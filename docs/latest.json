@@ -1,7 +1,7 @@
 {
   "versionCode": 2,
   "versionName": "1.1",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/main/docs/P4B.apk",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/2bbb65e60e9832da863f26d51ba3c0d372e4fa7c/docs/P4B.apk",
   "apkSha256": "eeb391c1eea75d11fe1595b257f6bba0f6de438770ff62ff10cab374029fdff9",
   "apkSizeBytes": 907817,
   "releaseNotes": "Adds GitHub-connected update checking and one-tap APK download from Settings."

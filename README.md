@@ -51,7 +51,7 @@ docs/P4B.apk
 docs/latest.json
 ```
 
-When publishing a new APK, bump `versionCode`/`versionName`, rebuild, replace `docs/P4B.apk`, and update `docs/latest.json`.
+When publishing a new APK, bump `versionCode`/`versionName`, rebuild, replace `docs/P4B.apk`, commit it, then update `docs/latest.json` so `apkUrl` points to that APK commit.
 
 ## Project Layout
 
