@@ -1,7 +1,7 @@
 {
   "versionCode": 6,
   "versionName": "1.5",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/8bd6e50d28617e599a65e3beca5736402954dde9/docs/P4B.apk",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/ddf45482fc166d4d37922d3ffc9fe1c01756618c/docs/P4B.apk",
   "apkSha256": "7d6d4ae8a171f281bc16b5f666fa0f2226f6697b3e319ed0e23781095438946d",
   "apkSizeBytes": 879160,
   "releaseNotes": "Copies flashcard text and shares it directly to the Google Translate app, with a share-sheet fallback."
