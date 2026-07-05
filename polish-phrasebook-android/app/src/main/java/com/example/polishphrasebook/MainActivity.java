@@ -74,9 +74,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String DEFAULT_THEME = "Klasyczny";
     private static final String LANG_EN = "en";
     private static final String LANG_PL = "pl";
+    private static final String SPEED_SLOWEST = "slowest";
     private static final String SPEED_SLOW = "slow";
     private static final String SPEED_NORMAL = "normal";
     private static final String SPEED_FAST = "fast";
+    private static final String SPEED_FASTEST = "fastest";
     private static final String UPDATE_MANIFEST_URL = "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/latest.json?ref=main";
     private static final String APK_MIME_TYPE = "application/vnd.android.package-archive";
     private static final long UPDATE_CHECK_INTERVAL_MS = 24L * 60L * 60L * 1000L;
@@ -124,7 +126,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             interfaceLanguage = LANG_EN;
         }
         speechSpeed = getSharedPreferences(PREFS, MODE_PRIVATE).getString("speechSpeed", SPEED_NORMAL);
-        if (!SPEED_SLOW.equals(speechSpeed) && !SPEED_FAST.equals(speechSpeed)) {
+        if (!SPEED_SLOWEST.equals(speechSpeed)
+                && !SPEED_SLOW.equals(speechSpeed)
+                && !SPEED_FAST.equals(speechSpeed)
+                && !SPEED_FASTEST.equals(speechSpeed)) {
             speechSpeed = SPEED_NORMAL;
         }
         loadFonts();
@@ -797,15 +802,15 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         addGap(content, 12);
 
         LinearLayout speed = settingsCard(t("Reading Speed", "Szybkość czytania"), t("Controls Polish and English TextToSpeech playback.", "Steruje odtwarzaniem TextToSpeech po polsku i angielsku."));
-        LinearLayout speedRow = row();
-        speedRow.addView(settingChoice(t("Slow", "Wolno"), SPEED_SLOW.equals(speechSpeed), () -> setSpeechSpeed(SPEED_SLOW)), new LinearLayout.LayoutParams(0, dp(42), 1));
-        LinearLayout.LayoutParams normalParams = new LinearLayout.LayoutParams(0, dp(42), 1);
-        normalParams.setMargins(dp(8), 0, 0, 0);
-        speedRow.addView(settingChoice(t("Normal", "Normalnie"), SPEED_NORMAL.equals(speechSpeed), () -> setSpeechSpeed(SPEED_NORMAL)), normalParams);
-        LinearLayout.LayoutParams fastParams = new LinearLayout.LayoutParams(0, dp(42), 1);
-        fastParams.setMargins(dp(8), 0, 0, 0);
-        speedRow.addView(settingChoice(t("Fast", "Szybko"), SPEED_FAST.equals(speechSpeed), () -> setSpeechSpeed(SPEED_FAST)), fastParams);
-        speed.addView(speedRow, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42), 12));
+        LinearLayout speedRowTop = row();
+        addSpeedChoice(speedRowTop, t("Slowest", "Najwolniej"), SPEED_SLOWEST, true);
+        addSpeedChoice(speedRowTop, t("Slow", "Wolno"), SPEED_SLOW, false);
+        addSpeedChoice(speedRowTop, t("Normal", "Normalnie"), SPEED_NORMAL, false);
+        speed.addView(speedRowTop, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42), 12));
+        LinearLayout speedRowBottom = row();
+        addSpeedChoice(speedRowBottom, t("Fast", "Szybko"), SPEED_FAST, true);
+        addSpeedChoice(speedRowBottom, t("Fastest", "Najszybciej"), SPEED_FASTEST, false);
+        speed.addView(speedRowBottom, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42), 8));
         content.addView(speed);
         addGap(content, 12);
 
@@ -833,6 +838,14 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         Button button = flatButton(text, selected ? th.ink : th.panel, selected ? th.bg : th.muted, selected ? th.ink : th.dash, 13, 42);
         button.setOnClickListener(v -> action.run());
         return button;
+    }
+
+    private void addSpeedChoice(LinearLayout row, String text, String value, boolean first) {
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, dp(42), 1);
+        if (!first) {
+            params.setMargins(dp(8), 0, 0, 0);
+        }
+        row.addView(settingChoice(text, value.equals(speechSpeed), () -> setSpeechSpeed(value)), params);
     }
 
     private void setSpeechSpeed(String speed) {
@@ -1232,11 +1245,17 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
     private float speechRate() {
+        if (SPEED_SLOWEST.equals(speechSpeed)) {
+            return 0.5f;
+        }
         if (SPEED_SLOW.equals(speechSpeed)) {
             return 0.6f;
         }
         if (SPEED_FAST.equals(speechSpeed)) {
             return 1.45f;
+        }
+        if (SPEED_FASTEST.equals(speechSpeed)) {
+            return 1.5f;
         }
         return 1.0f;
     }
