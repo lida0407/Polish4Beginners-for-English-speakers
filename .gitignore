@@ -8,3 +8,4 @@ polish-phrasebook-android/local.properties
 # Local build outputs
 *.apk
 *.aab
+!docs/P4B.apk

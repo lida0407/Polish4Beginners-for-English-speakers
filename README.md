@@ -4,6 +4,8 @@ Polish4Beginners is an Android app for English speakers who want to learn Polish
 
 This repository is focused on **Polish for beginners**, especially learners starting from English.
 
+Download the Android APK: [P4B.apk](https://lida0407.github.io/Polish4Beginners-for-English-speakers/P4B.apk)
+
 ## Features
 
 - `2264` Polish-English phrase and vocabulary cards
