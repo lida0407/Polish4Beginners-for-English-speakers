@@ -5,11 +5,6 @@ polish-phrasebook-android/.gradle/
 polish-phrasebook-android/app/build/
 polish-phrasebook-android/local.properties
 
-# Web TTS runtime/cache
-polish-learning-web/.tts-venv/
-polish-learning-web/.tts-cache/
-polish-learning-web/__pycache__/
-
 # Local build outputs
 *.apk
 *.aab

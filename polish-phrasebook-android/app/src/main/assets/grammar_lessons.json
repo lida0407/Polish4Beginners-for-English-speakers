@@ -25,8 +25,7 @@
       "prompt": "Ona ___ nauczycielką.",
       "answer": "jest",
       "hint": "Third-person singular uses jest."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A1-02",
@@ -54,8 +53,7 @@
       "prompt": "Jak ___ pan nazywa?",
       "answer": "się",
       "hint": "The reflexive marker stays with nazywać się."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A1-03",
@@ -83,8 +81,7 @@
       "prompt": "___ jesteś? Jestem z Kanady.",
       "answer": "Skąd",
       "hint": "Ask about origin with skąd."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A1-04",
@@ -112,8 +109,7 @@
       "prompt": "Jestem ___ Polski.",
       "answer": "z",
       "hint": "Use z to mean from."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A1-05",
@@ -141,8 +137,7 @@
       "prompt": "Ja ___ dokument.",
       "answer": "mam",
       "hint": "First-person singular of mieć is mam."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A1-06",
@@ -170,8 +165,7 @@
       "prompt": "___ ulica jest długa.",
       "answer": "Ta",
       "hint": "Ulica is usually feminine."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A1-07",
@@ -199,8 +193,7 @@
       "prompt": "To jest ___ kawa.",
       "answer": "dobra",
       "hint": "Kawa is feminine."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A1-08",
@@ -228,8 +221,7 @@
       "prompt": "Jestem ___ . (nauczyciel)",
       "answer": "nauczycielem",
       "hint": "Masculine profession in instrumental often ends in -em."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A1-09",
@@ -257,8 +249,7 @@
       "prompt": "Ja ___ po polsku. (mówić)",
       "answer": "mówię",
       "hint": "Mówić uses mówię for I speak."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A1-10",
@@ -286,8 +277,7 @@
       "prompt": "Poproszę ___ . (herbata)",
       "answer": "herbatę",
       "hint": "Feminine -a usually becomes -ę in accusative singular."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A1-11",
@@ -315,8 +305,7 @@
       "prompt": "Lubię ___ kawę. (pić)",
       "answer": "pić",
       "hint": "After lubię, an action stays in the infinitive."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A1-12",
@@ -344,8 +333,7 @@
       "prompt": "Nie mam ___ . (bilet)",
       "answer": "biletu",
       "hint": "After nie mam, masculine bilet becomes biletu."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A1-13",
@@ -373,8 +361,7 @@
       "prompt": "Jestem ___ szkole.",
       "answer": "w",
       "hint": "Use w for being in school."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A1-14",
@@ -402,8 +389,7 @@
       "prompt": "Proszę ___ w prawo. (skręcić)",
       "answer": "skręcić",
       "hint": "After proszę as a polite command, use the infinitive."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A1-15",
@@ -431,8 +417,7 @@
       "prompt": "Dzisiaj ___ metrem. (jechać)",
       "answer": "jadę",
       "hint": "One trip by transport uses jechać: jadę."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A1-16",
@@ -460,8 +445,7 @@
       "prompt": "Sklep jest otwarty ___ dziewiątej do siedemnastej.",
       "answer": "od",
       "hint": "From...to... is od...do...."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A1-17",
@@ -489,8 +473,7 @@
       "prompt": "___ mnie gardło.",
       "answer": "Boli",
       "hint": "Gardło is singular, so use boli."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A1-18",
@@ -518,8 +501,7 @@
       "prompt": "Mam na sobie ___ kurtkę. (czerwony)",
       "answer": "czerwoną",
       "hint": "Kurtkę is feminine accusative, so the adjective ends in -ą."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A1-19",
@@ -547,8 +529,7 @@
       "prompt": "Jutro ___ zimno.",
       "answer": "będzie",
       "hint": "Weather statements often use będzie."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A2-01",
@@ -576,8 +557,7 @@
       "prompt": "Wczoraj ___ w domu. (female speaker)",
       "answer": "byłam",
       "hint": "Female speaker: byłam."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A2-02",
@@ -605,8 +585,7 @@
       "prompt": "___ język polski. (znać)",
       "answer": "Znam",
       "hint": "Use znać with a language as a noun."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A2-03",
@@ -634,8 +613,7 @@
       "prompt": "Muszę ___ bilet. (kupić)",
       "answer": "kupić",
       "hint": "After muszę, keep the infinitive."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   },
   {
     "unit": "A2-04",
@@ -663,7 +641,6 @@
       "prompt": "Nie mam ___. (czas)",
       "answer": "czasu",
       "hint": "Nie mam triggers genitive."
-    },
-    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+    }
   }
 ]

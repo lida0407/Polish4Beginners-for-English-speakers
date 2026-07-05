@@ -1,16 +1,18 @@
 # Polish4Beginners for English Speakers
 
-A local Polish learning app for English speakers, built around an Android native app plus a local web companion.
+An Android Polish learning app for English speakers.
 
-## Included
+## Features
 
-- Android app in `polish-phrasebook-android`
-- Local web companion in `polish-learning-web`
 - `2264` Polish-English phrase and vocabulary cards
 - `23` grammar lessons
-- `39` alphabet/pronunciation tiles
-- New/forget/learnt memory states
-- Scenario sessions, flashcards, grammar, alphabet, themes, and TTS
+- `39` alphabet and pronunciation tiles
+- Warm editorial Android UI
+- 10-card study sessions
+- New, learning, and learnt memory states
+- Browse, grammar, and alphabet tabs
+- Five color themes
+- Android TextToSpeech for Polish and English
 
 ## Build Android APK
 
@@ -25,18 +27,13 @@ The debug APK is created at:
 polish-phrasebook-android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
-## Run Web Companion
-
-```bash
-./polish-learning-web/start.sh
-```
-
-Then open:
+## Project Layout
 
 ```text
-http://127.0.0.1:48733/polish-learning-web/
+polish-phrasebook-android/
+  app/src/main/assets/
+    alphabet.json
+    grammar_lessons.json
+    phrases.json
+  app/src/main/java/com/example/polishphrasebook/MainActivity.java
 ```
-
-## Notes
-
-The app keeps learning data local in JSON assets and uses Android TextToSpeech on the phone. The web companion can use local Supertonic TTS when available, with browser speech as fallback.
