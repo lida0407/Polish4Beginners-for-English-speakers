@@ -76,7 +76,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String SPEED_SLOW = "slow";
     private static final String SPEED_NORMAL = "normal";
     private static final String SPEED_FAST = "fast";
-    private static final String UPDATE_MANIFEST_URL = "https://lida0407.github.io/Polish4Beginners-for-English-speakers/latest.json";
+    private static final String UPDATE_MANIFEST_URL = "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/main/docs/latest.json";
     private static final String APK_MIME_TYPE = "application/vnd.android.package-archive";
     private static final long UPDATE_CHECK_INTERVAL_MS = 24L * 60L * 60L * 1000L;
     private static final int SESSION_SIZE = 10;
