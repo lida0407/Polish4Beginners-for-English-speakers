@@ -1,12 +1,13 @@
-# Polish4Beginners Android
+# Polish for Beginners Android App
 
-Native Android app for learning Polish from English.
+Native Android app for English speakers learning Polish for beginner conversations, grammar, alphabet pronunciation, and phrase practice.
 
 ## What Is Included
 
 - Offline Polish-English cards in `app/src/main/assets/phrases.json`
 - Grammar lessons in `app/src/main/assets/grammar_lessons.json`
 - Alphabet tiles in `app/src/main/assets/alphabet.json`
+- Scenario-based Polish for beginners study sessions
 - Study session, browse, grammar, and alphabet screens
 - Settings for interface language, color theme, and reading speed
 - New, learning, and learnt memory states
