@@ -1,8 +1,8 @@
 {
-  "versionCode": 5,
-  "versionName": "1.4",
+  "versionCode": 6,
+  "versionName": "1.5",
   "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/8bd6e50d28617e599a65e3beca5736402954dde9/docs/P4B.apk",
-  "apkSha256": "dae7fa4ea179af1e163535166e2a2899075ccc0855fdc360715a6ecc5033dfa8",
-  "apkSizeBytes": 879026,
-  "releaseNotes": "Adds selectable flashcard text, share and Google Translate actions, separate word-database updates, and richer topic categories."
+  "apkSha256": "7d6d4ae8a171f281bc16b5f666fa0f2226f6697b3e319ed0e23781095438946d",
+  "apkSizeBytes": 879160,
+  "releaseNotes": "Copies flashcard text and shares it directly to the Google Translate app, with a share-sheet fallback."
 }

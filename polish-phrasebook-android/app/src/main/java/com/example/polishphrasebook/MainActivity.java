@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -49,7 +51,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -1309,12 +1310,24 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
     private void openGoogleTranslate(String text, String sourceLanguage, String targetLanguage) {
+        if (text == null || text.trim().isEmpty()) {
+            return;
+        }
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        if (clipboard != null) {
+            clipboard.setPrimaryClip(ClipData.newPlainText("Polish phrase", text));
+        }
+
+        Intent translate = new Intent(Intent.ACTION_SEND);
+        translate.setType("text/plain");
+        translate.putExtra(Intent.EXTRA_TEXT, text);
+        translate.setPackage("com.google.android.apps.translate");
         try {
-            String encoded = URLEncoder.encode(text, StandardCharsets.UTF_8.name());
-            Uri uri = Uri.parse("https://translate.google.com/?sl=" + sourceLanguage + "&tl=" + targetLanguage + "&text=" + encoded + "&op=translate");
-            startActivity(new Intent(Intent.ACTION_VIEW, uri));
+            startActivity(translate);
+            Toast.makeText(this, t("Copied and sent to Google Translate.", "Skopiowano i wysłano do Google Translate."), Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(this, t("Could not open Google Translate.", "Nie można otworzyć Google Translate."), Toast.LENGTH_SHORT).show();
+            translate.setPackage(null);
+            startActivity(Intent.createChooser(translate, t("Share to translation app", "Udostępnij do tłumacza")));
         }
     }
 
