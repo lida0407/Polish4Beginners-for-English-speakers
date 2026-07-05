@@ -1221,6 +1221,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         applySpeechRate();
         String letter = item.letter.replace(" ", ", ");
         textToSpeech.speak(letter, TextToSpeech.QUEUE_FLUSH, null, "alphabet-letter");
+        applySpeechRate();
         textToSpeech.speak(item.example, TextToSpeech.QUEUE_ADD, null, "alphabet-example");
     }
 
