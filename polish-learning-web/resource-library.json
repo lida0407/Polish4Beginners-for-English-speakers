@@ -1,0 +1,131 @@
+[
+  {
+    "title": "Polish CORE 2000 Words and Phrases",
+    "source": "PolishPod101 PDF",
+    "language": "en",
+    "images": [],
+    "summary": "The local app imports the provided Polish CORE 2000 PDF as offline vocabulary cards, grouped by CEFR-style level and inferred real-life scenario.",
+    "items": [
+      "1,991 extracted Core 2000 cards",
+      "A1, A2, B1, B2, and C1 frequency-rank levels",
+      "Scenario labels for food, travel, work, school, health, home, nature, activities, and general core vocabulary",
+      "Polish and English device TTS for each card"
+    ]
+  },
+  {
+    "title": "Forvo: Useful Travel Phrases in Polish",
+    "source": "Forvo",
+    "url": "https://forvo.com/guides/useful_phrases_in_polish/",
+    "language": "en",
+    "images": [
+      {
+        "url": "https://static00.forvo.com/_presentation/assets/img/pages/guides/bg.png",
+        "alt": "Forvo travel guide banner"
+      }
+    ],
+    "summary": "Forvo's Polish travel guide groups practical phrases by situation: everyday phrases, banking, receiving care, shopping, getting around, drinking and dining, and directions. The local app uses the guide as a text phrase knowledge source and reads the Polish cards with Supertonic instead of Forvo recordings.",
+    "items": [
+      "Everyday phrases",
+      "Banking",
+      "Receiving care",
+      "Shopping",
+      "Getting around",
+      "Drinking and dining",
+      "Directions and locating",
+      "Essentials vocabulary"
+    ]
+  },
+  {
+    "title": "Quizlet: Kattarynka Polish Sets",
+    "source": "Quizlet",
+    "url": "https://quizlet.com/user/kattarynka/folders/polish-sets",
+    "language": "en",
+    "images": [],
+    "summary": "A Polish study-set direction used to shape the local learning database. The app keeps original Polish cards locally rather than copying user-authored Quizlet card text wholesale.",
+    "items": [
+      "Local phrase review",
+      "Memory status for every card",
+      "Supertonic read-aloud for Polish and English"
+    ]
+  },
+  {
+    "title": "Quizlet: Polish Swadesh Verbs",
+    "source": "Quizlet",
+    "url": "https://quizlet.com/320432/polish-swadesh-verbs-55-high-frequency-polish-verbs-flash-cards/",
+    "language": "en",
+    "images": [],
+    "summary": "A high-frequency verb study direction. The local app includes an original 55-card Polish verb category with Supertonic read-aloud for Polish and English.",
+    "items": [
+      "55 local verb cards",
+      "Polish infinitive",
+      "English meaning",
+      "Short learning note"
+    ]
+  },
+  {
+    "title": "Elementary Polish: University of Illinois",
+    "source": "University of Illinois",
+    "url": "https://faculty.las.illinois.edu/gladney/Elementary_Polish/Start.html",
+    "language": "en",
+    "images": [],
+    "summary": "Frank Gladney's Elementary Polish course direction is represented as beginner grammar study material. The local app includes short original grammar cards aligned with early topics such as basic sentences, questions, gender agreement, and common case patterns.",
+    "items": [
+      "Sounds and spelling",
+      "Basic sentence patterns",
+      "Questions and negation",
+      "Gender agreement",
+      "Introductory case patterns"
+    ]
+  },
+  {
+    "title": "Polish Learner News",
+    "source": "Let's Learn Polish",
+    "url": "https://www.lets-learn.eu/polish/news",
+    "language": "en",
+    "images": [
+      {
+        "url": "https://www.lets-learn.eu/wp-content/uploads/bear-spotted-wandering-przemysl-city-centre-at-night.webp",
+        "alt": "Bear spotted wandering Przemyśl city centre at night"
+      },
+      {
+        "url": "https://www.lets-learn.eu/wp-content/uploads/ustka-named-poland-beach-of-year-2026-after-13-years.webp",
+        "alt": "Ustka named Poland beach of the year 2026"
+      }
+    ],
+    "summary": "Polish Learner News offers news from Poland in Polish for language learners, with vocabulary, exercises, translations, and listening practice. The local app stores current headline metadata for a daily reading habit.",
+    "items": [
+      "Bear Spotted Wandering Przemyśl City Centre at Night",
+      "Ustka Named Poland's Beach of the Year 2026 After 13 Years",
+      "Polish Livestream Shatters Record For Cancer Charity",
+      "EU Parliament weighs lifting Kamiński immunity",
+      "Poland to Make School Health Education Compulsory",
+      "Northern Lights Illuminate Skies Over Poland"
+    ]
+  },
+  {
+    "title": "Polski na dobry start: A1 Grammar Path",
+    "source": "Polski na dobry start PDF",
+    "language": "en",
+    "images": [],
+    "summary": "The provided textbook is converted into compact grammar lessons and A1/A2 scenario cards: introductions, personal data, family, work, shopping, food, housing, transport, health, school, and everyday routines.",
+    "items": [
+      "23 grammar lessons with rules, patterns, examples, and quick checks",
+      "Scenario vocabulary drawn from the textbook topic map",
+      "A1 first, with selected A2 practical extensions for work, school, housing, and administration",
+      "Text-based study notes; TTS is used for study cards and examples"
+    ]
+  },
+  {
+    "title": "Rozmówki polsko-angielskie: Practical Situations",
+    "source": "Rozmówki polsko-angielskie PDF",
+    "language": "en",
+    "images": [],
+    "summary": "The provided phrasebook is folded into scenario cards for communication, signs, shopping, restaurants, banks, health, city directions, transport, offices, emergencies, and public services.",
+    "items": [
+      "Practical A1/A2 phrase cards with English meanings",
+      "Scenario labels for filters and flashcard testing",
+      "Office, doctor, transport, housing, and shopping survival language",
+      "Original compact study wording based on the phrasebook structure"
+    ]
+  }
+]

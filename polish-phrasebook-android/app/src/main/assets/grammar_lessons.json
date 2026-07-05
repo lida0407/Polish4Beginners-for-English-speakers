@@ -1,0 +1,669 @@
+[
+  {
+    "unit": "A1-01",
+    "level": "A1",
+    "scenario": "Introductions",
+    "topic": "Personal pronouns and być",
+    "focus": "Say who you are, who someone is, and where people are from.",
+    "rule": "Polish often drops the subject pronoun because the verb ending already shows the person. Use the pronoun for contrast or clarity.",
+    "pattern": "ja jestem, ty jesteś, on/ona jest, my jesteśmy, wy jesteście, oni/one są",
+    "examples": [
+      {
+        "polish": "Jestem Anna.",
+        "english": "I am Anna."
+      },
+      {
+        "polish": "Ona jest z Polski.",
+        "english": "She is from Poland."
+      },
+      {
+        "polish": "Czy państwo są z Ukrainy?",
+        "english": "Are you from Ukraine?"
+      }
+    ],
+    "check": {
+      "prompt": "Ona ___ nauczycielką.",
+      "answer": "jest",
+      "hint": "Third-person singular uses jest."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A1-02",
+    "level": "A1",
+    "scenario": "Introductions",
+    "topic": "Nazywać się and reflexive się",
+    "focus": "Give your name and ask someone else for their name politely.",
+    "rule": "The small word się marks a reflexive verb. It usually follows the conjugated verb or another stressed word.",
+    "pattern": "nazywam się, nazywasz się, nazywa się, nazywamy się, nazywacie się, nazywają się",
+    "examples": [
+      {
+        "polish": "Nazywam się Daniel.",
+        "english": "My name is Daniel."
+      },
+      {
+        "polish": "Jak się pani nazywa?",
+        "english": "What is your name? (formal to a woman)"
+      },
+      {
+        "polish": "Jak się pan nazywa?",
+        "english": "What is your name? (formal to a man)"
+      }
+    ],
+    "check": {
+      "prompt": "Jak ___ pan nazywa?",
+      "answer": "się",
+      "hint": "The reflexive marker stays with nazywać się."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A1-03",
+    "level": "A1",
+    "scenario": "Personal Data",
+    "topic": "Questions with jak, kto, co, skąd",
+    "focus": "Build the first useful questions for identity, objects, and origin.",
+    "rule": "Question words usually come near the beginning. Czy turns a statement into a yes/no question.",
+    "pattern": "Jak...? Kto...? Co...? Skąd...? Czy...?",
+    "examples": [
+      {
+        "polish": "Jak masz na imię?",
+        "english": "What is your first name?"
+      },
+      {
+        "polish": "Skąd jesteś?",
+        "english": "Where are you from?"
+      },
+      {
+        "polish": "Czy to jest formularz?",
+        "english": "Is this a form?"
+      }
+    ],
+    "check": {
+      "prompt": "___ jesteś? Jestem z Kanady.",
+      "answer": "Skąd",
+      "hint": "Ask about origin with skąd."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A1-04",
+    "level": "A1",
+    "scenario": "Origin",
+    "topic": "From a place: z + genitive",
+    "focus": "Say where someone is from and recognize country names in forms.",
+    "rule": "After być z meaning “to be from”, the place normally takes genitive: Polska -> z Polski, Ukraina -> z Ukrainy.",
+    "pattern": "Jestem z + genitive place.",
+    "examples": [
+      {
+        "polish": "Jestem z Anglii.",
+        "english": "I am from England."
+      },
+      {
+        "polish": "On jest z Polski.",
+        "english": "He is from Poland."
+      },
+      {
+        "polish": "Oni są z Niemiec.",
+        "english": "They are from Germany."
+      }
+    ],
+    "check": {
+      "prompt": "Jestem ___ Polski.",
+      "answer": "z",
+      "hint": "Use z to mean from."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A1-05",
+    "level": "A1",
+    "scenario": "Family",
+    "topic": "Possession with mieć",
+    "focus": "Talk about family, documents, and everyday things you have.",
+    "rule": "Mieć means “to have”. The thing you have often appears in accusative, but many common family phrases can be learned as whole chunks first.",
+    "pattern": "mam, masz, ma, mamy, macie, mają",
+    "examples": [
+      {
+        "polish": "Mam córkę i syna.",
+        "english": "I have a daughter and a son."
+      },
+      {
+        "polish": "Czy masz paszport?",
+        "english": "Do you have a passport?"
+      },
+      {
+        "polish": "Oni mają mieszkanie.",
+        "english": "They have an apartment."
+      }
+    ],
+    "check": {
+      "prompt": "Ja ___ dokument.",
+      "answer": "mam",
+      "hint": "First-person singular of mieć is mam."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A1-06",
+    "level": "A1",
+    "scenario": "Nouns",
+    "topic": "Noun gender and ten, ta, to",
+    "focus": "Recognize masculine, feminine, and neuter nouns for classroom and form-filling vocabulary.",
+    "rule": "Many masculine nouns end in a consonant, many feminine nouns end in -a, and many neuter nouns end in -o or -e. There are exceptions, so learn nouns with ten, ta, or to.",
+    "pattern": "ten adres, ta ulica, to imię",
+    "examples": [
+      {
+        "polish": "To jest ten numer.",
+        "english": "This is this number."
+      },
+      {
+        "polish": "To jest ta szkoła.",
+        "english": "This is this school."
+      },
+      {
+        "polish": "To jest to mieszkanie.",
+        "english": "This is this apartment."
+      }
+    ],
+    "check": {
+      "prompt": "___ ulica jest długa.",
+      "answer": "Ta",
+      "hint": "Ulica is usually feminine."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A1-07",
+    "level": "A1",
+    "scenario": "Descriptions",
+    "topic": "Adjective agreement",
+    "focus": "Describe people, feelings, clothing, rooms, and food with matching endings.",
+    "rule": "An adjective changes to match the noun: masculine -y/-i, feminine -a, neuter -e.",
+    "pattern": "dobry lekarz, dobra kawa, dobre mieszkanie",
+    "examples": [
+      {
+        "polish": "To jest dobra praca.",
+        "english": "This is a good job."
+      },
+      {
+        "polish": "Mam małe mieszkanie.",
+        "english": "I have a small apartment."
+      },
+      {
+        "polish": "On jest zmęczony.",
+        "english": "He is tired."
+      }
+    ],
+    "check": {
+      "prompt": "To jest ___ kawa.",
+      "answer": "dobra",
+      "hint": "Kawa is feminine."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A1-08",
+    "level": "A1",
+    "scenario": "Work",
+    "topic": "Instrumental after jestem",
+    "focus": "Say your job, role, or profession.",
+    "rule": "After jestem meaning “I am a/an” with a profession or role, use instrumental: student -> studentem, studentka -> studentką.",
+    "pattern": "Jestem + instrumental profession.",
+    "examples": [
+      {
+        "polish": "Jestem studentem.",
+        "english": "I am a student. (male speaker)"
+      },
+      {
+        "polish": "Jestem studentką.",
+        "english": "I am a student. (female speaker)"
+      },
+      {
+        "polish": "Ona jest lekarką.",
+        "english": "She is a doctor."
+      }
+    ],
+    "check": {
+      "prompt": "Jestem ___ . (nauczyciel)",
+      "answer": "nauczycielem",
+      "hint": "Masculine profession in instrumental often ends in -em."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A1-09",
+    "level": "A1",
+    "scenario": "Daily Routine",
+    "topic": "Present tense verb groups",
+    "focus": "Handle common verbs from daily routine lessons.",
+    "rule": "Many everyday verbs follow repeatable endings. Learn each verb with the first two forms to know its group.",
+    "pattern": "mieszkam/mieszkasz, rozumiem/rozumiesz, mówię/mówisz, uczę się/uczysz się",
+    "examples": [
+      {
+        "polish": "Mieszkam w Warszawie.",
+        "english": "I live in Warsaw."
+      },
+      {
+        "polish": "Mówię trochę po polsku.",
+        "english": "I speak a little Polish."
+      },
+      {
+        "polish": "Uczę się rano.",
+        "english": "I study in the morning."
+      }
+    ],
+    "check": {
+      "prompt": "Ja ___ po polsku. (mówić)",
+      "answer": "mówię",
+      "hint": "Mówić uses mówię for I speak."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A1-10",
+    "level": "A1",
+    "scenario": "Shopping",
+    "topic": "Accusative for direct objects",
+    "focus": "Ask for food, items, and clothing in shops.",
+    "rule": "A direct object often takes accusative. Feminine -a often becomes -ę: kawa -> kawę, bułka -> bułkę.",
+    "pattern": "Poproszę + accusative. Mam + accusative. Lubię + accusative.",
+    "examples": [
+      {
+        "polish": "Poproszę kawę.",
+        "english": "Coffee, please."
+      },
+      {
+        "polish": "Mam kartę.",
+        "english": "I have a card."
+      },
+      {
+        "polish": "Lubię zupę pomidorową.",
+        "english": "I like tomato soup."
+      }
+    ],
+    "check": {
+      "prompt": "Poproszę ___ . (herbata)",
+      "answer": "herbatę",
+      "hint": "Feminine -a usually becomes -ę in accusative singular."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A1-11",
+    "level": "A1",
+    "scenario": "Food",
+    "topic": "Lubić, woleć and infinitives",
+    "focus": "Say what you like to eat, drink, and do.",
+    "rule": "Use lubię + infinitive for activities, or lubię + noun in accusative for things. Wolę compares preferences.",
+    "pattern": "Lubię jeść..., Lubię kawę, Wolę herbatę niż kawę.",
+    "examples": [
+      {
+        "polish": "Lubię pić wodę.",
+        "english": "I like drinking water."
+      },
+      {
+        "polish": "Wolę ryż niż ziemniaki.",
+        "english": "I prefer rice to potatoes."
+      },
+      {
+        "polish": "Czy lubisz gotować?",
+        "english": "Do you like cooking?"
+      }
+    ],
+    "check": {
+      "prompt": "Lubię ___ kawę. (pić)",
+      "answer": "pić",
+      "hint": "After lubię, an action stays in the infinitive."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A1-12",
+    "level": "A1",
+    "scenario": "Negation",
+    "topic": "Nie, nie mam and genitive",
+    "focus": "Say what you do not have or what is missing.",
+    "rule": "Nie before a verb negates the action. After nie mam, Polish commonly uses genitive: czas -> czasu, karta -> karty.",
+    "pattern": "Nie rozumiem. Nie mam + genitive.",
+    "examples": [
+      {
+        "polish": "Nie rozumiem.",
+        "english": "I do not understand."
+      },
+      {
+        "polish": "Nie mam czasu.",
+        "english": "I do not have time."
+      },
+      {
+        "polish": "Nie mam karty.",
+        "english": "I do not have a card."
+      }
+    ],
+    "check": {
+      "prompt": "Nie mam ___ . (bilet)",
+      "answer": "biletu",
+      "hint": "After nie mam, masculine bilet becomes biletu."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A1-13",
+    "level": "A1",
+    "scenario": "Home",
+    "topic": "Locative with w and na",
+    "focus": "Say where things are in a room, town, school, or office.",
+    "rule": "After location words w and na, use locative: Polska -> w Polsce, stół -> na stole, biuro -> w biurze.",
+    "pattern": "w/na + locative place",
+    "examples": [
+      {
+        "polish": "Mieszkam w Polsce.",
+        "english": "I live in Poland."
+      },
+      {
+        "polish": "Książka leży na stole.",
+        "english": "The book is lying on the table."
+      },
+      {
+        "polish": "Pracuję w biurze.",
+        "english": "I work in an office."
+      }
+    ],
+    "check": {
+      "prompt": "Jestem ___ szkole.",
+      "answer": "w",
+      "hint": "Use w for being in school."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A1-14",
+    "level": "A1",
+    "scenario": "Directions",
+    "topic": "Directions and polite instructions",
+    "focus": "Understand and give simple route instructions.",
+    "rule": "Proszę + infinitive is a polite command. Direction chunks are often learned as fixed phrases first.",
+    "pattern": "Proszę iść prosto. Proszę skręcić w prawo.",
+    "examples": [
+      {
+        "polish": "Proszę iść prosto.",
+        "english": "Please go straight."
+      },
+      {
+        "polish": "Proszę skręcić w lewo.",
+        "english": "Please turn left."
+      },
+      {
+        "polish": "Apteka jest po prawej stronie.",
+        "english": "The pharmacy is on the right side."
+      }
+    ],
+    "check": {
+      "prompt": "Proszę ___ w prawo. (skręcić)",
+      "answer": "skręcić",
+      "hint": "After proszę as a polite command, use the infinitive."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A1-15",
+    "level": "A1",
+    "scenario": "Transport",
+    "topic": "Motion verbs iść, jechać, chodzić, jeździć",
+    "focus": "Choose walking vs riding and one-time vs repeated movement.",
+    "rule": "Iść means going on foot now or once. Jechać means going by transport now or once. Chodzić/jeździć describe repeated movement.",
+    "pattern": "Idę do sklepu. Jadę autobusem. Chodzę do szkoły. Jeżdżę tramwajem.",
+    "examples": [
+      {
+        "polish": "Idę do pracy.",
+        "english": "I am walking to work."
+      },
+      {
+        "polish": "Jadę autobusem.",
+        "english": "I am going by bus."
+      },
+      {
+        "polish": "Jeżdżę tramwajem do szkoły.",
+        "english": "I go by tram to school regularly."
+      }
+    ],
+    "check": {
+      "prompt": "Dzisiaj ___ metrem. (jechać)",
+      "answer": "jadę",
+      "hint": "One trip by transport uses jechać: jadę."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A1-16",
+    "level": "A1",
+    "scenario": "Time",
+    "topic": "Days, hours, and od... do...",
+    "focus": "Talk about opening hours, schedules, and routines.",
+    "rule": "Use w + day for on Monday etc. Use od + genitive and do + genitive for from... to....",
+    "pattern": "w poniedziałek, o ósmej, od ósmej do szesnastej",
+    "examples": [
+      {
+        "polish": "Pracuję w poniedziałek.",
+        "english": "I work on Monday."
+      },
+      {
+        "polish": "Zaczynam o ósmej.",
+        "english": "I start at eight."
+      },
+      {
+        "polish": "Urząd jest otwarty od ósmej do szesnastej.",
+        "english": "The office is open from eight to sixteen."
+      }
+    ],
+    "check": {
+      "prompt": "Sklep jest otwarty ___ dziewiątej do siedemnastej.",
+      "answer": "od",
+      "hint": "From...to... is od...do...."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A1-17",
+    "level": "A1",
+    "scenario": "Health",
+    "topic": "Boli mnie and mam symptoms",
+    "focus": "Describe basic health problems at a doctor or pharmacy.",
+    "rule": "Use boli mnie for one painful thing and bolą mnie for plural painful things. Use mam + symptom for common symptoms.",
+    "pattern": "Boli mnie głowa. Bolą mnie plecy. Mam gorączkę.",
+    "examples": [
+      {
+        "polish": "Boli mnie brzuch.",
+        "english": "My stomach hurts."
+      },
+      {
+        "polish": "Bolą mnie oczy.",
+        "english": "My eyes hurt."
+      },
+      {
+        "polish": "Mam kaszel.",
+        "english": "I have a cough."
+      }
+    ],
+    "check": {
+      "prompt": "___ mnie gardło.",
+      "answer": "Boli",
+      "hint": "Gardło is singular, so use boli."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A1-18",
+    "level": "A1",
+    "scenario": "Clothing",
+    "topic": "Mam na sobie and nosić",
+    "focus": "Describe what someone is wearing and ask for clothes in a shop.",
+    "rule": "Mam na sobie takes accusative. Nosić means to wear or carry habitually.",
+    "pattern": "Mam na sobie + accusative clothing. Noszę + accusative clothing.",
+    "examples": [
+      {
+        "polish": "Mam na sobie niebieską kurtkę.",
+        "english": "I am wearing a blue jacket."
+      },
+      {
+        "polish": "Noszę okulary.",
+        "english": "I wear glasses."
+      },
+      {
+        "polish": "Czy mogę przymierzyć tę koszulę?",
+        "english": "Can I try on this shirt?"
+      }
+    ],
+    "check": {
+      "prompt": "Mam na sobie ___ kurtkę. (czerwony)",
+      "answer": "czerwoną",
+      "hint": "Kurtkę is feminine accusative, so the adjective ends in -ą."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A1-19",
+    "level": "A1",
+    "scenario": "Weather",
+    "topic": "Future of być",
+    "focus": "Talk about tomorrow’s weather and near-future plans.",
+    "rule": "The future of być is będę, będziesz, będzie, będziemy, będziecie, będą.",
+    "pattern": "Jaka będzie pogoda? Będzie zimno. Będę w domu.",
+    "examples": [
+      {
+        "polish": "Jutro będzie ciepło.",
+        "english": "Tomorrow it will be warm."
+      },
+      {
+        "polish": "Czy będzie padać?",
+        "english": "Will it rain?"
+      },
+      {
+        "polish": "Będziemy w domu.",
+        "english": "We will be at home."
+      }
+    ],
+    "check": {
+      "prompt": "Jutro ___ zimno.",
+      "answer": "będzie",
+      "hint": "Weather statements often use będzie."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A2-01",
+    "level": "A2",
+    "scenario": "Past Events",
+    "topic": "Past tense basics",
+    "focus": "Report where you were and what you did yesterday.",
+    "rule": "Past tense agrees with the speaker/person in gender and number. Masculine often uses -łem, feminine often uses -łam for “I”.",
+    "pattern": "byłem/byłam, miałem/miałam, robiłem/robiłam, poszedłem/poszłam",
+    "examples": [
+      {
+        "polish": "Byłem w pracy.",
+        "english": "I was at work. (male speaker)"
+      },
+      {
+        "polish": "Byłam u lekarza.",
+        "english": "I was at the doctor. (female speaker)"
+      },
+      {
+        "polish": "Wczoraj poszłam do szkoły.",
+        "english": "Yesterday I went to school. (female speaker)"
+      }
+    ],
+    "check": {
+      "prompt": "Wczoraj ___ w domu. (female speaker)",
+      "answer": "byłam",
+      "hint": "Female speaker: byłam."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A2-02",
+    "level": "A2",
+    "scenario": "Ability",
+    "topic": "Umieć, potrafić, znać",
+    "focus": "Talk about skills, languages, and work abilities.",
+    "rule": "Umieć and potrafić usually take an infinitive. Znać takes a noun: znam język polski.",
+    "pattern": "Umiem pisać. Potrafię gotować. Znam angielski.",
+    "examples": [
+      {
+        "polish": "Umiem obsługiwać komputer.",
+        "english": "I can use a computer."
+      },
+      {
+        "polish": "Potrafię szybko pisać.",
+        "english": "I can type quickly."
+      },
+      {
+        "polish": "Znam język angielski.",
+        "english": "I know English."
+      }
+    ],
+    "check": {
+      "prompt": "___ język polski. (znać)",
+      "answer": "Znam",
+      "hint": "Use znać with a language as a noun."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A2-03",
+    "level": "A2",
+    "scenario": "Plans",
+    "topic": "Chcieć, móc, musieć + infinitive",
+    "focus": "Make requests and say what you want, can, or must do.",
+    "rule": "Modal verbs are followed by an infinitive: chcę zapłacić, mogę wejść, muszę pracować.",
+    "pattern": "chcę/mogę/muszę + infinitive",
+    "examples": [
+      {
+        "polish": "Chcę wynająć mieszkanie.",
+        "english": "I want to rent an apartment."
+      },
+      {
+        "polish": "Czy mogę zapłacić kartą?",
+        "english": "Can I pay by card?"
+      },
+      {
+        "polish": "Muszę iść do urzędu.",
+        "english": "I have to go to the office."
+      }
+    ],
+    "check": {
+      "prompt": "Muszę ___ bilet. (kupić)",
+      "answer": "kupić",
+      "hint": "After muszę, keep the infinitive."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  },
+  {
+    "unit": "A2-04",
+    "level": "A2",
+    "scenario": "Case Review",
+    "topic": "A practical case map",
+    "focus": "Choose the case by question and phrase pattern instead of memorizing tables first.",
+    "rule": "Start with common triggers: kto/co for nominative, mam/poproszę/lubię for accusative, nie mam/od/do/z for genitive, w/na location for locative, z/by transport/profession after jestem for instrumental.",
+    "pattern": "Mianownik: kto/co. Biernik: kogo/co. Dopełniacz: kogo/czego. Miejscownik: o/w/na kim/czym. Narzędnik: z kim/czym.",
+    "examples": [
+      {
+        "polish": "Mam bilet.",
+        "english": "I have a ticket. (accusative)"
+      },
+      {
+        "polish": "Nie mam biletu.",
+        "english": "I do not have a ticket. (genitive)"
+      },
+      {
+        "polish": "Jadę tramwajem.",
+        "english": "I am going by tram. (instrumental)"
+      }
+    ],
+    "check": {
+      "prompt": "Nie mam ___. (czas)",
+      "answer": "czasu",
+      "hint": "Nie mam triggers genitive."
+    },
+    "source": "Polski na dobry start PDF topic map + Rozmówki polsko-angielskie PDF scenarios"
+  }
+]

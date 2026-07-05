@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Polish Learning Desk</title>
+    <link rel="stylesheet" href="./styles.css?v=20260705-grammar-db" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="masthead" aria-labelledby="app-title">
+        <div>
+          <p class="kicker">Polish learning desk</p>
+          <h1 id="app-title">Polish learning database.</h1>
+        </div>
+        <div class="session-panel" aria-label="Daily session">
+          <span class="session-label">Practice mode</span>
+          <strong id="sessionMode">Study cards</strong>
+          <p class="tts-status" id="ttsStatus">Checking Supertonic voice...</p>
+        </div>
+      </section>
+
+      <section class="source-library" aria-labelledby="source-title">
+        <div class="source-topline">
+          <div>
+            <p class="kicker">Integrated resources</p>
+            <h2 id="source-title">Grammar and vocabulary database</h2>
+          </div>
+          <p class="source-note">Resource material is folded into local study notes, phrase cards, grammar prompts, vocabulary, and news topics.</p>
+        </div>
+        <div class="source-grid" id="sourceLibrary"></div>
+      </section>
+
+      <section class="workspace">
+        <aside class="sidebar" aria-label="Filters and progress">
+          <label class="search-label" for="searchInput">Search</label>
+          <input id="searchInput" type="search" placeholder="dworzec, to eat, accusative..." autocomplete="off" />
+
+          <div class="stats" aria-live="polite">
+            <div>
+              <strong id="visibleCount">0</strong>
+              <span>loaded</span>
+            </div>
+            <div>
+              <strong id="newCount">0</strong>
+              <span>new</span>
+            </div>
+            <div>
+              <strong id="forgotCount">0</strong>
+              <span>forget</span>
+            </div>
+            <div>
+              <strong id="learntCount">0</strong>
+              <span>learnt</span>
+            </div>
+          </div>
+
+          <p class="filter-heading">Memory</p>
+          <nav class="filters status-filters" id="statusFilters" aria-label="Learning status filters"></nav>
+          <p class="filter-heading">Level</p>
+          <nav class="filters level-filters" id="levelFilters" aria-label="CEFR level filters"></nav>
+          <p class="filter-heading">Database</p>
+          <nav class="filters" id="categoryFilters" aria-label="Card category filters"></nav>
+        </aside>
+
+        <section class="content" aria-label="Learning cards">
+          <div class="content-topline">
+            <h2 id="activeTitle">All cards</h2>
+            <div class="content-actions">
+              <button class="ghost-button is-active" id="cardsModeButton" type="button">Cards</button>
+              <button class="ghost-button" id="grammarModeButton" type="button">Grammar</button>
+              <button class="ghost-button" id="shuffleButton" type="button">Shuffle Test</button>
+            </div>
+          </div>
+          <div class="cards" id="cards"></div>
+          <div class="empty-state" id="emptyState" hidden>No matching cards.</div>
+        </section>
+      </section>
+    </main>
+
+    <template id="cardTemplate">
+      <article class="study-card">
+        <div class="card-meta">
+          <span class="category"></span>
+          <span class="memory-badge"></span>
+        </div>
+        <h3 class="polish"></h3>
+        <p class="english"></p>
+        <p class="note"></p>
+        <button class="reveal-button" type="button" hidden>Reveal answer</button>
+        <div class="choice-actions" hidden></div>
+        <div class="memory-actions" aria-label="Learning state">
+          <button class="memory-button" data-status="new" type="button">New</button>
+          <button class="memory-button" data-status="forgot" type="button">Forget</button>
+          <button class="memory-button" data-status="learnt" type="button">Learnt</button>
+        </div>
+        <div class="card-actions">
+          <button class="speak-button speak-polish" type="button">Read Polish</button>
+          <button class="speak-button speak-english" type="button">Read English</button>
+        </div>
+      </article>
+    </template>
+
+    <template id="sourceTemplate">
+      <article class="source-card">
+        <div class="source-image-wrap"></div>
+        <div class="source-body">
+          <span class="source-name"></span>
+          <h3></h3>
+          <p></p>
+          <ul></ul>
+        </div>
+      </article>
+    </template>
+
+    <script src="./app.js?v=20260705-grammar-db"></script>
+  </body>
+</html>
