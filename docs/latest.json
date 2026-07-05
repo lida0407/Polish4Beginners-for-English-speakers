@@ -1,0 +1,8 @@
+{
+  "versionCode": 2,
+  "versionName": "1.1",
+  "apkUrl": "https://lida0407.github.io/Polish4Beginners-for-English-speakers/P4B.apk",
+  "apkSha256": "f91b83f626db349d0cbc894a234bb0c98492a4361d6542dafe93b5c92715faba",
+  "apkSizeBytes": 911286,
+  "releaseNotes": "Adds GitHub-connected update checking and one-tap APK download from Settings."
+}

@@ -1,7 +1,14 @@
 package com.example.polishphrasebook;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -9,8 +16,11 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -34,6 +44,8 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,6 +76,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String SPEED_SLOW = "slow";
     private static final String SPEED_NORMAL = "normal";
     private static final String SPEED_FAST = "fast";
+    private static final String UPDATE_MANIFEST_URL = "https://lida0407.github.io/Polish4Beginners-for-English-speakers/latest.json";
+    private static final String APK_MIME_TYPE = "application/vnd.android.package-archive";
+    private static final long UPDATE_CHECK_INTERVAL_MS = 24L * 60L * 60L * 1000L;
     private static final int SESSION_SIZE = 10;
 
     private final List<Phrase> phrases = new ArrayList<>();
@@ -84,9 +99,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private int browseLimit = 25;
     private int sessionIndex = 0;
     private int sessionGot = 0;
+    private long updateDownloadId = -1L;
     private boolean sessionRevealed = false;
     private boolean ttsReady = false;
     private TextToSpeech textToSpeech;
+    private BroadcastReceiver updateDownloadReceiver;
     private Typeface sansRegular;
     private Typeface sansMedium;
     private Typeface sansSemiBold;
@@ -114,8 +131,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         loadGrammarLessons();
         loadAlphabet();
         loadMemory();
+        registerUpdateDownloadReceiver();
         textToSpeech = new TextToSpeech(this, this);
         render();
+        maybeCheckForUpdatesOnStart();
     }
 
     @Override
@@ -135,6 +154,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         if (textToSpeech != null) {
             textToSpeech.stop();
             textToSpeech.shutdown();
+        }
+        if (updateDownloadReceiver != null) {
+            try {
+                unregisterReceiver(updateDownloadReceiver);
+            } catch (IllegalArgumentException ignored) {
+            }
         }
         super.onDestroy();
     }
@@ -781,6 +806,14 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         speedRow.addView(settingChoice(t("Fast", "Szybko"), SPEED_FAST.equals(speechSpeed), () -> setSpeechSpeed(SPEED_FAST)), fastParams);
         speed.addView(speedRow, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42), 12));
         content.addView(speed);
+        addGap(content, 12);
+
+        LinearLayout update = settingsCard(t("App Updates", "Aktualizacje aplikacji"), t("Check GitHub for a newer APK and open the Android installer.", "Sprawdź w GitHub nowszy APK i otwórz instalator Androida."));
+        update.addView(bodyText("v" + BuildConfig.VERSION_NAME, 12.5f, th.faint), topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 8));
+        Button checkUpdates = flatButton(t("Check updates", "Sprawdź aktualizacje"), th.accentSoft, th.accent, th.accent, 13, 42);
+        checkUpdates.setOnClickListener(v -> checkForUpdates(true));
+        update.addView(checkUpdates, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42), 12));
+        content.addView(update);
     }
 
     private LinearLayout settingsCard(String title, String description) {
@@ -810,6 +843,147 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     private void saveSetting(String key, String value) {
         getSharedPreferences(PREFS, MODE_PRIVATE).edit().putString(key, value).apply();
+    }
+
+    private void maybeCheckForUpdatesOnStart() {
+        SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        long now = System.currentTimeMillis();
+        long lastCheck = prefs.getLong("lastUpdateCheckAt", 0L);
+        if (now - lastCheck >= UPDATE_CHECK_INTERVAL_MS) {
+            prefs.edit().putLong("lastUpdateCheckAt", now).apply();
+            checkForUpdates(false);
+        }
+    }
+
+    private void checkForUpdates(boolean userStarted) {
+        if (userStarted) {
+            Toast.makeText(this, t("Checking GitHub for updates...", "Sprawdzam aktualizacje w GitHub..."), Toast.LENGTH_SHORT).show();
+        }
+        new Thread(() -> {
+            try {
+                JSONObject manifest = fetchUpdateManifest();
+                int latestCode = manifest.optInt("versionCode", BuildConfig.VERSION_CODE);
+                String latestName = manifest.optString("versionName", "");
+                String apkUrl = manifest.optString("apkUrl", "");
+                String notes = manifest.optString("releaseNotes", "");
+                runOnUiThread(() -> {
+                    if (latestCode > BuildConfig.VERSION_CODE && !apkUrl.trim().isEmpty()) {
+                        showUpdateAvailable(latestName, notes, apkUrl);
+                    } else if (userStarted) {
+                        Toast.makeText(this, t("You already have the latest version.", "Masz już najnowszą wersję."), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (Exception e) {
+                if (userStarted) {
+                    runOnUiThread(() -> Toast.makeText(this, t("Could not check updates.", "Nie udało się sprawdzić aktualizacji."), Toast.LENGTH_SHORT).show());
+                }
+            }
+        }).start();
+    }
+
+    private JSONObject fetchUpdateManifest() throws Exception {
+        HttpURLConnection connection = (HttpURLConnection) new URL(UPDATE_MANIFEST_URL).openConnection();
+        connection.setConnectTimeout(7000);
+        connection.setReadTimeout(7000);
+        connection.setRequestProperty("Accept", "application/json");
+        int code = connection.getResponseCode();
+        if (code < 200 || code >= 300) {
+            throw new IllegalStateException("Update manifest returned HTTP " + code);
+        }
+        try {
+            return new JSONObject(readStream(connection.getInputStream()));
+        } finally {
+            connection.disconnect();
+        }
+    }
+
+    private void showUpdateAvailable(String versionName, String notes, String apkUrl) {
+        String title = t("Update available", "Dostępna aktualizacja");
+        String version = versionName.trim().isEmpty() ? "" : "v" + versionName + "\n\n";
+        String message = version + (notes.trim().isEmpty()
+                ? t("Download the newest APK from GitHub?", "Pobrać najnowszy APK z GitHub?")
+                : notes);
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(t("Download", "Pobierz"), (dialog, which) -> downloadUpdate(apkUrl))
+                .setNegativeButton(t("Later", "Później"), null)
+                .show();
+    }
+
+    private void downloadUpdate(String apkUrl) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !getPackageManager().canRequestPackageInstalls()) {
+            Toast.makeText(this, t("Allow this app to install updates, then check again.", "Zezwól tej aplikacji na instalowanie aktualizacji, potem sprawdź ponownie."), Toast.LENGTH_LONG).show();
+            Intent settings = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:" + getPackageName()));
+            startActivity(settings);
+            return;
+        }
+
+        DownloadManager manager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+        if (manager == null) {
+            Toast.makeText(this, t("Download service is not available.", "Usługa pobierania jest niedostępna."), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(apkUrl));
+        request.setTitle("P4B.apk");
+        request.setDescription(t("Downloading Polish4Beginners update", "Pobieranie aktualizacji Polish4Beginners"));
+        request.setMimeType(APK_MIME_TYPE);
+        request.setAllowedOverMetered(true);
+        request.setAllowedOverRoaming(true);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalFilesDir(this, Environment.DIRECTORY_DOWNLOADS, "P4B.apk");
+        updateDownloadId = manager.enqueue(request);
+        Toast.makeText(this, t("Downloading update...", "Pobieranie aktualizacji..."), Toast.LENGTH_SHORT).show();
+    }
+
+    private void registerUpdateDownloadReceiver() {
+        updateDownloadReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                long completedId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1L);
+                if (completedId == updateDownloadId) {
+                    openDownloadedUpdate(completedId);
+                }
+            }
+        };
+        IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(updateDownloadReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
+        } else {
+            registerReceiver(updateDownloadReceiver, filter);
+        }
+    }
+
+    private void openDownloadedUpdate(long downloadId) {
+        DownloadManager manager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+        if (manager == null) {
+            return;
+        }
+        DownloadManager.Query query = new DownloadManager.Query().setFilterById(downloadId);
+        try (Cursor cursor = manager.query(query)) {
+            if (cursor == null || !cursor.moveToFirst()) {
+                return;
+            }
+            int statusIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS);
+            if (statusIndex < 0 || cursor.getInt(statusIndex) != DownloadManager.STATUS_SUCCESSFUL) {
+                Toast.makeText(this, t("Update download failed.", "Pobieranie aktualizacji nie powiodło się."), Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+        Uri apkUri = manager.getUriForDownloadedFile(downloadId);
+        if (apkUri == null) {
+            Toast.makeText(this, t("Downloaded APK could not be opened.", "Nie można otworzyć pobranego APK."), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent install = new Intent(Intent.ACTION_VIEW);
+        install.setDataAndType(apkUri, APK_MIME_TYPE);
+        install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        try {
+            startActivity(install);
+        } catch (Exception e) {
+            Toast.makeText(this, t("Could not open Android installer.", "Nie można otworzyć instalatora Androida."), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private View bottomNav() {
@@ -1127,12 +1301,16 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
     private String readAsset(String fileName) throws Exception {
-        InputStream stream = getAssets().open(fileName);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
+        return readStream(getAssets().open(fileName));
+    }
+
+    private String readStream(InputStream stream) throws Exception {
         StringBuilder json = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            json.append(line);
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                json.append(line);
+            }
         }
         return json.toString();
     }

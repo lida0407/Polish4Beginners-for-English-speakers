@@ -18,6 +18,7 @@ Download the Android APK: [P4B.apk](https://lida0407.github.io/Polish4Beginners-
 - New, learning, and learnt memory states
 - Browse, grammar, and alphabet tabs
 - Settings for interface language, color theme, and reading speed
+- GitHub-connected APK update checking from Settings
 - Five color themes
 - Android TextToSpeech for Polish and English
 
@@ -40,6 +41,17 @@ The debug APK is created at:
 ```text
 polish-phrasebook-android/app/build/outputs/apk/debug/app-debug.apk
 ```
+
+## Publish APK Update
+
+GitHub Pages serves:
+
+```text
+docs/P4B.apk
+docs/latest.json
+```
+
+When publishing a new APK, bump `versionCode`/`versionName`, rebuild, replace `docs/P4B.apk`, and update `docs/latest.json`.
 
 ## Project Layout
 
