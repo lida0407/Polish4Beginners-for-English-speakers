@@ -123,6 +123,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         if (status == TextToSpeech.SUCCESS) {
             ttsReady = true;
             int result = textToSpeech.setLanguage(new Locale("pl", "PL"));
+            applySpeechRate();
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Toast.makeText(this, "Install a Polish TTS voice for Polish reading.", Toast.LENGTH_LONG).show();
             }
@@ -803,6 +804,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private void setSpeechSpeed(String speed) {
         speechSpeed = speed;
         saveSetting("speechSpeed", speechSpeed);
+        applySpeechRate();
         render();
     }
 
@@ -1019,7 +1021,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             Toast.makeText(this, "This voice is not installed on this device.", Toast.LENGTH_SHORT).show();
             return;
         }
-        textToSpeech.setSpeechRate(speechRate());
+        applySpeechRate();
         textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, "learning-card");
     }
 
@@ -1034,20 +1036,26 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             Toast.makeText(this, "This voice is not installed on this device.", Toast.LENGTH_SHORT).show();
             return;
         }
-        textToSpeech.setSpeechRate(speechRate());
+        applySpeechRate();
         String letter = item.letter.replace(" ", ", ");
         textToSpeech.speak(letter, TextToSpeech.QUEUE_FLUSH, null, "alphabet-letter");
         textToSpeech.speak(item.example, TextToSpeech.QUEUE_ADD, null, "alphabet-example");
     }
 
+    private void applySpeechRate() {
+        if (textToSpeech != null) {
+            textToSpeech.setSpeechRate(speechRate());
+        }
+    }
+
     private float speechRate() {
         if (SPEED_SLOW.equals(speechSpeed)) {
-            return 0.75f;
+            return 0.6f;
         }
         if (SPEED_FAST.equals(speechSpeed)) {
-            return 1.15f;
+            return 1.45f;
         }
-        return 0.95f;
+        return 1.0f;
     }
 
     private void loadPhrases() {
