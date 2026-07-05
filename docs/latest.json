@@ -1,8 +1,8 @@
 {
-  "versionCode": 4,
-  "versionName": "1.3",
+  "versionCode": 5,
+  "versionName": "1.4",
   "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/c588df1257e71348a9adfd6ccbe01d9a25e7b47e/docs/P4B.apk",
-  "apkSha256": "69c18af0a8469d85ca28be5786a87a07f7bab10de03bb3d7d855ff4ae954564f",
-  "apkSizeBytes": 874612,
-  "releaseNotes": "Adds Slowest 0.5x and Fastest 1.5x reading speeds for phrases and alphabet playback."
+  "apkSha256": "dae7fa4ea179af1e163535166e2a2899075ccc0855fdc360715a6ecc5033dfa8",
+  "apkSizeBytes": 879026,
+  "releaseNotes": "Adds selectable flashcard text, share and Google Translate actions, separate word-database updates, and richer topic categories."
 }

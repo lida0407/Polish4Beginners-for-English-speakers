@@ -19,6 +19,7 @@ Download the Android APK: [P4B.apk](https://lida0407.github.io/Polish4Beginners-
 - Browse, grammar, and alphabet tabs
 - Settings for interface language, color theme, and reading speed
 - GitHub-connected APK update checking from Settings
+- Separate GitHub-connected word database updates from Settings
 - Five color themes
 - Android TextToSpeech for Polish and English
 
@@ -49,9 +50,13 @@ GitHub Pages serves:
 ```text
 docs/P4B.apk
 docs/latest.json
+docs/phrases.json
+docs/database.json
 ```
 
 When publishing a new APK, bump `versionCode`/`versionName`, rebuild, replace `docs/P4B.apk`, commit it, then update `docs/latest.json` so `apkUrl` points to that APK commit.
+
+When publishing phrase-only contributions, update `docs/phrases.json`, bump `dataVersion` in `docs/database.json`, and keep the phrase count/checksum in sync.
 
 ## Project Layout
 

@@ -43,10 +43,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -80,7 +83,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String SPEED_FAST = "fast";
     private static final String SPEED_FASTEST = "fastest";
     private static final String UPDATE_MANIFEST_URL = "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/latest.json?ref=main";
+    private static final String DATA_MANIFEST_URL = "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/database.json?ref=main";
+    private static final String REMOTE_PHRASES_FILE = "phrases_remote.json";
     private static final String APK_MIME_TYPE = "application/vnd.android.package-archive";
+    private static final int DEFAULT_DATABASE_VERSION = 2;
     private static final long UPDATE_CHECK_INTERVAL_MS = 24L * 60L * 60L * 1000L;
     private static final int SESSION_SIZE = 10;
 
@@ -141,6 +147,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         textToSpeech = new TextToSpeech(this, this);
         render();
         maybeCheckForUpdatesOnStart();
+        maybeCheckForDataUpdatesOnStart();
     }
 
     @Override
@@ -442,6 +449,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         TextView polish = serifText(card.polish, 33, th.ink);
         polish.setGravity(Gravity.CENTER);
         polish.setLineSpacing(0, 1.02f);
+        polish.setTextIsSelectable(true);
         face.addView(polish, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         addGap(face, 14);
 
@@ -453,6 +461,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             TextView english = uiText(card.english, 18, th.body, sansMedium);
             english.setGravity(Gravity.CENTER);
             english.setLineSpacing(0, 1.08f);
+            english.setTextIsSelectable(true);
             face.addView(english);
             if (!card.phonetic.isEmpty()) {
                 TextView phonetic = uiText(card.phonetic, 13.5f, th.faint, sansRegular);
@@ -471,6 +480,18 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             readEnParams.setMargins(dp(10), 0, 0, 0);
             tts.addView(readEn, readEnParams);
             face.addView(tts, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 12));
+
+            LinearLayout tools = row();
+            tools.setGravity(Gravity.CENTER);
+            Button share = flatButton(t("Share", "Udostępnij"), th.panel, th.muted, th.dash, 12.5f, 38);
+            share.setOnClickListener(v -> sharePhrase(card));
+            tools.addView(share, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(38)));
+            Button translate = flatButton(t("Google Translate", "Google Translate"), th.panel, th.muted, th.dash, 12.5f, 38);
+            translate.setOnClickListener(v -> openGoogleTranslate(card.polish, "pl", "en"));
+            LinearLayout.LayoutParams translateParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(38));
+            translateParams.setMargins(dp(10), 0, 0, 0);
+            tools.addView(translate, translateParams);
+            face.addView(tools, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 10));
         } else {
             face.addView(label("ODWRÓĆ KARTĘ · TAP TO FLIP", th.ghost, 12, 0.08f));
         }
@@ -820,6 +841,14 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         checkUpdates.setOnClickListener(v -> checkForUpdates(true));
         update.addView(checkUpdates, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42), 12));
         content.addView(update);
+        addGap(content, 12);
+
+        LinearLayout dataUpdate = settingsCard(t("Word Database", "Baza słów"), t("Update contributed phrases and vocabulary without reinstalling the app.", "Aktualizuj dodane frazy i słownictwo bez ponownej instalacji aplikacji."));
+        dataUpdate.addView(bodyText(t("Database v", "Baza v") + currentDatabaseVersion() + " · " + phrases.size() + t(" cards", " kart"), 12.5f, th.faint), topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 8));
+        Button checkData = flatButton(t("Update words", "Aktualizuj słowa"), th.accentSoft, th.accent, th.accent, 13, 42);
+        checkData.setOnClickListener(v -> checkForDataUpdates(true));
+        dataUpdate.addView(checkData, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42), 12));
+        content.addView(dataUpdate);
     }
 
     private LinearLayout settingsCard(String title, String description) {
@@ -896,26 +925,102 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
     private JSONObject fetchUpdateManifest() throws Exception {
-        HttpURLConnection connection = (HttpURLConnection) new URL(UPDATE_MANIFEST_URL).openConnection();
+        return new JSONObject(fetchGitHubDocumentText(UPDATE_MANIFEST_URL));
+    }
+
+    private String fetchGitHubDocumentText(String urlString) throws Exception {
+        HttpURLConnection connection = (HttpURLConnection) new URL(urlString).openConnection();
         connection.setConnectTimeout(7000);
         connection.setReadTimeout(7000);
         connection.setRequestProperty("Accept", "application/vnd.github+json");
         connection.setRequestProperty("User-Agent", "Polish4Beginners-Android");
         int code = connection.getResponseCode();
         if (code < 200 || code >= 300) {
-            throw new IllegalStateException("Update manifest returned HTTP " + code);
+            throw new IllegalStateException("GitHub returned HTTP " + code);
         }
         try {
             JSONObject payload = new JSONObject(readStream(connection.getInputStream()));
             String encodedContent = payload.optString("content", "");
             if (!encodedContent.trim().isEmpty()) {
                 byte[] decoded = Base64.decode(encodedContent, Base64.DEFAULT);
-                return new JSONObject(new String(decoded, StandardCharsets.UTF_8));
+                return new String(decoded, StandardCharsets.UTF_8);
             }
-            return payload;
+            return payload.toString();
         } finally {
             connection.disconnect();
         }
+    }
+
+    private int currentDatabaseVersion() {
+        return getSharedPreferences(PREFS, MODE_PRIVATE).getInt("dataVersion", DEFAULT_DATABASE_VERSION);
+    }
+
+    private void maybeCheckForDataUpdatesOnStart() {
+        SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        long now = System.currentTimeMillis();
+        long lastCheck = prefs.getLong("lastDataCheckAt", 0L);
+        if (now - lastCheck >= UPDATE_CHECK_INTERVAL_MS) {
+            prefs.edit().putLong("lastDataCheckAt", now).apply();
+            checkForDataUpdates(false);
+        }
+    }
+
+    private void checkForDataUpdates(boolean userStarted) {
+        if (userStarted) {
+            Toast.makeText(this, t("Checking word database...", "Sprawdzam bazę słów..."), Toast.LENGTH_SHORT).show();
+        }
+        new Thread(() -> {
+            try {
+                JSONObject manifest = new JSONObject(fetchGitHubDocumentText(DATA_MANIFEST_URL));
+                int latestVersion = manifest.optInt("dataVersion", DEFAULT_DATABASE_VERSION);
+                String phrasesUrl = manifest.optString("phrasesUrl", "");
+                if (latestVersion <= currentDatabaseVersion() || phrasesUrl.trim().isEmpty()) {
+                    if (userStarted) {
+                        runOnUiThread(() -> Toast.makeText(this, t("Word database is already current.", "Baza słów jest aktualna."), Toast.LENGTH_SHORT).show());
+                    }
+                    return;
+                }
+                String phraseJson = fetchGitHubDocumentText(phrasesUrl);
+                int phraseCount = validatePhraseJson(phraseJson);
+                saveRemotePhraseJson(phraseJson, latestVersion);
+                runOnUiThread(() -> {
+                    try {
+                        loadPhrases();
+                        loadMemory();
+                        browseLimit = 25;
+                        sessionDeck.clear();
+                        Toast.makeText(this, t("Word database updated: ", "Baza słów zaktualizowana: ") + phraseCount + t(" cards", " kart"), Toast.LENGTH_LONG).show();
+                        render();
+                    } catch (Exception e) {
+                        Toast.makeText(this, t("Downloaded database could not be loaded.", "Nie można wczytać pobranej bazy."), Toast.LENGTH_LONG).show();
+                    }
+                });
+            } catch (Exception e) {
+                if (userStarted) {
+                    runOnUiThread(() -> Toast.makeText(this, t("Could not update word database.", "Nie udało się zaktualizować bazy słów."), Toast.LENGTH_SHORT).show());
+                }
+            }
+        }).start();
+    }
+
+    private int validatePhraseJson(String phraseJson) throws Exception {
+        JSONArray array = new JSONArray(phraseJson);
+        for (int i = 0; i < array.length(); i++) {
+            JSONObject item = array.getJSONObject(i);
+            item.getString("polish");
+            item.getString("english");
+        }
+        return array.length();
+    }
+
+    private void saveRemotePhraseJson(String phraseJson, int dataVersion) throws Exception {
+        try (FileOutputStream output = openFileOutput(REMOTE_PHRASES_FILE, MODE_PRIVATE)) {
+            output.write(phraseJson.getBytes(StandardCharsets.UTF_8));
+        }
+        getSharedPreferences(PREFS, MODE_PRIVATE)
+                .edit()
+                .putInt("dataVersion", dataVersion)
+                .apply();
     }
 
     private void showUpdateAvailable(String versionName, String notes, String apkUrl) {
@@ -1196,8 +1301,26 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 .apply();
     }
 
+    private void sharePhrase(Phrase phrase) {
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.putExtra(Intent.EXTRA_TEXT, phrase.polish + "\n" + phrase.english);
+        startActivity(Intent.createChooser(share, t("Share phrase", "Udostępnij frazę")));
+    }
+
+    private void openGoogleTranslate(String text, String sourceLanguage, String targetLanguage) {
+        try {
+            String encoded = URLEncoder.encode(text, StandardCharsets.UTF_8.name());
+            Uri uri = Uri.parse("https://translate.google.com/?sl=" + sourceLanguage + "&tl=" + targetLanguage + "&text=" + encoded + "&op=translate");
+            startActivity(new Intent(Intent.ACTION_VIEW, uri));
+        } catch (Exception e) {
+            Toast.makeText(this, t("Could not open Google Translate.", "Nie można otworzyć Google Translate."), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void loadMemory() {
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        memory.clear();
         for (Phrase phrase : phrases) {
             memory.put(phrase.key(), prefs.getString(MEMORY_PREFIX + phrase.key(), STATUS_NEW));
         }
@@ -1262,20 +1385,33 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     private void loadPhrases() {
         try {
-            JSONArray array = new JSONArray(readAsset("phrases.json"));
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject item = array.getJSONObject(i);
-                phrases.add(new Phrase(
-                        item.optString("scenario", item.optString("category", "General Core")),
-                        item.getString("polish"),
-                        item.getString("english"),
-                        item.optString("phonetic"),
-                        item.optString("level", "A1"),
-                        item.optInt("coreIndex", 0)
-                ));
-            }
+            parsePhrases(readPhraseJson());
         } catch (Exception error) {
             Toast.makeText(this, "Could not load phrase data.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private String readPhraseJson() throws Exception {
+        File remotePhrases = new File(getFilesDir(), REMOTE_PHRASES_FILE);
+        if (remotePhrases.exists()) {
+            return readStream(openFileInput(REMOTE_PHRASES_FILE));
+        }
+        return readAsset("phrases.json");
+    }
+
+    private void parsePhrases(String phraseJson) throws Exception {
+        JSONArray array = new JSONArray(phraseJson);
+        phrases.clear();
+        for (int i = 0; i < array.length(); i++) {
+            JSONObject item = array.getJSONObject(i);
+            phrases.add(new Phrase(
+                    item.optString("scenario", item.optString("category", "General Core")),
+                    item.getString("polish"),
+                    item.getString("english"),
+                    item.optString("phonetic"),
+                    item.optString("level", "A1"),
+                    item.optInt("coreIndex", 0)
+            ));
         }
     }
 
