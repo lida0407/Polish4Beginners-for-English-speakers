@@ -25,6 +25,7 @@ import android.speech.tts.TextToSpeech;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,7 +77,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String SPEED_SLOW = "slow";
     private static final String SPEED_NORMAL = "normal";
     private static final String SPEED_FAST = "fast";
-    private static final String UPDATE_MANIFEST_URL = "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/main/docs/latest.json";
+    private static final String UPDATE_MANIFEST_URL = "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/latest.json?ref=main";
     private static final String APK_MIME_TYPE = "application/vnd.android.package-archive";
     private static final long UPDATE_CHECK_INTERVAL_MS = 24L * 60L * 60L * 1000L;
     private static final int SESSION_SIZE = 10;
@@ -885,13 +886,20 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         HttpURLConnection connection = (HttpURLConnection) new URL(UPDATE_MANIFEST_URL).openConnection();
         connection.setConnectTimeout(7000);
         connection.setReadTimeout(7000);
-        connection.setRequestProperty("Accept", "application/json");
+        connection.setRequestProperty("Accept", "application/vnd.github+json");
+        connection.setRequestProperty("User-Agent", "Polish4Beginners-Android");
         int code = connection.getResponseCode();
         if (code < 200 || code >= 300) {
             throw new IllegalStateException("Update manifest returned HTTP " + code);
         }
         try {
-            return new JSONObject(readStream(connection.getInputStream()));
+            JSONObject payload = new JSONObject(readStream(connection.getInputStream()));
+            String encodedContent = payload.optString("content", "");
+            if (!encodedContent.trim().isEmpty()) {
+                byte[] decoded = Base64.decode(encodedContent, Base64.DEFAULT);
+                return new JSONObject(new String(decoded, StandardCharsets.UTF_8));
+            }
+            return payload;
         } finally {
             connection.disconnect();
         }
