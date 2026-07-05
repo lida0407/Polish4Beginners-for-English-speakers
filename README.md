@@ -11,6 +11,7 @@ An Android Polish learning app for English speakers.
 - 10-card study sessions
 - New, learning, and learnt memory states
 - Browse, grammar, and alphabet tabs
+- Settings for interface language, color theme, and reading speed
 - Five color themes
 - Android TextToSpeech for Polish and English
 
@@ -36,4 +37,16 @@ polish-phrasebook-android/
     grammar_lessons.json
     phrases.json
   app/src/main/java/com/example/polishphrasebook/MainActivity.java
+docs/
+  phrase-template.json
 ```
+
+## Contribute Phrases
+
+New phrase contributions are welcome. Please follow the format in:
+
+```text
+docs/phrase-template.json
+```
+
+See `CONTRIBUTING.md` for field definitions and review notes.

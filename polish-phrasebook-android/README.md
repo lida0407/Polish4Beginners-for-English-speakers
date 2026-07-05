@@ -8,6 +8,7 @@ Native Android app for learning Polish from English.
 - Grammar lessons in `app/src/main/assets/grammar_lessons.json`
 - Alphabet tiles in `app/src/main/assets/alphabet.json`
 - Study session, browse, grammar, and alphabet screens
+- Settings for interface language, color theme, and reading speed
 - New, learning, and learnt memory states
 - Five local themes
 - Android TextToSpeech for Polish and English

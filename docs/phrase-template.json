@@ -1,0 +1,14 @@
+{
+  "level": "A1",
+  "scenario": "Shopping",
+  "category": "Shopping",
+  "polish": "Czy mogę zapłacić kartą?",
+  "english": "Can I pay by card?",
+  "phonetic": "Polite everyday question.",
+  "tags": [
+    "payment",
+    "shop",
+    "question"
+  ],
+  "notes": "Use this for shops, restaurants, ticket offices, and service counters."
+}

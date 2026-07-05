@@ -57,7 +57,13 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String SCREEN_BROWSE = "browse";
     private static final String SCREEN_GRAMMAR = "grammar";
     private static final String SCREEN_ALPHABET = "alphabet";
+    private static final String SCREEN_SETTINGS = "settings";
     private static final String DEFAULT_THEME = "Klasyczny";
+    private static final String LANG_EN = "en";
+    private static final String LANG_PL = "pl";
+    private static final String SPEED_SLOW = "slow";
+    private static final String SPEED_NORMAL = "normal";
+    private static final String SPEED_FAST = "fast";
     private static final int SESSION_SIZE = 10;
 
     private final List<Phrase> phrases = new ArrayList<>();
@@ -70,6 +76,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private String screen = SCREEN_HOME;
     private String level = "A1";
     private String themeName = DEFAULT_THEME;
+    private String interfaceLanguage = LANG_EN;
+    private String speechSpeed = SPEED_NORMAL;
     private String browseTopic = "All";
     private String browseQuery = "";
     private String openLessonUnit = null;
@@ -92,6 +100,14 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         themeName = getSharedPreferences(PREFS, MODE_PRIVATE).getString("theme", DEFAULT_THEME);
         if (!themes.containsKey(themeName)) {
             themeName = DEFAULT_THEME;
+        }
+        interfaceLanguage = getSharedPreferences(PREFS, MODE_PRIVATE).getString("interfaceLanguage", LANG_EN);
+        if (!LANG_PL.equals(interfaceLanguage)) {
+            interfaceLanguage = LANG_EN;
+        }
+        speechSpeed = getSharedPreferences(PREFS, MODE_PRIVATE).getString("speechSpeed", SPEED_NORMAL);
+        if (!SPEED_SLOW.equals(speechSpeed) && !SPEED_FAST.equals(speechSpeed)) {
+            speechSpeed = SPEED_NORMAL;
         }
         loadFonts();
         loadPhrases();
@@ -172,8 +188,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 renderBrowse(content);
             } else if (SCREEN_GRAMMAR.equals(screen)) {
                 renderGrammar(content);
-            } else {
+            } else if (SCREEN_ALPHABET.equals(screen)) {
                 renderAlphabet(content);
+            } else {
+                renderSettings(content);
             }
             root.addView(bottomNav());
         }
@@ -192,13 +210,13 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         hero.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
 
         LinearLayout heroMeta = row();
-        TextView kicker = label("DZISIEJSZA LEKCJA", th.accent2, 11, 0.14f);
+        TextView kicker = label(t("TODAY'S LESSON", "DZISIEJSZA LEKCJA"), th.accent2, 11, 0.14f);
         heroMeta.addView(kicker, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
         heroMeta.addView(levelBadge());
         hero.addView(heroMeta);
         addGap(hero, 10);
 
-        TextView headline = serifText(firstVisit() ? "Your first 10 phrases" : "10 flashcards, level " + level, 23, th.ink);
+        TextView headline = serifText(firstVisit() ? t("Your first 10 phrases", "Twoje pierwsze 10 fraz") : t("10 flashcards, level ", "10 fiszek, poziom ") + level, 23, th.ink);
         headline.setLineSpacing(0, 1.05f);
         hero.addView(headline);
         addGap(hero, 10);
@@ -207,8 +225,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 dp(2)
         ));
         addGap(hero, 10);
-        hero.addView(bodyText("Flip each card, say it out loud, mark what stuck. " + dueCountForLevel() + " cards still waiting at this level.", 13, th.muted));
-        Button start = filledButton("Zaczynamy — start session", th.accent, th.onAccent, 16, 52);
+        hero.addView(bodyText(t("Flip each card, say it out loud, mark what stuck. ", "Odwróć każdą kartę, powiedz ją na głos i zaznacz, co pamiętasz. ") + dueCountForLevel() + t(" cards still waiting at this level.", " kart czeka na tym poziomie."), 13, th.muted));
+        Button start = filledButton(t("Zaczynamy — start session", "Zaczynamy — start"), th.accent, th.onAccent, 16, 52);
         start.setOnClickListener(v -> startSession("All"));
         hero.addView(start, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(52), 14));
         content.addView(shadowWrap(hero, 4));
@@ -247,7 +265,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             ThemeSwatch swatch = new ThemeSwatch(this, themes.get(name), name.equals(themeName));
             swatch.setOnClickListener(v -> {
                 themeName = name;
-                getSharedPreferences(PREFS, MODE_PRIVATE).edit().putString("theme", themeName).apply();
+                saveSetting("theme", themeName);
                 render();
             });
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dp(24), dp(24));
@@ -319,7 +337,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         LinearLayout section = vertical();
         LinearLayout heading = row();
         heading.setGravity(Gravity.CENTER_VERTICAL);
-        heading.addView(label("ROZDZIAŁY · TOPICS", th.faint, 11, 0.14f));
+        heading.addView(label(t("TOPICS", "ROZDZIAŁY"), th.faint, 11, 0.14f));
         View line = new View(this);
         line.setBackgroundColor(th.dash);
         LinearLayout.LayoutParams lineParams = new LinearLayout.LayoutParams(0, dp(2), 1);
@@ -329,7 +347,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         addGap(section, 10);
 
         for (TopicCount topic : topTopicsForLevel(6)) {
-            Button button = flatButton(topic.name + "                                  " + topic.count + " kart →", th.panel, th.ink, th.ink, 14, 48);
+            Button button = flatButton(topic.name + "                                  " + topic.count + t(" cards →", " kart →"), th.panel, th.ink, th.ink, 14, 48);
             button.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
             button.setPadding(dp(14), 0, dp(14), 0);
             button.setOnClickListener(v -> startSession(topic.name));
@@ -365,7 +383,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         LinearLayout.LayoutParams progressParams = new LinearLayout.LayoutParams(0, dp(10), 1);
         progressParams.setMargins(dp(12), 0, dp(12), 0);
         header.addView(progress, progressParams);
-        header.addView(uiText("karta " + (sessionIndex + 1) + "/" + sessionDeck.size(), 12, th.faint, sansBold));
+        header.addView(uiText(t("card ", "karta ") + (sessionIndex + 1) + "/" + sessionDeck.size(), 12, th.faint, sansBold));
         content.addView(header);
         addGap(content, 14);
 
@@ -412,7 +430,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             }
             LinearLayout tts = row();
             tts.setGravity(Gravity.CENTER);
-            Button readPl = flatButton("Czytaj PL", th.accentSoft, th.accent, th.accent, 12.5f, 38);
+            Button readPl = flatButton(t("Read PL", "Czytaj PL"), th.accentSoft, th.accent, th.accent, 12.5f, 38);
             readPl.setOnClickListener(v -> speak(card.polish, new Locale("pl", "PL")));
             tts.addView(readPl, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(38)));
             Button readEn = flatButton("Read EN", th.panel, th.muted, th.dash, 12.5f, 38);
@@ -466,15 +484,15 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 0,
                 1
         ));
-        done.addView(label("BRAWO!", th.accent, 11, 0.18f));
-        done.addView(serifText("Lekcja skończona", 30, th.ink), topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 14));
-        TextView summary = bodyText("You knew " + sessionGot + " of " + sessionDeck.size() + " cards.\nThe rest come back next lesson.", 14, th.muted);
+        done.addView(label(t("WELL DONE!", "BRAWO!"), th.accent, 11, 0.18f));
+        done.addView(serifText(t("Lesson finished", "Lekcja skończona"), 30, th.ink), topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 14));
+        TextView summary = bodyText(t("You knew ", "Znasz ") + sessionGot + t(" of ", " z ") + sessionDeck.size() + t(" cards.\nThe rest come back next lesson.", " kart.\nReszta wróci w następnej lekcji."), 14, th.muted);
         summary.setGravity(Gravity.CENTER);
         done.addView(summary, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 14));
-        Button again = flatButton("Jeszcze raz — again", th.accent, th.onAccent, th.ink, 15, 50);
+        Button again = flatButton(t("Again", "Jeszcze raz"), th.accent, th.onAccent, th.ink, 15, 50);
         again.setOnClickListener(v -> startSession("All"));
         done.addView(again, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(50), 18));
-        Button home = textButton("Back home", th.faint, 13);
+        Button home = textButton(t("Back home", "Wróć do domu"), th.faint, 13);
         home.setPaintFlags(home.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         home.setOnClickListener(v -> {
             screen = SCREEN_HOME;
@@ -485,14 +503,14 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     private void renderBrowse(LinearLayout content) {
         Theme th = theme();
-        content.addView(screenTitle("Katalog kart"));
+        content.addView(screenTitle(t("Card Catalog", "Katalog kart")));
         addGap(content, 14);
 
         EditText search = new EditText(this);
         search.setSingleLine(true);
         search.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         search.setText(browseQuery);
-        search.setHint("Szukaj: dworzec, to eat…");
+        search.setHint(t("Search: dworzec, to eat…", "Szukaj: dworzec, to eat…"));
         search.setTextSize(15);
         search.setTypeface(sansRegular);
         search.setTextColor(th.ink);
@@ -519,7 +537,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         addGap(content, 10);
 
         List<Phrase> filtered = browseCards();
-        content.addView(label(filtered.size() + " KART · POZIOM " + level, th.faint, 11.5f, 0.08f));
+        content.addView(label(filtered.size() + t(" CARDS · LEVEL ", " KART · POZIOM ") + level, th.faint, 11.5f, 0.08f));
         addGap(content, 10);
 
         int limit = Math.min(browseLimit, filtered.size());
@@ -529,7 +547,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
 
         if (filtered.size() > browseLimit) {
-            Button more = flatButton("Pokaż więcej", th.panel, th.ink, th.ink, 13, 44);
+            Button more = flatButton(t("Show more", "Pokaż więcej"), th.panel, th.ink, th.ink, 13, 44);
             more.setOnClickListener(v -> {
                 browseLimit += 25;
                 render();
@@ -598,9 +616,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     private void renderGrammar(LinearLayout content) {
         Theme th = theme();
-        content.addView(screenTitle("Gramatyka"));
+        content.addView(screenTitle(t("Grammar", "Gramatyka")));
         addGap(content, 12);
-        content.addView(bodyText("Short lessons in reading order, each with a self-check.", 13, th.muted));
+        content.addView(bodyText(t("Short lessons in reading order, each with a self-check.", "Krótkie lekcje w kolejności nauki, każda z auto-sprawdzeniem."), 13, th.muted));
         addGap(content, 12);
 
         for (GrammarLesson lesson : grammarLessons) {
@@ -633,12 +651,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
         if (open) {
             addGap(card, 10);
-            TextView rule = bodyText("Zasada. " + lesson.rule, 13, th.body);
+            TextView rule = bodyText(t("Rule. ", "Zasada. ") + lesson.rule, 13, th.body);
             rule.setPadding(dp(12), dp(10), dp(12), dp(10));
             rule.setBackground(leftBorderBox(th.bg, th.accent, 3));
             card.addView(rule);
             addGap(card, 8);
-            card.addView(bodyText("Wzór. " + lesson.pattern, 13, th.body));
+            card.addView(bodyText(t("Pattern. ", "Wzór. ") + lesson.pattern, 13, th.body));
             addGap(card, 8);
             for (GrammarExample example : lesson.examples) {
                 LinearLayout ex = vertical();
@@ -651,15 +669,15 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             }
             card.addView(new DashedLine(this, th.dash), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(2)));
             addGap(card, 10);
-            card.addView(uiText("Sprawdź się: " + lesson.checkPrompt, 13, th.ink, sansBold));
+            card.addView(uiText(t("Check yourself: ", "Sprawdź się: ") + lesson.checkPrompt, 13, th.ink, sansBold));
             addGap(card, 5);
-            card.addView(uiText("Odpowiedź: " + lesson.checkAnswer + (lesson.checkHint.isEmpty() ? "" : " — " + lesson.checkHint), 12.5f, th.accent2Text, sansBold));
-            Button read = flatButton("Czytaj przykłady", th.accentSoft, th.accent, th.accent, 12, 38);
+            card.addView(uiText(t("Answer: ", "Odpowiedź: ") + lesson.checkAnswer + (lesson.checkHint.isEmpty() ? "" : " — " + lesson.checkHint), 12.5f, th.accent2Text, sansBold));
+            Button read = flatButton(t("Read examples", "Czytaj przykłady"), th.accentSoft, th.accent, th.accent, 12, 38);
             read.setOnClickListener(v -> speak(lesson.polishExamples(), new Locale("pl", "PL")));
             card.addView(read, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(38), 10));
         }
 
-        Button toggle = flatButton(open ? "Zamknij lekcję" : "Otwórz lekcję", Color.TRANSPARENT, th.muted, th.dash, 12, 38);
+        Button toggle = flatButton(open ? t("Close lesson", "Zamknij lekcję") : t("Open lesson", "Otwórz lekcję"), Color.TRANSPARENT, th.muted, th.dash, 12, 38);
         toggle.setOnClickListener(v -> {
             openLessonUnit = open ? null : lesson.unit;
             render();
@@ -670,9 +688,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     private void renderAlphabet(LinearLayout content) {
         Theme th = theme();
-        content.addView(screenTitle("Alfabet i dźwięki"));
+        content.addView(screenTitle(t("Alphabet and Sounds", "Alfabet i dźwięki")));
         addGap(content, 12);
-        content.addView(bodyText("Tap a tile to hear the example word.", 13, th.muted));
+        content.addView(bodyText(t("Tap a tile to hear the letter and example word.", "Dotknij kafelka, aby usłyszeć literę i przykład."), 13, th.muted));
         addGap(content, 14);
 
         for (int i = 0; i < alphabet.size(); i += 2) {
@@ -703,16 +721,106 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         return tile;
     }
 
+    private void renderSettings(LinearLayout content) {
+        Theme th = theme();
+        content.addView(screenTitle(t("Settings", "Ustawienia")));
+        addGap(content, 12);
+        content.addView(bodyText(t("Personalize the interface, theme, and read-aloud speed.", "Dostosuj język interfejsu, motyw i szybkość czytania."), 13, th.muted));
+        addGap(content, 14);
+
+        LinearLayout language = settingsCard(t("Interface Language", "Język interfejsu"), t("Choose the app labels and instructions language.", "Wybierz język etykiet i instrukcji aplikacji."));
+        LinearLayout languageRow = row();
+        languageRow.addView(settingChoice("English", LANG_EN.equals(interfaceLanguage), () -> {
+            interfaceLanguage = LANG_EN;
+            saveSetting("interfaceLanguage", interfaceLanguage);
+            render();
+        }), new LinearLayout.LayoutParams(0, dp(42), 1));
+        LinearLayout.LayoutParams plParams = new LinearLayout.LayoutParams(0, dp(42), 1);
+        plParams.setMargins(dp(10), 0, 0, 0);
+        languageRow.addView(settingChoice("Polski", LANG_PL.equals(interfaceLanguage), () -> {
+            interfaceLanguage = LANG_PL;
+            saveSetting("interfaceLanguage", interfaceLanguage);
+            render();
+        }), plParams);
+        language.addView(languageRow, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42), 12));
+        content.addView(language);
+        addGap(content, 12);
+
+        LinearLayout themeCard = settingsCard(t("Color Theme", "Motyw kolorystyczny"), t("The same five themes are available from the home header.", "Te same pięć motywów jest dostępne w nagłówku ekranu głównego."));
+        LinearLayout themeRow = row();
+        themeRow.setGravity(Gravity.CENTER_VERTICAL);
+        boolean firstTheme = true;
+        for (String name : themes.keySet()) {
+            ThemeSwatch swatch = new ThemeSwatch(this, themes.get(name), name.equals(themeName));
+            swatch.setOnClickListener(v -> {
+                themeName = name;
+                saveSetting("theme", themeName);
+                render();
+            });
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dp(30), dp(30));
+            if (!firstTheme) {
+                params.setMargins(dp(12), 0, 0, 0);
+            }
+            themeRow.addView(swatch, params);
+            firstTheme = false;
+        }
+        themeCard.addView(themeRow, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(34), 12));
+        themeCard.addView(uiText(themeName, 12.5f, th.faint, sansSemiBold), topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 8));
+        content.addView(themeCard);
+        addGap(content, 12);
+
+        LinearLayout speed = settingsCard(t("Reading Speed", "Szybkość czytania"), t("Controls Polish and English TextToSpeech playback.", "Steruje odtwarzaniem TextToSpeech po polsku i angielsku."));
+        LinearLayout speedRow = row();
+        speedRow.addView(settingChoice(t("Slow", "Wolno"), SPEED_SLOW.equals(speechSpeed), () -> setSpeechSpeed(SPEED_SLOW)), new LinearLayout.LayoutParams(0, dp(42), 1));
+        LinearLayout.LayoutParams normalParams = new LinearLayout.LayoutParams(0, dp(42), 1);
+        normalParams.setMargins(dp(8), 0, 0, 0);
+        speedRow.addView(settingChoice(t("Normal", "Normalnie"), SPEED_NORMAL.equals(speechSpeed), () -> setSpeechSpeed(SPEED_NORMAL)), normalParams);
+        LinearLayout.LayoutParams fastParams = new LinearLayout.LayoutParams(0, dp(42), 1);
+        fastParams.setMargins(dp(8), 0, 0, 0);
+        speedRow.addView(settingChoice(t("Fast", "Szybko"), SPEED_FAST.equals(speechSpeed), () -> setSpeechSpeed(SPEED_FAST)), fastParams);
+        speed.addView(speedRow, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42), 12));
+        content.addView(speed);
+    }
+
+    private LinearLayout settingsCard(String title, String description) {
+        Theme th = theme();
+        LinearLayout card = vertical();
+        card.setPadding(dp(16), dp(16), dp(16), dp(16));
+        card.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
+        card.addView(serifText(title, 19, th.ink));
+        addGap(card, 5);
+        card.addView(bodyText(description, 13, th.muted));
+        return card;
+    }
+
+    private Button settingChoice(String text, boolean selected, Runnable action) {
+        Theme th = theme();
+        Button button = flatButton(text, selected ? th.ink : th.panel, selected ? th.bg : th.muted, selected ? th.ink : th.dash, 13, 42);
+        button.setOnClickListener(v -> action.run());
+        return button;
+    }
+
+    private void setSpeechSpeed(String speed) {
+        speechSpeed = speed;
+        saveSetting("speechSpeed", speechSpeed);
+        render();
+    }
+
+    private void saveSetting(String key, String value) {
+        getSharedPreferences(PREFS, MODE_PRIVATE).edit().putString(key, value).apply();
+    }
+
     private View bottomNav() {
         Theme th = theme();
         LinearLayout nav = row();
         nav.setPadding(dp(8), dp(6), dp(8), dp(2));
         nav.setGravity(Gravity.CENTER);
         nav.setBackground(topBorder(th.panel, th.ink, 2));
-        nav.addView(navItem("home", "Dom", SCREEN_HOME), new LinearLayout.LayoutParams(0, dp(56), 1));
-        nav.addView(navItem("browse", "Karty", SCREEN_BROWSE), new LinearLayout.LayoutParams(0, dp(56), 1));
-        nav.addView(navItem("grammar", "Gramatyka", SCREEN_GRAMMAR), new LinearLayout.LayoutParams(0, dp(56), 1));
-        nav.addView(navItem("alphabet", "Alfabet", SCREEN_ALPHABET), new LinearLayout.LayoutParams(0, dp(56), 1));
+        nav.addView(navItem("home", t("Home", "Dom"), SCREEN_HOME), new LinearLayout.LayoutParams(0, dp(56), 1));
+        nav.addView(navItem("browse", t("Cards", "Karty"), SCREEN_BROWSE), new LinearLayout.LayoutParams(0, dp(56), 1));
+        nav.addView(navItem("grammar", t("Grammar", "Gramatyka"), SCREEN_GRAMMAR), new LinearLayout.LayoutParams(0, dp(56), 1));
+        nav.addView(navItem("alphabet", t("Alphabet", "Alfabet"), SCREEN_ALPHABET), new LinearLayout.LayoutParams(0, dp(56), 1));
+        nav.addView(navItem("settings", t("Settings", "Ustawienia"), SCREEN_SETTINGS), new LinearLayout.LayoutParams(0, dp(56), 1));
         return nav;
     }
 
@@ -871,6 +979,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         return th.dash;
     }
 
+    private String t(String english, String polish) {
+        return LANG_PL.equals(interfaceLanguage) ? polish : english;
+    }
+
     private String getMemoryStatus(Phrase phrase) {
         String status = memory.get(phrase.key());
         if (STATUS_FORGOT.equals(status) || STATUS_LEARNT.equals(status) || STATUS_NEW.equals(status)) {
@@ -907,7 +1019,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             Toast.makeText(this, "This voice is not installed on this device.", Toast.LENGTH_SHORT).show();
             return;
         }
-        textToSpeech.setSpeechRate("pl".equals(locale.getLanguage()) ? 0.9f : 1.0f);
+        textToSpeech.setSpeechRate(speechRate());
         textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, "learning-card");
     }
 
@@ -922,10 +1034,20 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             Toast.makeText(this, "This voice is not installed on this device.", Toast.LENGTH_SHORT).show();
             return;
         }
-        textToSpeech.setSpeechRate(0.9f);
+        textToSpeech.setSpeechRate(speechRate());
         String letter = item.letter.replace(" ", ", ");
         textToSpeech.speak(letter, TextToSpeech.QUEUE_FLUSH, null, "alphabet-letter");
         textToSpeech.speak(item.example, TextToSpeech.QUEUE_ADD, null, "alphabet-example");
+    }
+
+    private float speechRate() {
+        if (SPEED_SLOW.equals(speechSpeed)) {
+            return 0.75f;
+        }
+        if (SPEED_FAST.equals(speechSpeed)) {
+            return 1.15f;
+        }
+        return 0.95f;
     }
 
     private void loadPhrases() {
@@ -1521,12 +1643,22 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 canvas.drawRoundRect(new RectF(w * 0.18f, h * 0.18f, w * 0.5f, h * 0.86f), 3, 3, paint);
                 canvas.drawRoundRect(new RectF(w * 0.5f, h * 0.18f, w * 0.82f, h * 0.86f), 3, 3, paint);
                 canvas.drawLine(w * 0.5f, h * 0.18f, w * 0.5f, h * 0.86f, paint);
-            } else {
+            } else if ("alphabet".equals(type)) {
                 canvas.drawLine(w * 0.17f, h * 0.85f, w * 0.42f, h * 0.18f, paint);
                 canvas.drawLine(w * 0.42f, h * 0.18f, w * 0.68f, h * 0.85f, paint);
                 canvas.drawLine(w * 0.27f, h * 0.62f, w * 0.58f, h * 0.62f, paint);
                 canvas.drawLine(w * 0.77f, h * 0.22f, w * 0.77f, h * 0.52f, paint);
                 canvas.drawLine(w * 0.65f, h * 0.37f, w * 0.9f, h * 0.37f, paint);
+            } else {
+                canvas.drawCircle(w * 0.5f, h * 0.5f, w * 0.18f, paint);
+                canvas.drawLine(w * 0.5f, h * 0.08f, w * 0.5f, h * 0.23f, paint);
+                canvas.drawLine(w * 0.5f, h * 0.77f, w * 0.5f, h * 0.92f, paint);
+                canvas.drawLine(w * 0.08f, h * 0.5f, w * 0.23f, h * 0.5f, paint);
+                canvas.drawLine(w * 0.77f, h * 0.5f, w * 0.92f, h * 0.5f, paint);
+                canvas.drawLine(w * 0.2f, h * 0.2f, w * 0.31f, h * 0.31f, paint);
+                canvas.drawLine(w * 0.69f, h * 0.69f, w * 0.8f, h * 0.8f, paint);
+                canvas.drawLine(w * 0.8f, h * 0.2f, w * 0.69f, h * 0.31f, paint);
+                canvas.drawLine(w * 0.31f, h * 0.69f, w * 0.2f, h * 0.8f, paint);
             }
         }
     }
