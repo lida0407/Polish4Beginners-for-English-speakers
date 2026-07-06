@@ -25,6 +25,7 @@ import android.os.Environment;
 import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Base64;
@@ -43,6 +44,10 @@ import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -56,11 +61,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilderFactory;
 
 public class MainActivity extends Activity implements TextToSpeech.OnInitListener {
     private static final String PREFS = "phrasebook";
@@ -95,6 +103,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private final List<Phrase> phrases = new ArrayList<>();
     private final List<GrammarLesson> grammarLessons = new ArrayList<>();
     private final List<AlphabetItem> alphabet = new ArrayList<>();
+    private final List<NewsItem> newsItems = new ArrayList<>();
     private final Map<String, String> memory = new HashMap<>();
     private final List<Phrase> sessionDeck = new ArrayList<>();
     private final Map<String, Theme> themes = new LinkedHashMap<>();
@@ -112,7 +121,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private int sessionGot = 0;
     private long updateDownloadId = -1L;
     private boolean sessionRevealed = false;
+    private boolean newsLoading = false;
+    private boolean newsFetchedOnce = false;
     private boolean ttsReady = false;
+    private String newsError = "";
+    private String newsLastUpdated = "";
     private TextToSpeech textToSpeech;
     private BroadcastReceiver updateDownloadReceiver;
     private Typeface sansRegular;
@@ -783,39 +796,246 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         content.addView(screenTitle(t("News Reading", "Czytanie wiadomości")));
         addGap(content, 12);
 
-        for (NewsSource source : newsSources()) {
-            LinearLayout card = vertical();
-            card.setPadding(dp(16), dp(16), dp(16), dp(16));
-            card.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
-            card.addView(serifText(source.name, 19, th.ink));
-            addGap(card, 6);
-            card.addView(bodyText(source.description, 13, th.muted));
+        LinearLayout controls = row();
+        controls.setGravity(Gravity.CENTER_VERTICAL);
+        TextView status = bodyText(newsStatusText(), 12.5f, th.faint);
+        controls.addView(status, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        Button refresh = flatButton(newsLoading ? t("Loading", "Ładowanie") : t("Refresh", "Odśwież"), th.accentSoft, th.accent, th.accent, 12.5f, 38);
+        refresh.setEnabled(!newsLoading);
+        refresh.setOnClickListener(v -> fetchTodayNews(true));
+        controls.addView(refresh, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(38)));
+        content.addView(controls);
+        addGap(content, 12);
 
-            LinearLayout actions = row();
-            Button polish = flatButton("Polski", th.accentSoft, th.accent, th.accent, 13, 42);
-            polish.setOnClickListener(v -> openWebUrl(source.url));
-            actions.addView(polish, new LinearLayout.LayoutParams(0, dp(42), 1));
+        if (!newsFetchedOnce && !newsLoading) {
+            fetchTodayNews(false);
+        }
 
-            Button english = flatButton("English", th.panel, th.muted, th.dash, 13, 42);
-            english.setOnClickListener(v -> openTranslatedSite(source.url));
-            LinearLayout.LayoutParams englishParams = new LinearLayout.LayoutParams(0, dp(42), 1);
-            englishParams.setMargins(dp(10), 0, 0, 0);
-            actions.addView(english, englishParams);
-            card.addView(actions, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42), 12));
+        if (!newsError.isEmpty()) {
+            TextView error = bodyText(newsError, 13, th.accent);
+            error.setPadding(dp(12), dp(10), dp(12), dp(10));
+            error.setBackground(leftBorderBox(th.panel, th.accent, 3));
+            content.addView(error);
+            addGap(content, 12);
+        }
 
-            content.addView(card);
+        if (newsLoading && newsItems.isEmpty()) {
+            content.addView(bodyText(t("Fetching today's headlines from Polish news feeds...", "Pobieram dzisiejsze nagłówki z polskich kanałów RSS..."), 13, th.muted));
+            return;
+        }
+
+        if (newsFetchedOnce && newsItems.isEmpty()) {
+            content.addView(bodyText(t("No dated items from today were found yet. Try Refresh later.", "Nie znaleziono jeszcze dzisiejszych pozycji. Spróbuj odświeżyć później."), 13, th.muted));
+            return;
+        }
+
+        for (NewsItem item : newsItems) {
+            content.addView(newsCard(item));
             addGap(content, 12);
         }
     }
 
     private List<NewsSource> newsSources() {
         List<NewsSource> sources = new ArrayList<>();
-        sources.add(new NewsSource("TVN24 Warszawa", "Warsaw local news and city updates.", "https://tvn24.pl/tvnwarszawa"));
-        sources.add(new NewsSource("Gazeta Wyborcza", "Polish reporting with Warsaw and national coverage.", "https://wyborcza.pl"));
-        sources.add(new NewsSource("RMF24", "Breaking news, politics, economy, and public affairs.", "https://www.rmf24.pl"));
-        sources.add(new NewsSource("Onet Wiadomości", "Broad Polish news portal for daily reading.", "https://wiadomosci.onet.pl"));
-        sources.add(new NewsSource("Polsat News", "Polish news, politics, society, and live coverage.", "https://www.polsatnews.pl"));
+        sources.add(new NewsSource("TVN24 Warszawa", "Warsaw local news and city updates.", "https://tvn24.pl/tvnwarszawa", "https://tvn24.pl/tvnwarszawa/najnowsze.xml"));
+        sources.add(new NewsSource("Gazeta Wyborcza", "Warsaw reporting from Gazeta Wyborcza.", "https://wyborcza.pl", "https://warszawa.wyborcza.pl/pub/rss/warszawa.xml"));
+        sources.add(new NewsSource("RMF24", "Breaking news, politics, economy, and public affairs.", "https://www.rmf24.pl", "https://www.rmf24.pl/fakty/feed"));
+        sources.add(new NewsSource("Onet Wiadomości", "Broad Polish news portal for daily reading.", "https://wiadomosci.onet.pl", "https://wiadomosci.onet.pl/.feed"));
+        sources.add(new NewsSource("Polsat News", "Polish news, politics, society, and live coverage.", "https://www.polsatnews.pl", "https://www.polsatnews.pl/rss/wszystkie.xml"));
         return sources;
+    }
+
+    private String newsStatusText() {
+        if (newsLoading) {
+            return t("Loading today's news...", "Ładowanie dzisiejszych wiadomości...");
+        }
+        if (!newsLastUpdated.isEmpty()) {
+            return t("Today · updated ", "Dzisiaj · aktualizacja ") + newsLastUpdated;
+        }
+        return t("Today · Polish + English", "Dzisiaj · polski + angielski");
+    }
+
+    private View newsCard(NewsItem item) {
+        Theme th = theme();
+        LinearLayout card = vertical();
+        card.setPadding(dp(16), dp(16), dp(16), dp(16));
+        card.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
+
+        LinearLayout meta = row();
+        meta.setGravity(Gravity.CENTER_VERTICAL);
+        meta.addView(label(item.source, th.accent2, 10.5f, 0.08f), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        meta.addView(uiText(item.timeLabel, 10.5f, th.ghost, sansBold));
+        card.addView(meta);
+        addGap(card, 8);
+
+        TextView title = serifText(item.title, 18.5f, th.ink);
+        title.setTextIsSelectable(true);
+        card.addView(title);
+        if (!item.description.isEmpty()) {
+            TextView description = bodyText(item.description, 13, th.muted);
+            description.setTextIsSelectable(true);
+            card.addView(description, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 7));
+        }
+
+        LinearLayout actions = row();
+        Button polish = flatButton("Polski", th.accentSoft, th.accent, th.accent, 13, 40);
+        polish.setOnClickListener(v -> openWebUrl(item.link));
+        actions.addView(polish, new LinearLayout.LayoutParams(0, dp(40), 1));
+        Button english = flatButton("English", th.panel, th.muted, th.dash, 13, 40);
+        english.setOnClickListener(v -> openTranslatedSite(item.link));
+        LinearLayout.LayoutParams englishParams = new LinearLayout.LayoutParams(0, dp(40), 1);
+        englishParams.setMargins(dp(10), 0, 0, 0);
+        actions.addView(english, englishParams);
+        card.addView(actions, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(40), 12));
+        return card;
+    }
+
+    private void fetchTodayNews(boolean userStarted) {
+        if (newsLoading) {
+            return;
+        }
+        newsLoading = true;
+        newsError = "";
+        if (userStarted && SCREEN_NEWS.equals(screen)) {
+            render();
+        }
+
+        new Thread(() -> {
+            List<NewsItem> fetched = new ArrayList<>();
+            int failedSources = 0;
+            for (NewsSource source : newsSources()) {
+                try {
+                    fetched.addAll(fetchNewsForSource(source));
+                } catch (Exception e) {
+                    failedSources++;
+                }
+            }
+            Collections.sort(fetched, (a, b) -> b.publishedAt.compareTo(a.publishedAt));
+            if (fetched.size() > 30) {
+                fetched = new ArrayList<>(fetched.subList(0, 30));
+            }
+            final List<NewsItem> result = fetched;
+            final int failures = failedSources;
+            runOnUiThread(() -> {
+                newsItems.clear();
+                newsItems.addAll(result);
+                newsLoading = false;
+                newsFetchedOnce = true;
+                newsLastUpdated = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
+                if (failures > 0 && result.isEmpty()) {
+                    newsError = t("Could not load today's RSS feeds.", "Nie udało się wczytać dzisiejszych kanałów RSS.");
+                } else if (failures > 0) {
+                    newsError = t("Some sources did not respond.", "Niektóre źródła nie odpowiedziały.");
+                } else {
+                    newsError = "";
+                }
+                if (SCREEN_NEWS.equals(screen)) {
+                    render();
+                }
+            });
+        }).start();
+    }
+
+    private List<NewsItem> fetchNewsForSource(NewsSource source) throws Exception {
+        List<NewsItem> items = new ArrayList<>();
+        HttpURLConnection connection = (HttpURLConnection) new URL(source.feedUrl).openConnection();
+        connection.setConnectTimeout(9000);
+        connection.setReadTimeout(9000);
+        connection.setRequestProperty("User-Agent", "Polish4Beginners-Android");
+        int code = connection.getResponseCode();
+        if (code < 200 || code >= 300) {
+            throw new IllegalStateException("RSS returned HTTP " + code);
+        }
+
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(false);
+            try {
+                factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+            } catch (Exception ignored) {
+            }
+            Document document = factory.newDocumentBuilder().parse(connection.getInputStream());
+            NodeList itemNodes = document.getElementsByTagName("item");
+            int sourceCount = 0;
+            for (int i = 0; i < itemNodes.getLength() && sourceCount < 6; i++) {
+                Node node = itemNodes.item(i);
+                if (!(node instanceof Element)) {
+                    continue;
+                }
+                Element element = (Element) node;
+                String title = cleanNewsText(childText(element, "title"));
+                String link = cleanNewsText(childText(element, "link"));
+                String description = shorten(cleanNewsText(childText(element, "description")), 220);
+                Date publishedAt = parseNewsDate(childText(element, "pubDate"));
+                if (title.isEmpty() || link.isEmpty() || publishedAt == null || !isToday(publishedAt)) {
+                    continue;
+                }
+                items.add(new NewsItem(source.name, title, description, link, formatNewsTime(publishedAt), publishedAt));
+                sourceCount++;
+            }
+        } finally {
+            connection.disconnect();
+        }
+        return items;
+    }
+
+    private String childText(Element parent, String tagName) {
+        NodeList nodes = parent.getElementsByTagName(tagName);
+        if (nodes.getLength() == 0 || nodes.item(0) == null) {
+            return "";
+        }
+        return nodes.item(0).getTextContent();
+    }
+
+    private Date parseNewsDate(String rawDate) {
+        String[] patterns = {
+                "EEE, dd MMM yyyy HH:mm:ss Z",
+                "EEE, dd MMM yyyy HH:mm Z",
+                "EEE, dd MMM yyyy HH:mm:ss z",
+                "dd MMM yyyy HH:mm:ss Z",
+                "yyyy-MM-dd'T'HH:mm:ssXXX"
+        };
+        for (String pattern : patterns) {
+            try {
+                SimpleDateFormat format = new SimpleDateFormat(pattern, Locale.ENGLISH);
+                format.setLenient(true);
+                return format.parse(rawDate.trim());
+            } catch (Exception ignored) {
+            }
+        }
+        return null;
+    }
+
+    private boolean isToday(Date date) {
+        Calendar today = Calendar.getInstance();
+        Calendar item = Calendar.getInstance();
+        item.setTime(date);
+        return today.get(Calendar.YEAR) == item.get(Calendar.YEAR)
+                && today.get(Calendar.DAY_OF_YEAR) == item.get(Calendar.DAY_OF_YEAR);
+    }
+
+    private String formatNewsTime(Date date) {
+        return new SimpleDateFormat("HH:mm", Locale.getDefault()).format(date);
+    }
+
+    private String cleanNewsText(String raw) {
+        if (raw == null) {
+            return "";
+        }
+        String text;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            text = Html.fromHtml(raw, Html.FROM_HTML_MODE_LEGACY).toString();
+        } else {
+            text = Html.fromHtml(raw).toString();
+        }
+        return text.replace('\u00a0', ' ').replaceAll("\\s+", " ").trim();
+    }
+
+    private String shorten(String text, int limit) {
+        if (text.length() <= limit) {
+            return text;
+        }
+        return text.substring(0, Math.max(0, limit - 1)).trim() + "…";
     }
 
     private void renderSettings(LinearLayout content) {
@@ -1834,11 +2054,31 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         final String name;
         final String description;
         final String url;
+        final String feedUrl;
 
-        NewsSource(String name, String description, String url) {
+        NewsSource(String name, String description, String url, String feedUrl) {
             this.name = name;
             this.description = description;
             this.url = url;
+            this.feedUrl = feedUrl;
+        }
+    }
+
+    private static class NewsItem {
+        final String source;
+        final String title;
+        final String description;
+        final String link;
+        final String timeLabel;
+        final Date publishedAt;
+
+        NewsItem(String source, String title, String description, String link, String timeLabel, Date publishedAt) {
+            this.source = source;
+            this.title = title;
+            this.description = description;
+            this.link = link;
+            this.timeLabel = timeLabel;
+            this.publishedAt = publishedAt;
         }
     }
 
