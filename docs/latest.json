@@ -1,7 +1,7 @@
 {
   "versionCode": 10,
   "versionName": "1.9",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/26d893f0a5aee29ef12a65f90e69fb8bd3fe2865/docs/P4B.apk",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/4c316494142a25c145e64f53b3ab1d2d90575578/docs/P4B.apk",
   "apkSha256": "5b3624677c53226a6388b5819b53eb11420639479082cbc2dda4be60a2ec8a23",
   "apkSizeBytes": 67469847,
   "releaseNotes": "Separates translated news titles from summaries and gives English translations a higher-contrast reading style."
