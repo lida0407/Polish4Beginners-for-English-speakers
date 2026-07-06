@@ -42,6 +42,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.mlkit.common.model.DownloadConditions;
+import com.google.mlkit.nl.translate.TranslateLanguage;
+import com.google.mlkit.nl.translate.Translation;
+import com.google.mlkit.nl.translate.Translator;
+import com.google.mlkit.nl.translate.TranslatorOptions;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
@@ -122,11 +128,14 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private long updateDownloadId = -1L;
     private boolean sessionRevealed = false;
     private boolean newsLoading = false;
+    private boolean newsTranslating = false;
     private boolean newsFetchedOnce = false;
     private boolean ttsReady = false;
     private String newsError = "";
     private String newsLastUpdated = "";
+    private String newsTranslationStatus = "";
     private TextToSpeech textToSpeech;
+    private Translator polishEnglishTranslator;
     private BroadcastReceiver updateDownloadReceiver;
     private Typeface sansRegular;
     private Typeface sansMedium;
@@ -182,6 +191,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         if (textToSpeech != null) {
             textToSpeech.stop();
             textToSpeech.shutdown();
+        }
+        if (polishEnglishTranslator != null) {
+            polishEnglishTranslator.close();
         }
         if (updateDownloadReceiver != null) {
             try {
@@ -850,7 +862,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             return t("Loading today's news...", "Ładowanie dzisiejszych wiadomości...");
         }
         if (!newsLastUpdated.isEmpty()) {
-            return t("Today · updated ", "Dzisiaj · aktualizacja ") + newsLastUpdated;
+            String status = t("Today · updated ", "Dzisiaj · aktualizacja ") + newsLastUpdated;
+            if (newsTranslating && !newsTranslationStatus.isEmpty()) {
+                status += " · " + newsTranslationStatus;
+            }
+            return status;
         }
         return t("Today · Polish + English", "Dzisiaj · polski + angielski");
     }
@@ -875,6 +891,23 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             TextView description = bodyText(item.description, 13, th.muted);
             description.setTextIsSelectable(true);
             card.addView(description, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 7));
+        }
+
+        TextView englishLabel = label("ENGLISH", th.accent, 10.5f, 0.08f);
+        card.addView(englishLabel, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 12));
+        if (!item.englishTitle.isEmpty()) {
+            TextView englishTitle = serifText(item.englishTitle, 17.5f, th.ink);
+            englishTitle.setTextIsSelectable(true);
+            card.addView(englishTitle, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 5));
+            if (!item.englishDescription.isEmpty()) {
+                TextView englishDescription = bodyText(item.englishDescription, 13, th.muted);
+                englishDescription.setTextIsSelectable(true);
+                card.addView(englishDescription, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 7));
+            }
+        } else {
+            card.addView(bodyText(item.translationFailed
+                    ? t("Translation unavailable. Use English button below.", "Tłumaczenie niedostępne. Użyj przycisku English poniżej.")
+                    : t("Translating in app...", "Tłumaczę w aplikacji..."), 13, th.faint), topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 5));
         }
 
         LinearLayout actions = row();
@@ -929,11 +962,85 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 } else {
                     newsError = "";
                 }
+                if (!newsItems.isEmpty()) {
+                    translateNewsItems();
+                }
                 if (SCREEN_NEWS.equals(screen)) {
                     render();
                 }
             });
         }).start();
+    }
+
+    private void translateNewsItems() {
+        if (newsItems.isEmpty()) {
+            return;
+        }
+        newsTranslating = true;
+        newsTranslationStatus = t("preparing translator", "przygotowuję tłumacza");
+
+        Translator translator = newsTranslator();
+        DownloadConditions conditions = new DownloadConditions.Builder().build();
+        translator.downloadModelIfNeeded(conditions)
+                .addOnSuccessListener(v -> {
+                    newsTranslationStatus = t("translating", "tłumaczę");
+                    translateNewsItemAt(0);
+                    if (SCREEN_NEWS.equals(screen)) {
+                        render();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    newsTranslating = false;
+                    newsTranslationStatus = "";
+                    for (NewsItem item : newsItems) {
+                        item.translationFailed = true;
+                    }
+                    if (SCREEN_NEWS.equals(screen)) {
+                        render();
+                    }
+                });
+    }
+
+    private Translator newsTranslator() {
+        if (polishEnglishTranslator == null) {
+            TranslatorOptions options = new TranslatorOptions.Builder()
+                    .setSourceLanguage(TranslateLanguage.POLISH)
+                    .setTargetLanguage(TranslateLanguage.ENGLISH)
+                    .build();
+            polishEnglishTranslator = Translation.getClient(options);
+        }
+        return polishEnglishTranslator;
+    }
+
+    private void translateNewsItemAt(int index) {
+        if (index >= newsItems.size()) {
+            newsTranslating = false;
+            newsTranslationStatus = "";
+            if (SCREEN_NEWS.equals(screen)) {
+                render();
+            }
+            return;
+        }
+
+        NewsItem item = newsItems.get(index);
+        String original = item.title + "\n\n" + item.description;
+        newsTranslator().translate(original)
+                .addOnSuccessListener(translated -> {
+                    String[] parts = translated.split("\\n\\s*\\n", 2);
+                    item.englishTitle = parts.length > 0 ? parts[0].trim() : translated.trim();
+                    item.englishDescription = parts.length > 1 ? parts[1].trim() : "";
+                    if (index == 0 || index % 4 == 0) {
+                        newsTranslationStatus = (index + 1) + "/" + newsItems.size();
+                        if (SCREEN_NEWS.equals(screen)) {
+                            render();
+                        }
+                    }
+                    translateNewsItemAt(index + 1);
+                })
+                .addOnFailureListener(e -> {
+                    item.translationFailed = true;
+                    translateNewsItemAt(index + 1);
+                });
     }
 
     private List<NewsItem> fetchNewsForSource(NewsSource source) throws Exception {
@@ -2071,6 +2178,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         final String link;
         final String timeLabel;
         final Date publishedAt;
+        String englishTitle = "";
+        String englishDescription = "";
+        boolean translationFailed = false;
 
         NewsItem(String source, String title, String description, String link, String timeLabel, Date publishedAt) {
             this.source = source;

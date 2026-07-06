@@ -1,8 +1,8 @@
 {
-  "versionCode": 8,
-  "versionName": "1.7",
+  "versionCode": 9,
+  "versionName": "1.8",
   "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/9de9426c0cb3c9b5ecbeea531d94364b7637d96e/docs/P4B.apk",
-  "apkSha256": "55e6679d2a16b6b8cc754c861c4955c268776254f867244dcffc1936e4a80dcc",
-  "apkSizeBytes": 884571,
-  "releaseNotes": "Fetches today's Polish news headlines and short summaries from RSS feeds, with Polish article and English Google Translate views."
+  "apkSha256": "02fbfd7e1168ffb8fdb76679a9897b242bd225a89accac61ca2f654fcbde784e",
+  "apkSizeBytes": 67469847,
+  "releaseNotes": "Adds in-app Polish-to-English ML Kit translation for today's news headlines and snippets."
 }
