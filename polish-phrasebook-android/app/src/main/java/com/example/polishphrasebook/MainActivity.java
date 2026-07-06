@@ -74,6 +74,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String SCREEN_BROWSE = "browse";
     private static final String SCREEN_GRAMMAR = "grammar";
     private static final String SCREEN_ALPHABET = "alphabet";
+    private static final String SCREEN_NEWS = "news";
     private static final String SCREEN_SETTINGS = "settings";
     private static final String DEFAULT_THEME = "Klasyczny";
     private static final String LANG_EN = "en";
@@ -230,6 +231,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 renderGrammar(content);
             } else if (SCREEN_ALPHABET.equals(screen)) {
                 renderAlphabet(content);
+            } else if (SCREEN_NEWS.equals(screen)) {
+                renderNews(content);
             } else {
                 renderSettings(content);
             }
@@ -775,6 +778,46 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         return tile;
     }
 
+    private void renderNews(LinearLayout content) {
+        Theme th = theme();
+        content.addView(screenTitle(t("News Reading", "Czytanie wiadomości")));
+        addGap(content, 12);
+
+        for (NewsSource source : newsSources()) {
+            LinearLayout card = vertical();
+            card.setPadding(dp(16), dp(16), dp(16), dp(16));
+            card.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
+            card.addView(serifText(source.name, 19, th.ink));
+            addGap(card, 6);
+            card.addView(bodyText(source.description, 13, th.muted));
+
+            LinearLayout actions = row();
+            Button polish = flatButton("Polski", th.accentSoft, th.accent, th.accent, 13, 42);
+            polish.setOnClickListener(v -> openWebUrl(source.url));
+            actions.addView(polish, new LinearLayout.LayoutParams(0, dp(42), 1));
+
+            Button english = flatButton("English", th.panel, th.muted, th.dash, 13, 42);
+            english.setOnClickListener(v -> openTranslatedSite(source.url));
+            LinearLayout.LayoutParams englishParams = new LinearLayout.LayoutParams(0, dp(42), 1);
+            englishParams.setMargins(dp(10), 0, 0, 0);
+            actions.addView(english, englishParams);
+            card.addView(actions, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42), 12));
+
+            content.addView(card);
+            addGap(content, 12);
+        }
+    }
+
+    private List<NewsSource> newsSources() {
+        List<NewsSource> sources = new ArrayList<>();
+        sources.add(new NewsSource("TVN24 Warszawa", "Warsaw local news and city updates.", "https://tvn24.pl/tvnwarszawa"));
+        sources.add(new NewsSource("Gazeta Wyborcza", "Polish reporting with Warsaw and national coverage.", "https://wyborcza.pl"));
+        sources.add(new NewsSource("RMF24", "Breaking news, politics, economy, and public affairs.", "https://www.rmf24.pl"));
+        sources.add(new NewsSource("Onet Wiadomości", "Broad Polish news portal for daily reading.", "https://wiadomosci.onet.pl"));
+        sources.add(new NewsSource("Polsat News", "Polish news, politics, society, and live coverage.", "https://www.polsatnews.pl"));
+        return sources;
+    }
+
     private void renderSettings(LinearLayout content) {
         Theme th = theme();
         content.addView(screenTitle(t("Settings", "Ustawienia")));
@@ -1122,7 +1165,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         nav.addView(navItem("home", t("Home", "Dom"), SCREEN_HOME), new LinearLayout.LayoutParams(0, dp(56), 1));
         nav.addView(navItem("browse", t("Cards", "Karty"), SCREEN_BROWSE), new LinearLayout.LayoutParams(0, dp(56), 1));
         nav.addView(navItem("grammar", t("Grammar", "Gramatyka"), SCREEN_GRAMMAR), new LinearLayout.LayoutParams(0, dp(56), 1));
-        nav.addView(navItem("alphabet", t("Alphabet", "Alfabet"), SCREEN_ALPHABET), new LinearLayout.LayoutParams(0, dp(56), 1));
+        nav.addView(navItem("alphabet", "ABC", SCREEN_ALPHABET), new LinearLayout.LayoutParams(0, dp(56), 1));
+        nav.addView(navItem("news", t("News", "News"), SCREEN_NEWS), new LinearLayout.LayoutParams(0, dp(56), 1));
         nav.addView(navItem("settings", t("Settings", "Ustawienia"), SCREEN_SETTINGS), new LinearLayout.LayoutParams(0, dp(56), 1));
         return nav;
     }
@@ -1329,6 +1373,24 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             translate.setPackage(null);
             startActivity(Intent.createChooser(translate, t("Share to translation app", "Udostępnij do tłumacza")));
         }
+    }
+
+    private void openWebUrl(String url) {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+        } catch (Exception e) {
+            Toast.makeText(this, t("Could not open news site.", "Nie można otworzyć strony z wiadomościami."), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void openTranslatedSite(String url) {
+        Uri translated = Uri.parse("https://translate.google.com/translate")
+                .buildUpon()
+                .appendQueryParameter("sl", "pl")
+                .appendQueryParameter("tl", "en")
+                .appendQueryParameter("u", url)
+                .build();
+        openWebUrl(translated.toString());
     }
 
     private void loadMemory() {
@@ -1768,6 +1830,18 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
     }
 
+    private static class NewsSource {
+        final String name;
+        final String description;
+        final String url;
+
+        NewsSource(String name, String description, String url) {
+            this.name = name;
+            this.description = description;
+            this.url = url;
+        }
+    }
+
     private static class TopicCount {
         final String name;
         final int count;
@@ -2012,6 +2086,13 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 canvas.drawLine(w * 0.27f, h * 0.62f, w * 0.58f, h * 0.62f, paint);
                 canvas.drawLine(w * 0.77f, h * 0.22f, w * 0.77f, h * 0.52f, paint);
                 canvas.drawLine(w * 0.65f, h * 0.37f, w * 0.9f, h * 0.37f, paint);
+            } else if ("news".equals(type)) {
+                canvas.drawRoundRect(new RectF(w * 0.14f, h * 0.18f, w * 0.86f, h * 0.84f), 3, 3, paint);
+                canvas.drawLine(w * 0.26f, h * 0.3f, w * 0.72f, h * 0.3f, paint);
+                canvas.drawLine(w * 0.26f, h * 0.43f, w * 0.72f, h * 0.43f, paint);
+                canvas.drawLine(w * 0.26f, h * 0.56f, w * 0.48f, h * 0.56f, paint);
+                canvas.drawLine(w * 0.58f, h * 0.56f, w * 0.72f, h * 0.56f, paint);
+                canvas.drawLine(w * 0.26f, h * 0.69f, w * 0.72f, h * 0.69f, paint);
             } else {
                 canvas.drawCircle(w * 0.5f, h * 0.5f, w * 0.18f, paint);
                 canvas.drawLine(w * 0.5f, h * 0.08f, w * 0.5f, h * 0.23f, paint);

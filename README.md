@@ -17,6 +17,7 @@ Download the Android APK: [P4B.apk](https://lida0407.github.io/Polish4Beginners-
 - 10-card study sessions
 - New, learning, and learnt memory states
 - Browse, grammar, and alphabet tabs
+- Bilingual Polish news reading tab with Google Translate page views
 - Settings for interface language, color theme, and reading speed
 - GitHub-connected APK update checking from Settings
 - Separate GitHub-connected word database updates from Settings
