@@ -893,22 +893,26 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             card.addView(description, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 7));
         }
 
+        LinearLayout englishPanel = vertical();
+        englishPanel.setPadding(dp(12), dp(10), dp(12), dp(10));
+        englishPanel.setBackground(rounded(th.accentSoft, th.accent, 4, 1.2f));
         TextView englishLabel = label("ENGLISH", th.accent, 10.5f, 0.08f);
-        card.addView(englishLabel, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 12));
+        englishPanel.addView(englishLabel);
         if (!item.englishTitle.isEmpty()) {
-            TextView englishTitle = serifText(item.englishTitle, 17.5f, th.ink);
+            TextView englishTitle = serifText(item.englishTitle, 17.5f, th.accent2Text);
             englishTitle.setTextIsSelectable(true);
-            card.addView(englishTitle, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 5));
+            englishPanel.addView(englishTitle, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 5));
             if (!item.englishDescription.isEmpty()) {
-                TextView englishDescription = bodyText(item.englishDescription, 13, th.muted);
+                TextView englishDescription = bodyText(item.englishDescription, 13, th.accent2Text);
                 englishDescription.setTextIsSelectable(true);
-                card.addView(englishDescription, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 7));
+                englishPanel.addView(englishDescription, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 7));
             }
         } else {
-            card.addView(bodyText(item.translationFailed
+            englishPanel.addView(bodyText(item.translationFailed
                     ? t("Translation unavailable. Use English button below.", "Tłumaczenie niedostępne. Użyj przycisku English poniżej.")
-                    : t("Translating in app...", "Tłumaczę w aplikacji..."), 13, th.faint), topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 5));
+                    : t("Translating in app...", "Tłumaczę w aplikacji..."), 13, th.accent2Text), topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 5));
         }
+        card.addView(englishPanel, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 12));
 
         LinearLayout actions = row();
         Button polish = flatButton("Polski", th.accentSoft, th.accent, th.accent, 13, 40);
@@ -1023,24 +1027,41 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
 
         NewsItem item = newsItems.get(index);
-        String original = item.title + "\n\n" + item.description;
-        newsTranslator().translate(original)
-                .addOnSuccessListener(translated -> {
-                    String[] parts = translated.split("\\n\\s*\\n", 2);
-                    item.englishTitle = parts.length > 0 ? parts[0].trim() : translated.trim();
-                    item.englishDescription = parts.length > 1 ? parts[1].trim() : "";
-                    if (index == 0 || index % 4 == 0) {
-                        newsTranslationStatus = (index + 1) + "/" + newsItems.size();
-                        if (SCREEN_NEWS.equals(screen)) {
-                            render();
-                        }
-                    }
-                    translateNewsItemAt(index + 1);
+        newsTranslator().translate(item.title)
+                .addOnSuccessListener(translatedTitle -> {
+                    item.englishTitle = translatedTitle.trim();
+                    translateNewsDescription(index, item);
                 })
                 .addOnFailureListener(e -> {
                     item.translationFailed = true;
                     translateNewsItemAt(index + 1);
                 });
+    }
+
+    private void translateNewsDescription(int index, NewsItem item) {
+        if (item.description.isEmpty()) {
+            finishNewsItemTranslation(index);
+            return;
+        }
+        newsTranslator().translate(item.description)
+                .addOnSuccessListener(translatedDescription -> {
+                    item.englishDescription = translatedDescription.trim();
+                    finishNewsItemTranslation(index);
+                })
+                .addOnFailureListener(e -> {
+                    item.translationFailed = true;
+                    finishNewsItemTranslation(index);
+                });
+    }
+
+    private void finishNewsItemTranslation(int index) {
+        if (index == 0 || index % 4 == 0) {
+            newsTranslationStatus = (index + 1) + "/" + newsItems.size();
+            if (SCREEN_NEWS.equals(screen)) {
+                render();
+            }
+        }
+        translateNewsItemAt(index + 1);
     }
 
     private List<NewsItem> fetchNewsForSource(NewsSource source) throws Exception {
