@@ -947,10 +947,26 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     private View newsPageIndicator() {
         Theme th = theme();
+        LinearLayout pager = row();
+        pager.setGravity(Gravity.CENTER_VERTICAL);
+
+        Button left = flatButton("<", th.panel, newsIndex > 0 ? th.ink : th.faint, th.dash, 16, 38);
+        left.setEnabled(newsIndex > 0);
+        left.setOnClickListener(v -> moveNewsPage(-1));
+        pager.addView(left, new LinearLayout.LayoutParams(dp(44), dp(38)));
+
         TextView count = label((newsIndex + 1) + " / " + newsItems.size(), th.accent2, 11, 0.12f);
         count.setGravity(Gravity.CENTER);
         count.setPadding(0, dp(8), 0, dp(8));
-        return count;
+        LinearLayout.LayoutParams countParams = new LinearLayout.LayoutParams(0, dp(38), 1);
+        countParams.setMargins(dp(10), 0, dp(10), 0);
+        pager.addView(count, countParams);
+
+        Button right = flatButton(">", th.panel, newsIndex < newsItems.size() - 1 ? th.ink : th.faint, th.dash, 16, 38);
+        right.setEnabled(newsIndex < newsItems.size() - 1);
+        right.setOnClickListener(v -> moveNewsPage(1));
+        pager.addView(right, new LinearLayout.LayoutParams(dp(44), dp(38)));
+        return pager;
     }
 
     private View newsImages(NewsItem item) {

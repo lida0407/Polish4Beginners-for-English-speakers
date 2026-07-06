@@ -1,8 +1,8 @@
 {
-  "versionCode": 12,
-  "versionName": "1.11",
+  "versionCode": 13,
+  "versionName": "1.12",
   "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/71eac3d80818b34e513c1d7d5e29b8d08c634e15/docs/P4B.apk",
-  "apkSha256": "a6fd6c5da93bfa016ccf1f847ecf22073c9066486a8d0aa365b9bec5df8bac26",
-  "apkSizeBytes": 67522285,
-  "releaseNotes": "Removes News previous/next buttons, keeps swipe paging, and lazily displays up to two RSS images per story."
+  "apkSha256": "e9cb9c36420cbf209e6482fea4f263c8ee8b05852de9d7afb516af8ec83d9e38",
+  "apkSizeBytes": 67469843,
+  "releaseNotes": "Adds compact left and right News pager buttons while keeping swipe navigation."
 }
