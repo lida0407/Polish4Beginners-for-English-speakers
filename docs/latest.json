@@ -1,8 +1,8 @@
 {
-  "versionCode": 10,
-  "versionName": "1.9",
+  "versionCode": 11,
+  "versionName": "1.10",
   "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/4c316494142a25c145e64f53b3ab1d2d90575578/docs/P4B.apk",
-  "apkSha256": "5b3624677c53226a6388b5819b53eb11420639479082cbc2dda4be60a2ec8a23",
-  "apkSizeBytes": 67469847,
-  "releaseNotes": "Separates translated news titles from summaries and gives English translations a higher-contrast reading style."
+  "apkSha256": "2cf59e409843d6e94dd934762a53f2b757e2e69bf676e66e9ea208d9ea0ac4ea",
+  "apkSizeBytes": 67491291,
+  "releaseNotes": "Changes News into a one-story pager with swipe navigation, next-five translation prefetching, and a single Open news button."
 }

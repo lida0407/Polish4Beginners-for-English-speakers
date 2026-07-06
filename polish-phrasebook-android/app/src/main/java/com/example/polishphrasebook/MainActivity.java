@@ -30,6 +30,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -105,6 +106,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final int DEFAULT_DATABASE_VERSION = 2;
     private static final long UPDATE_CHECK_INTERVAL_MS = 24L * 60L * 60L * 1000L;
     private static final int SESSION_SIZE = 10;
+    private static final int NEWS_PREFETCH_AHEAD = 5;
 
     private final List<Phrase> phrases = new ArrayList<>();
     private final List<GrammarLesson> grammarLessons = new ArrayList<>();
@@ -125,10 +127,16 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private int browseLimit = 25;
     private int sessionIndex = 0;
     private int sessionGot = 0;
+    private int newsIndex = 0;
+    private float newsTouchStartX = 0f;
+    private float newsTouchStartY = 0f;
     private long updateDownloadId = -1L;
     private boolean sessionRevealed = false;
     private boolean newsLoading = false;
     private boolean newsTranslating = false;
+    private boolean newsTranslatorReady = false;
+    private boolean newsTranslatorPreparing = false;
+    private boolean newsTranslationUnavailable = false;
     private boolean newsFetchedOnce = false;
     private boolean ttsReady = false;
     private String newsError = "";
@@ -841,10 +849,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             return;
         }
 
-        for (NewsItem item : newsItems) {
-            content.addView(newsCard(item));
-            addGap(content, 12);
-        }
+        clampNewsIndex();
+        prefetchNewsTranslations();
+
+        content.addView(newsCard(newsItems.get(newsIndex)));
+        addGap(content, 12);
+        content.addView(newsPagerControls());
     }
 
     private List<NewsSource> newsSources() {
@@ -863,7 +873,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
         if (!newsLastUpdated.isEmpty()) {
             String status = t("Today · updated ", "Dzisiaj · aktualizacja ") + newsLastUpdated;
-            if (newsTranslating && !newsTranslationStatus.isEmpty()) {
+            if (!newsItems.isEmpty()) {
+                status += " · " + (newsIndex + 1) + "/" + newsItems.size();
+            }
+            if (!newsTranslationStatus.isEmpty()) {
                 status += " · " + newsTranslationStatus;
             }
             return status;
@@ -876,6 +889,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         LinearLayout card = vertical();
         card.setPadding(dp(16), dp(16), dp(16), dp(16));
         card.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
+        attachNewsSwipe(card);
 
         LinearLayout meta = row();
         meta.setGravity(Gravity.CENTER_VERTICAL);
@@ -909,22 +923,80 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             }
         } else {
             englishPanel.addView(bodyText(item.translationFailed
-                    ? t("Translation unavailable. Use English button below.", "Tłumaczenie niedostępne. Użyj przycisku English poniżej.")
+                    ? t("Translation unavailable.", "Tłumaczenie niedostępne.")
                     : t("Translating in app...", "Tłumaczę w aplikacji..."), 13, th.accent2Text), topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 5));
         }
         card.addView(englishPanel, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 12));
 
-        LinearLayout actions = row();
-        Button polish = flatButton("Polski", th.accentSoft, th.accent, th.accent, 13, 40);
-        polish.setOnClickListener(v -> openWebUrl(item.link));
-        actions.addView(polish, new LinearLayout.LayoutParams(0, dp(40), 1));
-        Button english = flatButton("English", th.panel, th.muted, th.dash, 13, 40);
-        english.setOnClickListener(v -> openTranslatedSite(item.link));
-        LinearLayout.LayoutParams englishParams = new LinearLayout.LayoutParams(0, dp(40), 1);
-        englishParams.setMargins(dp(10), 0, 0, 0);
-        actions.addView(english, englishParams);
-        card.addView(actions, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(40), 12));
+        Button open = flatButton(t("Open news", "Otwórz wiadomość"), th.accentSoft, th.accent, th.accent, 13, 40);
+        open.setOnClickListener(v -> openWebUrl(item.link));
+        card.addView(open, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(40), 12));
         return card;
+    }
+
+    private View newsPagerControls() {
+        Theme th = theme();
+        LinearLayout controls = row();
+        controls.setGravity(Gravity.CENTER_VERTICAL);
+
+        Button previous = flatButton(t("Previous", "Poprzednia"), th.panel, newsIndex > 0 ? th.ink : th.faint, th.dash, 12.5f, 40);
+        previous.setEnabled(newsIndex > 0);
+        previous.setOnClickListener(v -> moveNewsPage(-1));
+        controls.addView(previous, new LinearLayout.LayoutParams(0, dp(40), 1));
+
+        TextView count = label((newsIndex + 1) + "/" + newsItems.size(), th.accent2, 11, 0.08f);
+        count.setGravity(Gravity.CENTER);
+        LinearLayout.LayoutParams countParams = new LinearLayout.LayoutParams(dp(68), dp(40));
+        countParams.setMargins(dp(10), 0, dp(10), 0);
+        controls.addView(count, countParams);
+
+        Button next = flatButton(t("Next", "Następna"), th.panel, newsIndex < newsItems.size() - 1 ? th.ink : th.faint, th.dash, 12.5f, 40);
+        next.setEnabled(newsIndex < newsItems.size() - 1);
+        next.setOnClickListener(v -> moveNewsPage(1));
+        controls.addView(next, new LinearLayout.LayoutParams(0, dp(40), 1));
+        return controls;
+    }
+
+    private void attachNewsSwipe(View view) {
+        view.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    newsTouchStartX = event.getX();
+                    newsTouchStartY = event.getY();
+                    return true;
+                case MotionEvent.ACTION_UP:
+                    float dx = event.getX() - newsTouchStartX;
+                    float dy = event.getY() - newsTouchStartY;
+                    if (Math.abs(dy) > dp(70) && Math.abs(dy) > Math.abs(dx) * 1.2f) {
+                        moveNewsPage(dy < 0 ? 1 : -1);
+                        return true;
+                    }
+                    v.performClick();
+                    return true;
+                default:
+                    return true;
+            }
+        });
+    }
+
+    private void moveNewsPage(int delta) {
+        if (newsItems.isEmpty()) {
+            return;
+        }
+        int nextIndex = Math.max(0, Math.min(newsItems.size() - 1, newsIndex + delta));
+        if (nextIndex == newsIndex) {
+            return;
+        }
+        newsIndex = nextIndex;
+        render();
+    }
+
+    private void clampNewsIndex() {
+        if (newsItems.isEmpty()) {
+            newsIndex = 0;
+        } else {
+            newsIndex = Math.max(0, Math.min(newsItems.size() - 1, newsIndex));
+        }
     }
 
     private void fetchTodayNews(boolean userStarted) {
@@ -933,6 +1005,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
         newsLoading = true;
         newsError = "";
+        newsTranslationStatus = "";
+        newsTranslating = false;
         if (userStarted && SCREEN_NEWS.equals(screen)) {
             render();
         }
@@ -956,6 +1030,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             runOnUiThread(() -> {
                 newsItems.clear();
                 newsItems.addAll(result);
+                newsIndex = 0;
+                newsTranslationUnavailable = false;
                 newsLoading = false;
                 newsFetchedOnce = true;
                 newsLastUpdated = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
@@ -967,7 +1043,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                     newsError = "";
                 }
                 if (!newsItems.isEmpty()) {
-                    translateNewsItems();
+                    prepareNewsTranslations();
                 }
                 if (SCREEN_NEWS.equals(screen)) {
                     render();
@@ -976,25 +1052,40 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }).start();
     }
 
-    private void translateNewsItems() {
+    private void prepareNewsTranslations() {
         if (newsItems.isEmpty()) {
             return;
         }
+        if (newsTranslationUnavailable) {
+            return;
+        }
+        if (newsTranslatorReady) {
+            prefetchNewsTranslations();
+            return;
+        }
+        if (newsTranslatorPreparing) {
+            return;
+        }
         newsTranslating = true;
+        newsTranslatorPreparing = true;
         newsTranslationStatus = t("preparing translator", "przygotowuję tłumacza");
 
         Translator translator = newsTranslator();
         DownloadConditions conditions = new DownloadConditions.Builder().build();
         translator.downloadModelIfNeeded(conditions)
                 .addOnSuccessListener(v -> {
-                    newsTranslationStatus = t("translating", "tłumaczę");
-                    translateNewsItemAt(0);
+                    newsTranslatorReady = true;
+                    newsTranslatorPreparing = false;
+                    newsTranslationUnavailable = false;
+                    prefetchNewsTranslations();
                     if (SCREEN_NEWS.equals(screen)) {
                         render();
                     }
                 })
                 .addOnFailureListener(e -> {
                     newsTranslating = false;
+                    newsTranslatorPreparing = false;
+                    newsTranslationUnavailable = true;
                     newsTranslationStatus = "";
                     for (NewsItem item : newsItems) {
                         item.translationFailed = true;
@@ -1003,6 +1094,25 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                         render();
                     }
                 });
+    }
+
+    private void prefetchNewsTranslations() {
+        if (newsItems.isEmpty()) {
+            return;
+        }
+        if (newsTranslationUnavailable) {
+            return;
+        }
+        if (!newsTranslatorReady) {
+            prepareNewsTranslations();
+            return;
+        }
+        clampNewsIndex();
+        int end = Math.min(newsItems.size() - 1, newsIndex + NEWS_PREFETCH_AHEAD);
+        for (int i = newsIndex; i <= end; i++) {
+            translateNewsItemAt(i);
+        }
+        updateNewsTranslationStatus();
     }
 
     private Translator newsTranslator() {
@@ -1017,16 +1127,17 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
     private void translateNewsItemAt(int index) {
-        if (index >= newsItems.size()) {
-            newsTranslating = false;
-            newsTranslationStatus = "";
-            if (SCREEN_NEWS.equals(screen)) {
-                render();
-            }
+        if (index < 0 || index >= newsItems.size() || !newsTranslatorReady) {
             return;
         }
 
         NewsItem item = newsItems.get(index);
+        if (!needsNewsTranslation(item)) {
+            return;
+        }
+        item.translationQueued = true;
+        newsTranslating = true;
+        updateNewsTranslationStatus();
         newsTranslator().translate(item.title)
                 .addOnSuccessListener(translatedTitle -> {
                     item.englishTitle = translatedTitle.trim();
@@ -1034,34 +1145,72 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 })
                 .addOnFailureListener(e -> {
                     item.translationFailed = true;
-                    translateNewsItemAt(index + 1);
+                    finishNewsItemTranslation(index, item);
                 });
     }
 
     private void translateNewsDescription(int index, NewsItem item) {
         if (item.description.isEmpty()) {
-            finishNewsItemTranslation(index);
+            finishNewsItemTranslation(index, item);
             return;
         }
         newsTranslator().translate(item.description)
                 .addOnSuccessListener(translatedDescription -> {
                     item.englishDescription = translatedDescription.trim();
-                    finishNewsItemTranslation(index);
+                    finishNewsItemTranslation(index, item);
                 })
                 .addOnFailureListener(e -> {
                     item.translationFailed = true;
-                    finishNewsItemTranslation(index);
+                    finishNewsItemTranslation(index, item);
                 });
     }
 
-    private void finishNewsItemTranslation(int index) {
-        if (index == 0 || index % 4 == 0) {
-            newsTranslationStatus = (index + 1) + "/" + newsItems.size();
-            if (SCREEN_NEWS.equals(screen)) {
-                render();
+    private void finishNewsItemTranslation(int index, NewsItem item) {
+        item.translationQueued = false;
+        item.translationComplete = true;
+        int currentIndex = index;
+        if (currentIndex < 0 || currentIndex >= newsItems.size() || newsItems.get(currentIndex) != item) {
+            currentIndex = newsItems.indexOf(item);
+        }
+        updateNewsTranslationStatus();
+        if (SCREEN_NEWS.equals(screen) && currentIndex >= newsIndex && currentIndex <= newsIndex + NEWS_PREFETCH_AHEAD) {
+            render();
+        }
+    }
+
+    private boolean needsNewsTranslation(NewsItem item) {
+        return !item.translationQueued
+                && !item.translationComplete
+                && !item.translationFailed
+                && item.englishTitle.isEmpty();
+    }
+
+    private void updateNewsTranslationStatus() {
+        if (newsItems.isEmpty()) {
+            newsTranslating = false;
+            newsTranslationStatus = "";
+            return;
+        }
+        if (newsTranslatorPreparing) {
+            newsTranslating = true;
+            newsTranslationStatus = t("preparing translator", "przygotowuję tłumacza");
+            return;
+        }
+        int end = Math.min(newsItems.size() - 1, newsIndex + NEWS_PREFETCH_AHEAD);
+        int ready = 0;
+        int working = 0;
+        int total = end - newsIndex + 1;
+        for (int i = newsIndex; i <= end; i++) {
+            NewsItem item = newsItems.get(i);
+            if (item.translationQueued) {
+                working++;
+            }
+            if (item.translationComplete || item.translationFailed || !item.englishTitle.isEmpty()) {
+                ready++;
             }
         }
-        translateNewsItemAt(index + 1);
+        newsTranslating = working > 0;
+        newsTranslationStatus = t("prepared ", "przygotowano ") + ready + "/" + total;
     }
 
     private List<NewsItem> fetchNewsForSource(NewsSource source) throws Exception {
@@ -1731,16 +1880,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
     }
 
-    private void openTranslatedSite(String url) {
-        Uri translated = Uri.parse("https://translate.google.com/translate")
-                .buildUpon()
-                .appendQueryParameter("sl", "pl")
-                .appendQueryParameter("tl", "en")
-                .appendQueryParameter("u", url)
-                .build();
-        openWebUrl(translated.toString());
-    }
-
     private void loadMemory() {
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
         memory.clear();
@@ -2201,6 +2340,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         final Date publishedAt;
         String englishTitle = "";
         String englishDescription = "";
+        boolean translationQueued = false;
+        boolean translationComplete = false;
         boolean translationFailed = false;
 
         NewsItem(String source, String title, String description, String link, String timeLabel, Date publishedAt) {
