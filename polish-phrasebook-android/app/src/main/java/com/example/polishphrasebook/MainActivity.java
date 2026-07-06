@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -38,6 +40,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -74,6 +77,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -854,7 +859,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
         content.addView(newsCard(newsItems.get(newsIndex)));
         addGap(content, 12);
-        content.addView(newsPagerControls());
+        content.addView(newsPageIndicator());
     }
 
     private List<NewsSource> newsSources() {
@@ -898,6 +903,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         card.addView(meta);
         addGap(card, 8);
 
+        loadNewsImages(item);
+        if (!item.images.isEmpty()) {
+            card.addView(newsImages(item), topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 2));
+            addGap(card, 10);
+        }
+
         TextView title = serifText(item.title, 18.5f, th.ink);
         title.setTextIsSelectable(true);
         card.addView(title);
@@ -934,27 +945,88 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         return card;
     }
 
-    private View newsPagerControls() {
+    private View newsPageIndicator() {
         Theme th = theme();
-        LinearLayout controls = row();
-        controls.setGravity(Gravity.CENTER_VERTICAL);
-
-        Button previous = flatButton(t("Previous", "Poprzednia"), th.panel, newsIndex > 0 ? th.ink : th.faint, th.dash, 12.5f, 40);
-        previous.setEnabled(newsIndex > 0);
-        previous.setOnClickListener(v -> moveNewsPage(-1));
-        controls.addView(previous, new LinearLayout.LayoutParams(0, dp(40), 1));
-
-        TextView count = label((newsIndex + 1) + "/" + newsItems.size(), th.accent2, 11, 0.08f);
+        TextView count = label((newsIndex + 1) + " / " + newsItems.size(), th.accent2, 11, 0.12f);
         count.setGravity(Gravity.CENTER);
-        LinearLayout.LayoutParams countParams = new LinearLayout.LayoutParams(dp(68), dp(40));
-        countParams.setMargins(dp(10), 0, dp(10), 0);
-        controls.addView(count, countParams);
+        count.setPadding(0, dp(8), 0, dp(8));
+        return count;
+    }
 
-        Button next = flatButton(t("Next", "Następna"), th.panel, newsIndex < newsItems.size() - 1 ? th.ink : th.faint, th.dash, 12.5f, 40);
-        next.setEnabled(newsIndex < newsItems.size() - 1);
-        next.setOnClickListener(v -> moveNewsPage(1));
-        controls.addView(next, new LinearLayout.LayoutParams(0, dp(40), 1));
-        return controls;
+    private View newsImages(NewsItem item) {
+        LinearLayout media = row();
+        media.setGravity(Gravity.CENTER);
+        int imageCount = Math.min(2, item.images.size());
+        for (int i = 0; i < imageCount; i++) {
+            ImageView image = new ImageView(this);
+            image.setImageBitmap(item.images.get(i));
+            image.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            image.setBackgroundColor(theme().softLine);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, dp(imageCount == 1 ? 178 : 132), 1);
+            if (i > 0) {
+                params.setMargins(dp(8), 0, 0, 0);
+            }
+            media.addView(image, params);
+        }
+        return media;
+    }
+
+    private void loadNewsImages(NewsItem item) {
+        if (item.imageUrls.isEmpty() || item.imagesLoaded || item.imagesLoading) {
+            return;
+        }
+        item.imagesLoading = true;
+        new Thread(() -> {
+            List<Bitmap> bitmaps = new ArrayList<>();
+            int count = Math.min(2, item.imageUrls.size());
+            for (int i = 0; i < count; i++) {
+                try {
+                    Bitmap bitmap = downloadNewsBitmap(item.imageUrls.get(i));
+                    if (bitmap != null) {
+                        bitmaps.add(bitmap);
+                    }
+                } catch (Exception ignored) {
+                }
+            }
+            runOnUiThread(() -> {
+                item.images.clear();
+                item.images.addAll(bitmaps);
+                item.imagesLoading = false;
+                item.imagesLoaded = true;
+                if (SCREEN_NEWS.equals(screen) && newsIndex < newsItems.size() && newsItems.get(newsIndex) == item) {
+                    render();
+                }
+            });
+        }).start();
+    }
+
+    private Bitmap downloadNewsBitmap(String url) throws Exception {
+        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+        connection.setConnectTimeout(7000);
+        connection.setReadTimeout(7000);
+        connection.setRequestProperty("User-Agent", "Polish4Beginners-Android");
+        int code = connection.getResponseCode();
+        if (code < 200 || code >= 300) {
+            connection.disconnect();
+            return null;
+        }
+        try {
+            Bitmap raw = BitmapFactory.decodeStream(connection.getInputStream());
+            if (raw == null) {
+                return null;
+            }
+            int maxWidth = 1200;
+            int maxHeight = 720;
+            float scale = Math.min(maxWidth / (float) raw.getWidth(), maxHeight / (float) raw.getHeight());
+            if (scale >= 1f) {
+                return raw;
+            }
+            Bitmap scaled = Bitmap.createScaledBitmap(raw, Math.max(1, Math.round(raw.getWidth() * scale)), Math.max(1, Math.round(raw.getHeight() * scale)), true);
+            raw.recycle();
+            return scaled;
+        } finally {
+            connection.disconnect();
+        }
     }
 
     private void attachNewsSwipe(View view) {
@@ -969,6 +1041,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                     float dy = event.getY() - newsTouchStartY;
                     if (Math.abs(dy) > dp(70) && Math.abs(dy) > Math.abs(dx) * 1.2f) {
                         moveNewsPage(dy < 0 ? 1 : -1);
+                        return true;
+                    }
+                    if (Math.abs(dx) > dp(70) && Math.abs(dx) > Math.abs(dy) * 1.2f) {
+                        moveNewsPage(dx < 0 ? 1 : -1);
                         return true;
                     }
                     v.performClick();
@@ -988,6 +1064,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             return;
         }
         newsIndex = nextIndex;
+        trimNewsImageCache();
         render();
     }
 
@@ -996,6 +1073,21 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             newsIndex = 0;
         } else {
             newsIndex = Math.max(0, Math.min(newsItems.size() - 1, newsIndex));
+        }
+    }
+
+    private void trimNewsImageCache() {
+        for (int i = 0; i < newsItems.size(); i++) {
+            if (Math.abs(i - newsIndex) > 3) {
+                NewsItem item = newsItems.get(i);
+                for (Bitmap bitmap : item.images) {
+                    if (bitmap != null && !bitmap.isRecycled()) {
+                        bitmap.recycle();
+                    }
+                }
+                item.images.clear();
+                item.imagesLoaded = false;
+            }
         }
     }
 
@@ -1240,14 +1332,15 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                     continue;
                 }
                 Element element = (Element) node;
+                String rawDescription = childText(element, "description");
                 String title = cleanNewsText(childText(element, "title"));
                 String link = cleanNewsText(childText(element, "link"));
-                String description = shorten(cleanNewsText(childText(element, "description")), 220);
+                String description = shorten(cleanNewsText(rawDescription), 220);
                 Date publishedAt = parseNewsDate(childText(element, "pubDate"));
                 if (title.isEmpty() || link.isEmpty() || publishedAt == null || !isToday(publishedAt)) {
                     continue;
                 }
-                items.add(new NewsItem(source.name, title, description, link, formatNewsTime(publishedAt), publishedAt));
+                items.add(new NewsItem(source.name, title, description, link, formatNewsTime(publishedAt), publishedAt, extractNewsImageUrls(element, rawDescription)));
                 sourceCount++;
             }
         } finally {
@@ -1262,6 +1355,82 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             return "";
         }
         return nodes.item(0).getTextContent();
+    }
+
+    private List<String> extractNewsImageUrls(Element item, String rawDescription) {
+        List<String> urls = new ArrayList<>();
+        addNewsImageUrlsFromElements(item, urls);
+        addNewsImageUrlsFromHtml(rawDescription, urls);
+        addNewsImageUrlsFromHtml(childText(item, "content:encoded"), urls);
+        return urls;
+    }
+
+    private void addNewsImageUrlsFromElements(Element parent, List<String> urls) {
+        NodeList nodes = parent.getElementsByTagName("*");
+        for (int i = 0; i < nodes.getLength() && urls.size() < 2; i++) {
+            Node node = nodes.item(i);
+            if (!(node instanceof Element)) {
+                continue;
+            }
+            Element element = (Element) node;
+            String name = element.getTagName().toLowerCase(Locale.US);
+            boolean likelyImageNode = name.endsWith("thumbnail") || name.endsWith("enclosure") || name.endsWith("content") || name.endsWith("image");
+            if (!likelyImageNode) {
+                continue;
+            }
+            String type = element.getAttribute("type").toLowerCase(Locale.US);
+            String medium = element.getAttribute("medium").toLowerCase(Locale.US);
+            String url = firstNonEmpty(element.getAttribute("url"), element.getAttribute("href"));
+            if (url.isEmpty()) {
+                continue;
+            }
+            if (name.endsWith("thumbnail")
+                    || medium.contains("image")
+                    || type.startsWith("image/")
+                    || looksLikeImageUrl(url)) {
+                addNewsImageUrl(urls, url);
+            }
+        }
+    }
+
+    private void addNewsImageUrlsFromHtml(String html, List<String> urls) {
+        if (html == null || html.isEmpty() || urls.size() >= 2) {
+            return;
+        }
+        Matcher matcher = Pattern.compile("<img[^>]+src=[\"']([^\"']+)[\"']", Pattern.CASE_INSENSITIVE).matcher(html);
+        while (matcher.find() && urls.size() < 2) {
+            addNewsImageUrl(urls, matcher.group(1));
+        }
+    }
+
+    private void addNewsImageUrl(List<String> urls, String rawUrl) {
+        if (rawUrl == null || urls.size() >= 2) {
+            return;
+        }
+        String url = rawUrl.trim();
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            return;
+        }
+        if (!urls.contains(url)) {
+            urls.add(url);
+        }
+    }
+
+    private boolean looksLikeImageUrl(String url) {
+        String lower = url.toLowerCase(Locale.US);
+        return lower.contains(".jpg")
+                || lower.contains(".jpeg")
+                || lower.contains(".png")
+                || lower.contains(".webp")
+                || lower.contains("/image/")
+                || lower.contains("image=");
+    }
+
+    private String firstNonEmpty(String first, String second) {
+        if (first != null && !first.trim().isEmpty()) {
+            return first.trim();
+        }
+        return second == null ? "" : second.trim();
     }
 
     private Date parseNewsDate(String rawDate) {
@@ -2338,19 +2507,24 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         final String link;
         final String timeLabel;
         final Date publishedAt;
+        final List<String> imageUrls;
+        final List<Bitmap> images = new ArrayList<>();
         String englishTitle = "";
         String englishDescription = "";
+        boolean imagesLoading = false;
+        boolean imagesLoaded = false;
         boolean translationQueued = false;
         boolean translationComplete = false;
         boolean translationFailed = false;
 
-        NewsItem(String source, String title, String description, String link, String timeLabel, Date publishedAt) {
+        NewsItem(String source, String title, String description, String link, String timeLabel, Date publishedAt, List<String> imageUrls) {
             this.source = source;
             this.title = title;
             this.description = description;
             this.link = link;
             this.timeLabel = timeLabel;
             this.publishedAt = publishedAt;
+            this.imageUrls = new ArrayList<>(imageUrls);
         }
     }
 
