@@ -1,7 +1,7 @@
 {
   "versionCode": 7,
   "versionName": "1.6",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/ddf45482fc166d4d37922d3ffc9fe1c01756618c/docs/P4B.apk",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/f7283bc5fc9f23ebe4cb0e97ad6011b326673294/docs/P4B.apk",
   "apkSha256": "1cc7884b906677671d0f0eb6565418e4be6f477606e519d3b0bedd5ea711313e",
   "apkSizeBytes": 880807,
   "releaseNotes": "Adds a bilingual News Reading tab with Polish sources and English Google Translate page views."
