@@ -16,9 +16,11 @@ Required fields:
 
 Recommended fields:
 
-- `phonetic`: short pronunciation hint, usage note, or example sentence.
+- `phonetic`: pronunciation respelling only, for example `chi MOH-gheh zah-PWAH-cheech KAR-tom`. Do not put usage notes or example sentences here.
+- `examplePolish`: one natural Polish sentence using the word or phrase.
+- `exampleEnglish`: the English translation of `examplePolish`.
 - `tags`: short searchable labels.
-- `notes`: anything reviewers should know, such as formal/informal tone, gendered speaker form, or regional usage.
+- `notes`: anything learners or reviewers should know, such as formal/informal tone, gendered speaker form, or regional usage.
 
 ## Example
 
@@ -29,7 +31,9 @@ Recommended fields:
   "category": "Shopping",
   "polish": "Czy mogę zapłacić kartą?",
   "english": "Can I pay by card?",
-  "phonetic": "Polite everyday question.",
+  "phonetic": "chi MOH-gheh zah-PWAH-cheech KAR-tom",
+  "examplePolish": "Czy mogę zapłacić kartą, czy tylko gotówką?",
+  "exampleEnglish": "Can I pay by card, or only in cash?",
   "tags": ["payment", "shop", "question"],
   "notes": "Useful in shops, restaurants, and ticket offices."
 }

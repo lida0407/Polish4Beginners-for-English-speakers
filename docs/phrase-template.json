@@ -4,7 +4,9 @@
   "category": "Shopping",
   "polish": "Czy mogę zapłacić kartą?",
   "english": "Can I pay by card?",
-  "phonetic": "Polite everyday question.",
+  "phonetic": "chi MOH-gheh zah-PWAH-cheech KAR-tom",
+  "examplePolish": "Czy mogę zapłacić kartą, czy tylko gotówką?",
+  "exampleEnglish": "Can I pay by card, or only in cash?",
   "tags": [
     "payment",
     "shop",

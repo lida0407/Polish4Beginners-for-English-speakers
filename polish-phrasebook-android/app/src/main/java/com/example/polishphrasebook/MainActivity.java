@@ -88,6 +88,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String STATUS_NEW = "new";
     private static final String STATUS_FORGOT = "forgot";
     private static final String STATUS_LEARNT = "learnt";
+    private static final long DAY_MS = 24L * 60L * 60L * 1000L;
+    // Leitner boxes: box 0 = new, boxes 1-5 reviewed at growing intervals.
+    private static final long[] BOX_INTERVALS_MS = {0, DAY_MS, 3 * DAY_MS, 7 * DAY_MS, 16 * DAY_MS, 35 * DAY_MS};
+    private static final int MAX_BOX = BOX_INTERVALS_MS.length - 1;
 
     private static final String SCREEN_HOME = "home";
     private static final String SCREEN_SESSION = "session";
@@ -108,7 +112,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String DATA_MANIFEST_URL = "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/database.json?ref=main";
     private static final String REMOTE_PHRASES_FILE = "phrases_remote.json";
     private static final String APK_MIME_TYPE = "application/vnd.android.package-archive";
-    private static final int DEFAULT_DATABASE_VERSION = 2;
+    private static final int DEFAULT_DATABASE_VERSION = 3;
     private static final long UPDATE_CHECK_INTERVAL_MS = 24L * 60L * 60L * 1000L;
     private static final int SESSION_SIZE = 10;
     private static final int NEWS_PREFETCH_AHEAD = 5;
@@ -117,7 +121,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private final List<GrammarLesson> grammarLessons = new ArrayList<>();
     private final List<AlphabetItem> alphabet = new ArrayList<>();
     private final List<NewsItem> newsItems = new ArrayList<>();
-    private final Map<String, String> memory = new HashMap<>();
+    private final Map<String, CardMemory> memory = new HashMap<>();
     private final List<Phrase> sessionDeck = new ArrayList<>();
     private final Map<String, Theme> themes = new LinkedHashMap<>();
 
@@ -306,7 +310,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 dp(2)
         ));
         addGap(hero, 10);
-        hero.addView(bodyText(t("Flip each card, say it out loud, mark what stuck. ", "Odwróć każdą kartę, powiedz ją na głos i zaznacz, co pamiętasz. ") + dueCountForLevel() + t(" cards still waiting at this level.", " kart czeka na tym poziomie."), 13, th.muted));
+        hero.addView(bodyText(t("Flip each card, say it out loud, mark what stuck. ", "Odwróć każdą kartę, powiedz ją na głos i zaznacz, co pamiętasz. ") + dueReviewCountForLevel() + t(" to review and ", " do powtórki i ") + newCountForLevel() + t(" new at this level.", " nowych na tym poziomie."), 13, th.muted));
         Button start = filledButton(t("Zaczynamy — start session", "Zaczynamy — start"), th.accent, th.onAccent, 16, 52);
         start.setOnClickListener(v -> startSession("All"));
         hero.addView(start, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(52), 14));
@@ -396,9 +400,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         strip.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
         strip.setBaselineAligned(false);
         int[] counts = memoryCounts();
-        strip.addView(statCell(String.valueOf(counts[0]), "New", th.ink, true), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
-        strip.addView(statCell(String.valueOf(counts[1]), "Learning", th.accent, true), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
-        strip.addView(statCell(String.valueOf(counts[2]), "Learnt", th.accent2, false), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        strip.addView(statCell(String.valueOf(counts[0]), t("New", "Nowe"), th.ink, true), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        strip.addView(statCell(String.valueOf(counts[1]), t("To review", "Do powtórki"), th.accent, true), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        strip.addView(statCell(String.valueOf(counts[2]), t("Scheduled", "Zaplanowane"), th.accent2, false), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
         return strip;
     }
 
@@ -510,6 +514,26 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 phonetic.setTypeface(Typeface.create(sansRegular, Typeface.ITALIC));
                 phonetic.setGravity(Gravity.CENTER);
                 face.addView(phonetic, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 8));
+            }
+            if (!card.examplePolish.isEmpty()) {
+                LinearLayout example = vertical();
+                example.setPadding(dp(12), dp(8), dp(12), dp(8));
+                example.setBackground(leftBorderOnly(th.accent2, 3));
+                TextView examplePolish = serifText(card.examplePolish, 15, th.body);
+                examplePolish.setLineSpacing(0, 1.06f);
+                example.addView(examplePolish);
+                if (!card.exampleEnglish.isEmpty()) {
+                    TextView exampleEnglish = uiText(card.exampleEnglish, 12.5f, th.faint, sansRegular);
+                    exampleEnglish.setLineSpacing(0, 1.06f);
+                    example.addView(exampleEnglish, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 2));
+                }
+                example.setOnClickListener(v -> speak(card.examplePolish, new Locale("pl", "PL")));
+                face.addView(example, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 12));
+            }
+            if (!card.notes.isEmpty()) {
+                TextView notes = uiText(card.notes, 12, th.faint, sansRegular);
+                notes.setGravity(Gravity.CENTER);
+                face.addView(notes, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 8));
             }
             LinearLayout tts = row();
             tts.setGravity(Gravity.CENTER);
@@ -1872,7 +1896,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
     private void startSession(String topic) {
-        List<Phrase> pool = new ArrayList<>();
+        List<Phrase> dueReviews = new ArrayList<>();
+        List<Phrase> fresh = new ArrayList<>();
+        List<Phrase> scheduled = new ArrayList<>();
         for (Phrase phrase : phrases) {
             if (!level.equals(phrase.level)) {
                 continue;
@@ -1880,22 +1906,27 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             if (!"All".equals(topic) && !topic.equals(phrase.category)) {
                 continue;
             }
-            if (!STATUS_LEARNT.equals(getMemoryStatus(phrase))) {
-                pool.add(phrase);
+            if (isDue(phrase)) {
+                dueReviews.add(phrase);
+            } else if (cardMemory(phrase).box == 0) {
+                fresh.add(phrase);
+            } else {
+                scheduled.add(phrase);
             }
         }
+        Collections.shuffle(dueReviews);
+        Collections.shuffle(fresh);
+        List<Phrase> pool = new ArrayList<>(dueReviews);
+        pool.addAll(fresh);
         if (pool.isEmpty()) {
-            for (Phrase phrase : phrases) {
-                if (level.equals(phrase.level) && ("All".equals(topic) || topic.equals(phrase.category))) {
-                    pool.add(phrase);
-                }
-            }
+            // Everything is scheduled ahead: let the learner practise the soonest-due cards early.
+            Collections.sort(scheduled, (a, b) -> Long.compare(cardMemory(a).dueAt, cardMemory(b).dueAt));
+            pool.addAll(scheduled);
         }
         if (pool.isEmpty()) {
             Toast.makeText(this, "No cards for this level yet.", Toast.LENGTH_SHORT).show();
             return;
         }
-        Collections.shuffle(pool);
         sessionDeck.clear();
         sessionDeck.addAll(pool.subList(0, Math.min(SESSION_SIZE, pool.size())));
         sessionIndex = 0;
@@ -1908,7 +1939,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private void answer(boolean got) {
         if (sessionIndex < sessionDeck.size()) {
             Phrase phrase = sessionDeck.get(sessionIndex);
-            setMemoryStatus(phrase, got ? STATUS_LEARNT : STATUS_FORGOT);
+            recordAnswer(phrase, got);
             if (got) {
                 sessionGot++;
             }
@@ -1937,23 +1968,34 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
     private String searchable(Phrase phrase) {
-        return (phrase.polish + " " + phrase.english + " " + phrase.phonetic + " " + phrase.category).toLowerCase(Locale.ROOT);
+        return (phrase.polish + " " + phrase.english + " " + phrase.phonetic + " "
+                + phrase.examplePolish + " " + phrase.exampleEnglish + " "
+                + phrase.notes + " " + phrase.category).toLowerCase(Locale.ROOT);
     }
 
     private boolean firstVisit() {
         for (Phrase phrase : phrases) {
-            String status = getMemoryStatus(phrase);
-            if (STATUS_LEARNT.equals(status) || STATUS_FORGOT.equals(status)) {
+            if (cardMemory(phrase).box > 0) {
                 return false;
             }
         }
         return true;
     }
 
-    private int dueCountForLevel() {
+    private int dueReviewCountForLevel() {
         int count = 0;
         for (Phrase phrase : phrases) {
-            if (level.equals(phrase.level) && !STATUS_LEARNT.equals(getMemoryStatus(phrase))) {
+            if (level.equals(phrase.level) && isDue(phrase)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private int newCountForLevel() {
+        int count = 0;
+        for (Phrase phrase : phrases) {
+            if (level.equals(phrase.level) && cardMemory(phrase).box == 0) {
                 count++;
             }
         }
@@ -2012,19 +2054,36 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         return LANG_PL.equals(interfaceLanguage) ? polish : english;
     }
 
-    private String getMemoryStatus(Phrase phrase) {
-        String status = memory.get(phrase.key());
-        if (STATUS_FORGOT.equals(status) || STATUS_LEARNT.equals(status) || STATUS_NEW.equals(status)) {
-            return status;
-        }
-        return STATUS_NEW;
+    private CardMemory cardMemory(Phrase phrase) {
+        CardMemory state = memory.get(phrase.key());
+        return state == null ? new CardMemory(0, 0) : state;
     }
 
-    private void setMemoryStatus(Phrase phrase, String status) {
-        memory.put(phrase.key(), status);
+    private String getMemoryStatus(Phrase phrase) {
+        CardMemory state = cardMemory(phrase);
+        if (state.box == 0) {
+            return STATUS_NEW;
+        }
+        return state.dueAt <= System.currentTimeMillis() ? STATUS_FORGOT : STATUS_LEARNT;
+    }
+
+    private boolean isDue(Phrase phrase) {
+        CardMemory state = cardMemory(phrase);
+        return state.box > 0 && state.dueAt <= System.currentTimeMillis();
+    }
+
+    private void recordAnswer(Phrase phrase, boolean got) {
+        CardMemory state = cardMemory(phrase);
+        int box = got ? Math.min(state.box + 1, MAX_BOX) : 1;
+        long dueAt = got ? System.currentTimeMillis() + BOX_INTERVALS_MS[box] : System.currentTimeMillis();
+        saveCardMemory(phrase, new CardMemory(box, dueAt));
+    }
+
+    private void saveCardMemory(Phrase phrase, CardMemory state) {
+        memory.put(phrase.key(), state);
         getSharedPreferences(PREFS, MODE_PRIVATE)
                 .edit()
-                .putString(MEMORY_PREFIX + phrase.key(), status)
+                .putString(MEMORY_PREFIX + phrase.key(), state.box + "|" + state.dueAt)
                 .apply();
     }
 
@@ -2067,10 +2126,45 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     private void loadMemory() {
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor migration = prefs.edit();
+        boolean migrated = false;
         memory.clear();
         for (Phrase phrase : phrases) {
-            memory.put(phrase.key(), prefs.getString(MEMORY_PREFIX + phrase.key(), STATUS_NEW));
+            String stored = prefs.getString(MEMORY_PREFIX + phrase.key(), "");
+            CardMemory state = parseCardMemory(stored);
+            memory.put(phrase.key(), state);
+            if (state.box > 0 && stored.indexOf('|') < 0) {
+                migration.putString(MEMORY_PREFIX + phrase.key(), state.box + "|" + state.dueAt);
+                migrated = true;
+            }
         }
+        if (migrated) {
+            migration.apply();
+        }
+    }
+
+    private CardMemory parseCardMemory(String stored) {
+        if (stored == null || stored.isEmpty() || STATUS_NEW.equals(stored)) {
+            return new CardMemory(0, 0);
+        }
+        // Pre-scheduling app versions stored a bare status string.
+        if (STATUS_LEARNT.equals(stored)) {
+            return new CardMemory(2, System.currentTimeMillis() + BOX_INTERVALS_MS[2]);
+        }
+        if (STATUS_FORGOT.equals(stored)) {
+            return new CardMemory(1, System.currentTimeMillis());
+        }
+        int split = stored.indexOf('|');
+        if (split > 0) {
+            try {
+                int box = Math.max(0, Math.min(MAX_BOX, Integer.parseInt(stored.substring(0, split))));
+                long dueAt = Long.parseLong(stored.substring(split + 1));
+                return new CardMemory(box, dueAt);
+            } catch (NumberFormatException ignored) {
+                // fall through
+            }
+        }
+        return new CardMemory(0, 0);
     }
 
     private void speak(String text, Locale locale) {
@@ -2151,11 +2245,24 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         phrases.clear();
         for (int i = 0; i < array.length(); i++) {
             JSONObject item = array.getJSONObject(i);
+            String phonetic = item.optString("phonetic");
+            String examplePolish = item.optString("examplePolish");
+            String exampleEnglish = item.optString("exampleEnglish");
+            if (examplePolish.isEmpty() && phonetic.contains(" / ")) {
+                // Pre-v3 data stored the example sentence in the phonetic field.
+                int split = phonetic.indexOf(" / ");
+                examplePolish = phonetic.substring(0, split).trim();
+                exampleEnglish = phonetic.substring(split + 3).trim();
+                phonetic = "";
+            }
             phrases.add(new Phrase(
                     item.optString("scenario", item.optString("category", "General Core")),
                     item.getString("polish"),
                     item.getString("english"),
-                    item.optString("phonetic"),
+                    phonetic,
+                    examplePolish,
+                    exampleEnglish,
+                    item.optString("notes"),
                     item.optString("level", "A1"),
                     item.optInt("coreIndex", 0)
             ));
@@ -2416,19 +2523,37 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         return new BorderDrawable(fill, color, dpFloat(strokeDp), 0, 0, 0);
     }
 
+    private static class CardMemory {
+        final int box;
+        final long dueAt;
+
+        CardMemory(int box, long dueAt) {
+            this.box = box;
+            this.dueAt = dueAt;
+        }
+    }
+
     private static class Phrase {
         final String category;
         final String polish;
         final String english;
         final String phonetic;
+        final String examplePolish;
+        final String exampleEnglish;
+        final String notes;
         final String level;
         final int coreIndex;
 
-        Phrase(String category, String polish, String english, String phonetic, String level, int coreIndex) {
+        Phrase(String category, String polish, String english, String phonetic,
+               String examplePolish, String exampleEnglish, String notes,
+               String level, int coreIndex) {
             this.category = category;
             this.polish = polish;
             this.english = english;
             this.phonetic = phonetic;
+            this.examplePolish = examplePolish;
+            this.exampleEnglish = exampleEnglish;
+            this.notes = notes;
             this.level = level;
             this.coreIndex = coreIndex;
         }

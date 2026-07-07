@@ -1,8 +1,8 @@
 {
-  "dataVersion": 2,
+  "dataVersion": 3,
   "phraseCount": 2264,
   "phrasesUrl": "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/phrases.json?ref=main",
-  "phrasesSha256": "03cd8e9d5098cd21adb724ca3c4cf17bcbc7e45fcd81c84ce0a0334388688aa5",
-  "phrasesSizeBytes": 595296,
-  "releaseNotes": "Adds more practical topic categories derived from the existing beginner books, phrase lists, and vocabulary database."
+  "phrasesSha256": "a007339044316d9a0d833edd89a78552f49e079cb498f916bc87029112b4c4ae",
+  "phrasesSizeBytes": 693045,
+  "releaseNotes": "Splits the overloaded phonetic field: example sentences now live in examplePolish/exampleEnglish, usage notes in notes, and phonetic holds only real pronunciation hints."
 }

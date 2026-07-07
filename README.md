@@ -9,13 +9,14 @@ Download the Android APK: [P4B.apk](https://lida0407.github.io/Polish4Beginners-
 ## Features
 
 - `2264` Polish-English phrase and vocabulary cards
+- Example sentences with Polish audio on most cards
 - `23` grammar lessons
 - `39` alphabet and pronunciation tiles
 - A1, A2, B1, B2, and C1 level filters
 - Scenario-based Polish phrase learning for beginner conversations
 - Warm editorial Android UI
 - 10-card study sessions
-- New, learning, and learnt memory states
+- Leitner-style spaced repetition: cards you know come back at growing intervals (1, 3, 7, 16, 35 days), cards you miss return the same day
 - Browse, grammar, and alphabet tabs
 - Daily Polish news tab with in-app Polish-English translation for headlines and snippets
 - Settings for interface language, color theme, and reading speed
