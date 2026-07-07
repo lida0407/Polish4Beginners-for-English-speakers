@@ -1,8 +1,8 @@
 {
-  "versionCode": 13,
-  "versionName": "1.12",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/85f7db5c455dd914e6963c92dc265845a957a097/docs/P4B.apk",
-  "apkSha256": "e9cb9c36420cbf209e6482fea4f263c8ee8b05852de9d7afb516af8ec83d9e38",
-  "apkSizeBytes": 67469843,
-  "releaseNotes": "Adds compact left and right News pager buttons while keeping swipe navigation."
+  "versionCode": 14,
+  "versionName": "1.13",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/b15eac4d4b6280a09c41fb99bf6bbccd520f9ff4/docs/P4B.apk",
+  "apkSha256": "7f7aa8cc5c6051b880fad00570f6f6a722a19d04f92cf1ba50dd9871e26d88e8",
+  "apkSizeBytes": 67476899,
+  "releaseNotes": "Adds Leitner spaced repetition scheduling and shows example sentences with Polish audio on cards."
 }
