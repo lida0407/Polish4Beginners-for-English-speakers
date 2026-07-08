@@ -1,8 +1,8 @@
 {
-  "versionCode": 18,
-  "versionName": "1.17",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/41589b78c5f4e507dd3e2618f62951cd037963be/docs/P4B.apk",
-  "apkSha256": "03f50c28f5b43965ff81b7a9c30576bb6b87e41ac6164476a6b7b0e1f588f018",
-  "apkSizeBytes": 67520948,
-  "releaseNotes": "Adds 900+ new words and phrases (elementary vocab, ChatGPT A1-B2 list, idioms, conversation phrases), noun genitive/plural forms, and a Conversation & Opinions category."
+  "versionCode": 19,
+  "versionName": "1.18",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/57b59a6547a1f082676243dcd4417d7994ebf45e/docs/P4B.apk",
+  "apkSha256": "b7ce389d9890f6e06ac78389f4e0eb8222f0023e045eb664ebb8629667283922",
+  "apkSizeBytes": 67513860,
+  "releaseNotes": "Fixes garbled core-vocabulary cards and removes duplicate headwords while keeping alternate meanings."
 }
