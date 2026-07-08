@@ -1,8 +1,8 @@
 {
-  "dataVersion": 3,
-  "phraseCount": 2264,
+  "dataVersion": 4,
+  "phraseCount": 2817,
   "phrasesUrl": "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/phrases.json?ref=main",
-  "phrasesSha256": "a007339044316d9a0d833edd89a78552f49e079cb498f916bc87029112b4c4ae",
-  "phrasesSizeBytes": 693045,
-  "releaseNotes": "Splits the overloaded phonetic field: example sentences now live in examplePolish/exampleEnglish, usage notes in notes, and phonetic holds only real pronunciation hints."
+  "phrasesSha256": "788bf8f1a1f0bf351b295a23cb6d28a6dd2d3c42a5354443e11cb8d6035be776",
+  "phrasesSizeBytes": 810581,
+  "releaseNotes": "Adds 553 vocabulary words and phrases (A1/A2) covering everyday topics: family, health, banking, travel, work, and more."
 }
