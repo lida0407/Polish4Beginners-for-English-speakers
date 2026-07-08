@@ -1,8 +1,8 @@
 {
-  "dataVersion": 5,
-  "phraseCount": 2933,
+  "dataVersion": 6,
+  "phraseCount": 2774,
   "phrasesUrl": "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/phrases.json?ref=main",
-  "phrasesSha256": "c4a4537780f450b116197ee7ead6ab515a1cb97fe9aa11d7a8ec9bf6d5c18f83",
-  "phrasesSizeBytes": 865581,
-  "releaseNotes": "Adds 116 original B1/B2 speaking-practice cards across biography, leisure, sport, city life, travel, education, culture, work, law, social issues, food, fashion, environment, and technology."
+  "phrasesSha256": "2da250e4e258451e3728581ba7ee5bfbef56850f1103c018be9937380578ef5a",
+  "phrasesSizeBytes": 822924,
+  "releaseNotes": "Fixes garbled OCR/import artifacts in core vocabulary and removes duplicate Polish headword cards while preserving alternate meanings on the kept cards."
 }
