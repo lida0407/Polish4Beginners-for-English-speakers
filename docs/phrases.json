@@ -5,7 +5,9 @@
     "level": "A1",
     "polish": "Dzień dobry.",
     "english": "Good morning. / Good afternoon.",
-    "phonetic": "jen DOH-bri"
+    "phonetic": "jen DOH-bri",
+    "examplePolish": "Dzień dobry, Anna.",
+    "exampleEnglish": "Good afternoon, Anna."
   },
   {
     "category": "Everyday",
@@ -13,15 +15,19 @@
     "level": "A1",
     "polish": "Dobry wieczór.",
     "english": "Good evening.",
-    "phonetic": "DOH-bri VYEH-choor"
+    "phonetic": "DOH-bri VYEH-choor",
+    "examplePolish": "Dobry wieczór, panie Li.",
+    "exampleEnglish": "Mr. Li, good evening."
   },
   {
     "category": "Everyday",
     "scenario": "Everyday",
     "level": "A1",
     "polish": "Cześć.",
-    "english": "Hi. / Bye.",
-    "phonetic": "cheshch"
+    "english": "Hi. / Bye. / Hello.",
+    "phonetic": "cheshch",
+    "examplePolish": "Cześć, mam na imię Anna.",
+    "exampleEnglish": "Hello, my name is Anna."
   },
   {
     "category": "Everyday",
@@ -29,7 +35,9 @@
     "level": "A1",
     "polish": "Do widzenia.",
     "english": "Goodbye.",
-    "phonetic": "doh vee-DZEN-ya"
+    "phonetic": "doh vee-DZEN-ya",
+    "examplePolish": "Do widzenia pani.",
+    "exampleEnglish": "Goodbye, ma’am."
   },
   {
     "category": "Everyday",
@@ -45,7 +53,9 @@
     "level": "A1",
     "polish": "Dziękuję.",
     "english": "Thank you.",
-    "phonetic": "jen-KOO-yeh"
+    "phonetic": "jen-KOO-yeh",
+    "examplePolish": "Dziękuję, ale ja tego nie zamawiałem.",
+    "exampleEnglish": "Thank you, but I didn’t order this."
   },
   {
     "category": "Everyday",
@@ -53,7 +63,9 @@
     "level": "A1",
     "polish": "Przepraszam.",
     "english": "Excuse me. / I'm sorry.",
-    "phonetic": "psheh-PRAH-sham"
+    "phonetic": "psheh-PRAH-sham",
+    "examplePolish": "Przepraszam, gdzie jest dworzec?",
+    "exampleEnglish": "Excuse me, where is the train station?"
   },
   {
     "category": "Everyday",
@@ -61,7 +73,9 @@
     "level": "A1",
     "polish": "Nie rozumiem.",
     "english": "I don't understand.",
-    "phonetic": "nyeh roh-ZOO-myem"
+    "phonetic": "nyeh roh-ZOO-myem",
+    "examplePolish": "Nie rozumiem japońskiego.",
+    "exampleEnglish": "I don’t understand Japanese."
   },
   {
     "category": "Everyday",
@@ -85,15 +99,18 @@
     "level": "A1",
     "polish": "Jak się masz?",
     "english": "How are you?",
-    "phonetic": "yak shyeh mash"
+    "phonetic": "yak shyeh mash",
+    "examplePolish": "Cześć, jak się masz?",
+    "exampleEnglish": "Hi, how are you?"
   },
   {
     "category": "Everyday",
     "scenario": "Everyday",
     "level": "A1",
     "polish": "Mam na imię Alex.",
-    "english": "My name is Alex.",
-    "phonetic": "mam nah EE-myeh Alex"
+    "english": "My name is Alex. / My first name is Alex.",
+    "phonetic": "mam nah EE-myeh Alex",
+    "notes": "introductions"
   },
   {
     "category": "Getting Around",
@@ -125,7 +142,8 @@
     "level": "A1",
     "polish": "O której odjeżdża pociąg?",
     "english": "What time does the train leave?",
-    "phonetic": "oh KTOO-rey od-YEZH-jah POH-chong"
+    "phonetic": "oh KTOO-rey od-YEZH-jah POH-chong",
+    "notes": "station"
   },
   {
     "category": "Getting Around",
@@ -157,7 +175,8 @@
     "level": "A1",
     "polish": "Czy mogę zapłacić kartą?",
     "english": "Can I pay by card?",
-    "phonetic": "chi MOH-geh zah-PWAH-chich KAR-toh"
+    "phonetic": "chi MOH-geh zah-PWAH-chich KAR-toh",
+    "notes": "paying"
   },
   {
     "category": "Food & Drink",
@@ -173,7 +192,8 @@
     "level": "A1",
     "polish": "Czy mogę prosić menu?",
     "english": "May I have the menu?",
-    "phonetic": "chi MOH-geh PROH-sich MEH-noo"
+    "phonetic": "chi MOH-geh PROH-sich MEH-noo",
+    "notes": "restaurant"
   },
   {
     "category": "Food & Drink",
@@ -197,7 +217,8 @@
     "level": "A1",
     "polish": "Poproszę wodę niegazowaną.",
     "english": "Still water, please.",
-    "phonetic": "poh-PROH-sheh VOH-deh nyeh-gah-zoh-VAH-noh"
+    "phonetic": "poh-PROH-sheh VOH-deh nyeh-gah-zoh-VAH-noh",
+    "notes": "drinks"
   },
   {
     "category": "Food & Drink",
@@ -229,7 +250,8 @@
     "level": "A1",
     "polish": "Ile to kosztuje?",
     "english": "How much does this cost?",
-    "phonetic": "EE-leh toh kosh-TOO-yeh"
+    "phonetic": "EE-leh toh kosh-TOO-yeh",
+    "notes": "prices"
   },
   {
     "category": "Shopping & Money",
@@ -269,7 +291,8 @@
     "level": "A1",
     "polish": "Poproszę paragon.",
     "english": "A receipt, please.",
-    "phonetic": "poh-PROH-sheh pah-RAH-gon"
+    "phonetic": "poh-PROH-sheh pah-RAH-gon",
+    "notes": "shopping"
   },
   {
     "category": "Places & Directions",
@@ -325,7 +348,9 @@
     "level": "A1",
     "polish": "Pomocy!",
     "english": "Help!",
-    "phonetic": "poh-MOH-tsih"
+    "phonetic": "poh-MOH-tsih",
+    "examplePolish": "Pomocy!",
+    "exampleEnglish": "Help!"
   },
   {
     "category": "Emergency",
@@ -333,7 +358,8 @@
     "level": "A1",
     "polish": "Potrzebuję lekarza.",
     "english": "I need a doctor.",
-    "phonetic": "poh-tsheh-BOO-yeh leh-KAH-zhah"
+    "phonetic": "poh-tsheh-BOO-yeh leh-KAH-zhah",
+    "notes": "care"
   },
   {
     "category": "Emergency",
@@ -413,7 +439,8 @@
     "level": "A1",
     "polish": "Która jest godzina?",
     "english": "What time is it?",
-    "phonetic": "KTOO-rah yest goh-JEE-nah"
+    "phonetic": "KTOO-rah yest goh-JEE-nah",
+    "notes": "time"
   },
   {
     "category": "Time & Calendar",
@@ -429,7 +456,9 @@
     "level": "A1",
     "polish": "Jutro.",
     "english": "Tomorrow.",
-    "phonetic": "YOO-troh"
+    "phonetic": "YOO-troh",
+    "examplePolish": "Jutro będzie słonecznie.",
+    "exampleEnglish": "It will be sunny tomorrow."
   },
   {
     "category": "Time & Calendar",
@@ -437,7 +466,9 @@
     "level": "A1",
     "polish": "Wczoraj.",
     "english": "Yesterday.",
-    "phonetic": "FCHOH-rai"
+    "phonetic": "FCHOH-rai",
+    "examplePolish": "Wczoraj wzięłam wolne.",
+    "exampleEnglish": "I took a day off yesterday."
   },
   {
     "category": "Time & Calendar",
@@ -472,7 +503,9 @@
     "polish": "robić",
     "english": "to do / to make",
     "phonetic": "",
-    "notes": "Perfective: zrobić"
+    "notes": "Perfective: zrobić",
+    "examplePolish": "Mam tyle do zrobienia!",
+    "exampleEnglish": "I have so much work to do!"
   },
   {
     "category": "Verbs",
@@ -490,16 +523,20 @@
     "polish": "iść",
     "english": "to go on foot",
     "phonetic": "",
-    "notes": "Motion verb"
+    "notes": "Motion verb",
+    "examplePolish": "iść do parku",
+    "exampleEnglish": "go to the park"
   },
   {
     "category": "Verbs",
     "scenario": "Verbs",
     "level": "A1",
     "polish": "jechać",
-    "english": "to go by vehicle",
+    "english": "to go by vehicle / ride",
     "phonetic": "",
-    "notes": "Motion verb"
+    "notes": "Motion verb",
+    "examplePolish": "Uczniowie jadą autobusem.",
+    "exampleEnglish": "The students are riding the bus."
   },
   {
     "category": "Verbs",
@@ -508,7 +545,9 @@
     "polish": "chcieć",
     "english": "to want",
     "phonetic": "",
-    "notes": "High-frequency verb"
+    "notes": "High-frequency verb",
+    "examplePolish": "Dzisiaj chcę spróbować czegoś innego.",
+    "exampleEnglish": "I want to try something different today."
   },
   {
     "category": "Verbs",
@@ -517,7 +556,9 @@
     "polish": "móc",
     "english": "to be able to / can",
     "phonetic": "",
-    "notes": "Modal verb"
+    "notes": "Modal verb",
+    "examplePolish": "Mogę jeść pikantne potrawy.",
+    "exampleEnglish": "I can eat spicy food."
   },
   {
     "category": "Verbs",
@@ -544,7 +585,9 @@
     "polish": "widzieć",
     "english": "to see",
     "phonetic": "",
-    "notes": "High-frequency verb"
+    "notes": "High-frequency verb",
+    "examplePolish": "Ona nic nie widzi bez okularów.",
+    "exampleEnglish": "She cannot see anything without her glasses."
   },
   {
     "category": "Verbs",
@@ -571,7 +614,9 @@
     "polish": "lubić",
     "english": "to like",
     "phonetic": "",
-    "notes": "High-frequency verb"
+    "notes": "High-frequency verb",
+    "examplePolish": "Ona lubi czytać książki.",
+    "exampleEnglish": "She likes reading books."
   },
   {
     "category": "Verbs",
@@ -580,7 +625,9 @@
     "polish": "kochać",
     "english": "to love",
     "phonetic": "",
-    "notes": "High-frequency verb"
+    "notes": "High-frequency verb",
+    "examplePolish": "Mężczyzna kocha kobietę.",
+    "exampleEnglish": "The man loves the woman."
   },
   {
     "category": "Verbs",
@@ -589,7 +636,9 @@
     "polish": "dawać",
     "english": "to give",
     "phonetic": "",
-    "notes": "Perfective: dać"
+    "notes": "Perfective: dać",
+    "examplePolish": "Nie poddawaj się!",
+    "exampleEnglish": "Don’t give up!"
   },
   {
     "category": "Verbs",
@@ -598,7 +647,9 @@
     "polish": "brać",
     "english": "to take",
     "phonetic": "",
-    "notes": "Perfective: wziąć"
+    "notes": "Perfective: wziąć",
+    "examplePolish": "Podoba mi się ten, więc go wezmę.",
+    "exampleEnglish": "I like this one so I’ll take it."
   },
   {
     "category": "Verbs",
@@ -607,7 +658,9 @@
     "polish": "kupować",
     "english": "to buy",
     "phonetic": "",
-    "notes": "Perfective: kupić"
+    "notes": "Perfective: kupić",
+    "examplePolish": "Kupimy alkohol i perfumy zwolnione od podatku w sklepie wolnocłowym na lotnisku.",
+    "exampleEnglish": "We’ll buy duty-free alcohol and perfume at the duty free shops in the airport."
   },
   {
     "category": "Verbs",
@@ -625,7 +678,9 @@
     "polish": "jeść",
     "english": "to eat",
     "phonetic": "",
-    "notes": "High-frequency verb"
+    "notes": "High-frequency verb",
+    "examplePolish": "Czy możesz jeść polskie jedzenie?",
+    "exampleEnglish": "Can you eat Polish food?"
   },
   {
     "category": "Verbs",
@@ -643,7 +698,9 @@
     "polish": "spać",
     "english": "to sleep",
     "phonetic": "",
-    "notes": "High-frequency verb"
+    "notes": "High-frequency verb",
+    "examplePolish": "Idę spać około północy.",
+    "exampleEnglish": "I go to sleep around midnight."
   },
   {
     "category": "Verbs",
@@ -659,9 +716,11 @@
     "scenario": "Verbs",
     "level": "A1",
     "polish": "uczyć się",
-    "english": "to learn",
+    "english": "to learn / study",
     "phonetic": "",
-    "notes": "Reflexive verb"
+    "notes": "Reflexive verb",
+    "examplePolish": "Zacząłem uczyć się polskiego, żeby mieszkać w Polsce.",
+    "exampleEnglish": "I started to learn Polish in order to live in Poland."
   },
   {
     "category": "Verbs",
@@ -670,7 +729,9 @@
     "polish": "czytać",
     "english": "to read",
     "phonetic": "",
-    "notes": "High-frequency verb"
+    "notes": "High-frequency verb",
+    "examplePolish": "czytać gazetę",
+    "exampleEnglish": "read the newspaper"
   },
   {
     "category": "Verbs",
@@ -688,7 +749,9 @@
     "polish": "szukać",
     "english": "to look for / to search",
     "phonetic": "",
-    "notes": "Takes genitive"
+    "notes": "Takes genitive",
+    "examplePolish": "Naukowiec szuka mrówek.",
+    "exampleEnglish": "The scientist is searching for ants."
   },
   {
     "category": "Verbs",
@@ -697,7 +760,9 @@
     "polish": "znaleźć",
     "english": "to find",
     "phonetic": "",
-    "notes": "Perfective verb"
+    "notes": "Perfective verb",
+    "examplePolish": "Czy może pan pomóc nam znaleźć nasze miejsca?",
+    "exampleEnglish": "Can you help us find our seats?"
   },
   {
     "category": "Verbs",
@@ -706,7 +771,9 @@
     "polish": "czekać",
     "english": "to wait",
     "phonetic": "",
-    "notes": "High-frequency verb"
+    "notes": "High-frequency verb",
+    "examplePolish": "Nie lubię czekać.",
+    "exampleEnglish": "I don’t like waiting."
   },
   {
     "category": "Verbs",
@@ -715,7 +782,9 @@
     "polish": "potrzebować",
     "english": "to need",
     "phonetic": "",
-    "notes": "High-frequency verb"
+    "notes": "High-frequency verb",
+    "examplePolish": "Wszyscy potrzebujemy wody i powietrza żeby żyć.",
+    "exampleEnglish": "We all need air and water to live."
   },
   {
     "category": "Verbs",
@@ -742,7 +811,9 @@
     "polish": "pamiętać",
     "english": "to remember",
     "phonetic": "",
-    "notes": "High-frequency verb"
+    "notes": "High-frequency verb",
+    "examplePolish": "Niczego nie pamiętam.",
+    "exampleEnglish": "I don’t remember anything."
   },
   {
     "category": "Verbs",
@@ -769,7 +840,9 @@
     "polish": "zamykać",
     "english": "to close",
     "phonetic": "",
-    "notes": "Perfective: zamknąć"
+    "notes": "Perfective: zamknąć",
+    "examplePolish": "Czy mógłbyś zamknąć drzwi?",
+    "exampleEnglish": "Could you close the door?"
   },
   {
     "category": "Verbs",
@@ -778,7 +851,9 @@
     "polish": "zaczynać",
     "english": "to begin / to start",
     "phonetic": "",
-    "notes": "Perfective: zacząć"
+    "notes": "Perfective: zacząć",
+    "examplePolish": "Czy możemy zaczynać?",
+    "exampleEnglish": "Shall we get started?"
   },
   {
     "category": "Verbs",
@@ -787,7 +862,9 @@
     "polish": "kończyć",
     "english": "to finish",
     "phonetic": "",
-    "notes": "Perfective: skończyć"
+    "notes": "Perfective: skończyć",
+    "examplePolish": "Muszę to skończyć do jutra.",
+    "exampleEnglish": "I have to finish this by tomorrow."
   },
   {
     "category": "Verbs",
@@ -796,7 +873,9 @@
     "polish": "wracać",
     "english": "to return",
     "phonetic": "",
-    "notes": "Perfective: wrócić"
+    "notes": "Perfective: wrócić",
+    "examplePolish": "Niedługo wrócę.",
+    "exampleEnglish": "I’ll return soon."
   },
   {
     "category": "Verbs",
@@ -805,7 +884,9 @@
     "polish": "przychodzić",
     "english": "to come / to arrive",
     "phonetic": "",
-    "notes": "Perfective: przyjść"
+    "notes": "Perfective: przyjść",
+    "examplePolish": "przychodzić wcześnie",
+    "exampleEnglish": "come early"
   },
   {
     "category": "Verbs",
@@ -832,7 +913,9 @@
     "polish": "stać",
     "english": "to stand",
     "phonetic": "",
-    "notes": "High-frequency verb"
+    "notes": "High-frequency verb",
+    "examplePolish": "Mężczyzna stoi.",
+    "exampleEnglish": "The man is standing."
   },
   {
     "category": "Verbs",
@@ -877,7 +960,9 @@
     "polish": "pytać",
     "english": "to ask",
     "phonetic": "",
-    "notes": "Perfective: zapytać"
+    "notes": "Perfective: zapytać",
+    "examplePolish": "Muszę cię o coś zapytać.",
+    "exampleEnglish": "[I have to ask you something."
   },
   {
     "category": "Verbs",
@@ -895,7 +980,9 @@
     "polish": "dzwonić",
     "english": "to call by phone",
     "phonetic": "",
-    "notes": "Perfective: zadzwonić"
+    "notes": "Perfective: zadzwonić",
+    "examplePolish": "Czy możesz zadzwonić pod ten numer?",
+    "exampleEnglish": "Could you call this number?"
   },
   {
     "category": "Verbs",
@@ -904,16 +991,20 @@
     "polish": "płacić",
     "english": "to pay",
     "phonetic": "",
-    "notes": "Perfective: zapłacić"
+    "notes": "Perfective: zapłacić",
+    "examplePolish": "Czy muszę zapłacić teraz?",
+    "exampleEnglish": "Do I have to pay money now?"
   },
   {
     "category": "Verbs",
     "scenario": "Verbs",
     "level": "A1",
     "polish": "gotować",
-    "english": "to cook",
+    "english": "to cook / boil / prepare",
     "phonetic": "",
-    "notes": "High-frequency verb"
+    "notes": "High-frequency verb",
+    "examplePolish": "Mężczyzna i kobieta gotują.",
+    "exampleEnglish": "The man and woman are cooking."
   },
   {
     "category": "Verbs",
@@ -922,16 +1013,20 @@
     "polish": "oglądać",
     "english": "to watch",
     "phonetic": "",
-    "notes": "Perfective: obejrzeć"
+    "notes": "Perfective: obejrzeć",
+    "examplePolish": "Bardzo lubię oglądać zawody piłkarskie",
+    "exampleEnglish": "I really like watching football games."
   },
   {
     "category": "Verbs",
     "scenario": "Verbs",
     "level": "A1",
     "polish": "słuchać",
-    "english": "to listen",
+    "english": "to listen / hear",
     "phonetic": "",
-    "notes": "High-frequency verb"
+    "notes": "High-frequency verb",
+    "examplePolish": "Lubię słuchać dźwięku deszczu.",
+    "exampleEnglish": "I like to hear the sound of the rain."
   },
   {
     "category": "Verbs",
@@ -940,7 +1035,9 @@
     "polish": "czuć",
     "english": "to feel",
     "phonetic": "",
-    "notes": "High-frequency verb"
+    "notes": "High-frequency verb",
+    "examplePolish": "Znasz to uczucie?",
+    "exampleEnglish": "Do you know this feeling?"
   },
   {
     "category": "Grammar & Function Words",
@@ -1564,39 +1661,6 @@
     "notes": "Travel phrase"
   },
   {
-    "category": "Greetings & Essentials",
-    "scenario": "Greetings & Essentials",
-    "level": "A1",
-    "polish": "Cześć.",
-    "english": "Hello.",
-    "phonetic": "",
-    "examplePolish": "Cześć, mam na imię Anna.",
-    "exampleEnglish": "Hello, my name is Anna.",
-    "coreIndex": 1
-  },
-  {
-    "category": "Greetings & Essentials",
-    "scenario": "Greetings & Essentials",
-    "level": "A1",
-    "polish": "Przepraszam.",
-    "english": "Excuse me.",
-    "phonetic": "",
-    "examplePolish": "Przepraszam, gdzie jest dworzec?",
-    "exampleEnglish": "Excuse me, where is the train station?",
-    "coreIndex": 2
-  },
-  {
-    "category": "Greetings & Essentials",
-    "scenario": "Greetings & Essentials",
-    "level": "A1",
-    "polish": "Przepraszam.",
-    "english": "I’m sorry.",
-    "phonetic": "",
-    "examplePolish": "Przepraszam, nie rozumiem.",
-    "exampleEnglish": "I’m sorry, I don’t understand.",
-    "coreIndex": 3
-  },
-  {
     "category": "Feelings & Qualities",
     "scenario": "Feelings & Qualities",
     "level": "A1",
@@ -1617,17 +1681,6 @@
     "examplePolish": "Miło mi poznać pana.",
     "exampleEnglish": "Nice to meet you, sir.",
     "coreIndex": 5
-  },
-  {
-    "category": "Greetings & Essentials",
-    "scenario": "Greetings & Essentials",
-    "level": "A1",
-    "polish": "Jak się masz?",
-    "english": "How are you?",
-    "phonetic": "",
-    "examplePolish": "Cześć, jak się masz?",
-    "exampleEnglish": "Hi, how are you?",
-    "coreIndex": 6
   },
   {
     "category": "Greetings & Essentials",
@@ -1655,17 +1708,6 @@
     "category": "Greetings & Essentials",
     "scenario": "Greetings & Essentials",
     "level": "A1",
-    "polish": "Dziękuję.",
-    "english": "Thank you.",
-    "phonetic": "",
-    "examplePolish": "Dziękuję, ale ja tego nie zamawiałem.",
-    "exampleEnglish": "Thank you, but I didn’t order this.",
-    "coreIndex": 9
-  },
-  {
-    "category": "Greetings & Essentials",
-    "scenario": "Greetings & Essentials",
-    "level": "A1",
     "polish": "Jestem...",
     "english": "I’m (name).",
     "phonetic": "",
@@ -1674,22 +1716,11 @@
     "coreIndex": 10
   },
   {
-    "category": "Greetings & Essentials",
-    "scenario": "Greetings & Essentials",
-    "level": "A1",
-    "polish": "Do widzenia.",
-    "english": "Goodbye.",
-    "phonetic": "",
-    "examplePolish": "Do widzenia pani.",
-    "exampleEnglish": "Goodbye, ma’am.",
-    "coreIndex": 11
-  },
-  {
     "category": "Feelings & Qualities",
     "scenario": "Feelings & Qualities",
     "level": "A1",
     "polish": "zły",
-    "english": "bad",
+    "english": "bad / angry",
     "phonetic": "",
     "examplePolish": "On jest złym chłopakiem.",
     "exampleEnglish": "He’s a bad boy.",
@@ -1798,28 +1829,6 @@
     "category": "Time & Calendar",
     "scenario": "Time & Calendar",
     "level": "A1",
-    "polish": "wczoraj",
-    "english": "yesterday",
-    "phonetic": "",
-    "examplePolish": "Wczoraj wzięłam wolne.",
-    "exampleEnglish": "I took a day off yesterday.",
-    "coreIndex": 22
-  },
-  {
-    "category": "Time & Calendar",
-    "scenario": "Time & Calendar",
-    "level": "A1",
-    "polish": "jutro",
-    "english": "tomorrow",
-    "phonetic": "",
-    "examplePolish": "Jutro będzie słonecznie.",
-    "exampleEnglish": "It will be sunny tomorrow.",
-    "coreIndex": 23
-  },
-  {
-    "category": "Time & Calendar",
-    "scenario": "Time & Calendar",
-    "level": "A1",
     "polish": "tydzień",
     "english": "week",
     "phonetic": "",
@@ -1866,7 +1875,7 @@
     "scenario": "Time & Calendar",
     "level": "A1",
     "polish": "godzina",
-    "english": "hour",
+    "english": "hour / o’clock",
     "phonetic": "",
     "examplePolish": "Wrócę z pracy do domu za godzinę.",
     "exampleEnglish": "I’ll be home from work in an hour.",
@@ -1888,18 +1897,6 @@
     "category": "Time & Calendar",
     "scenario": "Time & Calendar",
     "level": "A1",
-    "polish": "godzina",
-    "english": "o’clock",
-    "phonetic": "",
-    "examplePolish": "godzina dwunasta",
-    "exampleEnglish": "twelve o’clock",
-    "coreIndex": 30,
-    "notes": "(f.) · G. godziny · pl. godziny"
-  },
-  {
-    "category": "Time & Calendar",
-    "scenario": "Time & Calendar",
-    "level": "A1",
     "polish": "kalendarz",
     "english": "calendar",
     "phonetic": "",
@@ -1912,10 +1909,10 @@
     "scenario": "Time & Calendar",
     "level": "A1",
     "polish": "poniedziałek",
-    "english": "Monday The",
+    "english": "Monday",
     "phonetic": "",
     "examplePolish": "Tydzień pracy zaczyna się w poniedziałek.",
-    "exampleEnglish": "workweek starts on Monday.",
+    "exampleEnglish": "The workweek starts on Monday.",
     "coreIndex": 32
   },
   {
@@ -1923,10 +1920,10 @@
     "scenario": "Time & Calendar",
     "level": "A1",
     "polish": "wtorek",
-    "english": "Tuesday January 1st falls on a",
+    "english": "Tuesday",
     "phonetic": "",
     "examplePolish": "W tym roku pierwszy stycznia wypada we wtorek.",
-    "exampleEnglish": "Tuesday this year.",
+    "exampleEnglish": "This year January 1st falls on a Tuesday.",
     "coreIndex": 33
   },
   {
@@ -1934,10 +1931,10 @@
     "scenario": "Time & Calendar",
     "level": "A1",
     "polish": "środa",
-    "english": "Wednesday Wednesday",
+    "english": "Wednesday",
     "phonetic": "",
     "examplePolish": "W środy wieczorem gramy w pokera u mnie w domu.",
-    "exampleEnglish": "nights we play poker at my house.",
+    "exampleEnglish": "On Wednesday nights we play poker at my house.",
     "coreIndex": 34
   },
   {
@@ -1945,10 +1942,10 @@
     "scenario": "Time & Calendar",
     "level": "A1",
     "polish": "czwartek",
-    "english": "Thursday Thursday,",
+    "english": "Thursday",
     "phonetic": "",
     "examplePolish": "czwartek, trzeci stycznia",
-    "exampleEnglish": "January 3rd",
+    "exampleEnglish": "Thursday, January 3rd",
     "coreIndex": 35
   },
   {
@@ -1956,10 +1953,10 @@
     "scenario": "Time & Calendar",
     "level": "A1",
     "polish": "piątek",
-    "english": "Friday On",
+    "english": "Friday",
     "phonetic": "",
     "examplePolish": "W piątek często je się ryby.",
-    "exampleEnglish": "Friday people often eat fish.",
+    "exampleEnglish": "On Friday people often eat fish.",
     "coreIndex": 36
   },
   {
@@ -1978,34 +1975,12 @@
     "scenario": "Time & Calendar",
     "level": "A1",
     "polish": "niedziela",
-    "english": "Sunday Sunday",
+    "english": "Sunday",
     "phonetic": "",
     "examplePolish": "W niedzielę jest Dzień Ojca.",
-    "exampleEnglish": "is Father’s Day.",
+    "exampleEnglish": "Father's Day is on Sunday.",
     "coreIndex": 38,
     "notes": "(f.) · G. niedzieli · pl. niedziele"
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A1",
-    "polish": "robić",
-    "english": "do",
-    "phonetic": "",
-    "examplePolish": "Mam tyle do zrobienia!",
-    "exampleEnglish": "I have so much work to do!",
-    "coreIndex": 39
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A1",
-    "polish": "iść",
-    "english": "go",
-    "phonetic": "",
-    "examplePolish": "iść do parku",
-    "exampleEnglish": "go to the park",
-    "coreIndex": 40
   },
   {
     "category": "Activities & Sports",
@@ -2194,56 +2169,12 @@
     "category": "Activities & Sports",
     "scenario": "Activities & Sports",
     "level": "A1",
-    "polish": "przychodzić",
-    "english": "come",
-    "phonetic": "",
-    "examplePolish": "przychodzić wcześnie",
-    "exampleEnglish": "come early",
-    "coreIndex": 57
-  },
-  {
-    "category": "Greetings & Essentials",
-    "scenario": "Greetings & Essentials",
-    "level": "A1",
-    "polish": "widzieć",
-    "english": "see",
-    "phonetic": "",
-    "examplePolish": "Ona nic nie widzi bez okularów.",
-    "exampleEnglish": "She cannot see anything without her glasses.",
-    "coreIndex": 58
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A1",
-    "polish": "robić",
-    "english": "make",
-    "phonetic": "",
-    "examplePolish": "Kucharz robi sok pomarańczowy.",
-    "exampleEnglish": "The chef is making orange juice.",
-    "coreIndex": 59
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A1",
     "polish": "korzystać",
     "english": "use",
     "phonetic": "",
     "examplePolish": "Ta osoba korzysta z komputera, żeby napisać e-mail.",
     "exampleEnglish": "The person is using a computer to write an e-mail.",
     "coreIndex": 60
-  },
-  {
-    "category": "Grammar & Function Words",
-    "scenario": "Grammar & Function Words",
-    "level": "A1",
-    "polish": "móc",
-    "english": "can",
-    "phonetic": "",
-    "examplePolish": "Mogę jeść pikantne potrawy.",
-    "exampleEnglish": "I can eat spicy food.",
-    "coreIndex": 61
   },
   {
     "category": "Numbers & Measures",
@@ -2293,11 +2224,12 @@
     "category": "Numbers & Measures",
     "scenario": "Numbers & Measures",
     "level": "A1",
-    "polish": "cztery czteropasmowa droga",
-    "english": "four four-lane motorway",
+    "polish": "cztery",
+    "english": "four",
     "phonetic": "",
-    "notes": "szybkiego ruchu",
-    "coreIndex": 66
+    "coreIndex": 66,
+    "examplePolish": "czteropasmowa droga szybkiego ruchu",
+    "exampleEnglish": "four-lane motorway"
   },
   {
     "category": "Numbers & Measures",
@@ -2307,7 +2239,7 @@
     "english": "five",
     "phonetic": "",
     "examplePolish": "Rozgwiazda ma pięć ramion.",
-    "exampleEnglish": "The starfish has five legs.",
+    "exampleEnglish": "The starfish has five arms.",
     "coreIndex": 67
   },
   {
@@ -2348,10 +2280,11 @@
     "scenario": "Numbers & Measures",
     "level": "A1",
     "polish": "dziewięć",
-    "english": "nine ninety-nine percent",
+    "english": "nine",
     "phonetic": "",
-    "notes": "dziewięćdziesiąt dziewięć procent",
-    "coreIndex": 71
+    "coreIndex": 71,
+    "examplePolish": "Mam dziewięć biletów.",
+    "exampleEnglish": "I have nine tickets."
   },
   {
     "category": "Numbers & Measures",
@@ -2392,7 +2325,7 @@
     "scenario": "Food & Drink",
     "level": "A1",
     "polish": "kucharz",
-    "english": "cook",
+    "english": "cook / chef",
     "phonetic": "",
     "examplePolish": "Ona jest kucharką w czterogwiazdkowej restauracji.",
     "exampleEnglish": "She is a cook at a four-star restaurant.",
@@ -2549,10 +2482,10 @@
     "scenario": "Time & Calendar",
     "level": "A1",
     "polish": "styczeń",
-    "english": "January It’s",
+    "english": "January",
     "phonetic": "",
     "examplePolish": "Tutaj w styczniu jest bardzo zimno.",
-    "exampleEnglish": "very cold here in January",
+    "exampleEnglish": "It's very cold here in January.",
     "coreIndex": 89
   },
   {
@@ -2560,10 +2493,10 @@
     "scenario": "Time & Calendar",
     "level": "A1",
     "polish": "luty",
-    "english": "February February",
+    "english": "February",
     "phonetic": "",
     "examplePolish": "Luty jest najkrótszym miesiącem i ma dwadzieścia osiem dni.",
-    "exampleEnglish": "is the shortest month with 28 days.",
+    "exampleEnglish": "February is the shortest month and has twenty-eight days.",
     "coreIndex": 90
   },
   {
@@ -2571,10 +2504,10 @@
     "scenario": "Time & Calendar",
     "level": "A1",
     "polish": "marzec",
-    "english": "March It",
+    "english": "March",
     "phonetic": "",
     "examplePolish": "Teraz jest kwiecień, więc poprzednim miesiącem był marzec.",
-    "exampleEnglish": "is now April so last month was March.",
+    "exampleEnglish": "It is now April, so last month was March.",
     "coreIndex": 91
   },
   {
@@ -2582,21 +2515,21 @@
     "scenario": "Time & Calendar",
     "level": "A1",
     "polish": "kwiecień",
-    "english": "April April",
+    "english": "April",
     "phonetic": "",
     "examplePolish": "Kwietniowe deszcze przynoszą kwiaty w maju.",
-    "exampleEnglish": "showers bring May flowers.",
+    "exampleEnglish": "April showers bring May flowers.",
     "coreIndex": 92
   },
   {
-    "category": "Greetings & Essentials",
-    "scenario": "Greetings & Essentials",
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
     "level": "A1",
     "polish": "maj",
-    "english": "May May 31st is",
+    "english": "May",
     "phonetic": "",
     "examplePolish": "Trzydziesty pierwszy maja to Światowy Dzień bez Papierosa.",
-    "exampleEnglish": "World No Smoking Day.",
+    "exampleEnglish": "May 31st is World No Smoking Day.",
     "coreIndex": 93
   },
   {
@@ -2604,10 +2537,10 @@
     "scenario": "Time & Calendar",
     "level": "A1",
     "polish": "czerwiec",
-    "english": "June We",
+    "english": "June",
     "phonetic": "",
     "examplePolish": "Pobieramy się w czerwcu.",
-    "exampleEnglish": "are getting married in June.",
+    "exampleEnglish": "We are getting married in June.",
     "coreIndex": 94
   },
   {
@@ -2615,10 +2548,10 @@
     "scenario": "Time & Calendar",
     "level": "A1",
     "polish": "lipiec",
-    "english": "July July",
+    "english": "July",
     "phonetic": "",
     "examplePolish": "Nazwa miesiąca lipiec pochodzi od imienia Juliusza Cezara, który urodził się w lipcu.",
-    "exampleEnglish": "is named for Julius Caesar, who was born in July.",
+    "exampleEnglish": "The month of July is named for Julius Caesar, who was born in July.",
     "coreIndex": 95
   },
   {
@@ -2626,10 +2559,10 @@
     "scenario": "Time & Calendar",
     "level": "A1",
     "polish": "sierpień",
-    "english": "August The",
+    "english": "August",
     "phonetic": "",
     "examplePolish": "Szkoła jest zamknięta w sierpniu.",
-    "exampleEnglish": "school is closed in August.",
+    "exampleEnglish": "The school is closed in August.",
     "coreIndex": 96
   },
   {
@@ -2637,20 +2570,20 @@
     "scenario": "Time & Calendar",
     "level": "A1",
     "polish": "wrzesień",
-    "english": "September Today",
+    "english": "September",
     "phonetic": "",
     "examplePolish": "Dziś jest sobota, dziesiąty września.",
-    "exampleEnglish": "is Saturday, September 10th.",
+    "exampleEnglish": "Today is Saturday, September 10th.",
     "coreIndex": 97
   },
   {
     "category": "Time & Calendar",
     "scenario": "Time & Calendar",
     "level": "A1",
-    "polish": "październik trzynastego",
-    "english": "October on",
+    "polish": "trzynasty października",
+    "english": "October thirteenth",
     "phonetic": "",
-    "examplePolish": "października",
+    "examplePolish": "trzynasty października",
     "exampleEnglish": "October 13th",
     "coreIndex": 98
   },
@@ -2659,10 +2592,10 @@
     "scenario": "Time & Calendar",
     "level": "A1",
     "polish": "listopad",
-    "english": "November November",
+    "english": "November",
     "phonetic": "",
     "examplePolish": "Listopad jest jednym z czterech miesięcy, które mają trzydzieści dni.",
-    "exampleEnglish": "is one of four months with thirty days.",
+    "exampleEnglish": "November is one of four months that have thirty days.",
     "coreIndex": 99
   },
   {
@@ -2722,28 +2655,6 @@
     "coreIndex": 104
   },
   {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A1",
-    "polish": "szukać",
-    "english": "search",
-    "phonetic": "",
-    "examplePolish": "Naukowiec szuka mrówek.",
-    "exampleEnglish": "The scientist is searching for ants.",
-    "coreIndex": 105
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A1",
-    "polish": "brać",
-    "english": "take",
-    "phonetic": "",
-    "examplePolish": "Podoba mi się ten, więc go wezmę.",
-    "exampleEnglish": "I like this one so I’ll take it.",
-    "coreIndex": 106
-  },
-  {
     "category": "Feelings & Qualities",
     "scenario": "Feelings & Qualities",
     "level": "A1",
@@ -2792,7 +2703,7 @@
     "scenario": "Feelings & Qualities",
     "level": "A1",
     "polish": "zabawny",
-    "english": "funny",
+    "english": "funny / humorous",
     "phonetic": "",
     "examplePolish": "Ta książka jest całkiem zabawna.",
     "exampleEnglish": "This book is pretty funny.",
@@ -2942,28 +2853,6 @@
     "examplePolish": "Właśnie miałem to powiedzieć.",
     "exampleEnglish": "I was just going to say that.",
     "coreIndex": 124
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A1",
-    "polish": "dzwonić",
-    "english": "call",
-    "phonetic": "",
-    "examplePolish": "Czy możesz zadzwonić pod ten numer?",
-    "exampleEnglish": "Could you call this number?",
-    "coreIndex": 125
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A1",
-    "polish": "znaleźć",
-    "english": "find",
-    "phonetic": "",
-    "examplePolish": "Czy może pan pomóc nam znaleźć nasze miejsca?",
-    "exampleEnglish": "Can you help us find our seats?",
-    "coreIndex": 126
   },
   {
     "category": "Home & Daily Life",
@@ -3144,22 +3033,11 @@
     "coreIndex": 142
   },
   {
-    "category": "Feelings & Qualities",
-    "scenario": "Feelings & Qualities",
-    "level": "A1",
-    "polish": "zły",
-    "english": "angry",
-    "phonetic": "",
-    "examplePolish": "Dlaczego jesteś taki zły?",
-    "exampleEnglish": "Why are you so angry?",
-    "coreIndex": 143
-  },
-  {
     "category": "Clothing & Appearance",
     "scenario": "Clothing & Appearance",
     "level": "A1",
     "polish": "ubranie",
-    "english": "clothing",
+    "english": "clothing / clothes",
     "phonetic": "",
     "examplePolish": "Pracowałem w sklepie z ubraniami.",
     "exampleEnglish": "I worked at the clothing store.",
@@ -3170,7 +3048,7 @@
     "scenario": "Grammar & Function Words",
     "level": "A1",
     "polish": "but",
-    "english": "shoe",
+    "english": "shoe / boot",
     "phonetic": "",
     "examplePolish": "Gdzie jest mój prawy but?",
     "exampleEnglish": "Where is my right shoe?",
@@ -3208,22 +3086,11 @@
     "coreIndex": 148
   },
   {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A1",
-    "polish": "dawać",
-    "english": "give",
-    "phonetic": "",
-    "examplePolish": "Nie poddawaj się!",
-    "exampleEnglish": "Don’t give up!",
-    "coreIndex": 149
-  },
-  {
     "category": "Numbers & Measures",
     "scenario": "Numbers & Measures",
     "level": "A1",
     "polish": "niski",
-    "english": "low",
+    "english": "low / short",
     "phonetic": "",
     "examplePolish": "Sól jest w drugiej dolnej szufladzie.",
     "exampleEnglish": "You can find the salt in the second lower drawer.",
@@ -3234,7 +3101,7 @@
     "scenario": "Numbers & Measures",
     "level": "A1",
     "polish": "wysoki",
-    "english": "high",
+    "english": "high / tall",
     "phonetic": "",
     "examplePolish": "Pan Kopytko ma o sobie zdecydowanie za wysokie mniemanie.",
     "exampleEnglish": "Mr. Kopytko has a much too high opinion of himself.",
@@ -3711,7 +3578,7 @@
     "scenario": "Travel & Transport",
     "level": "A1",
     "polish": "samochód",
-    "english": "car",
+    "english": "car / automobile",
     "phonetic": "",
     "examplePolish": "Jan kupił nowy samochód.",
     "exampleEnglish": "John bought a new car.",
@@ -3849,28 +3716,6 @@
     "examplePolish": "Odpocznę przez godzinę.",
     "exampleEnglish": "I’ll rest for an hour.",
     "coreIndex": 205
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A1",
-    "polish": "słuchać",
-    "english": "hear",
-    "phonetic": "",
-    "examplePolish": "Lubię słuchać dźwięku deszczu.",
-    "exampleEnglish": "I like to hear the sound of the rain.",
-    "coreIndex": 206
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A1",
-    "polish": "chcieć",
-    "english": "want",
-    "phonetic": "",
-    "examplePolish": "Dzisiaj chcę spróbować czegoś innego.",
-    "exampleEnglish": "I want to try something different today.",
-    "coreIndex": 207
   },
   {
     "category": "Feelings & Qualities",
@@ -4054,28 +3899,6 @@
     "category": "Activities & Sports",
     "scenario": "Activities & Sports",
     "level": "A1",
-    "polish": "kończyć",
-    "english": "finish",
-    "phonetic": "",
-    "examplePolish": "Muszę to skończyć do jutra.",
-    "exampleEnglish": "I have to finish this by tomorrow.",
-    "coreIndex": 224
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A1",
-    "polish": "zaczynać",
-    "english": "start",
-    "phonetic": "",
-    "examplePolish": "Czy możemy zaczynać?",
-    "exampleEnglish": "Shall we get started?",
-    "coreIndex": 225
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A1",
     "polish": "stawać się",
     "english": "become",
     "phonetic": "",
@@ -4213,7 +4036,7 @@
     "scenario": "Work & School",
     "level": "A1",
     "polish": "poczta",
-    "english": "post office",
+    "english": "post office / mail",
     "phonetic": "",
     "examplePolish": "Przepraszam, gdzie jest najbliższa poczta?",
     "exampleEnglish": "Excuse me, where is the closest post office?",
@@ -4253,17 +4076,6 @@
     "examplePolish": "Dziękuję za pomoc.",
     "exampleEnglish": "Thank you for your help!",
     "coreIndex": 241
-  },
-  {
-    "category": "Work & School",
-    "scenario": "Work & School",
-    "level": "A1",
-    "polish": "uczyć się",
-    "english": "learn",
-    "phonetic": "",
-    "examplePolish": "Zacząłem uczyć się polskiego, żeby mieszkać w Polsce.",
-    "exampleEnglish": "I started to learn Polish in order to live in Poland.",
-    "coreIndex": 242
   },
   {
     "category": "Activities & Sports",
@@ -4444,17 +4256,6 @@
     "examplePolish": "Pszczoła zapyla żółty kwiat.",
     "exampleEnglish": "The bee is pollinating the yellow flower.",
     "coreIndex": 258
-  },
-  {
-    "category": "Clothing & Appearance",
-    "scenario": "Clothing & Appearance",
-    "level": "A1",
-    "polish": "pomarańczowy",
-    "english": "orange",
-    "phonetic": "",
-    "examplePolish": "Jego ulubiony kolor to pomarańczowy.",
-    "exampleEnglish": "His favorite color is orange.",
-    "coreIndex": 259
   },
   {
     "category": "Clothing & Appearance",
@@ -4978,10 +4779,10 @@
     "scenario": "Technology & Media",
     "level": "A1",
     "polish": "internet",
-    "english": "Internet Use",
+    "english": "Internet",
     "phonetic": "",
     "examplePolish": "Użyj internetu. Jest pełen materiałów do słuchania.",
-    "exampleEnglish": "the internet. It’s full of listening resources.",
+    "exampleEnglish": "Use the internet. It's full of listening resources.",
     "coreIndex": 306
   },
   {
@@ -5080,22 +4881,11 @@
     "scenario": "Work & School",
     "level": "A1",
     "polish": "tablica",
-    "english": "whiteboard",
+    "english": "whiteboard / blackboard",
     "phonetic": "",
     "examplePolish": "Biała tablica to doskonały sposób, by przedstawić coś wizualnie.",
     "exampleEnglish": "A whiteboard is a perfect means to demonstrate something visually.",
     "coreIndex": 315
-  },
-  {
-    "category": "Work & School",
-    "scenario": "Work & School",
-    "level": "A1",
-    "polish": "tablica",
-    "english": "blackboard",
-    "phonetic": "",
-    "examplePolish": "Nie widzę tablicy.",
-    "exampleEnglish": "I can’t see the blackboard.",
-    "coreIndex": 316
   },
   {
     "category": "Work & School",
@@ -5136,7 +4926,7 @@
     "scenario": "Work & School",
     "level": "A1",
     "polish": "praca",
-    "english": "job",
+    "english": "job / work",
     "phonetic": "",
     "examplePolish": "Dlaczego odchodzisz z pracy?",
     "exampleEnglish": "Why are you leaving your job?",
@@ -5466,17 +5256,6 @@
     "notes": "(m.) · G. studenta · pl. studenci"
   },
   {
-    "category": "Time & Calendar",
-    "scenario": "Time & Calendar",
-    "level": "A1",
-    "polish": "oglądać",
-    "english": "watch",
-    "phonetic": "",
-    "examplePolish": "Bardzo lubię oglądać zawody piłkarskie",
-    "exampleEnglish": "I really like watching football games.",
-    "coreIndex": 350
-  },
-  {
     "category": "Work & School",
     "scenario": "Work & School",
     "level": "A1",
@@ -5538,22 +5317,11 @@
     "scenario": "Places & Directions",
     "level": "A1",
     "polish": "północ",
-    "english": "north",
+    "english": "north / midnight",
     "phonetic": "",
     "examplePolish": "Polska rozciąga się od Bałtyku na północy, po Karpaty i Sudety na południu.",
     "exampleEnglish": "Poland spreads from the Baltic Sea in the north to the Karpaty and Sudety mountains in the south.",
     "coreIndex": 356
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A1",
-    "polish": "wracać",
-    "english": "return",
-    "phonetic": "",
-    "examplePolish": "Niedługo wrócę.",
-    "exampleEnglish": "I’ll return soon.",
-    "coreIndex": 357
   },
   {
     "category": "Health & Body",
@@ -5567,22 +5335,11 @@
     "coreIndex": 358
   },
   {
-    "category": "Home & Daily Life",
-    "scenario": "Home & Daily Life",
-    "level": "A1",
-    "polish": "spać",
-    "english": "sleep",
-    "phonetic": "",
-    "examplePolish": "Idę spać około północy.",
-    "exampleEnglish": "I go to sleep around midnight.",
-    "coreIndex": 359
-  },
-  {
     "category": "Places & Directions",
     "scenario": "Places & Directions",
     "level": "A1",
     "polish": "południe",
-    "english": "south",
+    "english": "south / noon",
     "phonetic": "",
     "examplePolish": "Ptaki lecą na południe.",
     "exampleEnglish": "The birds are flying south.",
@@ -5631,17 +5388,6 @@
     "examplePolish": "Ludzie dojeżdżają rano do pracy.",
     "exampleEnglish": "The people commute to work in the morning.",
     "coreIndex": 364
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A1",
-    "polish": "jeść",
-    "english": "eat",
-    "phonetic": "",
-    "examplePolish": "Czy możesz jeść polskie jedzenie?",
-    "exampleEnglish": "Can you eat Polish food?",
-    "coreIndex": 365
   },
   {
     "category": "Activities & Sports",
@@ -5711,28 +5457,6 @@
     "coreIndex": 371
   },
   {
-    "category": "Work & School",
-    "scenario": "Work & School",
-    "level": "A1",
-    "polish": "pytać",
-    "english": "ask",
-    "phonetic": "",
-    "examplePolish": "Muszę cię o coś zapytać.",
-    "exampleEnglish": "[I have to ask you something.",
-    "coreIndex": 372
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A1",
-    "polish": "zamykać",
-    "english": "close",
-    "phonetic": "",
-    "examplePolish": "Czy mógłbyś zamknąć drzwi?",
-    "exampleEnglish": "Could you close the door?",
-    "coreIndex": 373
-  },
-  {
     "category": "People & Family",
     "scenario": "People & Family",
     "level": "A1",
@@ -5742,18 +5466,6 @@
     "examplePolish": "Co roku świętujemy urodziny.",
     "exampleEnglish": "We celebrate our birth every year.",
     "coreIndex": 374
-  },
-  {
-    "category": "Work & School",
-    "scenario": "Work & School",
-    "level": "A1",
-    "polish": "praca",
-    "english": "work",
-    "phonetic": "",
-    "examplePolish": "Moja praca to mój świat.",
-    "exampleEnglish": "My job is the world to me.",
-    "coreIndex": 375,
-    "notes": "(f.) · G. pracy · pl. prace"
   },
   {
     "category": "Activities & Sports",
@@ -5837,7 +5549,7 @@
     "scenario": "Health & Body",
     "level": "A1",
     "polish": "myć",
-    "english": "wash",
+    "english": "wash / clean",
     "phonetic": "",
     "examplePolish": "Nienawidzę myć naczyń po jedzeniu.",
     "exampleEnglish": "After eating I hate to wash the dishes.",
@@ -5970,7 +5682,7 @@
     "scenario": "Home & Daily Life",
     "level": "A1",
     "polish": "dom",
-    "english": "house",
+    "english": "house / home",
     "phonetic": "",
     "examplePolish": "Mój dom jest bardzo duży.",
     "exampleEnglish": "My house is very big.",
@@ -5998,17 +5710,6 @@
     "examplePolish": "Sklep jest otwarty od 9:00.",
     "exampleEnglish": "The store is open from 9 a.m.",
     "coreIndex": 397
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A1",
-    "polish": "słuchać",
-    "english": "listen",
-    "phonetic": "",
-    "examplePolish": "Lubię słuchać radia przed spaniem.",
-    "exampleEnglish": "I like to listen to the radio before going to sleep.",
-    "coreIndex": 398
   },
   {
     "category": "Time & Calendar",
@@ -6070,7 +5771,7 @@
     "scenario": "Places & Directions",
     "level": "A2",
     "polish": "prawo",
-    "english": "right",
+    "english": "right / law",
     "phonetic": "",
     "examplePolish": "Skręć w prawo na następnych światłach.",
     "exampleEnglish": "Turn right at the next light.",
@@ -6158,7 +5859,7 @@
     "scenario": "Work & School",
     "level": "A2",
     "polish": "informacja",
-    "english": "information",
+    "english": "information / news",
     "phonetic": "",
     "examplePolish": "Twoja informacja jest nieprawidłowa.",
     "exampleEnglish": "Your information isn’t right.",
@@ -6208,7 +5909,8 @@
     "phonetic": "",
     "examplePolish": "Pracuję jako dentysta, ale tak naprawdę chcę być pisarzem.",
     "exampleEnglish": "I work as a dentist, but I really want to be a writer.",
-    "coreIndex": 416
+    "coreIndex": 416,
+    "notes": "znany pisarz"
   },
   {
     "category": "Activities & Sports",
@@ -6237,22 +5939,11 @@
     "scenario": "Activities & Sports",
     "level": "A2",
     "polish": "trzymać",
-    "english": "keep",
+    "english": "keep / hold",
     "phonetic": "",
     "examplePolish": "Trzymam dokumenty w teczce.",
     "exampleEnglish": "I keep the documents in the file.",
     "coreIndex": 419
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A2",
-    "polish": "czekać",
-    "english": "wait",
-    "phonetic": "",
-    "examplePolish": "Nie lubię czekać.",
-    "exampleEnglish": "I don’t like waiting.",
-    "coreIndex": 420
   },
   {
     "category": "Home & Daily Life",
@@ -6303,7 +5994,7 @@
     "scenario": "Travel & Transport",
     "level": "A2",
     "polish": "przewodnik",
-    "english": "guidebook",
+    "english": "guidebook / tour guide",
     "phonetic": "",
     "examplePolish": "Przewodnik udzieli ci przydatnych informacji o twojej podróży.",
     "exampleEnglish": "A guidebook will give you helpful information for your trip.",
@@ -6314,22 +6005,11 @@
     "scenario": "Home & Daily Life",
     "level": "A2",
     "polish": "wejście",
-    "english": "entrance",
+    "english": "entrance / input",
     "phonetic": "",
     "examplePolish": "Gdzie jest wejście?",
     "exampleEnglish": "Where’s the entrance?",
     "coreIndex": 426
-  },
-  {
-    "category": "Travel & Transport",
-    "scenario": "Travel & Transport",
-    "level": "A2",
-    "polish": "przewodnik",
-    "english": "tour guide",
-    "phonetic": "",
-    "examplePolish": "Przewodnik pomoże ci znaleźć drogę w nieznanym miejscu.",
-    "exampleEnglish": "The tour guide will help you find your way in a strange place.",
-    "coreIndex": 427
   },
   {
     "category": "Shopping & Money",
@@ -6375,17 +6055,6 @@
     "examplePolish": "Moim ulubionym przedmiotem w szkole jest matematyka.",
     "exampleEnglish": "My favorite subject in school is math.",
     "coreIndex": 431
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "A2",
-    "polish": "czuć",
-    "english": "feel",
-    "phonetic": "",
-    "examplePolish": "Znasz to uczucie?",
-    "exampleEnglish": "Do you know this feeling?",
-    "coreIndex": 432
   },
   {
     "category": "Activities & Sports",
@@ -6546,7 +6215,7 @@
     "scenario": "Nature & Animals",
     "level": "A2",
     "polish": "komar",
-    "english": "mosquito",
+    "english": "mosquito / gnat",
     "phonetic": "",
     "examplePolish": "Ten wredny mały komar ugryzł mnie w rękę.",
     "exampleEnglish": "That nasty little mosquito bit me on my arm.",
@@ -6568,7 +6237,7 @@
     "scenario": "People & Family",
     "level": "A2",
     "polish": "gospodyni domowa",
-    "english": "homemaker",
+    "english": "homemaker / housewife",
     "phonetic": "",
     "examplePolish": "Gospodyni domowa pracuje najciężej ze wszystkich.",
     "exampleEnglish": "The hardest worker anywhere is the homemaker.",
@@ -6674,17 +6343,6 @@
     "examplePolish": "Moja torba jest za ciężka.",
     "exampleEnglish": "My bag is too heavy.",
     "coreIndex": 458
-  },
-  {
-    "category": "Technology & Media",
-    "scenario": "Technology & Media",
-    "level": "A2",
-    "polish": "fotografia",
-    "english": "photograph",
-    "phonetic": "",
-    "examplePolish": "Ta fotografia nie wygląda dobrze.",
-    "exampleEnglish": "This photograph doesn’t look good.",
-    "coreIndex": 459
   },
   {
     "category": "Food & Drink",
@@ -7060,7 +6718,7 @@
     "scenario": "Work & School",
     "level": "A2",
     "polish": "ekonomia",
-    "english": "economics",
+    "english": "economics / economy",
     "phonetic": "",
     "examplePolish": "Ekonomia to dobry fundament dla wielu dziedzin.",
     "exampleEnglish": "Economics is a good background for many fields.",
@@ -7076,28 +6734,6 @@
     "examplePolish": "Spróbuj położyć to pudełko na górnej półce.",
     "exampleEnglish": "Please try to put this box on the top shelf.",
     "coreIndex": 494
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A2",
-    "polish": "pamiętać",
-    "english": "remember",
-    "phonetic": "",
-    "examplePolish": "Niczego nie pamiętam.",
-    "exampleEnglish": "I don’t remember anything.",
-    "coreIndex": 495
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "A2",
-    "polish": "trzymać",
-    "english": "hold",
-    "phonetic": "",
-    "examplePolish": "trzymać niebieski balonik",
-    "exampleEnglish": "hold a blue balloon",
-    "coreIndex": 496
   },
   {
     "category": "Shopping & Money",
@@ -7271,10 +6907,10 @@
     "scenario": "Measurements & Units",
     "level": "A2",
     "polish": "Fahrenheit",
-    "english": "Fahrenheit His",
+    "english": "Fahrenheit",
     "phonetic": "",
     "examplePolish": "Jego temperatura znacznie przekraczała normalne 98,6 stopni Fahrenheita.",
-    "exampleEnglish": "body temperature was far above the normal 98.6 degrees Fahrenheit.",
+    "exampleEnglish": "His body temperature was far above the normal 98.6 degrees Fahrenheit.",
     "coreIndex": 512
   },
   {
@@ -7439,7 +7075,7 @@
     "scenario": "Home & Daily Life",
     "level": "A2",
     "polish": "pilot",
-    "english": "remote control",
+    "english": "remote control / pilot",
     "phonetic": "",
     "examplePolish": "Mężczyzna wyłącza telewizor pilotem.",
     "exampleEnglish": "The man is turning off the TV with the remote control.",
@@ -7450,7 +7086,7 @@
     "scenario": "Cleaning & Household",
     "level": "A2",
     "polish": "wycierać",
-    "english": "wipe",
+    "english": "wipe / erase",
     "phonetic": "",
     "examplePolish": "Nie zapomnij wytrzeć podłogi.",
     "exampleEnglish": "Don’t forget to wipe the floor.",
@@ -7576,17 +7212,6 @@
     "examplePolish": "Jedna mila to mniej więcej jeden i sześć dziesiątych kilometra.",
     "exampleEnglish": "One mile is roughly 1.6 kilometers.",
     "coreIndex": 539
-  },
-  {
-    "category": "Numbers & Measures",
-    "scenario": "Numbers & Measures",
-    "level": "A2",
-    "polish": "stopa",
-    "english": "foot",
-    "phonetic": "",
-    "examplePolish": "Stopa ma dwanaście cali.",
-    "exampleEnglish": "There are twelve inches in a foot.",
-    "coreIndex": 540
   },
   {
     "category": "Health & Body",
@@ -7859,17 +7484,6 @@
     "coreIndex": 564
   },
   {
-    "category": "Home & Daily Life",
-    "scenario": "Home & Daily Life",
-    "level": "A2",
-    "polish": "myć",
-    "english": "clean",
-    "phonetic": "",
-    "examplePolish": "Mężczyzna myje piekarnik.",
-    "exampleEnglish": "The man is cleaning the oven.",
-    "coreIndex": 565
-  },
-  {
     "category": "Cleaning & Household",
     "scenario": "Cleaning & Household",
     "level": "A2",
@@ -7988,7 +7602,7 @@
     "polish": "siedemset",
     "english": "seven hundred",
     "phonetic": "",
-    "examplePolish": "Odległóść między Moskwą a St. Petersburgiem wynosi siedemset kilometrów.",
+    "examplePolish": "Odległość między Moskwą a Petersburgiem wynosi siedemset kilometrów.",
     "exampleEnglish": "The distance between Moscow and St. Petersburg is seven hundred kilometers.",
     "coreIndex": 576
   },
@@ -8074,11 +7688,11 @@
     "category": "Time & Calendar",
     "scenario": "Time & Calendar",
     "level": "A2",
-    "polish": "Celsjusz Dzisiejsza",
-    "english": "Celsius Today’s",
+    "polish": "Celsjusz",
+    "english": "Celsius",
     "phonetic": "",
-    "examplePolish": "temperatura wynosi 30 stopni Celsjusza.",
-    "exampleEnglish": "temperature is 30 degrees Celsius.",
+    "examplePolish": "Dzisiejsza temperatura wynosi 30 stopni Celsjusza.",
+    "exampleEnglish": "Today's temperature is 30 degrees Celsius.",
     "coreIndex": 584
   },
   {
@@ -8142,7 +7756,7 @@
     "scenario": "Places & Directions",
     "level": "A2",
     "polish": "znak",
-    "english": "sign",
+    "english": "sign / character",
     "phonetic": "",
     "examplePolish": "Co oznacza ten znak?",
     "exampleEnglish": "What does that sign mean?",
@@ -8187,10 +7801,10 @@
     "scenario": "Numbers & Measures",
     "level": "A2",
     "polish": "dziewięćset dziewięćdziesiąt dziewięć",
-    "english": "nine",
+    "english": "nine hundred ninety-nine",
     "phonetic": "",
     "examplePolish": "Na wydarzenie kupiliśmy dziewięćset dziewięćdziesiąt dziewięć krzeseł.",
-    "exampleEnglish": "hundred ninety nine We bought nine hundred ninety nine chairs for the event.",
+    "exampleEnglish": "We bought nine hundred ninety-nine chairs for the event.",
     "coreIndex": 594
   },
   {
@@ -8331,22 +7945,11 @@
     "scenario": "Weather & Nature",
     "level": "A2",
     "polish": "ziemia",
-    "english": "soil",
+    "english": "soil / dirt",
     "phonetic": "",
     "examplePolish": "Ziemia popękała z powodu suszy.",
     "exampleEnglish": "The soil cracked due to the drought.",
     "coreIndex": 607
-  },
-  {
-    "category": "Weather & Nature",
-    "scenario": "Weather & Nature",
-    "level": "A2",
-    "polish": "ziemia",
-    "english": "dirt",
-    "phonetic": "",
-    "examplePolish": "Dżdżownice wiją się w ziemi.",
-    "exampleEnglish": "The worms are squirming in the dirt.",
-    "coreIndex": 608
   },
   {
     "category": "Weather & Nature",
@@ -8376,10 +7979,10 @@
     "scenario": "Religion & Culture",
     "level": "A2",
     "polish": "taoizm",
-    "english": "Taoism Taoism",
+    "english": "Taoism",
     "phonetic": "",
     "examplePolish": "Taoizm jest także znany jako daoizm.",
-    "exampleEnglish": "is also known as Daoism.",
+    "exampleEnglish": "Taoism is also known as Daoism.",
     "coreIndex": 611
   },
   {
@@ -8420,10 +8023,10 @@
     "scenario": "Religion & Culture",
     "level": "A2",
     "polish": "judaizm",
-    "english": "Judaism Judaism",
+    "english": "Judaism",
     "phonetic": "",
     "examplePolish": "Judaizm jest wyznawany od ponad trzech tysięcy lat.",
-    "exampleEnglish": "has been practiced for over three thousand years.",
+    "exampleEnglish": "Judaism has been practiced for over three thousand years.",
     "coreIndex": 615
   },
   {
@@ -8674,7 +8277,7 @@
     "scenario": "Feelings & Qualities",
     "level": "A2",
     "polish": "zdenerwowany",
-    "english": "nervous",
+    "english": "nervous / upset",
     "phonetic": "",
     "examplePolish": "Zdenerwowany biznesmen czeka na rozmowę kwalifikacyjną.",
     "exampleEnglish": "The nervous businessman is waiting for the interview.",
@@ -8786,22 +8389,11 @@
     "scenario": "Work & School",
     "level": "A2",
     "polish": "język",
-    "english": "language",
+    "english": "language / tongue",
     "phonetic": "",
     "examplePolish": "Koreański jest językiem oficjalnym.",
     "exampleEnglish": "Korean is the official language.",
     "coreIndex": 648
-  },
-  {
-    "category": "Cleaning & Household",
-    "scenario": "Cleaning & Household",
-    "level": "A2",
-    "polish": "suszyć",
-    "english": "blow-dry",
-    "phonetic": "",
-    "examplePolish": "Codziennie rano suszę moje włosy.",
-    "exampleEnglish": "I blow-dry my hair every morning.",
-    "coreIndex": 649
   },
   {
     "category": "Sports & Hobbies",
@@ -8863,7 +8455,7 @@
     "scenario": "Feelings & Qualities",
     "level": "A2",
     "polish": "niezadowolony",
-    "english": "dissatisfied",
+    "english": "dissatisfied / unsatisfied",
     "phonetic": "",
     "examplePolish": "Mężczyzna jest niezadowolony z produktu.",
     "exampleEnglish": "The man is dissatisfied with the product.",
@@ -9206,10 +8798,10 @@
     "scenario": "General Core",
     "level": "A2",
     "polish": "islam",
-    "english": "Islam Islam",
+    "english": "Islam",
     "phonetic": "",
     "examplePolish": "Założycielem religii islam był prorok Mahomet.",
-    "exampleEnglish": "was founded by the prophet Muhammad.",
+    "exampleEnglish": "Islam was founded by the prophet Muhammad.",
     "coreIndex": 686
   },
   {
@@ -9217,10 +8809,10 @@
     "scenario": "General Core",
     "level": "A2",
     "polish": "protestantyzm",
-    "english": "Protestantism Protestantism",
+    "english": "Protestantism",
     "phonetic": "",
     "examplePolish": "Protestantyzm powstał jako odłam Kościoła rzymskokatolickiego.",
-    "exampleEnglish": "came as a break from the Roman Catholic Church.",
+    "exampleEnglish": "Protestantism came as a break from the Roman Catholic Church.",
     "coreIndex": 687
   },
   {
@@ -9228,10 +8820,10 @@
     "scenario": "General Core",
     "level": "A2",
     "polish": "katolicyzm",
-    "english": "Catholicism Catholicism",
+    "english": "Catholicism",
     "phonetic": "",
     "examplePolish": "Katolicyzm to religia tych, którzy akceptują przywództwo papieża.",
-    "exampleEnglish": "is the religion of those who accept the leadership of the Pope.",
+    "exampleEnglish": "Catholicism is the religion of those who accept the leadership of the Pope.",
     "coreIndex": 688
   },
   {
@@ -9239,10 +8831,10 @@
     "scenario": "General Core",
     "level": "A2",
     "polish": "hinduizm",
-    "english": "Hinduism Hinduism,",
+    "english": "Hinduism",
     "phonetic": "",
     "examplePolish": "Hinduizm, z Indii, wiąże się z wiarą w reinkarnację i wielu bogów.",
-    "exampleEnglish": "from India, involves the belief in reincarnation and many gods.",
+    "exampleEnglish": "Hinduism, from India, involves belief in reincarnation and many gods.",
     "coreIndex": 689
   },
   {
@@ -9250,10 +8842,10 @@
     "scenario": "General Core",
     "level": "A2",
     "polish": "buddyzm",
-    "english": "Buddhism Buddhism",
+    "english": "Buddhism",
     "phonetic": "",
     "examplePolish": "Buddyzm opiera się na naukach Buddy, oświeconego.",
-    "exampleEnglish": "is based on the teachings of the Buddha, the enlightened one.",
+    "exampleEnglish": "Buddhism is based on the teachings of the Buddha.",
     "coreIndex": 690
   },
   {
@@ -9321,17 +8913,6 @@
     "examplePolish": "Zapomniał ogolić się dziś rano.",
     "exampleEnglish": "He forgot to shave this morning.",
     "coreIndex": 696
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "A2",
-    "polish": "kucharz",
-    "english": "chef",
-    "phonetic": "",
-    "examplePolish": "Kucharz przyrządza potrawę.",
-    "exampleEnglish": "The chef is making a meal.",
-    "coreIndex": 697
   },
   {
     "category": "General Core",
@@ -9483,7 +9064,7 @@
     "scenario": "Home & Daily Life",
     "level": "A2",
     "polish": "budzenie",
-    "english": "wake-up call",
+    "english": "wake-up call / wake-up service",
     "phonetic": "",
     "examplePolish": "Dzień dobry, chciałabym zamówić budzenie na za piętnaście szósta rano.",
     "exampleEnglish": "Hi, I’d like a wake-up call at fifteen minutes to six in the morning.",
@@ -9505,7 +9086,7 @@
     "scenario": "General Core",
     "level": "A2",
     "polish": "jasny",
-    "english": "light",
+    "english": "light / bright",
     "phonetic": "",
     "examplePolish": "Naprawdę do twarzy ci w jasnych kolorach.",
     "exampleEnglish": "Light colors really suit you well.",
@@ -9711,17 +9292,6 @@
     "coreIndex": 731
   },
   {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "A2",
-    "polish": "jasny",
-    "english": "bright",
-    "phonetic": "",
-    "examplePolish": "Miała na sobie bluzkę w jasnym kolorze.",
-    "exampleEnglish": "She wore a bright colored shirt.",
-    "coreIndex": 732
-  },
-  {
     "category": "Work & School",
     "scenario": "Work & School",
     "level": "A2",
@@ -9891,33 +9461,33 @@
     "category": "General Core",
     "scenario": "General Core",
     "level": "A2",
-    "polish": "Australia Australia",
-    "english": "Australia Australia",
+    "polish": "Australia",
+    "english": "Australia",
     "phonetic": "",
-    "examplePolish": "to państwo i kontynent.",
-    "exampleEnglish": "is a country and continent.",
+    "examplePolish": "Australia to państwo i kontynent.",
+    "exampleEnglish": "Australia is a country and continent.",
     "coreIndex": 748
   },
   {
     "category": "General Core",
     "scenario": "General Core",
     "level": "A2",
-    "polish": "Antarktyda Kontynent",
-    "english": "Antarctica The",
+    "polish": "Antarktyda",
+    "english": "Antarctica",
     "phonetic": "",
-    "examplePolish": "Antarktydy otacza biegun południowy.",
-    "exampleEnglish": "continent of Antarctica surrounds the south pole.",
+    "examplePolish": "Kontynent Antarktydy otacza biegun południowy.",
+    "exampleEnglish": "The continent of Antarctica surrounds the South Pole.",
     "coreIndex": 749
   },
   {
     "category": "Places & Directions",
     "scenario": "Places & Directions",
     "level": "A2",
-    "polish": "Azja Azja",
-    "english": "Asia Asia",
+    "polish": "Azja",
+    "english": "Asia",
     "phonetic": "",
-    "examplePolish": "jest największym z siedmiu kontynentów Ziemi.",
-    "exampleEnglish": "is the largest of the Earth’s seven continents.",
+    "examplePolish": "Azja jest największym z siedmiu kontynentów Ziemi.",
+    "exampleEnglish": "Asia is the largest of Earth's seven continents.",
     "coreIndex": 750
   },
   {
@@ -9925,10 +9495,10 @@
     "scenario": "Places & Directions",
     "level": "A2",
     "polish": "Afryka",
-    "english": "Africa Africa,",
+    "english": "Africa",
     "phonetic": "",
     "examplePolish": "Afryka, drugi największy kontynent na Ziemi, ma ogromne bogactwa naturalne.",
-    "exampleEnglish": "Earth’s second biggest continent, has vast natural resources.",
+    "exampleEnglish": "Africa, Earth's second-biggest continent, has vast natural resources.",
     "coreIndex": 751
   },
   {
@@ -10333,7 +9903,7 @@
     "scenario": "Technology & Media",
     "level": "A2",
     "polish": "słuchawki",
-    "english": "headphones",
+    "english": "headphones / earphones",
     "phonetic": "",
     "examplePolish": "Te słuchawki są naprawdę drogie.",
     "exampleEnglish": "Those headphones are really expensive.",
@@ -10613,17 +10183,6 @@
     "examplePolish": "Pan Suzuki uczy angielskiego.",
     "exampleEnglish": "Suzuki teaches English.",
     "coreIndex": 814
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "A2",
-    "polish": "prawo",
-    "english": "law",
-    "phonetic": "",
-    "examplePolish": "Wielu studentów prawa dostaje pracę w rządzie.",
-    "exampleEnglish": "Many students of law take government jobs.",
-    "coreIndex": 815
   },
   {
     "category": "General Core",
@@ -10978,17 +10537,6 @@
     "notes": "(n.) · G. miejsca · pl. miejsca"
   },
   {
-    "category": "Health & Body",
-    "scenario": "Health & Body",
-    "level": "A2",
-    "polish": "lekarstwo",
-    "english": "medicine",
-    "phonetic": "",
-    "examplePolish": "lekarstwo na receptę",
-    "exampleEnglish": "prescription medicine",
-    "coreIndex": 848
-  },
-  {
     "category": "General Core",
     "scenario": "General Core",
     "level": "A2",
@@ -11191,7 +10739,7 @@
     "scenario": "Technology & Media",
     "level": "A2",
     "polish": "płyta",
-    "english": "DVD You",
+    "english": "DVD You / CD I ordered a new",
     "phonetic": "",
     "examplePolish": "DVD Możesz wypożyczyć książki, płyty CD i DVD z biblioteki.",
     "exampleEnglish": "can borrow books, CDs, and DVDs from the library.",
@@ -11306,36 +10854,14 @@
     "coreIndex": 877
   },
   {
-    "category": "Grammar & Function Words",
-    "scenario": "Grammar & Function Words",
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
     "level": "A2",
-    "polish": "płyta",
-    "english": "CD I ordered a new",
+    "polish": "Madryt",
+    "english": "Madrid",
     "phonetic": "",
-    "examplePolish": "CD Zamówiłem nową płytę CD.",
-    "exampleEnglish": "CD.",
-    "coreIndex": 878
-  },
-  {
-    "category": "Shopping & Money",
-    "scenario": "Shopping & Money",
-    "level": "A2",
-    "polish": "kupować",
-    "english": "buy",
-    "phonetic": "",
-    "examplePolish": "Kupimy alkohol i perfumy zwolnione od podatku w sklepie wolnocłowym na lotnisku.",
-    "exampleEnglish": "We’ll buy duty-free alcohol and perfume at the duty free shops in the airport.",
-    "coreIndex": 879
-  },
-  {
-    "category": "Cleaning & Household",
-    "scenario": "Cleaning & Household",
-    "level": "A2",
-    "polish": "Madryt Madryt",
-    "english": "Madrid Madrid",
-    "phonetic": "",
-    "examplePolish": "jest stolicą i największym miastem Hiszpanii.",
-    "exampleEnglish": "is the capital city and largest city of Spain.",
+    "examplePolish": "Madryt jest stolicą i największym miastem Hiszpanii.",
+    "exampleEnglish": "Madrid is the capital and largest city of Spain.",
     "coreIndex": 880
   },
   {
@@ -11461,17 +10987,6 @@
     "coreIndex": 891
   },
   {
-    "category": "Home & Daily Life",
-    "scenario": "Home & Daily Life",
-    "level": "A2",
-    "polish": "budzenie",
-    "english": "wake-up service",
-    "phonetic": "",
-    "examplePolish": "Zamówiłem budzenie na szóstą rano.",
-    "exampleEnglish": "I used the wake-up service to call me at 6 o’clock AM.",
-    "coreIndex": 892
-  },
-  {
     "category": "General Core",
     "scenario": "General Core",
     "level": "A2",
@@ -11509,7 +11024,7 @@
     "scenario": "General Core",
     "level": "A2",
     "polish": "taśma klejąca",
-    "english": "Scotch tape",
+    "english": "Scotch tape / adhesive tape",
     "phonetic": "",
     "examplePolish": "Taśma klejąca jest świetna do pakowania prezentów.",
     "exampleEnglish": "Scotch tape is perfect for wrapping presents.",
@@ -11549,36 +11064,36 @@
     "coreIndex": 899
   },
   {
-    "category": "General Core",
-    "scenario": "General Core",
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
     "level": "A2",
-    "polish": "Tokio Tokio",
-    "english": "Tokyo Tokyo",
+    "polish": "Tokio",
+    "english": "Tokyo",
     "phonetic": "",
-    "examplePolish": "jest stolicą Japonii.",
-    "exampleEnglish": "is the capital city of the nation of Japan.",
+    "examplePolish": "Tokio jest stolicą Japonii.",
+    "exampleEnglish": "Tokyo is the capital of Japan.",
     "coreIndex": 900
   },
   {
-    "category": "General Core",
-    "scenario": "General Core",
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
     "level": "B1",
-    "polish": "Pekin Pekin,",
-    "english": "Beijing Beijing,",
+    "polish": "Pekin",
+    "english": "Beijing",
     "phonetic": "",
-    "examplePolish": "Chiny",
-    "exampleEnglish": "China",
+    "examplePolish": "Pekin jest stolicą Chin.",
+    "exampleEnglish": "Beijing is the capital of China.",
     "coreIndex": 901
   },
   {
-    "category": "General Core",
-    "scenario": "General Core",
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
     "level": "B1",
-    "polish": "Londyn Londyn",
-    "english": "London London",
+    "polish": "Londyn",
+    "english": "London",
     "phonetic": "",
-    "examplePolish": "jest stolicą Anglii i Wielkiej Brytanii.",
-    "exampleEnglish": "is the capital of England and the United Kingdom.",
+    "examplePolish": "Londyn jest stolicą Anglii i Wielkiej Brytanii.",
+    "exampleEnglish": "London is the capital of England and the United Kingdom.",
     "coreIndex": 902
   },
   {
@@ -11741,7 +11256,7 @@
     "scenario": "Travel & Transport",
     "level": "B1",
     "polish": "kasa biletowa",
-    "english": "ticket booth",
+    "english": "ticket booth / ticket window",
     "phonetic": "",
     "examplePolish": "Kasa biletowa jest pusta.",
     "exampleEnglish": "The ticket booth is empty.",
@@ -11825,18 +11340,6 @@
     "coreIndex": 924
   },
   {
-    "category": "Technology & Media",
-    "scenario": "Technology & Media",
-    "level": "B1",
-    "polish": "informacja",
-    "english": "news",
-    "phonetic": "",
-    "examplePolish": "radio informacyjne",
-    "exampleEnglish": "news radio",
-    "coreIndex": 925,
-    "notes": "(f.) · G. informacji · pl. informacje"
-  },
-  {
     "category": "Travel & Transport",
     "scenario": "Travel & Transport",
     "level": "B1",
@@ -11863,22 +11366,11 @@
     "scenario": "Measurements & Units",
     "level": "B1",
     "polish": "program",
-    "english": "program",
+    "english": "program / broadcast",
     "phonetic": "",
     "examplePolish": "Oglądam mój ulubiony program w telewizji w każdy piątek wieczorem.",
     "exampleEnglish": "I watch my favorite program every Friday night on TV.",
     "coreIndex": 928
-  },
-  {
-    "category": "Measurements & Units",
-    "scenario": "Measurements & Units",
-    "level": "B1",
-    "polish": "program",
-    "english": "broadcast",
-    "phonetic": "",
-    "examplePolish": "Oglądam mój ulubiony program w telewizji w każdy piątek wieczorem.",
-    "exampleEnglish": "I watch my favorite program every Friday night on TV.",
-    "coreIndex": 929
   },
   {
     "category": "Technology & Media",
@@ -11901,28 +11393,6 @@
     "examplePolish": "Media są zdesperowane brakiem pikantnych informacji.",
     "exampleEnglish": "The media is desperate from the lack of juicy news.",
     "coreIndex": 931
-  },
-  {
-    "category": "Travel & Transport",
-    "scenario": "Travel & Transport",
-    "level": "B1",
-    "polish": "stacja telewizyjna",
-    "english": "station",
-    "phonetic": "",
-    "examplePolish": "Stacja telewizyjna musi dbać o równowagę między rozrywką a informacjami, żeby zatrzymać widownię.",
-    "exampleEnglish": "A TV station must balance entertainment and news to keep its audience watching.",
-    "coreIndex": 932
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "drukować",
-    "english": "printing",
-    "phonetic": "",
-    "examplePolish": "przemysł drukarski",
-    "exampleEnglish": "printing industry",
-    "coreIndex": 933
   },
   {
     "category": "Home & Housing",
@@ -11951,33 +11421,11 @@
     "scenario": "General Core",
     "level": "B1",
     "polish": "tłumacz",
-    "english": "interpreter",
+    "english": "interpreter / translator",
     "phonetic": "",
     "examplePolish": "stanowisko tłumacza",
     "exampleEnglish": "interpreter booth",
     "coreIndex": 936
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "tłumacz",
-    "english": "translator",
-    "phonetic": "",
-    "examplePolish": "tłumacz",
-    "exampleEnglish": "language translator",
-    "coreIndex": 937
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "zabawny",
-    "english": "humorous",
-    "phonetic": "",
-    "examplePolish": "Oni słuchają zabawnej historii.",
-    "exampleEnglish": "They are listening to a humorous story.",
-    "coreIndex": 938
   },
   {
     "category": "General Core",
@@ -12357,7 +11805,7 @@
     "scenario": "General Core",
     "level": "B1",
     "polish": "tkanina",
-    "english": "textile",
+    "english": "textile / cloth",
     "phonetic": "",
     "examplePolish": "Do odkurzania drewnianych mebli używaj miękkiej, suchej tkaniny.",
     "exampleEnglish": "textile factory",
@@ -12373,17 +11821,6 @@
     "examplePolish": "Zaoszczędźmy elektryczność przez wyłączenie zasilania.",
     "exampleEnglish": "Let’s save electricity by turning off the power.",
     "coreIndex": 974
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "wejście",
-    "english": "input",
-    "phonetic": "",
-    "examplePolish": "wejście danych",
-    "exampleEnglish": "data input",
-    "coreIndex": 975
   },
   {
     "category": "General Core",
@@ -12428,18 +11865,6 @@
     "examplePolish": "importować towary",
     "exampleEnglish": "import goods",
     "coreIndex": 979
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "samochód",
-    "english": "automobile",
-    "phonetic": "",
-    "examplePolish": "Samochód skręca w prawo.",
-    "exampleEnglish": "The automobile is turning right.",
-    "coreIndex": 980,
-    "notes": "(m.) · G. samochodu · pl. samochody"
   },
   {
     "category": "General Core",
@@ -12497,17 +11922,6 @@
     "coreIndex": 985
   },
   {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "tkanina",
-    "english": "cloth",
-    "phonetic": "",
-    "examplePolish": "Do odkurzania drewnianych mebli używaj miękkiej, suchej tkaniny.",
-    "exampleEnglish": "Use a soft, dry cloth when dusting wooden furniture.",
-    "coreIndex": 986
-  },
-  {
     "category": "Clothing & Appearance",
     "scenario": "Clothing & Appearance",
     "level": "B1",
@@ -12517,17 +11931,6 @@
     "examplePolish": "Wczoraj poszłam do szkoły w nowym płaszczu.",
     "exampleEnglish": "I wore my new coat to school yesterday.",
     "coreIndex": 987
-  },
-  {
-    "category": "Clothing & Appearance",
-    "scenario": "Clothing & Appearance",
-    "level": "B1",
-    "polish": "płaszcz",
-    "english": "overcoat",
-    "phonetic": "",
-    "examplePolish": "czarny płaszcz",
-    "exampleEnglish": "black overcoat",
-    "coreIndex": 988
   },
   {
     "category": "Weather & Nature",
@@ -12583,17 +11986,6 @@
     "examplePolish": "Dżinsy są popularne wśród wielu ludzi.",
     "exampleEnglish": "Jeans are commonly worn by many people.",
     "coreIndex": 993
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "ubranie",
-    "english": "clothes",
-    "phonetic": "",
-    "examplePolish": "prać ubranie w pralce",
-    "exampleEnglish": "wash clothes in a washing machine",
-    "coreIndex": 994
   },
   {
     "category": "General Core",
@@ -12911,14 +12303,14 @@
     "coreIndex": 1023
   },
   {
-    "category": "General Core",
-    "scenario": "General Core",
+    "category": "Clothing & Appearance",
+    "scenario": "Clothing & Appearance",
     "level": "B1",
-    "polish": "bawełna bawełniany",
-    "english": "cotton cotton",
+    "polish": "bawełna",
+    "english": "cotton",
     "phonetic": "",
-    "examplePolish": "T-shirt",
-    "exampleEnglish": "T-shirt",
+    "examplePolish": "bawełniany T-shirt",
+    "exampleEnglish": "cotton T-shirt",
     "coreIndex": 1024
   },
   {
@@ -12973,17 +12365,6 @@
     "english": "sandal brown sandals",
     "phonetic": "",
     "coreIndex": 1029
-  },
-  {
-    "category": "Grammar & Function Words",
-    "scenario": "Grammar & Function Words",
-    "level": "B1",
-    "polish": "but",
-    "english": "boot",
-    "phonetic": "",
-    "examplePolish": "Te buty kosztują dwieście euro.",
-    "exampleEnglish": "These boots cost two hundred euros.",
-    "coreIndex": 1030
   },
   {
     "category": "General Core",
@@ -13134,10 +12515,10 @@
     "scenario": "Time & Calendar",
     "level": "B1",
     "polish": "miesiąc",
-    "english": "month month of",
+    "english": "month",
     "phonetic": "",
     "examplePolish": "miesiąc lipiec",
-    "exampleEnglish": "July",
+    "exampleEnglish": "the month of July",
     "coreIndex": 1044,
     "notes": "(m.) · G. miesiąca · pl. miesiące"
   },
@@ -13187,28 +12568,6 @@
     "coreIndex": 1048
   },
   {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "południe",
-    "english": "noon",
-    "phonetic": "",
-    "examplePolish": "Codziennie w południe chodzę na lunch.",
-    "exampleEnglish": "I go to lunch each day at noon.",
-    "coreIndex": 1049
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "północ",
-    "english": "midnight",
-    "phonetic": "",
-    "examplePolish": "przekąska o północy",
-    "exampleEnglish": "midnight snack",
-    "coreIndex": 1050
-  },
-  {
     "category": "Grammar & Function Words",
     "scenario": "Grammar & Function Words",
     "level": "B1",
@@ -13224,10 +12583,10 @@
     "scenario": "Numbers & Measures",
     "level": "B1",
     "polish": "wpół do",
-    "english": "half past 9:30",
+    "english": "half past",
     "phonetic": "",
     "examplePolish": "Dziewiąta trzydzieści to to samo, co wpół do dziesiątej.",
-    "exampleEnglish": "is the same as half past nine.",
+    "exampleEnglish": "Nine thirty is the same as half past nine.",
     "coreIndex": 1052
   },
   {
@@ -13268,7 +12627,7 @@
     "scenario": "General Core",
     "level": "B1",
     "polish": "bać się",
-    "english": "fear",
+    "english": "fear / afraid / scared",
     "phonetic": "",
     "examplePolish": "bać się niebezpieczeństwa",
     "exampleEnglish": "fear danger",
@@ -13306,50 +12665,6 @@
     "examplePolish": "Dziękuję za twoją przyjaźń.",
     "exampleEnglish": "Thank you for being a friend.",
     "coreIndex": 1059
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "kochać",
-    "english": "love",
-    "phonetic": "",
-    "examplePolish": "Mężczyzna kocha kobietę.",
-    "exampleEnglish": "The man loves the woman.",
-    "coreIndex": 1060
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "potrzebować",
-    "english": "need",
-    "phonetic": "",
-    "examplePolish": "Wszyscy potrzebujemy wody i powietrza żeby żyć.",
-    "exampleEnglish": "We all need air and water to live.",
-    "coreIndex": 1061
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "B1",
-    "polish": "czytać",
-    "english": "read",
-    "phonetic": "",
-    "examplePolish": "czytać gazetę",
-    "exampleEnglish": "read the newspaper",
-    "coreIndex": 1062
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "stać",
-    "english": "stand",
-    "phonetic": "",
-    "examplePolish": "Mężczyzna stoi.",
-    "exampleEnglish": "The man is standing.",
-    "coreIndex": 1063
   },
   {
     "category": "General Core",
@@ -13400,7 +12715,7 @@
     "scenario": "Feelings & Qualities",
     "level": "B1",
     "polish": "Mam się dobrze.",
-    "english": "I’m good.",
+    "english": "I’m good. / I’m fine.",
     "phonetic": "",
     "examplePolish": "Mam się dobrze, dziękuję, a ty?",
     "exampleEnglish": "I’m good, thank you,how about you.",
@@ -13433,7 +12748,7 @@
     "scenario": "Grammar & Function Words",
     "level": "B1",
     "polish": "Nie podoba mi się to.",
-    "english": "I don’t like it.",
+    "english": "I don’t like it. / I dislike it.",
     "phonetic": "",
     "examplePolish": "Przestań dawać tyle czosnku do każdej potrawy. Nie podoba mi się to.",
     "exampleEnglish": "Stop adding so much garlic to every dish. I don’t like it.",
@@ -13449,17 +12764,6 @@
     "examplePolish": "Dzięki za pomoc.",
     "exampleEnglish": "Thanks for the help.",
     "coreIndex": 1072
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "B1",
-    "polish": "Pomocy!",
-    "english": "Help!",
-    "phonetic": "",
-    "examplePolish": "Pomocy!",
-    "exampleEnglish": "Help!",
-    "coreIndex": 1073
   },
   {
     "category": "General Core",
@@ -13488,7 +12792,7 @@
     "scenario": "Grammar & Function Words",
     "level": "B1",
     "polish": "W porządku.",
-    "english": "It’s okay.",
+    "english": "It’s okay. / That’s all right.",
     "phonetic": "",
     "examplePolish": "W porządku. To nie jest trudne.",
     "exampleEnglish": "It’s okay. It’s not hard.",
@@ -13562,28 +12866,6 @@
     "coreIndex": 1082
   },
   {
-    "category": "Work & School",
-    "scenario": "Work & School",
-    "level": "B1",
-    "polish": "uczyć się",
-    "english": "study",
-    "phonetic": "",
-    "examplePolish": "uczyć się razem",
-    "exampleEnglish": "study together",
-    "coreIndex": 1083
-  },
-  {
-    "category": "Food & Drink",
-    "scenario": "Food & Drink",
-    "level": "B1",
-    "polish": "gotować",
-    "english": "cook",
-    "phonetic": "",
-    "examplePolish": "Mężczyzna i kobieta gotują.",
-    "exampleEnglish": "The man and woman are cooking.",
-    "coreIndex": 1084
-  },
-  {
     "category": "General Core",
     "scenario": "General Core",
     "level": "B1",
@@ -13620,11 +12902,11 @@
     "category": "Numbers & Measures",
     "scenario": "Numbers & Measures",
     "level": "B1",
-    "polish": "sto tysięcy pożyczka",
+    "polish": "sto tysięcy",
     "english": "one hundred thousand",
     "phonetic": "",
-    "examplePolish": "w wysokości stu tysięcy dolarów",
-    "exampleEnglish": "one hundred thousand dollar loan",
+    "examplePolish": "pożyczka w wysokości stu tysięcy dolarów",
+    "exampleEnglish": "a loan for one hundred thousand dollars",
     "coreIndex": 1088
   },
   {
@@ -13645,15 +12927,15 @@
     "polish": "sto miliardów",
     "english": "one hundred billion",
     "phonetic": "",
-    "examplePolish": "Bank stracił sto milionów dolarów.",
-    "exampleEnglish": "The bank lost one hundred million dollars.",
+    "examplePolish": "Bank stracił sto miliardów dolarów.",
+    "exampleEnglish": "The bank lost one hundred billion dollars.",
     "coreIndex": 1090
   },
   {
     "category": "Numbers & Measures",
     "scenario": "Numbers & Measures",
     "level": "B1",
-    "polish": "dziesięć mililardów",
+    "polish": "dziesięć miliardów",
     "english": "ten billion",
     "phonetic": "",
     "examplePolish": "Nigdy nie będę mieć dziesięć miliardów dolarów.",
@@ -13742,7 +13024,7 @@
     "scenario": "General Core",
     "level": "B1",
     "polish": "gładki",
-    "english": "solid",
+    "english": "solid / fine",
     "phonetic": "",
     "examplePolish": "gładki kolor",
     "exampleEnglish": "solid color",
@@ -13945,17 +13227,6 @@
     "examplePolish": "Usunęliśmy farbę szorstkim papierem ściernym.",
     "exampleEnglish": "We took off the paint with coarse sandpaper.",
     "coreIndex": 1117
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "gładki",
-    "english": "fine",
-    "phonetic": "",
-    "examplePolish": "gładki jedwab",
-    "exampleEnglish": "fine silk",
-    "coreIndex": 1118
   },
   {
     "category": "General Core",
@@ -14335,18 +13606,6 @@
     "category": "General Core",
     "scenario": "General Core",
     "level": "B1",
-    "polish": "dzień",
-    "english": "daytime",
-    "phonetic": "",
-    "examplePolish": "Po prostu nie umiem spać w dzień.",
-    "exampleEnglish": "I just can’t sleep during the daytime.",
-    "coreIndex": 1153,
-    "notes": "(m.) · G. dnia · pl. dni"
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
     "polish": "po",
     "english": "after",
     "phonetic": "",
@@ -14469,7 +13728,7 @@
     "scenario": "General Core",
     "level": "B1",
     "polish": "zamarzać",
-    "english": "freeze",
+    "english": "freeze / ice over",
     "phonetic": "",
     "examplePolish": "Woda zamarza, gdy temperatura spada poniżej zera stopni Celsjusza.",
     "exampleEnglish": "Water will freeze when the temperature falls below zero degrees Celsius.",
@@ -14565,17 +13824,6 @@
     "coreIndex": 1173
   },
   {
-    "category": "Nature & Animals",
-    "scenario": "Nature & Animals",
-    "level": "B1",
-    "polish": "zamarzać",
-    "english": "ice over",
-    "phonetic": "",
-    "examplePolish": "Mosty zamarzają szybciej niż inne części drogi.",
-    "exampleEnglish": "Bridges will ice over before the rest of the roadway.",
-    "coreIndex": 1174
-  },
-  {
     "category": "General Core",
     "scenario": "General Core",
     "level": "B1",
@@ -14602,7 +13850,7 @@
     "scenario": "General Core",
     "level": "B1",
     "polish": "poniżej zera",
-    "english": "below freezing",
+    "english": "below freezing / below zero",
     "phonetic": "",
     "examplePolish": "temperatury poniżej zera",
     "exampleEnglish": "below freezing temperatures",
@@ -14618,17 +13866,6 @@
     "examplePolish": "Temperatura odczuwalna, to taka, jaką faktycznie się odczuwa na dworze.",
     "exampleEnglish": "Wind chill is how cold it really feels outside.",
     "coreIndex": 1178
-  },
-  {
-    "category": "Numbers & Measures",
-    "scenario": "Numbers & Measures",
-    "level": "B1",
-    "polish": "poniżej zera",
-    "english": "below zero",
-    "phonetic": "",
-    "examplePolish": "poniżej zera stopni",
-    "exampleEnglish": "below zero degrees",
-    "coreIndex": 1179
   },
   {
     "category": "General Core",
@@ -14708,16 +13945,6 @@
     "coreIndex": 1186
   },
   {
-    "category": "Work & School",
-    "scenario": "Work & School",
-    "level": "B1",
-    "polish": "pisarz",
-    "english": "author famous writer",
-    "phonetic": "",
-    "notes": "znany pisarz",
-    "coreIndex": 1187
-  },
-  {
     "category": "General Core",
     "scenario": "General Core",
     "level": "B1",
@@ -14749,17 +13976,6 @@
     "examplePolish": "Moim marzeniem jest zostać reżyserem filmowym.",
     "exampleEnglish": "My dream is to be a film director.",
     "coreIndex": 1190
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "B1",
-    "polish": "opowiadanie",
-    "english": "story",
-    "phonetic": "",
-    "examplePolish": "Słuchają zabawnego opowiadania.",
-    "exampleEnglish": "They are listening to a humorous story.",
-    "coreIndex": 1191
   },
   {
     "category": "General Core",
@@ -14842,17 +14058,6 @@
     "category": "Technology & Media",
     "scenario": "Technology & Media",
     "level": "B1",
-    "polish": "słuchawki",
-    "english": "earphones",
-    "phonetic": "",
-    "examplePolish": "Dziewczyna słucha muzyki przez słuchawki.",
-    "exampleEnglish": "The girl is listening to music with headphones.",
-    "coreIndex": 1199
-  },
-  {
-    "category": "Technology & Media",
-    "scenario": "Technology & Media",
-    "level": "B1",
     "polish": "aparat",
     "english": "camera",
     "phonetic": "",
@@ -14898,7 +14103,7 @@
     "scenario": "General Core",
     "level": "B1",
     "polish": "przyprawa",
-    "english": "condiment",
+    "english": "condiment / spice",
     "phonetic": "",
     "examplePolish": "W restauracjach, przyprawy często stoją na stołach.",
     "exampleEnglish": "Condiments are often available on the table in restaurants.",
@@ -15077,7 +14282,7 @@
     "scenario": "General Core",
     "level": "B1",
     "polish": "piec",
-    "english": "bake",
+    "english": "bake / roast",
     "phonetic": "",
     "examplePolish": "piec ciasto",
     "exampleEnglish": "bake a cake",
@@ -15088,7 +14293,7 @@
     "scenario": "General Core",
     "level": "B1",
     "polish": "grillować",
-    "english": "grill",
+    "english": "grill / barbecue",
     "phonetic": "",
     "examplePolish": "grillować na grillu",
     "exampleEnglish": "grill on the barbecue",
@@ -15120,17 +14325,6 @@
     "category": "General Core",
     "scenario": "General Core",
     "level": "B1",
-    "polish": "piec",
-    "english": "roast",
-    "phonetic": "",
-    "examplePolish": "Moja rodzina lubi piec kaczkę na obiad.",
-    "exampleEnglish": "My family likes to roast a duck for dinner.",
-    "coreIndex": 1224
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
     "polish": "kroić",
     "english": "cut",
     "phonetic": "",
@@ -15148,17 +14342,6 @@
     "examplePolish": "Kiedy przyrządzam wieprzowinę lubię robić ją saute na patelni.",
     "exampleEnglish": "When I make pork, I like to saute it in a pan.",
     "coreIndex": 1226
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "gotować",
-    "english": "boil",
-    "phonetic": "",
-    "examplePolish": "Woda się gotuje.",
-    "exampleEnglish": "The water is boiling.",
-    "coreIndex": 1227
   },
   {
     "category": "Food & Drink",
@@ -15192,17 +14375,6 @@
     "examplePolish": "Chcę odgrzać w mikrofalówce mrożone danie na obiad.",
     "exampleEnglish": "I want to microwave a frozen meal for lunch.",
     "coreIndex": 1230
-  },
-  {
-    "category": "Food & Drink",
-    "scenario": "Food & Drink",
-    "level": "B1",
-    "polish": "grillować",
-    "english": "barbecue",
-    "phonetic": "",
-    "examplePolish": "czerwony grill",
-    "exampleEnglish": "red barbecue",
-    "coreIndex": 1231
   },
   {
     "category": "General Core",
@@ -15492,28 +14664,6 @@
     "coreIndex": 1257
   },
   {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "przyprawa",
-    "english": "spice",
-    "phonetic": "",
-    "examplePolish": "Odpowiednia ilość przypraw może nadać wspaniały smak potrawie.",
-    "exampleEnglish": "The right amount of spice can make food taste wonderful.",
-    "coreIndex": 1258
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "sos",
-    "english": "sauce",
-    "phonetic": "",
-    "examplePolish": "Sos Tabasco jest dla mnie o wiele za ostry.",
-    "exampleEnglish": "Tabasco sauce is way too hot for me to eat.",
-    "coreIndex": 1259
-  },
-  {
     "category": "Food & Drink",
     "scenario": "Food & Drink",
     "level": "B1",
@@ -15607,7 +14757,7 @@
     "scenario": "General Core",
     "level": "B1",
     "polish": "danie główne",
-    "english": "main course",
+    "english": "main course / entrée",
     "phonetic": "",
     "examplePolish": "Danie główne to wołowina z warzywami.",
     "exampleEnglish": "The main course is beef and vegetables.",
@@ -15920,17 +15070,6 @@
     "coreIndex": 1296
   },
   {
-    "category": "Food & Drink",
-    "scenario": "Food & Drink",
-    "level": "B1",
-    "polish": "filiżanka",
-    "english": "teacup",
-    "phonetic": "",
-    "examplePolish": "filiżanka i spodek",
-    "exampleEnglish": "teacup and saucer",
-    "coreIndex": 1297
-  },
-  {
     "category": "General Core",
     "scenario": "General Core",
     "level": "B1",
@@ -15990,7 +15129,7 @@
     "scenario": "General Core",
     "level": "B1",
     "polish": "kręgosłup",
-    "english": "backbone",
+    "english": "backbone / spine",
     "phonetic": "",
     "examplePolish": "Kręgosłup składa się z wielu mniejszych kości.",
     "exampleEnglish": "The backbone is made up of several smaller bones.",
@@ -16067,7 +15206,7 @@
     "scenario": "General Core",
     "level": "B1",
     "polish": "kopać",
-    "english": "dig",
+    "english": "dig / kick",
     "phonetic": "",
     "examplePolish": "kopać dziurę",
     "exampleEnglish": "dig a hole",
@@ -16155,33 +15294,11 @@
     "scenario": "General Core",
     "level": "B1",
     "polish": "chudy",
-    "english": "skinny",
+    "english": "skinny / thin",
     "phonetic": "",
     "examplePolish": "Ten mężczyzna jest chudy.",
     "exampleEnglish": "The man is skinny.",
     "coreIndex": 1318
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "B1",
-    "polish": "niski",
-    "english": "short",
-    "phonetic": "",
-    "examplePolish": "Niski wzrost to cecha dziedziczna.",
-    "exampleEnglish": "Being short is a hereditary trait.",
-    "coreIndex": 1319
-  },
-  {
-    "category": "Clothing & Appearance",
-    "scenario": "Clothing & Appearance",
-    "level": "B1",
-    "polish": "wysoki",
-    "english": "tall",
-    "phonetic": "",
-    "examplePolish": "Chłopiec jest wyższy od dziewczynki.",
-    "exampleEnglish": "The boy is taller than the girl.",
-    "coreIndex": 1320
   },
   {
     "category": "Clothing & Appearance",
@@ -16226,17 +15343,6 @@
     "examplePolish": "On jest wysoki i gruby.",
     "exampleEnglish": "He’s tall and thick.",
     "coreIndex": 1324
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "chudy",
-    "english": "thin",
-    "phonetic": "",
-    "examplePolish": "Ta kobieta jest chuda.",
-    "exampleEnglish": "The woman is thin.",
-    "coreIndex": 1325
   },
   {
     "category": "General Core",
@@ -16424,17 +15530,6 @@
     "examplePolish": "Zarost zaczyna rosnąć, gdy ma się kilkanaście lat.",
     "exampleEnglish": "Facial hair begins growing in a person’s teen years.",
     "coreIndex": 1342
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "język",
-    "english": "tongue",
-    "phonetic": "",
-    "examplePolish": "Żaby używają języka do chwytania pokarmu.",
-    "exampleEnglish": "Frogs use their tongues to catch food.",
-    "coreIndex": 1343
   },
   {
     "category": "General Core",
@@ -16628,22 +15723,11 @@
     "scenario": "General Core",
     "level": "B1",
     "polish": "brzuch",
-    "english": "abdomen",
+    "english": "abdomen / belly",
     "phonetic": "",
     "examplePolish": "Mężczyzna ma duży brzuch.",
     "exampleEnglish": "The man has a big belly.",
     "coreIndex": 1361
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "brzuch",
-    "english": "belly",
-    "phonetic": "",
-    "examplePolish": "Mój brzuch stał się dużo większy niż bym chciał.",
-    "exampleEnglish": "My belly has gotten a lot bigger than I would like.",
-    "coreIndex": 1362
   },
   {
     "category": "General Core",
@@ -16705,22 +15789,11 @@
     "scenario": "General Core",
     "level": "B1",
     "polish": "plaster",
-    "english": "bandaid",
+    "english": "bandaid / adhesive bandage",
     "phonetic": "",
     "examplePolish": "Potrzebuję plastra na stopę.",
     "exampleEnglish": "I need a bandaid for my foot.",
     "coreIndex": 1368
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B1",
-    "polish": "taśma klejąca",
-    "english": "adhesive tape",
-    "phonetic": "",
-    "examplePolish": "Muszę kupić taśmę klejącą.",
-    "exampleEnglish": "I need to buy adhesive tape.",
-    "coreIndex": 1369
   },
   {
     "category": "Health & Body",
@@ -17002,18 +16075,6 @@
     "category": "Home & Daily Life",
     "scenario": "Home & Daily Life",
     "level": "B1",
-    "polish": "krzesło",
-    "english": "chair",
-    "phonetic": "",
-    "examplePolish": "Łatwiej się uczyć, gdy siedzisz na wygodnym krześle.",
-    "exampleEnglish": "It is easier to study when you are sitting in a comfortable chair.",
-    "coreIndex": 1395,
-    "notes": "(n.) · G. krzesła · pl. krzesła"
-  },
-  {
-    "category": "Home & Daily Life",
-    "scenario": "Home & Daily Life",
-    "level": "B1",
     "polish": "stół w jadalni",
     "english": "dinner table",
     "phonetic": "",
@@ -17104,34 +16165,12 @@
     "category": "General Core",
     "scenario": "General Core",
     "level": "B2",
-    "polish": "plaster",
-    "english": "adhesive bandage",
-    "phonetic": "",
-    "examplePolish": "Pielęgniarka nałożyła mi na nogę dużo plastra.",
-    "exampleEnglish": "The nurse put too much adhesive bandage on my leg.",
-    "coreIndex": 1406
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B2",
     "polish": "przymiotnik",
     "english": "adjective",
     "phonetic": "",
     "examplePolish": "Kiedy mówimy lub piszemy po angielsku, przymiotnik opisuje rzeczownik.",
     "exampleEnglish": "An adjective qualifies a noun when speaking or writing English.",
     "coreIndex": 1407
-  },
-  {
-    "category": "Feelings & Qualities",
-    "scenario": "Feelings & Qualities",
-    "level": "B2",
-    "polish": "bać się",
-    "english": "afraid",
-    "phonetic": "",
-    "examplePolish": "Boję się wychodzić nocą sama do miasta.",
-    "exampleEnglish": "I am afraid to go out alone at night in the city.",
-    "coreIndex": 1408
   },
   {
     "category": "General Core",
@@ -17269,17 +16308,6 @@
     "category": "General Core",
     "scenario": "General Core",
     "level": "B2",
-    "polish": "przychodzić",
-    "english": "arrive",
-    "phonetic": "",
-    "examplePolish": "przychodzić do szkoły",
-    "exampleEnglish": "arrive at school",
-    "coreIndex": 1421
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B2",
     "polish": "popielniczka",
     "english": "ashtray",
     "phonetic": "",
@@ -17376,25 +16404,14 @@
     "coreIndex": 1430
   },
   {
-    "category": "Work & School",
-    "scenario": "Work & School",
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
     "level": "B2",
-    "polish": "długopis",
-    "english": "ballpoint pen",
+    "polish": "Bangkok",
+    "english": "Bangkok",
     "phonetic": "",
-    "examplePolish": "Do pisania tych dokumentów należy użyć długopisu z czarnym tuszem.",
-    "exampleEnglish": "Use a ballpoint pen with black ink to sign these papers.",
-    "coreIndex": 1431
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B2",
-    "polish": "Bangkok Bangkok",
-    "english": "Bangkok Bangkok",
-    "phonetic": "",
-    "examplePolish": "jest największym miastem i stolicą Tajlandii.",
-    "exampleEnglish": "is the largest city and capital of Thailand.",
+    "examplePolish": "Bangkok jest największym miastem i stolicą Tajlandii.",
+    "exampleEnglish": "Bangkok is the largest city and capital of Thailand.",
     "coreIndex": 1432
   },
   {
@@ -17514,7 +16531,7 @@
     "scenario": "General Core",
     "level": "B2",
     "polish": "otwieracz",
-    "english": "bottle opener",
+    "english": "bottle opener / can opener",
     "phonetic": "",
     "examplePolish": "otwieracz z drewnianą rączką",
     "exampleEnglish": "bottle opener with wooden handle",
@@ -17532,14 +16549,14 @@
     "coreIndex": 1444
   },
   {
-    "category": "General Core",
-    "scenario": "General Core",
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
     "level": "B2",
-    "polish": "Brazylia Brazylia",
-    "english": "Brazil Brazil",
+    "polish": "Brazylia",
+    "english": "Brazil",
     "phonetic": "",
-    "examplePolish": "jest największym krajem w Ameryce Południowej.",
-    "exampleEnglish": "is the largest country in South America.",
+    "examplePolish": "Brazylia jest największym krajem w Ameryce Południowej.",
+    "exampleEnglish": "Brazil is the largest country in South America.",
     "coreIndex": 1445
   },
   {
@@ -17577,14 +16594,14 @@
     "coreIndex": 1448
   },
   {
-    "category": "General Core",
-    "scenario": "General Core",
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
     "level": "B2",
-    "polish": "Bruksela Bruksela",
-    "english": "Brussels Brussels",
+    "polish": "Bruksela",
+    "english": "Brussels",
     "phonetic": "",
-    "examplePolish": "jest stolicą Belgii.",
-    "exampleEnglish": "is the capital of Belgium.",
+    "examplePolish": "Bruksela jest stolicą Belgii.",
+    "exampleEnglish": "Brussels is the capital of Belgium.",
     "coreIndex": 1449
   },
   {
@@ -17603,7 +16620,7 @@
     "scenario": "General Core",
     "level": "B2",
     "polish": "robak",
-    "english": "bug",
+    "english": "bug / worm",
     "phonetic": "",
     "examplePolish": "duży owad",
     "exampleEnglish": "big bug",
@@ -17698,25 +16715,14 @@
     "coreIndex": 1459
   },
   {
-    "category": "Grammar & Function Words",
-    "scenario": "Grammar & Function Words",
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
     "level": "B2",
-    "polish": "otwieracz",
-    "english": "can opener",
+    "polish": "Kanada",
+    "english": "Canada",
     "phonetic": "",
-    "examplePolish": "Wolę otwierać puszki z kawą ręcznym otwieraczem niż elektrycznym.",
-    "exampleEnglish": "I prefer to open coffee cans with a manual can opener over an electric one.",
-    "coreIndex": 1460
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B2",
-    "polish": "Kanada Kanada",
-    "english": "Canada Canada",
-    "phonetic": "",
-    "examplePolish": "jest drugim co do wielkości państwem na świecie.",
-    "exampleEnglish": "is the second largest country in area on earth.",
+    "examplePolish": "Kanada jest drugim co do wielkości państwem na świecie.",
+    "exampleEnglish": "Canada is the second-largest country in the world by area.",
     "coreIndex": 1461
   },
   {
@@ -17746,7 +16752,7 @@
     "scenario": "General Core",
     "level": "B2",
     "polish": "dywan",
-    "english": "carpet",
+    "english": "carpet / rug",
     "phonetic": "",
     "examplePolish": "czysty dywan",
     "exampleEnglish": "clean carpet",
@@ -17768,7 +16774,7 @@
     "scenario": "General Core",
     "level": "B2",
     "polish": "gąsienica",
-    "english": "caterpillar",
+    "english": "caterpillar / inchworm",
     "phonetic": "",
     "examplePolish": "zielona gąsienica",
     "exampleEnglish": "green caterpillar",
@@ -17855,18 +16861,6 @@
     "category": "General Core",
     "scenario": "General Core",
     "level": "B2",
-    "polish": "znak",
-    "english": "character",
-    "phonetic": "",
-    "examplePolish": "Chiński znak “dao” oznacza drogę albo ulicę.",
-    "exampleEnglish": "The Chinese character for the word dao means road or way.",
-    "coreIndex": 1474,
-    "notes": "(m.) · G. znaku · pl. znaki"
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B2",
     "polish": "kibicować",
     "english": "cheer",
     "phonetic": "",
@@ -17900,11 +16894,11 @@
     "category": "Places & Directions",
     "scenario": "Places & Directions",
     "level": "B2",
-    "polish": "Chiny Chiny",
-    "english": "China China",
+    "polish": "Chiny",
+    "english": "China",
     "phonetic": "",
-    "examplePolish": "to kraj z największą populacją na Ziemi.",
-    "exampleEnglish": "is the largest country on Earth by population.",
+    "examplePolish": "Chiny to kraj z największą populacją na Ziemi.",
+    "exampleEnglish": "China is the country with the largest population on Earth.",
     "coreIndex": 1478
   },
   {
@@ -17935,7 +16929,7 @@
     "scenario": "General Core",
     "level": "B2",
     "polish": "lekcja",
-    "english": "class",
+    "english": "class / lesson",
     "phonetic": "",
     "examplePolish": "Biorę lekcje niemieckiego i matematyki.",
     "exampleEnglish": "I’m taking a class in German and one in mathematics.",
@@ -18189,7 +17183,7 @@
     "scenario": "General Core",
     "level": "B2",
     "polish": "podstępny",
-    "english": "cunning",
+    "english": "cunning / sly",
     "phonetic": "",
     "examplePolish": "Potrzebowałem podstępnego ruchu, żeby wygrać z nią w szachy.",
     "exampleEnglish": "It took a cunning move to beat her at chess.",
@@ -18305,17 +17299,6 @@
     "examplePolish": "Nie mogę się wypróżnić.",
     "exampleEnglish": "I can’t defecate.",
     "coreIndex": 1514
-  },
-  {
-    "category": "Numbers & Measures",
-    "scenario": "Numbers & Measures",
-    "level": "B2",
-    "polish": "stopień",
-    "english": "degree",
-    "phonetic": "",
-    "examplePolish": "Dzisiejsza temperatura wynosi 30 stopni.",
-    "exampleEnglish": "The temperature is 30 degrees today.",
-    "coreIndex": 1515
   },
   {
     "category": "General Core",
@@ -18455,10 +17438,10 @@
     "scenario": "Places & Directions",
     "level": "B2",
     "polish": "Dubai",
-    "english": "Dubai Dubai",
+    "english": "Dubai",
     "phonetic": "",
     "examplePolish": "Dubai jest największym miastem w Zjednoczonych Emiratach Arabskich.",
-    "exampleEnglish": "is the largest city of the United Arab Emirates.",
+    "exampleEnglish": "Dubai is the largest city of the United Arab Emirates.",
     "coreIndex": 1528
   },
   {
@@ -18492,17 +17475,6 @@
     "examplePolish": "Orzeł leci po niebie.",
     "exampleEnglish": "The eagle is flying in the sky.",
     "coreIndex": 1531
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B2",
-    "polish": "ekonomia",
-    "english": "economy",
-    "phonetic": "",
-    "examplePolish": "Bloguję o polityce i ekonomii.",
-    "exampleEnglish": "I blog about politics and the economy.",
-    "coreIndex": 1532
   },
   {
     "category": "General Core",
@@ -18586,7 +17558,7 @@
     "scenario": "Home & Daily Life",
     "level": "B2",
     "polish": "wyjście ewakuacyjne",
-    "english": "emergency exit",
+    "english": "emergency exit / fire escape",
     "phonetic": "",
     "examplePolish": "wyjście ewakuacyjne z samolotu",
     "exampleEnglish": "airplane emergency exit",
@@ -18637,17 +17609,6 @@
     "coreIndex": 1544
   },
   {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B2",
-    "polish": "danie główne",
-    "english": "entrée",
-    "phonetic": "",
-    "examplePolish": "Danie główne to wołowina z warzywami.",
-    "exampleEnglish": "The main course is beef and vegetables.",
-    "coreIndex": 1545
-  },
-  {
     "category": "Shopping & Money",
     "scenario": "Shopping & Money",
     "level": "B2",
@@ -18657,17 +17618,6 @@
     "examplePolish": "Użyj karty wstępu, żeby wejść do budynku.",
     "exampleEnglish": "Use your entry card to get in the building.",
     "coreIndex": 1546
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B2",
-    "polish": "wycierać",
-    "english": "erase",
-    "phonetic": "",
-    "examplePolish": "Uczeń wyciera to, co było napisane.",
-    "exampleEnglish": "The student is erasing the writing.",
-    "coreIndex": 1547
   },
   {
     "category": "General Core",
@@ -18712,17 +17662,6 @@
     "examplePolish": "list ekspresowy",
     "exampleEnglish": "mail express letter",
     "coreIndex": 1551
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B2",
-    "polish": "okulary",
-    "english": "eyeglasses",
-    "phonetic": "",
-    "examplePolish": "Ona nic nie widzi bez okularów.",
-    "exampleEnglish": "She cannot see anything without her glasses.",
-    "coreIndex": 1552
   },
   {
     "category": "Work & School",
@@ -18804,17 +17743,6 @@
     "category": "Emergencies & Safety",
     "scenario": "Emergencies & Safety",
     "level": "B2",
-    "polish": "wyjście ewakuacyjne",
-    "english": "fire escape",
-    "phonetic": "",
-    "examplePolish": "W tym budynku jest wyjście ewakuacyjne.",
-    "exampleEnglish": "The building has a fire escape staircase.",
-    "coreIndex": 1560
-  },
-  {
-    "category": "Emergencies & Safety",
-    "scenario": "Emergencies & Safety",
-    "level": "B2",
     "polish": "strażak",
     "english": "firefighter",
     "phonetic": "",
@@ -18860,7 +17788,7 @@
     "scenario": "General Core",
     "level": "B2",
     "polish": "kamizelka ratunkowa",
-    "english": "flotation device",
+    "english": "flotation device / life jacket",
     "phonetic": "",
     "examplePolish": "Kobieta pokazuje, jak napompować kamizelkę ratunkową.",
     "exampleEnglish": "The woman is demonstrating how to inflate the flotation device.",
@@ -18943,17 +17871,6 @@
     "coreIndex": 1572
   },
   {
-    "category": "Nature & Animals",
-    "scenario": "Nature & Animals",
-    "level": "B2",
-    "polish": "foka",
-    "english": "fur seal",
-    "phonetic": "",
-    "examplePolish": "Foka kręci hula-hop.",
-    "exampleEnglish": "The seal is spinning hula hoops.",
-    "coreIndex": 1573
-  },
-  {
     "category": "Sports & Hobbies",
     "scenario": "Sports & Hobbies",
     "level": "B2",
@@ -18969,7 +17886,7 @@
     "scenario": "Home & Daily Life",
     "level": "B2",
     "polish": "ogród",
-    "english": "garden",
+    "english": "garden / yard",
     "phonetic": "",
     "examplePolish": "Chcę kupić dom z ogrodem.",
     "exampleEnglish": "I want to buy a house with a garden.",
@@ -19010,17 +17927,6 @@
     "coreIndex": 1578
   },
   {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B2",
-    "polish": "komar",
-    "english": "gnat",
-    "phonetic": "",
-    "examplePolish": "Komar to mały, latający szkodnik pijący krew.",
-    "exampleEnglish": "The gnat is a tiny, blood sucking, flying pest.",
-    "coreIndex": 1579
-  },
-  {
     "category": "Activities & Sports",
     "scenario": "Activities & Sports",
     "level": "B2",
@@ -19041,39 +17947,6 @@
     "examplePolish": "Kozy bawią się w gospodarstwie.",
     "exampleEnglish": "The goats are playing on the farm.",
     "coreIndex": 1581
-  },
-  {
-    "category": "Feelings & Qualities",
-    "scenario": "Feelings & Qualities",
-    "level": "B2",
-    "polish": "Dzień dobry.",
-    "english": "Good afternoon.",
-    "phonetic": "",
-    "examplePolish": "Dzień dobry, Anna.",
-    "exampleEnglish": "Good afternoon, Anna.",
-    "coreIndex": 1582
-  },
-  {
-    "category": "Feelings & Qualities",
-    "scenario": "Feelings & Qualities",
-    "level": "B2",
-    "polish": "Dobry wieczór.",
-    "english": "Good evening.",
-    "phonetic": "",
-    "examplePolish": "Dobry wieczór, panie Li.",
-    "exampleEnglish": "Mr. Li, good evening.",
-    "coreIndex": 1583
-  },
-  {
-    "category": "Feelings & Qualities",
-    "scenario": "Feelings & Qualities",
-    "level": "B2",
-    "polish": "Dzień dobry.",
-    "english": "Good morning.",
-    "phonetic": "",
-    "examplePolish": "Dzień dobry, Anna.",
-    "exampleEnglish": "Good afternoon, Anna.",
-    "coreIndex": 1584
   },
   {
     "category": "General Core",
@@ -19198,17 +18071,6 @@
     "coreIndex": 1595
   },
   {
-    "category": "Greetings & Essentials",
-    "scenario": "Greetings & Essentials",
-    "level": "B2",
-    "polish": "Cześć.",
-    "english": "Hi.",
-    "phonetic": "",
-    "examplePolish": "Cześć, jak się masz?",
-    "exampleEnglish": "Hi, how are you?",
-    "coreIndex": 1596
-  },
-  {
     "category": "General Core",
     "scenario": "General Core",
     "level": "B2",
@@ -19229,18 +18091,6 @@
     "examplePolish": "W czasie jazdy proszę trzymać się poręczy.",
     "exampleEnglish": "Please hold on to the handrail while the vehicle is in motion.",
     "coreIndex": 1598
-  },
-  {
-    "category": "Home & Daily Life",
-    "scenario": "Home & Daily Life",
-    "level": "B2",
-    "polish": "dom",
-    "english": "home",
-    "phonetic": "",
-    "examplePolish": "wracać wcześnie do domu",
-    "exampleEnglish": "return home early",
-    "coreIndex": 1599,
-    "notes": "(m.) · G. domu · pl. domy"
   },
   {
     "category": "Work & School",
@@ -19279,34 +18129,12 @@
     "category": "Technology & Media",
     "scenario": "Technology & Media",
     "level": "B2",
-    "polish": "Hotmail usługa internetowa",
-    "english": "Hotmail Hotmail",
+    "polish": "Hotmail",
+    "english": "Hotmail",
     "phonetic": "",
-    "examplePolish": "Hotmail",
-    "exampleEnglish": "Internet service",
+    "examplePolish": "Hotmail to usługa internetowa.",
+    "exampleEnglish": "Hotmail is an internet service.",
     "coreIndex": 1603
-  },
-  {
-    "category": "Home & Housing",
-    "scenario": "Home & Housing",
-    "level": "B2",
-    "polish": "gospodyni domowa",
-    "english": "housewife",
-    "phonetic": "",
-    "examplePolish": "Gospodyni domowa pracuje najciężej ze wszystkich.",
-    "exampleEnglish": "The hardest worker anywhere is the housewife.",
-    "coreIndex": 1604
-  },
-  {
-    "category": "Greetings & Essentials",
-    "scenario": "Greetings & Essentials",
-    "level": "B2",
-    "polish": "Jak się masz?",
-    "english": "How have you been?",
-    "phonetic": "",
-    "examplePolish": "Jak się masz ostatnio?",
-    "exampleEnglish": "How have you been lately?",
-    "coreIndex": 1605
   },
   {
     "category": "Greetings & Essentials",
@@ -19335,56 +18163,12 @@
     "category": "Grammar & Function Words",
     "scenario": "Grammar & Function Words",
     "level": "B2",
-    "polish": "Nie podoba mi się to.",
-    "english": "I dislike it.",
-    "phonetic": "",
-    "examplePolish": "Przestań dawać tyle czosnku do każdej potrawy. Nie podoba mi się to.",
-    "exampleEnglish": "Stop adding so much garlic to every dish. I don’t like it.",
-    "coreIndex": 1608
-  },
-  {
-    "category": "Grammar & Function Words",
-    "scenario": "Grammar & Function Words",
-    "level": "B2",
-    "polish": "Nie rozumiem.",
-    "english": "I don’t understand.",
-    "phonetic": "",
-    "examplePolish": "Nie rozumiem japońskiego.",
-    "exampleEnglish": "I don’t understand Japanese.",
-    "coreIndex": 1609
-  },
-  {
-    "category": "Grammar & Function Words",
-    "scenario": "Grammar & Function Words",
-    "level": "B2",
     "polish": "Lubię to.",
     "english": "I like this.",
     "phonetic": "",
     "examplePolish": "--",
     "exampleEnglish": "--",
     "coreIndex": 1610
-  },
-  {
-    "category": "Grammar & Function Words",
-    "scenario": "Grammar & Function Words",
-    "level": "B2",
-    "polish": "Chciałbym...",
-    "english": "I’d like to...",
-    "phonetic": "",
-    "examplePolish": "Chciałbym kiedyś pojechać do Chin.",
-    "exampleEnglish": "I’d like to go to China someday.",
-    "coreIndex": 1611
-  },
-  {
-    "category": "Grammar & Function Words",
-    "scenario": "Grammar & Function Words",
-    "level": "B2",
-    "polish": "Mam się dobrze.",
-    "english": "I’m fine.",
-    "phonetic": "",
-    "examplePolish": "--",
-    "exampleEnglish": "--",
-    "coreIndex": 1612
   },
   {
     "category": "Nature & Animals",
@@ -19407,17 +18191,6 @@
     "examplePolish": "nielegalna substancja",
     "exampleEnglish": "illegal substance",
     "coreIndex": 1614
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B2",
-    "polish": "gąsienica",
-    "english": "inchworm",
-    "phonetic": "",
-    "examplePolish": "Gąsienica pełznie po drewnianym płocie.",
-    "exampleEnglish": "The inchworm is crawling on the wooden fence.",
-    "coreIndex": 1615
   },
   {
     "category": "General Core",
@@ -19512,10 +18285,10 @@
     "scenario": "Places & Directions",
     "level": "B2",
     "polish": "Japonia",
-    "english": "Japan Japan",
+    "english": "Japan",
     "phonetic": "",
     "examplePolish": "Japonia składa się z czterech głównych wysp i wielu mniejszych.",
-    "exampleEnglish": "has four main islands and many smaller ones.",
+    "exampleEnglish": "Japan has four main islands and many smaller ones.",
     "coreIndex": 1624
   },
   {
@@ -19551,17 +18324,6 @@
     "exampleEnglish": "Kangaroos are mammals.",
     "coreIndex": 1627,
     "notes": "(m.) · G. kangura · pl. kangury"
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B2",
-    "polish": "kopać",
-    "english": "kick",
-    "phonetic": "",
-    "examplePolish": "Zawodnik kopie piłkę.",
-    "exampleEnglish": "The player is kicking the soccer ball.",
-    "coreIndex": 1628
   },
   {
     "category": "Home & Daily Life",
@@ -19633,17 +18395,6 @@
     "category": "General Core",
     "scenario": "General Core",
     "level": "B2",
-    "polish": "laptop",
-    "english": "laptop",
-    "phonetic": "",
-    "examplePolish": "Laptop pozwala mi pracować prawie wszędzie.",
-    "exampleEnglish": "The laptop computer allows me to work almost anywhere.",
-    "coreIndex": 1635
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B2",
     "polish": "spóźniony",
     "english": "late",
     "phonetic": "",
@@ -19661,17 +18412,6 @@
     "examplePolish": "hotelowa usługa pralnicza",
     "exampleEnglish": "hotel laundry service",
     "coreIndex": 1637
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B2",
-    "polish": "grafit",
-    "english": "lead",
-    "phonetic": "",
-    "examplePolish": "Drewniane ołówki trzeba ostrzyć, kiedy złamie się grafit.",
-    "exampleEnglish": "Wooden pencils must be sharpened when the lead breaks.",
-    "coreIndex": 1638
   },
   {
     "category": "General Core",
@@ -19707,18 +18447,6 @@
     "coreIndex": 1641
   },
   {
-    "category": "Work & School",
-    "scenario": "Work & School",
-    "level": "B2",
-    "polish": "lekcja",
-    "english": "lesson",
-    "phonetic": "",
-    "examplePolish": "Profesor prowadzi lekcję.",
-    "exampleEnglish": "The professor is teaching a lesson.",
-    "coreIndex": 1642,
-    "notes": "(f.) · G. lekcji · pl. lekcje"
-  },
-  {
     "category": "General Core",
     "scenario": "General Core",
     "level": "B2",
@@ -19729,28 +18457,6 @@
     "exampleEnglish": "The person is mailing a letter.",
     "coreIndex": 1643,
     "notes": "(m.) · G. listu · pl. listy"
-  },
-  {
-    "category": "Travel & Transport",
-    "scenario": "Travel & Transport",
-    "level": "B2",
-    "polish": "prawo jazdy",
-    "english": "license",
-    "phonetic": "",
-    "examplePolish": "Gdy meldujesz się w hotelu, musisz mieć paszport albo prawo jazdy.",
-    "exampleEnglish": "You need a license or passport when you sign in at the hotel.",
-    "coreIndex": 1644
-  },
-  {
-    "category": "Clothing & Appearance",
-    "scenario": "Clothing & Appearance",
-    "level": "B2",
-    "polish": "kamizelka ratunkowa",
-    "english": "life jacket",
-    "phonetic": "",
-    "examplePolish": "Zawsze miej na sobie kamizelkę ratunkową.",
-    "exampleEnglish": "Wear your life jacket at all times.",
-    "coreIndex": 1645
   },
   {
     "category": "General Core",
@@ -19773,17 +18479,6 @@
     "examplePolish": "Zapalniczka jest zapalona.",
     "exampleEnglish": "The lighter is lit.",
     "coreIndex": 1647
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B2",
-    "polish": "lubić",
-    "english": "like",
-    "phonetic": "",
-    "examplePolish": "Ona lubi czytać książki.",
-    "exampleEnglish": "She likes reading books.",
-    "coreIndex": 1648
   },
   {
     "category": "General Core",
@@ -19867,7 +18562,7 @@
     "scenario": "General Core",
     "level": "B2",
     "polish": "ciężarówka",
-    "english": "lorry",
+    "english": "lorry / truck",
     "phonetic": "",
     "examplePolish": "Twoje meble będą dostarczone ciężarówką jutro rano.",
     "exampleEnglish": "Your funiture will be delivered on a lorry in the morning.",
@@ -19938,18 +18633,6 @@
     "examplePolish": "Twoje walizki będą w punkcie odbioru bagażu.",
     "exampleEnglish": "Your suitcases will be at the luggage pickup.",
     "coreIndex": 1662
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B2",
-    "polish": "poczta",
-    "english": "mail",
-    "phonetic": "",
-    "examplePolish": "skrzynka pocztowa pełna listów",
-    "exampleEnglish": "mailbox full of mail",
-    "coreIndex": 1663,
-    "notes": "(f.) · G. poczty · pl. poczty"
   },
   {
     "category": "General Core",
@@ -20084,22 +18767,11 @@
     "scenario": "General Core",
     "level": "B2",
     "polish": "Meksyk",
-    "english": "Mexico The",
+    "english": "Mexico",
     "phonetic": "",
     "examplePolish": "Serce imperium Azteków znajdowało się w dzisiejszym Meksyku.",
-    "exampleEnglish": "heart of the Aztec empire was in modern-day Mexico.",
+    "exampleEnglish": "The heart of the Aztec empire was in modern-day Mexico.",
     "coreIndex": 1676
-  },
-  {
-    "category": "Places & Directions",
-    "scenario": "Places & Directions",
-    "level": "B2",
-    "polish": "Meksyk",
-    "english": "Mexico City",
-    "phonetic": "",
-    "examplePolish": "Meksyk jest stolicą i najbardziej zaludnionym miastem na świecie.",
-    "exampleEnglish": "Mexico City is the capital and most heavily populated city in Mexico.",
-    "coreIndex": 1677
   },
   {
     "category": "Sports & Hobbies",
@@ -20547,17 +19219,6 @@
     "category": "Shopping & Money",
     "scenario": "Shopping & Money",
     "level": "B2",
-    "polish": "płacić",
-    "english": "pay money",
-    "phonetic": "",
-    "examplePolish": "Czy muszę zapłacić teraz?",
-    "exampleEnglish": "Do I have to pay money now?",
-    "coreIndex": 1718
-  },
-  {
-    "category": "Shopping & Money",
-    "scenario": "Shopping & Money",
-    "level": "B2",
     "polish": "płacić podatki",
     "english": "pay taxes",
     "phonetic": "",
@@ -20630,17 +19291,6 @@
     "examplePolish": "Przyniosą ci poduszkę, jeśli o nią poprosisz.",
     "exampleEnglish": "They will bring you a pillow if you ask for one.",
     "coreIndex": 1725
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B2",
-    "polish": "pilot",
-    "english": "pilot",
-    "phonetic": "",
-    "examplePolish": "Piloci pilotują samolot.",
-    "exampleEnglish": "The pilots are flying the plane.",
-    "coreIndex": 1726
   },
   {
     "category": "Nature & Animals",
@@ -20756,11 +19406,11 @@
     "category": "General Core",
     "scenario": "General Core",
     "level": "B2",
-    "polish": "Portugalia Portugalia",
-    "english": "Portugal Portugal",
+    "polish": "Portugalia",
+    "english": "Portugal",
     "phonetic": "",
-    "examplePolish": "jest znana z produkcji wina porto.",
-    "exampleEnglish": "is famous for its production of port wine.",
+    "examplePolish": "Portugalia jest znana z produkcji wina porto.",
+    "exampleEnglish": "Portugal is famous for its production of port wine.",
     "coreIndex": 1737
   },
   {
@@ -20784,17 +19434,6 @@
     "examplePolish": "białe gniazdko",
     "exampleEnglish": "outlet white power socket",
     "coreIndex": 1739
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "B2",
-    "polish": "gotować",
-    "english": "prepare",
-    "phonetic": "",
-    "examplePolish": "Mężczyzna i kobieta gotują.",
-    "exampleEnglish": "The man and woman are cooking.",
-    "coreIndex": 1740
   },
   {
     "category": "General Core",
@@ -20920,17 +19559,6 @@
     "coreIndex": 1751
   },
   {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "C1",
-    "polish": "czytać",
-    "english": "read aloud",
-    "phonetic": "",
-    "examplePolish": "na głos czytać komuś na głos",
-    "exampleEnglish": "read aloud to someone",
-    "coreIndex": 1752
-  },
-  {
     "category": "General Core",
     "scenario": "General Core",
     "level": "C1",
@@ -21052,17 +19680,6 @@
     "coreIndex": 1763
   },
   {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "C1",
-    "polish": "jechać",
-    "english": "ride",
-    "phonetic": "",
-    "examplePolish": "Uczniowie jadą autobusem.",
-    "exampleEnglish": "The students are riding the bus.",
-    "coreIndex": 1764
-  },
-  {
     "category": "Activities & Sports",
     "scenario": "Activities & Sports",
     "level": "C1",
@@ -21151,17 +19768,6 @@
     "coreIndex": 1772
   },
   {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "C1",
-    "polish": "dywan",
-    "english": "rug",
-    "phonetic": "",
-    "examplePolish": "Dywan jest położony w sypialni.",
-    "exampleEnglish": "The rug is installed in the bedroom.",
-    "coreIndex": 1773
-  },
-  {
     "category": "Activities & Sports",
     "scenario": "Activities & Sports",
     "level": "C1",
@@ -21173,14 +19779,14 @@
     "coreIndex": 1774
   },
   {
-    "category": "General Core",
-    "scenario": "General Core",
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
     "level": "C1",
-    "polish": "Rosja Rosja",
-    "english": "Russia Russia",
+    "polish": "Rosja",
+    "english": "Russia",
     "phonetic": "",
-    "examplePolish": "jest największym państwem na świecie.",
-    "exampleEnglish": "is the world’s largest country.",
+    "examplePolish": "Rosja jest największym państwem na świecie.",
+    "exampleEnglish": "Russia is the world's largest country.",
     "coreIndex": 1775
   },
   {
@@ -21204,17 +19810,6 @@
     "examplePolish": "piła ręczna",
     "exampleEnglish": "hand saw",
     "coreIndex": 1777
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "C1",
-    "polish": "bać się",
-    "english": "scared",
-    "phonetic": "",
-    "examplePolish": "Dziewczynka boi się.",
-    "exampleEnglish": "The young girl is scared.",
-    "coreIndex": 1778
   },
   {
     "category": "Work & School",
@@ -21361,14 +19956,14 @@
     "notes": "(n.) · G. zdania · pl. zdania"
   },
   {
-    "category": "General Core",
-    "scenario": "General Core",
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
     "level": "C1",
-    "polish": "Seul Seul",
-    "english": "Seoul Seoul",
+    "polish": "Seul",
+    "english": "Seoul",
     "phonetic": "",
-    "examplePolish": "jest stolicą Korei Południowej.",
-    "exampleEnglish": "is the capital city of South Korea.",
+    "examplePolish": "Seul jest stolicą Korei Południowej.",
+    "exampleEnglish": "Seoul is the capital city of South Korea.",
     "coreIndex": 1792
   },
   {
@@ -21441,11 +20036,11 @@
     "category": "Places & Directions",
     "scenario": "Places & Directions",
     "level": "C1",
-    "polish": "Singapur wyspiarskie wolne miasto",
-    "english": "Singapore island city-state of",
+    "polish": "Singapur",
+    "english": "Singapore",
     "phonetic": "",
-    "examplePolish": "Singapur",
-    "exampleEnglish": "Singapore",
+    "examplePolish": "Singapur jest wyspiarskim państwem-miastem.",
+    "exampleEnglish": "Singapore is an island city-state.",
     "coreIndex": 1799
   },
   {
@@ -21491,17 +20086,6 @@
     "examplePolish": "Jedź wolniej, proszę.",
     "exampleEnglish": "Go slower, please.",
     "coreIndex": 1803
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "C1",
-    "polish": "podstępny",
-    "english": "sly",
-    "phonetic": "",
-    "examplePolish": "Potrzebowałem podstępnego ruchu, żeby wygrać z nią w szachy.",
-    "exampleEnglish": "It took a cunning move to beat her at chess.",
-    "coreIndex": 1804
   },
   {
     "category": "Shopping & Money",
@@ -21591,17 +20175,6 @@
     "examplePolish": "Pająk ma osiem nóg.",
     "exampleEnglish": "A spider has eight legs.",
     "coreIndex": 1812
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "C1",
-    "polish": "kręgosłup",
-    "english": "spine",
-    "phonetic": "",
-    "examplePolish": "Kręgosłup składa się z wielu mniejszych kości.",
-    "exampleEnglish": "The backbone is made up of several smaller bones.",
-    "coreIndex": 1813
   },
   {
     "category": "General Core",
@@ -21838,14 +20411,14 @@
     "coreIndex": 1837
   },
   {
-    "category": "General Core",
-    "scenario": "General Core",
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
     "level": "C1",
-    "polish": "Sydney Sydney",
-    "english": "Sydney Sydney",
+    "polish": "Sydney",
+    "english": "Sydney",
     "phonetic": "",
-    "examplePolish": "to największe miasto w Australii.",
-    "exampleEnglish": "is the largest city in Australia.",
+    "examplePolish": "Sydney to największe miasto w Australii.",
+    "exampleEnglish": "Sydney is the largest city in Australia.",
     "coreIndex": 1838
   },
   {
@@ -21947,28 +20520,6 @@
     "coreIndex": 1847
   },
   {
-    "category": "Greetings & Essentials",
-    "scenario": "Greetings & Essentials",
-    "level": "C1",
-    "polish": "Dziękuję.",
-    "english": "Thank you!",
-    "phonetic": "",
-    "examplePolish": "Dziękuję, ale ja tego nie zamawiałem.",
-    "exampleEnglish": "Thank you, but I didn’t order this.",
-    "coreIndex": 1848
-  },
-  {
-    "category": "Places & Directions",
-    "scenario": "Places & Directions",
-    "level": "C1",
-    "polish": "W porządku.",
-    "english": "That’s all right.",
-    "phonetic": "",
-    "examplePolish": "--",
-    "exampleEnglish": "--",
-    "coreIndex": 1849
-  },
-  {
     "category": "Grammar & Function Words",
     "scenario": "Grammar & Function Words",
     "level": "C1",
@@ -21989,17 +20540,6 @@
     "examplePolish": "To jest dla ciebie.",
     "exampleEnglish": "This is for you.",
     "coreIndex": 1851
-  },
-  {
-    "category": "Travel & Transport",
-    "scenario": "Travel & Transport",
-    "level": "C1",
-    "polish": "kasa biletowa",
-    "english": "ticket window",
-    "phonetic": "",
-    "examplePolish": "Kasa biletowa jest na stacji.",
-    "exampleEnglish": "The ticket window is inside the station.",
-    "coreIndex": 1852
   },
   {
     "category": "General Core",
@@ -22068,14 +20608,14 @@
     "coreIndex": 1858
   },
   {
-    "category": "General Core",
-    "scenario": "General Core",
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
     "level": "C1",
-    "polish": "Toronto Toronto",
-    "english": "Toronto Toronto",
+    "polish": "Toronto",
+    "english": "Toronto",
     "phonetic": "",
-    "examplePolish": "jest stolicą Ontario w Kanadzie.",
-    "exampleEnglish": "is the capital of Ontario in Canada.",
+    "examplePolish": "Toronto jest stolicą Ontario w Kanadzie.",
+    "exampleEnglish": "Toronto is the capital of Ontario in Canada.",
     "coreIndex": 1859
   },
   {
@@ -22181,10 +20721,10 @@
     "scenario": "Grammar & Function Words",
     "level": "C1",
     "polish": "tłumaczyć",
-    "english": "translate translate from",
+    "english": "to translate",
     "phonetic": "",
     "examplePolish": "tłumaczyć z angielskiego na francuski",
-    "exampleEnglish": "English to French",
+    "exampleEnglish": "to translate from English to French",
     "coreIndex": 1869
   },
   {
@@ -22224,17 +20764,6 @@
     "category": "General Core",
     "scenario": "General Core",
     "level": "C1",
-    "polish": "ciężarówka",
-    "english": "truck",
-    "phonetic": "",
-    "examplePolish": "Z tej ciężarówki wycieka olej.",
-    "exampleEnglish": "That truck is leaking oil.",
-    "coreIndex": 1873
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "C1",
     "polish": "czesne",
     "english": "tuition",
     "phonetic": "",
@@ -22263,17 +20792,6 @@
     "examplePolish": "Samochód skręcił w lewo.",
     "exampleEnglish": "The car turned left.",
     "coreIndex": 1876
-  },
-  {
-    "category": "Activities & Sports",
-    "scenario": "Activities & Sports",
-    "level": "C1",
-    "polish": "skręcać",
-    "english": "turn a corner",
-    "phonetic": "",
-    "examplePolish": "Na końcu ulicy musisz skręcić.",
-    "exampleEnglish": "At the end of the street, you will need to turn a corner.",
-    "coreIndex": 1877
   },
   {
     "category": "General Core",
@@ -22309,28 +20827,6 @@
     "coreIndex": 1880
   },
   {
-    "category": "Feelings & Qualities",
-    "scenario": "Feelings & Qualities",
-    "level": "C1",
-    "polish": "niezadowolony",
-    "english": "unsatisfied",
-    "phonetic": "",
-    "examplePolish": "Kobieta jest niezadowolona.",
-    "exampleEnglish": "The woman is unsatisfied.",
-    "coreIndex": 1881
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "C1",
-    "polish": "zdenerwowany",
-    "english": "upset",
-    "phonetic": "",
-    "examplePolish": "Mężczyzna jest zdenerwowany, bo zostało mu dużo pracy.",
-    "exampleEnglish": "The man is upset, as he has a lot of work remaining.",
-    "coreIndex": 1882
-  },
-  {
     "category": "General Core",
     "scenario": "General Core",
     "level": "C1",
@@ -22351,18 +20847,6 @@
     "examplePolish": "Pies oddaje mocz.",
     "exampleEnglish": "The dog is urinating.",
     "coreIndex": 1884
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "C1",
-    "polish": "wakacje",
-    "english": "vacation",
-    "phonetic": "",
-    "examplePolish": "Muszę znaleźć pracę w czasie wakacji.",
-    "exampleEnglish": "It is necessary to find a job during my summer vacation.",
-    "coreIndex": 1885,
-    "notes": "(pl.) · G. wakacji"
   },
   {
     "category": "General Core",
@@ -22599,17 +21083,6 @@
     "category": "Greetings & Essentials",
     "scenario": "Greetings & Essentials",
     "level": "C1",
-    "polish": "gdzie",
-    "english": "Where is the bathroom?",
-    "phonetic": "",
-    "examplePolish": "Gdzie jest łazienka?",
-    "exampleEnglish": "Where is the bathroom?",
-    "coreIndex": 1908
-  },
-  {
-    "category": "Greetings & Essentials",
-    "scenario": "Greetings & Essentials",
-    "level": "C1",
     "polish": "Kto mówi?",
     "english": "Who is it?",
     "phonetic": "",
@@ -22755,17 +21228,6 @@
     "category": "General Core",
     "scenario": "General Core",
     "level": "C1",
-    "polish": "robak",
-    "english": "worm",
-    "phonetic": "",
-    "examplePolish": "Robaki kręcą się.",
-    "exampleEnglish": "The worms are wiggling about.",
-    "coreIndex": 1922
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "C1",
     "polish": "martwić się",
     "english": "worry",
     "phonetic": "",
@@ -22805,29 +21267,6 @@
     "examplePolish": "Sprawdzam trasę na Yahoo! zanim pójdę w jakieś nowe miejsce.",
     "exampleEnglish": "I look up directions on Yahoo! before going anywhere new.",
     "coreIndex": 1926
-  },
-  {
-    "category": "General Core",
-    "scenario": "General Core",
-    "level": "C1",
-    "polish": "ogród",
-    "english": "yard",
-    "phonetic": "",
-    "examplePolish": "duży ogród",
-    "exampleEnglish": "big yard",
-    "coreIndex": 1927,
-    "notes": "(m.) · G. ogrodu · pl. ogrody"
-  },
-  {
-    "category": "Greetings & Essentials",
-    "scenario": "Greetings & Essentials",
-    "level": "C1",
-    "polish": "tak",
-    "english": "yes",
-    "phonetic": "",
-    "examplePolish": "Tak, wszystko w porządku.",
-    "exampleEnglish": "Yes. it’s okay.",
-    "coreIndex": 1928
   },
   {
     "category": "Greetings & Essentials",
@@ -23659,15 +22098,6 @@
     "category": "Personal Data & Forms",
     "scenario": "Personal Data & Forms",
     "level": "A1",
-    "polish": "Mam na imię Alex.",
-    "english": "My first name is Alex.",
-    "phonetic": "",
-    "notes": "introductions"
-  },
-  {
-    "category": "Personal Data & Forms",
-    "scenario": "Personal Data & Forms",
-    "level": "A1",
     "polish": "Moje nazwisko to Smith.",
     "english": "My surname is Smith.",
     "phonetic": "",
@@ -23866,15 +22296,6 @@
     "category": "Numbers & Measures",
     "scenario": "Numbers & Measures",
     "level": "A1",
-    "polish": "Ile to kosztuje?",
-    "english": "How much does it cost?",
-    "phonetic": "",
-    "notes": "prices"
-  },
-  {
-    "category": "Numbers & Measures",
-    "scenario": "Numbers & Measures",
-    "level": "A1",
     "polish": "Poproszę dwa bilety normalne.",
     "english": "Two regular tickets, please.",
     "phonetic": "",
@@ -23888,15 +22309,6 @@
     "english": "It costs fifteen zloty.",
     "phonetic": "",
     "notes": "prices"
-  },
-  {
-    "category": "Time & Calendar",
-    "scenario": "Time & Calendar",
-    "level": "A1",
-    "polish": "Która jest godzina?",
-    "english": "What time is it?",
-    "phonetic": "",
-    "notes": "time"
   },
   {
     "category": "Time & Calendar",
@@ -23951,24 +22363,6 @@
     "english": "I have to clean the apartment.",
     "phonetic": "",
     "notes": "household chores"
-  },
-  {
-    "category": "Shopping & Money",
-    "scenario": "Shopping & Money",
-    "level": "A1",
-    "polish": "Poproszę paragon.",
-    "english": "A receipt, please.",
-    "phonetic": "",
-    "notes": "shopping"
-  },
-  {
-    "category": "Shopping & Money",
-    "scenario": "Shopping & Money",
-    "level": "A1",
-    "polish": "Czy mogę zapłacić kartą?",
-    "english": "Can I pay by card?",
-    "phonetic": "",
-    "notes": "paying"
   },
   {
     "category": "Shopping & Money",
@@ -24055,28 +22449,10 @@
     "category": "Food & Drink",
     "scenario": "Food & Drink",
     "level": "A1",
-    "polish": "Czy mogę prosić menu?",
-    "english": "May I have the menu?",
-    "phonetic": "",
-    "notes": "restaurant"
-  },
-  {
-    "category": "Food & Drink",
-    "scenario": "Food & Drink",
-    "level": "A1",
     "polish": "Na miejscu czy na wynos?",
     "english": "For here or takeaway?",
     "phonetic": "",
     "notes": "takeaway"
-  },
-  {
-    "category": "Food & Drink",
-    "scenario": "Food & Drink",
-    "level": "A1",
-    "polish": "Poproszę wodę niegazowaną.",
-    "english": "Still water, please.",
-    "phonetic": "",
-    "notes": "drinks"
   },
   {
     "category": "Food & Drink",
@@ -24113,15 +22489,6 @@
     "english": "I have a fever.",
     "phonetic": "",
     "notes": "symptoms"
-  },
-  {
-    "category": "Health & Body",
-    "scenario": "Health & Body",
-    "level": "A1",
-    "polish": "Potrzebuję lekarza.",
-    "english": "I need a doctor.",
-    "phonetic": "",
-    "notes": "care"
   },
   {
     "category": "Health & Body",
@@ -24329,15 +22696,6 @@
     "english": "Where can I buy a ticket?",
     "phonetic": "",
     "notes": "tickets"
-  },
-  {
-    "category": "Travel & Transport",
-    "scenario": "Travel & Transport",
-    "level": "A1",
-    "polish": "O której odjeżdża pociąg?",
-    "english": "What time does the train leave?",
-    "phonetic": "",
-    "notes": "station"
   },
   {
     "category": "Travel & Transport",

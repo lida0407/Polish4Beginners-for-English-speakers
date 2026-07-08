@@ -112,7 +112,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String DATA_MANIFEST_URL = "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/database.json?ref=main";
     private static final String REMOTE_PHRASES_FILE = "phrases_remote.json";
     private static final String APK_MIME_TYPE = "application/vnd.android.package-archive";
-    private static final int DEFAULT_DATABASE_VERSION = 8;
+    private static final int DEFAULT_DATABASE_VERSION = 9;
     private static final long UPDATE_CHECK_INTERVAL_MS = 24L * 60L * 60L * 1000L;
     private static final int SESSION_SIZE = 10;
     private static final int NEWS_PREFETCH_AHEAD = 5;

@@ -1,8 +1,8 @@
 {
-  "dataVersion": 8,
-  "phraseCount": 3329,
+  "dataVersion": 9,
+  "phraseCount": 3170,
   "phrasesUrl": "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/phrases.json?ref=main",
-  "phrasesSha256": "30630503b96b740c68af79f353db01ec2a3cc4b10a30410d96c93d13f20b72a1",
-  "phrasesSizeBytes": 953836,
-  "releaseNotes": "Adds 21 common Polish idioms and 52 original B1/B2 conversation phrases (opinions, requests, agreeing)."
+  "phrasesSha256": "3acacd417614e183ef025590a83357e45dc21f047f0036af96e5af1ce54302d4",
+  "phrasesSizeBytes": 910608,
+  "releaseNotes": "Repairs 62 garbled core-vocabulary cards and merges 159 duplicate headwords (keeping alternate meanings), via the cleanup pass recovered from the parallel branch."
 }
