@@ -1,8 +1,8 @@
 {
-  "dataVersion": 3,
-  "phraseCount": 2264,
+  "dataVersion": 5,
+  "phraseCount": 2933,
   "phrasesUrl": "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/phrases.json?ref=main",
-  "phrasesSha256": "a007339044316d9a0d833edd89a78552f49e079cb498f916bc87029112b4c4ae",
-  "phrasesSizeBytes": 693045,
-  "releaseNotes": "Splits the overloaded phonetic field: example sentences now live in examplePolish/exampleEnglish, usage notes in notes, and phonetic holds only real pronunciation hints."
+  "phrasesSha256": "c4a4537780f450b116197ee7ead6ab515a1cb97fe9aa11d7a8ec9bf6d5c18f83",
+  "phrasesSizeBytes": 865581,
+  "releaseNotes": "Adds 116 original B1/B2 speaking-practice cards across biography, leisure, sport, city life, travel, education, culture, work, law, social issues, food, fashion, environment, and technology."
 }

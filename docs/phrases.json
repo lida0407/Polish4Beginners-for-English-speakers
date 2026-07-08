@@ -24264,5 +24264,6548 @@
     "english": "Please send a message.",
     "phonetic": "",
     "notes": "contact"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "która",
+    "english": "which one (fem.)",
+    "phonetic": ""
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "fundacja",
+    "english": "foundation",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "grant",
+    "english": "grant, scholarship",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A1",
+    "polish": "piętro",
+    "english": "floor, storey",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "Polka",
+    "english": "a Polish woman",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "przystojny",
+    "english": "handsome",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "uśmiechnięty",
+    "english": "smiling",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "stypendium",
+    "english": "scholarship, grant",
+    "phonetic": "",
+    "notes": "(n.); does not decline in singular"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "wyjazd",
+    "english": "departure, trip",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "znakomicie",
+    "english": "brilliantly, excellently",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Czy życie nie jest piękne?",
+    "english": "Isn't life beautiful?",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "Jaka szkoda!",
+    "english": "What a pity!",
+    "phonetic": ""
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "Mam bilet na pierwszego maja.",
+    "english": "I have a ticket for May 1st.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Mieć czegoś dość.",
+    "english": "To have had enough of something.",
+    "phonetic": ""
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "Ona jest Polką.",
+    "english": "She is Polish.",
+    "phonetic": ""
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "Staram się o stypendium.",
+    "english": "I'm trying to get a scholarship.",
+    "phonetic": ""
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A1",
+    "polish": "To nasz dyrektor.",
+    "english": "He is our director.",
+    "phonetic": ""
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "Umówić kogoś z kimś.",
+    "english": "To arrange a meeting between two people.",
+    "phonetic": ""
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "Za tydzień.",
+    "english": "In a week.",
+    "phonetic": ""
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "Zajmować się czymś.",
+    "english": "To occupy oneself with something.",
+    "phonetic": ""
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A2",
+    "polish": "Chciałbym coś przedstawić.",
+    "english": "I would like to introduce someone (male speaker).",
+    "phonetic": ""
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "Co u ciebie słychać?",
+    "english": "What's new with you?",
+    "phonetic": ""
+  },
+  {
+    "category": "Nature & Animals",
+    "scenario": "Nature & Animals",
+    "level": "A2",
+    "polish": "niezapominajka",
+    "english": "forget-me-not (flower)",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
+    "level": "A2",
+    "polish": "Które miasto w Polsce cię interesuje?",
+    "english": "Which city in Poland interests you?",
+    "phonetic": ""
+  },
+  {
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
+    "level": "A2",
+    "polish": "Mieszkasz całe życie w...",
+    "english": "You've lived your whole life in...",
+    "phonetic": ""
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "Na twoje urodziny.",
+    "english": "For your birthday.",
+    "phonetic": ""
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A2",
+    "polish": "Pamiętasz, kiedy mam urodziny?",
+    "english": "Do you remember when my birthday is?",
+    "phonetic": ""
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A2",
+    "polish": "Twoja rodzina pochodzi z...",
+    "english": "Your family comes from...",
+    "phonetic": ""
+  },
+  {
+    "category": "Nature & Animals",
+    "scenario": "Nature & Animals",
+    "level": "A2",
+    "polish": "Twoje ukochane kwiaty.",
+    "english": "Your favorite flowers.",
+    "phonetic": ""
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "Za osiem miesięcy.",
+    "english": "In eight months.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Zrobię, co mogę.",
+    "english": "I'll do what I can.",
+    "phonetic": ""
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A2",
+    "polish": "Chciałem o coś zapytać.",
+    "english": "I wanted to ask about something (male speaker).",
+    "phonetic": ""
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "Serdecznie dziękuję.",
+    "english": "Thank you very much, sincerely.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "denerwować się",
+    "english": "to get upset, to be nervous",
+    "phonetic": "",
+    "notes": "(denerwuję się, denerwujesz się)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "popatrzeć na coś",
+    "english": "to look at something",
+    "phonetic": "",
+    "notes": "(popatrzę, popatrzysz)"
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A2",
+    "polish": "blady",
+    "english": "pale",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A1",
+    "polish": "chusteczka",
+    "english": "tissue, handkerchief",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Numbers & Measures",
+    "scenario": "Numbers & Measures",
+    "level": "A1",
+    "polish": "stopień Celsjusza",
+    "english": "degree Celsius",
+    "phonetic": ""
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A2",
+    "polish": "odpinać",
+    "english": "to unfasten",
+    "phonetic": "",
+    "notes": "(odpinam, odpinasz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "powtarzać za kimś",
+    "english": "to repeat after someone",
+    "phonetic": "",
+    "notes": "(powtarzam, powtarzasz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "pozostać na czymś",
+    "english": "to remain in something",
+    "phonetic": "",
+    "notes": "(pozostanę, pozostaniesz)"
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "witać kogoś",
+    "english": "to welcome someone",
+    "phonetic": "",
+    "notes": "(witam, witasz)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A2",
+    "polish": "wylatywać",
+    "english": "to depart by air, to fly out",
+    "phonetic": "",
+    "notes": "(wylatuję, wylatujesz)"
+  },
+  {
+    "category": "Clothing & Appearance",
+    "scenario": "Clothing & Appearance",
+    "level": "A1",
+    "polish": "błękitny",
+    "english": "sky blue",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Nature & Animals",
+    "scenario": "Nature & Animals",
+    "level": "A1",
+    "polish": "górski",
+    "english": "mountain (adjective)",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A2",
+    "polish": "higieniczny",
+    "english": "hygienic",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "kontrola paszportowa",
+    "english": "passport control",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A1",
+    "polish": "u siebie",
+    "english": "at home, in one's own place",
+    "phonetic": ""
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "Czas miejscowy.",
+    "english": "Local time.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Ze łzami w oczach.",
+    "english": "With tears in one's eyes.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Życie jest pełne niespodzianek.",
+    "english": "Life is full of surprises.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Chce mi się płakać.",
+    "english": "I feel like crying.",
+    "phonetic": ""
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "Czyja to jest chusteczka?",
+    "english": "Whose handkerchief is this?",
+    "phonetic": ""
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A1",
+    "polish": "internetowy",
+    "english": "internet (adjective)",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "koleżanka",
+    "english": "friend, colleague (female)",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "nazwa",
+    "english": "name (of a thing, place)",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "Polak",
+    "english": "a Polish man",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A2",
+    "polish": "znajomy",
+    "english": "acquaintance",
+    "phonetic": "",
+    "notes": "(m.); declines like an adjective, fem. znajoma"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "cieszyć się, że...",
+    "english": "to be glad that...",
+    "phonetic": "",
+    "notes": "(cieszę się, cieszysz się)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "dbać o kogoś",
+    "english": "to take care of someone",
+    "phonetic": "",
+    "notes": "(dbam, dbasz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "podchodzić do kogoś",
+    "english": "to approach someone",
+    "phonetic": "",
+    "notes": "(podchodzę, podchodzisz)"
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "przedstawiać się",
+    "english": "to introduce oneself",
+    "phonetic": "",
+    "notes": "(przedstawiam się, przedstawiasz się)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "zapamiętać coś",
+    "english": "to memorize something",
+    "phonetic": "",
+    "notes": "(zapamiętam, zapamiętasz)"
+  },
+  {
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
+    "level": "A1",
+    "polish": "dzielnica",
+    "english": "neighborhood, district",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "gościnność",
+    "english": "hospitality",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "kotlet schabowy",
+    "english": "breaded pork chop",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "najdroższy",
+    "english": "most expensive; dearest",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "oznaka",
+    "english": "sign, indication",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A2",
+    "polish": "podróżny",
+    "english": "traveler",
+    "phonetic": "",
+    "notes": "(m.); declines like an adjective"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "stewardesa",
+    "english": "flight attendant",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "zaskoczenie",
+    "english": "surprise",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "Jedna z nich.",
+    "english": "One of them.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Od przybytku głowa nie boli.",
+    "english": "You can never have too much of a good thing (proverb).",
+    "phonetic": ""
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A2",
+    "polish": "Czy mógłbym się przedstawić?",
+    "english": "May I introduce myself? (male speaker)",
+    "phonetic": ""
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A2",
+    "polish": "Przedstawiam ci...",
+    "english": "Let me introduce you to...",
+    "phonetic": ""
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A2",
+    "polish": "dostęp do czegoś",
+    "english": "access to something",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Clothing & Appearance",
+    "scenario": "Clothing & Appearance",
+    "level": "A1",
+    "polish": "dzinsy",
+    "english": "jeans",
+    "phonetic": "",
+    "notes": "(pl.)"
+  },
+  {
+    "category": "Clothing & Appearance",
+    "scenario": "Clothing & Appearance",
+    "level": "A2",
+    "polish": "gustowny",
+    "english": "tasteful, stylish",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A2",
+    "polish": "internauta",
+    "english": "internet user",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A2",
+    "polish": "miesięcznie",
+    "english": "monthly",
+    "phonetic": ""
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A2",
+    "polish": "nawiązanie kontaktu",
+    "english": "establishing contact",
+    "phonetic": ""
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "obaj",
+    "english": "both (masc. persons)",
+    "phonetic": ""
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A2",
+    "polish": "podłączenie",
+    "english": "connection",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "przyjaciel",
+    "english": "friend",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A1",
+    "polish": "przytulny",
+    "english": "cozy",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A2",
+    "polish": "właściciel",
+    "english": "owner, landlord",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A2",
+    "polish": "wychodzić na coś",
+    "english": "to face, look out on something",
+    "phonetic": "",
+    "notes": "(wychodzi, said of windows/rooms)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "zapalony",
+    "english": "keen, enthusiastic (about something)",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A1",
+    "polish": "Czuć się jak u siebie w domu.",
+    "english": "To feel at home.",
+    "phonetic": ""
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A1",
+    "polish": "Jakie kolorowe ściany!",
+    "english": "What colorful walls!",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Mieć problemy z czymś.",
+    "english": "To have problems with something.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "To miło z twojej strony.",
+    "english": "That's very nice of you.",
+    "phonetic": ""
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "To na razie wszystko.",
+    "english": "That's all for now.",
+    "phonetic": ""
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "jeździć",
+    "english": "to ride, to travel (by vehicle, repeatedly)",
+    "phonetic": "",
+    "notes": "(jeżdżę, jeździsz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "oczekiwać na coś",
+    "english": "to wait for, to expect something",
+    "phonetic": "",
+    "notes": "(oczekuję, oczekujesz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "uchodzić za kogoś",
+    "english": "to pass as somebody, to be regarded as somebody",
+    "phonetic": "",
+    "notes": "(uchodzę, uchodzisz)"
+  },
+  {
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
+    "level": "A1",
+    "polish": "czeski",
+    "english": "Czech",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "dopiero",
+    "english": "only then, not until",
+    "phonetic": ""
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "droższy",
+    "english": "more expensive",
+    "phonetic": ""
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A2",
+    "polish": "handlarz",
+    "english": "trader, seller",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "o właśnie!",
+    "english": "exactly!, that's it!",
+    "phonetic": ""
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "proszę pana",
+    "english": "excuse me, sir (polite address)",
+    "phonetic": ""
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A2",
+    "polish": "skok",
+    "english": "jump",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "sprzedaż",
+    "english": "sale",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A2",
+    "polish": "stać kogoś na coś",
+    "english": "to be able to afford something",
+    "phonetic": ""
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "stragan",
+    "english": "market stall",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "towar",
+    "english": "merchandise, goods",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A2",
+    "polish": "usługa",
+    "english": "service",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A2",
+    "polish": "wysportowany",
+    "english": "athletic",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A2",
+    "polish": "Coś jest tanie jak barszcz.",
+    "english": "Something is dirt cheap.",
+    "phonetic": ""
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A1",
+    "polish": "mistrz świata",
+    "english": "world champion",
+    "phonetic": ""
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "Biorę to.",
+    "english": "I'll take it.",
+    "phonetic": ""
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A2",
+    "polish": "Mogę sobie na to pozwolić.",
+    "english": "I can afford that.",
+    "phonetic": ""
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A2",
+    "polish": "Nie stać mnie na to.",
+    "english": "I can't afford that.",
+    "phonetic": ""
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "To niedrogo.",
+    "english": "That's not expensive.",
+    "phonetic": ""
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "brzmieć",
+    "english": "to sound",
+    "phonetic": "",
+    "notes": "(coś brzmi + adverb)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "proponować",
+    "english": "to suggest, to propose",
+    "phonetic": "",
+    "notes": "(proponuję, proponujesz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "przeglądać",
+    "english": "to look over, to browse",
+    "phonetic": "",
+    "notes": "(przeglądam, przeglądasz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "radzić komuś",
+    "english": "to advise someone",
+    "phonetic": "",
+    "notes": "(radzę, radzisz)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "smakować",
+    "english": "to taste (good)",
+    "phonetic": "",
+    "notes": "(coś smakuje)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "uwielbiać",
+    "english": "to adore, to love",
+    "phonetic": "",
+    "notes": "(uwielbiam, uwielbiasz)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "woleć",
+    "english": "to prefer",
+    "phonetic": "",
+    "notes": "(wolę, wolisz)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "zamawiać",
+    "english": "to order (food, drinks)",
+    "phonetic": "",
+    "notes": "(zamawiam, zamawiasz)"
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "zapraszać",
+    "english": "to invite",
+    "phonetic": "",
+    "notes": "(zapraszam, zapraszasz)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "kasza",
+    "english": "groats, porridge",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "kopytka",
+    "english": "Polish potato dumplings",
+    "phonetic": "",
+    "notes": "(pl.)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A2",
+    "polish": "kurki",
+    "english": "chanterelle mushrooms",
+    "phonetic": "",
+    "notes": "(pl.)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "pierogi",
+    "english": "Polish dumplings",
+    "phonetic": "",
+    "notes": "(pl.)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "potrawa",
+    "english": "dish (type of food)",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Nature & Animals",
+    "scenario": "Nature & Animals",
+    "level": "A2",
+    "polish": "prosię",
+    "english": "piglet",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A2",
+    "polish": "śledź",
+    "english": "herring",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "śmietana",
+    "english": "sour cream",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A2",
+    "polish": "wędzony",
+    "english": "smoked",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Nature & Animals",
+    "scenario": "Nature & Animals",
+    "level": "A2",
+    "polish": "węgorz",
+    "english": "eel",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "zupa",
+    "english": "soup",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "A co z rachunkiem?",
+    "english": "And what about the bill?",
+    "phonetic": ""
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "Czy to panu smakuje?",
+    "english": "Do you like the taste of it, sir?",
+    "phonetic": ""
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "Jestem syty.",
+    "english": "I'm full.",
+    "phonetic": ""
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "Ja stawiam.",
+    "english": "It's my treat.",
+    "phonetic": ""
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "Płacę za wszystko.",
+    "english": "I'll pay for everything.",
+    "phonetic": ""
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "Smacznego.",
+    "english": "Bon appétit.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Czuję się jak w siódmym niebie.",
+    "english": "I feel like I'm in seventh heaven.",
+    "phonetic": ""
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "dziać się",
+    "english": "to happen",
+    "phonetic": "",
+    "notes": "used only as: dzieje się, będzie się działo, działo się"
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A1",
+    "polish": "dzwonić do kogoś",
+    "english": "to call someone (phone)",
+    "phonetic": "",
+    "notes": "(dzwonię, dzwonisz)"
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A2",
+    "polish": "kontaktować się z kimś",
+    "english": "to contact someone",
+    "phonetic": "",
+    "notes": "(kontaktuję się, kontaktujesz się)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "niepokoić się czymś",
+    "english": "to worry about something",
+    "phonetic": "",
+    "notes": "(niepokoję się, niepokoisz się)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A2",
+    "polish": "opiekować się kimś",
+    "english": "to take care of someone",
+    "phonetic": "",
+    "notes": "(opiekuję się, opiekujesz się)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "przeżywać coś",
+    "english": "to experience something",
+    "phonetic": "",
+    "notes": "(przeżywam, przeżywasz)"
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "spędzić czas",
+    "english": "to spend time",
+    "phonetic": "",
+    "notes": "(spędzę, spędzisz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "potrafić",
+    "english": "to be able to, to be capable of",
+    "phonetic": "",
+    "notes": "(potrafię, potrafisz)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "Amerykanin",
+    "english": "an American (man)",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "braciszek",
+    "english": "little brother",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "Brazylijczyk",
+    "english": "a Brazilian (man)",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "charakter",
+    "english": "character",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "ciągle",
+    "english": "constantly",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "kryzys",
+    "english": "crisis",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A1",
+    "polish": "lalka",
+    "english": "doll",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "przyjemność",
+    "english": "pleasure",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "rodzeństwo",
+    "english": "siblings",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "samopoczucie",
+    "english": "mood, frame of mind",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "siostrzyczka",
+    "english": "little sister",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "synek",
+    "english": "little son",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "trudność",
+    "english": "difficulty",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Weather & Nature",
+    "scenario": "Weather & Nature",
+    "level": "A1",
+    "polish": "Jest zimno.",
+    "english": "It's cold.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Mieć mocny charakter.",
+    "english": "To have a strong character.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "To prawda.",
+    "english": "That's true.",
+    "phonetic": ""
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A2",
+    "polish": "Z kim mam przyjemność?",
+    "english": "Whom do I have the pleasure of speaking to?",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Wszystko po staremu.",
+    "english": "Nothing's new, everything's the same as always.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "Tęsknię za tobą.",
+    "english": "I miss you.",
+    "phonetic": ""
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A1",
+    "polish": "budzić",
+    "english": "to wake someone up",
+    "phonetic": "",
+    "notes": "(budzi, 3rd person)"
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A2",
+    "polish": "cierpieć na coś",
+    "english": "to suffer from something",
+    "phonetic": "",
+    "notes": "(cierpię, cierpisz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "kochać coś",
+    "english": "to love something",
+    "phonetic": "",
+    "notes": "(kocham, kochasz)"
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A2",
+    "polish": "uprawiać coś",
+    "english": "to practise, to do (a sport)",
+    "phonetic": "",
+    "notes": "(uprawiam, uprawiasz)"
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A2",
+    "polish": "zaradzić czemuś",
+    "english": "to remedy something",
+    "phonetic": "",
+    "notes": "(zaradzę, zaradzisz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "gust",
+    "english": "taste (preference)",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "jakiś",
+    "english": "some, any",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "jogurt",
+    "english": "yogurt",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A2",
+    "polish": "kefir",
+    "english": "kefir",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "ludzie",
+    "english": "people",
+    "phonetic": "",
+    "notes": "(pl.)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "miód",
+    "english": "honey",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A2",
+    "polish": "multiwitamina",
+    "english": "multivitamin",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "nastrój",
+    "english": "mood",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "nostalgia",
+    "english": "nostalgia",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "ochota",
+    "english": "desire, urge",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A2",
+    "polish": "organizm",
+    "english": "organism, body",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A1",
+    "polish": "płyta kompaktowa",
+    "english": "compact disc",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "rada",
+    "english": "advice, suggestion",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A1",
+    "polish": "syrop",
+    "english": "syrup",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "targ",
+    "english": "market",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A2",
+    "polish": "wiersz",
+    "english": "poem",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A2",
+    "polish": "znajoma",
+    "english": "acquaintance (female)",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "Chce mi się pić.",
+    "english": "I'm thirsty.",
+    "phonetic": ""
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "Iść na zakupy.",
+    "english": "To go shopping.",
+    "phonetic": ""
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A1",
+    "polish": "Mieć grypę.",
+    "english": "To have the flu.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "Mieć nadzieję, że...",
+    "english": "To hope that...",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Mieć ochotę na coś.",
+    "english": "To feel like having something.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "Mieć rację.",
+    "english": "To be right.",
+    "phonetic": ""
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "W takim razie...",
+    "english": "In that case...",
+    "phonetic": ""
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A1",
+    "polish": "Bolą mnie zęby.",
+    "english": "I have a toothache.",
+    "phonetic": ""
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A1",
+    "polish": "Co z tobą?",
+    "english": "What's wrong with you?",
+    "phonetic": ""
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A1",
+    "polish": "Jestem bardzo słaby.",
+    "english": "I feel really weak (male speaker).",
+    "phonetic": ""
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A2",
+    "polish": "Muszę pana zbadać.",
+    "english": "I have to examine you, sir.",
+    "phonetic": ""
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A1",
+    "polish": "Wszystko mnie boli.",
+    "english": "Everything hurts, my whole body aches.",
+    "phonetic": ""
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "brakować",
+    "english": "to lack, to be missing",
+    "phonetic": "",
+    "notes": "(brakuje czegoś)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "korzystać z czegoś",
+    "english": "to use something",
+    "phonetic": "",
+    "notes": "(korzystam, korzystasz)"
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A1",
+    "polish": "palić",
+    "english": "to smoke",
+    "phonetic": "",
+    "notes": "(palę, palisz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "potrzebować czegoś",
+    "english": "to need something",
+    "phonetic": "",
+    "notes": "(potrzebuję, potrzebujesz)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "przetłumaczyć coś",
+    "english": "to translate something",
+    "phonetic": "",
+    "notes": "(przetłumaczę, przetłumaczysz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "szukać czegoś",
+    "english": "to look for, to search for something",
+    "phonetic": "",
+    "notes": "(szukam, szukasz)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A2",
+    "polish": "wybierać się na coś",
+    "english": "to be planning to go somewhere",
+    "phonetic": "",
+    "notes": "(wybieram się, wybierasz się)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "zastanawiać się",
+    "english": "to think about, to wonder",
+    "phonetic": "",
+    "notes": "(zastanawiam się, zastanawiasz się)"
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A1",
+    "polish": "bajka",
+    "english": "fairytale",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A2",
+    "polish": "beczka",
+    "english": "barrel, keg",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "dżem",
+    "english": "jam",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A2",
+    "polish": "hałas",
+    "english": "noise",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "karton",
+    "english": "carton",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "papieros",
+    "english": "cigarette",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "pomysł",
+    "english": "idea",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "rzecz",
+    "english": "thing",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A1",
+    "polish": "szafka",
+    "english": "cupboard, cabinet",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "śniadanie",
+    "english": "breakfast",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A1",
+    "polish": "zapałka",
+    "english": "match (for lighting)",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "Co za pomysł!",
+    "english": "What an idea!",
+    "phonetic": ""
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "Jeść coś na śniadanie.",
+    "english": "To eat something for breakfast.",
+    "phonetic": ""
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "Robić zakupy.",
+    "english": "To go shopping.",
+    "phonetic": ""
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "Czy ma pan drobne?",
+    "english": "Do you have any small change, sir?",
+    "phonetic": ""
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "Proszę wpisać PIN.",
+    "english": "Please enter your PIN.",
+    "phonetic": ""
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "Proszę zapłacić w kasie.",
+    "english": "Please pay at the register.",
+    "phonetic": ""
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "W czym mogę pomóc?",
+    "english": "How can I help you?",
+    "phonetic": ""
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "dowiadywać się o czymś",
+    "english": "to find something out",
+    "phonetic": "",
+    "notes": "(dowiaduję się, dowiadujesz się)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "odwiedzać kogoś",
+    "english": "to visit someone",
+    "phonetic": "",
+    "notes": "(odwiedzam, odwiedzasz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "okazywać się",
+    "english": "to turn out (that)",
+    "phonetic": "",
+    "notes": "(okazuje się, że...)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "opowiadać coś",
+    "english": "to tell, to recount something",
+    "phonetic": "",
+    "notes": "(opowiadam, opowiadasz)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "rozwiązać coś",
+    "english": "to solve something",
+    "phonetic": "",
+    "notes": "(rozwiążę, rozwiążesz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "zachowywać się jak ktoś",
+    "english": "to behave like someone",
+    "phonetic": "",
+    "notes": "(zachowuję się, zachowujesz się)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "znikać",
+    "english": "to disappear",
+    "phonetic": "",
+    "notes": "(znikam, znikasz)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A1",
+    "polish": "autor",
+    "english": "author, writer",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "ciotka",
+    "english": "aunt",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
+    "level": "A2",
+    "polish": "mieszkaniec",
+    "english": "resident",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "nazwisko",
+    "english": "last name",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A2",
+    "polish": "opieka",
+    "english": "care",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A2",
+    "polish": "panna",
+    "english": "girl, young unmarried woman",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "przyjaciółka",
+    "english": "friend (female)",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A2",
+    "polish": "reżyseria",
+    "english": "direction (of a film/play)",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "śmierć",
+    "english": "death",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "tajemnica",
+    "english": "mystery, secret",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A1",
+    "polish": "telewizja",
+    "english": "television",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A1",
+    "polish": "tytuł",
+    "english": "title",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A2",
+    "polish": "ulotka",
+    "english": "flier, leaflet",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "zagadka",
+    "english": "mystery, puzzle",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A1",
+    "polish": "Co grają w teatrze?",
+    "english": "What's playing at the theater?",
+    "phonetic": ""
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A1",
+    "polish": "Na jaki film chcesz iść?",
+    "english": "What film do you want to see?",
+    "phonetic": ""
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A2",
+    "polish": "O której rozpoczyna się spektakl?",
+    "english": "At what time does the show begin?",
+    "phonetic": ""
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A1",
+    "polish": "W którym rzędzie?",
+    "english": "In which row?",
+    "phonetic": ""
+  },
+  {
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
+    "level": "A1",
+    "polish": "Skąd pan jest?",
+    "english": "Where are you from, sir?",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "No widzisz!",
+    "english": "You see!",
+    "phonetic": ""
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "dostać coś od kogoś",
+    "english": "to receive something from someone",
+    "phonetic": "",
+    "notes": "(dostanę, dostaniesz)"
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A1",
+    "polish": "obejrzeć coś",
+    "english": "to watch, to see something",
+    "phonetic": "",
+    "notes": "(obejrzę, obejrzysz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "otwierać coś",
+    "english": "to open something",
+    "phonetic": "",
+    "notes": "(otwieram, otwierasz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "przynieść coś",
+    "english": "to bring something",
+    "phonetic": "",
+    "notes": "(przyniosę, przyniesiesz)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "spotykać się",
+    "english": "to meet (each other)",
+    "phonetic": "",
+    "notes": "(spotykam się, spotykasz się)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "wyjeżdżać dokądś",
+    "english": "to leave for somewhere (by vehicle)",
+    "phonetic": "",
+    "notes": "(wyjeżdżam, wyjeżdżasz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "zabierać się do czegoś",
+    "english": "to get down to something",
+    "phonetic": "",
+    "notes": "(zabieram się, zabierasz się)"
+  },
+  {
+    "category": "Nature & Animals",
+    "scenario": "Nature & Animals",
+    "level": "A1",
+    "polish": "bukiet",
+    "english": "bouquet",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "człowiek",
+    "english": "human being, person",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "kwadrans",
+    "english": "quarter of an hour",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "urodziny",
+    "english": "birthday",
+    "phonetic": "",
+    "notes": "(pl.)"
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A2",
+    "polish": "żelazo",
+    "english": "iron (metal)",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "Co słychać?",
+    "english": "What's up?",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Co ty na to?",
+    "english": "What do you say to that?",
+    "phonetic": ""
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "Jestem głodny.",
+    "english": "I'm hungry (male speaker).",
+    "phonetic": ""
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "Kwadrans po szóstej.",
+    "english": "A quarter past six.",
+    "phonetic": ""
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A2",
+    "polish": "Mieć imieniny w...",
+    "english": "To have one's nameday in...",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Nie bądź złośliwa!",
+    "english": "Don't be nasty! (to a woman)",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Nie potrafić żyć bez siebie.",
+    "english": "To not be able to live without each other.",
+    "phonetic": ""
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "Obchodzić urodziny.",
+    "english": "To celebrate one's birthday.",
+    "phonetic": ""
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "Robić pierogi.",
+    "english": "To make pierogi.",
+    "phonetic": ""
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "Czy jest coś do jedzenia?",
+    "english": "Is there something to eat?",
+    "phonetic": ""
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A1",
+    "polish": "bawić się",
+    "english": "to have fun, to play",
+    "phonetic": "",
+    "notes": "(bawię się, bawisz się)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "obiecać, że...",
+    "english": "to promise that...",
+    "phonetic": "",
+    "notes": "(obiecam, obiecasz)"
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A2",
+    "polish": "planować coś",
+    "english": "to plan something",
+    "phonetic": "",
+    "notes": "(planuję, planujesz)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "pojechać dokądś",
+    "english": "to go somewhere (by transport)",
+    "phonetic": "",
+    "notes": "(pojadę, pojedziesz)"
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A1",
+    "polish": "położyć się",
+    "english": "to lie down",
+    "phonetic": "",
+    "notes": "(położę się, położysz się)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "pójść dokądś",
+    "english": "to go somewhere (on foot)",
+    "phonetic": "",
+    "notes": "(pójdę, pójdziesz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "przeszkadzać komuś",
+    "english": "to bother someone",
+    "phonetic": "",
+    "notes": "(przeszkadzam, przeszkadzasz)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "przyjechać dokądś",
+    "english": "to arrive somewhere (by transport)",
+    "phonetic": "",
+    "notes": "(przyjadę, przyjedziesz)"
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A1",
+    "polish": "spacerować",
+    "english": "to walk around, to stroll",
+    "phonetic": "",
+    "notes": "(spaceruję, spacerujesz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "tęsknić za kimś",
+    "english": "to miss someone",
+    "phonetic": "",
+    "notes": "(tęsknię, tęsknisz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "zostać",
+    "english": "to stay, to remain",
+    "phonetic": "",
+    "notes": "(zostanę, zostaniesz)"
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "Boże Narodzenie",
+    "english": "Christmas",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "chwila",
+    "english": "moment",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "kuzyn",
+    "english": "cousin (male)",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "niecierpliwość",
+    "english": "impatience",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A1",
+    "polish": "przedszkole",
+    "english": "preschool, kindergarten",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A2",
+    "polish": "willa",
+    "english": "villa",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A2",
+    "polish": "wydarzenie",
+    "english": "event",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Czekać na kogoś z niecierpliwością.",
+    "english": "To wait for someone impatiently.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Daj Boże!",
+    "english": "Please God! (idiom for hoping something happens)",
+    "phonetic": ""
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "Jak długo?",
+    "english": "How long?",
+    "phonetic": ""
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "Dziękuję za gościnę.",
+    "english": "Thank you for your hospitality.",
+    "phonetic": ""
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A2",
+    "polish": "Jadę w odwiedziny do...",
+    "english": "I'm going to visit... (male speaker)",
+    "phonetic": ""
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A2",
+    "polish": "Proszę się rozgościć.",
+    "english": "Please make yourself at home.",
+    "phonetic": ""
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "dostawać coś",
+    "english": "to receive something",
+    "phonetic": "",
+    "notes": "(dostaję, dostajesz)"
+  },
+  {
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
+    "level": "A2",
+    "polish": "emigrować skądś",
+    "english": "to emigrate from somewhere",
+    "phonetic": "",
+    "notes": "(emigruję, emigrujesz)"
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A1",
+    "polish": "oglądać coś",
+    "english": "to watch, to look at something",
+    "phonetic": "",
+    "notes": "(oglądam, oglądasz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "patrzeć na coś",
+    "english": "to look at something",
+    "phonetic": "",
+    "notes": "(patrzę, patrzysz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "przypominać sobie coś",
+    "english": "to recall something",
+    "phonetic": "",
+    "notes": "(przypominam sobie, przypominasz sobie)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "skończyć coś",
+    "english": "to finish something",
+    "phonetic": "",
+    "notes": "(skończę, skończysz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "uciekać",
+    "english": "to escape, to run away",
+    "phonetic": "",
+    "notes": "(uciekam, uciekasz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "wspominać coś",
+    "english": "to recall, to remember something",
+    "phonetic": "",
+    "notes": "(wspominam, wspominasz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "zabrać coś",
+    "english": "to take something (with you)",
+    "phonetic": "",
+    "notes": "(zabiorę, zabierzesz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "zaginąć",
+    "english": "to disappear, to go missing",
+    "phonetic": "",
+    "notes": "(zaginę, zaginiesz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "zapomnieć czegoś",
+    "english": "to forget something",
+    "phonetic": "",
+    "notes": "(zapomnę, zapomnisz)"
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A1",
+    "polish": "zasnąć",
+    "english": "to fall asleep",
+    "phonetic": "",
+    "notes": "(zasnę, zaśniesz)"
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "żegnać się",
+    "english": "to say goodbye",
+    "phonetic": "",
+    "notes": "(żegnam się, żegnasz się)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "cecha narodowa",
+    "english": "national trait",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "cisza",
+    "english": "silence",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
+    "level": "A2",
+    "polish": "gmina",
+    "english": "commune, municipality",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "pamiątka",
+    "english": "souvenir, memento",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A2",
+    "polish": "pobyt",
+    "english": "stay",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A2",
+    "polish": "przeszłość",
+    "english": "the past",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "przysłowie",
+    "english": "proverb, saying",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "rodzice",
+    "english": "parents",
+    "phonetic": "",
+    "notes": "(pl.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A2",
+    "polish": "wspólnota",
+    "english": "community",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A1",
+    "polish": "zdjęcie",
+    "english": "photograph",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A2",
+    "polish": "żurek",
+    "english": "Polish sour rye soup",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Być przekonanym.",
+    "english": "To be convinced.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Gość w dom, Bóg w dom.",
+    "english": "A guest in the home is God in the home (Polish hospitality proverb).",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "Jak chcesz.",
+    "english": "As you wish.",
+    "phonetic": ""
+  },
+  {
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
+    "level": "A1",
+    "polish": "Mieszkać nad jeziorem.",
+    "english": "To live by a lake.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "To lubię.",
+    "english": "I like that.",
+    "phonetic": ""
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A2",
+    "polish": "Zachować coś na pamiątkę.",
+    "english": "To keep something as a souvenir.",
+    "phonetic": ""
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "Kupić coś na pamiątkę.",
+    "english": "To buy something as a souvenir.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Wspominać stare, dobre czasy.",
+    "english": "To remember the good old days.",
+    "phonetic": ""
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "dojechać",
+    "english": "to arrive, to reach a place (by transport)",
+    "phonetic": "",
+    "notes": "(dojadę, dojedziesz)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "lecieć",
+    "english": "to fly; (informally) to hurry",
+    "phonetic": "",
+    "notes": "(lecę, lecisz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "odbierać coś",
+    "english": "to pick up, to receive something",
+    "phonetic": "",
+    "notes": "(odbieram, odbierasz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "skorzystać z czegoś",
+    "english": "to make use of something",
+    "phonetic": "",
+    "notes": "(skorzystam, skorzystasz)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "wysiadać",
+    "english": "to get off, to get out (of a vehicle)",
+    "phonetic": "",
+    "notes": "(wysiadam, wysiadasz)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "zatrzymać się",
+    "english": "to stop",
+    "phonetic": "",
+    "notes": "(zatrzymam się, zatrzymasz się)"
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "życzyć komuś czegoś",
+    "english": "to wish someone something",
+    "phonetic": "",
+    "notes": "(życzę, życzysz)"
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "kasjerka",
+    "english": "cashier, ticket clerk (female)",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "opóźnienie",
+    "english": "delay",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A2",
+    "polish": "pętla tramwajowa",
+    "english": "tram terminus",
+    "phonetic": ""
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A1",
+    "polish": "sms",
+    "english": "text message",
+    "phonetic": "",
+    "notes": "(m., informal)"
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A1",
+    "polish": "telefon komórkowy",
+    "english": "cell phone",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "tramwaj",
+    "english": "tram",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A2",
+    "polish": "Jak ten czas leci.",
+    "english": "How time flies.",
+    "phonetic": ""
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "Iść pieszo.",
+    "english": "To go on foot.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "Nie mieć racji.",
+    "english": "To be wrong.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "Nic nie szkodzi.",
+    "english": "No harm done, it's all right.",
+    "phonetic": ""
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "Życzyć komuś miłej podróży.",
+    "english": "To wish someone a nice trip.",
+    "phonetic": ""
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A2",
+    "polish": "Co za koszmarna podróż!",
+    "english": "What a nightmare journey!",
+    "phonetic": ""
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "Kupić bilet tam i z powrotem.",
+    "english": "To buy a round-trip ticket.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "liczyć na coś",
+    "english": "to count on something",
+    "phonetic": "",
+    "notes": "(liczę, liczysz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "stać gdzieś",
+    "english": "to stand somewhere",
+    "phonetic": "",
+    "notes": "(stoję, stoisz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "wejść dokądś",
+    "english": "to enter somewhere",
+    "phonetic": "",
+    "notes": "(wejdę, wejdziesz)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "założyć coś",
+    "english": "to establish, to found, to start something",
+    "phonetic": "",
+    "notes": "(założę, założysz)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "administracja",
+    "english": "administration",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A1",
+    "polish": "adres elektroniczny",
+    "english": "email address",
+    "phonetic": ""
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A1",
+    "polish": "dyplom",
+    "english": "diploma",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "dziedzina",
+    "english": "field (of study/work)",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Administration & Services",
+    "scenario": "Administration & Services",
+    "level": "A2",
+    "polish": "konsulat",
+    "english": "consulate",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Banking",
+    "scenario": "Banking",
+    "level": "A1",
+    "polish": "konto",
+    "english": "account",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "lektor",
+    "english": "language instructor",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
+    "level": "A1",
+    "polish": "osiedle",
+    "english": "housing estate, neighborhood",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "propozycja",
+    "english": "offer, proposal",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "sprawa",
+    "english": "matter, issue",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A1",
+    "polish": "uczelnia",
+    "english": "college, university",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "wiedza",
+    "english": "knowledge",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "wizyta",
+    "english": "visit",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A1",
+    "polish": "Otrzymać pracę.",
+    "english": "To get a job.",
+    "phonetic": ""
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "Podpisać umowę o pracę.",
+    "english": "To sign an employment contract.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "dokuczać komuś",
+    "english": "to tease, to pester someone",
+    "phonetic": "",
+    "notes": "(dokuczam, dokuczasz)"
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A1",
+    "polish": "kliknąć",
+    "english": "to click",
+    "phonetic": "",
+    "notes": "(kliknę, klikniesz)"
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "pospieszyć się",
+    "english": "to hurry",
+    "phonetic": "",
+    "notes": "(pospieszę się, pospieszysz się)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "przygotować się do czegoś",
+    "english": "to get ready for something",
+    "phonetic": "",
+    "notes": "(przygotuję się, przygotujesz się)"
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A2",
+    "polish": "schudnąć",
+    "english": "to lose weight",
+    "phonetic": "",
+    "notes": "(schudnę, schudniesz)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "spakować się",
+    "english": "to pack (one's bags)",
+    "phonetic": "",
+    "notes": "(spakuję się, spakujesz się)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "śmiać się, że...",
+    "english": "to laugh (that)...",
+    "phonetic": "",
+    "notes": "(śmieję się, śmiejesz się)"
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "spieszyć się",
+    "english": "to hurry, to be in a rush",
+    "phonetic": "",
+    "notes": "(spieszę się, spieszysz się)"
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A1",
+    "polish": "wydrukować coś",
+    "english": "to print something",
+    "phonetic": "",
+    "notes": "(wydrukuję, wydrukujesz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "potrzeba",
+    "english": "need",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "szczęście",
+    "english": "luck, happiness",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A1",
+    "polish": "szlak",
+    "english": "trail, path",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "trasa",
+    "english": "route",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Weather & Nature",
+    "scenario": "Weather & Nature",
+    "level": "A2",
+    "polish": "zmierzch",
+    "english": "dusk",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Mieć jakąś potrzebę.",
+    "english": "To have some kind of need.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "Mieć szczęście.",
+    "english": "To be lucky.",
+    "phonetic": ""
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A1",
+    "polish": "Być na diecie.",
+    "english": "To be on a diet.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Mieć pecha.",
+    "english": "To be unlucky, to have bad luck.",
+    "phonetic": ""
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A2",
+    "polish": "dojeżdżać dokądś",
+    "english": "to commute, to reach a place",
+    "phonetic": "",
+    "notes": "(dojeżdżam, dojeżdżasz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "przyglądać się czemuś",
+    "english": "to observe, to watch something",
+    "phonetic": "",
+    "notes": "(przyglądam się, przyglądasz się)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "tracić coś",
+    "english": "to lose something",
+    "phonetic": "",
+    "notes": "(tracę, tracisz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "zastanawiać się nad czymś",
+    "english": "to consider, to think about something",
+    "phonetic": "",
+    "notes": "(zastanawiam się, zastanawiasz się)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "humor",
+    "english": "mood, humor",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "korek",
+    "english": "traffic jam",
+    "phonetic": "",
+    "notes": "(m., informal)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "możliwość",
+    "english": "possibility",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "strona",
+    "english": "side; page",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A2",
+    "polish": "tablica rejestracyjna",
+    "english": "license plate",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Weather & Nature",
+    "scenario": "Weather & Nature",
+    "level": "A1",
+    "polish": "Ale gorąco!",
+    "english": "It's so hot!",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Nie tracić humoru.",
+    "english": "To not lose one's sense of humor.",
+    "phonetic": ""
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "Stać w korkach.",
+    "english": "To be stuck in traffic.",
+    "phonetic": ""
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "W przyszłym tygodniu.",
+    "english": "Next week.",
+    "phonetic": ""
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "Za dwa tygodnie.",
+    "english": "In two weeks.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "darować komuś coś",
+    "english": "to forgive someone for something",
+    "phonetic": "",
+    "notes": "(daruję, darujesz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "kończyć się",
+    "english": "to end, to finish",
+    "phonetic": "",
+    "notes": "(kończy się)"
+  },
+  {
+    "category": "Administration & Services",
+    "scenario": "Administration & Services",
+    "level": "A1",
+    "polish": "podpisać coś",
+    "english": "to sign something",
+    "phonetic": "",
+    "notes": "(podpiszę, podpiszesz)"
+  },
+  {
+    "category": "Numbers & Measures",
+    "scenario": "Numbers & Measures",
+    "level": "A2",
+    "polish": "przeliczać coś na coś",
+    "english": "to convert something into something",
+    "phonetic": "",
+    "notes": "(przeliczam, przeliczasz)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "wybrać się",
+    "english": "to set off, to go somewhere",
+    "phonetic": "",
+    "notes": "(wybiorę się, wybierzesz się)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A2",
+    "polish": "góral",
+    "english": "Polish highlander (male)",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A2",
+    "polish": "kurort",
+    "english": "resort",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Administration & Services",
+    "scenario": "Administration & Services",
+    "level": "A1",
+    "polish": "mandat",
+    "english": "fine, ticket",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Emergencies & Safety",
+    "scenario": "Emergencies & Safety",
+    "level": "A1",
+    "polish": "policja drogowa",
+    "english": "highway patrol",
+    "phonetic": ""
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A2",
+    "polish": "radar",
+    "english": "radar",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Numbers & Measures",
+    "scenario": "Numbers & Measures",
+    "level": "A1",
+    "polish": "szybkość",
+    "english": "speed",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A2",
+    "polish": "tłum",
+    "english": "crowd",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Mogło być gorzej.",
+    "english": "It could have been worse.",
+    "phonetic": ""
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "Tak czy inaczej.",
+    "english": "One way or another.",
+    "phonetic": ""
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A2",
+    "polish": "Dodać gazu.",
+    "english": "To step on the gas (informal).",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "bać się kogoś",
+    "english": "to be afraid of someone/something",
+    "phonetic": "",
+    "notes": "(boję się, boisz się)"
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A1",
+    "polish": "grać z kimś",
+    "english": "to play with someone",
+    "phonetic": "",
+    "notes": "(gram, grasz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "pokazywać coś komuś",
+    "english": "to show someone something",
+    "phonetic": "",
+    "notes": "(pokazuję, pokazujesz)"
+  },
+  {
+    "category": "Numbers & Measures",
+    "scenario": "Numbers & Measures",
+    "level": "A1",
+    "polish": "policzyć coś",
+    "english": "to count something",
+    "phonetic": "",
+    "notes": "(policzę, policzysz)"
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A1",
+    "polish": "posłuchać",
+    "english": "to listen (for a while)",
+    "phonetic": "",
+    "notes": "(posłucham, posłuchasz)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "poświęcić coś na coś",
+    "english": "to dedicate something to something",
+    "phonetic": "",
+    "notes": "(poświęcę, poświęcisz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "współczuć komuś",
+    "english": "to sympathize with someone",
+    "phonetic": "",
+    "notes": "(współczuję, współczujesz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "zachwalać coś",
+    "english": "to praise, to extol something",
+    "phonetic": "",
+    "notes": "(zachwalam, zachwalasz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "celownik",
+    "english": "dative case",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A1",
+    "polish": "gramatyka",
+    "english": "grammar",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "kłopot",
+    "english": "trouble, problem",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A1",
+    "polish": "nauka",
+    "english": "learning, study; science",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A2",
+    "polish": "przygoda",
+    "english": "adventure",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A1",
+    "polish": "uczeń",
+    "english": "pupil, student",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "wolny czas",
+    "english": "free time",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A1",
+    "polish": "zajęcia",
+    "english": "classes, lectures",
+    "phonetic": "",
+    "notes": "(pl.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Słowo się rzekło.",
+    "english": "The word has been spoken (idiom: a promise made can't be unmade).",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Robić miny.",
+    "english": "To make faces.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "To nie do wytrzymania.",
+    "english": "It's unbearable.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Mieć dobrą passę.",
+    "english": "To have a run of good luck.",
+    "phonetic": ""
+  },
+  {
+    "category": "Banking",
+    "scenario": "Banking",
+    "level": "A2",
+    "polish": "dysponować czymś",
+    "english": "to have something at one's disposal",
+    "phonetic": "",
+    "notes": "(dysponuję, dysponujesz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "polecić coś komuś",
+    "english": "to recommend something to someone",
+    "phonetic": "",
+    "notes": "(polecę, polecisz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "przejmować się czymś",
+    "english": "to be concerned about something",
+    "phonetic": "",
+    "notes": "(przejmuję się, przejmujesz się)"
+  },
+  {
+    "category": "Banking",
+    "scenario": "Banking",
+    "level": "A1",
+    "polish": "zarabiać",
+    "english": "to earn",
+    "phonetic": "",
+    "notes": "(zarabiam, zarabiasz)"
+  },
+  {
+    "category": "Places & Directions",
+    "scenario": "Places & Directions",
+    "level": "A1",
+    "polish": "znajdować się",
+    "english": "to be located",
+    "phonetic": "",
+    "notes": "(znajduję się, znajdujesz się)"
+  },
+  {
+    "category": "Banking",
+    "scenario": "Banking",
+    "level": "A1",
+    "polish": "bankomat",
+    "english": "ATM, cash machine",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Banking",
+    "scenario": "Banking",
+    "level": "A2",
+    "polish": "dochód",
+    "english": "income",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "doradca",
+    "english": "advisor",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Personal Data & Forms",
+    "scenario": "Personal Data & Forms",
+    "level": "A1",
+    "polish": "formularz",
+    "english": "form",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A1",
+    "polish": "klient",
+    "english": "client, customer",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Banking",
+    "scenario": "Banking",
+    "level": "A2",
+    "polish": "limit wypłat",
+    "english": "withdrawal limit",
+    "phonetic": ""
+  },
+  {
+    "category": "Banking",
+    "scenario": "Banking",
+    "level": "A2",
+    "polish": "linia kredytowa",
+    "english": "credit line",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Banking",
+    "scenario": "Banking",
+    "level": "A2",
+    "polish": "obsługa",
+    "english": "customer service",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Banking",
+    "scenario": "Banking",
+    "level": "A2",
+    "polish": "oddział",
+    "english": "branch (of a bank/company)",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A1",
+    "polish": "poczta elektroniczna",
+    "english": "email",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Banking",
+    "scenario": "Banking",
+    "level": "A1",
+    "polish": "przelew",
+    "english": "(bank) transfer",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "przystanek tramwajowy",
+    "english": "tram stop",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "umowa o pracę",
+    "english": "employment contract",
+    "phonetic": ""
+  },
+  {
+    "category": "Banking",
+    "scenario": "Banking",
+    "level": "A1",
+    "polish": "wypłata",
+    "english": "withdrawal; payout",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Banking",
+    "scenario": "Banking",
+    "level": "A2",
+    "polish": "Mieć stałe dochody.",
+    "english": "To have a steady income.",
+    "phonetic": ""
+  },
+  {
+    "category": "Banking",
+    "scenario": "Banking",
+    "level": "A1",
+    "polish": "Zakładać konto w banku.",
+    "english": "To open a bank account.",
+    "phonetic": ""
+  },
+  {
+    "category": "Banking",
+    "scenario": "Banking",
+    "level": "A2",
+    "polish": "Dokonywać przelewów przez internet.",
+    "english": "To make transfers online.",
+    "phonetic": ""
+  },
+  {
+    "category": "Banking",
+    "scenario": "Banking",
+    "level": "A2",
+    "polish": "Mieć debet.",
+    "english": "To be overdrawn.",
+    "phonetic": ""
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A1",
+    "polish": "biec dokądś",
+    "english": "to run somewhere",
+    "phonetic": "",
+    "notes": "(biegnę, biegniesz)"
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A1",
+    "polish": "boleć",
+    "english": "to hurt",
+    "phonetic": "",
+    "notes": "(coś kogoś boli)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "obchodzić się bez czegoś",
+    "english": "to do without something",
+    "phonetic": "",
+    "notes": "(obchodzę się, obchodzisz się)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "przestać",
+    "english": "to stop (doing something)",
+    "phonetic": "",
+    "notes": "(przestanę, przestaniesz)"
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A1",
+    "polish": "przykryć się czymś",
+    "english": "to cover oneself with something",
+    "phonetic": "",
+    "notes": "(przykryję się, przykryjesz się)"
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A1",
+    "polish": "wstać",
+    "english": "to get up, to stand up",
+    "phonetic": "",
+    "notes": "(wstanę, wstaniesz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "zamknąć coś",
+    "english": "to close something",
+    "phonetic": "",
+    "notes": "(zamknę, zamkniesz)"
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A1",
+    "polish": "zadzwonić po kogoś",
+    "english": "to call for someone (to come)",
+    "phonetic": "",
+    "notes": "(zadzwonię, zadzwonisz)"
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A2",
+    "polish": "zbadać kogoś",
+    "english": "to examine someone (medically)",
+    "phonetic": "",
+    "notes": "(zbadam, zbadasz)"
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A2",
+    "polish": "angina",
+    "english": "strep throat, tonsillitis",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A1",
+    "polish": "gardło",
+    "english": "throat",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A2",
+    "polish": "kompres",
+    "english": "compress",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A2",
+    "polish": "Co panu dolega?",
+    "english": "What's bothering you, sir? (asking about symptoms)",
+    "phonetic": ""
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A1",
+    "polish": "Boli mnie gardło.",
+    "english": "My throat hurts.",
+    "phonetic": ""
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A1",
+    "polish": "Czuć się coraz gorzej.",
+    "english": "To feel worse and worse.",
+    "phonetic": ""
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A1",
+    "polish": "Mieć bóle żołądka.",
+    "english": "To have a stomach ache.",
+    "phonetic": ""
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "Proszę wejść.",
+    "english": "Please come in.",
+    "phonetic": ""
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A1",
+    "polish": "Co cię boli?",
+    "english": "What hurts?",
+    "phonetic": ""
+  },
+  {
+    "category": "Emergencies & Safety",
+    "scenario": "Emergencies & Safety",
+    "level": "A1",
+    "polish": "Zadzwonić po pogotowie.",
+    "english": "To call an ambulance.",
+    "phonetic": ""
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A2",
+    "polish": "mijać",
+    "english": "to pass, to go by",
+    "phonetic": "",
+    "notes": "(mija, said of time)"
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "składać komuś życzenia",
+    "english": "to offer someone (birthday) wishes",
+    "phonetic": "",
+    "notes": "(składam, składasz)"
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A1",
+    "polish": "skontaktować się z kimś",
+    "english": "to contact someone",
+    "phonetic": "",
+    "notes": "(skontaktuję się, skontaktujesz się)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "spadać na coś",
+    "english": "to fall on something",
+    "phonetic": "",
+    "notes": "(spadam, spadasz)"
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A1",
+    "polish": "śpiewać komuś coś",
+    "english": "to sing something to someone",
+    "phonetic": "",
+    "notes": "(śpiewam, śpiewasz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "uwierzyć komuś",
+    "english": "to believe someone",
+    "phonetic": "",
+    "notes": "(uwierzę, uwierzysz)"
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A1",
+    "polish": "wysyłać coś",
+    "english": "to send something",
+    "phonetic": "",
+    "notes": "(wysyłam, wysyłasz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "zawiadamiać o czymś",
+    "english": "to inform about something",
+    "phonetic": "",
+    "notes": "(zawiadamiam, zawiadamiasz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "zdarzać się",
+    "english": "to happen",
+    "phonetic": "",
+    "notes": "(zdarza się)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A1",
+    "polish": "błąd",
+    "english": "mistake",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "ciocia",
+    "english": "aunt (informal)",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "dyrekcja",
+    "english": "management",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A1",
+    "polish": "głos",
+    "english": "voice",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A1",
+    "polish": "gumka",
+    "english": "eraser",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A1",
+    "polish": "kartka",
+    "english": "card, sheet of paper",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A1",
+    "polish": "kultura",
+    "english": "culture",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "kuzynka",
+    "english": "cousin (female)",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Nature & Animals",
+    "scenario": "Nature & Animals",
+    "level": "A2",
+    "polish": "łapa",
+    "english": "paw",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Activities & Sports",
+    "level": "A1",
+    "polish": "piosenka",
+    "english": "song",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A1",
+    "polish": "strona internetowa",
+    "english": "website",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "wujek",
+    "english": "uncle",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "życzenie",
+    "english": "wish",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A1",
+    "polish": "Czytać coś na głos.",
+    "english": "To read something aloud.",
+    "phonetic": ""
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A2",
+    "polish": "Ktoś jest podobny do kogoś.",
+    "english": "Someone looks similar to someone else.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Nic dwa razy się nie zdarza.",
+    "english": "Nothing happens twice.",
+    "phonetic": ""
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A1",
+    "polish": "Odpowiedzieć na e-mail.",
+    "english": "To reply to an email.",
+    "phonetic": ""
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A1",
+    "polish": "Wylogować się.",
+    "english": "To log out.",
+    "phonetic": ""
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A1",
+    "polish": "Założyć adres e-mail.",
+    "english": "To create an email address.",
+    "phonetic": ""
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "podszlifować coś",
+    "english": "to polish up, to brush up on something (informal)",
+    "phonetic": "",
+    "notes": "(podszlifuję, podszlifujesz)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A1",
+    "polish": "studiować",
+    "english": "to study (at university)",
+    "phonetic": "",
+    "notes": "(studiuję, studiujesz)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "wybierać coś dla kogoś",
+    "english": "to choose something for someone",
+    "phonetic": "",
+    "notes": "(wybieram, wybierasz)"
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A2",
+    "polish": "zamienić coś na coś",
+    "english": "to exchange something for something",
+    "phonetic": "",
+    "notes": "(zamienię, zamienisz)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A1",
+    "polish": "zapisać się na coś",
+    "english": "to sign up for something",
+    "phonetic": "",
+    "notes": "(zapiszę się, zapiszesz się)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "inteligentny",
+    "english": "intelligent",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "myślenie",
+    "english": "thinking",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "Administration & Services",
+    "scenario": "Administration & Services",
+    "level": "A2",
+    "polish": "obywatel",
+    "english": "citizen",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "przyszłość",
+    "english": "the future",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A1",
+    "polish": "szkoła językowa",
+    "english": "language school",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A2",
+    "polish": "szwagier",
+    "english": "brother-in-law",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "wybór",
+    "english": "choice",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A1",
+    "polish": "znaczenie",
+    "english": "meaning",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Być obywatelem świata.",
+    "english": "To be a citizen of the world.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Jakie to ma znaczenie?",
+    "english": "What does it matter?",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Mieć wrażenie, że...",
+    "english": "To have the feeling that...",
+    "phonetic": ""
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A2",
+    "polish": "Mieć własny kąt.",
+    "english": "To have one's own place (idiom).",
+    "phonetic": ""
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "czytać komuś coś",
+    "english": "to read something to someone",
+    "phonetic": "",
+    "notes": "(czytam, czytasz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "decydować się na coś",
+    "english": "to decide on something",
+    "phonetic": "",
+    "notes": "(decyduję się, decydujesz się)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A2",
+    "polish": "niszczyć coś",
+    "english": "to destroy something",
+    "phonetic": "",
+    "notes": "(niszczę, niszczysz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "obiecywać coś komuś",
+    "english": "to promise someone something",
+    "phonetic": "",
+    "notes": "(obiecuję, obiecujesz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "odmówić komuś",
+    "english": "to refuse someone",
+    "phonetic": "",
+    "notes": "(odmówię, odmówisz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "śnić się komuś",
+    "english": "to appear in someone's dream",
+    "phonetic": "",
+    "notes": "(coś się komuś śni)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "stracić coś",
+    "english": "to lose something",
+    "phonetic": "",
+    "notes": "(stracę, stracisz)"
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "upiec coś",
+    "english": "to bake something",
+    "phonetic": "",
+    "notes": "(upiekę, upieczesz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "zastanowić się",
+    "english": "to think something over",
+    "phonetic": "",
+    "notes": "(zastanowię się, zastanowisz się)"
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "zrozumieć coś",
+    "english": "to understand something",
+    "phonetic": "",
+    "notes": "(zrozumiem, zrozumiesz)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "cierpliwość",
+    "english": "patience",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "honor",
+    "english": "honor",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "list miłosny",
+    "english": "love letter",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "matka",
+    "english": "mother",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "miłość",
+    "english": "love",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Nature & Animals",
+    "scenario": "Nature & Animals",
+    "level": "A1",
+    "polish": "ogień",
+    "english": "fire",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A2",
+    "polish": "ogłoszenie",
+    "english": "announcement, advertisement",
+    "phonetic": "",
+    "notes": "(n.)"
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A2",
+    "polish": "podróż poślubna",
+    "english": "honeymoon trip",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Technology & Media",
+    "level": "A1",
+    "polish": "rozmowa telefoniczna",
+    "english": "telephone conversation",
+    "phonetic": "",
+    "notes": "(f.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "sen",
+    "english": "dream; sleep",
+    "phonetic": "",
+    "notes": "(m.)"
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Coś komuś śni się.",
+    "english": "Someone dreams something.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Dać komuś słowo honoru.",
+    "english": "To give someone one's word of honor.",
+    "phonetic": ""
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A2",
+    "polish": "Jechać w podróż poślubną.",
+    "english": "To go on a honeymoon trip.",
+    "phonetic": ""
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A2",
+    "polish": "Upiec dwie pieczenie przy jednym ogniu.",
+    "english": "To kill two birds with one stone.",
+    "phonetic": ""
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A2",
+    "polish": "Wziąć ślub z kimś.",
+    "english": "To get married to someone.",
+    "phonetic": ""
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A2",
+    "polish": "Ożenić się z kimś.",
+    "english": "To marry someone (said of a man).",
+    "phonetic": ""
+  },
+  {
+    "category": "People & Family",
+    "scenario": "Biography",
+    "level": "B1",
+    "polish": "życiorys",
+    "english": "life story / CV",
+    "phonetic": "",
+    "examplePolish": "Proszę krótko opowiedzieć swój życiorys.",
+    "exampleEnglish": "Please briefly tell your life story.",
+    "tags": [
+      "biography",
+      "people"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "People & Family",
+    "scenario": "Biography",
+    "level": "B1",
+    "polish": "osiągnięcie",
+    "english": "achievement",
+    "phonetic": "",
+    "examplePolish": "Największym osiągnięciem Marii było odkrycie radu.",
+    "exampleEnglish": "Maria's greatest achievement was discovering radium.",
+    "tags": [
+      "biography",
+      "success"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "People & Family",
+    "scenario": "Biography",
+    "level": "B1",
+    "polish": "wybitna osoba",
+    "english": "an outstanding person",
+    "phonetic": "",
+    "examplePolish": "Chciałbym opowiedzieć o wybitnej osobie z mojego kraju.",
+    "exampleEnglish": "I would like to talk about an outstanding person from my country.",
+    "tags": [
+      "biography",
+      "description"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "People & Family",
+    "scenario": "Biography",
+    "level": "B1",
+    "polish": "zasłynąć z czegoś",
+    "english": "to become famous for something",
+    "phonetic": "",
+    "examplePolish": "Ten lekarz zasłynął z trudnych operacji.",
+    "exampleEnglish": "This doctor became famous for difficult operations.",
+    "tags": [
+      "biography",
+      "verb"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "People & Family",
+    "scenario": "Biography",
+    "level": "B1",
+    "polish": "otrzymać nagrodę",
+    "english": "to receive an award",
+    "phonetic": "",
+    "examplePolish": "Pisarka otrzymała nagrodę za najnowszą powieść.",
+    "exampleEnglish": "The writer received an award for her newest novel.",
+    "tags": [
+      "biography",
+      "success"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Describing People",
+    "level": "B1",
+    "polish": "godny podziwu",
+    "english": "admirable",
+    "phonetic": "",
+    "examplePolish": "Jej odwaga jest naprawdę godna podziwu.",
+    "exampleEnglish": "Her courage is truly admirable.",
+    "tags": [
+      "description",
+      "opinion"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Free Time",
+    "level": "B1",
+    "polish": "spędzać czas na świeżym powietrzu",
+    "english": "to spend time outdoors",
+    "phonetic": "",
+    "examplePolish": "W weekend lubię spędzać czas na świeżym powietrzu.",
+    "exampleEnglish": "At the weekend I like spending time outdoors.",
+    "tags": [
+      "leisure",
+      "routine"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Free Time",
+    "level": "B1",
+    "polish": "mieć napięty grafik",
+    "english": "to have a tight schedule",
+    "phonetic": "",
+    "examplePolish": "Mam napięty grafik, więc rzadko wychodzę w tygodniu.",
+    "exampleEnglish": "I have a tight schedule, so I rarely go out during the week.",
+    "tags": [
+      "leisure",
+      "work"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Free Time",
+    "level": "B1",
+    "polish": "robić coś dla przyjemności",
+    "english": "to do something for pleasure",
+    "phonetic": "",
+    "examplePolish": "Gram na gitarze tylko dla przyjemności.",
+    "exampleEnglish": "I play guitar just for pleasure.",
+    "tags": [
+      "leisure",
+      "hobby"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Free Time",
+    "level": "B1",
+    "polish": "ładować baterie",
+    "english": "to recharge one's batteries",
+    "phonetic": "",
+    "examplePolish": "Krótki wyjazd pomaga mi ładować baterie.",
+    "exampleEnglish": "A short trip helps me recharge my batteries.",
+    "tags": [
+      "leisure",
+      "idiom"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Free Time",
+    "level": "B1",
+    "polish": "zrezygnować z planów",
+    "english": "to give up / cancel plans",
+    "phonetic": "",
+    "examplePolish": "Musieliśmy zrezygnować z planów przez pogodę.",
+    "exampleEnglish": "We had to cancel our plans because of the weather.",
+    "tags": [
+      "leisure",
+      "plans"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Free Time",
+    "level": "B1",
+    "polish": "wolę odpoczywać aktywnie",
+    "english": "I prefer active rest",
+    "phonetic": "",
+    "examplePolish": "Wolę odpoczywać aktywnie niż siedzieć cały dzień w domu.",
+    "exampleEnglish": "I prefer active rest to sitting at home all day.",
+    "tags": [
+      "leisure",
+      "opinion"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Sports",
+    "level": "B1",
+    "polish": "rozgrzewka",
+    "english": "warm-up",
+    "phonetic": "",
+    "examplePolish": "Przed treningiem zawsze robię krótką rozgrzewkę.",
+    "exampleEnglish": "Before training I always do a short warm-up.",
+    "tags": [
+      "sport",
+      "health"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Sports",
+    "level": "B1",
+    "polish": "kontuzja",
+    "english": "injury",
+    "phonetic": "",
+    "examplePolish": "Po kontuzji przez miesiąc nie mogłem biegać.",
+    "exampleEnglish": "After the injury I couldn't run for a month.",
+    "tags": [
+      "sport",
+      "health"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Sports",
+    "level": "B1",
+    "polish": "poprawić kondycję",
+    "english": "to improve fitness",
+    "phonetic": "",
+    "examplePolish": "Chcę poprawić kondycję przed wakacjami.",
+    "exampleEnglish": "I want to improve my fitness before the holidays.",
+    "tags": [
+      "sport",
+      "health"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Sports",
+    "level": "B1",
+    "polish": "kibicować komuś",
+    "english": "to cheer for someone",
+    "phonetic": "",
+    "examplePolish": "Kibicujemy naszej drużynie w każdym meczu.",
+    "exampleEnglish": "We cheer for our team in every match.",
+    "tags": [
+      "sport",
+      "people"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Sports",
+    "level": "B1",
+    "polish": "rywalizować z kimś",
+    "english": "to compete with someone",
+    "phonetic": "",
+    "examplePolish": "Nie lubię rywalizować z przyjaciółmi.",
+    "exampleEnglish": "I don't like competing with friends.",
+    "tags": [
+      "sport",
+      "verb"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Activities & Sports",
+    "scenario": "Sports",
+    "level": "B1",
+    "polish": "grać fair",
+    "english": "to play fair",
+    "phonetic": "",
+    "examplePolish": "Najważniejsze jest grać fair.",
+    "exampleEnglish": "The most important thing is to play fair.",
+    "tags": [
+      "sport",
+      "values"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "City Life",
+    "level": "B1",
+    "polish": "komunikacja miejska",
+    "english": "public transport",
+    "phonetic": "",
+    "examplePolish": "Komunikacja miejska działa tu bardzo dobrze.",
+    "exampleEnglish": "Public transport works very well here.",
+    "tags": [
+      "city",
+      "transport"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Places & Directions",
+    "scenario": "City Life",
+    "level": "B1",
+    "polish": "tereny zielone",
+    "english": "green areas",
+    "phonetic": "",
+    "examplePolish": "W mojej okolicy brakuje terenów zielonych.",
+    "exampleEnglish": "There are not enough green areas in my area.",
+    "tags": [
+      "city",
+      "nature"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Places & Directions",
+    "scenario": "City Life",
+    "level": "B1",
+    "polish": "ruch uliczny",
+    "english": "traffic",
+    "phonetic": "",
+    "examplePolish": "Ruch uliczny jest największy rano.",
+    "exampleEnglish": "Traffic is heaviest in the morning.",
+    "tags": [
+      "city",
+      "transport"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Places & Directions",
+    "scenario": "City Life",
+    "level": "B1",
+    "polish": "łatwy dojazd",
+    "english": "easy access / commute",
+    "phonetic": "",
+    "examplePolish": "Wybrałem to mieszkanie ze względu na łatwy dojazd.",
+    "exampleEnglish": "I chose this flat because of the easy commute.",
+    "tags": [
+      "city",
+      "housing"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Places & Directions",
+    "scenario": "City Life",
+    "level": "B1",
+    "polish": "miasto przyjazne mieszkańcom",
+    "english": "a resident-friendly city",
+    "phonetic": "",
+    "examplePolish": "Chciałabym mieszkać w mieście przyjaznym mieszkańcom.",
+    "exampleEnglish": "I would like to live in a resident-friendly city.",
+    "tags": [
+      "city",
+      "opinion"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel",
+    "level": "B1",
+    "polish": "nocleg",
+    "english": "accommodation",
+    "phonetic": "",
+    "examplePolish": "Czy nocleg jest wliczony w cenę wycieczki?",
+    "exampleEnglish": "Is accommodation included in the trip price?",
+    "tags": [
+      "travel",
+      "hotel"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel",
+    "level": "B1",
+    "polish": "bagaż podręczny",
+    "english": "hand luggage",
+    "phonetic": "",
+    "examplePolish": "W bagażu podręcznym mam tylko dokumenty i laptop.",
+    "exampleEnglish": "In my hand luggage I only have documents and a laptop.",
+    "tags": [
+      "travel",
+      "airport"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel",
+    "level": "B1",
+    "polish": "zwiedzać z przewodnikiem",
+    "english": "to tour with a guide",
+    "phonetic": "",
+    "examplePolish": "Wolimy zwiedzać z przewodnikiem, bo znamy wtedy więcej historii.",
+    "exampleEnglish": "We prefer touring with a guide because then we learn more history.",
+    "tags": [
+      "travel",
+      "culture"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel",
+    "level": "B1",
+    "polish": "wyjazd spełnił moje oczekiwania",
+    "english": "the trip met my expectations",
+    "phonetic": "",
+    "examplePolish": "Wyjazd spełnił moje oczekiwania, chociaż hotel był mały.",
+    "exampleEnglish": "The trip met my expectations, although the hotel was small.",
+    "tags": [
+      "travel",
+      "opinion"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel",
+    "level": "B1",
+    "polish": "poza sezonem",
+    "english": "off season",
+    "phonetic": "",
+    "examplePolish": "Najchętniej podróżuję poza sezonem.",
+    "exampleEnglish": "I prefer traveling off season.",
+    "tags": [
+      "travel",
+      "time"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel",
+    "level": "B1",
+    "polish": "zarezerwować z wyprzedzeniem",
+    "english": "to book in advance",
+    "phonetic": "",
+    "examplePolish": "Bilety trzeba zarezerwować z wyprzedzeniem.",
+    "exampleEnglish": "Tickets need to be booked in advance.",
+    "tags": [
+      "travel",
+      "planning"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Education",
+    "level": "B1",
+    "polish": "zdawać egzamin",
+    "english": "to take / pass an exam",
+    "phonetic": "",
+    "examplePolish": "W czerwcu będę zdawać ważny egzamin.",
+    "exampleEnglish": "In June I will take an important exam.",
+    "tags": [
+      "education",
+      "school"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Education",
+    "level": "B1",
+    "polish": "praca domowa",
+    "english": "homework",
+    "phonetic": "",
+    "examplePolish": "Nie zdążyłem zrobić pracy domowej.",
+    "exampleEnglish": "I didn't manage to do the homework.",
+    "tags": [
+      "education",
+      "school"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Education",
+    "level": "B1",
+    "polish": "zajęcia dodatkowe",
+    "english": "extra classes / activities",
+    "phonetic": "",
+    "examplePolish": "Po lekcjach chodzę na zajęcia dodatkowe z matematyki.",
+    "exampleEnglish": "After lessons I go to extra math classes.",
+    "tags": [
+      "education",
+      "school"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Education",
+    "level": "B1",
+    "polish": "dostać się na studia",
+    "english": "to get into university",
+    "phonetic": "",
+    "examplePolish": "Moja siostra dostała się na studia medyczne.",
+    "exampleEnglish": "My sister got into medical studies.",
+    "tags": [
+      "education",
+      "university"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Education",
+    "level": "B1",
+    "polish": "uczyć się systematycznie",
+    "english": "to study regularly",
+    "phonetic": "",
+    "examplePolish": "Łatwiej zdać egzamin, jeśli uczysz się systematycznie.",
+    "exampleEnglish": "It is easier to pass an exam if you study regularly.",
+    "tags": [
+      "education",
+      "study"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Celebrations",
+    "level": "B1",
+    "polish": "obchodzić święto",
+    "english": "to celebrate a holiday",
+    "phonetic": "",
+    "examplePolish": "Jakie święta obchodzi się w twoim kraju?",
+    "exampleEnglish": "What holidays are celebrated in your country?",
+    "tags": [
+      "celebrations",
+      "culture"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Celebrations",
+    "level": "B1",
+    "polish": "składać życzenia",
+    "english": "to offer wishes / greetings",
+    "phonetic": "",
+    "examplePolish": "W urodziny składamy solenizantowi życzenia.",
+    "exampleEnglish": "On birthdays we offer wishes to the birthday person.",
+    "tags": [
+      "celebrations",
+      "family"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Celebrations",
+    "level": "B1",
+    "polish": "tradycyjne potrawy",
+    "english": "traditional dishes",
+    "phonetic": "",
+    "examplePolish": "Na stole pojawiły się tradycyjne potrawy.",
+    "exampleEnglish": "Traditional dishes appeared on the table.",
+    "tags": [
+      "celebrations",
+      "food"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "People & Family",
+    "scenario": "Celebrations",
+    "level": "B1",
+    "polish": "spotkanie rodzinne",
+    "english": "family gathering",
+    "phonetic": "",
+    "examplePolish": "W niedzielę mamy duże spotkanie rodzinne.",
+    "exampleEnglish": "On Sunday we have a big family gathering.",
+    "tags": [
+      "celebrations",
+      "family"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Celebrations",
+    "level": "B1",
+    "polish": "dzień wolny od pracy",
+    "english": "day off work",
+    "phonetic": "",
+    "examplePolish": "Pierwszego listopada wiele osób ma dzień wolny od pracy.",
+    "exampleEnglish": "On November first many people have a day off work.",
+    "tags": [
+      "celebrations",
+      "work"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Religion & Culture",
+    "scenario": "Celebrations",
+    "level": "B1",
+    "polish": "podtrzymywać tradycję",
+    "english": "to maintain a tradition",
+    "phonetic": "",
+    "examplePolish": "Moja rodzina stara się podtrzymywać tę tradycję.",
+    "exampleEnglish": "My family tries to maintain this tradition.",
+    "tags": [
+      "celebrations",
+      "culture"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Religion & Culture",
+    "scenario": "Culture",
+    "level": "B1",
+    "polish": "bohater powieści",
+    "english": "novel character / protagonist",
+    "phonetic": "",
+    "examplePolish": "Główny bohater powieści musi podjąć trudną decyzję.",
+    "exampleEnglish": "The main character of the novel has to make a difficult decision.",
+    "tags": [
+      "culture",
+      "books"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Culture",
+    "level": "B1",
+    "polish": "ekranizacja",
+    "english": "screen adaptation",
+    "phonetic": "",
+    "examplePolish": "Ekranizacja różni się od książki.",
+    "exampleEnglish": "The screen adaptation differs from the book.",
+    "tags": [
+      "culture",
+      "film"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Religion & Culture",
+    "scenario": "Culture",
+    "level": "B1",
+    "polish": "polecić komuś film",
+    "english": "to recommend a film to someone",
+    "phonetic": "",
+    "examplePolish": "Mogę ci polecić świetny film dokumentalny.",
+    "exampleEnglish": "I can recommend a great documentary film to you.",
+    "tags": [
+      "culture",
+      "recommendation"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Religion & Culture",
+    "scenario": "Culture",
+    "level": "B1",
+    "polish": "recenzja",
+    "english": "review",
+    "phonetic": "",
+    "examplePolish": "Po przeczytaniu recenzji kupiłem bilet.",
+    "exampleEnglish": "After reading the review I bought a ticket.",
+    "tags": [
+      "culture",
+      "opinion"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Religion & Culture",
+    "scenario": "Culture",
+    "level": "B1",
+    "polish": "wciągająca książka",
+    "english": "engaging book",
+    "phonetic": "",
+    "examplePolish": "To wciągająca książka, którą przeczytałem w dwa dni.",
+    "exampleEnglish": "It is an engaging book that I read in two days.",
+    "tags": [
+      "culture",
+      "books"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Emotions",
+    "level": "B1",
+    "polish": "zdenerwować się",
+    "english": "to get upset / nervous",
+    "phonetic": "",
+    "examplePolish": "Zdenerwowałem się, kiedy spóźnił się autobus.",
+    "exampleEnglish": "I got upset when the bus was late.",
+    "tags": [
+      "emotions",
+      "verb"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Emotions",
+    "level": "B1",
+    "polish": "być rozczarowanym",
+    "english": "to be disappointed",
+    "phonetic": "",
+    "examplePolish": "Byłam rozczarowana wynikiem meczu.",
+    "exampleEnglish": "I was disappointed with the match result.",
+    "tags": [
+      "emotions",
+      "opinion"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Emotions",
+    "level": "B1",
+    "polish": "zachować spokój",
+    "english": "to stay calm",
+    "phonetic": "",
+    "examplePolish": "W trudnej sytuacji trzeba zachować spokój.",
+    "exampleEnglish": "In a difficult situation you need to stay calm.",
+    "tags": [
+      "emotions",
+      "advice"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Emotions",
+    "level": "B1",
+    "polish": "wpaść w dobry nastrój",
+    "english": "to get into a good mood",
+    "phonetic": "",
+    "examplePolish": "Po rozmowie z przyjaciółką wpadłam w dobry nastrój.",
+    "exampleEnglish": "After talking with my friend I got into a good mood.",
+    "tags": [
+      "emotions",
+      "mood"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Emotions",
+    "level": "B1",
+    "polish": "mieć mieszane uczucia",
+    "english": "to have mixed feelings",
+    "phonetic": "",
+    "examplePolish": "Mam mieszane uczucia co do tej decyzji.",
+    "exampleEnglish": "I have mixed feelings about this decision.",
+    "tags": [
+      "emotions",
+      "opinion"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Emotions",
+    "level": "B1",
+    "polish": "coś poprawiło mi humor",
+    "english": "something improved my mood",
+    "phonetic": "",
+    "examplePolish": "Ta wiadomość poprawiła mi humor.",
+    "exampleEnglish": "This message improved my mood.",
+    "tags": [
+      "emotions",
+      "mood"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Communication",
+    "level": "B1",
+    "polish": "wysłać wiadomość",
+    "english": "to send a message",
+    "phonetic": "",
+    "examplePolish": "Wyślę ci wiadomość po spotkaniu.",
+    "exampleEnglish": "I will send you a message after the meeting.",
+    "tags": [
+      "communication",
+      "technology"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Communication",
+    "level": "B1",
+    "polish": "odebrać telefon",
+    "english": "to answer the phone",
+    "phonetic": "",
+    "examplePolish": "Nie mogłem odebrać telefonu w pracy.",
+    "exampleEnglish": "I couldn't answer the phone at work.",
+    "tags": [
+      "communication",
+      "phone"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Communication",
+    "level": "B1",
+    "polish": "oddzwonić do kogoś",
+    "english": "to call someone back",
+    "phonetic": "",
+    "examplePolish": "Oddzwonię do pana za dziesięć minut.",
+    "exampleEnglish": "I will call you back in ten minutes.",
+    "tags": [
+      "communication",
+      "phone"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Communication",
+    "level": "B1",
+    "polish": "załączyć plik",
+    "english": "to attach a file",
+    "phonetic": "",
+    "examplePolish": "Proszę załączyć plik do maila.",
+    "exampleEnglish": "Please attach the file to the email.",
+    "tags": [
+      "communication",
+      "email"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Communication",
+    "level": "B1",
+    "polish": "mieć słaby zasięg",
+    "english": "to have poor signal",
+    "phonetic": "",
+    "examplePolish": "W górach często mam słaby zasięg.",
+    "exampleEnglish": "In the mountains I often have poor signal.",
+    "tags": [
+      "communication",
+      "phone"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Communication",
+    "level": "B1",
+    "polish": "porozumieć się bez problemu",
+    "english": "to communicate without difficulty",
+    "phonetic": "",
+    "examplePolish": "Po kilku miesiącach nauki mogłem porozumieć się bez problemu.",
+    "exampleEnglish": "After a few months of study I could communicate without difficulty.",
+    "tags": [
+      "communication",
+      "language"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Religion & Culture",
+    "scenario": "Intercultural Life",
+    "level": "B2",
+    "polish": "dziedzictwo kulturowe",
+    "english": "cultural heritage",
+    "phonetic": "",
+    "examplePolish": "Dziedzictwo kulturowe regionu widać w architekturze.",
+    "exampleEnglish": "The region's cultural heritage is visible in the architecture.",
+    "tags": [
+      "culture",
+      "heritage"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Religion & Culture",
+    "scenario": "Intercultural Life",
+    "level": "B2",
+    "polish": "różnice kulturowe",
+    "english": "cultural differences",
+    "phonetic": "",
+    "examplePolish": "Różnice kulturowe mogą prowadzić do nieporozumień.",
+    "exampleEnglish": "Cultural differences can lead to misunderstandings.",
+    "tags": [
+      "culture",
+      "society"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Religion & Culture",
+    "scenario": "Intercultural Life",
+    "level": "B2",
+    "polish": "dostosować się do zwyczajów",
+    "english": "to adapt to customs",
+    "phonetic": "",
+    "examplePolish": "Po przeprowadzce trzeba dostosować się do nowych zwyczajów.",
+    "exampleEnglish": "After moving, one needs to adapt to new customs.",
+    "tags": [
+      "culture",
+      "travel"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Religion & Culture",
+    "scenario": "Intercultural Life",
+    "level": "B2",
+    "polish": "uniknąć faux pas",
+    "english": "to avoid a faux pas",
+    "phonetic": "",
+    "examplePolish": "Przed podróżą warto poznać zasady, żeby uniknąć faux pas.",
+    "exampleEnglish": "Before traveling it is worth learning the rules to avoid a faux pas.",
+    "tags": [
+      "culture",
+      "manners"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Religion & Culture",
+    "scenario": "Intercultural Life",
+    "level": "B2",
+    "polish": "spojrzeć z innej perspektywy",
+    "english": "to look from another perspective",
+    "phonetic": "",
+    "examplePolish": "Rozmowa pomogła mi spojrzeć z innej perspektywy.",
+    "exampleEnglish": "The conversation helped me look from another perspective.",
+    "tags": [
+      "culture",
+      "opinion"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Advanced Travel",
+    "level": "B2",
+    "polish": "środek transportu",
+    "english": "means of transport",
+    "phonetic": "",
+    "examplePolish": "Najwygodniejszy środek transportu zależy od trasy.",
+    "exampleEnglish": "The most convenient means of transport depends on the route.",
+    "tags": [
+      "travel",
+      "transport"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Advanced Travel",
+    "level": "B2",
+    "polish": "podróż na własną rękę",
+    "english": "independent travel",
+    "phonetic": "",
+    "examplePolish": "Podróż na własną rękę daje więcej swobody.",
+    "exampleEnglish": "Independent travel gives more freedom.",
+    "tags": [
+      "travel",
+      "planning"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Advanced Travel",
+    "level": "B2",
+    "polish": "utknąć w korku",
+    "english": "to get stuck in traffic",
+    "phonetic": "",
+    "examplePolish": "Utknęliśmy w korku i spóźniliśmy się na pociąg.",
+    "exampleEnglish": "We got stuck in traffic and missed the train.",
+    "tags": [
+      "travel",
+      "transport"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Advanced Travel",
+    "level": "B2",
+    "polish": "zmienić trasę",
+    "english": "to change the route",
+    "phonetic": "",
+    "examplePolish": "Musieliśmy zmienić trasę z powodu remontu drogi.",
+    "exampleEnglish": "We had to change the route because of roadworks.",
+    "tags": [
+      "travel",
+      "transport"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Advanced Travel",
+    "level": "B2",
+    "polish": "przesiadka",
+    "english": "transfer / connection",
+    "phonetic": "",
+    "examplePolish": "Mamy tylko dziesięć minut na przesiadkę.",
+    "exampleEnglish": "We have only ten minutes for the transfer.",
+    "tags": [
+      "travel",
+      "transport"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Advanced Travel",
+    "level": "B2",
+    "polish": "podróżować odpowiedzialnie",
+    "english": "to travel responsibly",
+    "phonetic": "",
+    "examplePolish": "Coraz więcej osób chce podróżować odpowiedzialnie.",
+    "exampleEnglish": "More and more people want to travel responsibly.",
+    "tags": [
+      "travel",
+      "environment"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work",
+    "level": "B2",
+    "polish": "rzucić się w wir pracy",
+    "english": "to throw oneself into work",
+    "phonetic": "",
+    "examplePolish": "Po urlopie rzuciłam się w wir pracy.",
+    "exampleEnglish": "After vacation I threw myself into work.",
+    "tags": [
+      "work",
+      "idiom"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work",
+    "level": "B2",
+    "polish": "warunki zatrudnienia",
+    "english": "employment conditions",
+    "phonetic": "",
+    "examplePolish": "Przed podpisaniem umowy zapytaj o warunki zatrudnienia.",
+    "exampleEnglish": "Before signing the contract, ask about employment conditions.",
+    "tags": [
+      "work",
+      "contract"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work",
+    "level": "B2",
+    "polish": "równowaga między pracą a życiem prywatnym",
+    "english": "work-life balance",
+    "phonetic": "",
+    "examplePolish": "Równowaga między pracą a życiem prywatnym jest dla mnie ważna.",
+    "exampleEnglish": "Work-life balance is important to me.",
+    "tags": [
+      "work",
+      "lifestyle"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work",
+    "level": "B2",
+    "polish": "mieć doświadczenie w branży",
+    "english": "to have experience in the field",
+    "phonetic": "",
+    "examplePolish": "Mam pięć lat doświadczenia w branży IT.",
+    "exampleEnglish": "I have five years of experience in the IT field.",
+    "tags": [
+      "work",
+      "career"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work",
+    "level": "B2",
+    "polish": "podjąć wyzwanie",
+    "english": "to take on a challenge",
+    "phonetic": "",
+    "examplePolish": "Chętnie podejmę nowe wyzwanie zawodowe.",
+    "exampleEnglish": "I will gladly take on a new professional challenge.",
+    "tags": [
+      "work",
+      "career"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work",
+    "level": "B2",
+    "polish": "awansować na stanowisko",
+    "english": "to be promoted to a position",
+    "phonetic": "",
+    "examplePolish": "Po dwóch latach awansowała na stanowisko kierowniczki.",
+    "exampleEnglish": "After two years she was promoted to manager.",
+    "tags": [
+      "work",
+      "career"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Daily Choices",
+    "level": "B2",
+    "polish": "codzienne nawyki",
+    "english": "daily habits",
+    "phonetic": "",
+    "examplePolish": "Codzienne nawyki mają duży wpływ na zdrowie.",
+    "exampleEnglish": "Daily habits have a big influence on health.",
+    "tags": [
+      "daily-life",
+      "health"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Daily Choices",
+    "level": "B2",
+    "polish": "kupować lokalne produkty",
+    "english": "to buy local products",
+    "phonetic": "",
+    "examplePolish": "Staram się kupować lokalne produkty na targu.",
+    "exampleEnglish": "I try to buy local products at the market.",
+    "tags": [
+      "shopping",
+      "food"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Daily Choices",
+    "level": "B2",
+    "polish": "stosunek jakości do ceny",
+    "english": "value for money",
+    "phonetic": "",
+    "examplePolish": "Ten telefon ma dobry stosunek jakości do ceny.",
+    "exampleEnglish": "This phone offers good value for money.",
+    "tags": [
+      "shopping",
+      "opinion"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Daily Choices",
+    "level": "B2",
+    "polish": "ograniczać marnowanie jedzenia",
+    "english": "to reduce food waste",
+    "phonetic": "",
+    "examplePolish": "Planowanie zakupów pomaga ograniczać marnowanie jedzenia.",
+    "exampleEnglish": "Planning shopping helps reduce food waste.",
+    "tags": [
+      "daily-life",
+      "food"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Daily Choices",
+    "level": "B2",
+    "polish": "podejmować świadome decyzje",
+    "english": "to make conscious decisions",
+    "phonetic": "",
+    "examplePolish": "Jako konsumenci możemy podejmować świadome decyzje.",
+    "exampleEnglish": "As consumers we can make conscious decisions.",
+    "tags": [
+      "daily-life",
+      "opinion"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Daily Choices",
+    "level": "B2",
+    "polish": "zwracać uwagę na skład",
+    "english": "to pay attention to ingredients / composition",
+    "phonetic": "",
+    "examplePolish": "Przy zakupie kosmetyków zwracam uwagę na skład.",
+    "exampleEnglish": "When buying cosmetics I pay attention to the ingredients.",
+    "tags": [
+      "shopping",
+      "health"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Emergencies & Safety",
+    "scenario": "Law and Safety",
+    "level": "B2",
+    "polish": "przestępstwo",
+    "english": "crime",
+    "phonetic": "",
+    "examplePolish": "Kradzież jest przestępstwem.",
+    "exampleEnglish": "Theft is a crime.",
+    "tags": [
+      "law",
+      "safety"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Emergencies & Safety",
+    "scenario": "Law and Safety",
+    "level": "B2",
+    "polish": "wykroczenie",
+    "english": "minor offense",
+    "phonetic": "",
+    "examplePolish": "Za takie wykroczenie można dostać mandat.",
+    "exampleEnglish": "You can get a fine for such a minor offense.",
+    "tags": [
+      "law",
+      "safety"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Emergencies & Safety",
+    "scenario": "Law and Safety",
+    "level": "B2",
+    "polish": "zgłosić sprawę na policję",
+    "english": "to report a matter to the police",
+    "phonetic": "",
+    "examplePolish": "Świadek powinien zgłosić sprawę na policję.",
+    "exampleEnglish": "A witness should report the matter to the police.",
+    "tags": [
+      "law",
+      "police"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Emergencies & Safety",
+    "scenario": "Law and Safety",
+    "level": "B2",
+    "polish": "świadek zdarzenia",
+    "english": "witness of an incident",
+    "phonetic": "",
+    "examplePolish": "Świadek zdarzenia opisał sytuację funkcjonariuszom.",
+    "exampleEnglish": "The witness of the incident described the situation to the officers.",
+    "tags": [
+      "law",
+      "people"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Emergencies & Safety",
+    "scenario": "Law and Safety",
+    "level": "B2",
+    "polish": "ponieść konsekwencje",
+    "english": "to face consequences",
+    "phonetic": "",
+    "examplePolish": "Każdy kierowca musi ponieść konsekwencje niebezpiecznej jazdy.",
+    "exampleEnglish": "Every driver must face the consequences of dangerous driving.",
+    "tags": [
+      "law",
+      "consequences"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Emergencies & Safety",
+    "scenario": "Law and Safety",
+    "level": "B2",
+    "polish": "działać zgodnie z prawem",
+    "english": "to act according to the law",
+    "phonetic": "",
+    "examplePolish": "Firma musi działać zgodnie z prawem.",
+    "exampleEnglish": "The company must act according to the law.",
+    "tags": [
+      "law",
+      "work"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Helping Others",
+    "level": "B2",
+    "polish": "okazać wsparcie",
+    "english": "to show support",
+    "phonetic": "",
+    "examplePolish": "W trudnej chwili warto okazać wsparcie.",
+    "exampleEnglish": "In a difficult moment it is worth showing support.",
+    "tags": [
+      "helping",
+      "empathy"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Administration & Services",
+    "scenario": "Helping Others",
+    "level": "B2",
+    "polish": "kampania społeczna",
+    "english": "social campaign",
+    "phonetic": "",
+    "examplePolish": "Kampania społeczna zwraca uwagę na samotność seniorów.",
+    "exampleEnglish": "The social campaign draws attention to loneliness among seniors.",
+    "tags": [
+      "society",
+      "media"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "People & Family",
+    "scenario": "Helping Others",
+    "level": "B2",
+    "polish": "wolontariusz",
+    "english": "volunteer",
+    "phonetic": "",
+    "examplePolish": "Wolontariusze pomagają w schronisku.",
+    "exampleEnglish": "Volunteers help at the shelter.",
+    "tags": [
+      "helping",
+      "people"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Helping Others",
+    "level": "B2",
+    "polish": "uwrażliwić kogoś na problem",
+    "english": "to sensitize someone to a problem",
+    "phonetic": "",
+    "examplePolish": "Film może uwrażliwić widzów na problem przemocy.",
+    "exampleEnglish": "A film can sensitize viewers to the problem of violence.",
+    "tags": [
+      "society",
+      "empathy"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Administration & Services",
+    "scenario": "Helping Others",
+    "level": "B2",
+    "polish": "działać na rzecz społeczności",
+    "english": "to act for the benefit of the community",
+    "phonetic": "",
+    "examplePolish": "Organizacja działa na rzecz lokalnej społeczności.",
+    "exampleEnglish": "The organization acts for the benefit of the local community.",
+    "tags": [
+      "society",
+      "community"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Helping Others",
+    "level": "B2",
+    "polish": "nie pozostawać obojętnym",
+    "english": "not to remain indifferent",
+    "phonetic": "",
+    "examplePolish": "Nie możemy pozostawać obojętni wobec krzywdy innych.",
+    "exampleEnglish": "We cannot remain indifferent to the harm of others.",
+    "tags": [
+      "society",
+      "empathy"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food",
+    "level": "B2",
+    "polish": "regionalna kuchnia",
+    "english": "regional cuisine",
+    "phonetic": "",
+    "examplePolish": "Regionalna kuchnia często pokazuje historię miejsca.",
+    "exampleEnglish": "Regional cuisine often shows the history of a place.",
+    "tags": [
+      "food",
+      "culture"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food",
+    "level": "B2",
+    "polish": "przepis rodzinny",
+    "english": "family recipe",
+    "phonetic": "",
+    "examplePolish": "To przepis rodzinny przekazywany od lat.",
+    "exampleEnglish": "This is a family recipe passed down for years.",
+    "tags": [
+      "food",
+      "family"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food",
+    "level": "B2",
+    "polish": "doprawić do smaku",
+    "english": "to season to taste",
+    "phonetic": "",
+    "examplePolish": "Zupę trzeba doprawić do smaku.",
+    "exampleEnglish": "The soup needs to be seasoned to taste.",
+    "tags": [
+      "food",
+      "cooking"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food",
+    "level": "B2",
+    "polish": "danie wegetariańskie",
+    "english": "vegetarian dish",
+    "phonetic": "",
+    "examplePolish": "Restauracja ma kilka dań wegetariańskich.",
+    "exampleEnglish": "The restaurant has several vegetarian dishes.",
+    "tags": [
+      "food",
+      "restaurant"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food",
+    "level": "B2",
+    "polish": "niebo w gębie",
+    "english": "delicious / heavenly taste",
+    "phonetic": "",
+    "examplePolish": "Ten sernik to niebo w gębie.",
+    "exampleEnglish": "This cheesecake tastes heavenly.",
+    "tags": [
+      "food",
+      "idiom"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food",
+    "level": "B2",
+    "polish": "delektować się posiłkiem",
+    "english": "to savor a meal",
+    "phonetic": "",
+    "examplePolish": "Lubię delektować się posiłkiem bez pośpiechu.",
+    "exampleEnglish": "I like savoring a meal without rushing.",
+    "tags": [
+      "food",
+      "lifestyle"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Clothing & Appearance",
+    "scenario": "Fashion",
+    "level": "B2",
+    "polish": "ubiór formalny",
+    "english": "formal clothing",
+    "phonetic": "",
+    "examplePolish": "Na rozmowę kwalifikacyjną wybrałem ubiór formalny.",
+    "exampleEnglish": "For the job interview I chose formal clothing.",
+    "tags": [
+      "fashion",
+      "work"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Clothing & Appearance",
+    "scenario": "Fashion",
+    "level": "B2",
+    "polish": "być na bakier z modą",
+    "english": "to be out of step with fashion",
+    "phonetic": "",
+    "examplePolish": "Mój brat jest trochę na bakier z modą.",
+    "exampleEnglish": "My brother is a bit out of step with fashion.",
+    "tags": [
+      "fashion",
+      "idiom"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Clothing & Appearance",
+    "scenario": "Fashion",
+    "level": "B2",
+    "polish": "wyrażać siebie przez ubranie",
+    "english": "to express oneself through clothing",
+    "phonetic": "",
+    "examplePolish": "Wiele osób lubi wyrażać siebie przez ubranie.",
+    "exampleEnglish": "Many people like expressing themselves through clothing.",
+    "tags": [
+      "fashion",
+      "identity"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Clothing & Appearance",
+    "scenario": "Fashion",
+    "level": "B2",
+    "polish": "strój służbowy",
+    "english": "work uniform / business attire",
+    "phonetic": "",
+    "examplePolish": "W tej firmie obowiązuje strój służbowy.",
+    "exampleEnglish": "In this company business attire is required.",
+    "tags": [
+      "fashion",
+      "work"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Clothing & Appearance",
+    "scenario": "Fashion",
+    "level": "B2",
+    "polish": "dobrać dodatki",
+    "english": "to choose accessories",
+    "phonetic": "",
+    "examplePolish": "Do sukienki trudno dobrać dodatki.",
+    "exampleEnglish": "It is hard to choose accessories for the dress.",
+    "tags": [
+      "fashion",
+      "shopping"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Clothing & Appearance",
+    "scenario": "Fashion",
+    "level": "B2",
+    "polish": "pierwsze wrażenie",
+    "english": "first impression",
+    "phonetic": "",
+    "examplePolish": "Pierwsze wrażenie często zależy od sposobu ubierania się.",
+    "exampleEnglish": "The first impression often depends on the way someone dresses.",
+    "tags": [
+      "fashion",
+      "people"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Weather & Nature",
+    "scenario": "Environment",
+    "level": "B2",
+    "polish": "środowisko naturalne",
+    "english": "natural environment",
+    "phonetic": "",
+    "examplePolish": "Musimy lepiej chronić środowisko naturalne.",
+    "exampleEnglish": "We need to protect the natural environment better.",
+    "tags": [
+      "environment",
+      "nature"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Weather & Nature",
+    "scenario": "Environment",
+    "level": "B2",
+    "polish": "zmiana klimatu",
+    "english": "climate change",
+    "phonetic": "",
+    "examplePolish": "Zmiana klimatu wpływa na rolnictwo.",
+    "exampleEnglish": "Climate change affects agriculture.",
+    "tags": [
+      "environment",
+      "climate"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Weather & Nature",
+    "scenario": "Environment",
+    "level": "B2",
+    "polish": "segregować odpady",
+    "english": "to sort waste",
+    "phonetic": "",
+    "examplePolish": "W domu staramy się segregować odpady.",
+    "exampleEnglish": "At home we try to sort waste.",
+    "tags": [
+      "environment",
+      "home"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Weather & Nature",
+    "scenario": "Environment",
+    "level": "B2",
+    "polish": "oszczędzać energię",
+    "english": "to save energy",
+    "phonetic": "",
+    "examplePolish": "Nowe okna pomagają oszczędzać energię.",
+    "exampleEnglish": "New windows help save energy.",
+    "tags": [
+      "environment",
+      "home"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Weather & Nature",
+    "scenario": "Environment",
+    "level": "B2",
+    "polish": "zanieczyszczenie powietrza",
+    "english": "air pollution",
+    "phonetic": "",
+    "examplePolish": "Zanieczyszczenie powietrza jest poważnym problemem zimą.",
+    "exampleEnglish": "Air pollution is a serious problem in winter.",
+    "tags": [
+      "environment",
+      "city"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Weather & Nature",
+    "scenario": "Environment",
+    "level": "B2",
+    "polish": "żyć bardziej ekologicznie",
+    "english": "to live more ecologically",
+    "phonetic": "",
+    "examplePolish": "Chcemy żyć bardziej ekologicznie i mniej kupować.",
+    "exampleEnglish": "We want to live more ecologically and buy less.",
+    "tags": [
+      "environment",
+      "lifestyle"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Science and Inventions",
+    "level": "B2",
+    "polish": "wynalazek",
+    "english": "invention",
+    "phonetic": "",
+    "examplePolish": "Internet to wynalazek, który zmienił codzienne życie.",
+    "exampleEnglish": "The internet is an invention that changed daily life.",
+    "tags": [
+      "technology",
+      "science"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Science and Inventions",
+    "level": "B2",
+    "polish": "potrzeba jest matką wynalazku",
+    "english": "necessity is the mother of invention",
+    "phonetic": "",
+    "examplePolish": "Jak mówi przysłowie, potrzeba jest matką wynalazku.",
+    "exampleEnglish": "As the proverb says, necessity is the mother of invention.",
+    "tags": [
+      "technology",
+      "proverb"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Science and Inventions",
+    "level": "B2",
+    "polish": "ułatwiać życie",
+    "english": "to make life easier",
+    "phonetic": "",
+    "examplePolish": "Aplikacje mobilne mogą ułatwiać życie.",
+    "exampleEnglish": "Mobile apps can make life easier.",
+    "tags": [
+      "technology",
+      "daily-life"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Science and Inventions",
+    "level": "B2",
+    "polish": "wprowadzić na rynek",
+    "english": "to launch on the market",
+    "phonetic": "",
+    "examplePolish": "Firma chce wprowadzić na rynek nowy produkt.",
+    "exampleEnglish": "The company wants to launch a new product on the market.",
+    "tags": [
+      "technology",
+      "business"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Science and Inventions",
+    "level": "B2",
+    "polish": "sztuczna inteligencja",
+    "english": "artificial intelligence",
+    "phonetic": "",
+    "examplePolish": "Sztuczna inteligencja pomaga analizować duże zbiory danych.",
+    "exampleEnglish": "Artificial intelligence helps analyze large data sets.",
+    "tags": [
+      "technology",
+      "science"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
+  },
+  {
+    "category": "Technology & Media",
+    "scenario": "Science and Inventions",
+    "level": "B2",
+    "polish": "rozwiązać praktyczny problem",
+    "english": "to solve a practical problem",
+    "phonetic": "",
+    "examplePolish": "Dobry wynalazek powinien rozwiązać praktyczny problem.",
+    "exampleEnglish": "A good invention should solve a practical problem.",
+    "tags": [
+      "technology",
+      "problem-solving"
+    ],
+    "notes": "Original B1/B2 speaking-practice card; not copied from a workbook."
   }
 ]

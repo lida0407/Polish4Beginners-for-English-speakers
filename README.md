@@ -8,7 +8,7 @@ Download the Android APK: [P4B.apk](https://lida0407.github.io/Polish4Beginners-
 
 ## Features
 
-- `2264` Polish-English phrase and vocabulary cards
+- `2933` Polish-English phrase and vocabulary cards
 - Example sentences with Polish audio on most cards
 - `23` grammar lessons
 - `39` alphabet and pronunciation tiles
