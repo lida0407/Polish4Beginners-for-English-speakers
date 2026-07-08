@@ -1,8 +1,8 @@
 {
-  "dataVersion": 6,
+  "dataVersion": 7,
   "phraseCount": 3257,
   "phrasesUrl": "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/phrases.json?ref=main",
-  "phrasesSha256": "a23b16b929621c491a17249d99af66f31f10883752c559425dc49f5efac6facf",
-  "phrasesSizeBytes": 925042,
-  "releaseNotes": "Adds 324 A1-B2 vocabulary words across everyday and advanced topics."
+  "phrasesSha256": "24ad27fcb3a0bb76b859bd5a7c9bf33d3299a4c19feafe9749901ba661f4a421",
+  "phrasesSizeBytes": 936232,
+  "releaseNotes": "Adds Genitive singular and Nominative plural forms to 258 common noun cards."
 }

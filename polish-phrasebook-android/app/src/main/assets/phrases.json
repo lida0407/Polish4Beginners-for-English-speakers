@@ -1825,7 +1825,8 @@
     "phonetic": "",
     "examplePolish": "W każdym tygodniu jest siedem dni.",
     "exampleEnglish": "There are seven (7) days in every week.",
-    "coreIndex": 24
+    "coreIndex": 24,
+    "notes": "(m.) · G. tygodnia · pl. tygodnie"
   },
   {
     "category": "Time & Calendar",
@@ -1836,7 +1837,8 @@
     "phonetic": "",
     "examplePolish": "rok przestępny",
     "exampleEnglish": "leap year",
-    "coreIndex": 25
+    "coreIndex": 25,
+    "notes": "(m.) · G. roku · pl. lata"
   },
   {
     "category": "Numbers & Measures",
@@ -1856,7 +1858,8 @@
     "phonetic": "",
     "examplePolish": "Za minutę północ.",
     "exampleEnglish": "It’s one minute to midnight.",
-    "coreIndex": 27
+    "coreIndex": 27,
+    "notes": "(f.) · G. minuty · pl. minuty"
   },
   {
     "category": "Time & Calendar",
@@ -1867,7 +1870,8 @@
     "phonetic": "",
     "examplePolish": "Wrócę z pracy do domu za godzinę.",
     "exampleEnglish": "I’ll be home from work in an hour.",
-    "coreIndex": 28
+    "coreIndex": 28,
+    "notes": "(f.) · G. godziny · pl. godziny"
   },
   {
     "category": "Time & Calendar",
@@ -1889,7 +1893,8 @@
     "phonetic": "",
     "examplePolish": "godzina dwunasta",
     "exampleEnglish": "twelve o’clock",
-    "coreIndex": 30
+    "coreIndex": 30,
+    "notes": "(f.) · G. godziny · pl. godziny"
   },
   {
     "category": "Time & Calendar",
@@ -1977,7 +1982,8 @@
     "phonetic": "",
     "examplePolish": "W niedzielę jest Dzień Ojca.",
     "exampleEnglish": "is Father’s Day.",
-    "coreIndex": 38
+    "coreIndex": 38,
+    "notes": "(f.) · G. niedzieli · pl. niedziele"
   },
   {
     "category": "Activities & Sports",
@@ -2032,7 +2038,8 @@
     "phonetic": "",
     "examplePolish": "Czy mogę prosić o trochę wody?",
     "exampleEnglish": "Can I have some water, please?",
-    "coreIndex": 43
+    "coreIndex": 43,
+    "notes": "(f.) · G. wody · pl. wody"
   },
   {
     "category": "Food & Drink",
@@ -2043,7 +2050,8 @@
     "phonetic": "",
     "examplePolish": "Kobieta pije herbatę.",
     "exampleEnglish": "The woman is drinking tea.",
-    "coreIndex": 44
+    "coreIndex": 44,
+    "notes": "(f.) · G. herbaty · pl. herbaty"
   },
   {
     "category": "Food & Drink",
@@ -2054,7 +2062,8 @@
     "phonetic": "",
     "examplePolish": "Lubię czarną kawę.",
     "exampleEnglish": "I like my coffee black.",
-    "coreIndex": 45
+    "coreIndex": 45,
+    "notes": "(f.) · G. kawy · pl. kawy"
   },
   {
     "category": "Food & Drink",
@@ -2120,7 +2129,8 @@
     "phonetic": "",
     "examplePolish": "Japończycy jedzą dużo ryb.",
     "exampleEnglish": "Japanese people eat a lot of fish.",
-    "coreIndex": 51
+    "coreIndex": 51,
+    "notes": "(f.) · G. ryby · pl. ryby"
   },
   {
     "category": "Food & Drink",
@@ -2142,7 +2152,8 @@
     "phonetic": "",
     "examplePolish": "Lekarka mierzy puls pacjentki.",
     "exampleEnglish": "The doctor is taking the patient’s pulse.",
-    "coreIndex": 53
+    "coreIndex": 53,
+    "notes": "(m.) · G. lekarza · pl. lekarze"
   },
   {
     "category": "Work & School",
@@ -2153,7 +2164,8 @@
     "phonetic": "",
     "examplePolish": "Policjant przepytuje kierowcę.",
     "exampleEnglish": "The police officer is questioning the driver.",
-    "coreIndex": 54
+    "coreIndex": 54,
+    "notes": "(m.) · G. policjanta · pl. policjanci"
   },
   {
     "category": "Work & School",
@@ -2164,7 +2176,8 @@
     "phonetic": "",
     "examplePolish": "nauczycielka w klasie",
     "exampleEnglish": "teacher in a classroom",
-    "coreIndex": 55
+    "coreIndex": 55,
+    "notes": "(f.) · G. nauczycielki · pl. nauczycielki"
   },
   {
     "category": "Work & School",
@@ -2360,7 +2373,8 @@
     "phonetic": "",
     "examplePolish": "Sprzedawca wita klienta.",
     "exampleEnglish": "The salesman is greeting a customer.",
-    "coreIndex": 73
+    "coreIndex": 73,
+    "notes": "(m.) · G. sprzedawcy · pl. sprzedawcy"
   },
   {
     "category": "Work & School",
@@ -2415,7 +2429,8 @@
     "phonetic": "",
     "examplePolish": "Ta kobieta jest pielęgniarką.",
     "exampleEnglish": "The woman is a nurse.",
-    "coreIndex": 78
+    "coreIndex": 78,
+    "notes": "(f.) · G. pielęgniarki · pl. pielęgniarki"
   },
   {
     "category": "Health & Body",
@@ -2437,7 +2452,8 @@
     "phonetic": "",
     "examplePolish": "Załóż kask, żeby chronić głowę.",
     "exampleEnglish": "Wear a helmet to protect your head.",
-    "coreIndex": 80
+    "coreIndex": 80,
+    "notes": "(f.) · G. głowy · pl. głowy"
   },
   {
     "category": "Health & Body",
@@ -2459,7 +2475,8 @@
     "phonetic": "",
     "examplePolish": "muskularna ręka",
     "exampleEnglish": "muscular arm",
-    "coreIndex": 82
+    "coreIndex": 82,
+    "notes": "(f.) · G. ręki · pl. ręce"
   },
   {
     "category": "Numbers & Measures",
@@ -2490,7 +2507,8 @@
     "phonetic": "",
     "examplePolish": "Palec mi krwawi.",
     "exampleEnglish": "My finger’s bleeding.",
-    "coreIndex": 85
+    "coreIndex": 85,
+    "notes": "(m.) · G. palca · pl. palce"
   },
   {
     "category": "Health & Body",
@@ -2512,7 +2530,8 @@
     "phonetic": "",
     "examplePolish": "Żołądek mnie boli.",
     "exampleEnglish": "I have a stomach ache.",
-    "coreIndex": 87
+    "coreIndex": 87,
+    "notes": "(m.) · G. żołądka · pl. żołądki"
   },
   {
     "category": "Health & Body",
@@ -2666,7 +2685,8 @@
     "phonetic": "",
     "examplePolish": "Po ukończeniu szkoły dostała od rodziców zegarek.",
     "exampleEnglish": "She got a watch from her parents after the graduation ceremony.",
-    "coreIndex": 101
+    "coreIndex": 101,
+    "notes": "(m.) · G. zegarka · pl. zegarki"
   },
   {
     "category": "Clothing & Appearance",
@@ -2864,7 +2884,8 @@
     "phonetic": "",
     "examplePolish": "Lubisz konie?",
     "exampleEnglish": "Do you like horses?",
-    "coreIndex": 119
+    "coreIndex": 119,
+    "notes": "(m.) · G. konia · pl. konie"
   },
   {
     "category": "Nature & Animals",
@@ -2875,7 +2896,8 @@
     "phonetic": "",
     "examplePolish": "W lesie pada śnieg.",
     "exampleEnglish": "The snow is falling in the woods.",
-    "coreIndex": 120
+    "coreIndex": 120,
+    "notes": "(m.) · G. śniegu · no pl."
   },
   {
     "category": "Clothing & Appearance",
@@ -2996,7 +3018,8 @@
     "phonetic": "",
     "examplePolish": "Sałatki z sałatą są bardzo popularne latem.",
     "exampleEnglish": "Salads with lettuce are very popular in summer.",
-    "coreIndex": 131
+    "coreIndex": 131,
+    "notes": "(f.) · G. sałaty · pl. sałaty"
   },
   {
     "category": "Nature & Animals",
@@ -3095,7 +3118,8 @@
     "phonetic": "",
     "examplePolish": "Chłopiec słyszy szum oceanu.",
     "exampleEnglish": "The boy hears the sound of the ocean.",
-    "coreIndex": 140
+    "coreIndex": 140,
+    "notes": "(m.) · G. chłopca · pl. chłopcy"
   },
   {
     "category": "Feelings & Qualities",
@@ -3225,7 +3249,8 @@
     "phonetic": "",
     "examplePolish": "Bardzo lubię lody owocowe.",
     "exampleEnglish": "I like fruit ice-cream very much.",
-    "coreIndex": 152
+    "coreIndex": 152,
+    "notes": "(m.) · G. owocu · pl. owoce"
   },
   {
     "category": "Nature & Animals",
@@ -3335,7 +3360,8 @@
     "phonetic": "",
     "examplePolish": "Mogę zjeść to jabłko?",
     "exampleEnglish": "Can I eat this apple?",
-    "coreIndex": 162
+    "coreIndex": 162,
+    "notes": "(n.) · G. jabłka · pl. jabłka"
   },
   {
     "category": "Food & Drink",
@@ -3368,7 +3394,8 @@
     "phonetic": "",
     "examplePolish": "Te ptaki są straszne.",
     "exampleEnglish": "These birds are scary.",
-    "coreIndex": 165
+    "coreIndex": 165,
+    "notes": "(m.) · G. ptaka · pl. ptaki"
   },
   {
     "category": "Nature & Animals",
@@ -3423,7 +3450,8 @@
     "phonetic": "",
     "examplePolish": "Jestem niezależną kobietą.",
     "exampleEnglish": "I am an independent woman.",
-    "coreIndex": 170
+    "coreIndex": 170,
+    "notes": "(f.) · G. kobiety · pl. kobiety"
   },
   {
     "category": "People & Family",
@@ -3445,7 +3473,8 @@
     "phonetic": "",
     "examplePolish": "Moja dziewczyna jest z Polski.",
     "exampleEnglish": "My girlfriend is from Poland.",
-    "coreIndex": 172
+    "coreIndex": 172,
+    "notes": "(f.) · G. dziewczyny · pl. dziewczyny"
   },
   {
     "category": "People & Family",
@@ -3467,7 +3496,8 @@
     "phonetic": "",
     "examplePolish": "O której godzinie jest następny pociąg?",
     "exampleEnglish": "What time is the next train?",
-    "coreIndex": 174
+    "coreIndex": 174,
+    "notes": "(m.) · G. pociągu · pl. pociągi"
   },
   {
     "category": "Travel & Transport",
@@ -3478,7 +3508,8 @@
     "phonetic": "",
     "examplePolish": "Pasażerowie lecą samolotem.",
     "exampleEnglish": "The passengers are flying on the airplane.",
-    "coreIndex": 175
+    "coreIndex": 175,
+    "notes": "(m.) · G. samolotu · pl. samoloty"
   },
   {
     "category": "Travel & Transport",
@@ -3489,7 +3520,8 @@
     "phonetic": "",
     "examplePolish": "Czy ten autobus jedzie na lotnisko?",
     "exampleEnglish": "Is this the right bus for the airport?",
-    "coreIndex": 176
+    "coreIndex": 176,
+    "notes": "(m.) · G. autobusu · pl. autobusy"
   },
   {
     "category": "Travel & Transport",
@@ -3544,7 +3576,8 @@
     "phonetic": "",
     "examplePolish": "Czy to jest twój pies?",
     "exampleEnglish": "Is that your dog?",
-    "coreIndex": 181
+    "coreIndex": 181,
+    "notes": "(m.) · G. psa · pl. psy"
   },
   {
     "category": "Nature & Animals",
@@ -3555,7 +3588,8 @@
     "phonetic": "",
     "examplePolish": "Mój kot lubi spać po południu.",
     "exampleEnglish": "My cat likes to sleep in the afternoon.",
-    "coreIndex": 182
+    "coreIndex": 182,
+    "notes": "(m.) · G. kota · pl. koty"
   },
   {
     "category": "Nature & Animals",
@@ -3588,7 +3622,8 @@
     "phonetic": "",
     "examplePolish": "Lubię letni deszcz.",
     "exampleEnglish": "I like the summer rain.",
-    "coreIndex": 185
+    "coreIndex": 185,
+    "notes": "(m.) · G. deszczu · pl. deszcze"
   },
   {
     "category": "Food & Drink",
@@ -3621,7 +3656,8 @@
     "phonetic": "",
     "examplePolish": "Chcę zjeść wiśnie.",
     "exampleEnglish": "I want to eat cherries.",
-    "coreIndex": 188
+    "coreIndex": 188,
+    "notes": "(f.) · G. wiśni · pl. wiśnie"
   },
   {
     "category": "People & Family",
@@ -3632,7 +3668,8 @@
     "phonetic": "",
     "examplePolish": "Dziecko musi się zdrzemnąć.",
     "exampleEnglish": "The child needs to take a nap.",
-    "coreIndex": 189
+    "coreIndex": 189,
+    "notes": "(n.) · G. dziecka · pl. dzieci"
   },
   {
     "category": "People & Family",
@@ -3643,7 +3680,8 @@
     "phonetic": "",
     "examplePolish": "Mój kolega jest reżyserem.",
     "exampleEnglish": "My friend is a movie director.",
-    "coreIndex": 190
+    "coreIndex": 190,
+    "notes": "(m.) · G. kolegi · pl. koledzy"
   },
   {
     "category": "People & Family",
@@ -3665,7 +3703,8 @@
     "phonetic": "",
     "examplePolish": "Ten rower jest bardzo tani.",
     "exampleEnglish": "This bicycle is very cheap.",
-    "coreIndex": 192
+    "coreIndex": 192,
+    "notes": "(m.) · G. roweru · pl. rowery"
   },
   {
     "category": "Travel & Transport",
@@ -3676,7 +3715,8 @@
     "phonetic": "",
     "examplePolish": "Jan kupił nowy samochód.",
     "exampleEnglish": "John bought a new car.",
-    "coreIndex": 193
+    "coreIndex": 193,
+    "notes": "(m.) · G. samochodu · pl. samochody"
   },
   {
     "category": "Travel & Transport",
@@ -3951,7 +3991,8 @@
     "phonetic": "",
     "examplePolish": "Potrzebujesz tego zeszytu?",
     "exampleEnglish": "Do you need this notebook?",
-    "coreIndex": 218
+    "coreIndex": 218,
+    "notes": "(m.) · G. zeszytu · pl. zeszyty"
   },
   {
     "category": "Work & School",
@@ -3962,7 +4003,8 @@
     "phonetic": "",
     "examplePolish": "Masz ołówek i gumkę?",
     "exampleEnglish": "Do you have a pencil and an eraser?",
-    "coreIndex": 219
+    "coreIndex": 219,
+    "notes": "(m.) · G. ołówka · pl. ołówki"
   },
   {
     "category": "Activities & Sports",
@@ -4083,7 +4125,8 @@
     "phonetic": "",
     "examplePolish": "Dzwoni telefon.",
     "exampleEnglish": "The telephone is ringing.",
-    "coreIndex": 230
+    "coreIndex": 230,
+    "notes": "(m.) · G. telefonu · pl. telefony"
   },
   {
     "category": "Health & Body",
@@ -4094,7 +4137,8 @@
     "phonetic": "",
     "examplePolish": "Boli mnie prawe oko.",
     "exampleEnglish": "My right eye hurts.",
-    "coreIndex": 231
+    "coreIndex": 231,
+    "notes": "(n.) · G. oka · pl. oczy"
   },
   {
     "category": "Health & Body",
@@ -4138,7 +4182,8 @@
     "phonetic": "",
     "examplePolish": "Długopis spadł za biurko.",
     "exampleEnglish": "A pen fell behind the desk.",
-    "coreIndex": 235
+    "coreIndex": 235,
+    "notes": "(n.) · G. biurka · pl. biurka"
   },
   {
     "category": "Work & School",
@@ -4149,7 +4194,8 @@
     "phonetic": "",
     "examplePolish": "Co to za książka?",
     "exampleEnglish": "What is this book?",
-    "coreIndex": 236
+    "coreIndex": 236,
+    "notes": "(f.) · G. książki · pl. książki"
   },
   {
     "category": "Work & School",
@@ -4171,7 +4217,8 @@
     "phonetic": "",
     "examplePolish": "Przepraszam, gdzie jest najbliższa poczta?",
     "exampleEnglish": "Excuse me, where is the closest post office?",
-    "coreIndex": 238
+    "coreIndex": 238,
+    "notes": "(f.) · G. poczty · pl. poczty"
   },
   {
     "category": "Work & School",
@@ -4193,7 +4240,8 @@
     "phonetic": "",
     "examplePolish": "Agrest nie jest sprzedawany w supermarketach.",
     "exampleEnglish": "Gooseberries aren’t sold in supermarkets.",
-    "coreIndex": 240
+    "coreIndex": 240,
+    "notes": "(m.) · G. supermarketu · pl. supermarkety"
   },
   {
     "category": "Activities & Sports",
@@ -4292,7 +4340,8 @@
     "phonetic": "",
     "examplePolish": "Dziewczyna myje twarz.",
     "exampleEnglish": "The girl is washing her face.",
-    "coreIndex": 249
+    "coreIndex": 249,
+    "notes": "(f.) · G. twarzy · pl. twarze"
   },
   {
     "category": "Health & Body",
@@ -4303,7 +4352,8 @@
     "phonetic": "",
     "examplePolish": "Ucho mnie boli.",
     "exampleEnglish": "My ear is hurting.",
-    "coreIndex": 250
+    "coreIndex": 250,
+    "notes": "(n.) · G. ucha · pl. uszy"
   },
   {
     "category": "Clothing & Appearance",
@@ -4325,7 +4375,8 @@
     "phonetic": "",
     "examplePolish": "Te góry są bardzo wysokie.",
     "exampleEnglish": "Those mountains are very tall.",
-    "coreIndex": 252
+    "coreIndex": 252,
+    "notes": "(f.) · G. góry · pl. góry"
   },
   {
     "category": "Travel & Transport",
@@ -4369,7 +4420,8 @@
     "phonetic": "",
     "examplePolish": "To jest słownik polsko-angielski.",
     "exampleEnglish": "This is a Polish-English dictionary.",
-    "coreIndex": 256
+    "coreIndex": 256,
+    "notes": "(m.) · G. słownika · pl. słowniki"
   },
   {
     "category": "Clothing & Appearance",
@@ -4468,7 +4520,8 @@
     "phonetic": "",
     "examplePolish": "Niestety Maria nie znalazła kluczy.",
     "exampleEnglish": "Unfortunately Maria didn’t find the keys.",
-    "coreIndex": 265
+    "coreIndex": 265,
+    "notes": "(m.) · G. klucza · pl. klucze"
   },
   {
     "category": "Travel & Transport",
@@ -4490,7 +4543,8 @@
     "phonetic": "",
     "examplePolish": "Burza rozświetla ciemny las.",
     "exampleEnglish": "The thunderstorm is lighting up the dark forest.",
-    "coreIndex": 267
+    "coreIndex": 267,
+    "notes": "(m.) · G. lasu · pl. lasy"
   },
   {
     "category": "Nature & Animals",
@@ -4523,7 +4577,8 @@
     "phonetic": "",
     "examplePolish": "Jezioro zamarzło dopiero wczoraj, jeszcze nie wolno jeździć na łyżwach!",
     "exampleEnglish": "The lake has frozen only yesterday; you can’t go ice skating yet!",
-    "coreIndex": 270
+    "coreIndex": 270,
+    "notes": "(n.) · G. jeziora · pl. jeziora"
   },
   {
     "category": "Work & School",
@@ -4534,7 +4589,8 @@
     "phonetic": "",
     "examplePolish": "Patrzą na dokumenty księgowe.",
     "exampleEnglish": "They are looking at accounting documents.",
-    "coreIndex": 271
+    "coreIndex": 271,
+    "notes": "(m.) · G. dokumentu · pl. dokumenty"
   },
   {
     "category": "Work & School",
@@ -4545,7 +4601,8 @@
     "phonetic": "",
     "examplePolish": "Mam komputer.",
     "exampleEnglish": "I have a computer.",
-    "coreIndex": 272
+    "coreIndex": 272,
+    "notes": "(m.) · G. komputera · pl. komputery"
   },
   {
     "category": "Technology & Media",
@@ -4611,7 +4668,8 @@
     "phonetic": "",
     "examplePolish": "Bank jest po lewej stronie ulicy.",
     "exampleEnglish": "The bank is on the left side of the street.",
-    "coreIndex": 278
+    "coreIndex": 278,
+    "notes": "(m.) · G. banku · pl. banki"
   },
   {
     "category": "Shopping & Money",
@@ -4677,7 +4735,8 @@
     "phonetic": "",
     "examplePolish": "Świetliki latają nad polem pszenicy.",
     "exampleEnglish": "The fireflies are flying over the wheat field.",
-    "coreIndex": 284
+    "coreIndex": 284,
+    "notes": "(n.) · G. pola · pl. pola"
   },
   {
     "category": "Nature & Animals",
@@ -4732,7 +4791,8 @@
     "phonetic": "",
     "examplePolish": "Jutro masz spotkanie biznesowe.",
     "exampleEnglish": "Tomorrow you have a business meeting.",
-    "coreIndex": 289
+    "coreIndex": 289,
+    "notes": "(n.) · G. spotkania · pl. spotkania"
   },
   {
     "category": "Travel & Transport",
@@ -4754,7 +4814,8 @@
     "phonetic": "",
     "examplePolish": "Ta apteka jest droga.",
     "exampleEnglish": "This pharmacy is expensive.",
-    "coreIndex": 291
+    "coreIndex": 291,
+    "notes": "(f.) · G. apteki · pl. apteki"
   },
   {
     "category": "Food & Drink",
@@ -4820,7 +4881,8 @@
     "phonetic": "",
     "examplePolish": "Mamy umowę.",
     "exampleEnglish": "We have a deal.",
-    "coreIndex": 297
+    "coreIndex": 297,
+    "notes": "(f.) · G. umowy · pl. umowy"
   },
   {
     "category": "Feelings & Qualities",
@@ -4886,7 +4948,8 @@
     "phonetic": "",
     "examplePolish": "Kiedy dostanę pensję?",
     "exampleEnglish": "When will I get my salary?",
-    "coreIndex": 303
+    "coreIndex": 303,
+    "notes": "(f.) · G. pensji · pl. pensje"
   },
   {
     "category": "Technology & Media",
@@ -4930,7 +4993,8 @@
     "phonetic": "",
     "examplePolish": "To jest gazeta.",
     "exampleEnglish": "This is a newspaper.",
-    "coreIndex": 307
+    "coreIndex": 307,
+    "notes": "(f.) · G. gazety · pl. gazety"
   },
   {
     "category": "Technology & Media",
@@ -4963,7 +5027,8 @@
     "phonetic": "",
     "examplePolish": "Ten obraz jest znany w całej Polsce.",
     "exampleEnglish": "This painting is well-known throughout all of Poland.",
-    "coreIndex": 310
+    "coreIndex": 310,
+    "notes": "(m.) · G. obrazu · pl. obrazy"
   },
   {
     "category": "Activities & Sports",
@@ -4974,7 +5039,8 @@
     "phonetic": "",
     "examplePolish": "Teatr pociaga mnie bardziej niż film.",
     "exampleEnglish": "I am attracted more to theater than to movies.",
-    "coreIndex": 311
+    "coreIndex": 311,
+    "notes": "(m.) · G. teatru · pl. teatry"
   },
   {
     "category": "Activities & Sports",
@@ -5051,7 +5117,8 @@
     "phonetic": "",
     "examplePolish": "Przynieś jutro mój podręcznik.",
     "exampleEnglish": "Bring my textbook tomorrow.",
-    "coreIndex": 318
+    "coreIndex": 318,
+    "notes": "(m.) · G. podręcznika · pl. podręczniki"
   },
   {
     "category": "Places & Directions",
@@ -5073,7 +5140,8 @@
     "phonetic": "",
     "examplePolish": "Dlaczego odchodzisz z pracy?",
     "exampleEnglish": "Why are you leaving your job?",
-    "coreIndex": 320
+    "coreIndex": 320,
+    "notes": "(f.) · G. pracy · pl. prace"
   },
   {
     "category": "Work & School",
@@ -5128,7 +5196,8 @@
     "phonetic": "",
     "examplePolish": "Czy masz jakieś pieniądze?",
     "exampleEnglish": "Do you have any money?",
-    "coreIndex": 325
+    "coreIndex": 325,
+    "notes": "(pl.) · G. pieniędzy"
   },
   {
     "category": "Shopping & Money",
@@ -5150,7 +5219,8 @@
     "phonetic": "",
     "examplePolish": "Można prosić o rachunek?",
     "exampleEnglish": "May I have the bill, please?",
-    "coreIndex": 327
+    "coreIndex": 327,
+    "notes": "(m.) · G. rachunku · pl. rachunki"
   },
   {
     "category": "Technology & Media",
@@ -5392,7 +5462,8 @@
     "phonetic": "",
     "examplePolish": "On planuje zostać studentem medycyny.",
     "exampleEnglish": "He’s planning to become a medicine student.",
-    "coreIndex": 349
+    "coreIndex": 349,
+    "notes": "(m.) · G. studenta · pl. studenci"
   },
   {
     "category": "Time & Calendar",
@@ -5425,7 +5496,8 @@
     "phonetic": "",
     "examplePolish": "Jego córka jest najlepszą uczennicą w szkole.",
     "exampleEnglish": "His daughter is the best student in the school.",
-    "coreIndex": 352
+    "coreIndex": 352,
+    "notes": "(f.) · G. szkoły · pl. szkoły"
   },
   {
     "category": "Work & School",
@@ -5436,7 +5508,8 @@
     "phonetic": "",
     "examplePolish": "Kupiłem poduszkę na moje szkolne krzesło.",
     "exampleEnglish": "I bought a cushion for my school chair.",
-    "coreIndex": 353
+    "coreIndex": 353,
+    "notes": "(n.) · G. krzesła · pl. krzesła"
   },
   {
     "category": "Work & School",
@@ -5601,7 +5674,8 @@
     "phonetic": "",
     "examplePolish": "Czy ten film ma napisy?",
     "exampleEnglish": "Does this movie have subtitles?",
-    "coreIndex": 368
+    "coreIndex": 368,
+    "notes": "(m.) · G. filmu · pl. filmy"
   },
   {
     "category": "Activities & Sports",
@@ -5678,7 +5752,8 @@
     "phonetic": "",
     "examplePolish": "Moja praca to mój świat.",
     "exampleEnglish": "My job is the world to me.",
-    "coreIndex": 375
+    "coreIndex": 375,
+    "notes": "(f.) · G. pracy · pl. prace"
   },
   {
     "category": "Activities & Sports",
@@ -5887,7 +5962,8 @@
     "phonetic": "",
     "examplePolish": "Moje mieszkanie ma trzy pokoje.",
     "exampleEnglish": "My apartment has three rooms.",
-    "coreIndex": 394
+    "coreIndex": 394,
+    "notes": "(n.) · G. mieszkania · pl. mieszkania"
   },
   {
     "category": "Home & Daily Life",
@@ -5898,7 +5974,8 @@
     "phonetic": "",
     "examplePolish": "Mój dom jest bardzo duży.",
     "exampleEnglish": "My house is very big.",
-    "coreIndex": 395
+    "coreIndex": 395,
+    "notes": "(m.) · G. domu · pl. domy"
   },
   {
     "category": "Activities & Sports",
@@ -6085,7 +6162,8 @@
     "phonetic": "",
     "examplePolish": "Twoja informacja jest nieprawidłowa.",
     "exampleEnglish": "Your information isn’t right.",
-    "coreIndex": 412
+    "coreIndex": 412,
+    "notes": "(f.) · G. informacji · pl. informacje"
   },
   {
     "category": "Work & School",
@@ -6107,7 +6185,8 @@
     "phonetic": "",
     "examplePolish": "Sekretarka rozmawia przez telefon.",
     "exampleEnglish": "The secretary is on the phone.",
-    "coreIndex": 414
+    "coreIndex": 414,
+    "notes": "(f.) · G. sekretarki · pl. sekretarki"
   },
   {
     "category": "Work & School",
@@ -6272,7 +6351,8 @@
     "phonetic": "",
     "examplePolish": "Czy masz paszport?",
     "exampleEnglish": "Do you have a passport?",
-    "coreIndex": 429
+    "coreIndex": 429,
+    "notes": "(m.) · G. paszportu · pl. paszporty"
   },
   {
     "category": "Work & School",
@@ -6536,7 +6616,8 @@
     "phonetic": "",
     "examplePolish": "Idę do sklepu kupić mleko i jajka.",
     "exampleEnglish": "I’m going to the store to buy some milk and eggs.",
-    "coreIndex": 453
+    "coreIndex": 453,
+    "notes": "(m.) · G. sklepu · pl. sklepy"
   },
   {
     "category": "Shopping & Money",
@@ -6547,7 +6628,8 @@
     "phonetic": "",
     "examplePolish": "Kupujemy owoce i warzywa na rynku.",
     "exampleEnglish": "We buy our fruits and vegetables at the local market.",
-    "coreIndex": 454
+    "coreIndex": 454,
+    "notes": "(m.) · G. rynku · pl. rynki"
   },
   {
     "category": "Shopping & Money",
@@ -6712,7 +6794,8 @@
     "phonetic": "",
     "examplePolish": "Czy możesz podać mi nóż?",
     "exampleEnglish": "Could you pass me the knife?",
-    "coreIndex": 469
+    "coreIndex": 469,
+    "notes": "(m.) · G. noża · pl. noże"
   },
   {
     "category": "Food & Drink",
@@ -6767,7 +6850,8 @@
     "phonetic": "",
     "examplePolish": "Mleko jest ważnym źródłem wapnia dla dzieci i dorosłych.",
     "exampleEnglish": "Milk is an important source of calcium for kids and adults.",
-    "coreIndex": 474
+    "coreIndex": 474,
+    "notes": "(n.) · G. mleka · no pl."
   },
   {
     "category": "Work & School",
@@ -6877,7 +6961,8 @@
     "phonetic": "",
     "examplePolish": "Miska jest pusta.",
     "exampleEnglish": "The bowl is empty.",
-    "coreIndex": 484
+    "coreIndex": 484,
+    "notes": "(f.) · G. miski · pl. miski"
   },
   {
     "category": "Home & Daily Life",
@@ -6899,7 +6984,8 @@
     "phonetic": "",
     "examplePolish": "Ta mapa jest nieaktualna.",
     "exampleEnglish": "This map is out of date.",
-    "coreIndex": 486
+    "coreIndex": 486,
+    "notes": "(f.) · G. mapy · pl. mapy"
   },
   {
     "category": "Places & Directions",
@@ -6910,7 +6996,8 @@
     "phonetic": "",
     "examplePolish": "Ta walizka jest naprawdę ciężka.",
     "exampleEnglish": "This suitcase is really heavy",
-    "coreIndex": 487
+    "coreIndex": 487,
+    "notes": "(f.) · G. walizki · pl. walizki"
   },
   {
     "category": "Travel & Transport",
@@ -6921,7 +7008,8 @@
     "phonetic": "",
     "examplePolish": "Turysta robi zdjęcia zwierzętom.",
     "exampleEnglish": "The tourist is taking pictures of the animals.",
-    "coreIndex": 488
+    "coreIndex": 488,
+    "notes": "(m.) · G. turysty · pl. turyści"
   },
   {
     "category": "Work & School",
@@ -7086,7 +7174,8 @@
     "phonetic": "",
     "examplePolish": "Piję sok pomarańczowy do śniadania, a jabłkowy do lunchu.",
     "exampleEnglish": "I drink orange juice with breakfast and apple juice with lunch.",
-    "coreIndex": 503
+    "coreIndex": 503,
+    "notes": "(m.) · G. soku · pl. soki"
   },
   {
     "category": "Home & Daily Life",
@@ -7108,7 +7197,8 @@
     "phonetic": "",
     "examplePolish": "Moje nowe łóżko jest niewygodne.",
     "exampleEnglish": "My new bed is not comfortable.",
-    "coreIndex": 505
+    "coreIndex": 505,
+    "notes": "(n.) · G. łóżka · pl. łóżka"
   },
   {
     "category": "Home & Daily Life",
@@ -7295,7 +7385,8 @@
     "phonetic": "",
     "examplePolish": "W każdą niedzielę rano kupujemy chleb, ciasto i ciastka w piekarni.",
     "exampleEnglish": "Every Sunday morning we buy bread, cake, and cookies at the bakery.",
-    "coreIndex": 522
+    "coreIndex": 522,
+    "notes": "(m.) · G. chleba · pl. chleby"
   },
   {
     "category": "Food & Drink",
@@ -7306,7 +7397,8 @@
     "phonetic": "",
     "examplePolish": "Kucharz smaży jajko.",
     "exampleEnglish": "The cook is frying an egg.",
-    "coreIndex": 523
+    "coreIndex": 523,
+    "notes": "(n.) · G. jajka · pl. jajka"
   },
   {
     "category": "Food & Drink",
@@ -7339,7 +7431,8 @@
     "phonetic": "",
     "examplePolish": "Wyjdźmy z domu tylnymi drzwiami.",
     "exampleEnglish": "Let’s leave through the back door of the house.",
-    "coreIndex": 526
+    "coreIndex": 526,
+    "notes": "(pl.) · G. drzwi"
   },
   {
     "category": "Home & Daily Life",
@@ -7504,7 +7597,8 @@
     "phonetic": "",
     "examplePolish": "Strasznie schudłem przez chorobę.",
     "exampleEnglish": "I lost a lot of weight because of the illness.",
-    "coreIndex": 541
+    "coreIndex": 541,
+    "notes": "(f.) · G. choroby · pl. choroby"
   },
   {
     "category": "Health & Body",
@@ -7548,7 +7642,8 @@
     "phonetic": "",
     "examplePolish": "Tę kobietę coś boli.",
     "exampleEnglish": "The woman is in pain.",
-    "coreIndex": 545
+    "coreIndex": 545,
+    "notes": "(m.) · G. bólu · pl. bóle"
   },
   {
     "category": "Health & Body",
@@ -7570,7 +7665,8 @@
     "phonetic": "",
     "examplePolish": "Dlaczego patrzysz przez okno?",
     "exampleEnglish": "Why are you looking through the window?",
-    "coreIndex": 547
+    "coreIndex": 547,
+    "notes": "(n.) · G. okna · pl. okna"
   },
   {
     "category": "Food & Drink",
@@ -7592,7 +7688,8 @@
     "phonetic": "",
     "examplePolish": "W restauracji zjedliśmy posiłek z pięciu dań.",
     "exampleEnglish": "At the restaurant we had a five course meal.",
-    "coreIndex": 549
+    "coreIndex": 549,
+    "notes": "(m.) · G. posiłku · pl. posiłki"
   },
   {
     "category": "Weather & Nature",
@@ -7669,7 +7766,8 @@
     "phonetic": "",
     "examplePolish": "Opłata za podróż w obie strony pozwoli mi pojechać tam i z powrotem.",
     "exampleEnglish": "The roundtrip fare will get me there and back again.",
-    "coreIndex": 556
+    "coreIndex": 556,
+    "notes": "(f.) · G. opłaty · pl. opłaty"
   },
   {
     "category": "Travel & Transport",
@@ -7713,7 +7811,8 @@
     "phonetic": "",
     "examplePolish": "Tutaj można jechać osiemdziesiąt kilometrów na godzinę.",
     "exampleEnglish": "Here one can drive eighty kilometers per hour.",
-    "coreIndex": 560
+    "coreIndex": 560,
+    "notes": "(m.) · G. kilometra · pl. kilometry"
   },
   {
     "category": "Health & Body",
@@ -7834,7 +7933,8 @@
     "phonetic": "",
     "examplePolish": "Mała dziewczynka idzie drogą.",
     "exampleEnglish": "The little girl is walking on the road.",
-    "coreIndex": 571
+    "coreIndex": 571,
+    "notes": "(f.) · G. drogi · pl. drogi"
   },
   {
     "category": "Places & Directions",
@@ -7845,7 +7945,8 @@
     "phonetic": "",
     "examplePolish": "Ta ulica jest bardzo długa.",
     "exampleEnglish": "This street is very long.",
-    "coreIndex": 572
+    "coreIndex": 572,
+    "notes": "(f.) · G. ulicy · pl. ulice"
   },
   {
     "category": "Feelings & Qualities",
@@ -7955,7 +8056,8 @@
     "phonetic": "",
     "examplePolish": "Zawołam kelnera.",
     "exampleEnglish": "I’ll call the waiter.",
-    "coreIndex": 582
+    "coreIndex": 582,
+    "notes": "(m.) · G. kelnera · pl. kelnerzy"
   },
   {
     "category": "Nature & Animals",
@@ -8021,7 +8123,8 @@
     "phonetic": "",
     "examplePolish": "Para spaceruje w parku.",
     "exampleEnglish": "The couple is walking in the park.",
-    "coreIndex": 588
+    "coreIndex": 588,
+    "notes": "(m.) · G. parku · pl. parki"
   },
   {
     "category": "Travel & Transport",
@@ -8043,7 +8146,8 @@
     "phonetic": "",
     "examplePolish": "Co oznacza ten znak?",
     "exampleEnglish": "What does that sign mean?",
-    "coreIndex": 590
+    "coreIndex": 590,
+    "notes": "(m.) · G. znaku · pl. znaki"
   },
   {
     "category": "Travel & Transport",
@@ -8164,7 +8268,8 @@
     "phonetic": "",
     "examplePolish": "Kobiety jedzą w restauracji.",
     "exampleEnglish": "The women are eating out at a restaurant.",
-    "coreIndex": 601
+    "coreIndex": 601,
+    "notes": "(f.) · G. restauracji · pl. restauracje"
   },
   {
     "category": "Food & Drink",
@@ -8263,7 +8368,8 @@
     "phonetic": "",
     "examplePolish": "To jest młode drzewo.",
     "exampleEnglish": "This is a young tree.",
-    "coreIndex": 610
+    "coreIndex": 610,
+    "notes": "(n.) · G. drzewa · pl. drzewa"
   },
   {
     "category": "Religion & Culture",
@@ -8417,7 +8523,8 @@
     "phonetic": "",
     "examplePolish": "Miasto spowija mgła.",
     "exampleEnglish": "The city is covered in fog.",
-    "coreIndex": 624
+    "coreIndex": 624,
+    "notes": "(n.) · G. miasta · pl. miasta"
   },
   {
     "category": "Home & Housing",
@@ -8615,7 +8722,8 @@
     "phonetic": "",
     "examplePolish": "Mój dziadek mieszka w małej wiosce.",
     "exampleEnglish": "My grandfather lives in a small village.",
-    "coreIndex": 642
+    "coreIndex": 642,
+    "notes": "(f.) · G. wioski · pl. wioski"
   },
   {
     "category": "Places & Directions",
@@ -8648,7 +8756,8 @@
     "phonetic": "",
     "examplePolish": "Bagażowy zaniósł nasze torby do pokoju.",
     "exampleEnglish": "A porter carried our bags to our room.",
-    "coreIndex": 645
+    "coreIndex": 645,
+    "notes": "(m.) · G. pokoju · pl. pokoje"
   },
   {
     "category": "Health & Body",
@@ -8824,7 +8933,8 @@
     "phonetic": "",
     "examplePolish": "Mężczyzna zamierza dać róże swojej dziewczynie.",
     "exampleEnglish": "The man is about to give roses to his girlfriend.",
-    "coreIndex": 661
+    "coreIndex": 661,
+    "notes": "(f.) · G. róży · pl. róże"
   },
   {
     "category": "Nature & Animals",
@@ -8835,7 +8945,8 @@
     "phonetic": "",
     "examplePolish": "Chłopiec zrywa żółte kwiaty.",
     "exampleEnglish": "The boy is picking yellow flowers.",
-    "coreIndex": 662
+    "coreIndex": 662,
+    "notes": "(m.) · G. kwiatu · pl. kwiaty"
   },
   {
     "category": "Weather & Nature",
@@ -9253,7 +9364,8 @@
     "phonetic": "",
     "examplePolish": "On nie może znieść widoku krwi.",
     "exampleEnglish": "He cannot bear to see blood.",
-    "coreIndex": 700
+    "coreIndex": 700,
+    "notes": "(f.) · G. krwi · no pl."
   },
   {
     "category": "General Core",
@@ -9308,7 +9420,8 @@
     "phonetic": "",
     "examplePolish": "Lodówka jest pełna jedzenia na święta.",
     "exampleEnglish": "The refrigerator is full of food for the holiday.",
-    "coreIndex": 705
+    "coreIndex": 705,
+    "notes": "(f.) · G. lodówki · pl. lodówki"
   },
   {
     "category": "Cleaning & Household",
@@ -9451,7 +9564,8 @@
     "phonetic": "",
     "examplePolish": "Ja wprost przepadam za malinami.",
     "exampleEnglish": "I’m simply a huge fan of raspberries.",
-    "coreIndex": 718
+    "coreIndex": 718,
+    "notes": "(f.) · G. maliny · pl. maliny"
   },
   {
     "category": "Health & Body",
@@ -9726,7 +9840,8 @@
     "phonetic": "",
     "examplePolish": "W hotelu było sześćset pokoi, restauracja i basen.",
     "exampleEnglish": "The hotel had 600 rooms, a restaurant, and a swimming pool.",
-    "coreIndex": 743
+    "coreIndex": 743,
+    "notes": "(m.) · G. hotelu · pl. hotele"
   },
   {
     "category": "Work & School",
@@ -10089,7 +10204,8 @@
     "phonetic": "",
     "examplePolish": "Wczoraj wieczorem jadłam kapustę.",
     "exampleEnglish": "I ate a cabbage last night.",
-    "coreIndex": 776
+    "coreIndex": 776,
+    "notes": "(f.) · G. kapusty · pl. kapusty"
   },
   {
     "category": "Food & Drink",
@@ -10802,7 +10918,8 @@
     "phonetic": "",
     "examplePolish": "Kobieta jest chora na grypę.",
     "exampleEnglish": "The woman is sick with the flu.",
-    "coreIndex": 842
+    "coreIndex": 842,
+    "notes": "(f.) · G. grypy · pl. grypy"
   },
   {
     "category": "General Core",
@@ -10857,7 +10974,8 @@
     "phonetic": "",
     "examplePolish": "Stewardesa poprosiła pasażerkę o zajęcie miejsca.",
     "exampleEnglish": "The flight attendant asked the passenger to take her seat.",
-    "coreIndex": 847
+    "coreIndex": 847,
+    "notes": "(n.) · G. miejsca · pl. miejsca"
   },
   {
     "category": "Health & Body",
@@ -11229,7 +11347,8 @@
     "phonetic": "",
     "examplePolish": "Niemowlę ma katar.",
     "exampleEnglish": "The baby has a runny nose.",
-    "coreIndex": 881
+    "coreIndex": 881,
+    "notes": "(m.) · G. kataru · no pl."
   },
   {
     "category": "General Core",
@@ -11526,7 +11645,8 @@
     "phonetic": "",
     "examplePolish": "paszport i bilet",
     "exampleEnglish": "passport and ticket",
-    "coreIndex": 908
+    "coreIndex": 908,
+    "notes": "(m.) · G. biletu · pl. bilety"
   },
   {
     "category": "General Core",
@@ -11713,7 +11833,8 @@
     "phonetic": "",
     "examplePolish": "radio informacyjne",
     "exampleEnglish": "news radio",
-    "coreIndex": 925
+    "coreIndex": 925,
+    "notes": "(f.) · G. informacji · pl. informacje"
   },
   {
     "category": "Travel & Transport",
@@ -12131,7 +12252,8 @@
     "phonetic": "",
     "examplePolish": "dyrektor firmy",
     "exampleEnglish": "company director",
-    "coreIndex": 963
+    "coreIndex": 963,
+    "notes": "(m.) · G. dyrektora · pl. dyrektorzy"
   },
   {
     "category": "General Core",
@@ -12316,7 +12438,8 @@
     "phonetic": "",
     "examplePolish": "Samochód skręca w prawo.",
     "exampleEnglish": "The automobile is turning right.",
-    "coreIndex": 980
+    "coreIndex": 980,
+    "notes": "(m.) · G. samochodu · pl. samochody"
   },
   {
     "category": "General Core",
@@ -13003,7 +13126,8 @@
     "phonetic": "",
     "examplePolish": "słoneczny dzień",
     "exampleEnglish": "sunny day",
-    "coreIndex": 1043
+    "coreIndex": 1043,
+    "notes": "(m.) · G. dnia · pl. dni"
   },
   {
     "category": "Time & Calendar",
@@ -13014,7 +13138,8 @@
     "phonetic": "",
     "examplePolish": "miesiąc lipiec",
     "exampleEnglish": "July",
-    "coreIndex": 1044
+    "coreIndex": 1044,
+    "notes": "(m.) · G. miesiąca · pl. miesiące"
   },
   {
     "category": "General Core",
@@ -13025,7 +13150,8 @@
     "phonetic": "",
     "examplePolish": "Nowy Rok to moje ulubione święto w roku.",
     "exampleEnglish": "New Years is my favorite holiday each year.",
-    "coreIndex": 1045
+    "coreIndex": 1045,
+    "notes": "(n.) · G. święta · pl. święta"
   },
   {
     "category": "Time & Calendar",
@@ -13421,7 +13547,8 @@
     "phonetic": "",
     "examplePolish": "To nie może być prawda!",
     "exampleEnglish": "That can’t be true!",
-    "coreIndex": 1081
+    "coreIndex": 1081,
+    "notes": "(f.) · G. prawdy · no pl."
   },
   {
     "category": "General Core",
@@ -13870,7 +13997,8 @@
     "phonetic": "",
     "examplePolish": "duży prezent",
     "exampleEnglish": "big present",
-    "coreIndex": 1122
+    "coreIndex": 1122,
+    "notes": "(m.) · G. prezentu · pl. prezenty"
   },
   {
     "category": "General Core",
@@ -14200,7 +14328,8 @@
     "phonetic": "",
     "examplePolish": "nocny widok na miasto",
     "exampleEnglish": "nighttime view of the city",
-    "coreIndex": 1152
+    "coreIndex": 1152,
+    "notes": "(f.) · G. nocy · pl. noce"
   },
   {
     "category": "General Core",
@@ -14211,7 +14340,8 @@
     "phonetic": "",
     "examplePolish": "Po prostu nie umiem spać w dzień.",
     "exampleEnglish": "I just can’t sleep during the daytime.",
-    "coreIndex": 1153
+    "coreIndex": 1153,
+    "notes": "(m.) · G. dnia · pl. dni"
   },
   {
     "category": "General Core",
@@ -14420,7 +14550,8 @@
     "phonetic": "",
     "examplePolish": "Wiatr jest bardzo silny.",
     "exampleEnglish": "The wind is really strong.",
-    "coreIndex": 1172
+    "coreIndex": 1172,
+    "notes": "(m.) · G. wiatru · pl. wiatry"
   },
   {
     "category": "General Core",
@@ -14782,7 +14913,8 @@
     "phonetic": "",
     "examplePolish": "sól morska",
     "exampleEnglish": "sea salt",
-    "coreIndex": 1205
+    "coreIndex": 1205,
+    "notes": "(f.) · G. soli · no pl."
   },
   {
     "category": "General Core",
@@ -14793,7 +14925,8 @@
     "phonetic": "",
     "examplePolish": "Cukier, który pochodzi w większości z trzciny cukrowej lub buraków, to naturalny słodzik.",
     "exampleEnglish": "Most sugar comes from sugar cane or beets and is a natural sweetener.",
-    "coreIndex": 1206
+    "coreIndex": 1206,
+    "notes": "(m.) · G. cukru · no pl."
   },
   {
     "category": "General Core",
@@ -14815,7 +14948,8 @@
     "phonetic": "",
     "examplePolish": "Produkty mleczne to na przykład ser, jogurt, masło i śmietana.",
     "exampleEnglish": "Milk products include cheese, yogurt, butter, and cream.",
-    "coreIndex": 1208
+    "coreIndex": 1208,
+    "notes": "(n.) · G. masła · no pl."
   },
   {
     "category": "Feelings & Qualities",
@@ -15288,7 +15422,8 @@
     "phonetic": "",
     "examplePolish": "wybór mięs",
     "exampleEnglish": "selection of meat",
-    "coreIndex": 1251
+    "coreIndex": 1251,
+    "notes": "(n.) · G. mięsa · no pl."
   },
   {
     "category": "General Core",
@@ -15442,7 +15577,8 @@
     "phonetic": "",
     "examplePolish": "Obfity obiad sprawi, że będziesz śpiący po południu.",
     "exampleEnglish": "A big lunch will make you sleepy in the afternoon.",
-    "coreIndex": 1265
+    "coreIndex": 1265,
+    "notes": "(m.) · G. obiadu · pl. obiady"
   },
   {
     "category": "Food & Drink",
@@ -16133,7 +16269,8 @@
     "phonetic": "",
     "examplePolish": "Kiedy płaczesz, z oczu płyną ci łzy.",
     "exampleEnglish": "When you cry tears fall from your eyes.",
-    "coreIndex": 1328
+    "coreIndex": 1328,
+    "notes": "(f.) · G. łzy · pl. łzy"
   },
   {
     "category": "General Core",
@@ -16232,7 +16369,8 @@
     "phonetic": "",
     "examplePolish": "Kiedy boli ząb, ważne jest by iść do dentysty.",
     "exampleEnglish": "When your tooth hurts, it is important to go to the dentist.",
-    "coreIndex": 1337
+    "coreIndex": 1337,
+    "notes": "(m.) · G. zęba · pl. zęby"
   },
   {
     "category": "Grammar & Function Words",
@@ -16857,7 +16995,8 @@
     "phonetic": "",
     "examplePolish": "kanapa do salonu",
     "exampleEnglish": "living room sofa",
-    "coreIndex": 1394
+    "coreIndex": 1394,
+    "notes": "(f.) · G. kanapy · pl. kanapy"
   },
   {
     "category": "Home & Daily Life",
@@ -16868,7 +17007,8 @@
     "phonetic": "",
     "examplePolish": "Łatwiej się uczyć, gdy siedzisz na wygodnym krześle.",
     "exampleEnglish": "It is easier to study when you are sitting in a comfortable chair.",
-    "coreIndex": 1395
+    "coreIndex": 1395,
+    "notes": "(n.) · G. krzesła · pl. krzesła"
   },
   {
     "category": "Home & Daily Life",
@@ -16890,7 +17030,8 @@
     "phonetic": "",
     "examplePolish": "drewniany stół",
     "exampleEnglish": "wooden table",
-    "coreIndex": 1397
+    "coreIndex": 1397,
+    "notes": "(m.) · G. stołu · pl. stoły"
   },
   {
     "category": "Work & School",
@@ -16956,7 +17097,8 @@
     "phonetic": "",
     "examplePolish": "Wysłałam twój czek pod niewłaściwy adres.",
     "exampleEnglish": "I sent your check to the wrong address.",
-    "coreIndex": 1405
+    "coreIndex": 1405,
+    "notes": "(m.) · G. adresu · pl. adresy"
   },
   {
     "category": "General Core",
@@ -17297,7 +17439,8 @@
     "phonetic": "",
     "examplePolish": "Niedźwiedzie są silnymi zwierzętami.",
     "exampleEnglish": "Bears are strong animals.",
-    "coreIndex": 1436
+    "coreIndex": 1436,
+    "notes": "(m.) · G. niedźwiedzia · pl. niedźwiedzie"
   },
   {
     "category": "General Core",
@@ -17330,7 +17473,8 @@
     "phonetic": "",
     "examplePolish": "Koc, który dał mi pracownik obsługi, był bardzo komfortowy.",
     "exampleEnglish": "The blanket the flight attendant gave me was very comfortable.",
-    "coreIndex": 1439
+    "coreIndex": 1439,
+    "notes": "(m.) · G. koca · pl. koce"
   },
   {
     "category": "General Core",
@@ -17407,7 +17551,8 @@
     "phonetic": "",
     "examplePolish": "Przed mostem przepłynęliśmy rzekę łodzią.",
     "exampleEnglish": "Before the bridge, we crossed the river by boat.",
-    "coreIndex": 1446
+    "coreIndex": 1446,
+    "notes": "(m.) · G. mostu · pl. mosty"
   },
   {
     "category": "Measurements & Units",
@@ -17715,7 +17860,8 @@
     "phonetic": "",
     "examplePolish": "Chiński znak “dao” oznacza drogę albo ulicę.",
     "exampleEnglish": "The Chinese character for the word dao means road or way.",
-    "coreIndex": 1474
+    "coreIndex": 1474,
+    "notes": "(m.) · G. znaku · pl. znaki"
   },
   {
     "category": "General Core",
@@ -17770,7 +17916,8 @@
     "phonetic": "",
     "examplePolish": "Wielu chrześcijan uważa, że chodzenie do kościoła w każdą niedzielę jest bardzo ważne.",
     "exampleEnglish": "Many Christians feel it is important to attend church every Sunday.",
-    "coreIndex": 1479
+    "coreIndex": 1479,
+    "notes": "(m.) · G. kościoła · pl. kościoły"
   },
   {
     "category": "General Core",
@@ -17792,7 +17939,8 @@
     "phonetic": "",
     "examplePolish": "Biorę lekcje niemieckiego i matematyki.",
     "exampleEnglish": "I’m taking a class in German and one in mathematics.",
-    "coreIndex": 1481
+    "coreIndex": 1481,
+    "notes": "(f.) · G. lekcji · pl. lekcje"
   },
   {
     "category": "General Core",
@@ -18111,7 +18259,8 @@
     "phonetic": "",
     "examplePolish": "Nasza córka jest profesorem na uniwersytecie, a nasz syn jest biznesmenem.",
     "exampleEnglish": "Our daughter is a university professor, and our son is a businessman.",
-    "coreIndex": 1510
+    "coreIndex": 1510,
+    "notes": "(f.) · G. córki · pl. córki"
   },
   {
     "category": "General Core",
@@ -18298,7 +18447,8 @@
     "phonetic": "",
     "examplePolish": "kierowca autobusu",
     "exampleEnglish": "bus driver",
-    "coreIndex": 1527
+    "coreIndex": 1527,
+    "notes": "(m.) · G. kierowcy · pl. kierowcy"
   },
   {
     "category": "Places & Directions",
@@ -18823,7 +18973,8 @@
     "phonetic": "",
     "examplePolish": "Chcę kupić dom z ogrodem.",
     "exampleEnglish": "I want to buy a house with a garden.",
-    "coreIndex": 1575
+    "coreIndex": 1575,
+    "notes": "(m.) · G. ogrodu · pl. ogrody"
   },
   {
     "category": "Travel & Transport",
@@ -18944,7 +19095,8 @@
     "phonetic": "",
     "examplePolish": "Dziadek idzie ze swoimi wnukami.",
     "exampleEnglish": "The grandfather is walking with his grandchildren.",
-    "coreIndex": 1586
+    "coreIndex": 1586,
+    "notes": "(m.) · G. dziadka · pl. dziadkowie"
   },
   {
     "category": "General Core",
@@ -19087,7 +19239,8 @@
     "phonetic": "",
     "examplePolish": "wracać wcześnie do domu",
     "exampleEnglish": "return home early",
-    "coreIndex": 1599
+    "coreIndex": 1599,
+    "notes": "(m.) · G. domu · pl. domy"
   },
   {
     "category": "Work & School",
@@ -19175,7 +19328,8 @@
     "phonetic": "",
     "examplePolish": "Biorę prysznic rano, a mój mąż wieczorem.",
     "exampleEnglish": "I shower in the morning, and my husband showers at night.",
-    "coreIndex": 1607
+    "coreIndex": 1607,
+    "notes": "(m.) · G. męża · pl. mężowie"
   },
   {
     "category": "Grammar & Function Words",
@@ -19395,7 +19549,8 @@
     "phonetic": "",
     "examplePolish": "Kangury są ssakami.",
     "exampleEnglish": "Kangaroos are mammals.",
-    "coreIndex": 1627
+    "coreIndex": 1627,
+    "notes": "(m.) · G. kangura · pl. kangury"
   },
   {
     "category": "General Core",
@@ -19560,7 +19715,8 @@
     "phonetic": "",
     "examplePolish": "Profesor prowadzi lekcję.",
     "exampleEnglish": "The professor is teaching a lesson.",
-    "coreIndex": 1642
+    "coreIndex": 1642,
+    "notes": "(f.) · G. lekcji · pl. lekcje"
   },
   {
     "category": "General Core",
@@ -19571,7 +19727,8 @@
     "phonetic": "",
     "examplePolish": "Ktoś wysyła list.",
     "exampleEnglish": "The person is mailing a letter.",
-    "coreIndex": 1643
+    "coreIndex": 1643,
+    "notes": "(m.) · G. listu · pl. listy"
   },
   {
     "category": "Travel & Transport",
@@ -19791,7 +19948,8 @@
     "phonetic": "",
     "examplePolish": "skrzynka pocztowa pełna listów",
     "exampleEnglish": "mailbox full of mail",
-    "coreIndex": 1663
+    "coreIndex": 1663,
+    "notes": "(f.) · G. poczty · pl. poczty"
   },
   {
     "category": "General Core",
@@ -20040,7 +20198,8 @@
     "phonetic": "",
     "examplePolish": "Moi koledzy zawsze zwracali się do mojego ojca per “Panie Martin”.",
     "exampleEnglish": "My friends always called my father Mr. Martin.",
-    "coreIndex": 1686
+    "coreIndex": 1686,
+    "notes": "(m.) · G. pana · pl. panowie"
   },
   {
     "category": "People & Family",
@@ -20095,7 +20254,8 @@
     "phonetic": "",
     "examplePolish": "uprzejmy sąsiad",
     "exampleEnglish": "polite neighbor",
-    "coreIndex": 1691
+    "coreIndex": 1691,
+    "notes": "(m.) · G. sąsiada · pl. sąsiedzi"
   },
   {
     "category": "General Core",
@@ -20667,7 +20827,8 @@
     "phonetic": "",
     "examplePolish": "profesor matematyki",
     "exampleEnglish": "math professor",
-    "coreIndex": 1743
+    "coreIndex": 1743,
+    "notes": "(m.) · G. profesora · pl. profesorowie"
   },
   {
     "category": "General Core",
@@ -20722,7 +20883,8 @@
     "phonetic": "",
     "examplePolish": "zastanawiać się nad pytaniem",
     "exampleEnglish": "think about the question",
-    "coreIndex": 1748
+    "coreIndex": 1748,
+    "notes": "(n.) · G. pytania · pl. pytania"
   },
   {
     "category": "General Core",
@@ -21195,7 +21357,8 @@
     "phonetic": "",
     "examplePolish": "Przetłumacz następujące zdanie.",
     "exampleEnglish": "Translate the following sentence.",
-    "coreIndex": 1791
+    "coreIndex": 1791,
+    "notes": "(n.) · G. zdania · pl. zdania"
   },
   {
     "category": "General Core",
@@ -21360,7 +21523,8 @@
     "phonetic": "",
     "examplePolish": "Ojciec chce syna, ale matka chce córkę.",
     "exampleEnglish": "Father wants a son, but mother wants a daughter.",
-    "coreIndex": 1806
+    "coreIndex": 1806,
+    "notes": "(m.) · G. syna · pl. synowie"
   },
   {
     "category": "Grammar & Function Words",
@@ -21448,7 +21612,8 @@
     "phonetic": "",
     "examplePolish": "Przetrzyj stół gąbką.",
     "exampleEnglish": "Run the sponge across the table.",
-    "coreIndex": 1814
+    "coreIndex": 1814,
+    "notes": "(f.) · G. gąbki · pl. gąbki"
   },
   {
     "category": "Activities & Sports",
@@ -21503,7 +21668,8 @@
     "phonetic": "",
     "examplePolish": "Elton John jest światową gwiazdą piosenki.",
     "exampleEnglish": "Elton John is a world famous singing star.",
-    "coreIndex": 1819
+    "coreIndex": 1819,
+    "notes": "(f.) · G. gwiazdy · pl. gwiazdy"
   },
   {
     "category": "General Core",
@@ -21602,7 +21768,8 @@
     "phonetic": "",
     "examplePolish": "Muszę znaleźć pracę w czasie wakacji.",
     "exampleEnglish": "It is necessary to find a job during my summer vacation.",
-    "coreIndex": 1831
+    "coreIndex": 1831,
+    "notes": "(pl.) · G. wakacji"
   },
   {
     "category": "Work & School",
@@ -22194,7 +22361,8 @@
     "phonetic": "",
     "examplePolish": "Muszę znaleźć pracę w czasie wakacji.",
     "exampleEnglish": "It is necessary to find a job during my summer vacation.",
-    "coreIndex": 1885
+    "coreIndex": 1885,
+    "notes": "(pl.) · G. wakacji"
   },
   {
     "category": "General Core",
@@ -22469,7 +22637,8 @@
     "phonetic": "",
     "examplePolish": "Ona jest żoną i matką.",
     "exampleEnglish": "She is a wife and a mother.",
-    "coreIndex": 1911
+    "coreIndex": 1911,
+    "notes": "(f.) · G. żony · pl. żony"
   },
   {
     "category": "General Core",
@@ -22568,7 +22737,8 @@
     "phonetic": "",
     "examplePolish": "Powiem słowo, a ty powtórzysz je po angielsku.",
     "exampleEnglish": "I will say a word, and you will repeat it in English.",
-    "coreIndex": 1920
+    "coreIndex": 1920,
+    "notes": "(n.) · G. słowa · pl. słowa"
   },
   {
     "category": "General Core",
@@ -22645,7 +22815,8 @@
     "phonetic": "",
     "examplePolish": "duży ogród",
     "exampleEnglish": "big yard",
-    "coreIndex": 1927
+    "coreIndex": 1927,
+    "notes": "(m.) · G. ogrodu · pl. ogrody"
   },
   {
     "category": "Greetings & Essentials",
@@ -22865,7 +23036,8 @@
     "phonetic": "",
     "examplePolish": "Jak ma pani na imię?",
     "exampleEnglish": "What’s your name, ma’am?",
-    "coreIndex": 1949
+    "coreIndex": 1949,
+    "notes": "(n.) · G. imienia · pl. imiona"
   },
   {
     "category": "Technology & Media",
@@ -23327,7 +23499,8 @@
     "phonetic": "",
     "examplePolish": "Lubię kompot.",
     "exampleEnglish": "I like compote.",
-    "coreIndex": 1991
+    "coreIndex": 1991,
+    "notes": "(m.) · G. kompotu · pl. kompoty"
   },
   {
     "category": "Grammar & Function Words",
@@ -24289,7 +24462,7 @@
     "polish": "grant",
     "english": "grant, scholarship",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. grantu · pl. granty"
   },
   {
     "category": "Home & Daily Life",
@@ -24343,7 +24516,7 @@
     "polish": "wyjazd",
     "english": "departure, trip",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. wyjazdu · pl. wyjazdy"
   },
   {
     "category": "Feelings & Qualities",
@@ -24572,7 +24745,7 @@
     "polish": "chusteczka",
     "english": "tissue, handkerchief",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. chusteczki · pl. chusteczki"
   },
   {
     "category": "Numbers & Measures",
@@ -24727,7 +24900,7 @@
     "polish": "koleżanka",
     "english": "friend, colleague (female)",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. koleżanki · pl. koleżanki"
   },
   {
     "category": "Grammar & Function Words",
@@ -24808,7 +24981,7 @@
     "polish": "dzielnica",
     "english": "neighborhood, district",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. dzielnicy · pl. dzielnice"
   },
   {
     "category": "Feelings & Qualities",
@@ -24817,7 +24990,7 @@
     "polish": "gościnność",
     "english": "hospitality",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. gościnności · no pl."
   },
   {
     "category": "Food & Drink",
@@ -24862,7 +25035,7 @@
     "polish": "stewardesa",
     "english": "flight attendant",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. stewardesy · pl. stewardesy"
   },
   {
     "category": "Feelings & Qualities",
@@ -24981,7 +25154,7 @@
     "polish": "przyjaciel",
     "english": "friend",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. przyjaciela · pl. przyjaciele"
   },
   {
     "category": "Home & Daily Life",
@@ -25152,7 +25325,7 @@
     "polish": "sprzedaż",
     "english": "sale",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. sprzedaży · pl. sprzedaże"
   },
   {
     "category": "Shopping & Money",
@@ -25334,7 +25507,7 @@
     "polish": "kasza",
     "english": "groats, porridge",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. kaszy · pl. kasze"
   },
   {
     "category": "Food & Drink",
@@ -25424,7 +25597,7 @@
     "polish": "zupa",
     "english": "soup",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. zupy · pl. zupy"
   },
   {
     "category": "Food & Drink",
@@ -25614,7 +25787,7 @@
     "polish": "lalka",
     "english": "doll",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. lalki · pl. lalki"
   },
   {
     "category": "Feelings & Qualities",
@@ -25623,7 +25796,7 @@
     "polish": "przyjemność",
     "english": "pleasure",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. przyjemności · pl. przyjemności"
   },
   {
     "category": "People & Family",
@@ -25668,7 +25841,7 @@
     "polish": "trudność",
     "english": "difficulty",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. trudności · pl. trudności"
   },
   {
     "category": "Weather & Nature",
@@ -25806,7 +25979,7 @@
     "polish": "ludzie",
     "english": "people",
     "phonetic": "",
-    "notes": "(pl.)"
+    "notes": "(pl.) · G. ludzi"
   },
   {
     "category": "Food & Drink",
@@ -25815,7 +25988,7 @@
     "polish": "miód",
     "english": "honey",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. miodu · no pl."
   },
   {
     "category": "Health & Body",
@@ -25878,7 +26051,7 @@
     "polish": "rada",
     "english": "advice, suggestion",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. rady · pl. rady"
   },
   {
     "category": "Health & Body",
@@ -25896,7 +26069,7 @@
     "polish": "targ",
     "english": "market",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. targu · pl. targi"
   },
   {
     "category": "Activities & Sports",
@@ -26091,7 +26264,7 @@
     "polish": "bajka",
     "english": "fairytale",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. bajki · pl. bajki"
   },
   {
     "category": "Food & Drink",
@@ -26136,7 +26309,7 @@
     "polish": "papieros",
     "english": "cigarette",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. papierosa · pl. papierosy"
   },
   {
     "category": "Feelings & Qualities",
@@ -26145,7 +26318,7 @@
     "polish": "pomysł",
     "english": "idea",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. pomysłu · pl. pomysły"
   },
   {
     "category": "Grammar & Function Words",
@@ -26154,7 +26327,7 @@
     "polish": "rzecz",
     "english": "thing",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. rzeczy · pl. rzeczy"
   },
   {
     "category": "Home & Daily Life",
@@ -26172,7 +26345,7 @@
     "polish": "śniadanie",
     "english": "breakfast",
     "phonetic": "",
-    "notes": "(n.)"
+    "notes": "(n.) · G. śniadania · pl. śniadania"
   },
   {
     "category": "Home & Daily Life",
@@ -26309,7 +26482,7 @@
     "polish": "autor",
     "english": "author, writer",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. autora · pl. autorzy"
   },
   {
     "category": "People & Family",
@@ -26318,7 +26491,7 @@
     "polish": "ciotka",
     "english": "aunt",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. ciotki · pl. ciotki"
   },
   {
     "category": "Places & Directions",
@@ -26363,7 +26536,7 @@
     "polish": "przyjaciółka",
     "english": "friend (female)",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. przyjaciółki · pl. przyjaciółki"
   },
   {
     "category": "Activities & Sports",
@@ -26381,7 +26554,7 @@
     "polish": "śmierć",
     "english": "death",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. śmierci · no pl."
   },
   {
     "category": "Feelings & Qualities",
@@ -26555,7 +26728,7 @@
     "polish": "człowiek",
     "english": "human being, person",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. człowieka · pl. ludzie"
   },
   {
     "category": "Time & Calendar",
@@ -26573,7 +26746,7 @@
     "polish": "urodziny",
     "english": "birthday",
     "phonetic": "",
-    "notes": "(pl.)"
+    "notes": "(pl.) · G. urodzin"
   },
   {
     "category": "Home & Daily Life",
@@ -26779,7 +26952,7 @@
     "polish": "chwila",
     "english": "moment",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. chwili · pl. chwile"
   },
   {
     "category": "People & Family",
@@ -26788,7 +26961,7 @@
     "polish": "kuzyn",
     "english": "cousin (male)",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. kuzyna · pl. kuzyni"
   },
   {
     "category": "Feelings & Qualities",
@@ -26815,7 +26988,7 @@
     "polish": "willa",
     "english": "villa",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. willi · pl. wille"
   },
   {
     "category": "Time & Calendar",
@@ -26824,7 +26997,7 @@
     "polish": "wydarzenie",
     "english": "event",
     "phonetic": "",
-    "notes": "(n.)"
+    "notes": "(n.) · G. wydarzenia · pl. wydarzenia"
   },
   {
     "category": "Feelings & Qualities",
@@ -27025,7 +27198,7 @@
     "polish": "pamiątka",
     "english": "souvenir, memento",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. pamiątki · pl. pamiątki"
   },
   {
     "category": "Travel & Transport",
@@ -27034,7 +27207,7 @@
     "polish": "pobyt",
     "english": "stay",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. pobytu · pl. pobyty"
   },
   {
     "category": "Time & Calendar",
@@ -27043,7 +27216,7 @@
     "polish": "przeszłość",
     "english": "the past",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. przeszłości · no pl."
   },
   {
     "category": "Feelings & Qualities",
@@ -27061,7 +27234,7 @@
     "polish": "rodzice",
     "english": "parents",
     "phonetic": "",
-    "notes": "(pl.)"
+    "notes": "(pl.) · G. rodziców"
   },
   {
     "category": "People & Family",
@@ -27079,7 +27252,7 @@
     "polish": "zdjęcie",
     "english": "photograph",
     "phonetic": "",
-    "notes": "(n.)"
+    "notes": "(n.) · G. zdjęcia · pl. zdjęcia"
   },
   {
     "category": "Food & Drink",
@@ -27224,7 +27397,7 @@
     "polish": "kasjerka",
     "english": "cashier, ticket clerk (female)",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. kasjerki · pl. kasjerki"
   },
   {
     "category": "Travel & Transport",
@@ -27268,7 +27441,7 @@
     "polish": "tramwaj",
     "english": "tram",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. tramwaju · pl. tramwaje"
   },
   {
     "category": "Time & Calendar",
@@ -27422,7 +27595,7 @@
     "polish": "lektor",
     "english": "language instructor",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. lektora · pl. lektorzy"
   },
   {
     "category": "Places & Directions",
@@ -27440,7 +27613,7 @@
     "polish": "propozycja",
     "english": "offer, proposal",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. propozycji · pl. propozycje"
   },
   {
     "category": "Grammar & Function Words",
@@ -27449,7 +27622,7 @@
     "polish": "sprawa",
     "english": "matter, issue",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. sprawy · pl. sprawy"
   },
   {
     "category": "Work & School",
@@ -27609,7 +27782,7 @@
     "polish": "trasa",
     "english": "route",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. trasy · pl. trasy"
   },
   {
     "category": "Weather & Nature",
@@ -27704,7 +27877,7 @@
     "polish": "korek",
     "english": "traffic jam",
     "phonetic": "",
-    "notes": "(m., informal)"
+    "notes": "(m.) · G. korka · pl. korki"
   },
   {
     "category": "Grammar & Function Words",
@@ -27713,7 +27886,7 @@
     "polish": "możliwość",
     "english": "possibility",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. możliwości · pl. możliwości"
   },
   {
     "category": "Grammar & Function Words",
@@ -27843,7 +28016,7 @@
     "polish": "mandat",
     "english": "fine, ticket",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. mandatu · pl. mandaty"
   },
   {
     "category": "Emergencies & Safety",
@@ -28010,7 +28183,7 @@
     "polish": "nauka",
     "english": "learning, study; science",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. nauki · no pl."
   },
   {
     "category": "Activities & Sports",
@@ -28028,7 +28201,7 @@
     "polish": "uczeń",
     "english": "pupil, student",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. ucznia · pl. uczniowie"
   },
   {
     "category": "Time & Calendar",
@@ -28132,7 +28305,7 @@
     "polish": "bankomat",
     "english": "ATM, cash machine",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. bankomatu · pl. bankomaty"
   },
   {
     "category": "Banking",
@@ -28141,7 +28314,7 @@
     "polish": "dochód",
     "english": "income",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. dochodu · pl. dochody"
   },
   {
     "category": "Work & School",
@@ -28159,7 +28332,7 @@
     "polish": "formularz",
     "english": "form",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. formularza · pl. formularze"
   },
   {
     "category": "Shopping & Money",
@@ -28168,7 +28341,7 @@
     "polish": "klient",
     "english": "client, customer",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. klienta · pl. klienci"
   },
   {
     "category": "Banking",
@@ -28221,7 +28394,7 @@
     "polish": "przelew",
     "english": "(bank) transfer",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. przelewu · pl. przelewy"
   },
   {
     "category": "Travel & Transport",
@@ -28247,7 +28420,7 @@
     "polish": "wypłata",
     "english": "withdrawal; payout",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. wypłaty · pl. wypłaty"
   },
   {
     "category": "Banking",
@@ -28533,7 +28706,7 @@
     "polish": "błąd",
     "english": "mistake",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. błędu · pl. błędy"
   },
   {
     "category": "People & Family",
@@ -28542,7 +28715,7 @@
     "polish": "ciocia",
     "english": "aunt (informal)",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. cioci · pl. ciocie"
   },
   {
     "category": "Work & School",
@@ -28560,7 +28733,7 @@
     "polish": "głos",
     "english": "voice",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. głosu · pl. głosy"
   },
   {
     "category": "Work & School",
@@ -28578,7 +28751,7 @@
     "polish": "kartka",
     "english": "card, sheet of paper",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. kartki · pl. kartki"
   },
   {
     "category": "Work & School",
@@ -28596,7 +28769,7 @@
     "polish": "kuzynka",
     "english": "cousin (female)",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. kuzynki · pl. kuzynki"
   },
   {
     "category": "Nature & Animals",
@@ -28614,7 +28787,7 @@
     "polish": "piosenka",
     "english": "song",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. piosenki · pl. piosenki"
   },
   {
     "category": "Technology & Media",
@@ -28632,7 +28805,7 @@
     "polish": "wujek",
     "english": "uncle",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. wujka · pl. wujkowie"
   },
   {
     "category": "Greetings & Essentials",
@@ -28641,7 +28814,7 @@
     "polish": "życzenie",
     "english": "wish",
     "phonetic": "",
-    "notes": "(n.)"
+    "notes": "(n.) · G. życzenia · pl. życzenia"
   },
   {
     "category": "Work & School",
@@ -28770,7 +28943,7 @@
     "polish": "przyszłość",
     "english": "the future",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. przyszłości · no pl."
   },
   {
     "category": "Work & School",
@@ -28937,7 +29110,7 @@
     "polish": "cierpliwość",
     "english": "patience",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. cierpliwości · no pl."
   },
   {
     "category": "Feelings & Qualities",
@@ -28964,7 +29137,7 @@
     "polish": "matka",
     "english": "mother",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. matki · pl. matki"
   },
   {
     "category": "Feelings & Qualities",
@@ -28973,7 +29146,7 @@
     "polish": "miłość",
     "english": "love",
     "phonetic": "",
-    "notes": "(f.)"
+    "notes": "(f.) · G. miłości · no pl."
   },
   {
     "category": "Nature & Animals",
@@ -28982,7 +29155,7 @@
     "polish": "ogień",
     "english": "fire",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. ognia · no pl."
   },
   {
     "category": "Technology & Media",
@@ -29018,7 +29191,7 @@
     "polish": "sen",
     "english": "dream; sleep",
     "phonetic": "",
-    "notes": "(m.)"
+    "notes": "(m.) · G. snu · pl. sny"
   },
   {
     "category": "Feelings & Qualities",
@@ -30862,7 +31035,8 @@
     "level": "B1",
     "polish": "imieniny",
     "english": "name day",
-    "phonetic": ""
+    "phonetic": "",
+    "notes": "(pl.) · G. imienin"
   },
   {
     "category": "Time & Calendar",
@@ -31062,7 +31236,8 @@
     "level": "A1",
     "polish": "rodzina",
     "english": "family",
-    "phonetic": ""
+    "phonetic": "",
+    "notes": "(f.) · G. rodziny · pl. rodziny"
   },
   {
     "category": "Places & Directions",
@@ -31094,7 +31269,8 @@
     "level": "A1",
     "polish": "ojciec",
     "english": "father",
-    "phonetic": ""
+    "phonetic": "",
+    "notes": "(m.) · G. ojca · pl. ojcowie"
   },
   {
     "category": "Greetings & Essentials",
@@ -31126,7 +31302,8 @@
     "level": "A1",
     "polish": "ser",
     "english": "cheese",
-    "phonetic": ""
+    "phonetic": "",
+    "notes": "(m.) · G. sera · pl. sery"
   },
   {
     "category": "People & Family",
@@ -31150,7 +31327,8 @@
     "level": "A1",
     "polish": "karta",
     "english": "card",
-    "phonetic": ""
+    "phonetic": "",
+    "notes": "(f.) · G. karty · pl. karty"
   },
   {
     "category": "Weather & Nature",
@@ -31166,7 +31344,8 @@
     "level": "A1",
     "polish": "noga",
     "english": "leg",
-    "phonetic": ""
+    "phonetic": "",
+    "notes": "(f.) · G. nogi · pl. nogi"
   },
   {
     "category": "Greetings & Essentials",
@@ -31190,7 +31369,8 @@
     "level": "A1",
     "polish": "brat",
     "english": "brother",
-    "phonetic": ""
+    "phonetic": "",
+    "notes": "(m.) · G. brata · pl. bracia"
   },
   {
     "category": "Weather & Nature",
@@ -31206,7 +31386,8 @@
     "level": "A1",
     "polish": "siostra",
     "english": "sister",
-    "phonetic": ""
+    "phonetic": "",
+    "notes": "(f.) · G. siostry · pl. siostry"
   },
   {
     "category": "Health & Body",
@@ -31214,7 +31395,8 @@
     "level": "A1",
     "polish": "serce",
     "english": "heart",
-    "phonetic": ""
+    "phonetic": "",
+    "notes": "(n.) · G. serca · pl. serca"
   },
   {
     "category": "Time & Calendar",
@@ -31230,7 +31412,8 @@
     "level": "A1",
     "polish": "stacja",
     "english": "station",
-    "phonetic": ""
+    "phonetic": "",
+    "notes": "(f.) · G. stacji · pl. stacje"
   },
   {
     "category": "Places & Directions",
@@ -31238,7 +31421,8 @@
     "level": "A1",
     "polish": "dworzec",
     "english": "station; terminal",
-    "phonetic": ""
+    "phonetic": "",
+    "notes": "(m.) · G. dworca · pl. dworce"
   },
   {
     "category": "Time & Calendar",
@@ -31278,7 +31462,8 @@
     "level": "A1",
     "polish": "przystanek",
     "english": "stop",
-    "phonetic": ""
+    "phonetic": "",
+    "notes": "(m.) · G. przystanku · pl. przystanki"
   },
   {
     "category": "Greetings & Essentials",
@@ -31518,7 +31703,8 @@
     "level": "A2",
     "polish": "podróż",
     "english": "journey; travel",
-    "phonetic": ""
+    "phonetic": "",
+    "notes": "(f.) · G. podróży · pl. podróże"
   },
   {
     "category": "Food & Drink",
@@ -31598,7 +31784,8 @@
     "level": "A2",
     "polish": "morze",
     "english": "sea",
-    "phonetic": ""
+    "phonetic": "",
+    "notes": "(n.) · G. morza · pl. morza"
   },
   {
     "category": "People & Family",
@@ -31846,7 +32033,8 @@
     "level": "A2",
     "polish": "gość",
     "english": "guest",
-    "phonetic": ""
+    "phonetic": "",
+    "notes": "(m.) · G. gościa · pl. goście"
   },
   {
     "category": "Administration & Services",
@@ -31878,7 +32066,8 @@
     "level": "A2",
     "polish": "zwierzę",
     "english": "animal",
-    "phonetic": ""
+    "phonetic": "",
+    "notes": "(n.) · G. zwierzęcia · pl. zwierzęta"
   },
   {
     "category": "Administration & Services",
