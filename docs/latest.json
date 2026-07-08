@@ -1,8 +1,8 @@
 {
-  "versionCode": 15,
-  "versionName": "1.14",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/de7f20aff69877df90d6578a09bfb2657d885a62/docs/P4B.apk",
-  "apkSha256": "4ebf8937409bbd699130f732da598c2d2a8013adbde14ed15ce1303cf23e8024",
-  "apkSizeBytes": 67505458,
-  "releaseNotes": "Adds 669 vocabulary and original B1/B2 speaking-practice cards across everyday, travel, school, work, culture, society, technology, and exam topics."
+  "versionCode": 16,
+  "versionName": "1.15",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/b23365b22e8856d0be84e62f6bae8dc2f7b0eed4/docs/P4B.apk",
+  "apkSha256": "b5e23630e3cd74720c6ef220d8e350eaea86b3d257910565d786f957d0af6f9a",
+  "apkSizeBytes": 67498765,
+  "releaseNotes": "Fixes garbled OCR/import artifacts in core vocabulary and removes duplicate Polish headword cards while preserving alternate meanings on the kept cards."
 }
