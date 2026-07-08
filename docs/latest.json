@@ -1,8 +1,8 @@
 {
-  "versionCode": 14,
-  "versionName": "1.13",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/b15eac4d4b6280a09c41fb99bf6bbccd520f9ff4/docs/P4B.apk",
-  "apkSha256": "7f7aa8cc5c6051b880fad00570f6f6a722a19d04f92cf1ba50dd9871e26d88e8",
-  "apkSizeBytes": 67476899,
-  "releaseNotes": "Adds Leitner spaced repetition scheduling and shows example sentences with Polish audio on cards."
+  "versionCode": 18,
+  "versionName": "1.17",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/41589b78c5f4e507dd3e2618f62951cd037963be/docs/P4B.apk",
+  "apkSha256": "03f50c28f5b43965ff81b7a9c30576bb6b87e41ac6164476a6b7b0e1f588f018",
+  "apkSizeBytes": 67520948,
+  "releaseNotes": "Adds 900+ new words and phrases (elementary vocab, ChatGPT A1-B2 list, idioms, conversation phrases), noun genitive/plural forms, and a Conversation & Opinions category."
 }
