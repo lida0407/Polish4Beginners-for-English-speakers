@@ -1,8 +1,8 @@
 {
-  "versionCode": 14,
-  "versionName": "1.13",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/b15eac4d4b6280a09c41fb99bf6bbccd520f9ff4/docs/P4B.apk",
-  "apkSha256": "7f7aa8cc5c6051b880fad00570f6f6a722a19d04f92cf1ba50dd9871e26d88e8",
-  "apkSizeBytes": 67476899,
-  "releaseNotes": "Adds Leitner spaced repetition scheduling and shows example sentences with Polish audio on cards."
+  "versionCode": 15,
+  "versionName": "1.14",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/de7f20aff69877df90d6578a09bfb2657d885a62/docs/P4B.apk",
+  "apkSha256": "4ebf8937409bbd699130f732da598c2d2a8013adbde14ed15ce1303cf23e8024",
+  "apkSizeBytes": 67505458,
+  "releaseNotes": "Adds 669 vocabulary and original B1/B2 speaking-practice cards across everyday, travel, school, work, culture, society, technology, and exam topics."
 }
