@@ -1,8 +1,8 @@
 {
-  "dataVersion": 4,
-  "phraseCount": 2817,
+  "dataVersion": 5,
+  "phraseCount": 2933,
   "phrasesUrl": "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/phrases.json?ref=main",
-  "phrasesSha256": "788bf8f1a1f0bf351b295a23cb6d28a6dd2d3c42a5354443e11cb8d6035be776",
-  "phrasesSizeBytes": 810581,
-  "releaseNotes": "Adds 553 vocabulary words and phrases (A1/A2) covering everyday topics: family, health, banking, travel, work, and more."
+  "phrasesSha256": "c4a4537780f450b116197ee7ead6ab515a1cb97fe9aa11d7a8ec9bf6d5c18f83",
+  "phrasesSizeBytes": 865581,
+  "releaseNotes": "Adds 116 original B1/B2 speaking-practice cards across biography, leisure, sport, city life, travel, education, culture, work, law, social issues, food, fashion, environment, and technology."
 }

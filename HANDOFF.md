@@ -71,6 +71,10 @@ pirated Polish textbook PDFs (from Z-Library/1lib.sk) they've asked to have
   offer to write original content inspired by the topic list instead of
   extracting the source's actual text.
 
+Update after this pass: the workbook CSV was **not** copied into the app.
+Instead, 116 original B1/B2 speaking-practice cards were written around the
+same broad topic areas and marked in `notes` as original cards.
+
 ## What's implemented (this session, chronological)
 
 1. **Schema fix** — `phonetic` field used to be overloaded (1968/2264 cards
