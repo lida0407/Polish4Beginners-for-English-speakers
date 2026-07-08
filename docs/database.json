@@ -1,8 +1,8 @@
 {
-  "dataVersion": 7,
-  "phraseCount": 3257,
+  "dataVersion": 8,
+  "phraseCount": 3329,
   "phrasesUrl": "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/phrases.json?ref=main",
-  "phrasesSha256": "24ad27fcb3a0bb76b859bd5a7c9bf33d3299a4c19feafe9749901ba661f4a421",
-  "phrasesSizeBytes": 936232,
-  "releaseNotes": "Adds Genitive singular and Nominative plural forms to 258 common noun cards."
+  "phrasesSha256": "30630503b96b740c68af79f353db01ec2a3cc4b10a30410d96c93d13f20b72a1",
+  "phrasesSizeBytes": 953836,
+  "releaseNotes": "Adds 21 common Polish idioms and 52 original B1/B2 conversation phrases (opinions, requests, agreeing)."
 }
