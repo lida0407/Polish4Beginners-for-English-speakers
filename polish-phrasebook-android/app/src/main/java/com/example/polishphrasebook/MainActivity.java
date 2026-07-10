@@ -123,6 +123,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private final List<NewsItem> newsItems = new ArrayList<>();
     private final Map<String, CardMemory> memory = new HashMap<>();
     private final List<Phrase> sessionDeck = new ArrayList<>();
+    private final List<Boolean> sessionEnglishFront = new ArrayList<>();
     private final Map<String, Theme> themes = new LinkedHashMap<>();
 
     private String screen = SCREEN_HOME;
@@ -400,13 +401,13 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         strip.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
         strip.setBaselineAligned(false);
         int[] counts = memoryCounts();
-        strip.addView(statCell(String.valueOf(counts[0]), t("New", "Nowe"), th.ink, true), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
-        strip.addView(statCell(String.valueOf(counts[1]), t("To review", "Do powtórki"), th.accent, true), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
-        strip.addView(statCell(String.valueOf(counts[2]), t("Scheduled", "Zaplanowane"), th.accent2, false), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        strip.addView(statCell(String.valueOf(counts[0]), t("New", "Nowe"), th.ink, true, 0), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        strip.addView(statCell(String.valueOf(counts[1]), t("To review", "Do powtórki"), th.accent, true, 1), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        strip.addView(statCell(String.valueOf(counts[2]), t("Scheduled", "Zaplanowane"), th.accent2, false, 2), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
         return strip;
     }
 
-    private View statCell(String count, String label, int color, boolean divider) {
+    private View statCell(String count, String label, int color, boolean divider, int statusIndex) {
         Theme th = theme();
         LinearLayout cell = vertical();
         cell.setPadding(dp(14), dp(12), dp(14), dp(12));
@@ -414,6 +415,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         cell.addView(serifText(count, 22, color));
         TextView labelView = uiText(label.toUpperCase(Locale.ROOT), 11, th.faint, sansSemiBold);
         cell.addView(labelView);
+        cell.setOnClickListener(v -> startStatusSession(statusIndex));
         return cell;
     }
 
@@ -435,7 +437,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             Button button = flatButton(topic.name + "                                  " + topic.count + t(" cards →", " kart →"), th.panel, th.ink, th.ink, 14, 48);
             button.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
             button.setPadding(dp(14), 0, dp(14), 0);
-            button.setOnClickListener(v -> startSession(topic.name));
+            button.setOnClickListener(v -> startSession(topic.name, 0));
             section.addView(button, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(48), 0));
             addGap(section, 8);
         }
@@ -490,13 +492,19 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         meta.addView(uiText("Nr " + (sessionIndex + 1), 10.5f, th.ghost, sansBold));
         face.addView(meta, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
+        boolean englishFront = sessionIndex < sessionEnglishFront.size() && sessionEnglishFront.get(sessionIndex);
+        String frontText = englishFront ? card.english : card.polish;
+        String answerText = englishFront ? card.polish : card.english;
+
         SpaceView topSpace = new SpaceView(this);
         face.addView(topSpace, new LinearLayout.LayoutParams(1, 0, 1));
-        TextView polish = serifText(card.polish, 33, th.ink);
-        polish.setGravity(Gravity.CENTER);
-        polish.setLineSpacing(0, 1.02f);
-        polish.setTextIsSelectable(true);
-        face.addView(polish, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        face.addView(label(englishFront ? "EN → PL" : "PL → EN", th.ghost, 10, 0.14f));
+        addGap(face, 8);
+        TextView front = serifText(frontText, 33, th.ink);
+        front.setGravity(Gravity.CENTER);
+        front.setLineSpacing(0, 1.02f);
+        front.setTextIsSelectable(true);
+        face.addView(front, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         addGap(face, 14);
 
         if (sessionRevealed) {
@@ -504,11 +512,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             LinearLayout.LayoutParams dividerParams = new LinearLayout.LayoutParams(dp(52), dp(2));
             face.addView(divider, dividerParams);
             addGap(face, 14);
-            TextView english = uiText(card.english, 18, th.body, sansMedium);
-            english.setGravity(Gravity.CENTER);
-            english.setLineSpacing(0, 1.08f);
-            english.setTextIsSelectable(true);
-            face.addView(english);
+            TextView answer = uiText(answerText, 18, th.body, sansMedium);
+            answer.setGravity(Gravity.CENTER);
+            answer.setLineSpacing(0, 1.08f);
+            answer.setTextIsSelectable(true);
+            face.addView(answer);
             if (!card.phonetic.isEmpty()) {
                 TextView phonetic = uiText(card.phonetic, 13.5f, th.faint, sansRegular);
                 phonetic.setTypeface(Typeface.create(sansRegular, Typeface.ITALIC));
@@ -1739,6 +1747,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                         loadMemory();
                         browseLimit = 25;
                         sessionDeck.clear();
+                        sessionEnglishFront.clear();
                         Toast.makeText(this, t("Word database updated: ", "Baza słów zaktualizowana: ") + phraseCount + t(" cards", " kart"), Toast.LENGTH_LONG).show();
                         render();
                     } catch (Exception e) {
@@ -1895,7 +1904,14 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         return item;
     }
 
+    // Daily quick session from the hero: capped to SESSION_SIZE cards.
     private void startSession(String topic) {
+        startSession(topic, SESSION_SIZE);
+    }
+
+    // limit <= 0 means "use the whole pool" (topic sessions run until every
+    // not-yet-learnt card at this level is finished).
+    private void startSession(String topic, int limit) {
         List<Phrase> dueReviews = new ArrayList<>();
         List<Phrase> fresh = new ArrayList<>();
         List<Phrase> scheduled = new ArrayList<>();
@@ -1916,19 +1932,51 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
         Collections.shuffle(dueReviews);
         Collections.shuffle(fresh);
+        // Due reviews first, then new cards; learnt (scheduled-ahead) cards are
+        // left out unless nothing else remains.
         List<Phrase> pool = new ArrayList<>(dueReviews);
         pool.addAll(fresh);
         if (pool.isEmpty()) {
-            // Everything is scheduled ahead: let the learner practise the soonest-due cards early.
             Collections.sort(scheduled, (a, b) -> Long.compare(cardMemory(a).dueAt, cardMemory(b).dueAt));
             pool.addAll(scheduled);
         }
+        beginSession(pool, limit);
+    }
+
+    // Flashcard review of a memory bucket (0 = new, 1 = to review, 2 = learnt),
+    // matching the home stat cells. Spans all levels, like the counts do.
+    private void startStatusSession(int statusIndex) {
+        List<Phrase> pool = new ArrayList<>();
+        for (Phrase phrase : phrases) {
+            if (statusOf(phrase) == statusIndex) {
+                pool.add(phrase);
+            }
+        }
+        Collections.shuffle(pool);
+        beginSession(pool, 0);
+    }
+
+    private int statusOf(Phrase phrase) {
+        CardMemory state = cardMemory(phrase);
+        if (state.box == 0) {
+            return 0;
+        }
+        return state.dueAt <= System.currentTimeMillis() ? 1 : 2;
+    }
+
+    private void beginSession(List<Phrase> pool, int limit) {
         if (pool.isEmpty()) {
-            Toast.makeText(this, "No cards for this level yet.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, t("Nothing to study here yet.", "Nic tu jeszcze do nauki."), Toast.LENGTH_SHORT).show();
             return;
         }
+        int size = (limit <= 0) ? pool.size() : Math.min(limit, pool.size());
         sessionDeck.clear();
-        sessionDeck.addAll(pool.subList(0, Math.min(SESSION_SIZE, pool.size())));
+        sessionDeck.addAll(pool.subList(0, size));
+        // Randomize which side is shown first, per card, fresh each session.
+        sessionEnglishFront.clear();
+        for (int i = 0; i < sessionDeck.size(); i++) {
+            sessionEnglishFront.add(Math.random() < 0.5);
+        }
         sessionIndex = 0;
         sessionGot = 0;
         sessionRevealed = false;
