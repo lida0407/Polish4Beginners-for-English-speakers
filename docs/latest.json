@@ -1,8 +1,8 @@
 {
-  "versionCode": 19,
-  "versionName": "1.18",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/57b59a6547a1f082676243dcd4417d7994ebf45e/docs/P4B.apk",
-  "apkSha256": "b7ce389d9890f6e06ac78389f4e0eb8222f0023e045eb664ebb8629667283922",
-  "apkSizeBytes": 67513860,
-  "releaseNotes": "Fixes garbled core-vocabulary cards and removes duplicate headwords while keeping alternate meanings."
+  "versionCode": 20,
+  "versionName": "1.19",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/1bf8f502a4fe16ddbb5ee6d529f1ffb6cb5afd01/docs/P4B.apk",
+  "apkSha256": "a6a01c3f42cad902304ea246fa3b737cda45ef2e2cc687e83e8971706a655d19",
+  "apkSizeBytes": 67513861,
+  "releaseNotes": "Study upgrades: topics run through all their cards, cards randomly quiz English-first or Polish-first, and tapping New/To review/Scheduled reviews those cards as flashcards."
 }
