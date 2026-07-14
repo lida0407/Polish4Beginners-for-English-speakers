@@ -1,8 +1,8 @@
 {
-  "versionCode": 20,
-  "versionName": "1.19",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/1bf8f502a4fe16ddbb5ee6d529f1ffb6cb5afd01/docs/P4B.apk",
-  "apkSha256": "a6a01c3f42cad902304ea246fa3b737cda45ef2e2cc687e83e8971706a655d19",
-  "apkSizeBytes": 67513861,
-  "releaseNotes": "Study upgrades: topics run through all their cards, cards randomly quiz English-first or Polish-first, and tapping New/To review/Scheduled reviews those cards as flashcards."
+  "versionCode": 21,
+  "versionName": "1.20",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/cb636c2a8029fc80946b3ae9da4eb0a45e40f038/docs/P4B.apk",
+  "apkSha256": "543746eafa23a49672740ef921cb85469b049cd3c4de9b51970713c7fcfaf26a",
+  "apkSizeBytes": 67513851,
+  "releaseNotes": "New Translate tab: type any word or sentence and translate Polish<->English on your device, with read-aloud and copy."
 }
