@@ -19,6 +19,7 @@ Download the Android APK: [P4B.apk](https://lida0407.github.io/Polish4Beginners-
 - Leitner-style spaced repetition: cards you know come back at growing intervals (1, 3, 7, 16, 35 days), cards you miss return the same day
 - Browse, grammar, and alphabet tabs
 - Daily Polish news tab with in-app Polish-English translation for headlines and snippets
+- On-device translator: type any word or sentence, translate Polish↔English, read the result aloud
 - Settings for interface language, color theme, and reading speed
 - GitHub-connected APK update checking from Settings
 - Separate GitHub-connected word database updates from Settings

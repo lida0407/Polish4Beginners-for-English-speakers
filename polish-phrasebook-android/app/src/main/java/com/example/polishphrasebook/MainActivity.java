@@ -99,6 +99,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String SCREEN_GRAMMAR = "grammar";
     private static final String SCREEN_ALPHABET = "alphabet";
     private static final String SCREEN_NEWS = "news";
+    private static final String SCREEN_TRANSLATE = "translate";
     private static final String SCREEN_SETTINGS = "settings";
     private static final String DEFAULT_THEME = "Klasyczny";
     private static final String LANG_EN = "en";
@@ -154,6 +155,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private String newsTranslationStatus = "";
     private TextToSpeech textToSpeech;
     private Translator polishEnglishTranslator;
+    private Translator englishPolishTranslator;
+    private boolean translateEnToPl = false;
+    private boolean translateBusy = false;
+    private String translateInput = "";
+    private String translateOutput = "";
+    private String translateStatus = "";
     private BroadcastReceiver updateDownloadReceiver;
     private Typeface sansRegular;
     private Typeface sansMedium;
@@ -212,6 +219,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
         if (polishEnglishTranslator != null) {
             polishEnglishTranslator.close();
+        }
+        if (englishPolishTranslator != null) {
+            englishPolishTranslator.close();
         }
         if (updateDownloadReceiver != null) {
             try {
@@ -276,6 +286,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 renderAlphabet(content);
             } else if (SCREEN_NEWS.equals(screen)) {
                 renderNews(content);
+            } else if (SCREEN_TRANSLATE.equals(screen)) {
+                renderTranslate(content);
             } else {
                 renderSettings(content);
             }
@@ -1871,6 +1883,162 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
     }
 
+    private void renderTranslate(LinearLayout content) {
+        Theme th = theme();
+        content.addView(screenTitle(t("Translate", "Tłumacz")));
+        addGap(content, 8);
+        content.addView(bodyText(t("On-device Polish–English translation. The first use downloads a small language pack.",
+                "Tłumaczenie polsko-angielskie na urządzeniu. Pierwsze użycie pobiera mały pakiet językowy."), 13, th.muted));
+        addGap(content, 14);
+
+        String fromLang = translateEnToPl ? t("English", "Angielski") : t("Polish", "Polski");
+        String toLang = translateEnToPl ? t("Polish", "Polski") : t("English", "Angielski");
+
+        LinearLayout dir = row();
+        dir.setGravity(Gravity.CENTER_VERTICAL);
+        dir.addView(label(fromLang.toUpperCase(Locale.ROOT), th.accent2, 12, 0.1f), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        Button swap = flatButton("⇄", th.panel, th.ink, th.ink, 16, 40);
+        swap.setOnClickListener(v -> {
+            translateEnToPl = !translateEnToPl;
+            String tmp = translateInput;
+            translateInput = translateOutput;
+            translateOutput = tmp;
+            translateStatus = "";
+            render();
+        });
+        dir.addView(swap, new LinearLayout.LayoutParams(dp(48), dp(40)));
+        TextView toLabel = label(toLang.toUpperCase(Locale.ROOT), th.accent, 12, 0.1f);
+        toLabel.setGravity(Gravity.RIGHT);
+        dir.addView(toLabel, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        content.addView(dir);
+        addGap(content, 10);
+
+        EditText input = new EditText(this);
+        input.setText(translateInput);
+        input.setHint(translateEnToPl ? t("Type English…", "Wpisz po angielsku…") : t("Type Polish…", "Wpisz po polsku…"));
+        input.setTextSize(16);
+        input.setTypeface(sansRegular);
+        input.setTextColor(th.ink);
+        input.setHintTextColor(th.faint);
+        input.setGravity(Gravity.TOP | Gravity.START);
+        input.setMinLines(2);
+        input.setPadding(dp(14), dp(12), dp(14), dp(12));
+        input.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
+        input.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int st, int c, int a) {}
+            @Override public void onTextChanged(CharSequence s, int st, int b, int c) { translateInput = s.toString(); }
+            @Override public void afterTextChanged(Editable s) {}
+        });
+        input.setSelection(input.getText().length());
+        content.addView(input, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        addGap(content, 10);
+
+        Button go = filledButton(translateBusy ? t("Translating…", "Tłumaczę…") : t("Translate", "Przetłumacz"), th.accent, th.onAccent, 15, 50);
+        go.setEnabled(!translateBusy);
+        go.setOnClickListener(v -> runTranslation());
+        content.addView(go, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(50)));
+
+        if (!translateStatus.isEmpty()) {
+            addGap(content, 10);
+            TextView status = bodyText(translateStatus, 13, th.faint);
+            status.setGravity(Gravity.CENTER);
+            content.addView(status);
+        }
+
+        if (!translateOutput.isEmpty()) {
+            addGap(content, 16);
+            LinearLayout outCard = vertical();
+            outCard.setPadding(dp(16), dp(14), dp(16), dp(14));
+            outCard.setBackground(rounded(th.panel, th.accent2, 4, 1.5f));
+            outCard.addView(label(toLang.toUpperCase(Locale.ROOT), th.accent2, 11, 0.1f));
+            addGap(outCard, 6);
+            TextView outText = serifText(translateOutput, 20, th.ink);
+            outText.setLineSpacing(0, 1.05f);
+            outText.setTextIsSelectable(true);
+            outCard.addView(outText);
+            addGap(outCard, 12);
+            LinearLayout tools = row();
+            final Locale outLocale = translateEnToPl ? new Locale("pl", "PL") : Locale.US;
+            final String output = translateOutput;
+            Button read = flatButton(t("Read", "Czytaj"), th.accentSoft, th.accent, th.accent, 12.5f, 38);
+            read.setOnClickListener(v -> speak(output, outLocale));
+            tools.addView(read, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(38)));
+            Button copy = flatButton(t("Copy", "Kopiuj"), th.panel, th.muted, th.dash, 12.5f, 38);
+            copy.setOnClickListener(v -> {
+                ClipboardManager clip = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                if (clip != null) {
+                    clip.setPrimaryClip(ClipData.newPlainText("translation", output));
+                    Toast.makeText(this, t("Copied.", "Skopiowano."), Toast.LENGTH_SHORT).show();
+                }
+            });
+            LinearLayout.LayoutParams copyParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(38));
+            copyParams.setMargins(dp(10), 0, 0, 0);
+            tools.addView(copy, copyParams);
+            outCard.addView(tools, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0));
+            content.addView(outCard);
+        }
+    }
+
+    private Translator translatorFor(boolean enToPl) {
+        if (enToPl) {
+            if (englishPolishTranslator == null) {
+                TranslatorOptions options = new TranslatorOptions.Builder()
+                        .setSourceLanguage(TranslateLanguage.ENGLISH)
+                        .setTargetLanguage(TranslateLanguage.POLISH)
+                        .build();
+                englishPolishTranslator = Translation.getClient(options);
+            }
+            return englishPolishTranslator;
+        }
+        return newsTranslator();
+    }
+
+    private void runTranslation() {
+        final String text = translateInput.trim();
+        if (text.isEmpty()) {
+            Toast.makeText(this, t("Type something to translate.", "Wpisz coś do przetłumaczenia."), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (translateBusy) {
+            return;
+        }
+        translateBusy = true;
+        translateOutput = "";
+        translateStatus = t("Preparing…", "Przygotowuję…");
+        render();
+        final boolean enToPl = translateEnToPl;
+        final Translator translator = translatorFor(enToPl);
+        DownloadConditions conditions = new DownloadConditions.Builder().build();
+        translator.downloadModelIfNeeded(conditions)
+                .addOnSuccessListener(ignored -> translator.translate(text)
+                        .addOnSuccessListener(result -> {
+                            translateBusy = false;
+                            if (translateEnToPl != enToPl) {
+                                return;
+                            }
+                            translateOutput = result.trim();
+                            translateStatus = "";
+                            if (SCREEN_TRANSLATE.equals(screen)) {
+                                render();
+                            }
+                        })
+                        .addOnFailureListener(e -> {
+                            translateBusy = false;
+                            translateStatus = t("Translation failed.", "Tłumaczenie nie powiodło się.");
+                            if (SCREEN_TRANSLATE.equals(screen)) {
+                                render();
+                            }
+                        }))
+                .addOnFailureListener(e -> {
+                    translateBusy = false;
+                    translateStatus = t("Could not download the language pack. Connect to the internet and try again.",
+                            "Nie udało się pobrać pakietu językowego. Połącz się z internetem i spróbuj ponownie.");
+                    if (SCREEN_TRANSLATE.equals(screen)) {
+                        render();
+                    }
+                });
+    }
+
     private View bottomNav() {
         Theme th = theme();
         LinearLayout nav = row();
@@ -1882,6 +2050,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         nav.addView(navItem("grammar", t("Grammar", "Gramatyka"), SCREEN_GRAMMAR), new LinearLayout.LayoutParams(0, dp(56), 1));
         nav.addView(navItem("alphabet", "ABC", SCREEN_ALPHABET), new LinearLayout.LayoutParams(0, dp(56), 1));
         nav.addView(navItem("news", t("News", "News"), SCREEN_NEWS), new LinearLayout.LayoutParams(0, dp(56), 1));
+        nav.addView(navItem("translate", t("Translate", "Tłumacz"), SCREEN_TRANSLATE), new LinearLayout.LayoutParams(0, dp(56), 1));
         nav.addView(navItem("settings", t("Settings", "Ustawienia"), SCREEN_SETTINGS), new LinearLayout.LayoutParams(0, dp(56), 1));
         return nav;
     }
@@ -2968,6 +3137,14 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 canvas.drawLine(w * 0.26f, h * 0.56f, w * 0.48f, h * 0.56f, paint);
                 canvas.drawLine(w * 0.58f, h * 0.56f, w * 0.72f, h * 0.56f, paint);
                 canvas.drawLine(w * 0.26f, h * 0.69f, w * 0.72f, h * 0.69f, paint);
+            } else if ("translate".equals(type)) {
+                // two stacked arrows pointing opposite ways (translate both directions)
+                canvas.drawLine(w * 0.2f, h * 0.35f, w * 0.8f, h * 0.35f, paint);
+                canvas.drawLine(w * 0.8f, h * 0.35f, w * 0.66f, h * 0.24f, paint);
+                canvas.drawLine(w * 0.8f, h * 0.35f, w * 0.66f, h * 0.46f, paint);
+                canvas.drawLine(w * 0.2f, h * 0.65f, w * 0.8f, h * 0.65f, paint);
+                canvas.drawLine(w * 0.2f, h * 0.65f, w * 0.34f, h * 0.54f, paint);
+                canvas.drawLine(w * 0.2f, h * 0.65f, w * 0.34f, h * 0.76f, paint);
             } else {
                 canvas.drawCircle(w * 0.5f, h * 0.5f, w * 0.18f, paint);
                 canvas.drawLine(w * 0.5f, h * 0.08f, w * 0.5f, h * 0.23f, paint);
