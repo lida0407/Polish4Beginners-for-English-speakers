@@ -1,8 +1,8 @@
 {
-  "versionCode": 21,
-  "versionName": "1.20",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/cb636c2a8029fc80946b3ae9da4eb0a45e40f038/docs/P4B.apk",
-  "apkSha256": "543746eafa23a49672740ef921cb85469b049cd3c4de9b51970713c7fcfaf26a",
-  "apkSizeBytes": 67513851,
-  "releaseNotes": "New Translate tab: type any word or sentence and translate Polish<->English on your device, with read-aloud and copy."
+  "versionCode": 22,
+  "versionName": "1.21",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/2cde98c1a214daec7ca5bc50c2c68442c7954888/docs/P4B.apk",
+  "apkSha256": "8e03719a613ff00fe7ab79db811fbdaf532e3e1936ba57d4f43802b0bec974a8",
+  "apkSizeBytes": 67530239,
+  "releaseNotes": "Import your own word lists in the Translate tab: download the CSV template, fill it in (blank sides auto-translate), upload, and your words become study cards."
 }
