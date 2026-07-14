@@ -117,6 +117,15 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final long UPDATE_CHECK_INTERVAL_MS = 24L * 60L * 60L * 1000L;
     private static final int SESSION_SIZE = 10;
     private static final int NEWS_PREFETCH_AHEAD = 5;
+    private static final String CUSTOM_CARDS = "customCards";
+    private static final String MY_WORDS_CATEGORY = "My Words";
+    private static final int REQ_SAVE_TEMPLATE = 2001;
+    private static final int REQ_OPEN_LIST = 2002;
+    private static final String WORDLIST_TEMPLATE =
+            "polish,english,level\n"
+            + "dziękuję,thank you,A1\n"
+            + "proszę,,A1\n"
+            + ",good morning,A1\n";
 
     private final List<Phrase> phrases = new ArrayList<>();
     private final List<GrammarLesson> grammarLessons = new ArrayList<>();
@@ -1977,6 +1986,35 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             outCard.addView(tools, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0));
             content.addView(outCard);
         }
+
+        addGap(content, 22);
+        content.addView(new DashedLine(this, th.dash), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(2)));
+        addGap(content, 16);
+        content.addView(label(t("YOUR WORD LIST", "TWOJA LISTA SŁÓW"), th.faint, 11.5f, 0.12f));
+        addGap(content, 8);
+        int myWords = customCardCount();
+        content.addView(bodyText(t("Download the template, fill in your words (leave one side blank to auto-translate), then upload. Imported words become study cards. ",
+                "Pobierz szablon, wpisz swoje słowa (zostaw jedną stronę pustą, aby przetłumaczyć automatycznie) i prześlij. Zaimportowane słowa stają się fiszkami. ")
+                + t("You have ", "Masz ") + myWords + t(" saved words.", " zapisanych słów."), 13, th.muted));
+        addGap(content, 12);
+
+        LinearLayout fileRow = row();
+        Button template = flatButton(t("Download template", "Pobierz szablon"), th.panel, th.ink, th.ink, 13, 46);
+        template.setOnClickListener(v -> downloadTemplate());
+        fileRow.addView(template, new LinearLayout.LayoutParams(0, dp(46), 1));
+        Button upload = filledButton(t("Upload list", "Prześlij listę"), th.accent, th.onAccent, 13, 46);
+        upload.setOnClickListener(v -> pickWordList());
+        LinearLayout.LayoutParams upParams = new LinearLayout.LayoutParams(0, dp(46), 1);
+        upParams.setMargins(dp(10), 0, 0, 0);
+        fileRow.addView(upload, upParams);
+        content.addView(fileRow);
+
+        if (myWords > 0) {
+            addGap(content, 10);
+            Button study = flatButton(t("Study my words", "Ucz się moich słów") + " →", th.accent2, th.onAccent2, th.ink, 14, 48);
+            study.setOnClickListener(v -> startMyWordsSession());
+            content.addView(study, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(48)));
+        }
     }
 
     private Translator translatorFor(boolean enToPl) {
@@ -2037,6 +2075,165 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                         render();
                     }
                 });
+    }
+
+    private void downloadTemplate() {
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("text/csv");
+        intent.putExtra(Intent.EXTRA_TITLE, "polish_wordlist_template.csv");
+        try {
+            startActivityForResult(intent, REQ_SAVE_TEMPLATE);
+        } catch (Exception e) {
+            Toast.makeText(this, t("No app to save files.", "Brak aplikacji do zapisu plików."), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void pickWordList() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+        try {
+            startActivityForResult(intent, REQ_OPEN_LIST);
+        } catch (Exception e) {
+            Toast.makeText(this, t("No app to pick files.", "Brak aplikacji do wyboru plików."), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK || data == null || data.getData() == null) {
+            return;
+        }
+        Uri uri = data.getData();
+        if (requestCode == REQ_SAVE_TEMPLATE) {
+            try (java.io.OutputStream out = getContentResolver().openOutputStream(uri)) {
+                if (out != null) {
+                    out.write(WORDLIST_TEMPLATE.getBytes(StandardCharsets.UTF_8));
+                }
+                Toast.makeText(this, t("Template saved.", "Szablon zapisany."), Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                Toast.makeText(this, t("Could not save the template.", "Nie udało się zapisać szablonu."), Toast.LENGTH_LONG).show();
+            }
+        } else if (requestCode == REQ_OPEN_LIST) {
+            try {
+                List<String[]> rows = parseWordListCsv(readLines(getContentResolver().openInputStream(uri)));
+                if (rows.isEmpty()) {
+                    Toast.makeText(this, t("No words found in that file.", "Nie znaleziono słów w tym pliku."), Toast.LENGTH_LONG).show();
+                    return;
+                }
+                screen = SCREEN_TRANSLATE;
+                importRows(rows);
+            } catch (Exception e) {
+                Toast.makeText(this, t("Could not read that file.", "Nie udało się odczytać pliku."), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private List<String> readLines(InputStream stream) throws Exception {
+        List<String> lines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                lines.add(line);
+            }
+        }
+        return lines;
+    }
+
+    // Each returned row is {polish, english, level}; header row is skipped.
+    private List<String[]> parseWordListCsv(List<String> lines) {
+        List<String[]> rows = new ArrayList<>();
+        boolean first = true;
+        for (String raw : lines) {
+            String line = raw.trim();
+            if (line.isEmpty()) {
+                continue;
+            }
+            String[] parts = line.split(",", -1);
+            String pl = parts.length > 0 ? parts[0].trim() : "";
+            String en = parts.length > 1 ? parts[1].trim() : "";
+            String lvl = parts.length > 2 ? parts[2].trim() : "";
+            if (first) {
+                first = false;
+                if (pl.equalsIgnoreCase("polish") || en.equalsIgnoreCase("english")) {
+                    continue; // header
+                }
+            }
+            if (pl.isEmpty() && en.isEmpty()) {
+                continue;
+            }
+            rows.add(new String[]{pl, en, lvl});
+        }
+        return rows;
+    }
+
+    private void importRows(List<String[]> rows) {
+        translateBusy = true;
+        translateOutput = "";
+        translateStatus = t("Importing ", "Importuję ") + rows.size() + t(" words…", " słów…");
+        render();
+        processImportRow(rows, 0, new ArrayList<>());
+    }
+
+    // Walks the list one row at a time, translating whichever side is blank.
+    private void processImportRow(List<String[]> rows, int index, List<String[]> ready) {
+        if (index >= rows.size()) {
+            finishImport(ready);
+            return;
+        }
+        String[] r = rows.get(index);
+        final String pl = r[0].trim();
+        final String en = r[1].trim();
+        final String lvl = r[2];
+        if (!pl.isEmpty() && !en.isEmpty()) {
+            ready.add(new String[]{pl, en, lvl});
+            processImportRow(rows, index + 1, ready);
+            return;
+        }
+        final boolean enToPl = pl.isEmpty(); // english filled, need polish
+        final String source = enToPl ? en : pl;
+        translateStatus = t("Translating ", "Tłumaczę ") + (index + 1) + "/" + rows.size() + "…";
+        if (SCREEN_TRANSLATE.equals(screen)) {
+            render();
+        }
+        final Translator translator = translatorFor(enToPl);
+        translator.downloadModelIfNeeded(new DownloadConditions.Builder().build())
+                .addOnSuccessListener(ignored -> translator.translate(source)
+                        .addOnSuccessListener(result -> {
+                            if (enToPl) {
+                                ready.add(new String[]{result.trim(), en, lvl});
+                            } else {
+                                ready.add(new String[]{pl, result.trim(), lvl});
+                            }
+                            processImportRow(rows, index + 1, ready);
+                        })
+                        .addOnFailureListener(e -> processImportRow(rows, index + 1, ready)))
+                .addOnFailureListener(e -> {
+                    translateBusy = false;
+                    translateStatus = t("Could not download the language pack. Connect to the internet and try again.",
+                            "Nie udało się pobrać pakietu językowego. Połącz się z internetem i spróbuj ponownie.");
+                    if (SCREEN_TRANSLATE.equals(screen)) {
+                        render();
+                    }
+                });
+    }
+
+    private void finishImport(List<String[]> ready) {
+        int added = 0;
+        for (String[] r : ready) {
+            if (saveCustomCard(r[0], r[1], r[2])) {
+                added++;
+            }
+        }
+        loadPhrases();
+        loadMemory();
+        translateBusy = false;
+        translateStatus = t("Added ", "Dodano ") + added + t(" words to your cards.", " słów do Twoich kart.");
+        if (SCREEN_TRANSLATE.equals(screen)) {
+            render();
+        }
     }
 
     private View bottomNav() {
@@ -2444,9 +2641,88 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private void loadPhrases() {
         try {
             parsePhrases(readPhraseJson());
+            appendCustomCards();
         } catch (Exception error) {
             Toast.makeText(this, "Could not load phrase data.", Toast.LENGTH_LONG).show();
         }
+    }
+
+    // User-uploaded words, stored locally, added to the deck as "My Words" cards.
+    private void appendCustomCards() {
+        String raw = getSharedPreferences(PREFS, MODE_PRIVATE).getString(CUSTOM_CARDS, "[]");
+        try {
+            JSONArray arr = new JSONArray(raw);
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject o = arr.getJSONObject(i);
+                phrases.add(new Phrase(
+                        MY_WORDS_CATEGORY,
+                        o.optString("polish"),
+                        o.optString("english"),
+                        "", "", "",
+                        o.optString("notes", ""),
+                        o.optString("level", "A1"),
+                        0));
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    private String normPolish(String value) {
+        return value == null ? "" : value.trim().toLowerCase(Locale.ROOT).replaceAll("[.!?,;:]+$", "");
+    }
+
+    private int customCardCount() {
+        int count = 0;
+        for (Phrase phrase : phrases) {
+            if (MY_WORDS_CATEGORY.equals(phrase.category)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    // Returns true if newly stored (skips duplicates of any existing card).
+    private boolean saveCustomCard(String polish, String english, String lvl) {
+        polish = polish.trim();
+        english = english.trim();
+        if (polish.isEmpty() || english.isEmpty()) {
+            return false;
+        }
+        String key = normPolish(polish);
+        for (Phrase phrase : phrases) {
+            if (normPolish(phrase.polish).equals(key)) {
+                return false;
+            }
+        }
+        SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        try {
+            JSONArray arr = new JSONArray(prefs.getString(CUSTOM_CARDS, "[]"));
+            for (int i = 0; i < arr.length(); i++) {
+                if (normPolish(arr.getJSONObject(i).optString("polish")).equals(key)) {
+                    return false;
+                }
+            }
+            JSONObject o = new JSONObject();
+            o.put("polish", polish);
+            o.put("english", english);
+            o.put("level", (lvl == null || lvl.trim().isEmpty()) ? level : lvl.trim());
+            arr.put(o);
+            prefs.edit().putString(CUSTOM_CARDS, arr.toString()).apply();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private void startMyWordsSession() {
+        List<Phrase> pool = new ArrayList<>();
+        for (Phrase phrase : phrases) {
+            if (MY_WORDS_CATEGORY.equals(phrase.category)) {
+                pool.add(phrase);
+            }
+        }
+        Collections.shuffle(pool);
+        beginSession(pool, 0);
     }
 
     private String readPhraseJson() throws Exception {
