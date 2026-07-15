@@ -122,10 +122,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final int REQ_SAVE_TEMPLATE = 2001;
     private static final int REQ_OPEN_LIST = 2002;
     private static final String WORDLIST_TEMPLATE =
-            "polish,english,level\n"
-            + "dziękuję,thank you,A1\n"
-            + "proszę,,A1\n"
-            + ",good morning,A1\n";
+            "polish,english,level,tag\n"
+            + "dziękuję,thank you,A1,My Words\n"
+            + "proszę,,A1,My Words\n"
+            + ",good morning,A1,ZUS\n";
 
     private final List<Phrase> phrases = new ArrayList<>();
     private final List<GrammarLesson> grammarLessons = new ArrayList<>();
@@ -342,14 +342,20 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         content.addView(levelSelector());
         addGap(content, 16);
         content.addView(statsStrip());
-        int myWords = customCardCount();
-        if (myWords > 0) {
-            addGap(content, 12);
-            Button mine = flatButton(t("My Words", "Moje słowa") + "                                  " + myWords + t(" cards →", " kart →"), th.accent2, th.onAccent2, th.ink, 14, 48);
-            mine.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
-            mine.setPadding(dp(14), 0, dp(14), 0);
-            mine.setOnClickListener(v -> startMyWordsSession());
-            content.addView(mine, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(48)));
+        Map<String, Integer> tagCounts = customTagCounts();
+        if (!tagCounts.isEmpty()) {
+            addGap(content, 14);
+            content.addView(label(t("MY WORD LISTS", "MOJE LISTY SŁÓW"), th.faint, 11, 0.14f));
+            addGap(content, 8);
+            for (Map.Entry<String, Integer> entry : tagCounts.entrySet()) {
+                final String tag = entry.getKey();
+                Button mine = flatButton(tag + "                                  " + entry.getValue() + t(" cards →", " kart →"), th.accent2, th.onAccent2, th.ink, 14, 48);
+                mine.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
+                mine.setPadding(dp(14), 0, dp(14), 0);
+                mine.setOnClickListener(v -> startTagSession(tag));
+                content.addView(mine, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(48)));
+                addGap(content, 8);
+            }
         }
         addGap(content, 18);
         content.addView(topicsSection());
@@ -1997,17 +2003,17 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             // Save this translation to the "My Words" study tag, one at a time.
             final String polishSide = translateEnToPl ? translateOutput.trim() : translateInput.trim();
             final String englishSide = translateEnToPl ? translateInput.trim() : translateOutput.trim();
-            Button add = flatButton(t("Add to My Words", "Dodaj do Moich słów"), th.accent2, th.onAccent2, th.ink, 13, 44);
-            add.setOnClickListener(v -> {
-                if (saveCustomCard(polishSide, englishSide, level)) {
+            Button add = flatButton(t("Add to a list", "Dodaj do listy"), th.accent2, th.onAccent2, th.ink, 13, 44);
+            add.setOnClickListener(v -> promptForTag(lastTag(), tag -> {
+                if (saveCustomCard(polishSide, englishSide, level, tag)) {
                     loadPhrases();
                     loadMemory();
-                    Toast.makeText(this, t("Added to My Words.", "Dodano do Moich słów."), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, t("Added to ", "Dodano do ") + tag + ".", Toast.LENGTH_SHORT).show();
                     render();
                 } else {
                     Toast.makeText(this, t("This word is already in your cards.", "To słowo jest już w Twoich kartach."), Toast.LENGTH_SHORT).show();
                 }
-            });
+            }));
             outCard.addView(add, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(44), 10));
             content.addView(outCard);
         }
@@ -2015,12 +2021,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         addGap(content, 22);
         content.addView(new DashedLine(this, th.dash), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(2)));
         addGap(content, 16);
-        content.addView(label(t("YOUR WORD LIST", "TWOJA LISTA SŁÓW"), th.faint, 11.5f, 0.12f));
+        content.addView(label(t("YOUR WORD LISTS", "TWOJE LISTY SŁÓW"), th.faint, 11.5f, 0.12f));
         addGap(content, 8);
-        int myWords = customCardCount();
-        content.addView(bodyText(t("Download the template, fill in your words (leave one side blank to auto-translate), then upload. Imported words become study cards. ",
-                "Pobierz szablon, wpisz swoje słowa (zostaw jedną stronę pustą, aby przetłumaczyć automatycznie) i prześlij. Zaimportowane słowa stają się fiszkami. ")
-                + t("You have ", "Masz ") + myWords + t(" saved words.", " zapisanych słów."), 13, th.muted));
+        Map<String, Integer> tagCounts = customTagCounts();
+        content.addView(bodyText(t("Download the template, fill in your words (leave one side blank to auto-translate), then upload. Imported words become study cards you can group into named lists. ",
+                "Pobierz szablon, wpisz swoje słowa (zostaw jedną stronę pustą, aby przetłumaczyć automatycznie) i prześlij. Zaimportowane słowa stają się fiszkami w nazwanych listach. ")
+                + t("You have ", "Masz ") + customCardCount() + t(" saved words in ", " zapisanych słów w ") + tagCounts.size() + t(" lists.", " listach."), 13, th.muted));
         addGap(content, 12);
 
         LinearLayout fileRow = row();
@@ -2034,10 +2040,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         fileRow.addView(upload, upParams);
         content.addView(fileRow);
 
-        if (myWords > 0) {
+        for (Map.Entry<String, Integer> entry : tagCounts.entrySet()) {
+            final String tag = entry.getKey();
             addGap(content, 10);
-            Button study = flatButton(t("Study my words", "Ucz się moich słów") + " →", th.accent2, th.onAccent2, th.ink, 14, 48);
-            study.setOnClickListener(v -> startMyWordsSession());
+            Button study = flatButton(tag + "  ·  " + entry.getValue() + t(" cards →", " kart →"), th.accent2, th.onAccent2, th.ink, 14, 48);
+            study.setOnClickListener(v -> startTagSession(tag));
             content.addView(study, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(48)));
         }
     }
@@ -2143,13 +2150,13 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             }
         } else if (requestCode == REQ_OPEN_LIST) {
             try {
-                List<String[]> rows = parseWordListCsv(readLines(getContentResolver().openInputStream(uri)));
+                final List<String[]> rows = parseWordListCsv(readLines(getContentResolver().openInputStream(uri)));
                 if (rows.isEmpty()) {
                     Toast.makeText(this, t("No words found in that file.", "Nie znaleziono słów w tym pliku."), Toast.LENGTH_LONG).show();
                     return;
                 }
                 screen = SCREEN_TRANSLATE;
-                importRows(rows);
+                promptForTag(lastTag(), tag -> importRows(rows, tag));
             } catch (Exception e) {
                 Toast.makeText(this, t("Could not read that file.", "Nie udało się odczytać pliku."), Toast.LENGTH_LONG).show();
             }
@@ -2167,7 +2174,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         return lines;
     }
 
-    // Each returned row is {polish, english, level}; header row is skipped.
+    // Each returned row is {polish, english, level, tag}; header row is skipped.
+    // tag (4th column) is optional and defaults to "" (filled in at import time).
     private List<String[]> parseWordListCsv(List<String> lines) {
         List<String[]> rows = new ArrayList<>();
         boolean first = true;
@@ -2180,6 +2188,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             String pl = parts.size() > 0 ? parts.get(0).trim() : "";
             String en = parts.size() > 1 ? parts.get(1).trim() : "";
             String lvl = parts.size() > 2 ? parts.get(2).trim() : "";
+            String tag = parts.size() > 3 ? parts.get(3).trim() : "";
             if (first) {
                 first = false;
                 if (pl.equalsIgnoreCase("polish") || en.equalsIgnoreCase("english")) {
@@ -2189,7 +2198,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             if (pl.isEmpty() && en.isEmpty()) {
                 continue;
             }
-            rows.add(new String[]{pl, en, lvl});
+            rows.add(new String[]{pl, en, lvl, tag});
         }
         return rows;
     }
@@ -2226,16 +2235,17 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         return fields;
     }
 
-    private void importRows(List<String[]> rows) {
+    // defaultTag is used for any row whose CSV tag column is blank.
+    private void importRows(List<String[]> rows, String defaultTag) {
         translateBusy = true;
         translateOutput = "";
         translateStatus = t("Importing ", "Importuję ") + rows.size() + t(" words…", " słów…");
         render();
-        processImportRow(rows, 0, new ArrayList<>());
+        processImportRow(rows, 0, new ArrayList<>(), defaultTag);
     }
 
     // Walks the list one row at a time, translating whichever side is blank.
-    private void processImportRow(List<String[]> rows, int index, List<String[]> ready) {
+    private void processImportRow(List<String[]> rows, int index, List<String[]> ready, String defaultTag) {
         if (index >= rows.size()) {
             finishImport(ready);
             return;
@@ -2244,9 +2254,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         final String pl = r[0].trim();
         final String en = r[1].trim();
         final String lvl = r[2];
+        final String tag = (r.length > 3 && !r[3].trim().isEmpty()) ? r[3].trim() : defaultTag;
         if (!pl.isEmpty() && !en.isEmpty()) {
-            ready.add(new String[]{pl, en, lvl});
-            processImportRow(rows, index + 1, ready);
+            ready.add(new String[]{pl, en, lvl, tag});
+            processImportRow(rows, index + 1, ready, defaultTag);
             return;
         }
         final boolean enToPl = pl.isEmpty(); // english filled, need polish
@@ -2260,13 +2271,13 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 .addOnSuccessListener(ignored -> translator.translate(source)
                         .addOnSuccessListener(result -> {
                             if (enToPl) {
-                                ready.add(new String[]{result.trim(), en, lvl});
+                                ready.add(new String[]{result.trim(), en, lvl, tag});
                             } else {
-                                ready.add(new String[]{pl, result.trim(), lvl});
+                                ready.add(new String[]{pl, result.trim(), lvl, tag});
                             }
-                            processImportRow(rows, index + 1, ready);
+                            processImportRow(rows, index + 1, ready, defaultTag);
                         })
-                        .addOnFailureListener(e -> processImportRow(rows, index + 1, ready)))
+                        .addOnFailureListener(e -> processImportRow(rows, index + 1, ready, defaultTag)))
                 .addOnFailureListener(e -> {
                     translateBusy = false;
                     translateStatus = t("Could not download the language pack. Connect to the internet and try again.",
@@ -2280,14 +2291,14 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private void finishImport(List<String[]> ready) {
         int added = 0;
         for (String[] r : ready) {
-            if (saveCustomCard(r[0], r[1], r[2])) {
+            if (saveCustomCard(r[0], r[1], r[2], r.length > 3 ? r[3] : MY_WORDS_CATEGORY)) {
                 added++;
             }
         }
         loadPhrases();
         loadMemory();
         translateBusy = false;
-        translateStatus = t("Added ", "Dodano ") + added + t(" words to your cards.", " słów do Twoich kart.");
+        translateStatus = t("Added ", "Dodano ") + added + t(" words to your lists.", " słów do Twoich list.");
         if (SCREEN_TRANSLATE.equals(screen)) {
             render();
         }
@@ -2711,17 +2722,77 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             JSONArray arr = new JSONArray(raw);
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject o = arr.getJSONObject(i);
-                phrases.add(new Phrase(
+                Phrase p = new Phrase(
                         MY_WORDS_CATEGORY,
                         o.optString("polish"),
                         o.optString("english"),
                         "", "", "",
                         o.optString("notes", ""),
                         o.optString("level", "A1"),
-                        0));
+                        0);
+                p.tag = o.optString("tag", MY_WORDS_CATEGORY);
+                phrases.add(p);
             }
         } catch (Exception ignored) {
         }
+    }
+
+    private String lastTag() {
+        return getSharedPreferences(PREFS, MODE_PRIVATE).getString("lastTag", MY_WORDS_CATEGORY);
+    }
+
+    // Ordered map of list name -> card count, over user-added cards.
+    private Map<String, Integer> customTagCounts() {
+        Map<String, Integer> counts = new LinkedHashMap<>();
+        for (Phrase phrase : phrases) {
+            if (MY_WORDS_CATEGORY.equals(phrase.category)) {
+                String tag = phrase.tag.isEmpty() ? MY_WORDS_CATEGORY : phrase.tag;
+                Integer c = counts.get(tag);
+                counts.put(tag, c == null ? 1 : c + 1);
+            }
+        }
+        return counts;
+    }
+
+    private void startTagSession(String tag) {
+        List<Phrase> pool = new ArrayList<>();
+        for (Phrase phrase : phrases) {
+            if (MY_WORDS_CATEGORY.equals(phrase.category)
+                    && (phrase.tag.isEmpty() ? MY_WORDS_CATEGORY : phrase.tag).equals(tag)) {
+                pool.add(phrase);
+            }
+        }
+        Collections.shuffle(pool);
+        beginSession(pool, 0);
+    }
+
+    interface TagCallback {
+        void onTag(String tag);
+    }
+
+    private void promptForTag(String defaultTag, TagCallback callback) {
+        final EditText field = new EditText(this);
+        field.setText(defaultTag);
+        field.setHint(t("List name, e.g. ZUS", "Nazwa listy, np. ZUS"));
+        field.setSingleLine(true);
+        field.setSelection(field.getText().length());
+        int pad = dp(20);
+        FrameLayout wrap = new FrameLayout(this);
+        wrap.setPadding(pad, dp(8), pad, 0);
+        wrap.addView(field);
+        new AlertDialog.Builder(this)
+                .setTitle(t("Add to which list?", "Do której listy dodać?"))
+                .setView(wrap)
+                .setPositiveButton(t("Add", "Dodaj"), (d, w) -> {
+                    String tag = field.getText().toString().trim();
+                    if (tag.isEmpty()) {
+                        tag = MY_WORDS_CATEGORY;
+                    }
+                    saveSetting("lastTag", tag);
+                    callback.onTag(tag);
+                })
+                .setNegativeButton(t("Cancel", "Anuluj"), null)
+                .show();
     }
 
     private String normPolish(String value) {
@@ -2739,7 +2810,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
     // Returns true if newly stored (skips duplicates of any existing card).
-    private boolean saveCustomCard(String polish, String english, String lvl) {
+    private boolean saveCustomCard(String polish, String english, String lvl, String tag) {
         polish = polish.trim();
         english = english.trim();
         if (polish.isEmpty() || english.isEmpty()) {
@@ -2763,23 +2834,13 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             o.put("polish", polish);
             o.put("english", english);
             o.put("level", (lvl == null || lvl.trim().isEmpty()) ? level : lvl.trim());
+            o.put("tag", (tag == null || tag.trim().isEmpty()) ? MY_WORDS_CATEGORY : tag.trim());
             arr.put(o);
             prefs.edit().putString(CUSTOM_CARDS, arr.toString()).apply();
             return true;
         } catch (Exception e) {
             return false;
         }
-    }
-
-    private void startMyWordsSession() {
-        List<Phrase> pool = new ArrayList<>();
-        for (Phrase phrase : phrases) {
-            if (MY_WORDS_CATEGORY.equals(phrase.category)) {
-                pool.add(phrase);
-            }
-        }
-        Collections.shuffle(pool);
-        beginSession(pool, 0);
     }
 
     private String readPhraseJson() throws Exception {
@@ -3093,6 +3154,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         final String notes;
         final String level;
         final int coreIndex;
+        String tag = ""; // sub-list name for user-added "My Words" cards
 
         Phrase(String category, String polish, String english, String phonetic,
                String examplePolish, String exampleEnglish, String notes,
