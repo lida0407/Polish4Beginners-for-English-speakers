@@ -342,6 +342,15 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         content.addView(levelSelector());
         addGap(content, 16);
         content.addView(statsStrip());
+        int myWords = customCardCount();
+        if (myWords > 0) {
+            addGap(content, 12);
+            Button mine = flatButton(t("My Words", "Moje słowa") + "                                  " + myWords + t(" cards →", " kart →"), th.accent2, th.onAccent2, th.ink, 14, 48);
+            mine.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
+            mine.setPadding(dp(14), 0, dp(14), 0);
+            mine.setOnClickListener(v -> startMyWordsSession());
+            content.addView(mine, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(48)));
+        }
         addGap(content, 18);
         content.addView(topicsSection());
     }
@@ -1984,6 +1993,22 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             copyParams.setMargins(dp(10), 0, 0, 0);
             tools.addView(copy, copyParams);
             outCard.addView(tools, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0));
+
+            // Save this translation to the "My Words" study tag, one at a time.
+            final String polishSide = translateEnToPl ? translateOutput.trim() : translateInput.trim();
+            final String englishSide = translateEnToPl ? translateInput.trim() : translateOutput.trim();
+            Button add = flatButton(t("Add to My Words", "Dodaj do Moich słów"), th.accent2, th.onAccent2, th.ink, 13, 44);
+            add.setOnClickListener(v -> {
+                if (saveCustomCard(polishSide, englishSide, level)) {
+                    loadPhrases();
+                    loadMemory();
+                    Toast.makeText(this, t("Added to My Words.", "Dodano do Moich słów."), Toast.LENGTH_SHORT).show();
+                    render();
+                } else {
+                    Toast.makeText(this, t("This word is already in your cards.", "To słowo jest już w Twoich kartach."), Toast.LENGTH_SHORT).show();
+                }
+            });
+            outCard.addView(add, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(44), 10));
             content.addView(outCard);
         }
 
