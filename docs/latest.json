@@ -1,8 +1,8 @@
 {
-  "versionCode": 23,
-  "versionName": "1.22",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/fe52b63770466cdf3af63f8162fc6db245b6c035/docs/P4B.apk",
-  "apkSha256": "6327be3342810a59ddd0407a37f789eb16b831d3a05b64990581c14e9ec231ed",
-  "apkSizeBytes": 67530251,
-  "releaseNotes": "Word-list import now handles CSV cells that contain commas (quoted fields)."
+  "versionCode": 24,
+  "versionName": "1.23",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/ba400d86b2d48655530966546b79b5411b678873/docs/P4B.apk",
+  "apkSha256": "8d8f77e64abda1f3a899436b5521148c0922ae713fc9b4533490e20124b1e4d2",
+  "apkSizeBytes": 67530240,
+  "releaseNotes": "Build your own 'My Words' set: add any translation to it one at a time, and study just that tag from the home screen."
 }
