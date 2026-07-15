@@ -2151,10 +2151,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             if (line.isEmpty()) {
                 continue;
             }
-            String[] parts = line.split(",", -1);
-            String pl = parts.length > 0 ? parts[0].trim() : "";
-            String en = parts.length > 1 ? parts[1].trim() : "";
-            String lvl = parts.length > 2 ? parts[2].trim() : "";
+            List<String> parts = splitCsvLine(line);
+            String pl = parts.size() > 0 ? parts.get(0).trim() : "";
+            String en = parts.size() > 1 ? parts.get(1).trim() : "";
+            String lvl = parts.size() > 2 ? parts.get(2).trim() : "";
             if (first) {
                 first = false;
                 if (pl.equalsIgnoreCase("polish") || en.equalsIgnoreCase("english")) {
@@ -2167,6 +2167,38 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             rows.add(new String[]{pl, en, lvl});
         }
         return rows;
+    }
+
+    // Minimal RFC-4180 field splitter: fields may be double-quoted and then
+    // contain commas; "" inside a quoted field is a literal quote.
+    private List<String> splitCsvLine(String line) {
+        List<String> fields = new ArrayList<>();
+        StringBuilder cur = new StringBuilder();
+        boolean inQuotes = false;
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+            if (inQuotes) {
+                if (c == '"') {
+                    if (i + 1 < line.length() && line.charAt(i + 1) == '"') {
+                        cur.append('"');
+                        i++;
+                    } else {
+                        inQuotes = false;
+                    }
+                } else {
+                    cur.append(c);
+                }
+            } else if (c == '"') {
+                inQuotes = true;
+            } else if (c == ',') {
+                fields.add(cur.toString());
+                cur.setLength(0);
+            } else {
+                cur.append(c);
+            }
+        }
+        fields.add(cur.toString());
+        return fields;
     }
 
     private void importRows(List<String[]> rows) {
