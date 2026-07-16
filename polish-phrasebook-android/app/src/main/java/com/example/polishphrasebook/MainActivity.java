@@ -113,7 +113,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String DATA_MANIFEST_URL = "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/database.json?ref=main";
     private static final String REMOTE_PHRASES_FILE = "phrases_remote.json";
     private static final String APK_MIME_TYPE = "application/vnd.android.package-archive";
-    private static final int DEFAULT_DATABASE_VERSION = 9;
+    private static final int DEFAULT_DATABASE_VERSION = 10;
     private static final long UPDATE_CHECK_INTERVAL_MS = 24L * 60L * 60L * 1000L;
     private static final int SESSION_SIZE = 10;
     private static final int NEWS_PREFETCH_AHEAD = 5;
@@ -578,6 +578,21 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 TextView notes = uiText(card.notes, 12, th.faint, sansRegular);
                 notes.setGravity(Gravity.CENTER);
                 face.addView(notes, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 8));
+            }
+            if (!card.declension.isEmpty()) {
+                TextView table = new TextView(this);
+                table.setText(card.declension);
+                table.setTypeface(Typeface.MONOSPACE);
+                table.setTextSize(12.5f);
+                table.setTextColor(th.body);
+                table.setLineSpacing(0, 1.12f);
+                table.setPadding(dp(14), dp(10), dp(14), dp(10));
+                table.setBackground(rounded(th.bg, th.dash, 4, 1.5f));
+                table.setTextIsSelectable(true);
+                HorizontalScrollView scroll = new HorizontalScrollView(this);
+                scroll.setHorizontalScrollBarEnabled(false);
+                scroll.addView(table);
+                face.addView(scroll, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 10));
             }
             LinearLayout tts = row();
             tts.setGravity(Gravity.CENTER);
@@ -2866,7 +2881,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 exampleEnglish = phonetic.substring(split + 3).trim();
                 phonetic = "";
             }
-            phrases.add(new Phrase(
+            Phrase p = new Phrase(
                     item.optString("scenario", item.optString("category", "General Core")),
                     item.getString("polish"),
                     item.getString("english"),
@@ -2876,7 +2891,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                     item.optString("notes"),
                     item.optString("level", "A1"),
                     item.optInt("coreIndex", 0)
-            ));
+            );
+            p.declension = item.optString("declension");
+            phrases.add(p);
         }
     }
 
@@ -3155,6 +3172,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         final String level;
         final int coreIndex;
         String tag = ""; // sub-list name for user-added "My Words" cards
+        String declension = ""; // preformatted full case table (nouns)
 
         Phrase(String category, String polish, String english, String phonetic,
                String examplePolish, String exampleEnglish, String notes,

@@ -1,8 +1,8 @@
 {
-  "dataVersion": 9,
+  "dataVersion": 10,
   "phraseCount": 3170,
   "phrasesUrl": "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/phrases.json?ref=main",
-  "phrasesSha256": "3acacd417614e183ef025590a83357e45dc21f047f0036af96e5af1ce54302d4",
-  "phrasesSizeBytes": 910608,
-  "releaseNotes": "Repairs 62 garbled core-vocabulary cards and merges 159 duplicate headwords (keeping alternate meanings), via the cleanup pass recovered from the parallel branch."
+  "phrasesSha256": "38efcd7018c5621d1246aae876d4fc198cc03c0b47d61a0392e719336812fe4d",
+  "phrasesSizeBytes": 925131,
+  "releaseNotes": "Adds full case declension tables (all 7 cases, singular + plural) to 63 common noun cards."
 }

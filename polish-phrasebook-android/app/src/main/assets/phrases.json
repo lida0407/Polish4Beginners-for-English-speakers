@@ -1847,7 +1847,8 @@
     "examplePolish": "rok przestępny",
     "exampleEnglish": "leap year",
     "coreIndex": 25,
-    "notes": "(m.) · G. roku · pl. lata"
+    "notes": "(m.) · G. roku · pl. lata",
+    "declension": "Declension · masculine (m.)\n     sg      pl\nN    rok     lata\nG    roku    lat\nD    rokowi  latom\nA    rok     lata\nI    rokiem  latami\nL    roku    latach\nV    roku    lata"
   },
   {
     "category": "Numbers & Measures",
@@ -1880,7 +1881,8 @@
     "examplePolish": "Wrócę z pracy do domu za godzinę.",
     "exampleEnglish": "I’ll be home from work in an hour.",
     "coreIndex": 28,
-    "notes": "(f.) · G. godziny · pl. godziny"
+    "notes": "(f.) · G. godziny · pl. godziny",
+    "declension": "Declension · feminine (f.)\n     sg        pl\nN    godzina   godziny\nG    godziny   godzin\nD    godzinie  godzinom\nA    godzinę   godziny\nI    godziną   godzinami\nL    godzinie  godzinach\nV    godzino   godziny"
   },
   {
     "category": "Time & Calendar",
@@ -2014,7 +2016,8 @@
     "examplePolish": "Czy mogę prosić o trochę wody?",
     "exampleEnglish": "Can I have some water, please?",
     "coreIndex": 43,
-    "notes": "(f.) · G. wody · pl. wody"
+    "notes": "(f.) · G. wody · pl. wody",
+    "declension": "Declension · feminine (f.)\n     sg      pl\nN    woda    wody\nG    wody    wód\nD    wodzie  wodom\nA    wodę    wody\nI    wodą    wodami\nL    wodzie  wodach\nV    wodo    wody"
   },
   {
     "category": "Food & Drink",
@@ -2026,7 +2029,8 @@
     "examplePolish": "Kobieta pije herbatę.",
     "exampleEnglish": "The woman is drinking tea.",
     "coreIndex": 44,
-    "notes": "(f.) · G. herbaty · pl. herbaty"
+    "notes": "(f.) · G. herbaty · pl. herbaty",
+    "declension": "Declension · feminine (f.)\n     sg        pl\nN    herbata   herbaty\nG    herbaty   herbat\nD    herbacie  herbatom\nA    herbatę   herbaty\nI    herbatą   herbatami\nL    herbacie  herbatach\nV    herbato   herbaty"
   },
   {
     "category": "Food & Drink",
@@ -2038,7 +2042,8 @@
     "examplePolish": "Lubię czarną kawę.",
     "exampleEnglish": "I like my coffee black.",
     "coreIndex": 45,
-    "notes": "(f.) · G. kawy · pl. kawy"
+    "notes": "(f.) · G. kawy · pl. kawy",
+    "declension": "Declension · feminine (f.)\n     sg     pl\nN    kawa   kawy\nG    kawy   kaw\nD    kawie  kawom\nA    kawę   kawy\nI    kawą   kawami\nL    kawie  kawach\nV    kawo   kawy"
   },
   {
     "category": "Food & Drink",
@@ -2128,7 +2133,8 @@
     "examplePolish": "Lekarka mierzy puls pacjentki.",
     "exampleEnglish": "The doctor is taking the patient’s pulse.",
     "coreIndex": 53,
-    "notes": "(m.) · G. lekarza · pl. lekarze"
+    "notes": "(m.) · G. lekarza · pl. lekarze",
+    "declension": "Declension · masculine (m.)\n     sg         pl\nN    lekarz     lekarze\nG    lekarza    lekarzy\nD    lekarzowi  lekarzom\nA    lekarza    lekarzy\nI    lekarzem   lekarzami\nL    lekarzu    lekarzach\nV    lekarzu    lekarze"
   },
   {
     "category": "Work & School",
@@ -2386,7 +2392,8 @@
     "examplePolish": "Załóż kask, żeby chronić głowę.",
     "exampleEnglish": "Wear a helmet to protect your head.",
     "coreIndex": 80,
-    "notes": "(f.) · G. głowy · pl. głowy"
+    "notes": "(f.) · G. głowy · pl. głowy",
+    "declension": "Declension · feminine (f.)\n     sg      pl\nN    głowa   głowy\nG    głowy   głów\nD    głowie  głowom\nA    głowę   głowy\nI    głową   głowami\nL    głowie  głowach\nV    głowo   głowy"
   },
   {
     "category": "Health & Body",
@@ -2409,7 +2416,8 @@
     "examplePolish": "muskularna ręka",
     "exampleEnglish": "muscular arm",
     "coreIndex": 82,
-    "notes": "(f.) · G. ręki · pl. ręce"
+    "notes": "(f.) · G. ręki · pl. ręce",
+    "declension": "Declension · feminine (f.)\n     sg    pl\nN    ręka  ręce\nG    ręki  rąk\nD    ręce  rękom\nA    rękę  ręce\nI    ręką  rękami\nL    ręce  rękach\nV    ręko  ręce"
   },
   {
     "category": "Numbers & Measures",
@@ -2796,7 +2804,8 @@
     "examplePolish": "Lubisz konie?",
     "exampleEnglish": "Do you like horses?",
     "coreIndex": 119,
-    "notes": "(m.) · G. konia · pl. konie"
+    "notes": "(m.) · G. konia · pl. konie",
+    "declension": "Declension · masculine (m.)\n     sg       pl\nN    koń      konie\nG    konia    koni\nD    koniowi  koniom\nA    konia    konie\nI    koniem   końmi\nL    koniu    koniach\nV    koniu    konie"
   },
   {
     "category": "Nature & Animals",
@@ -3228,7 +3237,8 @@
     "examplePolish": "Mogę zjeść to jabłko?",
     "exampleEnglish": "Can I eat this apple?",
     "coreIndex": 162,
-    "notes": "(n.) · G. jabłka · pl. jabłka"
+    "notes": "(n.) · G. jabłka · pl. jabłka",
+    "declension": "Declension · neuter (n.)\n     sg        pl\nN    jabłko    jabłka\nG    jabłka    jabłek\nD    jabłku    jabłkom\nA    jabłko    jabłka\nI    jabłkiem  jabłkami\nL    jabłku    jabłkach\nV    jabłko    jabłka"
   },
   {
     "category": "Food & Drink",
@@ -3262,7 +3272,8 @@
     "examplePolish": "Te ptaki są straszne.",
     "exampleEnglish": "These birds are scary.",
     "coreIndex": 165,
-    "notes": "(m.) · G. ptaka · pl. ptaki"
+    "notes": "(m.) · G. ptaka · pl. ptaki",
+    "declension": "Declension · masculine (m.)\n     sg       pl\nN    ptak     ptaki\nG    ptaka    ptaków\nD    ptakowi  ptakom\nA    ptaka    ptaki\nI    ptakiem  ptakami\nL    ptaku    ptakach\nV    ptaku    ptaki"
   },
   {
     "category": "Nature & Animals",
@@ -3318,7 +3329,8 @@
     "examplePolish": "Jestem niezależną kobietą.",
     "exampleEnglish": "I am an independent woman.",
     "coreIndex": 170,
-    "notes": "(f.) · G. kobiety · pl. kobiety"
+    "notes": "(f.) · G. kobiety · pl. kobiety",
+    "declension": "Declension · feminine (f.)\n     sg        pl\nN    kobieta   kobiety\nG    kobiety   kobiet\nD    kobiecie  kobietom\nA    kobietę   kobiety\nI    kobietą   kobietami\nL    kobiecie  kobietach\nV    kobieto   kobiety"
   },
   {
     "category": "People & Family",
@@ -3341,7 +3353,8 @@
     "examplePolish": "Moja dziewczyna jest z Polski.",
     "exampleEnglish": "My girlfriend is from Poland.",
     "coreIndex": 172,
-    "notes": "(f.) · G. dziewczyny · pl. dziewczyny"
+    "notes": "(f.) · G. dziewczyny · pl. dziewczyny",
+    "declension": "Declension · feminine (f.)\n     sg           pl\nN    dziewczyna   dziewczyny\nG    dziewczyny   dziewczyn\nD    dziewczynie  dziewczynom\nA    dziewczynę   dziewczyny\nI    dziewczyną   dziewczynami\nL    dziewczynie  dziewczynach\nV    dziewczyno   dziewczyny"
   },
   {
     "category": "People & Family",
@@ -3364,7 +3377,8 @@
     "examplePolish": "O której godzinie jest następny pociąg?",
     "exampleEnglish": "What time is the next train?",
     "coreIndex": 174,
-    "notes": "(m.) · G. pociągu · pl. pociągi"
+    "notes": "(m.) · G. pociągu · pl. pociągi",
+    "declension": "Declension · masculine (m.)\n     sg         pl\nN    pociąg     pociągi\nG    pociągu    pociągów\nD    pociągowi  pociągom\nA    pociąg     pociągi\nI    pociągiem  pociągami\nL    pociągu    pociągach\nV    pociągu    pociągi"
   },
   {
     "category": "Travel & Transport",
@@ -3388,7 +3402,8 @@
     "examplePolish": "Czy ten autobus jedzie na lotnisko?",
     "exampleEnglish": "Is this the right bus for the airport?",
     "coreIndex": 176,
-    "notes": "(m.) · G. autobusu · pl. autobusy"
+    "notes": "(m.) · G. autobusu · pl. autobusy",
+    "declension": "Declension · masculine (m.)\n     sg          pl\nN    autobus     autobusy\nG    autobusu    autobusów\nD    autobusowi  autobusom\nA    autobus     autobusy\nI    autobusem   autobusami\nL    autobusie   autobusach\nV    autobusie   autobusy"
   },
   {
     "category": "Travel & Transport",
@@ -3444,7 +3459,8 @@
     "examplePolish": "Czy to jest twój pies?",
     "exampleEnglish": "Is that your dog?",
     "coreIndex": 181,
-    "notes": "(m.) · G. psa · pl. psy"
+    "notes": "(m.) · G. psa · pl. psy",
+    "declension": "Declension · masculine (m.)\n     sg    pl\nN    pies  psy\nG    psa   psów\nD    psu   psom\nA    psa   psy\nI    psem  psami\nL    psie  psach\nV    psie  psy"
   },
   {
     "category": "Nature & Animals",
@@ -3456,7 +3472,8 @@
     "examplePolish": "Mój kot lubi spać po południu.",
     "exampleEnglish": "My cat likes to sleep in the afternoon.",
     "coreIndex": 182,
-    "notes": "(m.) · G. kota · pl. koty"
+    "notes": "(m.) · G. kota · pl. koty",
+    "declension": "Declension · masculine (m.)\n     sg     pl\nN    kot    koty\nG    kota   kotów\nD    kotu   kotom\nA    kota   koty\nI    kotem  kotami\nL    kocie  kotach\nV    kocie  koty"
   },
   {
     "category": "Nature & Animals",
@@ -3536,7 +3553,8 @@
     "examplePolish": "Dziecko musi się zdrzemnąć.",
     "exampleEnglish": "The child needs to take a nap.",
     "coreIndex": 189,
-    "notes": "(n.) · G. dziecka · pl. dzieci"
+    "notes": "(n.) · G. dziecka · pl. dzieci",
+    "declension": "Declension · neuter (n.)\n     sg         pl\nN    dziecko    dzieci\nG    dziecka    dzieci\nD    dziecku    dzieciom\nA    dziecko    dzieci\nI    dzieckiem  dziećmi\nL    dziecku    dzieciach\nV    dziecko    dzieci"
   },
   {
     "category": "People & Family",
@@ -3583,7 +3601,8 @@
     "examplePolish": "Jan kupił nowy samochód.",
     "exampleEnglish": "John bought a new car.",
     "coreIndex": 193,
-    "notes": "(m.) · G. samochodu · pl. samochody"
+    "notes": "(m.) · G. samochodu · pl. samochody",
+    "declension": "Declension · masculine (m.)\n     sg           pl\nN    samochód     samochody\nG    samochodu    samochodów\nD    samochodowi  samochodom\nA    samochód     samochody\nI    samochodem   samochodami\nL    samochodzie  samochodach\nV    samochodzie  samochody"
   },
   {
     "category": "Travel & Transport",
@@ -3949,7 +3968,8 @@
     "examplePolish": "Dzwoni telefon.",
     "exampleEnglish": "The telephone is ringing.",
     "coreIndex": 230,
-    "notes": "(m.) · G. telefonu · pl. telefony"
+    "notes": "(m.) · G. telefonu · pl. telefony",
+    "declension": "Declension · masculine (m.)\n     sg          pl\nN    telefon     telefony\nG    telefonu    telefonów\nD    telefonowi  telefonom\nA    telefon     telefony\nI    telefonem   telefonami\nL    telefonie   telefonach\nV    telefonie   telefony"
   },
   {
     "category": "Health & Body",
@@ -3961,7 +3981,8 @@
     "examplePolish": "Boli mnie prawe oko.",
     "exampleEnglish": "My right eye hurts.",
     "coreIndex": 231,
-    "notes": "(n.) · G. oka · pl. oczy"
+    "notes": "(n.) · G. oka · pl. oczy",
+    "declension": "Declension · neuter (n.)\n     sg     pl\nN    oko    oczy\nG    oka    oczu\nD    oku    oczom\nA    oko    oczy\nI    okiem  oczami\nL    oku    oczach\nV    oko    oczy"
   },
   {
     "category": "Health & Body",
@@ -4018,7 +4039,8 @@
     "examplePolish": "Co to za książka?",
     "exampleEnglish": "What is this book?",
     "coreIndex": 236,
-    "notes": "(f.) · G. książki · pl. książki"
+    "notes": "(f.) · G. książki · pl. książki",
+    "declension": "Declension · feminine (f.)\n     sg       pl\nN    książka  książki\nG    książki  książek\nD    książce  książkom\nA    książkę  książki\nI    książką  książkami\nL    książce  książkach\nV    książko  książki"
   },
   {
     "category": "Work & School",
@@ -4322,7 +4344,8 @@
     "examplePolish": "Niestety Maria nie znalazła kluczy.",
     "exampleEnglish": "Unfortunately Maria didn’t find the keys.",
     "coreIndex": 265,
-    "notes": "(m.) · G. klucza · pl. klucze"
+    "notes": "(m.) · G. klucza · pl. klucze",
+    "declension": "Declension · masculine (m.)\n     sg        pl\nN    klucz     klucze\nG    klucza    kluczy\nD    kluczowi  kluczom\nA    klucz     klucze\nI    kluczem   kluczami\nL    kluczu    kluczach\nV    kluczu    klucze"
   },
   {
     "category": "Travel & Transport",
@@ -4379,7 +4402,8 @@
     "examplePolish": "Jezioro zamarzło dopiero wczoraj, jeszcze nie wolno jeździć na łyżwach!",
     "exampleEnglish": "The lake has frozen only yesterday; you can’t go ice skating yet!",
     "coreIndex": 270,
-    "notes": "(n.) · G. jeziora · pl. jeziora"
+    "notes": "(n.) · G. jeziora · pl. jeziora",
+    "declension": "Declension · neuter (n.)\n     sg        pl\nN    jezioro   jeziora\nG    jeziora   jezior\nD    jezioru   jeziorom\nA    jezioro   jeziora\nI    jeziorem  jeziorami\nL    jeziorze  jeziorach\nV    jezioro   jeziora"
   },
   {
     "category": "Work & School",
@@ -4403,7 +4427,8 @@
     "examplePolish": "Mam komputer.",
     "exampleEnglish": "I have a computer.",
     "coreIndex": 272,
-    "notes": "(m.) · G. komputera · pl. komputery"
+    "notes": "(m.) · G. komputera · pl. komputery",
+    "declension": "Declension · masculine (m.)\n     sg           pl\nN    komputer     komputery\nG    komputera    komputerów\nD    komputerowi  komputerom\nA    komputer     komputery\nI    komputerem   komputerami\nL    komputerze   komputerach\nV    komputerze   komputery"
   },
   {
     "category": "Technology & Media",
@@ -4537,7 +4562,8 @@
     "examplePolish": "Świetliki latają nad polem pszenicy.",
     "exampleEnglish": "The fireflies are flying over the wheat field.",
     "coreIndex": 284,
-    "notes": "(n.) · G. pola · pl. pola"
+    "notes": "(n.) · G. pola · pl. pola",
+    "declension": "Declension · neuter (n.)\n     sg     pl\nN    pole   pola\nG    pola   pól\nD    polu   polom\nA    pole   pola\nI    polem  polami\nL    polu   polach\nV    pole   pola"
   },
   {
     "category": "Nature & Animals",
@@ -4931,7 +4957,8 @@
     "examplePolish": "Dlaczego odchodzisz z pracy?",
     "exampleEnglish": "Why are you leaving your job?",
     "coreIndex": 320,
-    "notes": "(f.) · G. pracy · pl. prace"
+    "notes": "(f.) · G. pracy · pl. prace",
+    "declension": "Declension · feminine (f.)\n     sg     pl\nN    praca  prace\nG    pracy  prac\nD    pracy  pracom\nA    pracę  prace\nI    pracą  pracami\nL    pracy  pracach\nV    praco  prace"
   },
   {
     "category": "Work & School",
@@ -5253,7 +5280,8 @@
     "examplePolish": "On planuje zostać studentem medycyny.",
     "exampleEnglish": "He’s planning to become a medicine student.",
     "coreIndex": 349,
-    "notes": "(m.) · G. studenta · pl. studenci"
+    "notes": "(m.) · G. studenta · pl. studenci",
+    "declension": "Declension · masculine (m.)\n     sg          pl\nN    student     studenci\nG    studenta    studentów\nD    studentowi  studentom\nA    studenta    studentów\nI    studentem   studentami\nL    studencie   studentach\nV    studencie   studenci"
   },
   {
     "category": "Work & School",
@@ -5276,7 +5304,8 @@
     "examplePolish": "Jego córka jest najlepszą uczennicą w szkole.",
     "exampleEnglish": "His daughter is the best student in the school.",
     "coreIndex": 352,
-    "notes": "(f.) · G. szkoły · pl. szkoły"
+    "notes": "(f.) · G. szkoły · pl. szkoły",
+    "declension": "Declension · feminine (f.)\n     sg      pl\nN    szkoła  szkoły\nG    szkoły  szkół\nD    szkole  szkołom\nA    szkołę  szkoły\nI    szkołą  szkołami\nL    szkole  szkołach\nV    szkoło  szkoły"
   },
   {
     "category": "Work & School",
@@ -5288,7 +5317,8 @@
     "examplePolish": "Kupiłem poduszkę na moje szkolne krzesło.",
     "exampleEnglish": "I bought a cushion for my school chair.",
     "coreIndex": 353,
-    "notes": "(n.) · G. krzesła · pl. krzesła"
+    "notes": "(n.) · G. krzesła · pl. krzesła",
+    "declension": "Declension · neuter (n.)\n     sg        pl\nN    krzesło   krzesła\nG    krzesła   krzeseł\nD    krzesłu   krzesłom\nA    krzesło   krzesła\nI    krzesłem  krzesłami\nL    krześle   krzesłach\nV    krzesło   krzesła"
   },
   {
     "category": "Work & School",
@@ -5675,7 +5705,8 @@
     "examplePolish": "Moje mieszkanie ma trzy pokoje.",
     "exampleEnglish": "My apartment has three rooms.",
     "coreIndex": 394,
-    "notes": "(n.) · G. mieszkania · pl. mieszkania"
+    "notes": "(n.) · G. mieszkania · pl. mieszkania",
+    "declension": "Declension · neuter (n.)\n     sg           pl\nN    mieszkanie   mieszkania\nG    mieszkania   mieszkań\nD    mieszkaniu   mieszkaniom\nA    mieszkanie   mieszkania\nI    mieszkaniem  mieszkaniami\nL    mieszkaniu   mieszkaniach\nV    mieszkanie   mieszkania"
   },
   {
     "category": "Home & Daily Life",
@@ -5687,7 +5718,8 @@
     "examplePolish": "Mój dom jest bardzo duży.",
     "exampleEnglish": "My house is very big.",
     "coreIndex": 395,
-    "notes": "(m.) · G. domu · pl. domy"
+    "notes": "(m.) · G. domu · pl. domy",
+    "declension": "Declension · masculine (m.)\n     sg      pl\nN    dom     domy\nG    domu    domów\nD    domowi  domom\nA    dom     domy\nI    domem   domami\nL    domu    domach\nV    domu    domy"
   },
   {
     "category": "Activities & Sports",
@@ -6286,7 +6318,8 @@
     "examplePolish": "Idę do sklepu kupić mleko i jajka.",
     "exampleEnglish": "I’m going to the store to buy some milk and eggs.",
     "coreIndex": 453,
-    "notes": "(m.) · G. sklepu · pl. sklepy"
+    "notes": "(m.) · G. sklepu · pl. sklepy",
+    "declension": "Declension · masculine (m.)\n     sg        pl\nN    sklep     sklepy\nG    sklepu    sklepów\nD    sklepowi  sklepom\nA    sklep     sklepy\nI    sklepem   sklepami\nL    sklepie   sklepach\nV    sklepie   sklepy"
   },
   {
     "category": "Shopping & Money",
@@ -6834,7 +6867,8 @@
     "examplePolish": "Moje nowe łóżko jest niewygodne.",
     "exampleEnglish": "My new bed is not comfortable.",
     "coreIndex": 505,
-    "notes": "(n.) · G. łóżka · pl. łóżka"
+    "notes": "(n.) · G. łóżka · pl. łóżka",
+    "declension": "Declension · neuter (n.)\n     sg       pl\nN    łóżko    łóżka\nG    łóżka    łóżek\nD    łóżku    łóżkom\nA    łóżko    łóżka\nI    łóżkiem  łóżkami\nL    łóżku    łóżkach\nV    łóżko    łóżka"
   },
   {
     "category": "Home & Daily Life",
@@ -7022,7 +7056,8 @@
     "examplePolish": "W każdą niedzielę rano kupujemy chleb, ciasto i ciastka w piekarni.",
     "exampleEnglish": "Every Sunday morning we buy bread, cake, and cookies at the bakery.",
     "coreIndex": 522,
-    "notes": "(m.) · G. chleba · pl. chleby"
+    "notes": "(m.) · G. chleba · pl. chleby",
+    "declension": "Declension · masculine (m.)\n     sg        pl\nN    chleb     chleby\nG    chleba    chlebów\nD    chlebowi  chlebom\nA    chleb     chleby\nI    chlebem   chlebami\nL    chlebie   chlebach\nV    chlebie   chleby"
   },
   {
     "category": "Food & Drink",
@@ -7291,7 +7326,8 @@
     "examplePolish": "Dlaczego patrzysz przez okno?",
     "exampleEnglish": "Why are you looking through the window?",
     "coreIndex": 547,
-    "notes": "(n.) · G. okna · pl. okna"
+    "notes": "(n.) · G. okna · pl. okna",
+    "declension": "Declension · neuter (n.)\n     sg     pl\nN    okno   okna\nG    okna   okien\nD    oknu   oknom\nA    okno   okna\nI    oknem  oknami\nL    oknie  oknach\nV    okno   okna"
   },
   {
     "category": "Food & Drink",
@@ -7548,7 +7584,8 @@
     "examplePolish": "Mała dziewczynka idzie drogą.",
     "exampleEnglish": "The little girl is walking on the road.",
     "coreIndex": 571,
-    "notes": "(f.) · G. drogi · pl. drogi"
+    "notes": "(f.) · G. drogi · pl. drogi",
+    "declension": "Declension · feminine (f.)\n     sg      pl\nN    droga   drogi\nG    drogi   dróg\nD    drodze  drogom\nA    drogę   drogi\nI    drogą   drogami\nL    drodze  drogach\nV    drogo   drogi"
   },
   {
     "category": "Places & Directions",
@@ -7560,7 +7597,8 @@
     "examplePolish": "Ta ulica jest bardzo długa.",
     "exampleEnglish": "This street is very long.",
     "coreIndex": 572,
-    "notes": "(f.) · G. ulicy · pl. ulice"
+    "notes": "(f.) · G. ulicy · pl. ulice",
+    "declension": "Declension · feminine (f.)\n     sg     pl\nN    ulica  ulice\nG    ulicy  ulic\nD    ulicy  ulicom\nA    ulicę  ulice\nI    ulicą  ulicami\nL    ulicy  ulicach\nV    ulico  ulice"
   },
   {
     "category": "Feelings & Qualities",
@@ -7972,7 +8010,8 @@
     "examplePolish": "To jest młode drzewo.",
     "exampleEnglish": "This is a young tree.",
     "coreIndex": 610,
-    "notes": "(n.) · G. drzewa · pl. drzewa"
+    "notes": "(n.) · G. drzewa · pl. drzewa",
+    "declension": "Declension · neuter (n.)\n     sg       pl\nN    drzewo   drzewa\nG    drzewa   drzew\nD    drzewu   drzewom\nA    drzewo   drzewa\nI    drzewem  drzewami\nL    drzewie  drzewach\nV    drzewo   drzewa"
   },
   {
     "category": "Religion & Culture",
@@ -8127,7 +8166,8 @@
     "examplePolish": "Miasto spowija mgła.",
     "exampleEnglish": "The city is covered in fog.",
     "coreIndex": 624,
-    "notes": "(n.) · G. miasta · pl. miasta"
+    "notes": "(n.) · G. miasta · pl. miasta",
+    "declension": "Declension · neuter (n.)\n     sg       pl\nN    miasto   miasta\nG    miasta   miast\nD    miastu   miastom\nA    miasto   miasta\nI    miastem  miastami\nL    mieście  miastach\nV    miasto   miasta"
   },
   {
     "category": "Home & Housing",
@@ -12508,7 +12548,8 @@
     "examplePolish": "słoneczny dzień",
     "exampleEnglish": "sunny day",
     "coreIndex": 1043,
-    "notes": "(m.) · G. dnia · pl. dni"
+    "notes": "(m.) · G. dnia · pl. dni",
+    "declension": "Declension · masculine (m.)\n     sg      pl\nN    dzień   dni\nG    dnia    dni\nD    dniowi  dniom\nA    dzień   dni\nI    dniem   dniami\nL    dniu    dniach\nV    dniu    dni"
   },
   {
     "category": "Time & Calendar",
@@ -13600,7 +13641,8 @@
     "examplePolish": "nocny widok na miasto",
     "exampleEnglish": "nighttime view of the city",
     "coreIndex": 1152,
-    "notes": "(f.) · G. nocy · pl. noce"
+    "notes": "(f.) · G. nocy · pl. noce",
+    "declension": "Declension · feminine (f.)\n     sg    pl\nN    noc   noce\nG    nocy  nocy\nD    nocy  nocom\nA    noc   noce\nI    nocą  nocami\nL    nocy  nocach\nV    nocy  noce"
   },
   {
     "category": "General Core",
@@ -16092,7 +16134,8 @@
     "examplePolish": "drewniany stół",
     "exampleEnglish": "wooden table",
     "coreIndex": 1397,
-    "notes": "(m.) · G. stołu · pl. stoły"
+    "notes": "(m.) · G. stołu · pl. stoły",
+    "declension": "Declension · masculine (m.)\n     sg       pl\nN    stół     stoły\nG    stołu    stołów\nD    stołowi  stołom\nA    stół     stoły\nI    stołem   stołami\nL    stole    stołach\nV    stole    stoły"
   },
   {
     "category": "Work & School",
@@ -17254,7 +17297,8 @@
     "examplePolish": "Nasza córka jest profesorem na uniwersytecie, a nasz syn jest biznesmenem.",
     "exampleEnglish": "Our daughter is a university professor, and our son is a businessman.",
     "coreIndex": 1510,
-    "notes": "(f.) · G. córki · pl. córki"
+    "notes": "(f.) · G. córki · pl. córki",
+    "declension": "Declension · feminine (f.)\n     sg     pl\nN    córka  córki\nG    córki  córek\nD    córce  córkom\nA    córkę  córki\nI    córką  córkami\nL    córce  córkach\nV    córko  córki"
   },
   {
     "category": "General Core",
@@ -17891,7 +17935,8 @@
     "examplePolish": "Chcę kupić dom z ogrodem.",
     "exampleEnglish": "I want to buy a house with a garden.",
     "coreIndex": 1575,
-    "notes": "(m.) · G. ogrodu · pl. ogrody"
+    "notes": "(m.) · G. ogrodu · pl. ogrody",
+    "declension": "Declension · masculine (m.)\n     sg        pl\nN    ogród     ogrody\nG    ogrodu    ogrodów\nD    ogrodowi  ogrodom\nA    ogród     ogrody\nI    ogrodem   ogrodami\nL    ogrodzie  ogrodach\nV    ogrodzie  ogrody"
   },
   {
     "category": "Travel & Transport",
@@ -18157,7 +18202,8 @@
     "examplePolish": "Biorę prysznic rano, a mój mąż wieczorem.",
     "exampleEnglish": "I shower in the morning, and my husband showers at night.",
     "coreIndex": 1607,
-    "notes": "(m.) · G. męża · pl. mężowie"
+    "notes": "(m.) · G. męża · pl. mężowie",
+    "declension": "Declension · masculine (m.)\n     sg      pl\nN    mąż     mężowie\nG    męża    mężów\nD    mężowi  mężom\nA    męża    mężów\nI    mężem   mężami\nL    mężu    mężach\nV    mężu    mężowie"
   },
   {
     "category": "Grammar & Function Words",
@@ -18871,7 +18917,8 @@
     "examplePolish": "Moi koledzy zawsze zwracali się do mojego ojca per “Panie Martin”.",
     "exampleEnglish": "My friends always called my father Mr. Martin.",
     "coreIndex": 1686,
-    "notes": "(m.) · G. pana · pl. panowie"
+    "notes": "(m.) · G. pana · pl. panowie",
+    "declension": "Declension · masculine (m.)\n     sg     pl\nN    pan    panowie\nG    pana   panów\nD    panu   panom\nA    pana   panów\nI    panem  panami\nL    panu   panach\nV    panie  panowie"
   },
   {
     "category": "People & Family",
@@ -20108,7 +20155,8 @@
     "examplePolish": "Ojciec chce syna, ale matka chce córkę.",
     "exampleEnglish": "Father wants a son, but mother wants a daughter.",
     "coreIndex": 1806,
-    "notes": "(m.) · G. syna · pl. synowie"
+    "notes": "(m.) · G. syna · pl. synowie",
+    "declension": "Declension · masculine (m.)\n     sg      pl\nN    syn     synowie\nG    syna    synów\nD    synowi  synom\nA    syna    synów\nI    synem   synami\nL    synu    synach\nV    synu    synowie"
   },
   {
     "category": "Grammar & Function Words",
@@ -21111,7 +21159,8 @@
     "examplePolish": "Ona jest żoną i matką.",
     "exampleEnglish": "She is a wife and a mother.",
     "coreIndex": 1911,
-    "notes": "(f.) · G. żony · pl. żony"
+    "notes": "(f.) · G. żony · pl. żony",
+    "declension": "Declension · feminine (f.)\n     sg     pl\nN    żona   żony\nG    żony   żon\nD    żonie  żonom\nA    żonę   żony\nI    żoną   żonami\nL    żonie  żonach\nV    żono   żony"
   },
   {
     "category": "General Core",
@@ -21211,7 +21260,8 @@
     "examplePolish": "Powiem słowo, a ty powtórzysz je po angielsku.",
     "exampleEnglish": "I will say a word, and you will repeat it in English.",
     "coreIndex": 1920,
-    "notes": "(n.) · G. słowa · pl. słowa"
+    "notes": "(n.) · G. słowa · pl. słowa",
+    "declension": "Declension · neuter (n.)\n     sg      pl\nN    słowo   słowa\nG    słowa   słów\nD    słowu   słowom\nA    słowo   słowa\nI    słowem  słowami\nL    słowie  słowach\nV    słowo   słowa"
   },
   {
     "category": "General Core",
@@ -21476,7 +21526,8 @@
     "examplePolish": "Jak ma pani na imię?",
     "exampleEnglish": "What’s your name, ma’am?",
     "coreIndex": 1949,
-    "notes": "(n.) · G. imienia · pl. imiona"
+    "notes": "(n.) · G. imienia · pl. imiona",
+    "declension": "Declension · neuter (n.)\n     sg        pl\nN    imię      imiona\nG    imienia   imion\nD    imieniu   imionom\nA    imię      imiona\nI    imieniem  imionami\nL    imieniu   imionach\nV    imię      imiona"
   },
   {
     "category": "Technology & Media",
@@ -23512,7 +23563,8 @@
     "polish": "przyjaciel",
     "english": "friend",
     "phonetic": "",
-    "notes": "(m.) · G. przyjaciela · pl. przyjaciele"
+    "notes": "(m.) · G. przyjaciela · pl. przyjaciele",
+    "declension": "Declension · masculine (m.)\n     sg             pl\nN    przyjaciel     przyjaciele\nG    przyjaciela    przyjaciół\nD    przyjacielowi  przyjaciołom\nA    przyjaciela    przyjaciół\nI    przyjacielem   przyjaciółmi\nL    przyjacielu    przyjaciołach\nV    przyjacielu    przyjaciele"
   },
   {
     "category": "Home & Daily Life",
@@ -24703,7 +24755,8 @@
     "polish": "śniadanie",
     "english": "breakfast",
     "phonetic": "",
-    "notes": "(n.) · G. śniadania · pl. śniadania"
+    "notes": "(n.) · G. śniadania · pl. śniadania",
+    "declension": "Declension · neuter (n.)\n     sg          pl\nN    śniadanie   śniadania\nG    śniadania   śniadań\nD    śniadaniu   śniadaniom\nA    śniadanie   śniadania\nI    śniadaniem  śniadaniami\nL    śniadaniu   śniadaniach\nV    śniadanie   śniadania"
   },
   {
     "category": "Home & Daily Life",
@@ -27495,7 +27548,8 @@
     "polish": "matka",
     "english": "mother",
     "phonetic": "",
-    "notes": "(f.) · G. matki · pl. matki"
+    "notes": "(f.) · G. matki · pl. matki",
+    "declension": "Declension · feminine (f.)\n     sg     pl\nN    matka  matki\nG    matki  matek\nD    matce  matkom\nA    matkę  matki\nI    matką  matkami\nL    matce  matkach\nV    matko  matki"
   },
   {
     "category": "Feelings & Qualities",
@@ -29595,7 +29649,8 @@
     "polish": "rodzina",
     "english": "family",
     "phonetic": "",
-    "notes": "(f.) · G. rodziny · pl. rodziny"
+    "notes": "(f.) · G. rodziny · pl. rodziny",
+    "declension": "Declension · feminine (f.)\n     sg        pl\nN    rodzina   rodziny\nG    rodziny   rodzin\nD    rodzinie  rodzinom\nA    rodzinę   rodziny\nI    rodziną   rodzinami\nL    rodzinie  rodzinach\nV    rodzino   rodziny"
   },
   {
     "category": "Places & Directions",
@@ -29628,7 +29683,8 @@
     "polish": "ojciec",
     "english": "father",
     "phonetic": "",
-    "notes": "(m.) · G. ojca · pl. ojcowie"
+    "notes": "(m.) · G. ojca · pl. ojcowie",
+    "declension": "Declension · masculine (m.)\n     sg      pl\nN    ojciec  ojcowie\nG    ojca    ojców\nD    ojcu    ojcom\nA    ojca    ojców\nI    ojcem   ojcami\nL    ojcu    ojcach\nV    ojcze   ojcowie"
   },
   {
     "category": "Greetings & Essentials",
@@ -29661,7 +29717,8 @@
     "polish": "ser",
     "english": "cheese",
     "phonetic": "",
-    "notes": "(m.) · G. sera · pl. sery"
+    "notes": "(m.) · G. sera · pl. sery",
+    "declension": "Declension · masculine (m.)\n     sg      pl\nN    ser     sery\nG    sera    serów\nD    serowi  serom\nA    ser     sery\nI    serem   serami\nL    serze   serach\nV    serze   sery"
   },
   {
     "category": "People & Family",
@@ -29677,7 +29734,8 @@
     "level": "A1",
     "polish": "kraj",
     "english": "country",
-    "phonetic": ""
+    "phonetic": "",
+    "declension": "Declension · masculine (m.)\n     sg       pl\nN    kraj     kraje\nG    kraju    krajów\nD    krajowi  krajom\nA    kraj     kraje\nI    krajem   krajami\nL    kraju    krajach\nV    kraju    kraje"
   },
   {
     "category": "Shopping & Money",
@@ -29703,7 +29761,8 @@
     "polish": "noga",
     "english": "leg",
     "phonetic": "",
-    "notes": "(f.) · G. nogi · pl. nogi"
+    "notes": "(f.) · G. nogi · pl. nogi",
+    "declension": "Declension · feminine (f.)\n     sg     pl\nN    noga   nogi\nG    nogi   nóg\nD    nodze  nogom\nA    nogę   nogi\nI    nogą   nogami\nL    nodze  nogach\nV    nogo   nogi"
   },
   {
     "category": "Greetings & Essentials",
@@ -29728,7 +29787,8 @@
     "polish": "brat",
     "english": "brother",
     "phonetic": "",
-    "notes": "(m.) · G. brata · pl. bracia"
+    "notes": "(m.) · G. brata · pl. bracia",
+    "declension": "Declension · masculine (m.)\n     sg      pl\nN    brat    bracia\nG    brata   braci\nD    bratu   braciom\nA    brata   braci\nI    bratem  braćmi\nL    bracie  braciach\nV    bracie  bracia"
   },
   {
     "category": "Weather & Nature",
@@ -29745,7 +29805,8 @@
     "polish": "siostra",
     "english": "sister",
     "phonetic": "",
-    "notes": "(f.) · G. siostry · pl. siostry"
+    "notes": "(f.) · G. siostry · pl. siostry",
+    "declension": "Declension · feminine (f.)\n     sg        pl\nN    siostra   siostry\nG    siostry   sióstr\nD    siostrze  siostrom\nA    siostrę   siostry\nI    siostrą   siostrami\nL    siostrze  siostrach\nV    siostro   siostry"
   },
   {
     "category": "Health & Body",
@@ -29754,7 +29815,8 @@
     "polish": "serce",
     "english": "heart",
     "phonetic": "",
-    "notes": "(n.) · G. serca · pl. serca"
+    "notes": "(n.) · G. serca · pl. serca",
+    "declension": "Declension · neuter (n.)\n     sg      pl\nN    serce   serca\nG    serca   serc\nD    sercu   sercom\nA    serce   serca\nI    sercem  sercami\nL    sercu   sercach\nV    serce   serca"
   },
   {
     "category": "Time & Calendar",
@@ -30143,7 +30205,8 @@
     "polish": "morze",
     "english": "sea",
     "phonetic": "",
-    "notes": "(n.) · G. morza · pl. morza"
+    "notes": "(n.) · G. morza · pl. morza",
+    "declension": "Declension · neuter (n.)\n     sg      pl\nN    morze   morza\nG    morza   mórz\nD    morzu   morzom\nA    morze   morza\nI    morzem  morzami\nL    morzu   morzach\nV    morze   morza"
   },
   {
     "category": "People & Family",
