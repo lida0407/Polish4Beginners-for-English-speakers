@@ -1,8 +1,8 @@
 {
-  "versionCode": 25,
-  "versionName": "1.24",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/a1a8b3518be7199588f06ceea04f1425565c985f/docs/P4B.apk",
-  "apkSha256": "97c78896c976c37580a575fa3f255f29a40eddd0522fa73ae2ca5b5f73cf621c",
-  "apkSizeBytes": 67530242,
-  "releaseNotes": "Organize your own words into named lists (e.g. ZUS, food) and study each list on its own."
+  "versionCode": 26,
+  "versionName": "1.25",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/acb71be52a19213cd2bf8a9e6f2d6b108d9d1d28/docs/P4B.apk",
+  "apkSha256": "9595a008d623b61ae26d4276f90a3ba9c478d916f724a076867b4431b804a971",
+  "apkSizeBytes": 67534916,
+  "releaseNotes": "Common nouns now show a full case declension table (all 7 cases, singular and plural) on the card back."
 }
