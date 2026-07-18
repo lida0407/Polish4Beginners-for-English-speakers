@@ -1,8 +1,8 @@
 {
-  "dataVersion": 10,
+  "dataVersion": 11,
   "phraseCount": 3170,
   "phrasesUrl": "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/phrases.json?ref=main",
-  "phrasesSha256": "38efcd7018c5621d1246aae876d4fc198cc03c0b47d61a0392e719336812fe4d",
-  "phrasesSizeBytes": 925131,
-  "releaseNotes": "Adds full case declension tables (all 7 cases, singular + plural) to 63 common noun cards."
+  "phrasesSha256": "c330b05839bb2c81f46f2ffbf614d8b4a75854b51e79c594e07b5065dab48496",
+  "phrasesSizeBytes": 933186,
+  "releaseNotes": "Extends full case declension tables to 98 common noun cards (100 nouns)."
 }

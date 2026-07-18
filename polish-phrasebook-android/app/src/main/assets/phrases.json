@@ -1869,7 +1869,8 @@
     "examplePolish": "Za minutę północ.",
     "exampleEnglish": "It’s one minute to midnight.",
     "coreIndex": 27,
-    "notes": "(f.) · G. minuty · pl. minuty"
+    "notes": "(f.) · G. minuty · pl. minuty",
+    "declension": "Declension · feminine (f.)\n     sg       pl\nN    minuta   minuty\nG    minuty   minut\nD    minucie  minutom\nA    minutę   minuty\nI    minutą   minutami\nL    minucie  minutach\nV    minuto   minuty"
   },
   {
     "category": "Time & Calendar",
@@ -2110,7 +2111,8 @@
     "examplePolish": "Japończycy jedzą dużo ryb.",
     "exampleEnglish": "Japanese people eat a lot of fish.",
     "coreIndex": 51,
-    "notes": "(f.) · G. ryby · pl. ryby"
+    "notes": "(f.) · G. ryby · pl. ryby",
+    "declension": "Declension · feminine (f.)\n     sg     pl\nN    ryba   ryby\nG    ryby   ryb\nD    rybie  rybom\nA    rybę   ryby\nI    rybą   rybami\nL    rybie  rybach\nV    rybo   ryby"
   },
   {
     "category": "Food & Drink",
@@ -4063,7 +4065,8 @@
     "examplePolish": "Przepraszam, gdzie jest najbliższa poczta?",
     "exampleEnglish": "Excuse me, where is the closest post office?",
     "coreIndex": 238,
-    "notes": "(f.) · G. poczty · pl. poczty"
+    "notes": "(f.) · G. poczty · pl. poczty",
+    "declension": "Declension · feminine (f.)\n     sg       pl\nN    poczta   poczty\nG    poczty   poczt\nD    poczcie  pocztom\nA    pocztę   poczty\nI    pocztą   pocztami\nL    poczcie  pocztach\nV    poczto   poczty"
   },
   {
     "category": "Work & School",
@@ -4175,7 +4178,8 @@
     "examplePolish": "Dziewczyna myje twarz.",
     "exampleEnglish": "The girl is washing her face.",
     "coreIndex": 249,
-    "notes": "(f.) · G. twarzy · pl. twarze"
+    "notes": "(f.) · G. twarzy · pl. twarze",
+    "declension": "Declension · feminine (f.)\n     sg      pl\nN    twarz   twarze\nG    twarzy  twarzy\nD    twarzy  twarzom\nA    twarz   twarze\nI    twarzą  twarzami\nL    twarzy  twarzach\nV    twarzy  twarze"
   },
   {
     "category": "Health & Body",
@@ -4368,7 +4372,8 @@
     "examplePolish": "Burza rozświetla ciemny las.",
     "exampleEnglish": "The thunderstorm is lighting up the dark forest.",
     "coreIndex": 267,
-    "notes": "(m.) · G. lasu · pl. lasy"
+    "notes": "(m.) · G. lasu · pl. lasy",
+    "declension": "Declension · masculine (m.)\n     sg      pl\nN    las     lasy\nG    lasu    lasów\nD    lasowi  lasom\nA    las     lasy\nI    lasem   lasami\nL    lesie   lasach\nV    lesie   lasy"
   },
   {
     "category": "Nature & Animals",
@@ -4379,7 +4384,8 @@
     "phonetic": "",
     "examplePolish": "On mieszka w przepięknej dolinie nad rzeką.",
     "exampleEnglish": "He lives in a beautiful valley near the river.",
-    "coreIndex": 268
+    "coreIndex": 268,
+    "declension": "Declension · feminine (f.)\n     sg     pl\nN    rzeka  rzeki\nG    rzeki  rzek\nD    rzece  rzekom\nA    rzekę  rzeki\nI    rzeką  rzekami\nL    rzece  rzekach\nV    rzeko  rzeki"
   },
   {
     "category": "Nature & Animals",
@@ -4619,7 +4625,8 @@
     "examplePolish": "Jutro masz spotkanie biznesowe.",
     "exampleEnglish": "Tomorrow you have a business meeting.",
     "coreIndex": 289,
-    "notes": "(n.) · G. spotkania · pl. spotkania"
+    "notes": "(n.) · G. spotkania · pl. spotkania",
+    "declension": "Declension · neuter (n.)\n     sg          pl\nN    spotkanie   spotkania\nG    spotkania   spotkań\nD    spotkaniu   spotkaniom\nA    spotkanie   spotkania\nI    spotkaniem  spotkaniami\nL    spotkaniu   spotkaniach\nV    spotkanie   spotkania"
   },
   {
     "category": "Travel & Transport",
@@ -4642,7 +4649,8 @@
     "examplePolish": "Ta apteka jest droga.",
     "exampleEnglish": "This pharmacy is expensive.",
     "coreIndex": 291,
-    "notes": "(f.) · G. apteki · pl. apteki"
+    "notes": "(f.) · G. apteki · pl. apteki",
+    "declension": "Declension · feminine (f.)\n     sg      pl\nN    apteka  apteki\nG    apteki  aptek\nD    aptece  aptekom\nA    aptekę  apteki\nI    apteką  aptekami\nL    aptece  aptekach\nV    apteko  apteki"
   },
   {
     "category": "Food & Drink",
@@ -4821,7 +4829,8 @@
     "examplePolish": "To jest gazeta.",
     "exampleEnglish": "This is a newspaper.",
     "coreIndex": 307,
-    "notes": "(f.) · G. gazety · pl. gazety"
+    "notes": "(f.) · G. gazety · pl. gazety",
+    "declension": "Declension · feminine (f.)\n     sg       pl\nN    gazeta   gazety\nG    gazety   gazet\nD    gazecie  gazetom\nA    gazetę   gazety\nI    gazetą   gazetami\nL    gazecie  gazetach\nV    gazeto   gazety"
   },
   {
     "category": "Technology & Media",
@@ -5037,7 +5046,8 @@
     "examplePolish": "Można prosić o rachunek?",
     "exampleEnglish": "May I have the bill, please?",
     "coreIndex": 327,
-    "notes": "(m.) · G. rachunku · pl. rachunki"
+    "notes": "(m.) · G. rachunku · pl. rachunki",
+    "declension": "Declension · masculine (m.)\n     sg          pl\nN    rachunek    rachunki\nG    rachunku    rachunków\nD    rachunkowi  rachunkom\nA    rachunek    rachunki\nI    rachunkiem  rachunkami\nL    rachunku    rachunkach\nV    rachunku    rachunki"
   },
   {
     "category": "Technology & Media",
@@ -6676,7 +6686,8 @@
     "examplePolish": "Ta mapa jest nieaktualna.",
     "exampleEnglish": "This map is out of date.",
     "coreIndex": 486,
-    "notes": "(f.) · G. mapy · pl. mapy"
+    "notes": "(f.) · G. mapy · pl. mapy",
+    "declension": "Declension · feminine (f.)\n     sg     pl\nN    mapa   mapy\nG    mapy   map\nD    mapie  mapom\nA    mapę   mapy\nI    mapą   mapami\nL    mapie  mapach\nV    mapo   mapy"
   },
   {
     "category": "Places & Directions",
@@ -6844,7 +6855,8 @@
     "examplePolish": "Piję sok pomarańczowy do śniadania, a jabłkowy do lunchu.",
     "exampleEnglish": "I drink orange juice with breakfast and apple juice with lunch.",
     "coreIndex": 503,
-    "notes": "(m.) · G. soku · pl. soki"
+    "notes": "(m.) · G. soku · pl. soki",
+    "declension": "Declension · masculine (m.)\n     sg      pl\nN    sok     soki\nG    soku    soków\nD    sokowi  sokom\nA    sok     soki\nI    sokiem  sokami\nL    soku    sokach\nV    soku    soki"
   },
   {
     "category": "Home & Daily Life",
@@ -7069,7 +7081,8 @@
     "examplePolish": "Kucharz smaży jajko.",
     "exampleEnglish": "The cook is frying an egg.",
     "coreIndex": 523,
-    "notes": "(n.) · G. jajka · pl. jajka"
+    "notes": "(n.) · G. jajka · pl. jajka",
+    "declension": "Declension · neuter (n.)\n     sg       pl\nN    jajko    jajka\nG    jajka    jajek\nD    jajku    jajkom\nA    jajko    jajka\nI    jajkiem  jajkami\nL    jajku    jajkach\nV    jajko    jajka"
   },
   {
     "category": "Food & Drink",
@@ -7776,7 +7789,8 @@
     "examplePolish": "Para spaceruje w parku.",
     "exampleEnglish": "The couple is walking in the park.",
     "coreIndex": 588,
-    "notes": "(m.) · G. parku · pl. parki"
+    "notes": "(m.) · G. parku · pl. parki",
+    "declension": "Declension · masculine (m.)\n     sg       pl\nN    park     parki\nG    parku    parków\nD    parkowi  parkom\nA    park     parki\nI    parkiem  parkami\nL    parku    parkach\nV    parku    parki"
   },
   {
     "category": "Travel & Transport",
@@ -7921,7 +7935,8 @@
     "examplePolish": "Kobiety jedzą w restauracji.",
     "exampleEnglish": "The women are eating out at a restaurant.",
     "coreIndex": 601,
-    "notes": "(f.) · G. restauracji · pl. restauracje"
+    "notes": "(f.) · G. restauracji · pl. restauracje",
+    "declension": "Declension · feminine (f.)\n     sg           pl\nN    restauracja  restauracje\nG    restauracji  restauracji\nD    restauracji  restauracjom\nA    restaurację  restauracje\nI    restauracją  restauracjami\nL    restauracji  restauracjach\nV    restauracjo  restauracje"
   },
   {
     "category": "Food & Drink",
@@ -8400,7 +8415,8 @@
     "examplePolish": "Bagażowy zaniósł nasze torby do pokoju.",
     "exampleEnglish": "A porter carried our bags to our room.",
     "coreIndex": 645,
-    "notes": "(m.) · G. pokoju · pl. pokoje"
+    "notes": "(m.) · G. pokoju · pl. pokoje",
+    "declension": "Declension · masculine (m.)\n     sg        pl\nN    pokój     pokoje\nG    pokoju    pokoi\nD    pokojowi  pokojom\nA    pokój     pokoje\nI    pokojem   pokojami\nL    pokoju    pokojach\nV    pokoju    pokoje"
   },
   {
     "category": "Health & Body",
@@ -8578,7 +8594,8 @@
     "examplePolish": "Chłopiec zrywa żółte kwiaty.",
     "exampleEnglish": "The boy is picking yellow flowers.",
     "coreIndex": 662,
-    "notes": "(m.) · G. kwiatu · pl. kwiaty"
+    "notes": "(m.) · G. kwiatu · pl. kwiaty",
+    "declension": "Declension · masculine (m.)\n     sg        pl\nN    kwiat     kwiaty\nG    kwiatu    kwiatów\nD    kwiatowi  kwiatom\nA    kwiat     kwiaty\nI    kwiatem   kwiatami\nL    kwiecie   kwiatach\nV    kwiecie   kwiaty"
   },
   {
     "category": "Weather & Nature",
@@ -9451,7 +9468,8 @@
     "examplePolish": "W hotelu było sześćset pokoi, restauracja i basen.",
     "exampleEnglish": "The hotel had 600 rooms, a restaurant, and a swimming pool.",
     "coreIndex": 743,
-    "notes": "(m.) · G. hotelu · pl. hotele"
+    "notes": "(m.) · G. hotelu · pl. hotele",
+    "declension": "Declension · masculine (m.)\n     sg        pl\nN    hotel     hotele\nG    hotelu    hoteli\nD    hotelowi  hotelom\nA    hotel     hotele\nI    hotelem   hotelami\nL    hotelu    hotelach\nV    hotelu    hotele"
   },
   {
     "category": "Work & School",
@@ -10574,7 +10592,8 @@
     "examplePolish": "Stewardesa poprosiła pasażerkę o zajęcie miejsca.",
     "exampleEnglish": "The flight attendant asked the passenger to take her seat.",
     "coreIndex": 847,
-    "notes": "(n.) · G. miejsca · pl. miejsca"
+    "notes": "(n.) · G. miejsca · pl. miejsca",
+    "declension": "Declension · neuter (n.)\n     sg        pl\nN    miejsce   miejsca\nG    miejsca   miejsc\nD    miejscu   miejscom\nA    miejsce   miejsca\nI    miejscem  miejscami\nL    miejscu   miejscach\nV    miejsce   miejsca"
   },
   {
     "category": "General Core",
@@ -11201,7 +11220,8 @@
     "examplePolish": "paszport i bilet",
     "exampleEnglish": "passport and ticket",
     "coreIndex": 908,
-    "notes": "(m.) · G. biletu · pl. bilety"
+    "notes": "(m.) · G. biletu · pl. bilety",
+    "declension": "Declension · masculine (m.)\n     sg        pl\nN    bilet     bilety\nG    biletu    biletów\nD    biletowi  biletom\nA    bilet     bilety\nI    biletem   biletami\nL    bilecie   biletach\nV    bilecie   bilety"
   },
   {
     "category": "General Core",
@@ -13730,7 +13750,8 @@
     "phonetic": "",
     "examplePolish": "Lato to pora rodzinnych wakacji i ładnej pogody.",
     "exampleEnglish": "Summer is the time of family vacations and warm weather.",
-    "coreIndex": 1161
+    "coreIndex": 1161,
+    "declension": "Declension · neuter (n.)\n     sg     pl\nN    lato   lata\nG    lata   lat\nD    latu   latom\nA    lato   lata\nI    latem  latami\nL    lecie  latach\nV    lato   lata"
   },
   {
     "category": "General Core",
@@ -14770,7 +14791,8 @@
     "examplePolish": "Obfity obiad sprawi, że będziesz śpiący po południu.",
     "exampleEnglish": "A big lunch will make you sleepy in the afternoon.",
     "coreIndex": 1265,
-    "notes": "(m.) · G. obiadu · pl. obiady"
+    "notes": "(m.) · G. obiadu · pl. obiady",
+    "declension": "Declension · masculine (m.)\n     sg        pl\nN    obiad     obiady\nG    obiadu    obiadów\nD    obiadowi  obiadom\nA    obiad     obiady\nI    obiadem   obiadami\nL    obiedzie  obiadach\nV    obiedzie  obiady"
   },
   {
     "category": "Food & Drink",
@@ -16612,7 +16634,8 @@
     "examplePolish": "Przed mostem przepłynęliśmy rzekę łodzią.",
     "exampleEnglish": "Before the bridge, we crossed the river by boat.",
     "coreIndex": 1446,
-    "notes": "(m.) · G. mostu · pl. mosty"
+    "notes": "(m.) · G. mostu · pl. mosty",
+    "declension": "Declension · masculine (m.)\n     sg       pl\nN    most     mosty\nG    mostu    mostów\nD    mostowi  mostom\nA    most     mosty\nI    mostem   mostami\nL    moście   mostach\nV    moście   mosty"
   },
   {
     "category": "Measurements & Units",
@@ -16977,7 +17000,8 @@
     "examplePolish": "Biorę lekcje niemieckiego i matematyki.",
     "exampleEnglish": "I’m taking a class in German and one in mathematics.",
     "coreIndex": 1481,
-    "notes": "(f.) · G. lekcji · pl. lekcje"
+    "notes": "(f.) · G. lekcji · pl. lekcje",
+    "declension": "Declension · feminine (f.)\n     sg      pl\nN    lekcja  lekcje\nG    lekcji  lekcji\nD    lekcji  lekcjom\nA    lekcję  lekcje\nI    lekcją  lekcjami\nL    lekcji  lekcjach\nV    lekcjo  lekcje"
   },
   {
     "category": "General Core",
@@ -18424,7 +18448,8 @@
     "phonetic": "",
     "examplePolish": "Włącz lampę, gdy w pokoju zacznie się robić ciemno.",
     "exampleEnglish": "Turn on the lamp when it starts to get dark in the room.",
-    "coreIndex": 1633
+    "coreIndex": 1633,
+    "declension": "Declension · feminine (f.)\n     sg      pl\nN    lampa   lampy\nG    lampy   lamp\nD    lampie  lampom\nA    lampę   lampy\nI    lampą   lampami\nL    lampie  lampach\nV    lampo   lampy"
   },
   {
     "category": "General Core",
@@ -18974,7 +18999,8 @@
     "examplePolish": "uprzejmy sąsiad",
     "exampleEnglish": "polite neighbor",
     "coreIndex": 1691,
-    "notes": "(m.) · G. sąsiada · pl. sąsiedzi"
+    "notes": "(m.) · G. sąsiada · pl. sąsiedzi",
+    "declension": "Declension · masculine (m.)\n     sg         pl\nN    sąsiad     sąsiedzi\nG    sąsiada    sąsiadów\nD    sąsiadowi  sąsiadom\nA    sąsiada    sąsiadów\nI    sąsiadem   sąsiadami\nL    sąsiedzie  sąsiadach\nV    sąsiedzie  sąsiedzi"
   },
   {
     "category": "General Core",
@@ -19570,7 +19596,8 @@
     "examplePolish": "zastanawiać się nad pytaniem",
     "exampleEnglish": "think about the question",
     "coreIndex": 1748,
-    "notes": "(n.) · G. pytania · pl. pytania"
+    "notes": "(n.) · G. pytania · pl. pytania",
+    "declension": "Declension · neuter (n.)\n     sg        pl\nN    pytanie   pytania\nG    pytania   pytań\nD    pytaniu   pytaniom\nA    pytanie   pytania\nI    pytaniem  pytaniami\nL    pytaniu   pytaniach\nV    pytanie   pytania"
   },
   {
     "category": "General Core",
@@ -20000,7 +20027,8 @@
     "examplePolish": "Przetłumacz następujące zdanie.",
     "exampleEnglish": "Translate the following sentence.",
     "coreIndex": 1791,
-    "notes": "(n.) · G. zdania · pl. zdania"
+    "notes": "(n.) · G. zdania · pl. zdania",
+    "declension": "Declension · neuter (n.)\n     sg       pl\nN    zdanie   zdania\nG    zdania   zdań\nD    zdaniu   zdaniom\nA    zdanie   zdania\nI    zdaniem  zdaniami\nL    zdaniu   zdaniach\nV    zdanie   zdania"
   },
   {
     "category": "Places & Directions",
@@ -24007,7 +24035,8 @@
     "polish": "zupa",
     "english": "soup",
     "phonetic": "",
-    "notes": "(f.) · G. zupy · pl. zupy"
+    "notes": "(f.) · G. zupy · pl. zupy",
+    "declension": "Declension · feminine (f.)\n     sg     pl\nN    zupa   zupy\nG    zupy   zup\nD    zupie  zupom\nA    zupę   zupy\nI    zupą   zupami\nL    zupie  zupach\nV    zupo   zupy"
   },
   {
     "category": "Food & Drink",
@@ -24737,7 +24766,8 @@
     "polish": "rzecz",
     "english": "thing",
     "phonetic": "",
-    "notes": "(f.) · G. rzeczy · pl. rzeczy"
+    "notes": "(f.) · G. rzeczy · pl. rzeczy",
+    "declension": "Declension · feminine (f.)\n     sg      pl\nN    rzecz   rzeczy\nG    rzeczy  rzeczy\nD    rzeczy  rzeczom\nA    rzecz   rzeczy\nI    rzeczą  rzeczami\nL    rzeczy  rzeczach\nV    rzeczy  rzeczy"
   },
   {
     "category": "Home & Daily Life",
@@ -25139,7 +25169,8 @@
     "polish": "człowiek",
     "english": "human being, person",
     "phonetic": "",
-    "notes": "(m.) · G. człowieka · pl. ludzie"
+    "notes": "(m.) · G. człowieka · pl. ludzie",
+    "declension": "Declension · masculine (m.)\n     sg           pl\nN    człowiek     ludzie\nG    człowieka    ludzi\nD    człowiekowi  ludziom\nA    człowieka    ludzi\nI    człowiekiem  ludźmi\nL    człowieku    ludziach\nV    człowieku    ludzie"
   },
   {
     "category": "Time & Calendar",
@@ -25363,7 +25394,8 @@
     "polish": "chwila",
     "english": "moment",
     "phonetic": "",
-    "notes": "(f.) · G. chwili · pl. chwile"
+    "notes": "(f.) · G. chwili · pl. chwile",
+    "declension": "Declension · feminine (f.)\n     sg      pl\nN    chwila  chwile\nG    chwili  chwil\nD    chwili  chwilom\nA    chwilę  chwile\nI    chwilą  chwilami\nL    chwili  chwilach\nV    chwilo  chwile"
   },
   {
     "category": "People & Family",
@@ -29833,7 +29865,8 @@
     "polish": "stacja",
     "english": "station",
     "phonetic": "",
-    "notes": "(f.) · G. stacji · pl. stacje"
+    "notes": "(f.) · G. stacji · pl. stacje",
+    "declension": "Declension · feminine (f.)\n     sg      pl\nN    stacja  stacje\nG    stacji  stacji\nD    stacji  stacjom\nA    stację  stacje\nI    stacją  stacjami\nL    stacji  stacjach\nV    stacjo  stacje"
   },
   {
     "category": "Places & Directions",
@@ -30455,7 +30488,8 @@
     "polish": "gość",
     "english": "guest",
     "phonetic": "",
-    "notes": "(m.) · G. gościa · pl. goście"
+    "notes": "(m.) · G. gościa · pl. goście",
+    "declension": "Declension · masculine (m.)\n     sg        pl\nN    gość      goście\nG    gościa    gości\nD    gościowi  gościom\nA    gościa    gości\nI    gościem   gośćmi\nL    gościu    gościach\nV    gościu    goście"
   },
   {
     "category": "Administration & Services",
@@ -30488,7 +30522,8 @@
     "polish": "zwierzę",
     "english": "animal",
     "phonetic": "",
-    "notes": "(n.) · G. zwierzęcia · pl. zwierzęta"
+    "notes": "(n.) · G. zwierzęcia · pl. zwierzęta",
+    "declension": "Declension · neuter (n.)\n     sg           pl\nN    zwierzę      zwierzęta\nG    zwierzęcia   zwierząt\nD    zwierzęciu   zwierzętom\nA    zwierzę      zwierzęta\nI    zwierzęciem  zwierzętami\nL    zwierzęciu   zwierzętach\nV    zwierzę      zwierzęta"
   },
   {
     "category": "Administration & Services",
