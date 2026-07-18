@@ -1,8 +1,8 @@
 {
-  "versionCode": 26,
-  "versionName": "1.25",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/acb71be52a19213cd2bf8a9e6f2d6b108d9d1d28/docs/P4B.apk",
-  "apkSha256": "9595a008d623b61ae26d4276f90a3ba9c478d916f724a076867b4431b804a971",
-  "apkSizeBytes": 67534916,
-  "releaseNotes": "Common nouns now show a full case declension table (all 7 cases, singular and plural) on the card back."
+  "versionCode": 27,
+  "versionName": "1.26",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/77558d8300d34219d97e7d7b2c622369c8529ddf/docs/P4B.apk",
+  "apkSha256": "62aa511721de21a4a0ceb1cddd7bef933738bf049b23cb3f3126f743badb89d1",
+  "apkSizeBytes": 67537250,
+  "releaseNotes": "Star your favourite words while studying and review them as their own flashcard set from the home screen."
 }
