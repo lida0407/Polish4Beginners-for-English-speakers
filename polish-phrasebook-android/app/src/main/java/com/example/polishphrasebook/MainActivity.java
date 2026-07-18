@@ -118,6 +118,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final int SESSION_SIZE = 10;
     private static final int NEWS_PREFETCH_AHEAD = 5;
     private static final String CUSTOM_CARDS = "customCards";
+    private static final String FAVOURITES = "favourites";
     private static final String MY_WORDS_CATEGORY = "My Words";
     private static final int REQ_SAVE_TEMPLATE = 2001;
     private static final int REQ_OPEN_LIST = 2002;
@@ -132,6 +133,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private final List<AlphabetItem> alphabet = new ArrayList<>();
     private final List<NewsItem> newsItems = new ArrayList<>();
     private final Map<String, CardMemory> memory = new HashMap<>();
+    private final java.util.Set<String> favourites = new java.util.HashSet<>();
     private final List<Phrase> sessionDeck = new ArrayList<>();
     private final List<Boolean> sessionEnglishFront = new ArrayList<>();
     private final Map<String, Theme> themes = new LinkedHashMap<>();
@@ -201,6 +203,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         loadGrammarLessons();
         loadAlphabet();
         loadMemory();
+        loadFavourites();
         registerUpdateDownloadReceiver();
         textToSpeech = new TextToSpeech(this, this);
         render();
@@ -342,6 +345,15 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         content.addView(levelSelector());
         addGap(content, 16);
         content.addView(statsStrip());
+        int favs = favouriteCount();
+        if (favs > 0) {
+            addGap(content, 12);
+            Button favBtn = flatButton("★  " + t("Favourites", "Ulubione") + "                                  " + favs + t(" cards →", " kart →"), th.accent, th.onAccent, th.accent, 14, 48);
+            favBtn.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
+            favBtn.setPadding(dp(14), 0, dp(14), 0);
+            favBtn.setOnClickListener(v -> startFavouritesSession());
+            content.addView(favBtn, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(48)));
+        }
         Map<String, Integer> tagCounts = customTagCounts();
         if (!tagCounts.isEmpty()) {
             addGap(content, 14);
@@ -525,6 +537,14 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         LinearLayout meta = row();
         meta.setGravity(Gravity.CENTER_VERTICAL);
         meta.addView(label(card.level + " · " + card.category, th.accent2, 10.5f, 0.12f), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        boolean fav = isFavourite(card);
+        TextView star = uiText(fav ? "★" : "☆", 20, fav ? th.accent : th.ghost, sansBold);
+        star.setPadding(dp(8), 0, dp(8), 0);
+        star.setOnClickListener(v -> {
+            toggleFavourite(card);
+            render();
+        });
+        meta.addView(star);
         meta.addView(uiText("Nr " + (sessionIndex + 1), 10.5f, th.ghost, sansBold));
         face.addView(meta, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
@@ -2754,6 +2774,55 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     private String lastTag() {
         return getSharedPreferences(PREFS, MODE_PRIVATE).getString("lastTag", MY_WORDS_CATEGORY);
+    }
+
+    private void loadFavourites() {
+        favourites.clear();
+        String raw = getSharedPreferences(PREFS, MODE_PRIVATE).getString(FAVOURITES, "[]");
+        try {
+            JSONArray a = new JSONArray(raw);
+            for (int i = 0; i < a.length(); i++) {
+                favourites.add(a.getString(i));
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    private boolean isFavourite(Phrase phrase) {
+        return favourites.contains(phrase.key());
+    }
+
+    private void toggleFavourite(Phrase phrase) {
+        String k = phrase.key();
+        if (!favourites.remove(k)) {
+            favourites.add(k);
+        }
+        JSONArray a = new JSONArray();
+        for (String s : favourites) {
+            a.put(s);
+        }
+        getSharedPreferences(PREFS, MODE_PRIVATE).edit().putString(FAVOURITES, a.toString()).apply();
+    }
+
+    private int favouriteCount() {
+        int count = 0;
+        for (Phrase phrase : phrases) {
+            if (favourites.contains(phrase.key())) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private void startFavouritesSession() {
+        List<Phrase> pool = new ArrayList<>();
+        for (Phrase phrase : phrases) {
+            if (favourites.contains(phrase.key())) {
+                pool.add(phrase);
+            }
+        }
+        Collections.shuffle(pool);
+        beginSession(pool, 0);
     }
 
     // Ordered map of list name -> card count, over user-added cards.
