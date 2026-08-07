@@ -1,8 +1,8 @@
 {
-  "versionCode": 28,
-  "versionName": "1.27",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/a6414948956055df41555f020bba36640b594b2c/docs/P4B.apk",
-  "apkSha256": "ef3f99619d319d873700068093ac766c2476ac431fbe7297b7b5ec45d6bfb63d",
-  "apkSizeBytes": 67537245,
-  "releaseNotes": "Offline read-aloud: if the Polish or English voice isn't installed, the app now guides you to add it, and Settings shows voice status."
+  "versionCode": 29,
+  "versionName": "1.28",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/a210601626e2dc3055f89c9b0a9811aa714922ba/docs/P4B.apk",
+  "apkSha256": "4a35206537ee71673eb58dc66eaa27ac4b0320f2d47b43e88e3186821bc809bd",
+  "apkSizeBytes": 67537251,
+  "releaseNotes": "Choose your speech engine (MultiTTS, Google, ...) and pick a specific Polish and English voice in Settings."
 }
