@@ -1,8 +1,8 @@
 {
-  "versionCode": 27,
-  "versionName": "1.26",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/77558d8300d34219d97e7d7b2c622369c8529ddf/docs/P4B.apk",
-  "apkSha256": "62aa511721de21a4a0ceb1cddd7bef933738bf049b23cb3f3126f743badb89d1",
-  "apkSizeBytes": 67537250,
-  "releaseNotes": "Star your favourite words while studying and review them as their own flashcard set from the home screen."
+  "versionCode": 28,
+  "versionName": "1.27",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/a6414948956055df41555f020bba36640b594b2c/docs/P4B.apk",
+  "apkSha256": "ef3f99619d319d873700068093ac766c2476ac431fbe7297b7b5ec45d6bfb63d",
+  "apkSizeBytes": 67537245,
+  "releaseNotes": "Offline read-aloud: if the Polish or English voice isn't installed, the app now guides you to add it, and Settings shows voice status."
 }
