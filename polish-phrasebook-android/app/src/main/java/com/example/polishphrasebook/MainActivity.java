@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
+import android.speech.tts.Voice;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
@@ -104,6 +105,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String DEFAULT_THEME = "Klasyczny";
     private static final String LANG_EN = "en";
     private static final String LANG_PL = "pl";
+    private static final String PREF_TTS_ENGINE = "ttsEngine";
+    private static final String PREF_VOICE_PL = "ttsVoicePl";
+    private static final String PREF_VOICE_EN = "ttsVoiceEn";
     private static final String SPEED_SLOWEST = "slowest";
     private static final String SPEED_SLOW = "slow";
     private static final String SPEED_NORMAL = "normal";
@@ -205,7 +209,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         loadMemory();
         loadFavourites();
         registerUpdateDownloadReceiver();
-        textToSpeech = new TextToSpeech(this, this);
+        textToSpeech = createTts();
         render();
         maybeCheckForUpdatesOnStart();
         maybeCheckForDataUpdatesOnStart();
@@ -220,7 +224,38 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Toast.makeText(this, "Install a Polish TTS voice for Polish reading.", Toast.LENGTH_LONG).show();
             }
+            // Voice lists only exist once an engine is initialized; refresh Settings.
+            if (SCREEN_SETTINGS.equals(screen)) {
+                runOnUiThread(this::render);
+            }
         }
+    }
+
+    // Builds TextToSpeech on the chosen engine ("" = the system default engine,
+    // e.g. MultiTTS when the user has set it as their system TTS).
+    private TextToSpeech createTts() {
+        String engine = getSharedPreferences(PREFS, MODE_PRIVATE).getString(PREF_TTS_ENGINE, "");
+        if (engine.isEmpty()) {
+            return new TextToSpeech(this, this);
+        }
+        return new TextToSpeech(this, this, engine);
+    }
+
+    private void setTtsEngine(String enginePackage) {
+        saveSetting(PREF_TTS_ENGINE, enginePackage);
+        // Voice ids are engine-specific, so previous picks no longer apply.
+        saveSetting(PREF_VOICE_PL, "");
+        saveSetting(PREF_VOICE_EN, "");
+        ttsReady = false;
+        if (textToSpeech != null) {
+            try {
+                textToSpeech.stop();
+                textToSpeech.shutdown();
+            } catch (Exception ignored) {
+            }
+        }
+        textToSpeech = createTts();
+        render();
     }
 
     @Override
@@ -1664,12 +1699,33 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         content.addView(speed);
         addGap(content, 12);
 
-        LinearLayout voice = settingsCard(t("Reading Voice", "Głos do czytania"), t("Reading aloud uses your device's offline text-to-speech. Install the Polish and English voices once and they work without internet.", "Czytanie na głos korzysta z syntezatora mowy na urządzeniu. Zainstaluj głosy polski i angielski, aby działały bez internetu."));
-        String plStatus = voiceAvailable(new Locale("pl", "PL")) ? "✓ " + t("installed", "zainstalowany") : "✗ " + t("not installed", "brak");
-        String enStatus = voiceAvailable(Locale.US) ? "✓ " + t("installed", "zainstalowany") : "✗ " + t("not installed", "brak");
-        voice.addView(bodyText(t("Polish", "Polski") + ":  " + plStatus + "\n" + t("English", "Angielski") + ":  " + enStatus, 12.5f, th.faint), topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 8));
+        LinearLayout voice = settingsCard(t("Reading Voice", "Głos do czytania"), t("Reading aloud uses a text-to-speech engine on your device (including third-party engines like MultiTTS). Pick the engine and a voice per language.", "Czytanie na głos korzysta z silnika mowy na urządzeniu (także zewnętrznych, np. MultiTTS). Wybierz silnik i głos dla każdego języka."));
+        final Locale plLocale = new Locale("pl", "PL");
+        voice.addView(bodyText(t("Engine: ", "Silnik: ") + currentEngineLabel(), 12.5f, th.faint), topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 8));
+        Button engineBtn = flatButton(t("Choose engine", "Wybierz silnik"), th.panel, th.ink, th.dash, 13, 42);
+        engineBtn.setOnClickListener(v -> chooseTtsEngine());
+        voice.addView(engineBtn, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42), 10));
+
+        int plCount = voicesFor(plLocale).size();
+        int enCount = voicesFor(Locale.US).size();
+        String plVoice = selectedVoiceName(plLocale).isEmpty() ? t("engine default", "domyślny silnika") : selectedVoiceName(plLocale);
+        String enVoice = selectedVoiceName(Locale.US).isEmpty() ? t("engine default", "domyślny silnika") : selectedVoiceName(Locale.US);
+        voice.addView(bodyText(t("Polish voice: ", "Głos polski: ") + plVoice + "  (" + plCount + ")\n"
+                + t("English voice: ", "Głos angielski: ") + enVoice + "  (" + enCount + ")", 12.5f, th.faint),
+                topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 12));
+        LinearLayout pickRow = row();
+        Button plBtn = flatButton(t("Polish voice", "Głos polski"), th.accentSoft, th.accent, th.accent, 13, 42);
+        plBtn.setOnClickListener(v -> chooseVoice(plLocale));
+        pickRow.addView(plBtn, new LinearLayout.LayoutParams(0, dp(42), 1));
+        Button enBtn = flatButton(t("English voice", "Głos angielski"), th.accentSoft, th.accent, th.accent, 13, 42);
+        enBtn.setOnClickListener(v -> chooseVoice(Locale.US));
+        LinearLayout.LayoutParams enParams = new LinearLayout.LayoutParams(0, dp(42), 1);
+        enParams.setMargins(dp(10), 0, 0, 0);
+        pickRow.addView(enBtn, enParams);
+        voice.addView(pickRow, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42), 10));
+
         LinearLayout voiceRow = row();
-        Button installVoice = flatButton(t("Install voice", "Zainstaluj głos"), th.accentSoft, th.accent, th.accent, 13, 42);
+        Button installVoice = flatButton(t("Install voice", "Zainstaluj głos"), th.panel, th.ink, th.dash, 13, 42);
         installVoice.setOnClickListener(v -> installVoiceData());
         voiceRow.addView(installVoice, new LinearLayout.LayoutParams(0, dp(42), 1));
         Button ttsSettings = flatButton(t("TTS settings", "Ustawienia mowy"), th.panel, th.ink, th.dash, 13, 42);
@@ -1677,7 +1733,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         LinearLayout.LayoutParams tsParams = new LinearLayout.LayoutParams(0, dp(42), 1);
         tsParams.setMargins(dp(10), 0, 0, 0);
         voiceRow.addView(ttsSettings, tsParams);
-        voice.addView(voiceRow, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42), 12));
+        voice.addView(voiceRow, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42), 10));
         content.addView(voice);
         addGap(content, 12);
 
@@ -2709,10 +2765,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             Toast.makeText(this, "TextToSpeech is not ready.", Toast.LENGTH_SHORT).show();
             return;
         }
-        int result = textToSpeech.setLanguage(locale);
-        if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-            promptInstallVoice(locale);
-            return;
+        if (!applySavedVoice(locale)) {
+            int result = textToSpeech.setLanguage(locale);
+            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                promptInstallVoice(locale);
+                return;
+            }
         }
         applySpeechRate();
         textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, "learning-card");
@@ -2724,10 +2782,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             return;
         }
         Locale polish = new Locale("pl", "PL");
-        int result = textToSpeech.setLanguage(polish);
-        if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-            promptInstallVoice(polish);
-            return;
+        if (!applySavedVoice(polish)) {
+            int result = textToSpeech.setLanguage(polish);
+            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                promptInstallVoice(polish);
+                return;
+            }
         }
         applySpeechRate();
         String letter = item.letter.replace(" ", ", ");
@@ -2740,6 +2800,150 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         if (textToSpeech != null) {
             textToSpeech.setSpeechRate(speechRate());
         }
+    }
+
+    private String currentEngineLabel() {
+        String engine = getSharedPreferences(PREFS, MODE_PRIVATE).getString(PREF_TTS_ENGINE, "");
+        if (!ttsReady) {
+            return t("starting…", "uruchamianie…");
+        }
+        try {
+            if (engine.isEmpty()) {
+                String def = textToSpeech.getDefaultEngine();
+                for (TextToSpeech.EngineInfo info : textToSpeech.getEngines()) {
+                    if (info.name.equals(def)) {
+                        return info.label + " " + t("(system default)", "(domyślny systemu)");
+                    }
+                }
+                return t("System default", "Domyślny systemu");
+            }
+            for (TextToSpeech.EngineInfo info : textToSpeech.getEngines()) {
+                if (info.name.equals(engine)) {
+                    return info.label;
+                }
+            }
+        } catch (Exception ignored) {
+        }
+        return engine.isEmpty() ? t("System default", "Domyślny systemu") : engine;
+    }
+
+    private String voicePrefKey(Locale locale) {
+        return "pl".equals(locale.getLanguage()) ? PREF_VOICE_PL : PREF_VOICE_EN;
+    }
+
+    // All voices the current engine offers for this language.
+    private List<Voice> voicesFor(Locale locale) {
+        List<Voice> matches = new ArrayList<>();
+        if (textToSpeech == null || !ttsReady) {
+            return matches;
+        }
+        try {
+            java.util.Set<Voice> all = textToSpeech.getVoices();
+            if (all == null) {
+                return matches;
+            }
+            for (Voice v : all) {
+                if (v == null || v.getLocale() == null) {
+                    continue;
+                }
+                if (locale.getLanguage().equalsIgnoreCase(v.getLocale().getLanguage())) {
+                    matches.add(v);
+                }
+            }
+        } catch (Exception ignored) {
+        }
+        Collections.sort(matches, (a, b) -> a.getName().compareToIgnoreCase(b.getName()));
+        return matches;
+    }
+
+    private String voiceLabel(Voice v) {
+        String label = v.getName();
+        if (v.isNetworkConnectionRequired()) {
+            label += "  · " + t("online", "online");
+        }
+        return label;
+    }
+
+    private String selectedVoiceName(Locale locale) {
+        return getSharedPreferences(PREFS, MODE_PRIVATE).getString(voicePrefKey(locale), "");
+    }
+
+    // Returns true when a specific saved voice was applied.
+    private boolean applySavedVoice(Locale locale) {
+        String saved = selectedVoiceName(locale);
+        if (saved.isEmpty() || textToSpeech == null) {
+            return false;
+        }
+        try {
+            for (Voice v : voicesFor(locale)) {
+                if (saved.equals(v.getName())) {
+                    return textToSpeech.setVoice(v) == TextToSpeech.SUCCESS;
+                }
+            }
+        } catch (Exception ignored) {
+        }
+        return false;
+    }
+
+    private void chooseTtsEngine() {
+        if (textToSpeech == null) {
+            return;
+        }
+        final List<String> packages = new ArrayList<>();
+        final List<String> labels = new ArrayList<>();
+        packages.add("");
+        labels.add(t("System default", "Domyślny systemu"));
+        try {
+            for (TextToSpeech.EngineInfo info : textToSpeech.getEngines()) {
+                packages.add(info.name);
+                labels.add(info.label);
+            }
+        } catch (Exception ignored) {
+        }
+        String current = getSharedPreferences(PREFS, MODE_PRIVATE).getString(PREF_TTS_ENGINE, "");
+        int checked = Math.max(0, packages.indexOf(current));
+        new AlertDialog.Builder(this)
+                .setTitle(t("Speech engine", "Silnik mowy"))
+                .setSingleChoiceItems(labels.toArray(new String[0]), checked, (d, which) -> {
+                    d.dismiss();
+                    setTtsEngine(packages.get(which));
+                })
+                .setNegativeButton(t("Cancel", "Anuluj"), null)
+                .show();
+    }
+
+    private void chooseVoice(Locale locale) {
+        final List<Voice> voices = voicesFor(locale);
+        if (voices.isEmpty()) {
+            Toast.makeText(this, t("This engine offers no voices for that language yet.",
+                    "Ten silnik nie ma jeszcze głosów dla tego języka."), Toast.LENGTH_LONG).show();
+            return;
+        }
+        final List<String> labels = new ArrayList<>();
+        labels.add(t("Engine default", "Domyślny silnika"));
+        for (Voice v : voices) {
+            labels.add(voiceLabel(v));
+        }
+        String saved = selectedVoiceName(locale);
+        int checked = 0;
+        for (int i = 0; i < voices.size(); i++) {
+            if (voices.get(i).getName().equals(saved)) {
+                checked = i + 1;
+                break;
+            }
+        }
+        final boolean polish = "pl".equals(locale.getLanguage());
+        new AlertDialog.Builder(this)
+                .setTitle(polish ? t("Polish voice", "Głos polski") : t("English voice", "Głos angielski"))
+                .setSingleChoiceItems(labels.toArray(new String[0]), checked, (d, which) -> {
+                    d.dismiss();
+                    saveSetting(voicePrefKey(locale), which == 0 ? "" : voices.get(which - 1).getName());
+                    render();
+                    // Play a sample so the choice is audible immediately.
+                    speak(polish ? "Dzień dobry. Uczę się polskiego." : "Good morning. I am learning Polish.", locale);
+                })
+                .setNegativeButton(t("Cancel", "Anuluj"), null)
+                .show();
     }
 
     private boolean voiceAvailable(Locale locale) {
