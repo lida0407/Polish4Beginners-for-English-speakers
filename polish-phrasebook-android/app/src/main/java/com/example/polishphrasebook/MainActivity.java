@@ -1664,6 +1664,23 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         content.addView(speed);
         addGap(content, 12);
 
+        LinearLayout voice = settingsCard(t("Reading Voice", "Głos do czytania"), t("Reading aloud uses your device's offline text-to-speech. Install the Polish and English voices once and they work without internet.", "Czytanie na głos korzysta z syntezatora mowy na urządzeniu. Zainstaluj głosy polski i angielski, aby działały bez internetu."));
+        String plStatus = voiceAvailable(new Locale("pl", "PL")) ? "✓ " + t("installed", "zainstalowany") : "✗ " + t("not installed", "brak");
+        String enStatus = voiceAvailable(Locale.US) ? "✓ " + t("installed", "zainstalowany") : "✗ " + t("not installed", "brak");
+        voice.addView(bodyText(t("Polish", "Polski") + ":  " + plStatus + "\n" + t("English", "Angielski") + ":  " + enStatus, 12.5f, th.faint), topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 8));
+        LinearLayout voiceRow = row();
+        Button installVoice = flatButton(t("Install voice", "Zainstaluj głos"), th.accentSoft, th.accent, th.accent, 13, 42);
+        installVoice.setOnClickListener(v -> installVoiceData());
+        voiceRow.addView(installVoice, new LinearLayout.LayoutParams(0, dp(42), 1));
+        Button ttsSettings = flatButton(t("TTS settings", "Ustawienia mowy"), th.panel, th.ink, th.dash, 13, 42);
+        ttsSettings.setOnClickListener(v -> openTtsSettings());
+        LinearLayout.LayoutParams tsParams = new LinearLayout.LayoutParams(0, dp(42), 1);
+        tsParams.setMargins(dp(10), 0, 0, 0);
+        voiceRow.addView(ttsSettings, tsParams);
+        voice.addView(voiceRow, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42), 12));
+        content.addView(voice);
+        addGap(content, 12);
+
         LinearLayout update = settingsCard(t("App Updates", "Aktualizacje aplikacji"), t("Check GitHub for a newer APK and open the Android installer.", "Sprawdź w GitHub nowszy APK i otwórz instalator Androida."));
         update.addView(bodyText("v" + BuildConfig.VERSION_NAME, 12.5f, th.faint), topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 8));
         Button checkUpdates = flatButton(t("Check updates", "Sprawdź aktualizacje"), th.accentSoft, th.accent, th.accent, 13, 42);
@@ -2694,7 +2711,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
         int result = textToSpeech.setLanguage(locale);
         if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-            Toast.makeText(this, "This voice is not installed on this device.", Toast.LENGTH_SHORT).show();
+            promptInstallVoice(locale);
             return;
         }
         applySpeechRate();
@@ -2709,7 +2726,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         Locale polish = new Locale("pl", "PL");
         int result = textToSpeech.setLanguage(polish);
         if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-            Toast.makeText(this, "This voice is not installed on this device.", Toast.LENGTH_SHORT).show();
+            promptInstallVoice(polish);
             return;
         }
         applySpeechRate();
@@ -2722,6 +2739,53 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private void applySpeechRate() {
         if (textToSpeech != null) {
             textToSpeech.setSpeechRate(speechRate());
+        }
+    }
+
+    private boolean voiceAvailable(Locale locale) {
+        if (textToSpeech == null || !ttsReady) {
+            return false;
+        }
+        try {
+            return textToSpeech.isLanguageAvailable(locale) >= TextToSpeech.LANG_AVAILABLE;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private void promptInstallVoice(Locale locale) {
+        String lang = "pl".equals(locale.getLanguage()) ? t("Polish", "polski") : t("English", "angielski");
+        new AlertDialog.Builder(this)
+                .setTitle(t("Voice not installed", "Głos nie jest zainstalowany"))
+                .setMessage(t("The ", "Głos ") + lang
+                        + t(" voice for offline reading isn't installed on this device. You can add it for free from your device's text-to-speech settings, then it works without internet.",
+                            " do czytania offline nie jest zainstalowany na tym urządzeniu. Możesz go dodać za darmo w ustawieniach syntezatora mowy — potem działa bez internetu."))
+                .setPositiveButton(t("Install voice", "Zainstaluj głos"), (d, w) -> installVoiceData())
+                .setNeutralButton(t("TTS settings", "Ustawienia mowy"), (d, w) -> openTtsSettings())
+                .setNegativeButton(t("Close", "Zamknij"), null)
+                .show();
+    }
+
+    private void installVoiceData() {
+        try {
+            startActivity(new Intent(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA));
+        } catch (Exception e) {
+            openTtsSettings();
+        }
+    }
+
+    private void openTtsSettings() {
+        try {
+            Intent intent = new Intent("com.android.settings.TTS_SETTINGS");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } catch (Exception e) {
+            try {
+                startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
+            } catch (Exception ignored) {
+                Toast.makeText(this, t("Open your device's text-to-speech settings to install a voice.",
+                        "Otwórz ustawienia syntezatora mowy, aby zainstalować głos."), Toast.LENGTH_LONG).show();
+            }
         }
     }
 
