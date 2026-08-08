@@ -1,8 +1,8 @@
 {
-  "versionCode": 31,
-  "versionName": "1.30",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/d7041a3975ad6e250ff0b2dc9f8621a13f5342ae/docs/P4B.apk",
-  "apkSha256": "71ad7aeb2b2074081c68fa46c7702670fcd8423b67d40da9a3b3312945cd85e4",
-  "apkSizeBytes": 67556355,
-  "releaseNotes": "Upload your own dictionary and build all translations once on your device - listening and study then read them instantly, fully offline."
+  "versionCode": 32,
+  "versionName": "1.31",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/aa9fd7ecdd90e0b85d4bbc7dfa95bd65e0cb0971/docs/P4B.apk",
+  "apkSha256": "64577017376a9b0aa0441f553931981874effb4025be52c9f32a516277a871b9",
+  "apkSizeBytes": 67578664,
+  "releaseNotes": "Adds 30 new A2 scenario conversations - trains, hotels, shopping, restaurants, doctor, police - now 33 in total with audio."
 }
