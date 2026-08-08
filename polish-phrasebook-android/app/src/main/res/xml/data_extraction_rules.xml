@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 12+ (dataExtractionRules): cloud backup and device-to-device transfer. -->
+<data-extraction-rules>
+    <cloud-backup>
+        <include domain="sharedpref" path="phrasebook.xml" />
+        <exclude domain="file" path="gloss_cache.json" />
+        <exclude domain="file" path="phrases_remote.json" />
+    </cloud-backup>
+    <device-transfer>
+        <include domain="sharedpref" path="phrasebook.xml" />
+        <!-- A direct transfer can afford the user dictionary too. -->
+        <include domain="file" path="user_dictionary.json" />
+        <exclude domain="file" path="gloss_cache.json" />
+        <exclude domain="file" path="phrases_remote.json" />
+    </device-transfer>
+</data-extraction-rules>

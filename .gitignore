@@ -9,3 +9,12 @@ polish-phrasebook-android/local.properties
 *.apk
 *.aab
 !docs/P4B.apk
+
+# --- Android release secrets (never commit) ---
+*.jks
+*.keystore
+keystore.properties
+app/keystore.properties
+local.properties
+signing.properties
+play-service-account*.json

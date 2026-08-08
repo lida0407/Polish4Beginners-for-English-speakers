@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 11 and below (allowBackup / fullBackupContent).
+     Keep learning progress and user-authored content; drop regenerable caches. -->
+<full-backup-content>
+    <include domain="sharedpref" path="phrasebook.xml" />
+
+    <!-- Regenerable: rebuilt from the user's dictionary on demand. -->
+    <exclude domain="file" path="gloss_cache.json" />
+    <!-- Re-downloadable from the data update channel. -->
+    <exclude domain="file" path="phrases_remote.json" />
+</full-backup-content>

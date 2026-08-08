@@ -1,16 +1,12 @@
-package com.example.polishphrasebook;
+package com.mustardseed.polish4beginners;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DownloadManager;
-import android.content.BroadcastReceiver;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -23,7 +19,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.Settings;
 import android.os.Handler;
 import android.os.Looper;
@@ -121,10 +116,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String SPEED_NORMAL = "normal";
     private static final String SPEED_FAST = "fast";
     private static final String SPEED_FASTEST = "fastest";
-    private static final String UPDATE_MANIFEST_URL = "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/latest.json?ref=main";
     private static final String DATA_MANIFEST_URL = "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/database.json?ref=main";
     private static final String REMOTE_PHRASES_FILE = "phrases_remote.json";
-    private static final String APK_MIME_TYPE = "application/vnd.android.package-archive";
     private static final int DEFAULT_DATABASE_VERSION = 10;
     private static final long UPDATE_CHECK_INTERVAL_MS = 24L * 60L * 60L * 1000L;
     private static final int SESSION_SIZE = 10;
@@ -194,6 +187,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private boolean listenPlaying = false;
     private boolean listenShowEnglish = true;
     private String openDialogId = null;
+    private boolean dataReady = false;
+    private String dataError = "";
+    private Bundle pendingState = null;
     private int dialogPlayIndex = -1;
     private boolean dialogShowEnglish = true;
     private String browseQuery = "";
@@ -204,7 +200,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private int newsIndex = 0;
     private float newsTouchStartX = 0f;
     private float newsTouchStartY = 0f;
-    private long updateDownloadId = -1L;
     private boolean sessionRevealed = false;
     private boolean newsLoading = false;
     private boolean newsTranslating = false;
@@ -224,7 +219,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private String translateInput = "";
     private String translateOutput = "";
     private String translateStatus = "";
-    private BroadcastReceiver updateDownloadReceiver;
     private Typeface sansRegular;
     private Typeface sansMedium;
     private Typeface sansSemiBold;
@@ -251,18 +245,155 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             speechSpeed = SPEED_NORMAL;
         }
         loadFonts();
-        loadPhrases();
-        loadGrammarLessons();
-        loadAlphabet();
-        loadDialogs();
-        loadMemory();
-        loadFavourites();
-        loadDictionaryAsync();
-        registerUpdateDownloadReceiver();
-        textToSpeech = createTts();
+        // Assets are ~1 MB of JSON; parsing them on the main thread delayed the
+        // first frame. Show a loading state and finish initialization off-thread.
+        pendingState = savedInstanceState;
         render();
-        maybeCheckForUpdatesOnStart();
-        maybeCheckForDataUpdatesOnStart();
+        startDataLoad();
+    }
+
+    private void startDataLoad() {
+        new Thread(() -> {
+            dataError = "";
+            try {
+                loadPhrases();
+                loadGrammarLessons();
+                loadAlphabet();
+                loadDialogs();
+                loadMemory();
+                loadFavourites();
+            } catch (Throwable error) {
+                if (dataError.isEmpty()) {
+                    dataError = "Could not load learning data.";
+                }
+            }
+            runOnUiThread(() -> {
+                dataReady = true;
+                restoreInstanceState(pendingState);
+                pendingState = null;
+                loadDictionaryAsync();
+                textToSpeech = createTts();
+                render();
+                maybeCheckForDataUpdatesOnStart();
+            });
+        }, "p4b-data-load").start();
+    }
+
+    private void renderLoading(LinearLayout root) {
+        Theme th = theme();
+        LinearLayout box = vertical();
+        box.setGravity(Gravity.CENTER);
+        box.setPadding(dp(28), dp(28), dp(28), dp(28));
+        root.addView(box, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+        if (dataError.isEmpty()) {
+            box.addView(serifText("Mój polski", 30, th.ink));
+            TextView msg = bodyText(t("Loading your cards…", "Wczytuję karty…"), 14, th.muted);
+            msg.setGravity(Gravity.CENTER);
+            box.addView(msg, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 14));
+        } else {
+            box.addView(serifText(t("Something went wrong", "Coś poszło nie tak"), 24, th.ink));
+            TextView msg = bodyText(dataError, 14, th.muted);
+            msg.setGravity(Gravity.CENTER);
+            box.addView(msg, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 12));
+            Button retry = filledButton(t("Try again", "Spróbuj ponownie"), th.accent, th.onAccent, 15, 50);
+            retry.setOnClickListener(v -> {
+                dataReady = false;
+                dataError = "";
+                render();
+                startDataLoad();
+            });
+            box.addView(retry, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(50), 18));
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("screen", screen);
+        outState.putString("level", level);
+        outState.putString("browseTopic", browseTopic);
+        outState.putString("browseQuery", browseQuery);
+        outState.putInt("browseLimit", browseLimit);
+        outState.putString("openLessonUnit", openLessonUnit);
+        outState.putString("listenTopic", listenTopic);
+        outState.putInt("listenIndex", listenIndex);
+        outState.putBoolean("listenShowEnglish", listenShowEnglish);
+        outState.putString("openDialogId", openDialogId);
+        outState.putBoolean("dialogShowEnglish", dialogShowEnglish);
+        outState.putInt("newsIndex", newsIndex);
+        outState.putBoolean("translateEnToPl", translateEnToPl);
+        outState.putString("translateInput", translateInput);
+        outState.putString("translateOutput", translateOutput);
+        // Study session: keep card identities, not object references.
+        outState.putInt("sessionIndex", sessionIndex);
+        outState.putInt("sessionGot", sessionGot);
+        outState.putBoolean("sessionRevealed", sessionRevealed);
+        String[] keys = new String[sessionDeck.size()];
+        for (int i = 0; i < sessionDeck.size(); i++) {
+            keys[i] = sessionDeck.get(i).key();
+        }
+        outState.putStringArray("sessionKeys", keys);
+        boolean[] fronts = new boolean[sessionEnglishFront.size()];
+        for (int i = 0; i < sessionEnglishFront.size(); i++) {
+            fronts[i] = sessionEnglishFront.get(i);
+        }
+        outState.putBooleanArray("sessionFronts", fronts);
+    }
+
+    // Applied only once phrases are loaded, so session cards can be resolved.
+    private void restoreInstanceState(Bundle in) {
+        if (in == null) {
+            return;
+        }
+        screen = in.getString("screen", SCREEN_HOME);
+        level = in.getString("level", level);
+        browseTopic = in.getString("browseTopic", browseTopic);
+        browseQuery = in.getString("browseQuery", browseQuery);
+        browseLimit = in.getInt("browseLimit", browseLimit);
+        openLessonUnit = in.getString("openLessonUnit");
+        listenTopic = in.getString("listenTopic", listenTopic);
+        listenIndex = in.getInt("listenIndex", 0);
+        listenShowEnglish = in.getBoolean("listenShowEnglish", true);
+        openDialogId = in.getString("openDialogId");
+        dialogShowEnglish = in.getBoolean("dialogShowEnglish", true);
+        newsIndex = in.getInt("newsIndex", 0);
+        translateEnToPl = in.getBoolean("translateEnToPl", false);
+        translateInput = in.getString("translateInput", "");
+        translateOutput = in.getString("translateOutput", "");
+
+        String[] keys = in.getStringArray("sessionKeys");
+        sessionDeck.clear();
+        if (keys != null && keys.length > 0) {
+            Map<String, Phrase> byKey = new HashMap<>();
+            for (Phrase phrase : phrases) {
+                byKey.put(phrase.key(), phrase);
+            }
+            for (String key : keys) {
+                Phrase phrase = byKey.get(key);
+                if (phrase != null) {
+                    sessionDeck.add(phrase);
+                }
+            }
+        }
+        sessionEnglishFront.clear();
+        boolean[] fronts = in.getBooleanArray("sessionFronts");
+        if (fronts != null) {
+            for (boolean b : fronts) {
+                sessionEnglishFront.add(b);
+            }
+        }
+        // Keep the deck and its direction list the same length.
+        while (sessionEnglishFront.size() < sessionDeck.size()) {
+            sessionEnglishFront.add(false);
+        }
+        sessionIndex = Math.max(0, in.getInt("sessionIndex", 0));
+        sessionGot = in.getInt("sessionGot", 0);
+        sessionRevealed = in.getBoolean("sessionRevealed", false);
+        // If the deck could not be rebuilt, don't strand the user on a blank card.
+        if (SCREEN_SESSION.equals(screen) && sessionDeck.isEmpty()) {
+            screen = SCREEN_HOME;
+        }
     }
 
     @Override
@@ -321,12 +452,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         if (englishPolishTranslator != null) {
             englishPolishTranslator.close();
         }
-        if (updateDownloadReceiver != null) {
-            try {
-                unregisterReceiver(updateDownloadReceiver);
-            } catch (IllegalArgumentException ignored) {
-            }
-        }
         super.onDestroy();
     }
 
@@ -368,6 +493,13 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         LinearLayout root = new LinearLayout(this);
         root.setOrientation(LinearLayout.VERTICAL);
         root.setBackgroundColor(theme.bg);
+
+        // Nothing is interactive until the learning data is in memory.
+        if (!dataReady) {
+            renderLoading(root);
+            setContentView(root);
+            return;
+        }
 
         if (SCREEN_SESSION.equals(screen)) {
             renderSession(root);
@@ -1825,11 +1957,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         content.addView(voice);
         addGap(content, 12);
 
-        LinearLayout update = settingsCard(t("App Updates", "Aktualizacje aplikacji"), t("Check GitHub for a newer APK and open the Android installer.", "Sprawdź w GitHub nowszy APK i otwórz instalator Androida."));
-        update.addView(bodyText("v" + BuildConfig.VERSION_NAME, 12.5f, th.faint), topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 8));
-        Button checkUpdates = flatButton(t("Check updates", "Sprawdź aktualizacje"), th.accentSoft, th.accent, th.accent, 13, 42);
-        checkUpdates.setOnClickListener(v -> checkForUpdates(true));
-        update.addView(checkUpdates, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42), 12));
+        // App updates are delivered by Google Play; the app never installs APKs itself.
+        LinearLayout update = settingsCard(t("App Version", "Wersja aplikacji"), t("Updates are delivered through Google Play.", "Aktualizacje są dostarczane przez Google Play."));
+        update.addView(bodyText("v" + BuildConfig.VERSION_NAME + " (" + BuildConfig.VERSION_CODE + ")", 12.5f, th.faint), topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 8));
         content.addView(update);
         addGap(content, 12);
 
@@ -1876,46 +2006,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     private void saveSetting(String key, String value) {
         getSharedPreferences(PREFS, MODE_PRIVATE).edit().putString(key, value).apply();
-    }
-
-    private void maybeCheckForUpdatesOnStart() {
-        SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
-        long now = System.currentTimeMillis();
-        long lastCheck = prefs.getLong("lastUpdateCheckAt", 0L);
-        if (now - lastCheck >= UPDATE_CHECK_INTERVAL_MS) {
-            prefs.edit().putLong("lastUpdateCheckAt", now).apply();
-            checkForUpdates(false);
-        }
-    }
-
-    private void checkForUpdates(boolean userStarted) {
-        if (userStarted) {
-            Toast.makeText(this, t("Checking GitHub for updates...", "Sprawdzam aktualizacje w GitHub..."), Toast.LENGTH_SHORT).show();
-        }
-        new Thread(() -> {
-            try {
-                JSONObject manifest = fetchUpdateManifest();
-                int latestCode = manifest.optInt("versionCode", BuildConfig.VERSION_CODE);
-                String latestName = manifest.optString("versionName", "");
-                String apkUrl = manifest.optString("apkUrl", "");
-                String notes = manifest.optString("releaseNotes", "");
-                runOnUiThread(() -> {
-                    if (latestCode > BuildConfig.VERSION_CODE && !apkUrl.trim().isEmpty()) {
-                        showUpdateAvailable(latestName, notes, apkUrl);
-                    } else if (userStarted) {
-                        Toast.makeText(this, t("You already have the latest version.", "Masz już najnowszą wersję."), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } catch (Exception e) {
-                if (userStarted) {
-                    runOnUiThread(() -> Toast.makeText(this, t("Could not check updates.", "Nie udało się sprawdzić aktualizacji."), Toast.LENGTH_SHORT).show());
-                }
-            }
-        }).start();
-    }
-
-    private JSONObject fetchUpdateManifest() throws Exception {
-        return new JSONObject(fetchGitHubDocumentText(UPDATE_MANIFEST_URL));
     }
 
     private String fetchGitHubDocumentText(String urlString) throws Exception {
@@ -2012,95 +2102,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 .edit()
                 .putInt("dataVersion", dataVersion)
                 .apply();
-    }
-
-    private void showUpdateAvailable(String versionName, String notes, String apkUrl) {
-        String title = t("Update available", "Dostępna aktualizacja");
-        String version = versionName.trim().isEmpty() ? "" : "v" + versionName + "\n\n";
-        String message = version + (notes.trim().isEmpty()
-                ? t("Download the newest APK from GitHub?", "Pobrać najnowszy APK z GitHub?")
-                : notes);
-        new AlertDialog.Builder(this)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton(t("Download", "Pobierz"), (dialog, which) -> downloadUpdate(apkUrl))
-                .setNegativeButton(t("Later", "Później"), null)
-                .show();
-    }
-
-    private void downloadUpdate(String apkUrl) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !getPackageManager().canRequestPackageInstalls()) {
-            Toast.makeText(this, t("Allow this app to install updates, then check again.", "Zezwól tej aplikacji na instalowanie aktualizacji, potem sprawdź ponownie."), Toast.LENGTH_LONG).show();
-            Intent settings = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:" + getPackageName()));
-            startActivity(settings);
-            return;
-        }
-
-        DownloadManager manager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-        if (manager == null) {
-            Toast.makeText(this, t("Download service is not available.", "Usługa pobierania jest niedostępna."), Toast.LENGTH_SHORT).show();
-            return;
-        }
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(apkUrl));
-        request.setTitle("P4B.apk");
-        request.setDescription(t("Downloading Polish4Beginners update", "Pobieranie aktualizacji Polish4Beginners"));
-        request.setMimeType(APK_MIME_TYPE);
-        request.setAllowedOverMetered(true);
-        request.setAllowedOverRoaming(true);
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        request.setDestinationInExternalFilesDir(this, Environment.DIRECTORY_DOWNLOADS, "P4B.apk");
-        updateDownloadId = manager.enqueue(request);
-        Toast.makeText(this, t("Downloading update...", "Pobieranie aktualizacji..."), Toast.LENGTH_SHORT).show();
-    }
-
-    private void registerUpdateDownloadReceiver() {
-        updateDownloadReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                long completedId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1L);
-                if (completedId == updateDownloadId) {
-                    openDownloadedUpdate(completedId);
-                }
-            }
-        };
-        IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            registerReceiver(updateDownloadReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
-        } else {
-            registerReceiver(updateDownloadReceiver, filter);
-        }
-    }
-
-    private void openDownloadedUpdate(long downloadId) {
-        DownloadManager manager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-        if (manager == null) {
-            return;
-        }
-        DownloadManager.Query query = new DownloadManager.Query().setFilterById(downloadId);
-        try (Cursor cursor = manager.query(query)) {
-            if (cursor == null || !cursor.moveToFirst()) {
-                return;
-            }
-            int statusIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS);
-            if (statusIndex < 0 || cursor.getInt(statusIndex) != DownloadManager.STATUS_SUCCESSFUL) {
-                Toast.makeText(this, t("Update download failed.", "Pobieranie aktualizacji nie powiodło się."), Toast.LENGTH_SHORT).show();
-                return;
-            }
-        }
-        Uri apkUri = manager.getUriForDownloadedFile(downloadId);
-        if (apkUri == null) {
-            Toast.makeText(this, t("Downloaded APK could not be opened.", "Nie można otworzyć pobranego APK."), Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Intent install = new Intent(Intent.ACTION_VIEW);
-        install.setDataAndType(apkUri, APK_MIME_TYPE);
-        install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        try {
-            startActivity(install);
-        } catch (Exception e) {
-            Toast.makeText(this, t("Could not open Android installer.", "Nie można otworzyć instalatora Androida."), Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void renderTranslate(LinearLayout content) {
@@ -2627,10 +2628,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     private int statusOf(Phrase phrase) {
         CardMemory state = cardMemory(phrase);
-        if (state.box == 0) {
-            return 0;
-        }
-        return state.dueAt <= System.currentTimeMillis() ? 1 : 2;
+        return LearningLogic.statusOf(state.box, state.dueAt, System.currentTimeMillis());
     }
 
     private void beginSession(List<Phrase> pool, int limit) {
@@ -2786,13 +2784,14 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     private boolean isDue(Phrase phrase) {
         CardMemory state = cardMemory(phrase);
-        return state.box > 0 && state.dueAt <= System.currentTimeMillis();
+        return LearningLogic.isDue(state.box, state.dueAt, System.currentTimeMillis());
     }
 
     private void recordAnswer(Phrase phrase, boolean got) {
         CardMemory state = cardMemory(phrase);
-        int box = got ? Math.min(state.box + 1, MAX_BOX) : 1;
-        long dueAt = got ? System.currentTimeMillis() + BOX_INTERVALS_MS[box] : System.currentTimeMillis();
+        long now = System.currentTimeMillis();
+        int box = LearningLogic.nextBox(state.box, got);
+        long dueAt = LearningLogic.nextDueAt(box, got, now);
         saveCardMemory(phrase, new CardMemory(box, dueAt));
     }
 
@@ -2800,7 +2799,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         memory.put(phrase.key(), state);
         getSharedPreferences(PREFS, MODE_PRIVATE)
                 .edit()
-                .putString(MEMORY_PREFIX + phrase.key(), state.box + "|" + state.dueAt)
+                .putString(MEMORY_PREFIX + phrase.key(), LearningLogic.encodeMemory(state.box, state.dueAt))
                 .apply();
     }
 
@@ -2851,7 +2850,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             CardMemory state = parseCardMemory(stored);
             memory.put(phrase.key(), state);
             if (state.box > 0 && stored.indexOf('|') < 0) {
-                migration.putString(MEMORY_PREFIX + phrase.key(), state.box + "|" + state.dueAt);
+                migration.putString(MEMORY_PREFIX + phrase.key(), LearningLogic.encodeMemory(state.box, state.dueAt));
                 migrated = true;
             }
         }
@@ -2861,27 +2860,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
     private CardMemory parseCardMemory(String stored) {
-        if (stored == null || stored.isEmpty() || STATUS_NEW.equals(stored)) {
-            return new CardMemory(0, 0);
-        }
-        // Pre-scheduling app versions stored a bare status string.
-        if (STATUS_LEARNT.equals(stored)) {
-            return new CardMemory(2, System.currentTimeMillis() + BOX_INTERVALS_MS[2]);
-        }
-        if (STATUS_FORGOT.equals(stored)) {
-            return new CardMemory(1, System.currentTimeMillis());
-        }
-        int split = stored.indexOf('|');
-        if (split > 0) {
-            try {
-                int box = Math.max(0, Math.min(MAX_BOX, Integer.parseInt(stored.substring(0, split))));
-                long dueAt = Long.parseLong(stored.substring(split + 1));
-                return new CardMemory(box, dueAt);
-            } catch (NumberFormatException ignored) {
-                // fall through
-            }
-        }
-        return new CardMemory(0, 0);
+        long[] decoded = LearningLogic.decodeMemory(stored, System.currentTimeMillis());
+        return new CardMemory((int) decoded[0], decoded[1]);
     }
 
     private void speak(String text, Locale locale) {
@@ -2936,7 +2916,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     // listening/study never does a lookup or a translation mid-playback.
 
     private String dictKey(String polish) {
-        return polish == null ? "" : polish.trim().toLowerCase(Locale.ROOT).replaceAll("[.!?,;:]+$", "");
+        return LearningLogic.normalizeHeadword(polish);
     }
 
     private void loadDictionaryAsync() {
@@ -3945,7 +3925,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             parsePhrases(readPhraseJson());
             appendCustomCards();
         } catch (Exception error) {
-            Toast.makeText(this, "Could not load phrase data.", Toast.LENGTH_LONG).show();
+            dataError = "Could not load phrase data.";
         }
     }
 
@@ -4079,7 +4059,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
     private String normPolish(String value) {
-        return value == null ? "" : value.trim().toLowerCase(Locale.ROOT).replaceAll("[.!?,;:]+$", "");
+        return LearningLogic.normalizeHeadword(value);
     }
 
     private int customCardCount() {
@@ -4193,7 +4173,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 ));
             }
         } catch (Exception error) {
-            Toast.makeText(this, "Could not load grammar lessons.", Toast.LENGTH_LONG).show();
+            dataError = "Could not load grammar lessons.";
         }
     }
 
@@ -4210,7 +4190,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 ));
             }
         } catch (Exception error) {
-            Toast.makeText(this, "Could not load alphabet.", Toast.LENGTH_LONG).show();
+            dataError = "Could not load alphabet.";
         }
     }
 
@@ -4586,10 +4566,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
 
         String key() {
-            if (coreIndex > 0) {
-                return "core:" + coreIndex;
-            }
-            return category + ":" + polish;
+            return LearningLogic.cardKey(coreIndex, category, polish);
         }
     }
 
