@@ -3004,6 +3004,14 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 joined.append(l).append('\n');
             }
             String raw = joined.toString().trim();
+            // Editors (notably Excel) prepend a UTF-8 BOM; it would defeat the
+            // '{' / '[' format sniff below and silently yield zero entries.
+            if (!raw.isEmpty() && raw.charAt(0) == '\uFEFF') {
+                raw = raw.substring(1).trim();
+                if (!lines.isEmpty()) {
+                    lines.set(0, lines.get(0).replace("\uFEFF", ""));
+                }
+            }
             Map<String, String> parsed = new HashMap<>();
 
             if (raw.startsWith("{")) {
