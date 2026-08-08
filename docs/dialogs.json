@@ -11,20 +11,79 @@
       "B": "Sprzedawca · Shop assistant"
     },
     "lines": [
-      { "speaker": "B", "polish": "Dzień dobry! W czym mogę pomóc?", "english": "Good morning! How can I help you?" },
-      { "speaker": "A", "polish": "Dzień dobry. Szukam chleba i mleka.", "english": "Good morning. I'm looking for bread and milk." },
-      { "speaker": "B", "polish": "Chleb jest na drugiej półce po lewej, a mleko w lodówce z tyłu.", "english": "The bread is on the second shelf on the left, and the milk is in the fridge at the back." },
-      { "speaker": "A", "polish": "Dziękuję. Ile kosztuje ten chleb?", "english": "Thank you. How much does this bread cost?", "note": "ile kosztuje = how much does it cost" },
-      { "speaker": "B", "polish": "Cztery złote pięćdziesiąt.", "english": "Four zloty fifty." },
-      { "speaker": "A", "polish": "Poproszę dwa. Czy mają państwo świeże jabłka?", "english": "Two, please. Do you have fresh apples?", "note": "poproszę = polite 'I'll have / please give me'" },
-      { "speaker": "B", "polish": "Tak, dzisiaj są przecenione. Kilogram kosztuje sześć złotych.", "english": "Yes, they are on sale today. A kilo costs six zloty." },
-      { "speaker": "A", "polish": "W takim razie poproszę kilogram.", "english": "In that case I'll take a kilo." },
-      { "speaker": "B", "polish": "Coś jeszcze?", "english": "Anything else?" },
-      { "speaker": "A", "polish": "Nie, dziękuję. To wszystko.", "english": "No, thank you. That's everything." },
-      { "speaker": "B", "polish": "Razem dwadzieścia jeden złotych. Płaci pan kartą czy gotówką?", "english": "Twenty-one zloty altogether. Are you paying by card or cash?" },
-      { "speaker": "A", "polish": "Kartą. Czy mogę dostać paragon?", "english": "By card. Can I have the receipt?" },
-      { "speaker": "B", "polish": "Oczywiście, proszę bardzo. Miłego dnia!", "english": "Of course, here you are. Have a nice day!" },
-      { "speaker": "A", "polish": "Dziękuję, nawzajem. Do widzenia.", "english": "Thank you, you too. Goodbye.", "note": "nawzajem = likewise / same to you" }
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry! W czym mogę pomóc?",
+        "english": "Good morning! How can I help you?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Szukam chleba i mleka.",
+        "english": "Good morning. I'm looking for bread and milk."
+      },
+      {
+        "speaker": "B",
+        "polish": "Chleb jest na drugiej półce po lewej, a mleko w lodówce z tyłu.",
+        "english": "The bread is on the second shelf on the left, and the milk is in the fridge at the back."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję. Ile kosztuje ten chleb?",
+        "english": "Thank you. How much does this bread cost?",
+        "note": "ile kosztuje = how much does it cost"
+      },
+      {
+        "speaker": "B",
+        "polish": "Cztery złote pięćdziesiąt.",
+        "english": "Four zloty fifty."
+      },
+      {
+        "speaker": "A",
+        "polish": "Poproszę dwa. Czy mają państwo świeże jabłka?",
+        "english": "Two, please. Do you have fresh apples?",
+        "note": "poproszę = polite 'I'll have / please give me'"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, dzisiaj są przecenione. Kilogram kosztuje sześć złotych.",
+        "english": "Yes, they are on sale today. A kilo costs six zloty."
+      },
+      {
+        "speaker": "A",
+        "polish": "W takim razie poproszę kilogram.",
+        "english": "In that case I'll take a kilo."
+      },
+      {
+        "speaker": "B",
+        "polish": "Coś jeszcze?",
+        "english": "Anything else?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Nie, dziękuję. To wszystko.",
+        "english": "No, thank you. That's everything."
+      },
+      {
+        "speaker": "B",
+        "polish": "Razem dwadzieścia jeden złotych. Płaci pan kartą czy gotówką?",
+        "english": "Twenty-one zloty altogether. Are you paying by card or cash?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Kartą. Czy mogę dostać paragon?",
+        "english": "By card. Can I have the receipt?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Oczywiście, proszę bardzo. Miłego dnia!",
+        "english": "Of course, here you are. Have a nice day!"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję, nawzajem. Do widzenia.",
+        "english": "Thank you, you too. Goodbye.",
+        "note": "nawzajem = likewise / same to you"
+      }
     ]
   },
   {
@@ -39,21 +98,83 @@
       "B": "Fryzjer · Barber"
     },
     "lines": [
-      { "speaker": "B", "polish": "Dzień dobry! Czy jest pan umówiony?", "english": "Good morning! Do you have an appointment?" },
-      { "speaker": "A", "polish": "Dzień dobry. Nie, czy jest wolny termin teraz?", "english": "Good morning. No, is there a free slot right now?" },
-      { "speaker": "B", "polish": "Tak, proszę usiąść. Jak pana ostrzyc?", "english": "Yes, please take a seat. How would you like your hair cut?" },
-      { "speaker": "A", "polish": "Poproszę krótko po bokach i trochę dłużej na górze.", "english": "Short on the sides and a bit longer on top, please." },
-      { "speaker": "B", "polish": "Na jaką długość po bokach? Numer dwa czy trzy?", "english": "What length on the sides? Number two or three?" },
-      { "speaker": "A", "polish": "Numer dwa, proszę.", "english": "Number two, please." },
-      { "speaker": "B", "polish": "A grzywkę zostawiamy?", "english": "And shall we keep the fringe?" },
-      { "speaker": "A", "polish": "Tak, ale proszę skrócić ją odrobinę.", "english": "Yes, but please shorten it a little.", "note": "odrobinę = just a little bit" },
-      { "speaker": "B", "polish": "Chce pan też podciąć brodę?", "english": "Would you like your beard trimmed as well?" },
-      { "speaker": "A", "polish": "Tak, proszę wyrównać i skrócić o pół centymetra.", "english": "Yes, please even it out and take off half a centimetre." },
-      { "speaker": "B", "polish": "Gotowe. Czy podoba się panu?", "english": "All done. Do you like it?" },
-      { "speaker": "A", "polish": "Bardzo dobrze, dziękuję. Ile płacę?", "english": "Very good, thank you. How much do I pay?" },
-      { "speaker": "B", "polish": "Strzyżenie i broda to sześćdziesiąt złotych.", "english": "The haircut and beard come to sixty zloty." },
-      { "speaker": "A", "polish": "Proszę bardzo. Reszty nie trzeba.", "english": "Here you are. Keep the change.", "note": "reszty nie trzeba = keep the change" },
-      { "speaker": "B", "polish": "Dziękuję! Zapraszam ponownie.", "english": "Thank you! Come again." }
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry! Czy jest pan umówiony?",
+        "english": "Good morning! Do you have an appointment?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Nie, czy jest wolny termin teraz?",
+        "english": "Good morning. No, is there a free slot right now?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, proszę usiąść. Jak pana ostrzyc?",
+        "english": "Yes, please take a seat. How would you like your hair cut?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Poproszę krótko po bokach i trochę dłużej na górze.",
+        "english": "Short on the sides and a bit longer on top, please."
+      },
+      {
+        "speaker": "B",
+        "polish": "Na jaką długość po bokach? Numer dwa czy trzy?",
+        "english": "What length on the sides? Number two or three?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Numer dwa, proszę.",
+        "english": "Number two, please."
+      },
+      {
+        "speaker": "B",
+        "polish": "A grzywkę zostawiamy?",
+        "english": "And shall we keep the fringe?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Tak, ale proszę skrócić ją odrobinę.",
+        "english": "Yes, but please shorten it a little.",
+        "note": "odrobinę = just a little bit"
+      },
+      {
+        "speaker": "B",
+        "polish": "Chce pan też podciąć brodę?",
+        "english": "Would you like your beard trimmed as well?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Tak, proszę wyrównać i skrócić o pół centymetra.",
+        "english": "Yes, please even it out and take off half a centimetre."
+      },
+      {
+        "speaker": "B",
+        "polish": "Gotowe. Czy podoba się panu?",
+        "english": "All done. Do you like it?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Bardzo dobrze, dziękuję. Ile płacę?",
+        "english": "Very good, thank you. How much do I pay?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Strzyżenie i broda to sześćdziesiąt złotych.",
+        "english": "The haircut and beard come to sixty zloty."
+      },
+      {
+        "speaker": "A",
+        "polish": "Proszę bardzo. Reszty nie trzeba.",
+        "english": "Here you are. Keep the change.",
+        "note": "reszty nie trzeba = keep the change"
+      },
+      {
+        "speaker": "B",
+        "polish": "Dziękuję! Zapraszam ponownie.",
+        "english": "Thank you! Come again."
+      }
     ]
   },
   {
@@ -68,19 +189,3008 @@
       "B": "Farmaceutka · Pharmacist"
     },
     "lines": [
-      { "speaker": "B", "polish": "Dzień dobry. Słucham pana?", "english": "Good morning. How can I help you?" },
-      { "speaker": "A", "polish": "Dzień dobry. Od wczoraj boli mnie gardło.", "english": "Good morning. My throat has been hurting since yesterday." },
-      { "speaker": "B", "polish": "Czy ma pan gorączkę albo katar?", "english": "Do you have a fever or a runny nose?" },
-      { "speaker": "A", "polish": "Trochę katar, ale gorączki nie mam.", "english": "A bit of a runny nose, but no fever." },
-      { "speaker": "B", "polish": "Proponuję tabletki do ssania i syrop.", "english": "I suggest lozenges and a syrup.", "note": "tabletki do ssania = lozenges (lit. tablets to suck)" },
-      { "speaker": "A", "polish": "Czy potrzebna jest recepta?", "english": "Is a prescription needed?" },
-      { "speaker": "B", "polish": "Nie, oba są bez recepty.", "english": "No, both are available without a prescription." },
-      { "speaker": "A", "polish": "Ile razy dziennie mam je brać?", "english": "How many times a day should I take them?" },
-      { "speaker": "B", "polish": "Syrop trzy razy dziennie po jedzeniu, tabletki co dwie godziny.", "english": "The syrup three times a day after meals, the lozenges every two hours." },
-      { "speaker": "A", "polish": "Dziękuję. Poproszę oba.", "english": "Thank you. I'll take both, please." },
-      { "speaker": "B", "polish": "Razem trzydzieści dwa złote. Proszę o paragon?", "english": "Thirty-two zloty altogether. Would you like a receipt?" },
-      { "speaker": "A", "polish": "Tak, poproszę. Dziękuję bardzo.", "english": "Yes, please. Thank you very much." },
-      { "speaker": "B", "polish": "Zdrowia życzę! Do widzenia.", "english": "Get well soon! Goodbye.", "note": "Zdrowia życzę = a common pharmacy farewell" }
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. Słucham pana?",
+        "english": "Good morning. How can I help you?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Od wczoraj boli mnie gardło.",
+        "english": "Good morning. My throat has been hurting since yesterday."
+      },
+      {
+        "speaker": "B",
+        "polish": "Czy ma pan gorączkę albo katar?",
+        "english": "Do you have a fever or a runny nose?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Trochę katar, ale gorączki nie mam.",
+        "english": "A bit of a runny nose, but no fever."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proponuję tabletki do ssania i syrop.",
+        "english": "I suggest lozenges and a syrup.",
+        "note": "tabletki do ssania = lozenges (lit. tablets to suck)"
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy potrzebna jest recepta?",
+        "english": "Is a prescription needed?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Nie, oba są bez recepty.",
+        "english": "No, both are available without a prescription."
+      },
+      {
+        "speaker": "A",
+        "polish": "Ile razy dziennie mam je brać?",
+        "english": "How many times a day should I take them?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Syrop trzy razy dziennie po jedzeniu, tabletki co dwie godziny.",
+        "english": "The syrup three times a day after meals, the lozenges every two hours."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję. Poproszę oba.",
+        "english": "Thank you. I'll take both, please."
+      },
+      {
+        "speaker": "B",
+        "polish": "Razem trzydzieści dwa złote. Proszę o paragon?",
+        "english": "Thirty-two zloty altogether. Would you like a receipt?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Tak, poproszę. Dziękuję bardzo.",
+        "english": "Yes, please. Thank you very much."
+      },
+      {
+        "speaker": "B",
+        "polish": "Zdrowia życzę! Do widzenia.",
+        "english": "Get well soon! Goodbye.",
+        "note": "Zdrowia życzę = a common pharmacy farewell"
+      }
+    ]
+  },
+  {
+    "id": "buying-train-ticket",
+    "title": "Buying a train ticket",
+    "titlePolish": "Kupowanie biletu na pociąg",
+    "level": "A2",
+    "scenario": "Travel & Transport",
+    "description": "Buying a one-way train ticket, asking about reservation, price, and platform.",
+    "roles": {
+      "A": "Pasażer · Passenger",
+      "B": "Kasjer/Kasjerka · Ticket clerk"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry, słucham.",
+        "english": "Good morning. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Poproszę bilet do Krakowa.",
+        "english": "Good morning. A ticket to Kraków, please.",
+        "note": "poproszę is a natural polite way to ask for something at a counter."
+      },
+      {
+        "speaker": "B",
+        "polish": "W jedną stronę czy powrotny?",
+        "english": "One way or return?",
+        "note": "w jedną stronę = one way; bilet powrotny = return ticket."
+      },
+      {
+        "speaker": "A",
+        "polish": "W jedną stronę, proszę.",
+        "english": "One way, please."
+      },
+      {
+        "speaker": "B",
+        "polish": "Na który pociąg?",
+        "english": "Which train?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Na pociąg o dziesiątej trzydzieści.",
+        "english": "The train at ten thirty."
+      },
+      {
+        "speaker": "B",
+        "polish": "Druga klasa?",
+        "english": "Second class?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Tak. Czy muszę rezerwować miejsce?",
+        "english": "Yes. Do I need to reserve a seat?",
+        "note": "muszę + infinitive means 'I have to' or 'do I need to' in questions."
+      },
+      {
+        "speaker": "B",
+        "polish": "Nie, rezerwacja nie jest potrzebna.",
+        "english": "No, a reservation isn't necessary."
+      },
+      {
+        "speaker": "A",
+        "polish": "Ile kosztuje bilet?",
+        "english": "How much is the ticket?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Sześćdziesiąt osiem złotych.",
+        "english": "Sixty-eight zloty."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy mogę zapłacić kartą?",
+        "english": "Can I pay by card?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Oczywiście. Proszę przyłożyć kartę.",
+        "english": "Of course. Please tap your card."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję. Z którego peronu odjeżdża pociąg?",
+        "english": "Thank you. Which platform does the train leave from?",
+        "note": "z którego peronu uses the genitive after z when asking 'from which platform?'"
+      },
+      {
+        "speaker": "B",
+        "polish": "Z peronu trzeciego. Do widzenia.",
+        "english": "From platform three. Goodbye."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję, do widzenia.",
+        "english": "Thank you, goodbye."
+      }
+    ]
+  },
+  {
+    "id": "asking-train-departure",
+    "title": "Asking about a train departure",
+    "titlePolish": "Pytanie o odjazd pociągu",
+    "level": "A2",
+    "scenario": "Travel & Transport",
+    "description": "Asking when a train leaves, where it departs from, and whether it is direct.",
+    "roles": {
+      "A": "Pasażer · Passenger",
+      "B": "Pracownik informacji · Information clerk"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. W czym mogę pomóc?",
+        "english": "Good morning. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. O której odjeżdża następny pociąg do Gdańska?",
+        "english": "Good morning. What time does the next train to Gdańsk leave?",
+        "note": "o której asks 'at what time?'"
+      },
+      {
+        "speaker": "B",
+        "polish": "O jedenastej piętnaście.",
+        "english": "At eleven fifteen."
+      },
+      {
+        "speaker": "A",
+        "polish": "Z którego peronu?",
+        "english": "From which platform?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Z peronu piątego.",
+        "english": "From platform five."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy to jest pociąg bezpośredni?",
+        "english": "Is it a direct train?",
+        "note": "bezpośredni = direct, with no change required."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, nie trzeba się przesiadać.",
+        "english": "Yes, you don't need to change trains.",
+        "note": "przesiadać się = to change from one train, bus, or tram to another."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy zatrzymuje się w Malborku?",
+        "english": "Does it stop in Malbork?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, zatrzymuje się tam na kilka minut.",
+        "english": "Yes, it stops there for a few minutes."
+      },
+      {
+        "speaker": "A",
+        "polish": "Ile trwa podróż do Gdańska?",
+        "english": "How long is the journey to Gdańsk?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Około trzech godzin.",
+        "english": "About three hours."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy pociąg odjeżdża punktualnie?",
+        "english": "Is the train leaving on time?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, na razie nie ma opóźnienia.",
+        "english": "Yes, there is no delay at the moment.",
+        "note": "na razie = for now / at the moment."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobrze, dziękuję za informację.",
+        "english": "All right, thank you for the information."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę bardzo. Miłej podróży.",
+        "english": "You're welcome. Have a good journey."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję, do widzenia.",
+        "english": "Thank you, goodbye."
+      }
+    ]
+  },
+  {
+    "id": "delayed-train",
+    "title": "Dealing with a delayed train",
+    "titlePolish": "Opóźniony pociąg",
+    "level": "A2",
+    "scenario": "Travel & Transport",
+    "description": "Checking a train delay, expected departure time, platform, and connection.",
+    "roles": {
+      "A": "Pasażer · Passenger",
+      "B": "Pracownik informacji · Information clerk"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. Słucham.",
+        "english": "Good morning. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Czy pociąg do Poznania jest opóźniony?",
+        "english": "Good morning. Is the train to Poznań delayed?",
+        "note": "opóźniony = delayed."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, ma około dwudziestu pięciu minut opóźnienia.",
+        "english": "Yes, it is about twenty-five minutes late."
+      },
+      {
+        "speaker": "A",
+        "polish": "O której teraz odjedzie?",
+        "english": "What time will it leave now?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Około czternastej czterdzieści.",
+        "english": "At about two forty p.m."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy nadal odjeżdża z peronu drugiego?",
+        "english": "Is it still leaving from platform two?",
+        "note": "nadal = still, continuing to be the case."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, peron się nie zmienił.",
+        "english": "Yes, the platform hasn't changed."
+      },
+      {
+        "speaker": "A",
+        "polish": "Mam przesiadkę w Poznaniu. Czy zdążę?",
+        "english": "I have a connection in Poznań. Will I make it?",
+        "note": "zdążyć means to make it in time."
+      },
+      {
+        "speaker": "B",
+        "polish": "Ma pan trzydzieści minut na przesiadkę.",
+        "english": "You have thirty minutes to change trains."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy mogę sprawdzić następny pociąg?",
+        "english": "Can I check the next train?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak. Następny jest o szesnastej dziesięć.",
+        "english": "Yes. The next one is at four ten p.m."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobrze. Poczekam na ten pierwszy.",
+        "english": "All right. I'll wait for the first one."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę słuchać komunikatów na dworcu.",
+        "english": "Please listen for announcements at the station.",
+        "note": "komunikat on a station is an announcement or public information message."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję za pomoc. Do widzenia.",
+        "english": "Thank you for your help. Goodbye."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę bardzo. Do widzenia.",
+        "english": "You're welcome. Goodbye."
+      }
+    ]
+  },
+  {
+    "id": "lost-luggage",
+    "title": "Lost luggage",
+    "titlePolish": "Zagubiony bagaż",
+    "level": "A2",
+    "scenario": "Travel & Transport",
+    "description": "Reporting a missing suitcase and giving details so staff can look for it.",
+    "roles": {
+      "A": "Pasażer · Passenger",
+      "B": "Pracownik biura rzeczy znalezionych · Lost property staff"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. W czym mogę pomóc?",
+        "english": "Good morning. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Nie mogę znaleźć mojej walizki.",
+        "english": "Good morning. I can't find my suitcase."
+      },
+      {
+        "speaker": "B",
+        "polish": "Gdzie ją pan ostatnio widział?",
+        "english": "Where did you last see it?",
+        "note": "walizka is feminine, so ją means 'it' here."
+      },
+      {
+        "speaker": "A",
+        "polish": "W pociągu z Warszawy do Krakowa.",
+        "english": "On the train from Warsaw to Kraków."
+      },
+      {
+        "speaker": "B",
+        "polish": "Jak wygląda walizka?",
+        "english": "What does the suitcase look like?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Jest duża, czarna i ma czerwony pasek.",
+        "english": "It's large and black, with a red strap."
+      },
+      {
+        "speaker": "B",
+        "polish": "Czy ma etykietę z nazwiskiem?",
+        "english": "Does it have a label with your name?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Tak, jest tam moje nazwisko i numer telefonu.",
+        "english": "Yes, my name and phone number are on it.",
+        "note": "nazwisko means surname or family name."
+      },
+      {
+        "speaker": "B",
+        "polish": "Co jest w środku?",
+        "english": "What's inside?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Ubrania, buty i mała kosmetyczka.",
+        "english": "Clothes, shoes, and a small toiletry bag."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę wypełnić ten formularz.",
+        "english": "Please fill in this form.",
+        "note": "wypełnić formularz = to fill in a form."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobrze. Czy mogę podać też adres hotelu?",
+        "english": "All right. Can I also give the hotel address?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, proszę. Skontaktujemy się z panem, jeśli znajdziemy walizkę.",
+        "english": "Yes, please. We'll contact you if we find the suitcase.",
+        "note": "z panem is the polite form used when speaking to a male customer; to a woman: z panią."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję. Mam nadzieję, że się znajdzie.",
+        "english": "Thank you. I hope it turns up."
+      },
+      {
+        "speaker": "B",
+        "polish": "Zrobimy, co możemy. Do widzenia.",
+        "english": "We'll do what we can. Goodbye."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję, do widzenia.",
+        "english": "Thank you, goodbye."
+      }
+    ]
+  },
+  {
+    "id": "taking-taxi",
+    "title": "Taking a taxi",
+    "titlePolish": "Przejazd taksówką",
+    "level": "A2",
+    "scenario": "Travel & Transport",
+    "description": "Taking a taxi to a hotel, asking about the fare, payment, and where to stop.",
+    "roles": {
+      "A": "Pasażer · Passenger",
+      "B": "Taksówkarz/Taksówkarka · Taxi driver"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. Dokąd jedziemy?",
+        "english": "Good morning. Where are we going?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Proszę mnie zawieźć pod ten adres.",
+        "english": "Good morning. Please take me to this address.",
+        "note": "pod + address is common when asking to be taken to a specific building or address."
+      },
+      {
+        "speaker": "B",
+        "polish": "To hotel przy ulicy Długiej, tak?",
+        "english": "That's the hotel on Długa Street, right?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Tak. Ile mniej więcej kosztuje przejazd?",
+        "english": "Yes. About how much will the ride cost?",
+        "note": "mniej więcej = more or less / approximately."
+      },
+      {
+        "speaker": "B",
+        "polish": "Około czterdziestu złotych, jeśli nie ma korków.",
+        "english": "About forty zloty, if there isn't much traffic."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobrze. Proszę włączyć taksometr.",
+        "english": "All right. Please turn on the meter.",
+        "note": "taksometr = taxi meter."
+      },
+      {
+        "speaker": "B",
+        "polish": "Oczywiście. Ma pan dużo bagażu?",
+        "english": "Of course. Do you have a lot of luggage?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Tylko jedną walizkę.",
+        "english": "Just one suitcase."
+      },
+      {
+        "speaker": "B",
+        "polish": "Dobrze. Dojazd zajmie około piętnastu minut.",
+        "english": "All right. The drive will take about fifteen minutes."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy mogę zapłacić kartą?",
+        "english": "Can I pay by card?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, kartą albo gotówką.",
+        "english": "Yes, by card or cash."
+      },
+      {
+        "speaker": "A",
+        "polish": "Proszę zatrzymać się tutaj, przed wejściem.",
+        "english": "Please stop here, in front of the entrance.",
+        "note": "zatrzymać się = to stop; proszę zatrzymać się is a polite request."
+      },
+      {
+        "speaker": "B",
+        "polish": "Jasne. To będzie trzydzieści osiem złotych.",
+        "english": "Sure. That will be thirty-eight zloty."
+      },
+      {
+        "speaker": "A",
+        "polish": "Kartą, proszę. Czy mogę dostać paragon?",
+        "english": "By card, please. Can I get a receipt?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Oczywiście. Proszę bardzo. Miłego dnia.",
+        "english": "Of course. Here you are. Have a nice day."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję, do widzenia.",
+        "english": "Thank you, goodbye."
+      }
+    ]
+  },
+  {
+    "id": "renting-bicycle",
+    "title": "Renting a bicycle",
+    "titlePolish": "Wypożyczanie roweru",
+    "level": "A2",
+    "scenario": "Travel & Transport",
+    "description": "Renting a bicycle for a day and asking about price, lock, return time, and payment.",
+    "roles": {
+      "A": "Klient · Customer",
+      "B": "Pracownik wypożyczalni · Rental staff"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. W czym mogę pomóc?",
+        "english": "Good morning. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Chcę wypożyczyć rower na jeden dzień.",
+        "english": "Good morning. I'd like to rent a bicycle for one day.",
+        "note": "wypożyczyć = to rent or borrow for a limited time."
+      },
+      {
+        "speaker": "B",
+        "polish": "Rower miejski czy trekkingowy?",
+        "english": "A city bike or a trekking bike?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Miejski, proszę. Ile kosztuje wypożyczenie?",
+        "english": "A city bike, please. How much is the rental?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Sześćdziesiąt złotych za dzień.",
+        "english": "Sixty zloty per day.",
+        "note": "za dzień = per day / for a day."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy w cenie jest zapięcie?",
+        "english": "Is a lock included in the price?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, zapięcie i kask są w cenie.",
+        "english": "Yes, a lock and helmet are included."
+      },
+      {
+        "speaker": "A",
+        "polish": "Świetnie. O której muszę oddać rower?",
+        "english": "Great. What time do I have to return the bike?",
+        "note": "oddać means to return something you have borrowed or rented."
+      },
+      {
+        "speaker": "B",
+        "polish": "Najpóźniej o dziewiętnastej.",
+        "english": "By seven p.m. at the latest."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy mogę zapłacić kartą?",
+        "english": "Can I pay by card?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak. Potrzebuję też dokumentu tożsamości.",
+        "english": "Yes. I also need an identity document.",
+        "note": "dokument tożsamości = identity document or ID."
+      },
+      {
+        "speaker": "A",
+        "polish": "Proszę, tutaj jest mój paszport.",
+        "english": "Here you are, this is my passport."
+      },
+      {
+        "speaker": "B",
+        "polish": "Dziękuję. Proszę sprawdzić hamulce i siodełko.",
+        "english": "Thank you. Please check the brakes and saddle."
+      },
+      {
+        "speaker": "A",
+        "polish": "Wszystko jest w porządku.",
+        "english": "Everything is fine."
+      },
+      {
+        "speaker": "B",
+        "polish": "Świetnie. Miłej jazdy i do zobaczenia wieczorem.",
+        "english": "Great. Enjoy the ride and see you this evening."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję, do zobaczenia.",
+        "english": "Thank you, see you."
+      }
+    ]
+  },
+  {
+    "id": "asking-directions-station",
+    "title": "Asking for directions",
+    "titlePolish": "Pytanie o drogę",
+    "level": "A2",
+    "scenario": "Places & Directions",
+    "description": "Asking a local how to walk to the railway station and checking the route.",
+    "roles": {
+      "A": "Turysta/Turystka · Tourist",
+      "B": "Przechodzień/Przechodnia · Local passer-by"
+    },
+    "lines": [
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Przepraszam, gdzie jest dworzec główny?",
+        "english": "Good morning. Excuse me, where is the main station?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. To niedaleko.",
+        "english": "Good morning. It's not far."
+      },
+      {
+        "speaker": "A",
+        "polish": "Jak tam mogę się dostać?",
+        "english": "How can I get there?",
+        "note": "dostać się = to get to a place."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę iść prosto do świateł.",
+        "english": "Go straight ahead to the traffic lights."
+      },
+      {
+        "speaker": "A",
+        "polish": "A potem?",
+        "english": "And then?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Na światłach proszę skręcić w lewo.",
+        "english": "At the lights, turn left.",
+        "note": "skręcić w lewo / w prawo = turn left / right."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy dworzec jest po lewej stronie?",
+        "english": "Is the station on the left?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Nie, po prawej, naprzeciwko dużego hotelu.",
+        "english": "No, on the right, opposite a large hotel.",
+        "note": "naprzeciwko + genitive: naprzeciwko hotelu."
+      },
+      {
+        "speaker": "A",
+        "polish": "Jak daleko to jest stąd?",
+        "english": "How far is it from here?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Około dziesięciu minut pieszo.",
+        "english": "About ten minutes on foot.",
+        "note": "pieszo = on foot."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy po drodze jest jakiś znak?",
+        "english": "Is there any sign on the way?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, zobaczy pan znak z napisem „Dworzec Główny”.",
+        "english": "Yes, you'll see a sign saying 'Main Station'."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobrze, chyba rozumiem.",
+        "english": "All right, I think I understand."
+      },
+      {
+        "speaker": "B",
+        "polish": "Prosto, potem w lewo i dworzec będzie po prawej.",
+        "english": "Straight ahead, then left, and the station will be on the right."
+      },
+      {
+        "speaker": "A",
+        "polish": "Bardzo dziękuję za pomoc. Do widzenia.",
+        "english": "Thank you very much for your help. Goodbye."
+      },
+      {
+        "speaker": "B",
+        "polish": "Nie ma za co. Do widzenia.",
+        "english": "You're welcome. Goodbye."
+      }
+    ]
+  },
+  {
+    "id": "finding-hotel",
+    "title": "Finding a hotel",
+    "titlePolish": "Szukanie hotelu",
+    "level": "A2",
+    "scenario": "Travel & Transport",
+    "description": "Asking at tourist information for an inexpensive nearby hotel with a single room.",
+    "roles": {
+      "A": "Turysta/Turystka · Tourist",
+      "B": "Pracowniczka informacji turystycznej · Tourist information clerk"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. W czym mogę pomóc?",
+        "english": "Good morning. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Szukam niedrogiego hotelu w centrum.",
+        "english": "Good morning. I'm looking for an inexpensive hotel in the city centre.",
+        "note": "szukam + genitive: szukam hotelu."
+      },
+      {
+        "speaker": "B",
+        "polish": "Na ile nocy?",
+        "english": "For how many nights?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Na dwie noce. Potrzebuję pokoju jednoosobowego.",
+        "english": "For two nights. I need a single room.",
+        "note": "pokój jednoosobowy = single room."
+      },
+      {
+        "speaker": "B",
+        "polish": "Polecam hotel Amber. Jest blisko rynku.",
+        "english": "I recommend the Amber Hotel. It's close to the market square."
+      },
+      {
+        "speaker": "A",
+        "polish": "Ile kosztuje pokój za noc?",
+        "english": "How much is the room per night?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Około dwustu czterdziestu złotych ze śniadaniem.",
+        "english": "About 240 zloty with breakfast."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy może pani polecić coś tańszego?",
+        "english": "Could you recommend something cheaper?",
+        "note": "Czy może pani... is a polite way to address a female staff member."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak. Pensjonat Park kosztuje sto osiemdziesiąt złotych.",
+        "english": "Yes. Park Guesthouse costs 180 zloty."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy jest daleko stąd?",
+        "english": "Is it far from here?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Nie, około piętnastu minut pieszo.",
+        "english": "No, about fifteen minutes on foot."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy ma pani adres?",
+        "english": "Do you have the address?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak. Ulica Zielona dwanaście.",
+        "english": "Yes. 12 Zielona Street."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy może mi pani pokazać na mapie?",
+        "english": "Could you show me on the map?",
+        "note": "na mapie = on the map; locative case after na for location."
+      },
+      {
+        "speaker": "B",
+        "polish": "Oczywiście. Proszę bardzo.",
+        "english": "Of course. Here you are."
+      },
+      {
+        "speaker": "A",
+        "polish": "Bardzo dziękuję. Do widzenia.",
+        "english": "Thank you very much. Goodbye."
+      }
+    ]
+  },
+  {
+    "id": "hotel-check-in",
+    "title": "Checking into a hotel",
+    "titlePolish": "Meldowanie się w hotelu",
+    "level": "A2",
+    "scenario": "Travel & Transport",
+    "description": "Checking in with a reservation, showing ID, and asking about breakfast and the room.",
+    "roles": {
+      "A": "Gość · Guest",
+      "B": "Recepcjonista/Recepcjonistka · Receptionist"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. Witamy w hotelu.",
+        "english": "Good morning. Welcome to the hotel."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Mam rezerwację na nazwisko Brown.",
+        "english": "Good morning. I have a reservation under the name Brown.",
+        "note": "na nazwisko + surname = under the name of."
+      },
+      {
+        "speaker": "B",
+        "polish": "Już sprawdzam. Rezerwacja na trzy noce, zgadza się?",
+        "english": "I'll check. A reservation for three nights, correct?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Tak, zgadza się.",
+        "english": "Yes, that's correct."
+      },
+      {
+        "speaker": "B",
+        "polish": "Czy mogę prosić o paszport albo dowód osobisty?",
+        "english": "May I see your passport or ID card?",
+        "note": "Czy mogę prosić o... is a standard polite request."
+      },
+      {
+        "speaker": "A",
+        "polish": "Oczywiście. Proszę bardzo.",
+        "english": "Of course. Here you are."
+      },
+      {
+        "speaker": "B",
+        "polish": "Dziękuję. Pokój jest na czwartym piętrze.",
+        "english": "Thank you. The room is on the fourth floor."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy w hotelu jest winda?",
+        "english": "Is there a lift in the hotel?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, winda jest po prawej stronie.",
+        "english": "Yes, the lift is on the right."
+      },
+      {
+        "speaker": "A",
+        "polish": "O której jest śniadanie?",
+        "english": "What time is breakfast?",
+        "note": "o której = at what time."
+      },
+      {
+        "speaker": "B",
+        "polish": "Od siódmej do dziesiątej, na parterze.",
+        "english": "From seven to ten, on the ground floor."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy Wi-Fi jest bezpłatne?",
+        "english": "Is Wi-Fi free?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak. Hasło jest na karcie do pokoju.",
+        "english": "Yes. The password is on the room card.",
+        "note": "hasło can mean password in this context."
+      },
+      {
+        "speaker": "A",
+        "polish": "Świetnie. Dziękuję za informacje.",
+        "english": "Great. Thank you for the information."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę bardzo. Oto karta do pokoju. Miłego pobytu.",
+        "english": "You're welcome. Here's your room card. Enjoy your stay."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję bardzo. Do widzenia.",
+        "english": "Thank you very much. Goodbye."
+      }
+    ]
+  },
+  {
+    "id": "hotel-requests",
+    "title": "Making requests at a hotel",
+    "titlePolish": "Prośby w hotelu",
+    "level": "A2",
+    "scenario": "Travel & Transport",
+    "description": "Asking reception for a key, clean towel, extra blanket, breakfast time, and a wake-up call.",
+    "roles": {
+      "A": "Gość · Guest",
+      "B": "Recepcjonista/Recepcjonistka · Receptionist"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dobry wieczór. W czym mogę pomóc?",
+        "english": "Good evening. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobry wieczór. Czy mogę prosić o klucz do pokoju sto osiem?",
+        "english": "Good evening. Could I have the key to room 108?",
+        "note": "Czy mogę prosić o... is a very useful polite request pattern."
+      },
+      {
+        "speaker": "B",
+        "polish": "Oczywiście. Proszę bardzo.",
+        "english": "Of course. Here you are."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję. Mam jeszcze jedną prośbę.",
+        "english": "Thank you. I have one more request."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, słucham.",
+        "english": "Yes, go ahead."
+      },
+      {
+        "speaker": "A",
+        "polish": "Ręcznik w moim pokoju nie jest czysty.",
+        "english": "The towel in my room isn't clean."
+      },
+      {
+        "speaker": "B",
+        "polish": "Przepraszam. Zaraz przyniesiemy czysty ręcznik.",
+        "english": "I'm sorry. We'll bring a clean towel right away.",
+        "note": "zaraz = right away / in a moment."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy mogę też prosić o dodatkowy koc?",
+        "english": "Could I also have an extra blanket?",
+        "note": "prosić o + accusative: prosić o koc, ręcznik, klucz."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, oczywiście.",
+        "english": "Yes, of course."
+      },
+      {
+        "speaker": "A",
+        "polish": "O której jutro jest śniadanie?",
+        "english": "What time is breakfast tomorrow?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Od siódmej do dziesiątej.",
+        "english": "From seven to ten."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy mogą mnie państwo obudzić o szóstej trzydzieści?",
+        "english": "Could you wake me at six thirty?",
+        "note": "państwo is a polite way to address staff or a group collectively."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, zapisuję pobudkę na szóstą trzydzieści.",
+        "english": "Yes, I'll schedule a wake-up call for six thirty."
+      },
+      {
+        "speaker": "A",
+        "polish": "To wszystko. Bardzo dziękuję za pomoc.",
+        "english": "That's all. Thank you very much for your help."
+      },
+      {
+        "speaker": "B",
+        "polish": "Nie ma za co. Spokojnej nocy.",
+        "english": "You're welcome. Have a restful night."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję. Dobranoc.",
+        "english": "Thank you. Good night."
+      }
+    ]
+  },
+  {
+    "id": "hotel-room-problem",
+    "title": "Reporting a problem with a hotel room",
+    "titlePolish": "Problem z pokojem hotelowym",
+    "level": "A2",
+    "scenario": "Travel & Transport",
+    "description": "Reporting that the air conditioning does not work and asking for help or another room.",
+    "roles": {
+      "A": "Gość · Guest",
+      "B": "Recepcjonista/Recepcjonistka · Receptionist"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dobry wieczór. W czym mogę pomóc?",
+        "english": "Good evening. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobry wieczór. Mam problem z pokojem.",
+        "english": "Good evening. I have a problem with my room."
+      },
+      {
+        "speaker": "B",
+        "polish": "Co się stało?",
+        "english": "What happened?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Klimatyzacja nie działa, a w pokoju jest bardzo gorąco.",
+        "english": "The air conditioning isn't working, and the room is very hot.",
+        "note": "nie działa = it does not work; useful for equipment and machines."
+      },
+      {
+        "speaker": "B",
+        "polish": "Rozumiem. Jaki ma pan numer pokoju?",
+        "english": "I understand. What is your room number?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dwieście czternaście.",
+        "english": "Two hundred and fourteen."
+      },
+      {
+        "speaker": "B",
+        "polish": "Mogę wysłać kogoś z obsługi.",
+        "english": "I can send someone from the staff."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobrze. Czy może ktoś przyjść teraz?",
+        "english": "All right. Can someone come now?",
+        "note": "Czy może ktoś... is a natural way to ask if someone can do something."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, za około dziesięć minut.",
+        "english": "Yes, in about ten minutes."
+      },
+      {
+        "speaker": "A",
+        "polish": "A jeśli nie da się naprawić klimatyzacji?",
+        "english": "And if the air conditioning cannot be fixed?",
+        "note": "nie da się + infinitive = it cannot be done / it is not possible to do."
+      },
+      {
+        "speaker": "B",
+        "polish": "Wtedy możemy zaproponować inny pokój.",
+        "english": "Then we can offer another room."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy jest jakiś cichszy pokój?",
+        "english": "Is there a quieter room?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, mamy jeden od strony podwórka.",
+        "english": "Yes, we have one facing the courtyard.",
+        "note": "od strony... = on the side facing..."
+      },
+      {
+        "speaker": "A",
+        "polish": "Świetnie. Dziękuję za pomoc.",
+        "english": "Great. Thank you for your help."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę bardzo. Zaraz się tym zajmiemy.",
+        "english": "You're welcome. We'll take care of it right away."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję. Dobranoc.",
+        "english": "Thank you. Good night."
+      }
+    ]
+  },
+  {
+    "id": "hotel-checkout",
+    "title": "Checking out of a hotel",
+    "titlePolish": "Wymeldowanie z hotelu",
+    "level": "A2",
+    "scenario": "Travel & Transport",
+    "description": "Checking out, asking for the bill, paying, and leaving luggage at reception.",
+    "roles": {
+      "A": "Gość · Guest",
+      "B": "Recepcjonista/Recepcjonistka · Receptionist"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. Słucham.",
+        "english": "Good morning. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Chcę się wymeldować.",
+        "english": "Good morning. I'd like to check out.",
+        "note": "wymeldować się = to check out of a hotel."
+      },
+      {
+        "speaker": "B",
+        "polish": "Oczywiście. Jaki numer pokoju?",
+        "english": "Of course. What is your room number?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Sto dwadzieścia trzy.",
+        "english": "One hundred and twenty-three."
+      },
+      {
+        "speaker": "B",
+        "polish": "Już sprawdzam. Czy korzystał pan z minibaru?",
+        "english": "I'll check. Did you use the minibar?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Nie, nie korzystałem.",
+        "english": "No, I didn't.",
+        "note": "korzystać z + genitive: korzystać z minibaru."
+      },
+      {
+        "speaker": "B",
+        "polish": "W takim razie razem jest pięćset czterdzieści złotych.",
+        "english": "In that case, the total is 540 zloty."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy mogę zapłacić kartą?",
+        "english": "Can I pay by card?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, oczywiście. Proszę przyłożyć kartę.",
+        "english": "Yes, of course. Please tap your card."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy mogę dostać fakturę?",
+        "english": "Can I get an invoice?",
+        "note": "faktura = invoice; paragon = receipt."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak. Na firmę czy na osobę prywatną?",
+        "english": "Yes. For a company or a private individual?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Na osobę prywatną, proszę.",
+        "english": "For a private individual, please."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę bardzo. Czy to wszystko?",
+        "english": "Here you are. Is that everything?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy mogę zostawić bagaż do popołudnia?",
+        "english": "Can I leave my luggage here until the afternoon?",
+        "note": "zostawić bagaż = to leave luggage."
+      },
+      {
+        "speaker": "B",
+        "polish": "Oczywiście. Przechowalnia jest obok recepcji.",
+        "english": "Of course. The luggage room is next to reception."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję bardzo. Do widzenia.",
+        "english": "Thank you very much. Goodbye."
+      }
+    ]
+  },
+  {
+    "id": "buying-sim-card",
+    "title": "Buying a SIM card",
+    "titlePolish": "Kupowanie karty SIM",
+    "level": "A2",
+    "scenario": "Technology & Media",
+    "description": "Buying a prepaid SIM card and asking about data, calls, activation, and price.",
+    "roles": {
+      "A": "Klient · Customer",
+      "B": "Sprzedawca/Sprzedawczyni · Sales assistant"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. W czym mogę pomóc?",
+        "english": "Good morning. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Chcę kupić kartę SIM.",
+        "english": "Good morning. I'd like to buy a SIM card."
+      },
+      {
+        "speaker": "B",
+        "polish": "Na kartę czy abonament?",
+        "english": "Prepaid or contract?",
+        "note": "na kartę = prepaid; abonament = contract / monthly plan."
+      },
+      {
+        "speaker": "A",
+        "polish": "Na kartę, proszę.",
+        "english": "Prepaid, please."
+      },
+      {
+        "speaker": "B",
+        "polish": "Ile internetu pan potrzebuje?",
+        "english": "How much data do you need?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Około dwudziestu gigabajtów.",
+        "english": "About twenty gigabytes."
+      },
+      {
+        "speaker": "B",
+        "polish": "Mamy pakiet z dwudziestoma pięcioma gigabajtami.",
+        "english": "We have a package with twenty-five gigabytes."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy rozmowy w Polsce są w cenie?",
+        "english": "Are calls within Poland included?",
+        "note": "w cenie = included in the price."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, rozmowy i SMS-y są bez limitu.",
+        "english": "Yes, calls and texts are unlimited."
+      },
+      {
+        "speaker": "A",
+        "polish": "Ile kosztuje ten pakiet?",
+        "english": "How much is this package?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Trzydzieści pięć złotych.",
+        "english": "Thirty-five zloty."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy karta działa od razu?",
+        "english": "Does the card work immediately?",
+        "note": "od razu = immediately / right away."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, ale trzeba ją najpierw zarejestrować.",
+        "english": "Yes, but it has to be registered first.",
+        "note": "trzeba + infinitive = it is necessary to / one has to."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobrze. Poproszę ten pakiet.",
+        "english": "All right. I'll take that package."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę pokazać paszport. Zaraz wszystko aktywujemy.",
+        "english": "Please show your passport. We'll activate everything in a moment."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję bardzo.",
+        "english": "Thank you very much."
+      }
+    ]
+  },
+  {
+    "id": "internet-printing",
+    "title": "Using internet and printing services",
+    "titlePolish": "Internet i drukowanie",
+    "level": "A2",
+    "scenario": "Technology & Media",
+    "description": "Asking to use a computer, print documents, and pay for the service.",
+    "roles": {
+      "A": "Klient · Customer",
+      "B": "Pracownik punktu usługowego · Service desk staff"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. W czym mogę pomóc?",
+        "english": "Good morning. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Czy mogę skorzystać z komputera?",
+        "english": "Good morning. Can I use a computer?",
+        "note": "skorzystać z + genitive: skorzystać z komputera."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak. Potrzebuje pan internetu?",
+        "english": "Yes. Do you need internet access?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Tak, i chcę też wydrukować dwa dokumenty.",
+        "english": "Yes, and I also want to print two documents."
+      },
+      {
+        "speaker": "B",
+        "polish": "Dokumenty są na pendrivie czy w e-mailu?",
+        "english": "Are the documents on a USB drive or in your email?"
+      },
+      {
+        "speaker": "A",
+        "polish": "W e-mailu.",
+        "english": "In my email."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę usiąść przy komputerze numer trzy.",
+        "english": "Please sit at computer number three."
+      },
+      {
+        "speaker": "A",
+        "polish": "Ile kosztuje korzystanie z internetu?",
+        "english": "How much does internet use cost?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Dziesięć złotych za godzinę.",
+        "english": "Ten zloty per hour.",
+        "note": "za godzinę = per hour."
+      },
+      {
+        "speaker": "A",
+        "polish": "A ile kosztuje jedna strona wydruku?",
+        "english": "And how much is one printed page?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Jedna złotówka za stronę czarno-białą.",
+        "english": "One zloty per black-and-white page.",
+        "note": "czarno-biały = black and white."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobrze. Potrzebuję tylko dwóch stron.",
+        "english": "All right. I only need two pages."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę wysłać plik na ten adres e-mail.",
+        "english": "Please send the file to this email address."
+      },
+      {
+        "speaker": "A",
+        "polish": "Gotowe. Czy mogę zapłacić kartą?",
+        "english": "Done. Can I pay by card?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak. Razem dwanaście złotych.",
+        "english": "Yes. Twelve zloty altogether.",
+        "note": "razem = altogether / in total."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję. Do widzenia.",
+        "english": "Thank you. Goodbye."
+      }
+    ]
+  },
+  {
+    "id": "sending-parcel-post-office",
+    "title": "Sending a parcel at the post office",
+    "titlePolish": "Wysyłanie paczki na poczcie",
+    "level": "A2",
+    "scenario": "Administration & Services",
+    "description": "Sending a parcel abroad and asking about delivery options, price, and tracking.",
+    "roles": {
+      "A": "Klient · Customer",
+      "B": "Pracownik poczty · Postal clerk"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. W czym mogę pomóc?",
+        "english": "Good morning. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Chcę wysłać tę paczkę do Niemiec.",
+        "english": "Good morning. I'd like to send this parcel to Germany."
+      },
+      {
+        "speaker": "B",
+        "polish": "Zwykłą czy priorytetową?",
+        "english": "Standard or priority?",
+        "note": "przesyłka priorytetowa is priority mail."
+      },
+      {
+        "speaker": "A",
+        "polish": "Priorytetową, proszę. Ile idzie taka paczka?",
+        "english": "Priority, please. How long does a parcel like that take?",
+        "note": "Ile idzie...? is a common spoken way to ask how long delivery takes."
+      },
+      {
+        "speaker": "B",
+        "polish": "Zwykle trzy do pięciu dni roboczych.",
+        "english": "Usually three to five business days."
+      },
+      {
+        "speaker": "A",
+        "polish": "Ile kosztuje wysyłka?",
+        "english": "How much is postage?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Najpierw muszę zważyć paczkę.",
+        "english": "First I need to weigh the parcel.",
+        "note": "zważyć = to weigh."
+      },
+      {
+        "speaker": "A",
+        "polish": "Oczywiście.",
+        "english": "Of course."
+      },
+      {
+        "speaker": "B",
+        "polish": "Paczka waży dwa i pół kilograma. Cena to sześćdziesiąt dwa złote.",
+        "english": "The parcel weighs two and a half kilograms. The price is 62 zloty."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy mogę dostać numer do śledzenia przesyłki?",
+        "english": "Can I get a tracking number?",
+        "note": "śledzenie przesyłki = shipment tracking."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, numer będzie na potwierdzeniu.",
+        "english": "Yes, the number will be on the confirmation."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy muszę wypełnić jakiś formularz?",
+        "english": "Do I need to fill in a form?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, proszę wpisać adres nadawcy i odbiorcy.",
+        "english": "Yes, please enter the sender's and recipient's addresses."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobrze. Czy mogę zapłacić kartą?",
+        "english": "All right. Can I pay by card?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Oczywiście. Proszę bardzo, oto potwierdzenie.",
+        "english": "Of course. Here you are, this is your confirmation."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję. Do widzenia.",
+        "english": "Thank you. Goodbye."
+      }
+    ]
+  },
+  {
+    "id": "bank-exchange-withdrawal",
+    "title": "Exchanging and withdrawing money at a bank",
+    "titlePolish": "Wymiana i wypłata pieniędzy w banku",
+    "level": "A2",
+    "scenario": "Banking",
+    "description": "Asking about the exchange rate, commission, and withdrawing cash from an account.",
+    "roles": {
+      "A": "Klient · Customer",
+      "B": "Pracownik banku · Bank employee"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. W czym mogę pomóc?",
+        "english": "Good morning. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Chcę wymienić euro na złote.",
+        "english": "Good morning. I'd like to exchange euros for zloty."
+      },
+      {
+        "speaker": "B",
+        "polish": "Jaką kwotę?",
+        "english": "What amount?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dwieście euro. Jaki jest dzisiaj kurs?",
+        "english": "Two hundred euros. What is today's exchange rate?",
+        "note": "kurs here means exchange rate."
+      },
+      {
+        "speaker": "B",
+        "polish": "Jedno euro to cztery złote i trzydzieści groszy.",
+        "english": "One euro is 4.30 zloty."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy jest prowizja?",
+        "english": "Is there a commission fee?",
+        "note": "prowizja = commission or service fee."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, pięć złotych za transakcję.",
+        "english": "Yes, five zloty per transaction."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobrze. Chcę też wypłacić trzysta złotych z konta.",
+        "english": "All right. I'd also like to withdraw 300 zloty from my account.",
+        "note": "wypłacić pieniądze = to withdraw money."
+      },
+      {
+        "speaker": "B",
+        "polish": "Czy ma pan kartę i dokument tożsamości?",
+        "english": "Do you have your card and ID?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Tak, proszę bardzo.",
+        "english": "Yes, here you are."
+      },
+      {
+        "speaker": "B",
+        "polish": "Dziękuję. Proszę wpisać PIN.",
+        "english": "Thank you. Please enter your PIN."
+      },
+      {
+        "speaker": "A",
+        "polish": "Gotowe.",
+        "english": "Done."
+      },
+      {
+        "speaker": "B",
+        "polish": "Czy potrzebuje pan potwierdzenia?",
+        "english": "Do you need a confirmation?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Tak, poproszę.",
+        "english": "Yes, please.",
+        "note": "poproszę is natural when requesting a document or item at a counter."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę bardzo. To wszystko.",
+        "english": "Here you are. That's everything."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję za pomoc. Do widzenia.",
+        "english": "Thank you for your help. Goodbye."
+      }
+    ]
+  },
+  {
+    "id": "museum-ticket",
+    "title": "Buying a museum ticket",
+    "titlePolish": "Kupowanie biletu do muzeum",
+    "level": "A2",
+    "scenario": "Religion & Culture",
+    "description": "Buying a museum ticket and asking about discounts, opening hours, and photography.",
+    "roles": {
+      "A": "Zwiedzający · Visitor",
+      "B": "Kasjer/Kasjerka · Ticket clerk"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. Proszę.",
+        "english": "Good morning. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Poproszę jeden bilet normalny.",
+        "english": "Good morning. One regular ticket, please.",
+        "note": "bilet normalny = full-price ticket."
+      },
+      {
+        "speaker": "B",
+        "polish": "Czy ma pan prawo do zniżki?",
+        "english": "Are you eligible for a discount?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Jestem studentem. Czy jest zniżka studencka?",
+        "english": "I'm a student. Is there a student discount?",
+        "note": "zniżka studencka = student discount."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, z ważną legitymacją studencką.",
+        "english": "Yes, with a valid student ID."
+      },
+      {
+        "speaker": "A",
+        "polish": "Proszę, tutaj jest moja legitymacja.",
+        "english": "Here you are, this is my student ID."
+      },
+      {
+        "speaker": "B",
+        "polish": "W takim razie bilet kosztuje dwadzieścia złotych.",
+        "english": "In that case, the ticket costs twenty zloty."
+      },
+      {
+        "speaker": "A",
+        "polish": "Do której muzeum jest dziś otwarte?",
+        "english": "Until what time is the museum open today?",
+        "note": "Do której...? asks 'until what time?'"
+      },
+      {
+        "speaker": "B",
+        "polish": "Do osiemnastej. Ostatnie wejście jest o siedemnastej trzydzieści.",
+        "english": "Until six p.m. Last admission is at five thirty."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy mogę robić zdjęcia?",
+        "english": "Can I take photos?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, ale bez lampy błyskowej.",
+        "english": "Yes, but without flash.",
+        "note": "lampa błyskowa = camera flash."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy audioprzewodnik jest w cenie?",
+        "english": "Is the audio guide included in the price?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Nie, kosztuje dodatkowo dziesięć złotych.",
+        "english": "No, it costs an additional ten zloty."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobrze, poproszę też audioprzewodnik.",
+        "english": "All right, I'll take an audio guide as well."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę bardzo. Życzę miłego zwiedzania.",
+        "english": "Here you are. Enjoy your visit."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję bardzo.",
+        "english": "Thank you very much."
+      }
+    ]
+  },
+  {
+    "id": "sightseeing-tour",
+    "title": "Joining a sightseeing tour",
+    "titlePolish": "Wycieczka z przewodnikiem",
+    "level": "A2",
+    "scenario": "Activities & Sports",
+    "description": "Asking about the next guided tour, duration, language, price, and what is included.",
+    "roles": {
+      "A": "Turysta/Turystka · Tourist",
+      "B": "Pracownik biura turystycznego · Tour office staff"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. W czym mogę pomóc?",
+        "english": "Good morning. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Chcę pojechać na wycieczkę po mieście.",
+        "english": "Good morning. I'd like to go on a city tour."
+      },
+      {
+        "speaker": "B",
+        "polish": "Najbliższa wycieczka zaczyna się o jedenastej.",
+        "english": "The next tour starts at eleven."
+      },
+      {
+        "speaker": "A",
+        "polish": "Ile trwa wycieczka?",
+        "english": "How long does the tour last?",
+        "note": "Ile trwa...? = How long does ... last?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Około trzech godzin.",
+        "english": "About three hours."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy przewodnik mówi po angielsku?",
+        "english": "Does the guide speak English?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, wycieczka jest po polsku i po angielsku.",
+        "english": "Yes, the tour is in Polish and English."
+      },
+      {
+        "speaker": "A",
+        "polish": "Co jest w cenie biletu?",
+        "english": "What is included in the ticket price?",
+        "note": "w cenie = included in the price."
+      },
+      {
+        "speaker": "B",
+        "polish": "Przewodnik, transport i wejście do muzeum.",
+        "english": "The guide, transport, and museum admission."
+      },
+      {
+        "speaker": "A",
+        "polish": "A obiad?",
+        "english": "And lunch?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Nie, obiad nie jest wliczony.",
+        "english": "No, lunch is not included.",
+        "note": "wliczony = included in the total price."
+      },
+      {
+        "speaker": "A",
+        "polish": "Ile kosztuje bilet dla jednej osoby?",
+        "english": "How much is a ticket for one person?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Sto dwadzieścia złotych.",
+        "english": "One hundred and twenty zloty."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobrze, poproszę jeden bilet.",
+        "english": "All right, one ticket please.",
+        "note": "poproszę + accusative is a standard polite purchasing pattern."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę bardzo. Zbiórka jest przed biurem o dziesiątej pięćdziesiąt.",
+        "english": "Here you are. The meeting point is in front of the office at ten fifty."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję. Do zobaczenia.",
+        "english": "Thank you. See you."
+      }
+    ]
+  },
+  {
+    "id": "looking-for-item-shop",
+    "title": "Looking for an item in a shop",
+    "titlePolish": "Szukanie produktu w sklepie",
+    "level": "A2",
+    "scenario": "Shopping & Money",
+    "description": "Looking for a specific product, asking about alternatives, price, and guarantee.",
+    "roles": {
+      "A": "Klient · Customer",
+      "B": "Sprzedawca/Sprzedawczyni · Sales assistant"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. Czy mogę w czymś pomóc?",
+        "english": "Good morning. Can I help you with anything?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Szukam małej ładowarki do telefonu.",
+        "english": "Good morning. I'm looking for a small phone charger.",
+        "note": "szukam + genitive: szukam ładowarki."
+      },
+      {
+        "speaker": "B",
+        "polish": "Do jakiego telefonu?",
+        "english": "For what kind of phone?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Do telefonu z wejściem USB-C.",
+        "english": "For a phone with a USB-C port."
+      },
+      {
+        "speaker": "B",
+        "polish": "Mamy kilka modeli. Ten jest najmniejszy.",
+        "english": "We have several models. This one is the smallest."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy mogę go zobaczyć?",
+        "english": "Can I see it?",
+        "note": "go refers to a masculine object, here model."
+      },
+      {
+        "speaker": "B",
+        "polish": "Oczywiście. Proszę bardzo.",
+        "english": "Of course. Here you are."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy mają państwo coś tańszego?",
+        "english": "Do you have anything cheaper?",
+        "note": "mają państwo is a polite plural/formal way to ask store staff."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, ten model kosztuje pięćdziesiąt dziewięć złotych.",
+        "english": "Yes, this model costs fifty-nine zloty."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy ma gwarancję?",
+        "english": "Does it have a guarantee?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, dwa lata.",
+        "english": "Yes, two years."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy w pudełku jest kabel?",
+        "english": "Is there a cable in the box?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, kabel jest w zestawie.",
+        "english": "Yes, the cable is included.",
+        "note": "w zestawie = included with the product / in the set."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobrze, poproszę ten model.",
+        "english": "All right, I'll take this model."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę podejść do kasy. Dziękuję.",
+        "english": "Please go to the checkout. Thank you."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję. Do widzenia.",
+        "english": "Thank you. Goodbye."
+      }
+    ]
+  },
+  {
+    "id": "outlet-shopping-shoes",
+    "title": "Shopping at an outlet",
+    "titlePolish": "Zakupy w outlecie",
+    "level": "A2",
+    "scenario": "Clothing & Appearance",
+    "description": "Looking for discounted shoes, trying another size, checking the discount, and paying.",
+    "roles": {
+      "A": "Klient/Klientka · Customer",
+      "B": "Sprzedawca/Sprzedawczyni · Sales assistant"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. W czym mogę pomóc?",
+        "english": "Good morning. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Szukam butów sportowych na wyprzedaży.",
+        "english": "Good morning. I'm looking for sports shoes on sale.",
+        "note": "szukam + genitive: szukam butów."
+      },
+      {
+        "speaker": "B",
+        "polish": "Jaki rozmiar pan nosi?",
+        "english": "What size do you wear?",
+        "note": "To a woman, say: Jaki rozmiar pani nosi?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Czterdzieści dwa. Czy mogę przymierzyć ten model?",
+        "english": "Forty-two. Can I try on this model?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Oczywiście. Proszę bardzo.",
+        "english": "Of course. Here you are."
+      },
+      {
+        "speaker": "A",
+        "polish": "Są trochę za ciasne. Czy jest rozmiar czterdzieści trzy?",
+        "english": "They're a little too tight. Do you have size forty-three?",
+        "note": "za ciasne = too tight; za + adjective often means 'too...'."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, już sprawdzam na zapleczu.",
+        "english": "Yes, I'll check in the back room."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję.",
+        "english": "Thank you."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę, jest rozmiar czterdzieści trzy.",
+        "english": "Here you are, we have size forty-three."
+      },
+      {
+        "speaker": "A",
+        "polish": "Te pasują dobrze. Jaka jest zniżka?",
+        "english": "These fit well. What is the discount?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Czterdzieści procent od ceny regularnej.",
+        "english": "Forty percent off the regular price.",
+        "note": "od ceny regularnej = off the regular price."
+      },
+      {
+        "speaker": "A",
+        "polish": "Ile kosztują po zniżce?",
+        "english": "How much are they after the discount?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Dwieście dziewiętnaście złotych.",
+        "english": "Two hundred and nineteen zloty."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobrze, poproszę je. Zapłacę kartą.",
+        "english": "All right, I'll take them. I'll pay by card."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę bardzo. Oto paragon. Miłego dnia.",
+        "english": "Here you are. Here's your receipt. Have a nice day."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję. Do widzenia.",
+        "english": "Thank you. Goodbye."
+      }
+    ]
+  },
+  {
+    "id": "trying-on-clothes-shoes",
+    "title": "Trying on clothes and shoes",
+    "titlePolish": "Przymierzanie ubrań i butów",
+    "level": "A2",
+    "scenario": "Clothing & Appearance",
+    "description": "Trying on a jacket and shoes, asking for another size, and checking the fit.",
+    "roles": {
+      "A": "Klient/Klientka · Customer",
+      "B": "Sprzedawca/Sprzedawczyni · Sales assistant"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. W czym mogę pomóc?",
+        "english": "Good morning. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Chcę przymierzyć tę kurtkę.",
+        "english": "Good morning. I'd like to try on this jacket.",
+        "note": "przymierzyć = to try on clothes or shoes."
+      },
+      {
+        "speaker": "B",
+        "polish": "Oczywiście. Jaki rozmiar pan nosi?",
+        "english": "Of course. What size do you wear?",
+        "note": "To a woman, say: Jaki rozmiar pani nosi?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Zwykle M.",
+        "english": "Usually medium."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę bardzo. Przymierzalnia jest po prawej.",
+        "english": "Here you are. The fitting room is on the right."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję. Ta kurtka jest trochę za ciasna.",
+        "english": "Thank you. This jacket is a little too tight.",
+        "note": "za + adjective means 'too...', for example za ciasna = too tight."
+      },
+      {
+        "speaker": "B",
+        "polish": "Mogę przynieść rozmiar L.",
+        "english": "I can bring a large."
+      },
+      {
+        "speaker": "A",
+        "polish": "Tak, proszę. I czy mogę przymierzyć te buty?",
+        "english": "Yes, please. And can I try on these shoes?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Jaki rozmiar?",
+        "english": "What size?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Czterdzieści dwa.",
+        "english": "Forty-two."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę. Tu jest rozmiar czterdzieści dwa.",
+        "english": "Here you are. This is size forty-two."
+      },
+      {
+        "speaker": "A",
+        "polish": "Buty pasują dobrze, ale kurtka jest za duża.",
+        "english": "The shoes fit well, but the jacket is too big.",
+        "note": "pasować = to fit or suit."
+      },
+      {
+        "speaker": "B",
+        "polish": "Może pan spróbować innego modelu w rozmiarze M.",
+        "english": "You can try another model in medium."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobrze, poproszę.",
+        "english": "All right, please."
+      },
+      {
+        "speaker": "B",
+        "polish": "Już przynoszę.",
+        "english": "I'll bring it right away."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję bardzo.",
+        "english": "Thank you very much."
+      }
+    ]
+  },
+  {
+    "id": "paying-in-shop",
+    "title": "Paying in a shop",
+    "titlePolish": "Płacenie w sklepie",
+    "level": "A2",
+    "scenario": "Shopping & Money",
+    "description": "Paying for purchases, choosing card or cash, and asking for a receipt.",
+    "roles": {
+      "A": "Klient/Klientka · Customer",
+      "B": "Kasjer/Kasjerka · Cashier"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. Czy to wszystko?",
+        "english": "Good morning. Is that everything?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Tak, to wszystko.",
+        "english": "Good morning. Yes, that's everything."
+      },
+      {
+        "speaker": "B",
+        "polish": "Razem osiemdziesiąt sześć złotych.",
+        "english": "That's eighty-six zloty altogether.",
+        "note": "razem at the checkout means 'altogether' or 'in total'."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy mogę zapłacić kartą?",
+        "english": "Can I pay by card?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak. Kartą czy telefonem?",
+        "english": "Yes. By card or phone?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Kartą, proszę.",
+        "english": "By card, please."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę przyłożyć kartę do terminala.",
+        "english": "Please tap your card on the terminal.",
+        "note": "przyłożyć kartę = to tap or hold the card against the terminal."
+      },
+      {
+        "speaker": "A",
+        "polish": "Muszę wpisać PIN?",
+        "english": "Do I need to enter my PIN?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, proszę wpisać PIN.",
+        "english": "Yes, please enter your PIN."
+      },
+      {
+        "speaker": "A",
+        "polish": "Gotowe.",
+        "english": "Done."
+      },
+      {
+        "speaker": "B",
+        "polish": "Płatność zaakceptowana.",
+        "english": "Payment accepted."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy mogę dostać paragon?",
+        "english": "Can I get a receipt?",
+        "note": "paragon = receipt; faktura = invoice."
+      },
+      {
+        "speaker": "B",
+        "polish": "Oczywiście. Potrzebuje pan torby?",
+        "english": "Of course. Do you need a bag?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Nie, dziękuję. Mam własną.",
+        "english": "No, thank you. I have my own.",
+        "note": "własną agrees with torbę, which is feminine."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę bardzo. Miłego dnia.",
+        "english": "Here you are. Have a nice day."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję. Do widzenia.",
+        "english": "Thank you. Goodbye."
+      }
+    ]
+  },
+  {
+    "id": "returning-faulty-product",
+    "title": "Returning a faulty product",
+    "titlePolish": "Zwrot wadliwego produktu",
+    "level": "A2",
+    "scenario": "Shopping & Money",
+    "description": "Returning faulty headphones and asking for an exchange or refund.",
+    "roles": {
+      "A": "Klient/Klientka · Customer",
+      "B": "Pracownik działu reklamacji · Returns desk staff"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. W czym mogę pomóc?",
+        "english": "Good morning. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Chcę zwrócić te słuchawki.",
+        "english": "Good morning. I'd like to return these headphones.",
+        "note": "zwrócić = to return an item to a shop."
+      },
+      {
+        "speaker": "B",
+        "polish": "Co jest nie tak?",
+        "english": "What's wrong with them?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Jedna słuchawka nie działa.",
+        "english": "One earpiece doesn't work.",
+        "note": "nie działa = it doesn't work."
+      },
+      {
+        "speaker": "B",
+        "polish": "Kiedy je pan kupił?",
+        "english": "When did you buy them?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Trzy dni temu.",
+        "english": "Three days ago."
+      },
+      {
+        "speaker": "B",
+        "polish": "Czy ma pan paragon?",
+        "english": "Do you have the receipt?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Tak, proszę bardzo.",
+        "english": "Yes, here you are."
+      },
+      {
+        "speaker": "B",
+        "polish": "Dziękuję. Może pan wymienić słuchawki na nowe.",
+        "english": "Thank you. You can exchange the headphones for new ones.",
+        "note": "wymienić na + accusative = exchange for something."
+      },
+      {
+        "speaker": "A",
+        "polish": "Wolałbym zwrot pieniędzy.",
+        "english": "I'd prefer a refund.",
+        "note": "Male: wolałbym. Female: wolałabym."
+      },
+      {
+        "speaker": "B",
+        "polish": "Dobrze. Zwrot będzie na kartę, którą pan płacił.",
+        "english": "All right. The refund will go back to the card you used."
+      },
+      {
+        "speaker": "A",
+        "polish": "Ile to potrwa?",
+        "english": "How long will that take?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Zwykle od dwóch do pięciu dni.",
+        "english": "Usually two to five days."
+      },
+      {
+        "speaker": "A",
+        "polish": "Rozumiem. Czy muszę coś podpisać?",
+        "english": "I understand. Do I need to sign anything?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, proszę podpisać tutaj. Dziękuję.",
+        "english": "Yes, please sign here. Thank you."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję za pomoc. Do widzenia.",
+        "english": "Thank you for your help. Goodbye."
+      }
+    ]
+  },
+  {
+    "id": "buying-book-newspaper",
+    "title": "Buying a book or newspaper",
+    "titlePolish": "Kupowanie książki lub gazety",
+    "level": "A2",
+    "scenario": "Shopping & Money",
+    "description": "Looking for a Polish phrasebook and an English-language newspaper in a bookshop.",
+    "roles": {
+      "A": "Klient/Klientka · Customer",
+      "B": "Sprzedawca/Sprzedawczyni · Bookseller"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. Czy mogę pomóc?",
+        "english": "Good morning. Can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Szukam rozmówek polskich dla początkujących.",
+        "english": "Good morning. I'm looking for a Polish phrasebook for beginners.",
+        "note": "szukam + genitive: szukam rozmówek."
+      },
+      {
+        "speaker": "B",
+        "polish": "Mamy kilka. Woli pan książkę po polsku czy z angielskim tłumaczeniem?",
+        "english": "We have several. Do you prefer a book in Polish or with English translations?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Z angielskim tłumaczeniem, proszę.",
+        "english": "With English translations, please."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę zobaczyć tę książkę.",
+        "english": "Please have a look at this book."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy jest też wersja z nagraniami?",
+        "english": "Is there also a version with recordings?",
+        "note": "nagrania = recordings, for example audio recordings."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, ta wersja ma dostęp do nagrań online.",
+        "english": "Yes, this version includes access to online recordings."
+      },
+      {
+        "speaker": "A",
+        "polish": "Ile kosztuje?",
+        "english": "How much is it?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Czterdzieści dziewięć złotych.",
+        "english": "Forty-nine zloty."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobrze. Czy mają państwo też gazetę po angielsku?",
+        "english": "All right. Do you also have a newspaper in English?",
+        "note": "mają państwo is a polite way to ask shop staff what they have."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, gazety są przy kasie.",
+        "english": "Yes, the newspapers are by the checkout."
+      },
+      {
+        "speaker": "A",
+        "polish": "Poproszę jedną gazetę i tę książkę.",
+        "english": "I'll take one newspaper and this book.",
+        "note": "poproszę is natural when choosing something to buy."
+      },
+      {
+        "speaker": "B",
+        "polish": "Oczywiście. Razem sześćdziesiąt jeden złotych.",
+        "english": "Of course. That's sixty-one zloty altogether."
+      },
+      {
+        "speaker": "A",
+        "polish": "Zapłacę kartą.",
+        "english": "I'll pay by card."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę bardzo. Miłego dnia.",
+        "english": "Here you are. Have a nice day."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję. Do widzenia.",
+        "english": "Thank you. Goodbye."
+      }
+    ]
+  },
+  {
+    "id": "ordering-coffee-a2",
+    "title": "Ordering coffee at a café",
+    "titlePolish": "Zamawianie kawy w kawiarni",
+    "level": "A2",
+    "scenario": "Food & Drink",
+    "description": "Ordering coffee and a snack, choosing milk and takeaway, and paying.",
+    "roles": {
+      "A": "Klient/Klientka · Customer",
+      "B": "Barista"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. Co podać?",
+        "english": "Good morning. What can I get you?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Poproszę dużą kawę z mlekiem.",
+        "english": "Good morning. A large coffee with milk, please.",
+        "note": "poproszę is the standard polite way to order at a café."
+      },
+      {
+        "speaker": "B",
+        "polish": "Zwykłe mleko czy roślinne?",
+        "english": "Regular milk or plant-based milk?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Owsiane, proszę.",
+        "english": "Oat milk, please.",
+        "note": "mleko owsiane = oat milk."
+      },
+      {
+        "speaker": "B",
+        "polish": "Na miejscu czy na wynos?",
+        "english": "For here or to go?",
+        "note": "na miejscu = for here; na wynos = to go."
+      },
+      {
+        "speaker": "A",
+        "polish": "Na wynos. I poproszę jeszcze rogalika.",
+        "english": "To go. And I'll also have a croissant."
+      },
+      {
+        "speaker": "B",
+        "polish": "Z czekoladą czy bez nadzienia?",
+        "english": "With chocolate or plain?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Z czekoladą, proszę.",
+        "english": "With chocolate, please."
+      },
+      {
+        "speaker": "B",
+        "polish": "Czy coś jeszcze?",
+        "english": "Anything else?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Nie, dziękuję. Ile płacę?",
+        "english": "No, thank you. How much is it?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Dwadzieścia dziewięć złotych.",
+        "english": "Twenty-nine zloty."
+      },
+      {
+        "speaker": "A",
+        "polish": "Zapłacę kartą.",
+        "english": "I'll pay by card."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę przyłożyć kartę.",
+        "english": "Please tap your card."
+      },
+      {
+        "speaker": "A",
+        "polish": "Gotowe.",
+        "english": "Done."
+      },
+      {
+        "speaker": "B",
+        "polish": "Dziękuję. Kawa będzie za chwilę.",
+        "english": "Thank you. Your coffee will be ready in a moment.",
+        "note": "za chwilę = in a moment / shortly."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję bardzo. Do widzenia.",
+        "english": "Thank you very much. Goodbye."
+      }
+    ]
+  },
+  {
+    "id": "getting-table-restaurant",
+    "title": "Getting a table at a restaurant",
+    "titlePolish": "Stolik w restauracji",
+    "level": "A2",
+    "scenario": "Food & Drink",
+    "description": "Asking for a table, choosing where to sit, and asking about the wait.",
+    "roles": {
+      "A": "Gość · Guest",
+      "B": "Kelner/Kelnerka · Waiter/Waitress"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dobry wieczór. Witam.",
+        "english": "Good evening. Welcome."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobry wieczór. Poproszę stolik dla dwóch osób.",
+        "english": "Good evening. A table for two, please.",
+        "note": "stolik dla dwóch osób = a table for two people."
+      },
+      {
+        "speaker": "B",
+        "polish": "Czy mają państwo rezerwację?",
+        "english": "Do you have a reservation?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Nie, nie mamy.",
+        "english": "No, we don't."
+      },
+      {
+        "speaker": "B",
+        "polish": "W środku jest wolny stolik. Na zewnątrz trzeba poczekać.",
+        "english": "There is a free table inside. For outside seating, you'll need to wait."
+      },
+      {
+        "speaker": "A",
+        "polish": "Ile trzeba czekać na stolik na zewnątrz?",
+        "english": "How long is the wait for a table outside?",
+        "note": "trzeba + infinitive expresses that something is necessary."
+      },
+      {
+        "speaker": "B",
+        "polish": "Około piętnastu minut.",
+        "english": "About fifteen minutes."
+      },
+      {
+        "speaker": "A",
+        "polish": "W takim razie usiądziemy w środku.",
+        "english": "In that case, we'll sit inside.",
+        "note": "w takim razie = in that case."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę za mną.",
+        "english": "Please follow me."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy możemy usiąść przy oknie?",
+        "english": "Can we sit by the window?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, ten stolik jest wolny.",
+        "english": "Yes, this table is free."
+      },
+      {
+        "speaker": "A",
+        "polish": "Świetnie. Czy możemy dostać menu?",
+        "english": "Great. Can we have the menu?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Oczywiście. Proszę bardzo.",
+        "english": "Of course. Here you are."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję. Czy mają państwo menu po angielsku?",
+        "english": "Thank you. Do you have an English menu?",
+        "note": "mają państwo is polite when addressing restaurant staff."
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, już przynoszę.",
+        "english": "Yes, I'll bring one right away."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję bardzo.",
+        "english": "Thank you very much."
+      }
+    ]
+  },
+  {
+    "id": "ordering-meal",
+    "title": "Ordering a meal",
+    "titlePolish": "Zamawianie jedzenia",
+    "level": "A2",
+    "scenario": "Food & Drink",
+    "description": "Asking for a recommendation, ordering a main dish and drink, and requesting the bill.",
+    "roles": {
+      "A": "Gość · Guest",
+      "B": "Kelner/Kelnerka · Waiter/Waitress"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dobry wieczór. Czy są państwo gotowi zamówić?",
+        "english": "Good evening. Are you ready to order?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobry wieczór. Jeszcze nie. Co pani poleca?",
+        "english": "Good evening. Not yet. What do you recommend?",
+        "note": "To a male waiter: Co pan poleca? To a female waiter: Co pani poleca?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Polecam pierogi z mięsem albo z kapustą i grzybami.",
+        "english": "I recommend pierogi with meat or with cabbage and mushrooms."
+      },
+      {
+        "speaker": "A",
+        "polish": "Poproszę pierogi z kapustą i grzybami.",
+        "english": "I'll have the pierogi with cabbage and mushrooms.",
+        "note": "poproszę is natural and polite when ordering food."
+      },
+      {
+        "speaker": "B",
+        "polish": "A do picia?",
+        "english": "And to drink?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Wodę mineralną bez gazu, proszę.",
+        "english": "Still mineral water, please.",
+        "note": "bez gazu = still; z gazem = sparkling."
+      },
+      {
+        "speaker": "B",
+        "polish": "Małą czy dużą?",
+        "english": "Small or large?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dużą.",
+        "english": "Large."
+      },
+      {
+        "speaker": "B",
+        "polish": "Czy coś jeszcze?",
+        "english": "Anything else?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Na razie nie, dziękuję.",
+        "english": "Not for now, thank you.",
+        "note": "na razie = for now / at the moment."
+      },
+      {
+        "speaker": "B",
+        "polish": "Dobrze. Zamówienie będzie za około piętnaście minut.",
+        "english": "All right. Your order will be ready in about fifteen minutes."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję.",
+        "english": "Thank you."
+      },
+      {
+        "speaker": "A",
+        "polish": "Przepraszam, poproszę rachunek.",
+        "english": "Excuse me, the bill please."
+      },
+      {
+        "speaker": "B",
+        "polish": "Oczywiście. Razem sześćdziesiąt cztery złote.",
+        "english": "Of course. That's sixty-four zloty altogether."
+      },
+      {
+        "speaker": "A",
+        "polish": "Zapłacę kartą. Dziękuję.",
+        "english": "I'll pay by card. Thank you."
+      },
+      {
+        "speaker": "B",
+        "polish": "Dziękuję. Do widzenia.",
+        "english": "Thank you. Goodbye."
+      }
+    ]
+  },
+  {
+    "id": "food-allergy-special-diet",
+    "title": "Explaining a food allergy or special diet",
+    "titlePolish": "Alergia i specjalna dieta w restauracji",
+    "level": "A2",
+    "scenario": "Food & Drink",
+    "description": "Explaining a nut allergy and asking which dishes are safe to order.",
+    "roles": {
+      "A": "Gość · Guest",
+      "B": "Kelner/Kelnerka · Waiter/Waitress"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dobry wieczór. Czy mogę przyjąć zamówienie?",
+        "english": "Good evening. May I take your order?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobry wieczór. Najpierw mam pytanie. Mam uczulenie na orzechy.",
+        "english": "Good evening. First I have a question. I'm allergic to nuts.",
+        "note": "Mam uczulenie na... = I'm allergic to..."
+      },
+      {
+        "speaker": "B",
+        "polish": "Rozumiem. Czy alergia jest silna?",
+        "english": "I understand. Is the allergy severe?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Tak. Nie mogę jeść żadnych orzechów.",
+        "english": "Yes. I can't eat any nuts.",
+        "note": "nie mogę + infinitive = I cannot / I'm not able to."
+      },
+      {
+        "speaker": "B",
+        "polish": "Sprawdzę skład dań.",
+        "english": "I'll check the ingredients in the dishes."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy ta zupa zawiera orzechy?",
+        "english": "Does this soup contain nuts?",
+        "note": "zawierać = to contain."
+      },
+      {
+        "speaker": "B",
+        "polish": "Nie, ale jest przygotowywana w tej samej kuchni.",
+        "english": "No, but it is prepared in the same kitchen."
+      },
+      {
+        "speaker": "A",
+        "polish": "A czy sałatka jest bezpieczna?",
+        "english": "And is the salad safe?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, możemy przygotować ją bez sosu z orzechami.",
+        "english": "Yes, we can prepare it without the nut sauce."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobrze. Czy ma w sobie produkty mleczne?",
+        "english": "All right. Does it contain dairy products?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak, w sosie jest ser.",
+        "english": "Yes, there is cheese in the sauce."
+      },
+      {
+        "speaker": "A",
+        "polish": "W takim razie poproszę sałatkę bez sosu.",
+        "english": "In that case, I'll have the salad without the sauce.",
+        "note": "bez + genitive: bez sosu, bez cukru, bez mleka."
+      },
+      {
+        "speaker": "B",
+        "polish": "Oczywiście. Powiem też kucharzowi o alergii.",
+        "english": "Of course. I'll also tell the cook about the allergy."
+      },
+      {
+        "speaker": "A",
+        "polish": "Bardzo dziękuję.",
+        "english": "Thank you very much."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę bardzo. Zaraz przyjmę resztę zamówienia.",
+        "english": "You're welcome. I'll take the rest of your order in a moment."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobrze, dziękuję.",
+        "english": "All right, thank you."
+      }
+    ]
+  },
+  {
+    "id": "doctor-pharmacy",
+    "title": "Going to a doctor or pharmacy",
+    "titlePolish": "U lekarza i w aptece",
+    "level": "A2",
+    "scenario": "Health & Body",
+    "description": "Describing simple symptoms and asking what to take for a sore throat and fever.",
+    "roles": {
+      "A": "Pacjent/Pacjentka · Patient",
+      "B": "Farmaceuta/Farmaceutka · Pharmacist"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. W czym mogę pomóc?",
+        "english": "Good morning. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Od dwóch dni źle się czuję.",
+        "english": "Good morning. I've been feeling unwell for two days.",
+        "note": "źle się czuję = I feel unwell."
+      },
+      {
+        "speaker": "B",
+        "polish": "Jakie ma pan objawy?",
+        "english": "What symptoms do you have?",
+        "note": "objawy = symptoms."
+      },
+      {
+        "speaker": "A",
+        "polish": "Mam ból gardła, kaszel i gorączkę.",
+        "english": "I have a sore throat, a cough, and a fever."
+      },
+      {
+        "speaker": "B",
+        "polish": "Jak wysoka jest gorączka?",
+        "english": "How high is the fever?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Około trzydziestu ośmiu stopni.",
+        "english": "About thirty-eight degrees."
+      },
+      {
+        "speaker": "B",
+        "polish": "Czy ma pan jakieś alergie na leki?",
+        "english": "Do you have any allergies to medicines?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Tak, mam alergię na penicylinę.",
+        "english": "Yes, I'm allergic to penicillin.",
+        "note": "Mam alergię na... is another common way to say you are allergic to something."
+      },
+      {
+        "speaker": "B",
+        "polish": "Rozumiem. Czy bierze pan teraz jakieś leki?",
+        "english": "I understand. Are you taking any medicines now?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Nie.",
+        "english": "No."
+      },
+      {
+        "speaker": "B",
+        "polish": "Mogę zaproponować lek na ból gardła i środek przeciwgorączkowy.",
+        "english": "I can suggest something for the sore throat and a fever reducer."
+      },
+      {
+        "speaker": "A",
+        "polish": "Jak często mam go brać?",
+        "english": "How often should I take it?",
+        "note": "brać lek = to take medicine."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę stosować zgodnie z ulotką. Jeśli gorączka nie spadnie, proszę skontaktować się z lekarzem.",
+        "english": "Please use it according to the leaflet. If the fever doesn't go down, contact a doctor."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dobrze. Poproszę ten lek.",
+        "english": "All right. I'll take that medicine."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę bardzo. Życzę zdrowia.",
+        "english": "Here you are. I hope you feel better."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję. Do widzenia.",
+        "english": "Thank you. Goodbye."
+      }
+    ]
+  },
+  {
+    "id": "police-lost-passport",
+    "title": "Reporting a lost passport at a police station",
+    "titlePolish": "Zgłoszenie zgubionego paszportu na policji",
+    "level": "A2",
+    "scenario": "Emergencies & Safety",
+    "description": "Reporting a lost passport, explaining where it was last seen, and asking for a police report.",
+    "roles": {
+      "A": "Turysta/Turystka · Tourist",
+      "B": "Policjant/Policjantka · Police officer"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry. W czym mogę pomóc?",
+        "english": "Good morning. How can I help?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzień dobry. Zgubiłem paszport.",
+        "english": "Good morning. I've lost my passport.",
+        "note": "Male: zgubiłem. Female: zgubiłam."
+      },
+      {
+        "speaker": "B",
+        "polish": "Kiedy zauważył pan, że go nie ma?",
+        "english": "When did you notice it was missing?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Dzisiaj rano.",
+        "english": "This morning."
+      },
+      {
+        "speaker": "B",
+        "polish": "Gdzie miał pan paszport ostatni raz?",
+        "english": "Where did you have the passport last?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Chyba wczoraj w restauracji przy rynku.",
+        "english": "I think yesterday at a restaurant near the market square.",
+        "note": "chyba = probably / I think, when you are not completely certain."
+      },
+      {
+        "speaker": "B",
+        "polish": "Czy zginęło coś jeszcze?",
+        "english": "Is anything else missing?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Nie. Portfel i telefon mam.",
+        "english": "No. I still have my wallet and phone."
+      },
+      {
+        "speaker": "B",
+        "polish": "Dobrze. Proszę podać imię, nazwisko i adres w Polsce.",
+        "english": "All right. Please give your first name, surname, and address in Poland.",
+        "note": "nazwisko = surname / family name."
+      },
+      {
+        "speaker": "A",
+        "polish": "Nazywam się Daniel Brown. Mieszkam teraz w hotelu Centrum.",
+        "english": "My name is Daniel Brown. I'm currently staying at Hotel Centrum."
+      },
+      {
+        "speaker": "B",
+        "polish": "Czy ma pan kopię paszportu albo inny dokument?",
+        "english": "Do you have a copy of your passport or another document?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Mam zdjęcie paszportu w telefonie.",
+        "english": "I have a photo of the passport on my phone."
+      },
+      {
+        "speaker": "B",
+        "polish": "Dobrze. Proszę wypełnić ten formularz.",
+        "english": "All right. Please fill in this form.",
+        "note": "wypełnić formularz = to fill in a form."
+      },
+      {
+        "speaker": "A",
+        "polish": "Czy dostanę potwierdzenie zgłoszenia?",
+        "english": "Will I get confirmation of the report?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Tak. Z tym dokumentem może pan skontaktować się z ambasadą.",
+        "english": "Yes. With this document you can contact your embassy."
+      },
+      {
+        "speaker": "A",
+        "polish": "Dziękuję bardzo za pomoc. Do widzenia.",
+        "english": "Thank you very much for your help. Goodbye."
+      }
     ]
   }
 ]

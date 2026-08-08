@@ -22,7 +22,7 @@ Download the Android APK: [P4B.apk](https://lida0407.github.io/Polish4Beginners-
 - On-device translator: type any word or sentence, translate Polish↔English, read the result aloud
 - Import your own word lists (CSV template): blank sides auto-translate, and imported words become study cards
 - Immersive listening: hands-free playback of a topic — each word twice in Polish, once in English, with a pause
-- Scenario conversations (grocery, barbershop, pharmacy) with line-by-line audio, plus your own uploadable dialogs (JSON)
+- `33` scenario conversations with line-by-line audio — travel, hotels, shopping, food, health, emergencies — plus your own uploadable dialogs (JSON)
 - Settings for interface language, color theme, and reading speed
 - GitHub-connected APK update checking from Settings
 - Separate GitHub-connected word database updates from Settings
