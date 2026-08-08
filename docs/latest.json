@@ -1,8 +1,8 @@
 {
-  "versionCode": 32,
-  "versionName": "1.31",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/aa9fd7ecdd90e0b85d4bbc7dfa95bd65e0cb0971/docs/P4B.apk",
-  "apkSha256": "64577017376a9b0aa0441f553931981874effb4025be52c9f32a516277a871b9",
-  "apkSizeBytes": 67578664,
-  "releaseNotes": "Adds 30 new A2 scenario conversations - trains, hotels, shopping, restaurants, doctor, police - now 33 in total with audio."
+  "versionCode": 33,
+  "versionName": "1.32",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/51feadd0b4f43068b621fe8e5ccc265b3d22ec04/docs/P4B.apk",
+  "apkSha256": "2a45627b8e90171b111d97ac45f0c8b07c797b564331338d094a3ab46e22a43c",
+  "apkSizeBytes": 67578671,
+  "releaseNotes": "Dictionary import now handles UTF-8 BOM files (Excel exports) that previously imported as empty."
 }
