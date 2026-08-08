@@ -86,3 +86,15 @@ docs/phrase-template.json
 ```
 
 See `CONTRIBUTING.md` for field definitions and review notes.
+
+## Contribute Conversations
+
+Scenario dialogs use a small JSON format. The template and a ready-to-use
+generation prompt are in:
+
+```text
+docs/dialog-template.json
+docs/DIALOG_FORMAT.md
+```
+
+Upload your own from **Home → Conversations → Upload dialog**.

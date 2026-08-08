@@ -1,0 +1,53 @@
+[
+  {
+    "id": "my-cafe",
+    "title": "Ordering coffee",
+    "titlePolish": "Zamawianie kawy",
+    "level": "A1",
+    "scenario": "Food & Drink",
+    "description": "Ordering at the counter, choosing takeaway, and paying.",
+    "roles": {
+      "A": "Klient · Customer",
+      "B": "Barista"
+    },
+    "lines": [
+      {
+        "speaker": "B",
+        "polish": "Dzień dobry! Co podać?",
+        "english": "Good morning! What can I get you?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Poproszę dużą kawę z mlekiem.",
+        "english": "A large coffee with milk, please.",
+        "note": "poproszę = the polite way to order: 'I'll have…'"
+      },
+      {
+        "speaker": "B",
+        "polish": "Na miejscu czy na wynos?",
+        "english": "For here or to go?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Na wynos, proszę. Ile płacę?",
+        "english": "To go, please. How much do I pay?"
+      },
+      {
+        "speaker": "B",
+        "polish": "Czternaście złotych. Płaci pan kartą czy gotówką?",
+        "english": "Fourteen zloty. Are you paying by card or cash?"
+      },
+      {
+        "speaker": "A",
+        "polish": "Kartą. Dziękuję bardzo.",
+        "english": "By card. Thank you very much."
+      },
+      {
+        "speaker": "B",
+        "polish": "Proszę bardzo. Miłego dnia!",
+        "english": "Here you are. Have a nice day!",
+        "note": "proszę bardzo = 'here you are' when handing something over"
+      }
+    ]
+  }
+]
