@@ -136,6 +136,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final int REQ_OPEN_LIST = 2002;
     private static final int REQ_SAVE_DIALOG_TEMPLATE = 2003;
     private static final int REQ_OPEN_DIALOG = 2004;
+    private static final int REQ_OPEN_DICTIONARY = 2005;
+    private static final String DICTIONARY_FILE = "user_dictionary.json";
+    private static final String GLOSS_FILE = "gloss_cache.json";
     private static final String DIALOG_TEMPLATE =
             "[\n"
             + "  {\n"
@@ -169,6 +172,13 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private final List<Phrase> listenDeck = new ArrayList<>();
     private final List<Dialog> dialogs = new ArrayList<>();
     private final Handler listenHandler = new Handler(Looper.getMainLooper());
+    // Uploaded dictionary: normalized Polish -> gloss. Loaded once, then O(1).
+    private final Map<String, String> userDictionary = new HashMap<>();
+    // Prebuilt per-card gloss, so playback never looks anything up.
+    private final Map<String, String> glossCache = new HashMap<>();
+    private boolean dictionaryLoading = false;
+    private boolean glossBuilding = false;
+    private String glossStatus = "";
     private final List<Phrase> sessionDeck = new ArrayList<>();
     private final List<Boolean> sessionEnglishFront = new ArrayList<>();
     private final Map<String, Theme> themes = new LinkedHashMap<>();
@@ -247,6 +257,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         loadDialogs();
         loadMemory();
         loadFavourites();
+        loadDictionaryAsync();
         registerUpdateDownloadReceiver();
         textToSpeech = createTts();
         render();
@@ -2232,6 +2243,39 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             study.setOnClickListener(v -> startTagSession(tag));
             content.addView(study, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(48)));
         }
+
+        addGap(content, 22);
+        content.addView(new DashedLine(this, th.dash), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(2)));
+        addGap(content, 16);
+        content.addView(label(t("OFFLINE DICTIONARY", "SŁOWNIK OFFLINE"), th.faint, 11.5f, 0.12f));
+        addGap(content, 8);
+        content.addView(bodyText(t("Upload your own dictionary (CSV, TSV or JSON: Polish then English). Then build the translations once — the app resolves every card and saves the result, so listening and study never look anything up while playing.",
+                "Prześlij własny słownik (CSV, TSV lub JSON: polski, potem angielski). Następnie raz zbuduj tłumaczenia — aplikacja rozwiąże wszystkie karty i zapisze wynik, więc słuchanie i nauka nie szukają niczego podczas odtwarzania."), 13, th.muted));
+        addGap(content, 10);
+        content.addView(bodyText(t("Dictionary entries: ", "Hasła w słowniku: ") + userDictionary.size()
+                + "   ·   " + t("Built translations: ", "Zbudowane tłumaczenia: ") + glossCache.size(), 12.5f, th.faint));
+        if (!glossStatus.isEmpty()) {
+            addGap(content, 6);
+            content.addView(bodyText(glossStatus, 12.5f, th.accent));
+        }
+        addGap(content, 10);
+        LinearLayout dictRow = row();
+        Button upDict = flatButton(t("Upload dictionary", "Prześlij słownik"), th.panel, th.ink, th.ink, 13, 46);
+        upDict.setOnClickListener(v -> pickDictionaryFile());
+        dictRow.addView(upDict, new LinearLayout.LayoutParams(0, dp(46), 1));
+        Button build = filledButton(glossBuilding ? t("Building…", "Buduję…") : t("Build translations", "Zbuduj tłumaczenia"), th.accent, th.onAccent, 13, 46);
+        build.setEnabled(!glossBuilding);
+        build.setOnClickListener(v -> buildGlosses());
+        LinearLayout.LayoutParams bp = new LinearLayout.LayoutParams(0, dp(46), 1);
+        bp.setMargins(dp(10), 0, 0, 0);
+        dictRow.addView(build, bp);
+        content.addView(dictRow);
+        if (userDictionary.size() > 0 || glossCache.size() > 0) {
+            addGap(content, 10);
+            Button clear = flatButton(t("Clear dictionary", "Wyczyść słownik"), th.panel, th.muted, th.dash, 12.5f, 42);
+            clear.setOnClickListener(v -> clearDictionary());
+            content.addView(clear, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42)));
+        }
     }
 
     private Translator translatorFor(boolean enToPl) {
@@ -2336,6 +2380,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             }
         } else if (requestCode == REQ_OPEN_DIALOG) {
             importDialogFile(uri);
+        } else if (requestCode == REQ_OPEN_DICTIONARY) {
+            importDictionary(uri);
         } else if (requestCode == REQ_OPEN_LIST) {
             try {
                 final List<String[]> rows = parseWordListCsv(readLines(getContentResolver().openInputStream(uri)));
@@ -2883,6 +2929,243 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
     }
 
+    // ---- User dictionary + prebuilt glosses -------------------------------
+    // A dictionary is imported once and kept as an in-memory map; the gloss
+    // build resolves every card up front (dictionary first, on-device
+    // translation only for the gaps) and caches the result to disk, so
+    // listening/study never does a lookup or a translation mid-playback.
+
+    private String dictKey(String polish) {
+        return polish == null ? "" : polish.trim().toLowerCase(Locale.ROOT).replaceAll("[.!?,;:]+$", "");
+    }
+
+    private void loadDictionaryAsync() {
+        if (dictionaryLoading) {
+            return;
+        }
+        dictionaryLoading = true;
+        new Thread(() -> {
+            final Map<String, String> dict = new HashMap<>();
+            final Map<String, String> gloss = new HashMap<>();
+            try {
+                File f = new File(getFilesDir(), DICTIONARY_FILE);
+                if (f.exists()) {
+                    JSONObject o = new JSONObject(readStream(openFileInput(DICTIONARY_FILE)));
+                    for (java.util.Iterator<String> it = o.keys(); it.hasNext(); ) {
+                        String k = it.next();
+                        dict.put(k, o.optString(k));
+                    }
+                }
+            } catch (Exception ignored) {
+            }
+            try {
+                File g = new File(getFilesDir(), GLOSS_FILE);
+                if (g.exists()) {
+                    JSONObject o = new JSONObject(readStream(openFileInput(GLOSS_FILE)));
+                    for (java.util.Iterator<String> it = o.keys(); it.hasNext(); ) {
+                        String k = it.next();
+                        gloss.put(k, o.optString(k));
+                    }
+                }
+            } catch (Exception ignored) {
+            }
+            runOnUiThread(() -> {
+                userDictionary.clear();
+                userDictionary.putAll(dict);
+                glossCache.clear();
+                glossCache.putAll(gloss);
+                dictionaryLoading = false;
+                if (SCREEN_TRANSLATE.equals(screen) || SCREEN_LISTEN.equals(screen)) {
+                    render();
+                }
+            });
+        }).start();
+    }
+
+    // The translation shown for a card: prebuilt gloss, else dictionary, else
+    // the card's own English. Pure map access — safe to call during playback.
+    private String glossFor(Phrase phrase) {
+        String cached = glossCache.get(phrase.key());
+        if (cached != null && !cached.isEmpty()) {
+            return cached;
+        }
+        String dict = userDictionary.get(dictKey(phrase.polish));
+        if (dict != null && !dict.isEmpty()) {
+            return dict;
+        }
+        return phrase.english;
+    }
+
+    private void importDictionary(Uri uri) {
+        try {
+            List<String> lines = readLines(getContentResolver().openInputStream(uri));
+            StringBuilder joined = new StringBuilder();
+            for (String l : lines) {
+                joined.append(l).append('\n');
+            }
+            String raw = joined.toString().trim();
+            Map<String, String> parsed = new HashMap<>();
+
+            if (raw.startsWith("{")) {
+                JSONObject o = new JSONObject(raw);
+                for (java.util.Iterator<String> it = o.keys(); it.hasNext(); ) {
+                    String k = it.next();
+                    parsed.put(dictKey(k), o.optString(k).trim());
+                }
+            } else if (raw.startsWith("[")) {
+                JSONArray a = new JSONArray(raw);
+                for (int i = 0; i < a.length(); i++) {
+                    JSONObject o = a.getJSONObject(i);
+                    String pl = o.optString("polish", o.optString("word", "")).trim();
+                    String en = o.optString("english", o.optString("translation", "")).trim();
+                    if (!pl.isEmpty() && !en.isEmpty()) {
+                        parsed.put(dictKey(pl), en);
+                    }
+                }
+            } else {
+                boolean first = true;
+                for (String line : lines) {
+                    String s = line.trim();
+                    if (s.isEmpty()) {
+                        continue;
+                    }
+                    List<String> parts = s.contains("\t")
+                            ? java.util.Arrays.asList(s.split("\t", -1))
+                            : splitCsvLine(s);
+                    if (parts.size() < 2) {
+                        continue;
+                    }
+                    String pl = parts.get(0).trim();
+                    String en = parts.get(1).trim();
+                    if (first) {
+                        first = false;
+                        if (pl.equalsIgnoreCase("polish") || en.equalsIgnoreCase("english")) {
+                            continue;
+                        }
+                    }
+                    if (!pl.isEmpty() && !en.isEmpty()) {
+                        parsed.put(dictKey(pl), en);
+                    }
+                }
+            }
+
+            if (parsed.isEmpty()) {
+                Toast.makeText(this, t("No entries found in that dictionary.", "Nie znaleziono haseł w tym słowniku."), Toast.LENGTH_LONG).show();
+                return;
+            }
+            JSONObject out = new JSONObject();
+            for (Map.Entry<String, String> e : parsed.entrySet()) {
+                out.put(e.getKey(), e.getValue());
+            }
+            try (FileOutputStream fos = openFileOutput(DICTIONARY_FILE, MODE_PRIVATE)) {
+                fos.write(out.toString().getBytes(StandardCharsets.UTF_8));
+            }
+            userDictionary.clear();
+            for (Map.Entry<String, String> e : parsed.entrySet()) {
+                userDictionary.put(e.getKey(), e.getValue());
+            }
+            screen = SCREEN_TRANSLATE;
+            glossStatus = t("Dictionary loaded: ", "Wczytano słownik: ") + parsed.size() + t(" entries. Build translations to apply them.", " haseł. Zbuduj tłumaczenia, aby je zastosować.");
+            render();
+        } catch (Exception e) {
+            Toast.makeText(this, t("Could not read that dictionary file.", "Nie udało się odczytać pliku słownika."), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void clearDictionary() {
+        deleteFile(DICTIONARY_FILE);
+        deleteFile(GLOSS_FILE);
+        userDictionary.clear();
+        glossCache.clear();
+        glossStatus = t("Dictionary and built translations cleared.", "Słownik i zbudowane tłumaczenia usunięte.");
+        render();
+    }
+
+    // One-time pass over the deck: dictionary hits are instant; only cards with
+    // no gloss and no English are sent to the on-device translator, one at a
+    // time, and everything is written to the cache file at the end.
+    private void buildGlosses() {
+        if (glossBuilding) {
+            return;
+        }
+        glossBuilding = true;
+        glossCache.clear();
+        final List<Phrase> needTranslation = new ArrayList<>();
+        int fromDict = 0;
+        for (Phrase p : phrases) {
+            String dict = userDictionary.get(dictKey(p.polish));
+            if (dict != null && !dict.isEmpty()) {
+                glossCache.put(p.key(), dict);
+                fromDict++;
+            } else if (p.english == null || p.english.trim().isEmpty()) {
+                needTranslation.add(p);
+            } else {
+                glossCache.put(p.key(), p.english);
+            }
+        }
+        glossStatus = t("Matched ", "Dopasowano ") + fromDict + t(" from dictionary. Translating ", " ze słownika. Tłumaczę ")
+                + needTranslation.size() + "…";
+        render();
+        translateGlossAt(needTranslation, 0);
+    }
+
+    private void translateGlossAt(final List<Phrase> todo, final int index) {
+        if (index >= todo.size()) {
+            finishGlossBuild();
+            return;
+        }
+        final Phrase p = todo.get(index);
+        final Translator tr = translatorFor(false); // Polish -> English
+        tr.downloadModelIfNeeded(new DownloadConditions.Builder().build())
+                .addOnSuccessListener(ignored -> tr.translate(p.polish)
+                        .addOnSuccessListener(result -> {
+                            glossCache.put(p.key(), result.trim());
+                            if (index % 10 == 0) {
+                                glossStatus = t("Translating ", "Tłumaczę ") + (index + 1) + "/" + todo.size() + "…";
+                                if (SCREEN_TRANSLATE.equals(screen)) {
+                                    render();
+                                }
+                            }
+                            translateGlossAt(todo, index + 1);
+                        })
+                        .addOnFailureListener(e -> translateGlossAt(todo, index + 1)))
+                .addOnFailureListener(e -> {
+                    glossBuilding = false;
+                    glossStatus = t("Could not download the language pack. Connect to the internet and try again.",
+                            "Nie udało się pobrać pakietu językowego. Połącz się z internetem i spróbuj ponownie.");
+                    if (SCREEN_TRANSLATE.equals(screen)) {
+                        render();
+                    }
+                });
+    }
+
+    private void finishGlossBuild() {
+        try {
+            JSONObject out = new JSONObject();
+            for (Map.Entry<String, String> e : glossCache.entrySet()) {
+                out.put(e.getKey(), e.getValue());
+            }
+            try (FileOutputStream fos = openFileOutput(GLOSS_FILE, MODE_PRIVATE)) {
+                fos.write(out.toString().getBytes(StandardCharsets.UTF_8));
+            }
+        } catch (Exception ignored) {
+        }
+        glossBuilding = false;
+        glossStatus = t("Ready: ", "Gotowe: ") + glossCache.size() + t(" translations built and saved offline.", " tłumaczeń zbudowanych i zapisanych offline.");
+        render();
+    }
+
+    private void pickDictionaryFile() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+        try {
+            startActivityForResult(intent, REQ_OPEN_DICTIONARY);
+        } catch (Exception e) {
+            Toast.makeText(this, t("No app to pick files.", "Brak aplikacji do wyboru plików."), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     // ---- Immersive listening: Polish ×2, English ×1, 1s gap, then next card ----
 
     private void buildListenDeck() {
@@ -3007,7 +3290,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         Phrase card = listenDeck.get(listenIndex);
         boolean polishStep = step < 2;
         Locale locale = polishStep ? new Locale("pl", "PL") : Locale.US;
-        String text = polishStep ? card.polish : card.english;
+        String text = polishStep ? card.polish : glossFor(card);
         if (text == null || text.trim().isEmpty()) {
             advanceListening(listenIndex, step);
             return;
@@ -3078,7 +3361,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             card.addView(pl, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             if (listenShowEnglish) {
                 addGap(card, 12);
-                TextView en = uiText(now.english, 17, th.body, sansMedium);
+                TextView en = uiText(glossFor(now), 17, th.body, sansMedium);
                 en.setGravity(Gravity.CENTER);
                 en.setLineSpacing(0, 1.08f);
                 card.addView(en, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
