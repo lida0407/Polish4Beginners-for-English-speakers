@@ -1,8 +1,8 @@
 {
-  "versionCode": 29,
-  "versionName": "1.28",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/a210601626e2dc3055f89c9b0a9811aa714922ba/docs/P4B.apk",
-  "apkSha256": "4a35206537ee71673eb58dc66eaa27ac4b0320f2d47b43e88e3186821bc809bd",
-  "apkSizeBytes": 67537251,
-  "releaseNotes": "Choose your speech engine (MultiTTS, Google, ...) and pick a specific Polish and English voice in Settings."
+  "versionCode": 30,
+  "versionName": "1.29",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/b071cad01e6194fab2a7efce34e6ed2cd086b2a2/docs/P4B.apk",
+  "apkSha256": "8d7cad11f5e92388964d2836bf3e4af99028b682095ca8d7eb62d92692810596",
+  "apkSizeBytes": 67556364,
+  "releaseNotes": "New: hands-free immersive listening (Polish x2 + English, with pauses) and scenario conversations with audio - grocery, barbershop, pharmacy, plus your own uploadable dialogs."
 }
