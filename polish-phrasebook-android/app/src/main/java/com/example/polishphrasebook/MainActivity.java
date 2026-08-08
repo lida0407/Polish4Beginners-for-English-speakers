@@ -25,8 +25,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
+import android.os.Handler;
+import android.os.Looper;
 import android.speech.tts.TextToSpeech;
+import android.speech.tts.UtteranceProgressListener;
 import android.speech.tts.Voice;
+import android.view.WindowManager;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
@@ -101,6 +105,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String SCREEN_ALPHABET = "alphabet";
     private static final String SCREEN_NEWS = "news";
     private static final String SCREEN_TRANSLATE = "translate";
+    private static final String SCREEN_LISTEN = "listen";
+    private static final String SCREEN_DIALOGS = "dialogs";
+    private static final String CUSTOM_DIALOGS = "customDialogs";
+    private static final long LISTEN_GAP_MS = 1000L;
     private static final String SCREEN_SETTINGS = "settings";
     private static final String DEFAULT_THEME = "Klasyczny";
     private static final String LANG_EN = "en";
@@ -126,6 +134,26 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String MY_WORDS_CATEGORY = "My Words";
     private static final int REQ_SAVE_TEMPLATE = 2001;
     private static final int REQ_OPEN_LIST = 2002;
+    private static final int REQ_SAVE_DIALOG_TEMPLATE = 2003;
+    private static final int REQ_OPEN_DIALOG = 2004;
+    private static final String DIALOG_TEMPLATE =
+            "[\n"
+            + "  {\n"
+            + "    \"id\": \"my-cafe\",\n"
+            + "    \"title\": \"Ordering coffee\",\n"
+            + "    \"titlePolish\": \"Zamawianie kawy\",\n"
+            + "    \"level\": \"A1\",\n"
+            + "    \"scenario\": \"Food & Drink\",\n"
+            + "    \"description\": \"Ordering at the counter and paying.\",\n"
+            + "    \"roles\": { \"A\": \"Klient · Customer\", \"B\": \"Barista\" },\n"
+            + "    \"lines\": [\n"
+            + "      { \"speaker\": \"B\", \"polish\": \"Dzień dobry! Co podać?\", \"english\": \"Hello! What can I get you?\" },\n"
+            + "      { \"speaker\": \"A\", \"polish\": \"Poproszę dużą kawę z mlekiem.\", \"english\": \"A large coffee with milk, please.\", \"note\": \"poproszę = polite 'I'll have'\" },\n"
+            + "      { \"speaker\": \"B\", \"polish\": \"Na miejscu czy na wynos?\", \"english\": \"For here or to go?\" },\n"
+            + "      { \"speaker\": \"A\", \"polish\": \"Na wynos, proszę.\", \"english\": \"To go, please.\" }\n"
+            + "    ]\n"
+            + "  }\n"
+            + "]\n";
     private static final String WORDLIST_TEMPLATE =
             "polish,english,level,tag\n"
             + "dziękuję,thank you,A1,My Words\n"
@@ -138,6 +166,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private final List<NewsItem> newsItems = new ArrayList<>();
     private final Map<String, CardMemory> memory = new HashMap<>();
     private final java.util.Set<String> favourites = new java.util.HashSet<>();
+    private final List<Phrase> listenDeck = new ArrayList<>();
+    private final List<Dialog> dialogs = new ArrayList<>();
+    private final Handler listenHandler = new Handler(Looper.getMainLooper());
     private final List<Phrase> sessionDeck = new ArrayList<>();
     private final List<Boolean> sessionEnglishFront = new ArrayList<>();
     private final Map<String, Theme> themes = new LinkedHashMap<>();
@@ -148,6 +179,13 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private String interfaceLanguage = LANG_EN;
     private String speechSpeed = SPEED_NORMAL;
     private String browseTopic = "All";
+    private String listenTopic = "All";
+    private int listenIndex = 0;
+    private boolean listenPlaying = false;
+    private boolean listenShowEnglish = true;
+    private String openDialogId = null;
+    private int dialogPlayIndex = -1;
+    private boolean dialogShowEnglish = true;
     private String browseQuery = "";
     private String openLessonUnit = null;
     private int browseLimit = 25;
@@ -206,6 +244,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         loadPhrases();
         loadGrammarLessons();
         loadAlphabet();
+        loadDialogs();
         loadMemory();
         loadFavourites();
         registerUpdateDownloadReceiver();
@@ -260,6 +299,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     @Override
     protected void onDestroy() {
+        listenHandler.removeCallbacksAndMessages(null);
         if (textToSpeech != null) {
             textToSpeech.stop();
             textToSpeech.shutdown();
@@ -282,6 +322,18 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     @Override
     public void onBackPressed() {
         if (SCREEN_SESSION.equals(screen)) {
+            screen = SCREEN_HOME;
+            render();
+            return;
+        }
+        if (SCREEN_DIALOGS.equals(screen) && openDialogId != null) {
+            stopAudioPlayback();
+            openDialogId = null;
+            render();
+            return;
+        }
+        if (SCREEN_LISTEN.equals(screen) || SCREEN_DIALOGS.equals(screen)) {
+            stopAudioPlayback();
             screen = SCREEN_HOME;
             render();
             return;
@@ -335,6 +387,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 renderNews(content);
             } else if (SCREEN_TRANSLATE.equals(screen)) {
                 renderTranslate(content);
+            } else if (SCREEN_LISTEN.equals(screen)) {
+                renderListen(content);
+            } else if (SCREEN_DIALOGS.equals(screen)) {
+                renderDialogs(content);
             } else {
                 renderSettings(content);
             }
@@ -379,6 +435,27 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
         content.addView(levelSelector());
         addGap(content, 16);
+        addGap(content, 12);
+        LinearLayout modes = row();
+        Button listenBtn = flatButton("🎧  " + t("Listen", "Słuchaj"), th.accent2, th.onAccent2, th.ink, 14, 50);
+        listenBtn.setOnClickListener(v -> {
+            screen = SCREEN_LISTEN;
+            buildListenDeck();
+            render();
+        });
+        modes.addView(listenBtn, new LinearLayout.LayoutParams(0, dp(50), 1));
+        Button talkBtn = flatButton("💬  " + t("Conversations", "Rozmowy"), th.accent2, th.onAccent2, th.ink, 14, 50);
+        talkBtn.setOnClickListener(v -> {
+            screen = SCREEN_DIALOGS;
+            openDialogId = null;
+            render();
+        });
+        LinearLayout.LayoutParams talkP = new LinearLayout.LayoutParams(0, dp(50), 1);
+        talkP.setMargins(dp(10), 0, 0, 0);
+        modes.addView(talkBtn, talkP);
+        content.addView(modes);
+        addGap(content, 16);
+
         content.addView(statsStrip());
         int favs = favouriteCount();
         if (favs > 0) {
@@ -2247,15 +2324,18 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             return;
         }
         Uri uri = data.getData();
-        if (requestCode == REQ_SAVE_TEMPLATE) {
+        if (requestCode == REQ_SAVE_TEMPLATE || requestCode == REQ_SAVE_DIALOG_TEMPLATE) {
+            String payload = requestCode == REQ_SAVE_TEMPLATE ? WORDLIST_TEMPLATE : DIALOG_TEMPLATE;
             try (java.io.OutputStream out = getContentResolver().openOutputStream(uri)) {
                 if (out != null) {
-                    out.write(WORDLIST_TEMPLATE.getBytes(StandardCharsets.UTF_8));
+                    out.write(payload.getBytes(StandardCharsets.UTF_8));
                 }
                 Toast.makeText(this, t("Template saved.", "Szablon zapisany."), Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 Toast.makeText(this, t("Could not save the template.", "Nie udało się zapisać szablonu."), Toast.LENGTH_LONG).show();
             }
+        } else if (requestCode == REQ_OPEN_DIALOG) {
+            importDialogFile(uri);
         } else if (requestCode == REQ_OPEN_LIST) {
             try {
                 final List<String[]> rows = parseWordListCsv(readLines(getContentResolver().openInputStream(uri)));
@@ -2436,6 +2516,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         item.setGravity(Gravity.CENTER);
         item.setPadding(0, dp(4), 0, dp(4));
         item.setOnClickListener(v -> {
+            stopAudioPlayback();
             screen = target;
             render();
         });
@@ -2799,6 +2880,565 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private void applySpeechRate() {
         if (textToSpeech != null) {
             textToSpeech.setSpeechRate(speechRate());
+        }
+    }
+
+    // ---- Immersive listening: Polish ×2, English ×1, 1s gap, then next card ----
+
+    private void buildListenDeck() {
+        listenDeck.clear();
+        for (Phrase phrase : phrases) {
+            if (!level.equals(phrase.level)) {
+                continue;
+            }
+            if (!"All".equals(listenTopic) && !listenTopic.equals(phrase.category)) {
+                continue;
+            }
+            listenDeck.add(phrase);
+        }
+        Collections.shuffle(listenDeck);
+        listenIndex = 0;
+    }
+
+    private void startListening() {
+        if (listenDeck.isEmpty()) {
+            buildListenDeck();
+        }
+        if (listenDeck.isEmpty()) {
+            Toast.makeText(this, t("No cards for this topic yet.", "Brak kart dla tego tematu."), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!ttsReady) {
+            Toast.makeText(this, t("Speech engine is still starting.", "Silnik mowy jeszcze się uruchamia."), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        listenPlaying = true;
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        attachListenProgressListener();
+        render();
+        playListenStep(0);
+    }
+
+    // Silences whichever auto-playback is running (listening loop or dialog).
+    private void stopAudioPlayback() {
+        listenPlaying = false;
+        dialogPlayIndex = -1;
+        listenHandler.removeCallbacksAndMessages(null);
+        if (textToSpeech != null) {
+            try {
+                textToSpeech.stop();
+            } catch (Exception ignored) {
+            }
+        }
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    }
+
+    private void stopListening() {
+        listenPlaying = false;
+        listenHandler.removeCallbacksAndMessages(null);
+        if (textToSpeech != null) {
+            try {
+                textToSpeech.stop();
+            } catch (Exception ignored) {
+            }
+        }
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        render();
+    }
+
+    private void attachListenProgressListener() {
+        if (textToSpeech == null) {
+            return;
+        }
+        textToSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
+            @Override public void onStart(String utteranceId) { }
+
+            @Override
+            public void onDone(String utteranceId) {
+                if (utteranceId == null || !utteranceId.startsWith("listen:")) {
+                    return;
+                }
+                final String[] parts = utteranceId.split(":");
+                if (parts.length < 3) {
+                    return;
+                }
+                final int card = Integer.parseInt(parts[1]);
+                final int step = Integer.parseInt(parts[2]);
+                listenHandler.post(() -> advanceListening(card, step));
+            }
+
+            @Override public void onError(String utteranceId) {
+                listenHandler.post(() -> {
+                    if (listenPlaying) {
+                        stopListening();
+                    }
+                });
+            }
+        });
+    }
+
+    private void advanceListening(int card, int step) {
+        if (!listenPlaying || card != listenIndex) {
+            return;
+        }
+        if (step < 2) {
+            playListenStep(step + 1);
+            return;
+        }
+        // Finished English: pause, then move to the next card.
+        listenHandler.postDelayed(() -> {
+            if (!listenPlaying) {
+                return;
+            }
+            listenIndex++;
+            if (listenIndex >= listenDeck.size()) {
+                listenIndex = 0; // loop the topic
+            }
+            render();
+            playListenStep(0);
+        }, LISTEN_GAP_MS);
+    }
+
+    // step 0,1 = Polish; step 2 = English
+    private void playListenStep(int step) {
+        if (!listenPlaying || listenIndex >= listenDeck.size() || textToSpeech == null) {
+            return;
+        }
+        Phrase card = listenDeck.get(listenIndex);
+        boolean polishStep = step < 2;
+        Locale locale = polishStep ? new Locale("pl", "PL") : Locale.US;
+        String text = polishStep ? card.polish : card.english;
+        if (text == null || text.trim().isEmpty()) {
+            advanceListening(listenIndex, step);
+            return;
+        }
+        if (!applySavedVoice(locale)) {
+            textToSpeech.setLanguage(locale);
+        }
+        applySpeechRate();
+        String id = "listen:" + listenIndex + ":" + step;
+        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, id);
+    }
+
+    private void renderListen(LinearLayout content) {
+        Theme th = theme();
+        content.addView(screenTitle(t("Immersive Listening", "Słuchanie")));
+        addGap(content, 8);
+        content.addView(bodyText(t("Each word is read twice in Polish, then once in English, with a short pause. It keeps going hands-free.",
+                "Każde słowo czytane jest dwa razy po polsku, potem raz po angielsku, z krótką przerwą. Działa bez dotykania telefonu."), 13, th.muted));
+        addGap(content, 14);
+
+        // Topic chips
+        HorizontalScrollView scroll = new HorizontalScrollView(this);
+        scroll.setHorizontalScrollBarEnabled(false);
+        LinearLayout chipRow = row();
+        scroll.addView(chipRow);
+        List<String> topics = new ArrayList<>();
+        topics.add("All");
+        for (TopicCount tc : allTopicsForLevel()) {
+            topics.add(tc.name);
+        }
+        for (String topic : topics) {
+            boolean selected = topic.equals(listenTopic);
+            Button chip = flatButton(topic, selected ? th.ink : th.panel, selected ? th.bg : th.muted, selected ? th.ink : th.dash, 12, 32);
+            chip.setAllCaps(true);
+            chip.setOnClickListener(v -> {
+                boolean wasPlaying = listenPlaying;
+                stopListening();
+                listenTopic = topic;
+                buildListenDeck();
+                if (wasPlaying) {
+                    startListening();
+                } else {
+                    render();
+                }
+            });
+            LinearLayout.LayoutParams cp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(32));
+            cp.setMargins(0, 0, dp(8), 0);
+            chipRow.addView(chip, cp);
+        }
+        content.addView(scroll);
+        addGap(content, 16);
+
+        if (listenDeck.isEmpty()) {
+            buildListenDeck();
+        }
+
+        LinearLayout card = vertical();
+        card.setGravity(Gravity.CENTER);
+        card.setPadding(dp(22), dp(28), dp(22), dp(28));
+        card.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
+        if (!listenDeck.isEmpty()) {
+            Phrase now = listenDeck.get(Math.min(listenIndex, listenDeck.size() - 1));
+            card.addView(label(now.level + " · " + now.category, th.accent2, 10.5f, 0.12f));
+            addGap(card, 12);
+            TextView pl = serifText(now.polish, 30, th.ink);
+            pl.setGravity(Gravity.CENTER);
+            pl.setLineSpacing(0, 1.03f);
+            card.addView(pl, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            if (listenShowEnglish) {
+                addGap(card, 12);
+                TextView en = uiText(now.english, 17, th.body, sansMedium);
+                en.setGravity(Gravity.CENTER);
+                en.setLineSpacing(0, 1.08f);
+                card.addView(en, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                if (!now.examplePolish.isEmpty()) {
+                    addGap(card, 12);
+                    TextView ex = uiText(now.examplePolish + (now.exampleEnglish.isEmpty() ? "" : "\n" + now.exampleEnglish), 13, th.faint, sansRegular);
+                    ex.setGravity(Gravity.CENTER);
+                    card.addView(ex, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                }
+            }
+            addGap(card, 14);
+            card.addView(uiText((listenIndex + 1) + " / " + listenDeck.size(), 11.5f, th.ghost, sansBold));
+        }
+        content.addView(card);
+        addGap(content, 14);
+
+        LinearLayout controls = row();
+        Button prev = flatButton("‹", th.panel, th.ink, th.dash, 18, 52);
+        prev.setOnClickListener(v -> {
+            listenIndex = listenIndex > 0 ? listenIndex - 1 : Math.max(0, listenDeck.size() - 1);
+            render();
+            if (listenPlaying) {
+                playListenStep(0);
+            }
+        });
+        controls.addView(prev, new LinearLayout.LayoutParams(0, dp(52), 1));
+        Button toggle = filledButton(listenPlaying ? t("Pause", "Pauza") : t("Play", "Odtwórz"), th.accent, th.onAccent, 15, 52);
+        toggle.setOnClickListener(v -> {
+            if (listenPlaying) {
+                stopListening();
+            } else {
+                startListening();
+            }
+        });
+        LinearLayout.LayoutParams tp = new LinearLayout.LayoutParams(0, dp(52), 2);
+        tp.setMargins(dp(10), 0, dp(10), 0);
+        controls.addView(toggle, tp);
+        Button next = flatButton("›", th.panel, th.ink, th.dash, 18, 52);
+        next.setOnClickListener(v -> {
+            listenIndex = (listenIndex + 1) % Math.max(1, listenDeck.size());
+            render();
+            if (listenPlaying) {
+                playListenStep(0);
+            }
+        });
+        controls.addView(next, new LinearLayout.LayoutParams(0, dp(52), 1));
+        content.addView(controls);
+        addGap(content, 10);
+
+        Button eng = flatButton(listenShowEnglish ? t("Hide English", "Ukryj angielski") : t("Show English", "Pokaż angielski"), th.panel, th.muted, th.dash, 13, 44);
+        eng.setOnClickListener(v -> {
+            listenShowEnglish = !listenShowEnglish;
+            render();
+        });
+        content.addView(eng, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(44)));
+    }
+
+    // ---- Scenario conversations ----
+
+    private void renderDialogs(LinearLayout content) {
+        Theme th = theme();
+        Dialog open = openDialogId == null ? null : dialogById(openDialogId);
+        if (open != null) {
+            renderDialogDetail(content, open);
+            return;
+        }
+        content.addView(screenTitle(t("Conversations", "Rozmowy")));
+        addGap(content, 8);
+        content.addView(bodyText(t("Real-life scenarios, line by line. Tap any line to hear it, or play the whole conversation.",
+                "Scenariusze z życia, linijka po linijce. Dotknij linii, aby ją usłyszeć, lub odtwórz całą rozmowę."), 13, th.muted));
+        addGap(content, 14);
+
+        for (Dialog d : dialogs) {
+            LinearLayout item = vertical();
+            item.setPadding(dp(14), dp(12), dp(14), dp(12));
+            item.setBackground(rounded(th.panel, d.custom ? th.accent2 : th.ink, 4, 1.5f));
+            LinearLayout head = row();
+            head.setGravity(Gravity.CENTER_VERTICAL);
+            head.addView(label(d.level + (d.scenario.isEmpty() ? "" : " · " + d.scenario), th.accent2, 10.5f, 0.1f),
+                    new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+            head.addView(uiText(d.lines.size() + t(" lines", " linii"), 10.5f, th.ghost, sansBold));
+            item.addView(head);
+            addGap(item, 6);
+            item.addView(serifText(d.title, 19, th.ink));
+            if (!d.titlePolish.isEmpty()) {
+                item.addView(uiText(d.titlePolish, 13, th.faint, sansRegular));
+            }
+            if (!d.description.isEmpty()) {
+                addGap(item, 4);
+                item.addView(uiText(d.description, 12.5f, th.muted, sansRegular));
+            }
+            item.setOnClickListener(v -> {
+                openDialogId = d.id;
+                dialogPlayIndex = -1;
+                render();
+            });
+            content.addView(item);
+            addGap(content, 10);
+        }
+
+        addGap(content, 8);
+        content.addView(new DashedLine(this, th.dash), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(2)));
+        addGap(content, 14);
+        content.addView(label(t("YOUR OWN CONVERSATIONS", "TWOJE ROZMOWY"), th.faint, 11.5f, 0.12f));
+        addGap(content, 8);
+        content.addView(bodyText(t("Write a dialog as a JSON file and upload it. Download the template to see the format.",
+                "Zapisz rozmowę jako plik JSON i prześlij. Pobierz szablon, aby zobaczyć format."), 13, th.muted));
+        addGap(content, 10);
+        LinearLayout fileRow = row();
+        Button tmpl = flatButton(t("Dialog template", "Szablon rozmowy"), th.panel, th.ink, th.ink, 13, 46);
+        tmpl.setOnClickListener(v -> downloadDialogTemplate());
+        fileRow.addView(tmpl, new LinearLayout.LayoutParams(0, dp(46), 1));
+        Button up = filledButton(t("Upload dialog", "Prześlij rozmowę"), th.accent, th.onAccent, 13, 46);
+        up.setOnClickListener(v -> pickDialogFile());
+        LinearLayout.LayoutParams upP = new LinearLayout.LayoutParams(0, dp(46), 1);
+        upP.setMargins(dp(10), 0, 0, 0);
+        fileRow.addView(up, upP);
+        content.addView(fileRow);
+    }
+
+    private void renderDialogDetail(LinearLayout content, Dialog d) {
+        Theme th = theme();
+        LinearLayout head = row();
+        head.setGravity(Gravity.CENTER_VERTICAL);
+        Button back = flatButton("‹ " + t("All", "Wszystkie"), th.panel, th.ink, th.dash, 12.5f, 38);
+        back.setOnClickListener(v -> {
+            stopDialogPlayback();
+            openDialogId = null;
+            render();
+        });
+        head.addView(back, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(38)));
+        content.addView(head);
+        addGap(content, 10);
+        content.addView(serifText(d.title, 24, th.ink));
+        if (!d.titlePolish.isEmpty()) {
+            content.addView(uiText(d.titlePolish, 14, th.faint, sansRegular));
+        }
+        addGap(content, 12);
+
+        LinearLayout controls = row();
+        Button play = filledButton(dialogPlayIndex >= 0 ? t("Stop", "Stop") : t("Play conversation", "Odtwórz rozmowę"), th.accent, th.onAccent, 14, 48);
+        play.setOnClickListener(v -> {
+            if (dialogPlayIndex >= 0) {
+                stopDialogPlayback();
+            } else {
+                startDialogPlayback(d, 0);
+            }
+        });
+        controls.addView(play, new LinearLayout.LayoutParams(0, dp(48), 2));
+        Button toggleEn = flatButton(dialogShowEnglish ? t("Hide EN", "Ukryj EN") : t("Show EN", "Pokaż EN"), th.panel, th.muted, th.dash, 13, 48);
+        toggleEn.setOnClickListener(v -> {
+            dialogShowEnglish = !dialogShowEnglish;
+            render();
+        });
+        LinearLayout.LayoutParams tp = new LinearLayout.LayoutParams(0, dp(48), 1);
+        tp.setMargins(dp(10), 0, 0, 0);
+        controls.addView(toggleEn, tp);
+        content.addView(controls);
+        addGap(content, 14);
+
+        for (int i = 0; i < d.lines.size(); i++) {
+            final DialogLine line = d.lines.get(i);
+            final int index = i;
+            boolean left = "A".equalsIgnoreCase(line.speaker);
+            boolean active = index == dialogPlayIndex;
+            LinearLayout bubble = vertical();
+            bubble.setPadding(dp(13), dp(10), dp(13), dp(10));
+            bubble.setBackground(rounded(active ? th.accentSoft : th.panel, active ? th.accent : (left ? th.ink : th.dash), 4, 1.5f));
+            bubble.addView(label(d.roleLabel(line.speaker), left ? th.accent : th.accent2, 10, 0.08f));
+            addGap(bubble, 4);
+            TextView pl = serifText(line.polish, 17, th.ink);
+            pl.setLineSpacing(0, 1.05f);
+            pl.setTextIsSelectable(true);
+            bubble.addView(pl);
+            if (dialogShowEnglish && !line.english.isEmpty()) {
+                TextView en = uiText(line.english, 12.5f, th.faint, sansRegular);
+                en.setLineSpacing(0, 1.05f);
+                bubble.addView(en, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 3));
+            }
+            if (!line.note.isEmpty()) {
+                TextView note = uiText("• " + line.note, 11.5f, th.muted, sansRegular);
+                bubble.addView(note, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 4));
+            }
+            bubble.setOnClickListener(v -> speak(line.polish, new Locale("pl", "PL")));
+            LinearLayout wrap = row();
+            if (!left) {
+                SpaceView spacer = new SpaceView(this);
+                wrap.addView(spacer, new LinearLayout.LayoutParams(0, 1, 1));
+            }
+            wrap.addView(bubble, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 6));
+            if (left) {
+                SpaceView spacer = new SpaceView(this);
+                wrap.addView(spacer, new LinearLayout.LayoutParams(0, 1, 1));
+            }
+            content.addView(wrap);
+            addGap(content, 8);
+        }
+
+        if (d.custom) {
+            addGap(content, 8);
+            Button del = flatButton(t("Delete this conversation", "Usuń tę rozmowę"), th.panel, th.accent, th.accent, 13, 44);
+            del.setOnClickListener(v -> deleteCustomDialog(d));
+            content.addView(del, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(44)));
+        }
+    }
+
+    private void startDialogPlayback(Dialog d, int from) {
+        if (!ttsReady) {
+            Toast.makeText(this, t("Speech engine is still starting.", "Silnik mowy jeszcze się uruchamia."), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        openDialogId = d.id;
+        dialogPlayIndex = from;
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        attachDialogProgressListener(d);
+        render();
+        speakDialogLine(d, from);
+    }
+
+    private void stopDialogPlayback() {
+        dialogPlayIndex = -1;
+        listenHandler.removeCallbacksAndMessages(null);
+        if (textToSpeech != null) {
+            try {
+                textToSpeech.stop();
+            } catch (Exception ignored) {
+            }
+        }
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        render();
+    }
+
+    private void speakDialogLine(Dialog d, int index) {
+        if (index < 0 || index >= d.lines.size() || textToSpeech == null) {
+            return;
+        }
+        DialogLine line = d.lines.get(index);
+        Locale pl = new Locale("pl", "PL");
+        if (!applySavedVoice(pl)) {
+            textToSpeech.setLanguage(pl);
+        }
+        applySpeechRate();
+        textToSpeech.speak(line.polish, TextToSpeech.QUEUE_FLUSH, null, "dialog:" + index);
+    }
+
+    private void attachDialogProgressListener(final Dialog d) {
+        if (textToSpeech == null) {
+            return;
+        }
+        textToSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
+            @Override public void onStart(String utteranceId) { }
+
+            @Override
+            public void onDone(String utteranceId) {
+                if (utteranceId == null || !utteranceId.startsWith("dialog:")) {
+                    return;
+                }
+                final int done = Integer.parseInt(utteranceId.substring(7));
+                listenHandler.post(() -> {
+                    if (dialogPlayIndex != done) {
+                        return;
+                    }
+                    listenHandler.postDelayed(() -> {
+                        if (dialogPlayIndex != done) {
+                            return;
+                        }
+                        int next = done + 1;
+                        if (next >= d.lines.size()) {
+                            stopDialogPlayback();
+                            return;
+                        }
+                        dialogPlayIndex = next;
+                        render();
+                        speakDialogLine(d, next);
+                    }, LISTEN_GAP_MS);
+                });
+            }
+
+            @Override public void onError(String utteranceId) {
+                listenHandler.post(() -> stopDialogPlayback());
+            }
+        });
+    }
+
+    private void deleteCustomDialog(Dialog d) {
+        String rawId = d.id.startsWith("my:") ? d.id.substring(3) : d.id;
+        SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        try {
+            JSONArray arr = new JSONArray(prefs.getString(CUSTOM_DIALOGS, "[]"));
+            JSONArray keep = new JSONArray();
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject o = arr.getJSONObject(i);
+                if (!rawId.equals(o.optString("id"))) {
+                    keep.put(o);
+                }
+            }
+            prefs.edit().putString(CUSTOM_DIALOGS, keep.toString()).apply();
+        } catch (Exception ignored) {
+        }
+        openDialogId = null;
+        loadDialogs();
+        Toast.makeText(this, t("Conversation deleted.", "Rozmowa usunięta."), Toast.LENGTH_SHORT).show();
+        render();
+    }
+
+    private void downloadDialogTemplate() {
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("application/json");
+        intent.putExtra(Intent.EXTRA_TITLE, "dialog_template.json");
+        try {
+            startActivityForResult(intent, REQ_SAVE_DIALOG_TEMPLATE);
+        } catch (Exception e) {
+            Toast.makeText(this, t("No app to save files.", "Brak aplikacji do zapisu plików."), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void pickDialogFile() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+        try {
+            startActivityForResult(intent, REQ_OPEN_DIALOG);
+        } catch (Exception e) {
+            Toast.makeText(this, t("No app to pick files.", "Brak aplikacji do wyboru plików."), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void importDialogFile(Uri uri) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            for (String line : readLines(getContentResolver().openInputStream(uri))) {
+                sb.append(line).append('\n');
+            }
+            String json = sb.toString().trim();
+            // Validate before storing.
+            int before = dialogs.size();
+            parseDialogsInto(json, true);
+            int parsed = dialogs.size() - before;
+            if (parsed <= 0) {
+                Toast.makeText(this, t("No conversations found in that file.", "Nie znaleziono rozmów w tym pliku."), Toast.LENGTH_LONG).show();
+                loadDialogs();
+                return;
+            }
+            SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+            JSONArray stored = new JSONArray(prefs.getString(CUSTOM_DIALOGS, "[]"));
+            String trimmed = json.startsWith("{") ? "[" + json + "]" : json;
+            JSONArray incoming = new JSONArray(trimmed);
+            for (int i = 0; i < incoming.length(); i++) {
+                stored.put(incoming.getJSONObject(i));
+            }
+            prefs.edit().putString(CUSTOM_DIALOGS, stored.toString()).apply();
+            loadDialogs();
+            screen = SCREEN_DIALOGS;
+            openDialogId = null;
+            Toast.makeText(this, t("Added ", "Dodano ") + parsed + t(" conversation(s).", " rozmów."), Toast.LENGTH_LONG).show();
+            render();
+        } catch (Exception e) {
+            Toast.makeText(this, t("Could not read that dialog file. Check the JSON format.",
+                    "Nie udało się odczytać pliku. Sprawdź format JSON."), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -3283,6 +3923,91 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
     }
 
+    private void loadDialogs() {
+        dialogs.clear();
+        try {
+            parseDialogsInto(readAsset("dialogs.json"), false);
+        } catch (Exception ignored) {
+        }
+        String custom = getSharedPreferences(PREFS, MODE_PRIVATE).getString(CUSTOM_DIALOGS, "[]");
+        try {
+            parseDialogsInto(custom, true);
+        } catch (Exception ignored) {
+        }
+    }
+
+    // Accepts either a single dialog object or an array of them.
+    private int parseDialogsInto(String json, boolean custom) throws Exception {
+        String trimmed = json.trim();
+        JSONArray arr;
+        if (trimmed.startsWith("{")) {
+            arr = new JSONArray();
+            arr.put(new JSONObject(trimmed));
+        } else {
+            arr = new JSONArray(trimmed);
+        }
+        int added = 0;
+        for (int i = 0; i < arr.length(); i++) {
+            JSONObject o = arr.getJSONObject(i);
+            JSONArray lineArr = o.optJSONArray("lines");
+            if (lineArr == null || lineArr.length() == 0) {
+                continue;
+            }
+            List<DialogLine> lines = new ArrayList<>();
+            for (int j = 0; j < lineArr.length(); j++) {
+                JSONObject l = lineArr.getJSONObject(j);
+                String pl = l.optString("polish").trim();
+                if (pl.isEmpty()) {
+                    continue;
+                }
+                lines.add(new DialogLine(
+                        l.optString("speaker", "A").trim(),
+                        pl,
+                        l.optString("english").trim(),
+                        l.optString("note").trim()));
+            }
+            if (lines.isEmpty()) {
+                continue;
+            }
+            Map<String, String> roles = new LinkedHashMap<>();
+            JSONObject r = o.optJSONObject("roles");
+            if (r != null) {
+                for (java.util.Iterator<String> it = r.keys(); it.hasNext(); ) {
+                    String k = it.next();
+                    roles.put(k, r.optString(k, k));
+                }
+            }
+            String id = o.optString("id", "").trim();
+            if (id.isEmpty()) {
+                id = "dialog-" + (dialogs.size() + 1);
+            }
+            if (custom) {
+                id = "my:" + id;
+            }
+            dialogs.add(new Dialog(
+                    id,
+                    o.optString("title", id),
+                    o.optString("titlePolish", ""),
+                    o.optString("level", "A1"),
+                    o.optString("scenario", ""),
+                    o.optString("description", ""),
+                    roles,
+                    lines,
+                    custom));
+            added++;
+        }
+        return added;
+    }
+
+    private Dialog dialogById(String id) {
+        for (Dialog d : dialogs) {
+            if (d.id.equals(id)) {
+                return d;
+            }
+        }
+        return null;
+    }
+
     private String readAsset(String fileName) throws Exception {
         return readStream(getAssets().open(fileName));
     }
@@ -3486,6 +4211,50 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     private android.graphics.drawable.Drawable leftBorderBox(int fill, int color, float strokeDp) {
         return new BorderDrawable(fill, color, dpFloat(strokeDp), 0, 0, 0);
+    }
+
+    private static class DialogLine {
+        final String speaker;
+        final String polish;
+        final String english;
+        final String note;
+
+        DialogLine(String speaker, String polish, String english, String note) {
+            this.speaker = speaker;
+            this.polish = polish;
+            this.english = english;
+            this.note = note;
+        }
+    }
+
+    private static class Dialog {
+        final String id;
+        final String title;
+        final String titlePolish;
+        final String level;
+        final String scenario;
+        final String description;
+        final Map<String, String> roles;
+        final List<DialogLine> lines;
+        final boolean custom;
+
+        Dialog(String id, String title, String titlePolish, String level, String scenario,
+               String description, Map<String, String> roles, List<DialogLine> lines, boolean custom) {
+            this.id = id;
+            this.title = title;
+            this.titlePolish = titlePolish;
+            this.level = level;
+            this.scenario = scenario;
+            this.description = description;
+            this.roles = roles;
+            this.lines = lines;
+            this.custom = custom;
+        }
+
+        String roleLabel(String speaker) {
+            String r = roles.get(speaker);
+            return r == null ? speaker : r;
+        }
     }
 
     private static class CardMemory {

@@ -1,0 +1,86 @@
+[
+  {
+    "id": "grocery",
+    "title": "At the grocery store",
+    "titlePolish": "W sklepie spożywczym",
+    "level": "A1",
+    "scenario": "Shopping & Money",
+    "description": "Finding items, asking prices and paying at the till.",
+    "roles": {
+      "A": "Klient · Customer",
+      "B": "Sprzedawca · Shop assistant"
+    },
+    "lines": [
+      { "speaker": "B", "polish": "Dzień dobry! W czym mogę pomóc?", "english": "Good morning! How can I help you?" },
+      { "speaker": "A", "polish": "Dzień dobry. Szukam chleba i mleka.", "english": "Good morning. I'm looking for bread and milk." },
+      { "speaker": "B", "polish": "Chleb jest na drugiej półce po lewej, a mleko w lodówce z tyłu.", "english": "The bread is on the second shelf on the left, and the milk is in the fridge at the back." },
+      { "speaker": "A", "polish": "Dziękuję. Ile kosztuje ten chleb?", "english": "Thank you. How much does this bread cost?", "note": "ile kosztuje = how much does it cost" },
+      { "speaker": "B", "polish": "Cztery złote pięćdziesiąt.", "english": "Four zloty fifty." },
+      { "speaker": "A", "polish": "Poproszę dwa. Czy mają państwo świeże jabłka?", "english": "Two, please. Do you have fresh apples?", "note": "poproszę = polite 'I'll have / please give me'" },
+      { "speaker": "B", "polish": "Tak, dzisiaj są przecenione. Kilogram kosztuje sześć złotych.", "english": "Yes, they are on sale today. A kilo costs six zloty." },
+      { "speaker": "A", "polish": "W takim razie poproszę kilogram.", "english": "In that case I'll take a kilo." },
+      { "speaker": "B", "polish": "Coś jeszcze?", "english": "Anything else?" },
+      { "speaker": "A", "polish": "Nie, dziękuję. To wszystko.", "english": "No, thank you. That's everything." },
+      { "speaker": "B", "polish": "Razem dwadzieścia jeden złotych. Płaci pan kartą czy gotówką?", "english": "Twenty-one zloty altogether. Are you paying by card or cash?" },
+      { "speaker": "A", "polish": "Kartą. Czy mogę dostać paragon?", "english": "By card. Can I have the receipt?" },
+      { "speaker": "B", "polish": "Oczywiście, proszę bardzo. Miłego dnia!", "english": "Of course, here you are. Have a nice day!" },
+      { "speaker": "A", "polish": "Dziękuję, nawzajem. Do widzenia.", "english": "Thank you, you too. Goodbye.", "note": "nawzajem = likewise / same to you" }
+    ]
+  },
+  {
+    "id": "barbershop",
+    "title": "At the barbershop",
+    "titlePolish": "U fryzjera",
+    "level": "A2",
+    "scenario": "Clothing & Appearance",
+    "description": "Asking for a haircut, describing the length you want, and paying.",
+    "roles": {
+      "A": "Klient · Customer",
+      "B": "Fryzjer · Barber"
+    },
+    "lines": [
+      { "speaker": "B", "polish": "Dzień dobry! Czy jest pan umówiony?", "english": "Good morning! Do you have an appointment?" },
+      { "speaker": "A", "polish": "Dzień dobry. Nie, czy jest wolny termin teraz?", "english": "Good morning. No, is there a free slot right now?" },
+      { "speaker": "B", "polish": "Tak, proszę usiąść. Jak pana ostrzyc?", "english": "Yes, please take a seat. How would you like your hair cut?" },
+      { "speaker": "A", "polish": "Poproszę krótko po bokach i trochę dłużej na górze.", "english": "Short on the sides and a bit longer on top, please." },
+      { "speaker": "B", "polish": "Na jaką długość po bokach? Numer dwa czy trzy?", "english": "What length on the sides? Number two or three?" },
+      { "speaker": "A", "polish": "Numer dwa, proszę.", "english": "Number two, please." },
+      { "speaker": "B", "polish": "A grzywkę zostawiamy?", "english": "And shall we keep the fringe?" },
+      { "speaker": "A", "polish": "Tak, ale proszę skrócić ją odrobinę.", "english": "Yes, but please shorten it a little.", "note": "odrobinę = just a little bit" },
+      { "speaker": "B", "polish": "Chce pan też podciąć brodę?", "english": "Would you like your beard trimmed as well?" },
+      { "speaker": "A", "polish": "Tak, proszę wyrównać i skrócić o pół centymetra.", "english": "Yes, please even it out and take off half a centimetre." },
+      { "speaker": "B", "polish": "Gotowe. Czy podoba się panu?", "english": "All done. Do you like it?" },
+      { "speaker": "A", "polish": "Bardzo dobrze, dziękuję. Ile płacę?", "english": "Very good, thank you. How much do I pay?" },
+      { "speaker": "B", "polish": "Strzyżenie i broda to sześćdziesiąt złotych.", "english": "The haircut and beard come to sixty zloty." },
+      { "speaker": "A", "polish": "Proszę bardzo. Reszty nie trzeba.", "english": "Here you are. Keep the change.", "note": "reszty nie trzeba = keep the change" },
+      { "speaker": "B", "polish": "Dziękuję! Zapraszam ponownie.", "english": "Thank you! Come again." }
+    ]
+  },
+  {
+    "id": "pharmacy",
+    "title": "At the pharmacy",
+    "titlePolish": "W aptece",
+    "level": "A2",
+    "scenario": "Health & Body",
+    "description": "Describing symptoms and buying medicine without a prescription.",
+    "roles": {
+      "A": "Klient · Customer",
+      "B": "Farmaceutka · Pharmacist"
+    },
+    "lines": [
+      { "speaker": "B", "polish": "Dzień dobry. Słucham pana?", "english": "Good morning. How can I help you?" },
+      { "speaker": "A", "polish": "Dzień dobry. Od wczoraj boli mnie gardło.", "english": "Good morning. My throat has been hurting since yesterday." },
+      { "speaker": "B", "polish": "Czy ma pan gorączkę albo katar?", "english": "Do you have a fever or a runny nose?" },
+      { "speaker": "A", "polish": "Trochę katar, ale gorączki nie mam.", "english": "A bit of a runny nose, but no fever." },
+      { "speaker": "B", "polish": "Proponuję tabletki do ssania i syrop.", "english": "I suggest lozenges and a syrup.", "note": "tabletki do ssania = lozenges (lit. tablets to suck)" },
+      { "speaker": "A", "polish": "Czy potrzebna jest recepta?", "english": "Is a prescription needed?" },
+      { "speaker": "B", "polish": "Nie, oba są bez recepty.", "english": "No, both are available without a prescription." },
+      { "speaker": "A", "polish": "Ile razy dziennie mam je brać?", "english": "How many times a day should I take them?" },
+      { "speaker": "B", "polish": "Syrop trzy razy dziennie po jedzeniu, tabletki co dwie godziny.", "english": "The syrup three times a day after meals, the lozenges every two hours." },
+      { "speaker": "A", "polish": "Dziękuję. Poproszę oba.", "english": "Thank you. I'll take both, please." },
+      { "speaker": "B", "polish": "Razem trzydzieści dwa złote. Proszę o paragon?", "english": "Thirty-two zloty altogether. Would you like a receipt?" },
+      { "speaker": "A", "polish": "Tak, poproszę. Dziękuję bardzo.", "english": "Yes, please. Thank you very much." },
+      { "speaker": "B", "polish": "Zdrowia życzę! Do widzenia.", "english": "Get well soon! Goodbye.", "note": "Zdrowia życzę = a common pharmacy farewell" }
+    ]
+  }
+]
