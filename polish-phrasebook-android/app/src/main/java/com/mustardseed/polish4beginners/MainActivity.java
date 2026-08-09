@@ -30,6 +30,10 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.style.ClickableSpan;
+import android.text.method.LinkMovementMethod;
+import android.text.Spanned;
+import android.text.SpannableString;
 import android.util.Base64;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -131,6 +135,17 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final int REQ_OPEN_DIALOG = 2004;
     private static final int REQ_OPEN_DICTIONARY = 2005;
     private static final String DICTIONARY_FILE = "user_dictionary.json";
+    // Words for tap-to-translate: letters plus internal apostrophes/hyphens.
+    private static final Pattern WORD_PATTERN = Pattern.compile("\\p{L}+(?:['\u2019-]\\p{L}+)*");
+    private static final String BUNDLED_DICTIONARY_ASSET = "dictionary_pl_en.tsv";
+    // Longest first: the fallback accepts the first trimmed form that exists.
+    // Noun/adjective endings, longest first, plus the vowels a stem may restore.
+    private static final String[] INFLECTION_SUFFIXES = {
+            "iami", "ach", "ami", "ego", "emu", "imi", "ymi", "owi", "iem",
+            "om", "ów", "em", "ie", "iu", "ia", "io", "ce", "ka", "ki", "ku",
+            "ą", "ę", "y", "i", "u", "a", "e", "o"
+    };
+    private static final String[] INFLECTION_RESTORES = {"", "a", "o", "e", "y", "i"};
     private static final String GLOSS_FILE = "gloss_cache.json";
     private static final String DIALOG_TEMPLATE =
             "[\n"
@@ -167,6 +182,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private final Handler listenHandler = new Handler(Looper.getMainLooper());
     // Uploaded dictionary: normalized Polish -> gloss. Loaded once, then O(1).
     private final Map<String, String> userDictionary = new HashMap<>();
+    // Built-in PL->EN dictionary (assets); user entries take precedence.
+    private final Map<String, String> bundledDictionary = new HashMap<>();
     // Prebuilt per-card gloss, so playback never looks anything up.
     private final Map<String, String> glossCache = new HashMap<>();
     private boolean dictionaryLoading = false;
@@ -262,6 +279,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 loadDialogs();
                 loadMemory();
                 loadFavourites();
+                loadBundledDictionary();
             } catch (Throwable error) {
                 if (dataError.isEmpty()) {
                     dataError = "Could not load learning data.";
@@ -2253,7 +2271,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         content.addView(bodyText(t("Upload your own dictionary (CSV, TSV or JSON: Polish then English). Then build the translations once — the app resolves every card and saves the result, so listening and study never look anything up while playing.",
                 "Prześlij własny słownik (CSV, TSV lub JSON: polski, potem angielski). Następnie raz zbuduj tłumaczenia — aplikacja rozwiąże wszystkie karty i zapisze wynik, więc słuchanie i nauka nie szukają niczego podczas odtwarzania."), 13, th.muted));
         addGap(content, 10);
-        content.addView(bodyText(t("Dictionary entries: ", "Hasła w słowniku: ") + userDictionary.size()
+        content.addView(bodyText(t("Built-in dictionary: ", "Słownik wbudowany: ") + bundledDictionary.size()
+                + t(" entries", " haseł")
+                + "\n" + t("Your dictionary: ", "Twój słownik: ") + userDictionary.size()
                 + "   ·   " + t("Built translations: ", "Zbudowane tłumaczenia: ") + glossCache.size(), 12.5f, th.faint));
         if (!glossStatus.isEmpty()) {
             addGap(content, 6);
@@ -2919,6 +2939,73 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         return LearningLogic.normalizeHeadword(polish);
     }
 
+    /** Built-in Polish→English dictionary shipped in assets (tab separated). */
+    private void loadBundledDictionary() {
+        if (!bundledDictionary.isEmpty()) {
+            return;
+        }
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(getAssets().open(BUNDLED_DICTIONARY_ASSET), StandardCharsets.UTF_8), 32768)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                int tab = line.indexOf('\t');
+                if (tab > 0) {
+                    bundledDictionary.put(line.substring(0, tab), line.substring(tab + 1));
+                }
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    /**
+     * Exact dictionary hit only — the user's own dictionary first, then the
+     * bundled one. Deliberately strict: an exact hit is trustworthy and is
+     * shown as the answer.
+     */
+    private String lookupWord(String word) {
+        String key = dictKey(word);
+        if (key.isEmpty()) {
+            return null;
+        }
+        String hit = userDictionary.get(key);
+        if (hit == null || hit.isEmpty()) {
+            hit = bundledDictionary.get(key);
+        }
+        return (hit == null || hit.isEmpty()) ? null : hit;
+    }
+
+    /**
+     * Best-effort base form for an inflected word, as "słowo — gloss".
+     *
+     * Polish stem changes mean suffix trimming alone can land on the wrong
+     * lemma (e.g. "dzwoni" trims to the noun "dzwon" when the verb "dzwonić"
+     * was meant), so this is never presented as the translation — only as a
+     * dictionary hint alongside a real translation.
+     */
+    private String lookupBaseForm(String word) {
+        String key = dictKey(word);
+        if (key.isEmpty() || key.length() < 4) {
+            return null;
+        }
+        for (String suffix : INFLECTION_SUFFIXES) {
+            if (!key.endsWith(suffix) || key.length() <= suffix.length() + 1) {
+                continue;
+            }
+            String stem = key.substring(0, key.length() - suffix.length());
+            for (String restore : INFLECTION_RESTORES) {
+                String candidate = stem + restore;
+                if (candidate.equals(key)) {
+                    continue;
+                }
+                String gloss = bundledDictionary.get(candidate);
+                if (gloss != null && !gloss.isEmpty()) {
+                    return candidate + " — " + gloss;
+                }
+            }
+        }
+        return null;
+    }
+
     private void loadDictionaryAsync() {
         if (dictionaryLoading) {
             return;
@@ -3082,6 +3169,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         int fromDict = 0;
         for (Phrase p : phrases) {
             String dict = userDictionary.get(dictKey(p.polish));
+            if (dict == null || dict.isEmpty()) {
+                dict = bundledDictionary.get(dictKey(p.polish));
+            }
             if (dict != null && !dict.isEmpty()) {
                 glossCache.put(p.key(), dict);
                 fromDict++;
@@ -3522,7 +3612,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             addGap(bubble, 4);
             TextView pl = serifText(line.polish, 17, th.ink);
             pl.setLineSpacing(0, 1.05f);
-            pl.setTextIsSelectable(true);
+            makeWordsTappable(pl, line.polish);
             bubble.addView(pl);
             if (dialogShowEnglish && !line.english.isEmpty()) {
                 TextView en = uiText(line.english, 12.5f, th.faint, sansRegular);
@@ -3554,6 +3644,144 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             del.setOnClickListener(v -> deleteCustomDialog(d));
             content.addView(del, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(44)));
         }
+    }
+
+    /** Makes every word in a Polish sentence individually tappable. */
+    private void makeWordsTappable(TextView view, String sentence) {
+        final Theme th = theme();
+        SpannableString span = new SpannableString(sentence);
+        Matcher m = WORD_PATTERN.matcher(sentence);
+        boolean any = false;
+        while (m.find()) {
+            final String word = m.group();
+            span.setSpan(new ClickableSpan() {
+                @Override
+                public void onClick(View widget) {
+                    showWordLookup(word);
+                }
+
+                @Override
+                public void updateDrawState(android.text.TextPaint ds) {
+                    ds.setColor(th.ink);      // keep the editorial look, no blue links
+                    ds.setUnderlineText(false);
+                }
+            }, m.start(), m.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            any = true;
+        }
+        if (any) {
+            view.setText(span);
+            view.setMovementMethod(LinkMovementMethod.getInstance());
+            view.setHighlightColor(th.accentSoft);
+        }
+    }
+
+    /** Word sheet: translation, audio, and one tap into a list or favourites. */
+    private void showWordLookup(final String rawWord) {
+        final String word = rawWord.trim();
+        if (word.isEmpty()) {
+            return;
+        }
+        String gloss = lookupWord(word);
+        if (gloss != null) {
+            presentWordSheet(word, gloss, t("built-in dictionary", "słownik wbudowany"));
+            return;
+        }
+        // Inflected form: translate it properly, and offer the dictionary's
+        // base form as a hint rather than guessing at the lemma.
+        final String baseHint = lookupBaseForm(word);
+        final Translator tr = translatorFor(false);
+        tr.downloadModelIfNeeded(new DownloadConditions.Builder().build())
+                .addOnSuccessListener(ignored -> tr.translate(word)
+                        .addOnSuccessListener(result -> {
+                            String text = result.trim();
+                            if (baseHint != null) {
+                                text = text + "\n\n" + t("Dictionary form: ", "Forma słownikowa: ") + baseHint;
+                            }
+                            presentWordSheet(word, text, t("on-device translation", "tłumaczenie na urządzeniu"));
+                        })
+                        .addOnFailureListener(e -> presentWordSheet(word,
+                                baseHint == null ? "" : t("Dictionary form: ", "Forma słownikowa: ") + baseHint,
+                                t("dictionary only", "tylko słownik"))))
+                .addOnFailureListener(e -> presentWordSheet(word,
+                        baseHint == null ? "" : t("Dictionary form: ", "Forma słownikowa: ") + baseHint,
+                        t("offline dictionary", "słownik offline")));
+    }
+
+    private void presentWordSheet(final String word, final String gloss, String sourceLabel) {
+        Theme th = theme();
+        LinearLayout box = vertical();
+        box.setPadding(dp(22), dp(18), dp(22), dp(8));
+
+        TextView head = serifText(word, 26, th.ink);
+        head.setTextIsSelectable(true);
+        box.addView(head);
+        box.addView(label(sourceLabel.toUpperCase(Locale.ROOT), th.ghost, 10, 0.1f),
+                topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 4));
+        TextView body = bodyText(gloss.isEmpty() ? t("No translation available.", "Brak tłumaczenia.") : gloss, 15, th.body);
+        box.addView(body, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 10));
+
+        final AlertDialog dialog = new AlertDialog.Builder(this).setView(box).create();
+
+        LinearLayout actions = row();
+        Button speak = flatButton("🔊 " + t("Play", "Odtwórz"), th.accentSoft, th.accent, th.accent, 13, 44);
+        speak.setOnClickListener(v -> speak(word, new Locale("pl", "PL")));
+        actions.addView(speak, new LinearLayout.LayoutParams(0, dp(44), 1));
+        Button fav = flatButton("★ " + t("Favourite", "Ulubione"), th.panel, th.ink, th.dash, 13, 44);
+        fav.setOnClickListener(v -> {
+            addWordToCollection(word, gloss, null, true);
+            dialog.dismiss();
+        });
+        LinearLayout.LayoutParams fp = new LinearLayout.LayoutParams(0, dp(44), 1);
+        fp.setMargins(dp(8), 0, 0, 0);
+        actions.addView(fav, fp);
+        box.addView(actions, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(44), 16));
+
+        Button addList = filledButton(t("Add to a list", "Dodaj do listy"), th.accent, th.onAccent, 14, 46);
+        addList.setOnClickListener(v -> {
+            dialog.dismiss();
+            promptForTag(lastTag(), tag -> addWordToCollection(word, gloss, tag, false));
+        });
+        box.addView(addList, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(46), 10));
+
+        dialog.show();
+    }
+
+    /**
+     * Saves a looked-up word as a study card, optionally starring it. Words
+     * already in the deck are reused rather than duplicated.
+     */
+    private void addWordToCollection(String word, String gloss, String tag, boolean favourite) {
+        String english = gloss == null ? "" : gloss.trim();
+        if (english.isEmpty()) {
+            english = word; // keep the card valid; the user can edit the list later
+        }
+        String key = dictKey(word);
+        Phrase existing = null;
+        for (Phrase phrase : phrases) {
+            if (dictKey(phrase.polish).equals(key)) {
+                existing = phrase;
+                break;
+            }
+        }
+        if (existing == null) {
+            boolean saved = saveCustomCard(word, english, level, tag == null ? lastTag() : tag);
+            loadPhrases();
+            loadMemory();
+            if (saved) {
+                for (Phrase phrase : phrases) {
+                    if (dictKey(phrase.polish).equals(key)) {
+                        existing = phrase;
+                        break;
+                    }
+                }
+            }
+        }
+        if (favourite && existing != null && !isFavourite(existing)) {
+            toggleFavourite(existing);
+        }
+        String where = favourite ? t("Favourites", "Ulubione") : (tag == null ? lastTag() : tag);
+        Toast.makeText(this, "„" + word + "” → " + where, Toast.LENGTH_SHORT).show();
+        render();
     }
 
     private void startDialogPlayback(Dialog d, int from) {

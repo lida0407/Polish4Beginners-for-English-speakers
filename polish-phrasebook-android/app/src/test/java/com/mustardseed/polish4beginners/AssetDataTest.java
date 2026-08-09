@@ -171,4 +171,27 @@ public class AssetDataTest {
         assertEquals("database.json phraseCount is stale", actualCount, declaredCount);
         assertEquals("database.json phrasesSizeBytes is stale", b.length, db.optInt("phrasesSizeBytes", -1));
     }
+
+    // ---- bundled dictionary ----------------------------------------------
+
+    @Test
+    public void bundledDictionaryParsesAndCoversCommonWords() throws Exception {
+        File f = new File("src/main/assets/dictionary_pl_en.tsv");
+        assertTrue("missing bundled dictionary", f.exists());
+        java.util.Map<String, String> dict = new java.util.HashMap<>();
+        for (String line : Files.readAllLines(f.toPath(), StandardCharsets.UTF_8)) {
+            int tab = line.indexOf('\t');
+            if (tab > 0) {
+                dict.put(line.substring(0, tab), line.substring(tab + 1));
+            }
+        }
+        assertTrue("dictionary too small: " + dict.size(), dict.size() > 40000);
+        for (String word : new String[]{"dom", "chleb", "woda", "gardło", "bilet", "fryzjer"}) {
+            assertNotNull("missing common word: " + word, dict.get(word));
+        }
+        // Keys must already be normalized, or lookups will silently miss.
+        for (String key : dict.keySet()) {
+            assertEquals("unnormalized key: " + key, LearningLogic.normalizeHeadword(key), key);
+        }
+    }
 }
