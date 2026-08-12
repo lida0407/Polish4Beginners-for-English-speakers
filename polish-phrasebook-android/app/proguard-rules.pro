@@ -14,7 +14,7 @@
 -keepattributes *Annotation*,Signature,InnerClasses,EnclosingMethod
 
 # ---- App entry point ----------------------------------------------------
--keep class com.mustardseed.polish4beginners.MainActivity { *; }
+-keep class com.example.polishphrasebook.MainActivity { *; }
 
 # The Activity implements TTS callbacks that the framework resolves reflectively.
 -keep class * implements android.speech.tts.TextToSpeech$OnInitListener { *; }

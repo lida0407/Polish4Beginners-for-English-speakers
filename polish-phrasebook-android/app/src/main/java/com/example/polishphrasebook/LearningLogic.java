@@ -1,4 +1,4 @@
-package com.mustardseed.polish4beginners;
+package com.example.polishphrasebook;
 
 /**
  * Pure logic extracted from MainActivity so it can be unit tested without an

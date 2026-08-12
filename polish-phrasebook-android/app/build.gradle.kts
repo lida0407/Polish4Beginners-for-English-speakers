@@ -31,7 +31,7 @@ val hasReleaseSigning =
         file(storeFilePath).exists()
 
 android {
-    namespace = "com.mustardseed.polish4beginners"
+    namespace = "com.example.polishphrasebook"
     compileSdk = 35
 
     buildFeatures {
@@ -39,11 +39,11 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.mustardseed.polish4beginners"
+        applicationId = "com.example.polishphrasebook"
         minSdk = 23
         targetSdk = 35
-        versionCode = 34
-        versionName = "1.33"
+        versionCode = 35
+        versionName = "1.34"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
