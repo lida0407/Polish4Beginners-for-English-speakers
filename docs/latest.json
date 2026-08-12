@@ -1,8 +1,8 @@
 {
-  "versionCode": 33,
-  "versionName": "1.32",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/51feadd0b4f43068b621fe8e5ccc265b3d22ec04/docs/P4B.apk",
-  "apkSha256": "2a45627b8e90171b111d97ac45f0c8b07c797b564331338d094a3ab46e22a43c",
-  "apkSizeBytes": 67578671,
-  "releaseNotes": "Dictionary import now handles UTF-8 BOM files (Excel exports) that previously imported as empty."
+  "versionCode": 35,
+  "versionName": "1.34",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/833c9ffc40e54214152216b0677dfcf89fb18684/docs/P4B.apk",
+  "apkSha256": "88665b8cf40db74e88835650af84ee983c90dbcb7cdbd6fdf39f2c3acdadbca8",
+  "apkSizeBytes": 68702498,
+  "releaseNotes": "Adds a built-in 50,000-word Polish-English dictionary, and tap any Polish word in Conversations or Listening to look it up, hear it, and save it to a list or favourites."
 }
