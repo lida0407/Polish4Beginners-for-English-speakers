@@ -3385,8 +3385,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         Theme th = theme();
         content.addView(screenTitle(t("Immersive Listening", "Słuchanie")));
         addGap(content, 8);
-        content.addView(bodyText(t("Each word is read twice in Polish, then once in English, with a short pause. It keeps going hands-free.",
-                "Każde słowo czytane jest dwa razy po polsku, potem raz po angielsku, z krótką przerwą. Działa bez dotykania telefonu."), 13, th.muted));
+        content.addView(bodyText(t("Each word is read twice in Polish, then once in English, with a short pause. It keeps going hands-free. Tap any Polish word to look it up — playback pauses while you do.",
+                "Każde słowo czytane jest dwa razy po polsku, potem raz po angielsku, z krótką przerwą. Działa bez dotykania telefonu. Dotknij dowolnego polskiego słowa, aby je sprawdzić — odtwarzanie wtedy się zatrzyma."), 13, th.muted));
         addGap(content, 14);
 
         // Topic chips
@@ -3436,6 +3436,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             TextView pl = serifText(now.polish, 30, th.ink);
             pl.setGravity(Gravity.CENTER);
             pl.setLineSpacing(0, 1.03f);
+            makeWordsTappable(pl, now.polish);
             card.addView(pl, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             if (listenShowEnglish) {
                 addGap(card, 12);
@@ -3445,9 +3446,15 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 card.addView(en, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                 if (!now.examplePolish.isEmpty()) {
                     addGap(card, 12);
-                    TextView ex = uiText(now.examplePolish + (now.exampleEnglish.isEmpty() ? "" : "\n" + now.exampleEnglish), 13, th.faint, sansRegular);
+                    TextView ex = uiText(now.examplePolish, 13, th.faint, sansRegular);
                     ex.setGravity(Gravity.CENTER);
+                    makeWordsTappable(ex, now.examplePolish);
                     card.addView(ex, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    if (!now.exampleEnglish.isEmpty()) {
+                        TextView exEn = uiText(now.exampleEnglish, 13, th.faint, sansRegular);
+                        exEn.setGravity(Gravity.CENTER);
+                        card.addView(exEn, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    }
                 }
             }
             addGap(card, 14);
@@ -3680,6 +3687,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         final String word = rawWord.trim();
         if (word.isEmpty()) {
             return;
+        }
+        // The listening loop and the sheet's audio would otherwise talk over
+        // each other, and flushing the loop's utterance can stall its chain.
+        if (listenPlaying) {
+            stopListening();
         }
         String gloss = lookupWord(word);
         if (gloss != null) {
