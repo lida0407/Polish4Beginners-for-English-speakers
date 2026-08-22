@@ -111,6 +111,11 @@ new dictionary. **Clear dictionary** removes both the dictionary and the cache.
 
 ## Converting MDX / MOBI / StarDict
 
+The app ships **no** dictionary — you supply your own. For Kindle `.mobi`
+dictionaries this repo includes `scripts/mobi_extract.py`, which decompresses
+the text stream so you can parse it into TSV.
+
+
 Binary dictionary formats are not read natively. Convert once on a computer
 with [PyGlossary](https://github.com/ilius/pyglossary), then upload the result:
 

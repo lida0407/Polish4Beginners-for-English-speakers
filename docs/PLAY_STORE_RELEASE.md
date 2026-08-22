@@ -219,7 +219,6 @@ Run through this before every Play upload.
 - [ ] Installed the release APK on a device and smoke-tested: study session,
       listening mode, a conversation, translation, TTS playback
 - [ ] `git status` clean of keystores, `keystore.properties`, `local.properties`
-- [ ] **Bundled dictionary licensing resolved** — see DICTIONARY_SOURCE.md
 - [ ] Privacy policy URL live and reachable
 - [ ] Data Safety form matches PRIVACY_DATA_NOTES.md
 

@@ -137,7 +137,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String DICTIONARY_FILE = "user_dictionary.json";
     // Words for tap-to-translate: letters plus internal apostrophes/hyphens.
     private static final Pattern WORD_PATTERN = Pattern.compile("\\p{L}+(?:['\u2019-]\\p{L}+)*");
-    private static final String BUNDLED_DICTIONARY_ASSET = "dictionary_pl_en.tsv";
     // Longest first: the fallback accepts the first trimmed form that exists.
     // Noun/adjective endings, longest first, plus the vowels a stem may restore.
     private static final String[] INFLECTION_SUFFIXES = {
@@ -182,8 +181,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private final Handler listenHandler = new Handler(Looper.getMainLooper());
     // Uploaded dictionary: normalized Polish -> gloss. Loaded once, then O(1).
     private final Map<String, String> userDictionary = new HashMap<>();
-    // Built-in PL->EN dictionary (assets); user entries take precedence.
-    private final Map<String, String> bundledDictionary = new HashMap<>();
     // Prebuilt per-card gloss, so playback never looks anything up.
     private final Map<String, String> glossCache = new HashMap<>();
     private boolean dictionaryLoading = false;
@@ -279,7 +276,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 loadDialogs();
                 loadMemory();
                 loadFavourites();
-                loadBundledDictionary();
             } catch (Throwable error) {
                 if (dataError.isEmpty()) {
                     dataError = "Could not load learning data.";
@@ -2271,9 +2267,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         content.addView(bodyText(t("Upload your own dictionary (CSV, TSV or JSON: Polish then English). Then build the translations once — the app resolves every card and saves the result, so listening and study never look anything up while playing.",
                 "Prześlij własny słownik (CSV, TSV lub JSON: polski, potem angielski). Następnie raz zbuduj tłumaczenia — aplikacja rozwiąże wszystkie karty i zapisze wynik, więc słuchanie i nauka nie szukają niczego podczas odtwarzania."), 13, th.muted));
         addGap(content, 10);
-        content.addView(bodyText(t("Built-in dictionary: ", "Słownik wbudowany: ") + bundledDictionary.size()
-                + t(" entries", " haseł")
-                + "\n" + t("Your dictionary: ", "Twój słownik: ") + userDictionary.size()
+        content.addView(bodyText(t("Your dictionary: ", "Twój słownik: ") + userDictionary.size()
                 + "   ·   " + t("Built translations: ", "Zbudowane tłumaczenia: ") + glossCache.size(), 12.5f, th.faint));
         if (!glossStatus.isEmpty()) {
             addGap(content, 6);
@@ -2939,23 +2933,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         return LearningLogic.normalizeHeadword(polish);
     }
 
-    /** Built-in Polish→English dictionary shipped in assets (tab separated). */
-    private void loadBundledDictionary() {
-        if (!bundledDictionary.isEmpty()) {
-            return;
-        }
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(getAssets().open(BUNDLED_DICTIONARY_ASSET), StandardCharsets.UTF_8), 32768)) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                int tab = line.indexOf('\t');
-                if (tab > 0) {
-                    bundledDictionary.put(line.substring(0, tab), line.substring(tab + 1));
-                }
-            }
-        } catch (Exception ignored) {
-        }
-    }
 
     /**
      * Exact dictionary hit only — the user's own dictionary first, then the
@@ -2968,9 +2945,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             return null;
         }
         String hit = userDictionary.get(key);
-        if (hit == null || hit.isEmpty()) {
-            hit = bundledDictionary.get(key);
-        }
         return (hit == null || hit.isEmpty()) ? null : hit;
     }
 
@@ -2997,7 +2971,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 if (candidate.equals(key)) {
                     continue;
                 }
-                String gloss = bundledDictionary.get(candidate);
+                String gloss = userDictionary.get(candidate);
                 if (gloss != null && !gloss.isEmpty()) {
                     return candidate + " — " + gloss;
                 }
@@ -3169,9 +3143,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         int fromDict = 0;
         for (Phrase p : phrases) {
             String dict = userDictionary.get(dictKey(p.polish));
-            if (dict == null || dict.isEmpty()) {
-                dict = bundledDictionary.get(dictKey(p.polish));
-            }
             if (dict != null && !dict.isEmpty()) {
                 glossCache.put(p.key(), dict);
                 fromDict++;
