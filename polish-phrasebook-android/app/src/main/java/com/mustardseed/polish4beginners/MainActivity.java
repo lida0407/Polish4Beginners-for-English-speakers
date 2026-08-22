@@ -1862,6 +1862,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         } else {
             text = Html.fromHtml(raw).toString();
         }
+        // Html.fromHtml turns <img> into U+FFFC (object replacement), which RSS
+        // descriptions commonly carry; strip it and other stray marks.
+        text = text.replace("\ufffc", "").replace("\ufffd", "");
+        text = text.replaceAll("[\\u200B-\\u200D\\uFEFF]", "");
         return text.replace('\u00a0', ' ').replaceAll("\\s+", " ").trim();
     }
 
@@ -2582,9 +2586,15 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             render();
         });
         item.addView(new NavIcon(this, icon, color), new LinearLayout.LayoutParams(dp(21), dp(21)));
-        TextView label = uiText(text, 10.5f, color, sansBold);
+        // Seven tabs are tight on a phone: clip each label to its own cell so
+        // long words (Translate, Grammar) can't bleed into their neighbours.
+        TextView label = uiText(text, 9.5f, color, sansBold);
         label.setGravity(Gravity.CENTER);
-        item.addView(label);
+        label.setSingleLine(true);
+        label.setEllipsize(TextUtils.TruncateAt.END);
+        label.setPadding(dp(2), 0, dp(2), 0);
+        item.addView(label, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         return item;
     }
 

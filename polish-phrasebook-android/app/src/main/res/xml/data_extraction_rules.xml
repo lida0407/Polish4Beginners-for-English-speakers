@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Android 12+ (dataExtractionRules): cloud backup and device-to-device transfer. -->
+<!-- Android 12+ (dataExtractionRules). Anything not included is not
+     transferred, so regenerable caches need no explicit exclude. -->
 <data-extraction-rules>
     <cloud-backup>
+        <!-- Progress only: keeps the backup small and well within quota. -->
         <include domain="sharedpref" path="phrasebook.xml" />
-        <exclude domain="file" path="gloss_cache.json" />
-        <exclude domain="file" path="phrases_remote.json" />
     </cloud-backup>
     <device-transfer>
         <include domain="sharedpref" path="phrasebook.xml" />
-        <!-- A direct transfer can afford the user dictionary too. -->
+        <!-- A direct device-to-device move can afford the user's dictionary. -->
         <include domain="file" path="user_dictionary.json" />
-        <exclude domain="file" path="gloss_cache.json" />
-        <exclude domain="file" path="phrases_remote.json" />
     </device-transfer>
 </data-extraction-rules>
