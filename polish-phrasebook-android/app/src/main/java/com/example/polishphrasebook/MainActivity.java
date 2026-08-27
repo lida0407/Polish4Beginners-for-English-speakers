@@ -113,8 +113,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String SCREEN_DIALOGS = "dialogs";
     private static final String CUSTOM_DIALOGS = "customDialogs";
     private static final long LISTEN_GAP_MS = 1000L;
+    private static final String SCREEN_READ = "read";
+    private static final String SCREEN_MORE = "more";
     private static final String SCREEN_SETTINGS = "settings";
-    private static final String DEFAULT_THEME = "Klasyczny";
+    private static final String DEFAULT_THEME = "Komiks";
     private static final String LANG_EN = "en";
     private static final String LANG_PL = "pl";
     private static final String PREF_TTS_ENGINE = "ttsEngine";
@@ -139,12 +141,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final int REQ_SAVE_DIALOG_TEMPLATE = 2003;
     private static final int REQ_OPEN_DIALOG = 2004;
     private static final int REQ_OPEN_DICTIONARY = 2005;
+    private static final String UPDATE_MANIFEST_URL = "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/latest.json?ref=main";
+    private static final String APK_MIME_TYPE = "application/vnd.android.package-archive";
     private static final String DICTIONARY_FILE = "user_dictionary.json";
     // Words for tap-to-translate: letters plus internal apostrophes/hyphens.
     private static final Pattern WORD_PATTERN = Pattern.compile("\\p{L}+(?:['\u2019-]\\p{L}+)*");
-    private static final String UPDATE_MANIFEST_URL = "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/latest.json?ref=main";
-    private static final String APK_MIME_TYPE = "application/vnd.android.package-archive";
-    private static final String BUNDLED_DICTIONARY_ASSET = "dictionary_pl_en.tsv";
     // Longest first: the fallback accepts the first trimmed form that exists.
     // Noun/adjective endings, longest first, plus the vowels a stem may restore.
     private static final String[] INFLECTION_SUFFIXES = {
@@ -189,8 +190,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private final Handler listenHandler = new Handler(Looper.getMainLooper());
     // Uploaded dictionary: normalized Polish -> gloss. Loaded once, then O(1).
     private final Map<String, String> userDictionary = new HashMap<>();
-    // Built-in PL->EN dictionary (assets); user entries take precedence.
-    private final Map<String, String> bundledDictionary = new HashMap<>();
     // Prebuilt per-card gloss, so playback never looks anything up.
     private final Map<String, String> glossCache = new HashMap<>();
     private boolean dictionaryLoading = false;
@@ -211,6 +210,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private boolean listenPlaying = false;
     private boolean listenShowEnglish = true;
     private String openDialogId = null;
+    private boolean readShowsDialogs = false;
     private long updateDownloadId = -1L;
     private BroadcastReceiver updateDownloadReceiver;
     private boolean dataReady = false;
@@ -250,6 +250,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private Typeface sansSemiBold;
     private Typeface sansBold;
     private Typeface serifBold;
+    private Typeface displaySemi;
+    private Typeface displayBold;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -289,7 +291,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 loadDialogs();
                 loadMemory();
                 loadFavourites();
-                loadBundledDictionary();
             } catch (Throwable error) {
                 if (dataError.isEmpty()) {
                     dataError = "Could not load learning data.";
@@ -509,6 +510,17 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             render();
             return;
         }
+        if (SCREEN_GRAMMAR.equals(screen) || SCREEN_ALPHABET.equals(screen)
+                || SCREEN_TRANSLATE.equals(screen) || SCREEN_SETTINGS.equals(screen)) {
+            screen = SCREEN_MORE;   // these now live under "More"
+            render();
+            return;
+        }
+        if (SCREEN_NEWS.equals(screen)) {
+            screen = SCREEN_READ;
+            render();
+            return;
+        }
         if (!SCREEN_HOME.equals(screen)) {
             screen = SCREEN_HOME;
             render();
@@ -527,7 +539,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
         LinearLayout root = new LinearLayout(this);
         root.setOrientation(LinearLayout.VERTICAL);
-        root.setBackgroundColor(theme.bg);
+        if (theme.halftone) {
+            root.setBackground(new HalftoneDrawable(theme.bg, theme.softLine, dpFloat(1.3f), dpFloat(14)));
+        } else {
+            root.setBackgroundColor(theme.bg);
+        }
 
         // Nothing is interactive until the learning data is in memory.
         if (!dataReady) {
@@ -569,6 +585,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 renderListen(content);
             } else if (SCREEN_DIALOGS.equals(screen)) {
                 renderDialogs(content);
+            } else if (SCREEN_READ.equals(screen)) {
+                renderRead(content);
+            } else if (SCREEN_MORE.equals(screen)) {
+                renderMore(content);
             } else {
                 renderSettings(content);
             }
@@ -586,7 +606,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
         LinearLayout hero = vertical();
         hero.setPadding(dp(18), dp(18), dp(18), dp(18));
-        hero.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
+        hero.setBackground(rounded(th.panel, th.ink, th.radius, th.border));
 
         LinearLayout heroMeta = row();
         TextView kicker = label(t("TODAY'S LESSON", "DZISIEJSZA LEKCJA"), th.accent2, 11, 0.14f);
@@ -615,22 +635,22 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         addGap(content, 16);
         addGap(content, 12);
         LinearLayout modes = row();
-        Button listenBtn = flatButton("🎧  " + t("Listen", "Słuchaj"), th.accent2, th.onAccent2, th.ink, 14, 50);
+        Button listenBtn = flatButton("🎧  " + t("Listen", "Słuchaj"), th.accent2, th.onAccent2, th.ink, 15, 56);
         listenBtn.setOnClickListener(v -> {
             screen = SCREEN_LISTEN;
             buildListenDeck();
             render();
         });
-        modes.addView(listenBtn, new LinearLayout.LayoutParams(0, dp(50), 1));
-        Button talkBtn = flatButton("💬  " + t("Conversations", "Rozmowy"), th.accent2, th.onAccent2, th.ink, 14, 50);
+        modes.addView(shadowWrap(listenBtn, 3), new LinearLayout.LayoutParams(0, dp(56), 1));
+        Button talkBtn = flatButton("💬  " + t("Conversations", "Rozmowy"), th.accentAlt, th.ink, th.ink, 15, 56);
         talkBtn.setOnClickListener(v -> {
             screen = SCREEN_DIALOGS;
             openDialogId = null;
             render();
         });
-        LinearLayout.LayoutParams talkP = new LinearLayout.LayoutParams(0, dp(50), 1);
+        LinearLayout.LayoutParams talkP = new LinearLayout.LayoutParams(0, dp(56), 1);
         talkP.setMargins(dp(10), 0, 0, 0);
-        modes.addView(talkBtn, talkP);
+        modes.addView(shadowWrap(talkBtn, 3), talkP);
         content.addView(modes);
         addGap(content, 16);
 
@@ -647,7 +667,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         Map<String, Integer> tagCounts = customTagCounts();
         if (!tagCounts.isEmpty()) {
             addGap(content, 14);
-            content.addView(label(t("MY WORD LISTS", "MOJE LISTY SŁÓW"), th.faint, 11, 0.14f));
+            content.addView(label(t("MY WORD LISTS", "MOJE LISTY SŁÓW"), th.accent, 11, 0.14f));
             addGap(content, 8);
             for (Map.Entry<String, Integer> entry : tagCounts.entrySet()) {
                 final String tag = entry.getKey();
@@ -709,7 +729,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         TextView badge = uiText(level, 11, th.accent, sansBold);
         badge.setGravity(Gravity.CENTER);
         badge.setPadding(dp(7), dp(2), dp(7), dp(2));
-        badge.setBackground(rounded(Color.TRANSPARENT, th.accent, 3, 1.5f));
+        badge.setBackground(rounded(Color.TRANSPARENT, th.accent, th.radius, th.border));
         return badge;
     }
 
@@ -736,12 +756,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private View statsStrip() {
         Theme th = theme();
         LinearLayout strip = row();
-        strip.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
+        strip.setBackground(rounded(th.panel, th.ink, th.radius, th.border));
         strip.setBaselineAligned(false);
         int[] counts = memoryCounts();
-        strip.addView(statCell(String.valueOf(counts[0]), t("New", "Nowe"), th.ink, true, 0), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        strip.addView(statCell(String.valueOf(counts[0]), t("New", "Nowe"), th.accent, true, 0), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
         strip.addView(statCell(String.valueOf(counts[1]), t("To review", "Do powtórki"), th.accent, true, 1), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
-        strip.addView(statCell(String.valueOf(counts[2]), t("Scheduled", "Zaplanowane"), th.accent2, false, 2), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        strip.addView(statCell(String.valueOf(counts[2]), t("Scheduled", "Zaplanowane"), th.accent3, false, 2), new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
         return strip;
     }
 
@@ -750,7 +770,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         LinearLayout cell = vertical();
         cell.setPadding(dp(14), dp(12), dp(14), dp(12));
         cell.setBackground(divider ? rightBorder(th.softLine, 1.5f) : null);
-        cell.addView(serifText(count, 22, color));
+        cell.addView(serifText(count, 24, color));
         TextView labelView = uiText(label.toUpperCase(Locale.ROOT), 11, th.faint, sansSemiBold);
         cell.addView(labelView);
         cell.setOnClickListener(v -> startStatusSession(statusIndex));
@@ -762,7 +782,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         LinearLayout section = vertical();
         LinearLayout heading = row();
         heading.setGravity(Gravity.CENTER_VERTICAL);
-        heading.addView(label(t("TOPICS", "ROZDZIAŁY"), th.faint, 11, 0.14f));
+        heading.addView(label(t("TOPICS", "ROZDZIAŁY"), th.accent, 11, 0.14f));
         View line = new View(this);
         line.setBackgroundColor(th.dash);
         LinearLayout.LayoutParams lineParams = new LinearLayout.LayoutParams(0, dp(2), 1);
@@ -816,7 +836,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         LinearLayout face = vertical();
         face.setGravity(Gravity.CENTER);
         face.setPadding(dp(24), dp(28), dp(24), dp(28));
-        face.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
+        face.setBackground(rounded(th.panel, th.ink, th.radius, th.border));
         face.setOnClickListener(v -> {
             if (!sessionRevealed) {
                 sessionRevealed = true;
@@ -897,7 +917,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 table.setTextColor(th.body);
                 table.setLineSpacing(0, 1.12f);
                 table.setPadding(dp(14), dp(10), dp(14), dp(10));
-                table.setBackground(rounded(th.bg, th.dash, 4, 1.5f));
+                table.setBackground(rounded(th.bg, th.dash, th.radius, th.border));
                 table.setTextIsSelectable(true);
                 HorizontalScrollView scroll = new HorizontalScrollView(this);
                 scroll.setHorizontalScrollBarEnabled(false);
@@ -1004,7 +1024,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         search.setTextColor(th.ink);
         search.setHintTextColor(th.faint);
         search.setPadding(dp(14), 0, dp(14), 0);
-        search.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
+        search.setBackground(rounded(th.panel, th.ink, th.radius, th.border));
         search.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -1075,7 +1095,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         Theme th = theme();
         LinearLayout outer = row();
         outer.setGravity(Gravity.CENTER_VERTICAL);
-        outer.setBackground(rounded(th.panel, th.softLine, 3, 1.5f));
+        outer.setBackground(rounded(th.panel, th.softLine, th.radius, th.border));
 
         View status = new View(this);
         status.setBackgroundColor(statusColor(phrase));
@@ -1120,13 +1140,13 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         boolean open = lesson.unit.equals(openLessonUnit);
         LinearLayout card = vertical();
         card.setPadding(dp(16), dp(16), dp(16), dp(16));
-        card.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
+        card.setBackground(rounded(th.panel, th.ink, th.radius, th.border));
 
         LinearLayout header = row();
         header.setGravity(Gravity.CENTER_VERTICAL);
         TextView unit = uiText(lesson.unit, 10.5f, th.onAccent2, sansBold);
         unit.setPadding(dp(7), dp(3), dp(7), dp(3));
-        unit.setBackground(rounded(th.accent2, th.accent2, 2, 1));
+        unit.setBackground(rounded(th.accent2, th.accent2, th.radius / 2f, th.border));
         header.addView(unit);
         TextView scenario = label(lesson.scenario, th.faint, 11, 0.06f);
         scenario.setGravity(Gravity.RIGHT);
@@ -1201,7 +1221,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         Theme th = theme();
         LinearLayout tile = vertical();
         tile.setPadding(dp(14), dp(12), dp(14), dp(12));
-        tile.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
+        tile.setBackground(rounded(th.panel, th.ink, th.radius, th.border));
         tile.setOnClickListener(v -> speakAlphabetItem(item));
         tile.addView(serifText(item.letter, 21, th.ink));
         tile.addView(uiText(item.sound, 11.5f, th.accent, sansBold));
@@ -1286,7 +1306,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         Theme th = theme();
         LinearLayout card = vertical();
         card.setPadding(dp(16), dp(16), dp(16), dp(16));
-        card.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
+        card.setBackground(rounded(th.panel, th.ink, th.radius, th.border));
         attachNewsSwipe(card);
 
         LinearLayout meta = row();
@@ -1313,7 +1333,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
         LinearLayout englishPanel = vertical();
         englishPanel.setPadding(dp(12), dp(10), dp(12), dp(10));
-        englishPanel.setBackground(rounded(th.accentSoft, th.accent, 4, 1.2f));
+        englishPanel.setBackground(rounded(th.accentSoft, th.accent, th.radius, th.border));
         TextView englishLabel = label("ENGLISH", th.accent, 10.5f, 0.08f);
         englishPanel.addView(englishLabel);
         if (!item.englishTitle.isEmpty()) {
@@ -1883,6 +1903,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         } else {
             text = Html.fromHtml(raw).toString();
         }
+        // Html.fromHtml turns <img> into U+FFFC (object replacement), which RSS
+        // descriptions commonly carry; strip it and other stray marks.
+        text = text.replace("\ufffc", "").replace("\ufffd", "");
+        text = text.replaceAll("[\\u200B-\\u200D\\uFEFF]", "");
         return text.replace('\u00a0', ' ').replaceAll("\\s+", " ").trim();
     }
 
@@ -1992,6 +2016,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         content.addView(voice);
         addGap(content, 12);
 
+        // App updates are delivered by Google Play; the app never installs APKs itself.
         LinearLayout update = settingsCard(t("App Updates", "Aktualizacje aplikacji"), t("Sideload build: checks GitHub for a newer APK.", "Wersja sideload: sprawdza nowszy APK w GitHub."));
         update.addView(bodyText("v" + BuildConfig.VERSION_NAME + " (" + BuildConfig.VERSION_CODE + ")", 12.5f, th.faint), topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 8));
         Button checkUpdates = flatButton(t("Check updates", "Sprawdź aktualizacje"), th.accentSoft, th.accent, th.accent, 13, 42);
@@ -2012,7 +2037,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         Theme th = theme();
         LinearLayout card = vertical();
         card.setPadding(dp(16), dp(16), dp(16), dp(16));
-        card.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
+        card.setBackground(rounded(th.panel, th.ink, th.radius, th.border));
         card.addView(serifText(title, 19, th.ink));
         addGap(card, 5);
         card.addView(bodyText(description, 13, th.muted));
@@ -2181,7 +2206,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         input.setGravity(Gravity.TOP | Gravity.START);
         input.setMinLines(2);
         input.setPadding(dp(14), dp(12), dp(14), dp(12));
-        input.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
+        input.setBackground(rounded(th.panel, th.ink, th.radius, th.border));
         input.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int st, int c, int a) {}
             @Override public void onTextChanged(CharSequence s, int st, int b, int c) { translateInput = s.toString(); }
@@ -2207,7 +2232,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             addGap(content, 16);
             LinearLayout outCard = vertical();
             outCard.setPadding(dp(16), dp(14), dp(16), dp(14));
-            outCard.setBackground(rounded(th.panel, th.accent2, 4, 1.5f));
+            outCard.setBackground(rounded(th.panel, th.accent2, th.radius, th.border));
             outCard.addView(label(toLang.toUpperCase(Locale.ROOT), th.accent2, 11, 0.1f));
             addGap(outCard, 6);
             TextView outText = serifText(translateOutput, 20, th.ink);
@@ -2255,7 +2280,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         addGap(content, 22);
         content.addView(new DashedLine(this, th.dash), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(2)));
         addGap(content, 16);
-        content.addView(label(t("YOUR WORD LISTS", "TWOJE LISTY SŁÓW"), th.faint, 11.5f, 0.12f));
+        content.addView(label(t("YOUR WORD LISTS", "TWOJE LISTY SŁÓW"), th.accent, 11, 0.14f));
         addGap(content, 8);
         Map<String, Integer> tagCounts = customTagCounts();
         content.addView(bodyText(t("Download the template, fill in your words (leave one side blank to auto-translate), then upload. Imported words become study cards you can group into named lists. ",
@@ -2285,14 +2310,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         addGap(content, 22);
         content.addView(new DashedLine(this, th.dash), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(2)));
         addGap(content, 16);
-        content.addView(label(t("OFFLINE DICTIONARY", "SŁOWNIK OFFLINE"), th.faint, 11.5f, 0.12f));
+        content.addView(label(t("OFFLINE DICTIONARY", "SŁOWNIK OFFLINE"), th.accent, 11, 0.14f));
         addGap(content, 8);
         content.addView(bodyText(t("Upload your own dictionary (CSV, TSV or JSON: Polish then English). Then build the translations once — the app resolves every card and saves the result, so listening and study never look anything up while playing.",
                 "Prześlij własny słownik (CSV, TSV lub JSON: polski, potem angielski). Następnie raz zbuduj tłumaczenia — aplikacja rozwiąże wszystkie karty i zapisze wynik, więc słuchanie i nauka nie szukają niczego podczas odtwarzania."), 13, th.muted));
         addGap(content, 10);
-        content.addView(bodyText(t("Built-in dictionary: ", "Słownik wbudowany: ") + bundledDictionary.size()
-                + t(" entries", " haseł")
-                + "\n" + t("Your dictionary: ", "Twój słownik: ") + userDictionary.size()
+        content.addView(bodyText(t("Your dictionary: ", "Twój słownik: ") + userDictionary.size()
                 + "   ·   " + t("Built translations: ", "Zbudowane tłumaczenia: ") + glossCache.size(), 12.5f, th.faint));
         if (!glossStatus.isEmpty()) {
             addGap(content, 6);
@@ -2578,6 +2601,72 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
     }
 
+    /** Czytaj: News and Conversations behind one top toggle. */
+    private void renderRead(LinearLayout content) {
+        Theme th = theme();
+        LinearLayout toggle = row();
+        Button news = flatButton(t("News", "Wiadomości"),
+                readShowsDialogs ? th.panel : th.accent,
+                readShowsDialogs ? th.muted : th.onAccent, th.ink, 14, 46);
+        news.setOnClickListener(v -> {
+            stopAudioPlayback();
+            readShowsDialogs = false;
+            render();
+        });
+        toggle.addView(news, new LinearLayout.LayoutParams(0, dp(46), 1));
+        Button talks = flatButton(t("Conversations", "Rozmowy"),
+                readShowsDialogs ? th.accent : th.panel,
+                readShowsDialogs ? th.onAccent : th.muted, th.ink, 14, 46);
+        talks.setOnClickListener(v -> {
+            readShowsDialogs = true;
+            render();
+        });
+        LinearLayout.LayoutParams tp = new LinearLayout.LayoutParams(0, dp(46), 1);
+        tp.setMargins(dp(10), 0, 0, 0);
+        toggle.addView(talks, tp);
+        content.addView(toggle);
+        addGap(content, 16);
+        if (readShowsDialogs) {
+            renderDialogs(content);
+        } else {
+            renderNews(content);
+        }
+    }
+
+    /** Więcej: the destinations that no longer have their own tab. */
+    private void renderMore(LinearLayout content) {
+        Theme th = theme();
+        content.addView(screenTitle(t("More", "Więcej")));
+        addGap(content, 14);
+        addMoreRow(content, t("Grammar", "Gramatyka"), t("23 lessons with self-checks", "23 lekcje z autotestem"), SCREEN_GRAMMAR, th.accent);
+        addMoreRow(content, t("Alphabet", "Alfabet"), t("39 letters and sounds", "39 liter i dźwięków"), SCREEN_ALPHABET, th.accent2);
+        addMoreRow(content, t("Translate", "Tłumacz"), t("Dictionary, word lists, imports", "Słownik, listy słów, import"), SCREEN_TRANSLATE, th.accent3);
+        addMoreRow(content, t("Settings", "Ustawienia"), t("Theme, voice, reading speed", "Motyw, głos, szybkość czytania"), SCREEN_SETTINGS, th.accentAlt);
+    }
+
+    private void addMoreRow(LinearLayout content, String title, String subtitle, final String target, int chipColor) {
+        Theme th = theme();
+        LinearLayout row = row();
+        row.setGravity(Gravity.CENTER_VERTICAL);
+        row.setPadding(dp(14), dp(14), dp(14), dp(14));
+        row.setBackground(rounded(th.panel, th.ink, th.radius, th.border));
+        View chip = new View(this);
+        chip.setBackground(rounded(chipColor, th.ink, th.radius / 2f, th.border));
+        row.addView(chip, new LinearLayout.LayoutParams(dp(34), dp(34)));
+        LinearLayout copy = vertical();
+        copy.setPadding(dp(12), 0, 0, 0);
+        copy.addView(serifText(title, 17, th.ink));
+        copy.addView(uiText(subtitle, 12, th.muted, sansRegular));
+        row.addView(copy, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        row.addView(uiText("›", 20, th.ghost, sansBold));
+        row.setOnClickListener(v -> {
+            screen = target;
+            render();
+        });
+        content.addView(shadowWrap(row, 4));
+        addGap(content, 10);
+    }
+
     private void maybeCheckForUpdatesOnStart() {
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
         long now = System.currentTimeMillis();
@@ -2715,11 +2804,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         nav.setBackground(topBorder(th.panel, th.ink, 2));
         nav.addView(navItem("home", t("Home", "Dom"), SCREEN_HOME), new LinearLayout.LayoutParams(0, dp(56), 1));
         nav.addView(navItem("browse", t("Cards", "Karty"), SCREEN_BROWSE), new LinearLayout.LayoutParams(0, dp(56), 1));
-        nav.addView(navItem("grammar", t("Grammar", "Gramatyka"), SCREEN_GRAMMAR), new LinearLayout.LayoutParams(0, dp(56), 1));
-        nav.addView(navItem("alphabet", "ABC", SCREEN_ALPHABET), new LinearLayout.LayoutParams(0, dp(56), 1));
-        nav.addView(navItem("news", t("News", "News"), SCREEN_NEWS), new LinearLayout.LayoutParams(0, dp(56), 1));
-        nav.addView(navItem("translate", t("Translate", "Tłumacz"), SCREEN_TRANSLATE), new LinearLayout.LayoutParams(0, dp(56), 1));
-        nav.addView(navItem("settings", t("Settings", "Ustawienia"), SCREEN_SETTINGS), new LinearLayout.LayoutParams(0, dp(56), 1));
+        nav.addView(navItem("listen", t("Listen", "Słuchaj"), SCREEN_LISTEN), new LinearLayout.LayoutParams(0, dp(56), 1));
+        nav.addView(navItem("read", t("Read", "Czytaj"), SCREEN_READ), new LinearLayout.LayoutParams(0, dp(56), 1));
+        nav.addView(navItem("more", t("More", "Więcej"), SCREEN_MORE), new LinearLayout.LayoutParams(0, dp(56), 1));
         return nav;
     }
 
@@ -2736,9 +2823,15 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             render();
         });
         item.addView(new NavIcon(this, icon, color), new LinearLayout.LayoutParams(dp(21), dp(21)));
-        TextView label = uiText(text, 10.5f, color, sansBold);
+        // Seven tabs are tight on a phone: clip each label to its own cell so
+        // long words (Translate, Grammar) can't bleed into their neighbours.
+        TextView label = uiText(text, 9.5f, color, sansBold);
         label.setGravity(Gravity.CENTER);
-        item.addView(label);
+        label.setSingleLine(true);
+        label.setEllipsize(TextUtils.TruncateAt.END);
+        label.setPadding(dp(2), 0, dp(2), 0);
+        item.addView(label, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         return item;
     }
 
@@ -3087,23 +3180,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         return LearningLogic.normalizeHeadword(polish);
     }
 
-    /** Built-in Polish→English dictionary shipped in assets (tab separated). */
-    private void loadBundledDictionary() {
-        if (!bundledDictionary.isEmpty()) {
-            return;
-        }
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(getAssets().open(BUNDLED_DICTIONARY_ASSET), StandardCharsets.UTF_8), 32768)) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                int tab = line.indexOf('\t');
-                if (tab > 0) {
-                    bundledDictionary.put(line.substring(0, tab), line.substring(tab + 1));
-                }
-            }
-        } catch (Exception ignored) {
-        }
-    }
 
     /**
      * Exact dictionary hit only — the user's own dictionary first, then the
@@ -3116,9 +3192,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             return null;
         }
         String hit = userDictionary.get(key);
-        if (hit == null || hit.isEmpty()) {
-            hit = bundledDictionary.get(key);
-        }
         return (hit == null || hit.isEmpty()) ? null : hit;
     }
 
@@ -3145,7 +3218,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 if (candidate.equals(key)) {
                     continue;
                 }
-                String gloss = bundledDictionary.get(candidate);
+                String gloss = userDictionary.get(candidate);
                 if (gloss != null && !gloss.isEmpty()) {
                     return candidate + " — " + gloss;
                 }
@@ -3317,9 +3390,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         int fromDict = 0;
         for (Phrase p : phrases) {
             String dict = userDictionary.get(dictKey(p.polish));
-            if (dict == null || dict.isEmpty()) {
-                dict = bundledDictionary.get(dictKey(p.polish));
-            }
             if (dict != null && !dict.isEmpty()) {
                 glossCache.put(p.key(), dict);
                 fromDict++;
@@ -3576,7 +3646,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         LinearLayout card = vertical();
         card.setGravity(Gravity.CENTER);
         card.setPadding(dp(22), dp(28), dp(22), dp(28));
-        card.setBackground(rounded(th.panel, th.ink, 4, 1.5f));
+        card.setBackground(rounded(th.panel, th.ink, th.radius, th.border));
         if (!listenDeck.isEmpty()) {
             Phrase now = listenDeck.get(Math.min(listenIndex, listenDeck.size() - 1));
             card.addView(label(now.level + " · " + now.category, th.accent2, 10.5f, 0.12f));
@@ -3670,7 +3740,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         for (Dialog d : dialogs) {
             LinearLayout item = vertical();
             item.setPadding(dp(14), dp(12), dp(14), dp(12));
-            item.setBackground(rounded(th.panel, d.custom ? th.accent2 : th.ink, 4, 1.5f));
+            item.setBackground(rounded(th.panel, d.custom ? th.accent2 : th.ink, th.radius, th.border));
             LinearLayout head = row();
             head.setGravity(Gravity.CENTER_VERTICAL);
             head.addView(label(d.level + (d.scenario.isEmpty() ? "" : " · " + d.scenario), th.accent2, 10.5f, 0.1f),
@@ -3698,7 +3768,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         addGap(content, 8);
         content.addView(new DashedLine(this, th.dash), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(2)));
         addGap(content, 14);
-        content.addView(label(t("YOUR OWN CONVERSATIONS", "TWOJE ROZMOWY"), th.faint, 11.5f, 0.12f));
+        content.addView(label(t("YOUR OWN CONVERSATIONS", "TWOJE ROZMOWY"), th.accent, 11, 0.14f));
         addGap(content, 8);
         content.addView(bodyText(t("Write a dialog as a JSON file and upload it. Download the template to see the format.",
                 "Zapisz rozmowę jako plik JSON i prześlij. Pobierz szablon, aby zobaczyć format."), 13, th.muted));
@@ -3762,7 +3832,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             boolean active = index == dialogPlayIndex;
             LinearLayout bubble = vertical();
             bubble.setPadding(dp(13), dp(10), dp(13), dp(10));
-            bubble.setBackground(rounded(active ? th.accentSoft : th.panel, active ? th.accent : (left ? th.ink : th.dash), 4, 1.5f));
+            bubble.setBackground(rounded(active ? th.accentSoft : th.panel, active ? th.accent : (left ? th.ink : th.dash), th.radius, th.border));
             bubble.addView(label(d.roleLabel(line.speaker), left ? th.accent : th.accent2, 10, 0.08f));
             addGap(bubble, 4);
             TextView pl = serifText(line.polish, 17, th.ink);
@@ -4684,17 +4754,21 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     private void loadFonts() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            sansRegular = getResources().getFont(R.font.ibm_plex_sans_regular);
-            sansMedium = getResources().getFont(R.font.ibm_plex_sans_medium);
-            sansSemiBold = getResources().getFont(R.font.ibm_plex_sans_semibold);
-            sansBold = getResources().getFont(R.font.ibm_plex_sans_bold);
-            serifBold = getResources().getFont(R.font.source_serif_4_bold);
+            sansRegular = getResources().getFont(R.font.nunito_regular);
+            sansMedium = getResources().getFont(R.font.nunito_bold);
+            sansSemiBold = getResources().getFont(R.font.nunito_extrabold);
+            sansBold = getResources().getFont(R.font.nunito_black);
+            serifBold = getResources().getFont(R.font.baloo2_extrabold);
+            displaySemi = getResources().getFont(R.font.baloo2_semibold);
+            displayBold = getResources().getFont(R.font.baloo2_bold);
         } else {
-            sansRegular = Typeface.create("sans", Typeface.NORMAL);
-            sansMedium = Typeface.create("sans", Typeface.NORMAL);
-            sansSemiBold = Typeface.create("sans", Typeface.BOLD);
-            sansBold = Typeface.create("sans", Typeface.BOLD);
-            serifBold = Typeface.create("serif", Typeface.BOLD);
+            sansRegular = Typeface.create("sans-serif", Typeface.NORMAL);
+            sansMedium = Typeface.create("sans-serif", Typeface.BOLD);
+            sansSemiBold = Typeface.create("sans-serif", Typeface.BOLD);
+            sansBold = Typeface.create("sans-serif", Typeface.BOLD);
+            serifBold = Typeface.create("sans-serif", Typeface.BOLD);
+            displaySemi = serifBold;
+            displayBold = serifBold;
         }
     }
 
@@ -4704,15 +4778,38 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
     private boolean isDarkTheme() {
-        return "Atrament".equals(themeName);
+        // Derived from the background, so status-bar icon contrast stays
+        // correct for any theme added later.
+        int bg = theme().bg;
+        double luminance = (0.299 * Color.red(bg) + 0.587 * Color.green(bg) + 0.114 * Color.blue(bg)) / 255.0;
+        return luminance < 0.5;
     }
 
     private void buildThemes() {
-        themes.put("Klasyczny", new Theme("#f7f1e6", "#fffdf7", "#23251f", "#4b463b", "#6d6759", "#8c8677", "#c9c0ad", "#e3d9c6", "#d9cfba", "#e3d9c6", "#c2402f", "#d4664f", "#fbe9e4", "#fdf8ee", "#29489c", "#fdf8ee", "#29489c"));
-        themes.put("Las", new Theme("#edf1e4", "#fafcf3", "#1e2a1f", "#414b3d", "#5d6653", "#7f8a73", "#bcc4a9", "#d8ddc4", "#cbd2b6", "#d8ddc4", "#2d6a4f", "#4c8a6d", "#e0efe4", "#f2f8ec", "#a5651f", "#fbf5e8", "#8f5518"));
-        themes.put("Bałtyk", new Theme("#e9eff1", "#f9fcfd", "#182630", "#3c4e59", "#566a74", "#7d919b", "#b4c5cd", "#d0dde2", "#c2d2d9", "#d0dde2", "#1f6f8b", "#4590aa", "#e0eef3", "#f2f9fb", "#ad4a2f", "#fbf1ec", "#a03f24"));
-        themes.put("Wrzos", new Theme("#f2ecf2", "#fcf9fc", "#2a2130", "#4e4356", "#6b5d70", "#90839a", "#c7bacf", "#e0d3e0", "#d4c4d4", "#e0d3e0", "#6d3f7d", "#8e619e", "#f0e2f0", "#f9f3fa", "#ad4a2f", "#fbf1ec", "#a03f24"));
-        themes.put("Atrament", new Theme("#201d18", "#2a2620", "#f1e9d8", "#d8cfba", "#b5ab97", "#8c8471", "#5c5546", "#3d3830", "#4a443a", "#14120e", "#d9a441", "#b98a2e", "#3a3222", "#201d18", "#c96f4a", "#201d18", "#c96f4a"));
+        // Cartoon theme set. Order here is the order of the masthead swatches.
+        // Args: bg, panel, ink, body, muted, faint, ghost, softLine, dash, shadow,
+        //       accent, accentAlt, accentSoft, onAccent, accent2, onAccent2,
+        //       accent2Text, accent3, radiusDp, borderDp, halftone
+        themes.put("Komiks", new Theme(
+                "#f4f1ff", "#ffffff", "#17141f", "#3a3547", "#6c5fd4", "#8a86a0", "#b9b5cc",
+                "#d9d2f5", "#d9d2f5", "#17141f",
+                "#6c4dff", "#ff5c7a", "#e6dfff", "#ffffff",
+                "#c8f542", "#17141f", "#5a7a0e", "#25c9d0", 12, 2.5f, true));
+        themes.put("Borówka", new Theme(
+                "#e4eaff", "#ffffff", "#232d63", "#3d4780", "#7a86c9", "#939ed4", "#a9b2dd",
+                "#c3cdfa", "#c3cdfa", "#232d63",
+                "#4d6bff", "#ffd94d", "#e4eaff", "#ffffff",
+                "#ff7a59", "#ffffff", "#c94f2e", "#22c4a8", 18, 2.5f, false));
+        themes.put("Mięta", new Theme(
+                "#ddf5e7", "#ffffff", "#1d3f31", "#33574a", "#5f8a75", "#7aa48e", "#93bda8",
+                "#b6e3c9", "#b6e3c9", "#1d3f31",
+                "#ff5c6c", "#ffab2e", "#ffe1e4", "#ffffff",
+                "#17b877", "#ffffff", "#0e7a4e", "#ffd23f", 18, 2.5f, false));
+        themes.put("Zachód", new Theme(
+                "#ffe6d7", "#ffffff", "#4d2545", "#6b4260", "#a8788f", "#bb92a5", "#cfa8b8",
+                "#ffc9a8", "#ffc9a8", "#4d2545",
+                "#ff6b35", "#2fbfde", "#ffe6d7", "#ffffff",
+                "#9b5cff", "#ffffff", "#7a3fd4", "#2fbfde", 18, 2.5f, false));
     }
 
     private LinearLayout vertical() {
@@ -4743,6 +4840,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         view.setTypeface(serifBold);
         view.setIncludeFontPadding(true);
         return view;
+    }
+
+    /** Card/panel background using the active theme's radius and border. */
+    private android.graphics.drawable.Drawable cardBg() {
+        Theme th = theme();
+        return rounded(th.panel, th.ink, th.radius, th.border);
     }
 
     private TextView bodyText(String text, float size, int color) {
@@ -4778,13 +4881,14 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         button.setAllCaps(false);
         button.setText(text);
         button.setTextSize(size);
-        button.setTypeface(sansBold);
+        button.setTypeface(displayBold);
         button.setTextColor(textColor);
         button.setGravity(Gravity.CENTER);
         button.setMinHeight(0);
         button.setMinWidth(0);
-        button.setPadding(dp(12), 0, dp(12), 0);
-        button.setBackground(rounded(fill, stroke, 4, 1.5f));
+        button.setPadding(dp(14), 0, dp(14), 0);
+        // Cartoon language: pill shape, thick ink outline.
+        button.setBackground(rounded(fill, stroke, Math.max(theme().radius, heightDp / 2), theme().border));
         button.setIncludeFontPadding(false);
         button.setHeight(dp(heightDp));
         return button;
@@ -4803,10 +4907,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         return button;
     }
 
-    private GradientDrawable rounded(int fill, int stroke, int radiusDp, float strokeDp) {
+    private GradientDrawable rounded(int fill, int stroke, float radiusDp, float strokeDp) {
         GradientDrawable drawable = new GradientDrawable();
         drawable.setColor(fill);
-        drawable.setCornerRadius(dp(radiusDp));
+        drawable.setCornerRadius(dpFloat(radiusDp));
         drawable.setStroke(Math.max(1, Math.round(dpFloat(strokeDp))), stroke);
         return drawable;
     }
@@ -4816,7 +4920,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
     private ShadowLayout shadowWrap(View child, int offsetDp, boolean fillHeight) {
-        ShadowLayout shadow = new ShadowLayout(this, theme().shadow, dp(offsetDp), dp(4));
+        ShadowLayout shadow = new ShadowLayout(this, theme().shadow, dp(offsetDp), dp(theme().radius));
         FrameLayout.LayoutParams childParams = new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 fillHeight ? FrameLayout.LayoutParams.MATCH_PARENT : FrameLayout.LayoutParams.WRAP_CONTENT
@@ -5089,8 +5193,16 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         final int accent2;
         final int onAccent2;
         final int accent2Text;
+        final int accent3;      // third accent, used for the 3rd stat / tile
+        final int radius;       // card corner radius in dp
+        final float border;     // card / button border width in dp
+        final boolean halftone; // draw the dotted background texture
 
-        Theme(String bg, String panel, String ink, String body, String muted, String faint, String ghost, String softLine, String dash, String shadow, String accent, String accentAlt, String accentSoft, String onAccent, String accent2, String onAccent2, String accent2Text) {
+        Theme(String bg, String panel, String ink, String body, String muted, String faint, String ghost, String softLine, String dash, String shadow, String accent, String accentAlt, String accentSoft, String onAccent, String accent2, String onAccent2, String accent2Text, String accent3, int radius, float border, boolean halftone) {
+            this.accent3 = Color.parseColor(accent3);
+            this.radius = radius;
+            this.border = border;
+            this.halftone = halftone;
             this.bg = Color.parseColor(bg);
             this.panel = Color.parseColor(panel);
             this.ink = Color.parseColor(ink);
@@ -5109,6 +5221,38 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             this.onAccent2 = Color.parseColor(onAccent2);
             this.accent2Text = Color.parseColor(accent2Text);
         }
+    }
+
+    /** Halftone dot field used as the Komiks background texture. */
+    private static class HalftoneDrawable extends android.graphics.drawable.Drawable {
+        private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final int bg;
+        private final float dot;
+        private final float step;
+
+        HalftoneDrawable(int bg, int dotColor, float dotRadiusPx, float stepPx) {
+            this.bg = bg;
+            this.dot = dotRadiusPx;
+            this.step = stepPx;
+            paint.setColor(dotColor);
+        }
+
+        @Override
+        public void draw(Canvas canvas) {
+            canvas.drawColor(bg);
+            android.graphics.Rect b = getBounds();
+            int row = 0;
+            for (float y = 0; y < b.height() + step; y += step, row++) {
+                float offset = (row % 2 == 0) ? 0f : step / 2f;
+                for (float x = -step; x < b.width() + step; x += step) {
+                    canvas.drawCircle(x + offset, y, dot, paint);
+                }
+            }
+        }
+
+        @Override public void setAlpha(int alpha) { paint.setAlpha(alpha); }
+        @Override public void setColorFilter(android.graphics.ColorFilter cf) { paint.setColorFilter(cf); }
+        @Override public int getOpacity() { return android.graphics.PixelFormat.OPAQUE; }
     }
 
     private static class SpaceView extends View {
@@ -5312,6 +5456,25 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 canvas.drawLine(w * 0.26f, h * 0.56f, w * 0.48f, h * 0.56f, paint);
                 canvas.drawLine(w * 0.58f, h * 0.56f, w * 0.72f, h * 0.56f, paint);
                 canvas.drawLine(w * 0.26f, h * 0.69f, w * 0.72f, h * 0.69f, paint);
+            } else if ("listen".equals(type)) {
+                // headphones: band + two ear cups
+                RectF band = new RectF(w * 0.17f, h * 0.18f, w * 0.83f, h * 0.72f);
+                canvas.drawArc(band, 180, 180, false, paint);
+                canvas.drawRoundRect(new RectF(w * 0.13f, h * 0.5f, w * 0.32f, h * 0.84f), w * 0.08f, w * 0.08f, paint);
+                canvas.drawRoundRect(new RectF(w * 0.68f, h * 0.5f, w * 0.87f, h * 0.84f), w * 0.08f, w * 0.08f, paint);
+            } else if ("read".equals(type)) {
+                // open book: spine plus two facing pages
+                canvas.drawLine(w * 0.5f, h * 0.26f, w * 0.5f, h * 0.84f, paint);
+                canvas.drawLine(w * 0.5f, h * 0.26f, w * 0.14f, h * 0.2f, paint);
+                canvas.drawLine(w * 0.14f, h * 0.2f, w * 0.14f, h * 0.76f, paint);
+                canvas.drawLine(w * 0.14f, h * 0.76f, w * 0.5f, h * 0.84f, paint);
+                canvas.drawLine(w * 0.5f, h * 0.26f, w * 0.86f, h * 0.2f, paint);
+                canvas.drawLine(w * 0.86f, h * 0.2f, w * 0.86f, h * 0.76f, paint);
+                canvas.drawLine(w * 0.86f, h * 0.76f, w * 0.5f, h * 0.84f, paint);
+            } else if ("more".equals(type)) {
+                canvas.drawCircle(w * 0.22f, h * 0.5f, w * 0.085f, paint);
+                canvas.drawCircle(w * 0.5f, h * 0.5f, w * 0.085f, paint);
+                canvas.drawCircle(w * 0.78f, h * 0.5f, w * 0.085f, paint);
             } else if ("translate".equals(type)) {
                 // two stacked arrows pointing opposite ways (translate both directions)
                 canvas.drawLine(w * 0.2f, h * 0.35f, w * 0.8f, h * 0.35f, paint);
