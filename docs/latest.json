@@ -1,8 +1,8 @@
 {
-  "versionCode": 35,
-  "versionName": "1.34",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/833c9ffc40e54214152216b0677dfcf89fb18684/docs/P4B.apk",
-  "apkSha256": "88665b8cf40db74e88835650af84ee983c90dbcb7cdbd6fdf39f2c3acdadbca8",
-  "apkSizeBytes": 68702498,
-  "releaseNotes": "Adds a built-in 50,000-word Polish-English dictionary, and tap any Polish word in Conversations or Listening to look it up, hear it, and save it to a list or favourites."
+  "versionCode": 36,
+  "versionName": "1.35",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/f78dc42ac503f10db14efc8057efe4a2154fa082/docs/P4B.apk",
+  "apkSha256": "a0adf2ce37945a8a34b2bfd2b3e45a99e1aa0703fb2789a90d1f4f3a5ab24010",
+  "apkSizeBytes": 68932253,
+  "releaseNotes": "New cartoon look with four themes you can switch between - Komiks, Borowka, Mieta and Zachod - applied across every screen, with new rounded typography and a simpler 5-tab layout."
 }
