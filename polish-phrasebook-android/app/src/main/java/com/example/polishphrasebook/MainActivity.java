@@ -206,6 +206,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private String speechSpeed = SPEED_NORMAL;
     private String browseTopic = "All";
     private String listenTopic = "All";
+    // "topic" (category at current level) | "fav" | "tag" (a My Words list)
+    private String listenScope = "topic";
     private int listenIndex = 0;
     private boolean listenPlaying = false;
     private boolean listenShowEnglish = true;
@@ -347,6 +349,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         outState.putInt("browseLimit", browseLimit);
         outState.putString("openLessonUnit", openLessonUnit);
         outState.putString("listenTopic", listenTopic);
+        outState.putString("listenScope", listenScope);
         outState.putInt("listenIndex", listenIndex);
         outState.putBoolean("listenShowEnglish", listenShowEnglish);
         outState.putString("openDialogId", openDialogId);
@@ -383,6 +386,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         browseLimit = in.getInt("browseLimit", browseLimit);
         openLessonUnit = in.getString("openLessonUnit");
         listenTopic = in.getString("listenTopic", listenTopic);
+        listenScope = in.getString("listenScope", "topic");
         listenIndex = in.getInt("listenIndex", 0);
         listenShowEnglish = in.getBoolean("listenShowEnglish", true);
         openDialogId = in.getString("openDialogId");
@@ -3467,11 +3471,27 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private void buildListenDeck() {
         listenDeck.clear();
         for (Phrase phrase : phrases) {
-            if (!level.equals(phrase.level)) {
-                continue;
-            }
-            if (!"All".equals(listenTopic) && !listenTopic.equals(phrase.category)) {
-                continue;
+            if ("fav".equals(listenScope)) {
+                // Favourites and word lists span every level, matching how
+                // their study sessions already behave.
+                if (!favourites.contains(phrase.key())) {
+                    continue;
+                }
+            } else if ("tag".equals(listenScope)) {
+                if (!MY_WORDS_CATEGORY.equals(phrase.category)) {
+                    continue;
+                }
+                String tag = phrase.tag.isEmpty() ? MY_WORDS_CATEGORY : phrase.tag;
+                if (!tag.equals(listenTopic)) {
+                    continue;
+                }
+            } else {
+                if (!level.equals(phrase.level)) {
+                    continue;
+                }
+                if (!"All".equals(listenTopic) && !listenTopic.equals(phrase.category)) {
+                    continue;
+                }
             }
             listenDeck.add(phrase);
         }
@@ -3479,12 +3499,25 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         listenIndex = 0;
     }
 
+    private void selectListenSource(String scope, String value) {
+        boolean wasPlaying = listenPlaying;
+        stopListening();
+        listenScope = scope;
+        listenTopic = value;
+        buildListenDeck();
+        if (wasPlaying && !listenDeck.isEmpty()) {
+            startListening();
+        } else {
+            render();
+        }
+    }
+
     private void startListening() {
         if (listenDeck.isEmpty()) {
             buildListenDeck();
         }
         if (listenDeck.isEmpty()) {
-            Toast.makeText(this, t("No cards for this topic yet.", "Brak kart dla tego tematu."), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, t("Nothing to listen to in this source yet.", "Brak materiału w tym źródle."), Toast.LENGTH_SHORT).show();
             return;
         }
         if (!ttsReady) {
@@ -3603,35 +3636,47 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         Theme th = theme();
         content.addView(screenTitle(t("Immersive Listening", "Słuchanie")));
         addGap(content, 8);
-        content.addView(bodyText(t("Each word is read twice in Polish, then once in English, with a short pause. It keeps going hands-free. Tap any Polish word to look it up — playback pauses while you do.",
-                "Każde słowo czytane jest dwa razy po polsku, potem raz po angielsku, z krótką przerwą. Działa bez dotykania telefonu. Dotknij dowolnego polskiego słowa, aby je sprawdzić — odtwarzanie wtedy się zatrzyma."), 13, th.muted));
+        content.addView(bodyText(t("Pick a source below — your favourites, one of your word lists, or a topic. Each word is read twice in Polish, then once in English. Tap any Polish word to look it up; playback pauses while you do.",
+                "Wybierz źródło poniżej — ulubione, jedną z Twoich list lub temat. Każde słowo czytane jest dwa razy po polsku, potem raz po angielsku. Dotknij słowa, aby je sprawdzić; odtwarzanie wtedy się zatrzyma."), 13, th.muted));
         addGap(content, 14);
 
-        // Topic chips
+        // Source chips: Favourites and My Words lists first, then topics.
         HorizontalScrollView scroll = new HorizontalScrollView(this);
         scroll.setHorizontalScrollBarEnabled(false);
         LinearLayout chipRow = row();
         scroll.addView(chipRow);
+
+        int favCount = favouriteCount();
+        if (favCount > 0) {
+            boolean on = "fav".equals(listenScope);
+            Button chip = flatButton("★ " + t("Favourites", "Ulubione") + "  " + favCount,
+                    on ? th.accent : th.panel, on ? th.onAccent : th.muted, on ? th.ink : th.dash, 12, 32);
+            chip.setOnClickListener(v -> selectListenSource("fav", "fav"));
+            LinearLayout.LayoutParams cp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(32));
+            cp.setMargins(0, 0, dp(8), 0);
+            chipRow.addView(chip, cp);
+        }
+        for (Map.Entry<String, Integer> entry : customTagCounts().entrySet()) {
+            final String tag = entry.getKey();
+            boolean on = "tag".equals(listenScope) && tag.equals(listenTopic);
+            Button chip = flatButton(tag + "  " + entry.getValue(),
+                    on ? th.accent2 : th.panel, on ? th.onAccent2 : th.muted, on ? th.ink : th.dash, 12, 32);
+            chip.setOnClickListener(v -> selectListenSource("tag", tag));
+            LinearLayout.LayoutParams cp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(32));
+            cp.setMargins(0, 0, dp(8), 0);
+            chipRow.addView(chip, cp);
+        }
+
         List<String> topics = new ArrayList<>();
         topics.add("All");
         for (TopicCount tc : allTopicsForLevel()) {
             topics.add(tc.name);
         }
         for (String topic : topics) {
-            boolean selected = topic.equals(listenTopic);
+            boolean selected = "topic".equals(listenScope) && topic.equals(listenTopic);
             Button chip = flatButton(topic, selected ? th.ink : th.panel, selected ? th.bg : th.muted, selected ? th.ink : th.dash, 12, 32);
             chip.setAllCaps(true);
-            chip.setOnClickListener(v -> {
-                boolean wasPlaying = listenPlaying;
-                stopListening();
-                listenTopic = topic;
-                buildListenDeck();
-                if (wasPlaying) {
-                    startListening();
-                } else {
-                    render();
-                }
-            });
+            chip.setOnClickListener(v -> selectListenSource("topic", topic));
             LinearLayout.LayoutParams cp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(32));
             cp.setMargins(0, 0, dp(8), 0);
             chipRow.addView(chip, cp);
@@ -3641,6 +3686,22 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
         if (listenDeck.isEmpty()) {
             buildListenDeck();
+        }
+        if (listenDeck.isEmpty()) {
+            LinearLayout empty = vertical();
+            empty.setGravity(Gravity.CENTER);
+            empty.setPadding(dp(22), dp(30), dp(22), dp(30));
+            empty.setBackground(rounded(th.panel, th.ink, th.radius, th.border));
+            empty.addView(serifText("fav".equals(listenScope)
+                    ? t("No favourites yet", "Brak ulubionych")
+                    : t("This list is empty", "Ta lista jest pusta"), 20, th.ink));
+            TextView hint = bodyText("fav".equals(listenScope)
+                    ? t("Star a word while studying, then listen to them here.", "Oznacz słowo gwiazdką podczas nauki, potem posłuchaj go tutaj.")
+                    : t("Add words to this list, then listen to them here.", "Dodaj słowa do tej listy, potem posłuchaj ich tutaj."), 13, th.muted);
+            hint.setGravity(Gravity.CENTER);
+            empty.addView(hint, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 10));
+            content.addView(shadowWrap(empty, 4));
+            return;
         }
 
         LinearLayout card = vertical();
