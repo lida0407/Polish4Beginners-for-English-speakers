@@ -1,8 +1,8 @@
 {
-  "versionCode": 36,
-  "versionName": "1.35",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/f78dc42ac503f10db14efc8057efe4a2154fa082/docs/P4B.apk",
-  "apkSha256": "a0adf2ce37945a8a34b2bfd2b3e45a99e1aa0703fb2789a90d1f4f3a5ab24010",
-  "apkSizeBytes": 68932253,
-  "releaseNotes": "New cartoon look with four themes you can switch between - Komiks, Borowka, Mieta and Zachod - applied across every screen, with new rounded typography and a simpler 5-tab layout."
+  "versionCode": 37,
+  "versionName": "1.36",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/2d4b7587b670727dad2f4dad13cd772f1f24fc2a/docs/P4B.apk",
+  "apkSha256": "b97eafe4e1a5288373ad1196f308d254a98c2d10738f64f2736d3addabfe02da",
+  "apkSizeBytes": 68932250,
+  "releaseNotes": "Listening can now play your Favourites or any of your own word lists, not just a topic."
 }
