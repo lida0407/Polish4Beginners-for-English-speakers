@@ -108,6 +108,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String SCREEN_DIALOGS = "dialogs";
     private static final String CUSTOM_DIALOGS = "customDialogs";
     private static final long LISTEN_GAP_MS = 1000L;
+    private static final int DIALOG_PAGE_SIZE = 10;
     private static final String SCREEN_READ = "read";
     private static final String SCREEN_MORE = "more";
     private static final String SCREEN_SETTINGS = "settings";
@@ -206,6 +207,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private boolean listenShowEnglish = true;
     private String openDialogId = null;
     private boolean readShowsDialogs = false;
+    private String dialogScenario = "All";   // scenario filter for the conversation list
+    private int dialogPage = 0;              // 0-based, DIALOG_PAGE_SIZE per page
     private boolean dataReady = false;
     private String dataError = "";
     private Bundle pendingState = null;
@@ -342,6 +345,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         outState.putInt("listenIndex", listenIndex);
         outState.putBoolean("listenShowEnglish", listenShowEnglish);
         outState.putString("openDialogId", openDialogId);
+        outState.putString("dialogScenario", dialogScenario);
+        outState.putInt("dialogPage", dialogPage);
         outState.putBoolean("dialogShowEnglish", dialogShowEnglish);
         outState.putInt("newsIndex", newsIndex);
         outState.putBoolean("translateEnToPl", translateEnToPl);
@@ -379,6 +384,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         listenIndex = in.getInt("listenIndex", 0);
         listenShowEnglish = in.getBoolean("listenShowEnglish", true);
         openDialogId = in.getString("openDialogId");
+        dialogScenario = in.getString("dialogScenario", "All");
+        dialogPage = in.getInt("dialogPage", 0);
         dialogShowEnglish = in.getBoolean("dialogShowEnglish", true);
         newsIndex = in.getInt("newsIndex", 0);
         translateEnToPl = in.getBoolean("translateEnToPl", false);
@@ -3649,7 +3656,59 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 "Scenariusze z życia, linijka po linijce. Dotknij linii, aby ją usłyszeć, lub odtwórz całą rozmowę."), 13, th.muted));
         addGap(content, 14);
 
+        // Scenario chips — several conversations share a scenario.
+        java.util.LinkedHashMap<String, Integer> scenarios = new java.util.LinkedHashMap<>();
         for (Dialog d : dialogs) {
+            String key = d.scenario.isEmpty() ? t("Other", "Inne") : d.scenario;
+            Integer c = scenarios.get(key);
+            scenarios.put(key, c == null ? 1 : c + 1);
+        }
+        HorizontalScrollView chipScroll = new HorizontalScrollView(this);
+        chipScroll.setHorizontalScrollBarEnabled(false);
+        LinearLayout chips = row();
+        chipScroll.addView(chips);
+        List<String> chipNames = new ArrayList<>();
+        chipNames.add("All");
+        chipNames.addAll(scenarios.keySet());
+        for (String name : chipNames) {
+            boolean on = name.equals(dialogScenario);
+            String text = "All".equals(name)
+                    ? t("All", "Wszystkie") + "  " + dialogs.size()
+                    : name + "  " + scenarios.get(name);
+            Button chip = flatButton(text, on ? th.ink : th.panel, on ? th.bg : th.muted, on ? th.ink : th.dash, 12, 32);
+            chip.setOnClickListener(v -> {
+                dialogScenario = name;
+                dialogPage = 0;      // a new filter starts at page 1
+                render();
+            });
+            LinearLayout.LayoutParams cp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(32));
+            cp.setMargins(0, 0, dp(8), 0);
+            chips.addView(chip, cp);
+        }
+        content.addView(chipScroll);
+        addGap(content, 14);
+
+        List<Dialog> filtered = new ArrayList<>();
+        for (Dialog d : dialogs) {
+            String key = d.scenario.isEmpty() ? t("Other", "Inne") : d.scenario;
+            if ("All".equals(dialogScenario) || key.equals(dialogScenario)) {
+                filtered.add(d);
+            }
+        }
+        int pageCount = Math.max(1, (filtered.size() + DIALOG_PAGE_SIZE - 1) / DIALOG_PAGE_SIZE);
+        if (dialogPage >= pageCount) {
+            dialogPage = pageCount - 1;   // filter shrank under us
+        }
+        int from = dialogPage * DIALOG_PAGE_SIZE;
+        int to = Math.min(filtered.size(), from + DIALOG_PAGE_SIZE);
+
+        content.addView(label((filtered.size() + t(" CONVERSATIONS", " ROZMÓW"))
+                + (pageCount > 1 ? "  ·  " + t("PAGE ", "STRONA ") + (dialogPage + 1) + "/" + pageCount : ""),
+                th.faint, 10.5f, 0.12f));
+        addGap(content, 10);
+
+        for (int i = from; i < to; i++) {
+            final Dialog d = filtered.get(i);
             LinearLayout item = vertical();
             item.setPadding(dp(14), dp(12), dp(14), dp(12));
             item.setBackground(rounded(th.panel, d.custom ? th.accent2 : th.ink, th.radius, th.border));
@@ -3675,6 +3734,40 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             });
             content.addView(item);
             addGap(content, 10);
+        }
+
+        if (pageCount > 1) {
+            LinearLayout pager = row();
+            Button prev = flatButton("‹ " + t("Back", "Wstecz"),
+                    dialogPage > 0 ? th.panel : th.bg,
+                    dialogPage > 0 ? th.ink : th.ghost, th.dash, 13, 46);
+            prev.setEnabled(dialogPage > 0);
+            prev.setOnClickListener(v -> {
+                if (dialogPage > 0) {
+                    dialogPage--;
+                    render();
+                }
+            });
+            pager.addView(prev, new LinearLayout.LayoutParams(0, dp(46), 1));
+            TextView pageLabel = uiText((dialogPage + 1) + " / " + pageCount, 13, th.muted, sansBold);
+            pageLabel.setGravity(Gravity.CENTER);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, dp(46), 1);
+            lp.setMargins(dp(8), 0, dp(8), 0);
+            pager.addView(pageLabel, lp);
+            final int lastPage = pageCount - 1;
+            Button next = flatButton(t("Next", "Dalej") + " ›",
+                    dialogPage < lastPage ? th.accent : th.bg,
+                    dialogPage < lastPage ? th.onAccent : th.ghost, th.dash, 13, 46);
+            next.setEnabled(dialogPage < lastPage);
+            next.setOnClickListener(v -> {
+                if (dialogPage < lastPage) {
+                    dialogPage++;
+                    render();
+                }
+            });
+            pager.addView(next, new LinearLayout.LayoutParams(0, dp(46), 1));
+            content.addView(pager);
+            addGap(content, 6);
         }
 
         addGap(content, 8);
