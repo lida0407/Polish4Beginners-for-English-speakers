@@ -214,7 +214,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private boolean listenShowEnglish = true;
     private String openDialogId = null;
     private boolean readShowsDialogs = false;
-    private String dialogScenario = "All";   // scenario filter for the conversation list
+    // Selected scenarios; empty means "all". Persisted so a filter survives restarts.
+    private final java.util.Set<String> dialogScenarios = new java.util.LinkedHashSet<>();
+    private boolean dialogFilterOpen = false;
     private int dialogPage = 0;              // 0-based, DIALOG_PAGE_SIZE per page
     private long updateDownloadId = -1L;
     private BroadcastReceiver updateDownloadReceiver;
@@ -294,6 +296,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 loadGrammarLessons();
                 loadAlphabet();
                 loadDialogs();
+        loadDialogFilter();
                 loadMemory();
                 loadFavourites();
             } catch (Throwable error) {
@@ -356,7 +359,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         outState.putInt("listenIndex", listenIndex);
         outState.putBoolean("listenShowEnglish", listenShowEnglish);
         outState.putString("openDialogId", openDialogId);
-        outState.putString("dialogScenario", dialogScenario);
+        outState.putStringArray("dialogScenarios", dialogScenarios.toArray(new String[0]));
+        outState.putBoolean("dialogFilterOpen", dialogFilterOpen);
         outState.putInt("dialogPage", dialogPage);
         outState.putBoolean("dialogShowEnglish", dialogShowEnglish);
         outState.putInt("newsIndex", newsIndex);
@@ -395,7 +399,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         listenIndex = in.getInt("listenIndex", 0);
         listenShowEnglish = in.getBoolean("listenShowEnglish", true);
         openDialogId = in.getString("openDialogId");
-        dialogScenario = in.getString("dialogScenario", "All");
+        String[] savedScenarios = in.getStringArray("dialogScenarios");
+        dialogScenarios.clear();
+        if (savedScenarios != null) {
+            dialogScenarios.addAll(java.util.Arrays.asList(savedScenarios));
+        }
+        dialogFilterOpen = in.getBoolean("dialogFilterOpen", false);
         dialogPage = in.getInt("dialogPage", 0);
         dialogShowEnglish = in.getBoolean("dialogShowEnglish", true);
         newsIndex = in.getInt("newsIndex", 0);
@@ -3792,6 +3801,29 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     // ---- Scenario conversations ----
 
+    private void saveDialogFilter() {
+        StringBuilder joined = new StringBuilder();
+        for (String name : dialogScenarios) {
+            if (joined.length() > 0) {
+                joined.append('\n');
+            }
+            joined.append(name);
+        }
+        saveSetting("dialogScenarios", joined.toString());
+    }
+
+    private void loadDialogFilter() {
+        dialogScenarios.clear();
+        String stored = getSharedPreferences(PREFS, MODE_PRIVATE).getString("dialogScenarios", "");
+        if (!stored.isEmpty()) {
+            for (String name : stored.split("\n")) {
+                if (!name.trim().isEmpty()) {
+                    dialogScenarios.add(name);
+                }
+            }
+        }
+    }
+
     private void renderDialogs(LinearLayout content) {
         Theme th = theme();
         Dialog open = openDialogId == null ? null : dialogById(openDialogId);
@@ -3805,42 +3837,93 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 "Scenariusze z życia, linijka po linijce. Dotknij linii, aby ją usłyszeć, lub odtwórz całą rozmowę."), 13, th.muted));
         addGap(content, 14);
 
-        // Scenario chips — several conversations share a scenario.
+        // Scenario filter. Collapsed it is one summary row; expanded it lists
+        // every scenario as a toggle, so this still works with dozens of them.
         java.util.LinkedHashMap<String, Integer> scenarios = new java.util.LinkedHashMap<>();
         for (Dialog d : dialogs) {
             String key = d.scenario.isEmpty() ? t("Other", "Inne") : d.scenario;
             Integer c = scenarios.get(key);
             scenarios.put(key, c == null ? 1 : c + 1);
         }
-        HorizontalScrollView chipScroll = new HorizontalScrollView(this);
-        chipScroll.setHorizontalScrollBarEnabled(false);
-        LinearLayout chips = row();
-        chipScroll.addView(chips);
-        List<String> chipNames = new ArrayList<>();
-        chipNames.add("All");
-        chipNames.addAll(scenarios.keySet());
-        for (String name : chipNames) {
-            boolean on = name.equals(dialogScenario);
-            String text = "All".equals(name)
-                    ? t("All", "Wszystkie") + "  " + dialogs.size()
-                    : name + "  " + scenarios.get(name);
-            Button chip = flatButton(text, on ? th.ink : th.panel, on ? th.bg : th.muted, on ? th.ink : th.dash, 12, 32);
-            chip.setOnClickListener(v -> {
-                dialogScenario = name;
-                dialogPage = 0;      // a new filter starts at page 1
+        // Drop selections whose scenario no longer exists (e.g. a deleted upload).
+        dialogScenarios.retainAll(scenarios.keySet());
+
+        String summary = dialogScenarios.isEmpty()
+                ? t("All scenarios", "Wszystkie scenariusze")
+                : (dialogScenarios.size() == 1
+                        ? dialogScenarios.iterator().next()
+                        : dialogScenarios.size() + t(" scenarios selected", " wybranych scenariuszy"));
+        Button filterToggle = flatButton((dialogFilterOpen ? "▾  " : "▸  ") + summary
+                        + "   (" + scenarios.size() + ")",
+                dialogScenarios.isEmpty() ? th.panel : th.accentSoft,
+                dialogScenarios.isEmpty() ? th.ink : th.accent, th.ink, 13, 48);
+        filterToggle.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
+        filterToggle.setOnClickListener(v -> {
+            dialogFilterOpen = !dialogFilterOpen;
+            render();
+        });
+        content.addView(filterToggle, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(48)));
+
+        if (dialogFilterOpen) {
+            addGap(content, 10);
+            LinearLayout panel = vertical();
+            panel.setPadding(dp(12), dp(12), dp(12), dp(12));
+            panel.setBackground(rounded(th.panel, th.ink, th.radius, th.border));
+
+            LinearLayout actions = row();
+            // Empty selection already means "everything", so one reset button
+            // is enough — a separate "select all" would do the same thing.
+            Button showAll = flatButton(t("Show all", "Pokaż wszystkie"),
+                    dialogScenarios.isEmpty() ? th.bg : th.panel,
+                    dialogScenarios.isEmpty() ? th.ghost : th.ink, th.dash, 12, 38);
+            showAll.setEnabled(!dialogScenarios.isEmpty());
+            showAll.setOnClickListener(v -> {
+                dialogScenarios.clear();
+                dialogPage = 0;
+                saveDialogFilter();
                 render();
             });
-            LinearLayout.LayoutParams cp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(32));
-            cp.setMargins(0, 0, dp(8), 0);
-            chips.addView(chip, cp);
+            actions.addView(showAll, new LinearLayout.LayoutParams(0, dp(38), 1));
+            Button done = filledButton(t("Done", "Gotowe"), th.accent, th.onAccent, 12, 38);
+            done.setOnClickListener(v -> {
+                dialogFilterOpen = false;
+                render();
+            });
+            LinearLayout.LayoutParams donep = new LinearLayout.LayoutParams(0, dp(38), 1);
+            donep.setMargins(dp(8), 0, 0, 0);
+            actions.addView(done, donep);
+            panel.addView(actions, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(38)));
+            addGap(panel, 12);
+
+            panel.addView(uiText(t("Tap to pick one or several.", "Dotknij, aby wybrać jeden lub kilka."), 11.5f, th.muted, sansRegular));
+            addGap(panel, 8);
+            FlowLayout grid = new FlowLayout(this, dp(8), dp(8));
+            for (Map.Entry<String, Integer> e : scenarios.entrySet()) {
+                final String name = e.getKey();
+                boolean on = dialogScenarios.contains(name);
+                Button chip = flatButton((on ? "✓ " : "") + name + "  " + e.getValue(),
+                        on ? th.accent : th.panel, on ? th.onAccent : th.muted,
+                        on ? th.ink : th.dash, 12, 34);
+                chip.setOnClickListener(v -> {
+                    if (!dialogScenarios.remove(name)) {
+                        dialogScenarios.add(name);
+                    }
+                    dialogPage = 0;   // a changed filter starts at page 1
+                    saveDialogFilter();
+                    render();
+                });
+                grid.addView(chip);
+            }
+            panel.addView(grid, new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            content.addView(panel);
         }
-        content.addView(chipScroll);
         addGap(content, 14);
 
         List<Dialog> filtered = new ArrayList<>();
         for (Dialog d : dialogs) {
             String key = d.scenario.isEmpty() ? t("Other", "Inne") : d.scenario;
-            if ("All".equals(dialogScenario) || key.equals(dialogScenario)) {
+            if (dialogScenarios.isEmpty() || dialogScenarios.contains(key)) {
                 filtered.add(d);
             }
         }
@@ -5407,6 +5490,71 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         @Override public void setAlpha(int alpha) { paint.setAlpha(alpha); }
         @Override public void setColorFilter(android.graphics.ColorFilter cf) { paint.setColorFilter(cf); }
         @Override public int getOpacity() { return android.graphics.PixelFormat.OPAQUE; }
+    }
+
+    /** Minimal flow layout: wraps children onto new rows as width runs out. */
+    private static class FlowLayout extends ViewGroup {
+        private final int hGap;
+        private final int vGap;
+
+        FlowLayout(Context context, int hGap, int vGap) {
+            super(context);
+            this.hGap = hGap;
+            this.vGap = vGap;
+        }
+
+        @Override
+        protected void onMeasure(int widthSpec, int heightSpec) {
+            int width = MeasureSpec.getSize(widthSpec);
+            int x = getPaddingLeft();
+            int y = getPaddingTop();
+            int rowHeight = 0;
+            int limit = width - getPaddingRight();
+            for (int i = 0; i < getChildCount(); i++) {
+                View child = getChildAt(i);
+                if (child.getVisibility() == GONE) {
+                    continue;
+                }
+                measureChild(child,
+                        MeasureSpec.makeMeasureSpec(width, MeasureSpec.AT_MOST),
+                        MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+                int cw = child.getMeasuredWidth();
+                int ch = child.getMeasuredHeight();
+                if (x > getPaddingLeft() && x + cw > limit) {
+                    x = getPaddingLeft();
+                    y += rowHeight + vGap;
+                    rowHeight = 0;
+                }
+                x += cw + hGap;
+                rowHeight = Math.max(rowHeight, ch);
+            }
+            setMeasuredDimension(width, y + rowHeight + getPaddingBottom());
+        }
+
+        @Override
+        protected void onLayout(boolean changed, int l, int t, int r, int b) {
+            int width = r - l;
+            int x = getPaddingLeft();
+            int y = getPaddingTop();
+            int rowHeight = 0;
+            int limit = width - getPaddingRight();
+            for (int i = 0; i < getChildCount(); i++) {
+                View child = getChildAt(i);
+                if (child.getVisibility() == GONE) {
+                    continue;
+                }
+                int cw = child.getMeasuredWidth();
+                int ch = child.getMeasuredHeight();
+                if (x > getPaddingLeft() && x + cw > limit) {
+                    x = getPaddingLeft();
+                    y += rowHeight + vGap;
+                    rowHeight = 0;
+                }
+                child.layout(x, y, x + cw, y + ch);
+                x += cw + hGap;
+                rowHeight = Math.max(rowHeight, ch);
+            }
+        }
     }
 
     private static class SpaceView extends View {
