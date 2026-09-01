@@ -1,8 +1,8 @@
 {
-  "versionCode": 37,
-  "versionName": "1.36",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/2d4b7587b670727dad2f4dad13cd772f1f24fc2a/docs/P4B.apk",
-  "apkSha256": "b97eafe4e1a5288373ad1196f308d254a98c2d10738f64f2736d3addabfe02da",
-  "apkSizeBytes": 68932250,
-  "releaseNotes": "Listening can now play your Favourites or any of your own word lists, not just a topic."
+  "versionCode": 38,
+  "versionName": "1.37",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/0c037cc961d2cb6e0cda8fca86559ca86672275e/docs/P4B.apk",
+  "apkSha256": "7886d0c4865c250e9949ee14436dcb30bb1b3d5346ee24308f04bb2ade34b214",
+  "apkSizeBytes": 68932253,
+  "releaseNotes": "Conversations now group by scenario and page 10 at a time, so the list is easier to work through."
 }
