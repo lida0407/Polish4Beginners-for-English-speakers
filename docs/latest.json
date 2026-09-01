@@ -1,8 +1,8 @@
 {
-  "versionCode": 38,
-  "versionName": "1.37",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/0c037cc961d2cb6e0cda8fca86559ca86672275e/docs/P4B.apk",
-  "apkSha256": "7886d0c4865c250e9949ee14436dcb30bb1b3d5346ee24308f04bb2ade34b214",
+  "versionCode": 39,
+  "versionName": "1.38",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/ebb1cb33f55706630db52adef802f9681020f9e4/docs/P4B.apk",
+  "apkSha256": "20f078b6ae710e01709122277ba371173b2310373854864050e5bbd62ac5fb90",
   "apkSizeBytes": 68932253,
-  "releaseNotes": "Conversations now group by scenario and page 10 at a time, so the list is easier to work through."
+  "releaseNotes": "Conversations: open the scenario filter to see every scenario at once and pick one or several."
 }
