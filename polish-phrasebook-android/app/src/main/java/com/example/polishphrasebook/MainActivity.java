@@ -18,6 +18,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
@@ -217,6 +218,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     // Selected scenarios; empty means "all". Persisted so a filter survives restarts.
     private final java.util.Set<String> dialogScenarios = new java.util.LinkedHashSet<>();
     private boolean dialogFilterOpen = false;
+    private boolean scanlinesOn = true;   // arcade theme only
     private int dialogPage = 0;              // 0-based, DIALOG_PAGE_SIZE per page
     private long updateDownloadId = -1L;
     private BroadcastReceiver updateDownloadReceiver;
@@ -259,6 +261,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private Typeface serifBold;
     private Typeface displaySemi;
     private Typeface displayBold;
+    private Typeface pixelifyBold;
+    private Typeface pixelifySemi;
+    private Typeface jerseyRegular;
+    private Typeface pressStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -297,6 +303,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 loadAlphabet();
                 loadDialogs();
         loadDialogFilter();
+        scanlinesOn = !"0".equals(getSharedPreferences(PREFS, MODE_PRIVATE).getString("scanlines", "1"));
                 loadMemory();
                 loadFavourites();
             } catch (Throwable error) {
@@ -568,7 +575,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         // Nothing is interactive until the learning data is in memory.
         if (!dataReady) {
             renderLoading(root);
-            setContentView(root);
+            setContentView(withScanlines(root));
             return;
         }
 
@@ -615,7 +622,57 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             root.addView(bottomNav());
         }
 
-        setContentView(root);
+        setContentView(withScanlines(root));
+    }
+
+    /**
+     * Arcade CRT overlay. Drawn above everything but non-interactive, so taps
+     * pass straight through to the UI underneath.
+     */
+    private View withScanlines(View root) {
+        if (!theme().scanlines || !scanlinesOn) {
+            return root;
+        }
+        FrameLayout stack = new FrameLayout(this);
+        stack.addView(root, new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+        View overlay = new View(this);
+        overlay.setBackground(new ScanlineDrawable(dpFloat(1), dpFloat(3)));
+        overlay.setClickable(false);
+        overlay.setFocusable(false);
+        stack.addView(overlay, new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+        return stack;
+    }
+
+    /**
+     * A list row: label on the left, count and arrow right-aligned. Replaces
+     * the old single-button labels that faked alignment with runs of spaces,
+     * which drifted at other text sizes and in Polish.
+     */
+    private View listRow(String label, String trailing, int fill, int textColor, int stroke,
+                         Runnable onTap) {
+        Theme th = theme();
+        LinearLayout rowView = row();
+        rowView.setGravity(Gravity.CENTER_VERTICAL);
+        rowView.setMinimumHeight(dp(48));
+        rowView.setPadding(dp(14), dp(10), dp(14), dp(10));
+        float corner = th.pillButtons ? Math.max(th.radius, 24f) : th.radius;
+        if (th.bevel) {
+            rowView.setBackground(new BevelDrawable(rounded(fill, stroke, corner, th.border),
+                    dpFloat(3), fill == th.panel || fill == th.bg, th.softLine));
+        } else {
+            rowView.setBackground(rounded(fill, stroke, corner, th.border));
+        }
+        TextView name = uiText(label, 14, textColor, sansBold);
+        rowView.addView(name, new LinearLayout.LayoutParams(
+                0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        TextView count = uiText(trailing, 13, textColor, sansBold);
+        count.setGravity(Gravity.END);
+        rowView.addView(count, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        rowView.setOnClickListener(v -> onTap.run());
+        return rowView;
     }
 
     private void renderHome(LinearLayout content) {
@@ -678,11 +735,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         int favs = favouriteCount();
         if (favs > 0) {
             addGap(content, 12);
-            Button favBtn = flatButton("★  " + t("Favourites", "Ulubione") + "                                  " + favs + t(" cards →", " kart →"), th.accent, th.onAccent, th.accent, 14, 48);
-            favBtn.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
-            favBtn.setPadding(dp(14), 0, dp(14), 0);
-            favBtn.setOnClickListener(v -> startFavouritesSession());
-            content.addView(favBtn, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(48)));
+            View favBtn = listRow("★  " + t("Favourites", "Ulubione"),
+                    favs + t(" cards →", " kart →"), th.accent, th.onAccent, th.accent,
+                    this::startFavouritesSession);
+            content.addView(favBtn, new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         }
         Map<String, Integer> tagCounts = customTagCounts();
         if (!tagCounts.isEmpty()) {
@@ -691,11 +748,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             addGap(content, 8);
             for (Map.Entry<String, Integer> entry : tagCounts.entrySet()) {
                 final String tag = entry.getKey();
-                Button mine = flatButton(tag + "                                  " + entry.getValue() + t(" cards →", " kart →"), th.accent2, th.onAccent2, th.ink, 14, 48);
-                mine.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
-                mine.setPadding(dp(14), 0, dp(14), 0);
-                mine.setOnClickListener(v -> startTagSession(tag));
-                content.addView(mine, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(48)));
+                View mine = listRow(tag, entry.getValue() + t(" cards →", " kart →"),
+                        th.accent2, th.onAccent2, th.ink, () -> startTagSession(tag));
+                content.addView(mine, new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                 addGap(content, 8);
             }
         }
@@ -719,27 +775,22 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
         LinearLayout titleRow = row();
         titleRow.setGravity(Gravity.CENTER_VERTICAL);
-        TextView title = serifText("Mój polski", 34, th.ink);
+        TextView title = serifText("Mój polski", th.wordmark / th.displayScale, th.ink);
         titleRow.addView(title, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
 
-        LinearLayout swatches = row();
-        swatches.setGravity(Gravity.CENTER_VERTICAL);
-        boolean first = true;
+        // Seven themes no longer fit beside the wordmark, so the swatches sit
+        // on their own wrapping row underneath it.
+        FlowLayout swatches = new FlowLayout(this, dp(8), dp(8));
         for (String name : themes.keySet()) {
             ThemeSwatch swatch = new ThemeSwatch(this, themes.get(name), name.equals(themeName));
+            swatch.setContentDescription(name);
             swatch.setOnClickListener(v -> {
                 themeName = name;
                 saveSetting("theme", themeName);
                 render();
             });
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dp(24), dp(24));
-            if (!first) {
-                params.setMargins(dp(8), 0, 0, 0);
-            }
-            swatches.addView(swatch, params);
-            first = false;
+            swatches.addView(swatch, new ViewGroup.LayoutParams(dp(22), dp(22)));
         }
-        titleRow.addView(swatches);
         box.addView(titleRow);
         return box;
     }
@@ -812,11 +863,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         addGap(section, 10);
 
         for (TopicCount topic : topTopicsForLevel(6)) {
-            Button button = flatButton(topic.name + "                                  " + topic.count + t(" cards →", " kart →"), th.panel, th.ink, th.ink, 14, 48);
-            button.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
-            button.setPadding(dp(14), 0, dp(14), 0);
-            button.setOnClickListener(v -> startSession(topic.name, 0));
-            section.addView(button, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(48), 0));
+            View button = listRow(topic.name, topic.count + t(" cards →", " kart →"),
+                    th.panel, th.ink, th.ink, () -> startSession(topic.name, 0));
+            section.addView(button, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT, 0));
             addGap(section, 8);
         }
         return section;
@@ -986,14 +1036,18 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             Button miss = flatButton("Jeszcze nie", th.panel, th.accent, th.accent, 15, 54);
             miss.setOnClickListener(v -> answer(false));
             actions.addView(miss, new LinearLayout.LayoutParams(0, dp(54), 1));
-            Button got = flatButton("Umiem!", th.accent2, th.onAccent2, th.ink, 15, 54);
+            Button got = th.pillButtons
+                    ? flatButton("Umiem!", th.accent2, th.onAccent2, th.ink, 15, 54)
+                    : flatButton("Umiem!", th.accent, th.onAccent, th.accent, 15, 54);
             got.setOnClickListener(v -> answer(true));
             LinearLayout.LayoutParams gotParams = new LinearLayout.LayoutParams(0, dp(54), 1);
             gotParams.setMargins(dp(12), 0, 0, 0);
             actions.addView(got, gotParams);
             content.addView(actions);
         } else {
-            Button reveal = flatButton("Pokaż odpowiedź", th.ink, th.bg, th.ink, 15, 54);
+            Button reveal = th.pillButtons
+                    ? flatButton("Pokaż odpowiedź", th.ink, th.bg, th.ink, 15, 54)
+                    : flatButton("Pokaż odpowiedź", th.accent, th.onAccent, th.accent, 15, 54);
             reveal.setOnClickListener(v -> {
                 sessionRevealed = true;
                 render();
@@ -1962,26 +2016,34 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         content.addView(language);
         addGap(content, 12);
 
-        LinearLayout themeCard = settingsCard(t("Color Theme", "Motyw kolorystyczny"), t("The same five themes are available from the home header.", "Te same pięć motywów jest dostępne w nagłówku ekranu głównego."));
-        LinearLayout themeRow = row();
-        themeRow.setGravity(Gravity.CENTER_VERTICAL);
-        boolean firstTheme = true;
+        LinearLayout themeCard = settingsCard(t("Color Theme", "Motyw kolorystyczny"), t("The same " + themes.size() + " themes are available from the home header.", "Te same motywy (" + themes.size() + ") są dostępne w nagłówku ekranu głównego."));
+        FlowLayout themeRow = new FlowLayout(this, dp(12), dp(12));
         for (String name : themes.keySet()) {
             ThemeSwatch swatch = new ThemeSwatch(this, themes.get(name), name.equals(themeName));
+            swatch.setContentDescription(name);
             swatch.setOnClickListener(v -> {
                 themeName = name;
                 saveSetting("theme", themeName);
                 render();
             });
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dp(30), dp(30));
-            if (!firstTheme) {
-                params.setMargins(dp(12), 0, 0, 0);
-            }
-            themeRow.addView(swatch, params);
-            firstTheme = false;
+            themeRow.addView(swatch, new ViewGroup.LayoutParams(dp(30), dp(30)));
         }
-        themeCard.addView(themeRow, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(34), 12));
+        themeCard.addView(themeRow, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT, 12));
         themeCard.addView(uiText(themeName, 12.5f, th.faint, sansSemiBold), topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 8));
+        if (th.scanlines) {
+            Button scan = flatButton(scanlinesOn
+                            ? t("Scanlines: on", "Linie CRT: wł.")
+                            : t("Scanlines: off", "Linie CRT: wył."),
+                    scanlinesOn ? th.accent : th.panel,
+                    scanlinesOn ? th.onAccent : th.muted, th.dash, 13, 42);
+            scan.setOnClickListener(v -> {
+                scanlinesOn = !scanlinesOn;
+                saveSetting("scanlines", scanlinesOn ? "1" : "0");
+                render();
+            });
+            themeCard.addView(scan, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42), 12));
+        }
         content.addView(themeCard);
         addGap(content, 12);
 
@@ -2322,9 +2384,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         for (Map.Entry<String, Integer> entry : tagCounts.entrySet()) {
             final String tag = entry.getKey();
             addGap(content, 10);
-            Button study = flatButton(tag + "  ·  " + entry.getValue() + t(" cards →", " kart →"), th.accent2, th.onAccent2, th.ink, 14, 48);
-            study.setOnClickListener(v -> startTagSession(tag));
-            content.addView(study, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(48)));
+            View study = listRow(tag, entry.getValue() + t(" cards →", " kart →"),
+                    th.accent2, th.onAccent2, th.ink, () -> startTagSession(tag));
+            content.addView(study, new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         }
 
         addGap(content, 22);
@@ -2845,7 +2908,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         item.addView(new NavIcon(this, icon, color), new LinearLayout.LayoutParams(dp(21), dp(21)));
         // Seven tabs are tight on a phone: clip each label to its own cell so
         // long words (Translate, Grammar) can't bleed into their neighbours.
-        TextView label = uiText(text, 9.5f, color, sansBold);
+        // Console themes label the nav in their display face; the floor keeps
+        // the widest pixel face from dropping below a readable size.
+        boolean pixelNav = !"baloo".equals(th.displayFont);
+        TextView label = uiText(text, pixelNav ? Math.max(8f, displaySize(9.5f)) : 9.5f, color,
+                pixelNav ? displayFaceLight() : sansBold);
         label.setGravity(Gravity.CENTER);
         label.setSingleLine(true);
         label.setEllipsize(TextUtils.TruncateAt.END);
@@ -4998,6 +5065,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             serifBold = getResources().getFont(R.font.baloo2_extrabold);
             displaySemi = getResources().getFont(R.font.baloo2_semibold);
             displayBold = getResources().getFont(R.font.baloo2_bold);
+            pixelifyBold = getResources().getFont(R.font.pixelify_bold);
+            pixelifySemi = getResources().getFont(R.font.pixelify_semibold);
+            jerseyRegular = getResources().getFont(R.font.jersey15_regular);
+            pressStart = getResources().getFont(R.font.pressstart2p_regular);
         } else {
             sansRegular = Typeface.create("sans-serif", Typeface.NORMAL);
             sansMedium = Typeface.create("sans-serif", Typeface.BOLD);
@@ -5006,6 +5077,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             serifBold = Typeface.create("sans-serif", Typeface.BOLD);
             displaySemi = serifBold;
             displayBold = serifBold;
+            // Below API 26 every face falls back, as the cartoon themes already do.
+            pixelifyBold = serifBold;
+            pixelifySemi = serifBold;
+            jerseyRegular = serifBold;
+            pressStart = serifBold;
         }
     }
 
@@ -5047,6 +5123,36 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 "#ffc9a8", "#ffc9a8", "#4d2545",
                 "#ff6b35", "#2fbfde", "#ffe6d7", "#ffffff",
                 "#9b5cff", "#ffffff", "#7a3fd4", "#2fbfde", 18, 2.5f, false));
+
+        // ---- Retro console set -------------------------------------------
+        // Added alongside the cartoon themes, not replacing them.
+
+        // 16-BIT: muted violet console, bevelled controls, block stripe.
+        themes.put("Szesnastka", new Theme(
+                "#d5d3e0", "#f4f3f8", "#2b2660", "#2b2660", "#6a6690", "#9c99b8", "#e6e4ef",
+                "#b9b5d4", "#b9b5d4", "#2b2660",
+                "#5b4fbf", "#4a3fa6", "#ddd9f3", "#ffffff",
+                "#9c8fdc", "#2b2660", "#5b4fbf", "#e94f8a", 6, 2.5f, false)
+                .display("pixelify", 1f, 0f, 28f)
+                .effects(true, false, false, true, false));
+
+        // ARCADE: dark neon cabinet, grid horizon, scanlines, glow.
+        themes.put("Automat", new Theme(
+                "#0b0620", "#160d3a", "#fefefe", "#fefefe", "#9d8fd0", "#6b5fa0", "#1f1448",
+                "#3a2d6e", "#3a2d6e", "#ff2bd6",
+                "#ff2bd6", "#e01dbb", "#3a1338", "#0b0620",
+                "#19e6ff", "#0b0620", "#19e6ff", "#ffe52a", 2, 2f, false)
+                .display("jersey", 0.82f, 0f, 22f)
+                .effects(false, true, true, false, true));
+
+        // HANDHELD COLOUR: square-cornered pocket console, thick borders.
+        themes.put("Kieszonka", new Theme(
+                "#d6efe9", "#ffffff", "#173a3a", "#173a3a", "#4f7a78", "#8fb0ae", "#eaf6f3",
+                "#b7d6d1", "#4f7a78", "#173a3a",
+                "#0e9e8a", "#0b8574", "#cfede7", "#ffffff",
+                "#c4287a", "#ffffff", "#c4287a", "#f2c230", 0, 3f, false)
+                .display("pressstart", 0.6f, 20f, 15f)
+                .effects(false, false, false, false, false));
     }
 
     private LinearLayout vertical() {
@@ -5069,12 +5175,41 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         return title;
     }
 
+    /** The active theme's display face. */
+    private Typeface displayFace() {
+        String font = theme().displayFont;
+        if ("pixelify".equals(font)) {
+            return pixelifyBold;
+        }
+        if ("jersey".equals(font)) {
+            return jerseyRegular;
+        }
+        if ("pressstart".equals(font)) {
+            return pressStart;
+        }
+        return serifBold;
+    }
+
+    private Typeface displayFaceLight() {
+        return "pixelify".equals(theme().displayFont) ? pixelifySemi : displayFace();
+    }
+
+    /** Display sizes are authored for Baloo; other faces scale off that. */
+    private float displaySize(float size) {
+        Theme th = theme();
+        float scaled = size * th.displayScale;
+        if (th.displayMax > 0 && scaled > th.displayMax) {
+            scaled = th.displayMax;
+        }
+        return scaled;
+    }
+
     private TextView serifText(String text, float size, int color) {
         TextView view = new TextView(this);
         view.setText(text);
-        view.setTextSize(size);
+        view.setTextSize(displaySize(size));
         view.setTextColor(color);
-        view.setTypeface(serifBold);
+        view.setTypeface(displayFace());
         view.setIncludeFontPadding(true);
         return view;
     }
@@ -5092,9 +5227,16 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
     private TextView label(String text, int color, float size, float letterSpacing) {
-        TextView view = uiText(text.toUpperCase(Locale.ROOT), size, color, sansBold);
+        Theme th = theme();
+        boolean pixel = !"baloo".equals(th.displayFont);
+        // Console kickers are set in the display face. Pixel faces are already
+        // wide, so they take less tracking and a size floor keeps the smallest
+        // ones (Press Start 2P) readable.
+        float size2 = pixel ? Math.max(8f, displaySize(size)) : size;
+        TextView view = uiText(text.toUpperCase(Locale.ROOT), size2, color,
+                pixel ? displayFaceLight() : sansBold);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            view.setLetterSpacing(letterSpacing);
+            view.setLetterSpacing(pixel ? letterSpacing * 0.4f : letterSpacing);
         }
         return view;
     }
@@ -5117,15 +5259,22 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         Button button = new Button(this);
         button.setAllCaps(false);
         button.setText(text);
-        button.setTextSize(size);
-        button.setTypeface(displayBold);
+        Theme th = theme();
+        button.setTextSize(displaySize(size));
+        button.setTypeface(displayFace());
         button.setTextColor(textColor);
         button.setGravity(Gravity.CENTER);
         button.setMinHeight(0);
         button.setMinWidth(0);
         button.setPadding(dp(14), 0, dp(14), 0);
-        // Cartoon language: pill shape, thick ink outline.
-        button.setBackground(rounded(fill, stroke, Math.max(theme().radius, heightDp / 2), theme().border));
+        // Cartoon language is a pill; console themes keep their own corners.
+        float corner = th.pillButtons ? Math.max(th.radius, heightDp / 2f) : th.radius;
+        if (th.bevel) {
+            button.setBackground(new BevelDrawable(rounded(fill, stroke, corner, th.border),
+                    dpFloat(3), fill == th.panel || fill == th.bg, th.softLine));
+        } else {
+            button.setBackground(rounded(fill, stroke, corner, th.border));
+        }
         button.setIncludeFontPadding(false);
         button.setHeight(dp(heightDp));
         return button;
@@ -5157,7 +5306,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
     private ShadowLayout shadowWrap(View child, int offsetDp, boolean fillHeight) {
-        ShadowLayout shadow = new ShadowLayout(this, theme().shadow, dp(offsetDp), dp(theme().radius));
+        Theme th = theme();
+        ShadowLayout shadow = th.glow
+                ? new ShadowLayout(this, th.shadow, dp(offsetDp), dp(th.radius), dpFloat(14))
+                : new ShadowLayout(this, th.shadow, dp(offsetDp), dp(th.radius));
         FrameLayout.LayoutParams childParams = new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 fillHeight ? FrameLayout.LayoutParams.MATCH_PARENT : FrameLayout.LayoutParams.WRAP_CONTENT
@@ -5435,6 +5587,42 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         final float border;     // card / button border width in dp
         final boolean halftone; // draw the dotted background texture
 
+        // Display face + how much to shrink display sizes for it. Pixel fonts
+        // run much wider than Baloo, so each theme scales the shared type
+        // scale rather than every call site being rewritten per theme.
+        String displayFont = "baloo";
+        float displayScale = 1f;
+        float displayMax = 0f;    // sp cap, 0 = uncapped
+        float wordmark = 34f;     // masthead size, tuned per face
+
+        // Retro console extras. All default off, so the cartoon themes are
+        // untouched by any of this.
+        boolean bevel = false;         // inset highlight/shade on buttons+chips
+        boolean scanlines = false;     // full-screen CRT overlay
+        boolean gridHorizon = false;   // perspective grid behind the masthead
+        boolean mastheadStripe = false;// colour block stripe under the wordmark
+        boolean glow = false;          // blurred neon shadow instead of hard
+        boolean pillButtons = true;    // cartoon pills vs console rectangles
+
+        Theme display(String font, float scale, float max, float wordmarkSp) {
+            this.displayFont = font;
+            this.displayScale = scale;
+            this.displayMax = max;
+            this.wordmark = wordmarkSp;
+            return this;
+        }
+
+        Theme effects(boolean bevel, boolean scanlines, boolean gridHorizon,
+                      boolean mastheadStripe, boolean glow) {
+            this.pillButtons = false;   // every console theme uses its radius
+            this.bevel = bevel;
+            this.scanlines = scanlines;
+            this.gridHorizon = gridHorizon;
+            this.mastheadStripe = mastheadStripe;
+            this.glow = glow;
+            return this;
+        }
+
         Theme(String bg, String panel, String ink, String body, String muted, String faint, String ghost, String softLine, String dash, String shadow, String accent, String accentAlt, String accentSoft, String onAccent, String accent2, String onAccent2, String accent2Text, String accent3, int radius, float border, boolean halftone) {
             this.accent3 = Color.parseColor(accent3);
             this.radius = radius;
@@ -5493,6 +5681,177 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
     /** Minimal flow layout: wraps children onto new rows as width runs out. */
+    /**
+     * 16-bit control bevel: an inset highlight along the top-left and a shade
+     * along the bottom-right, drawn over the normal rounded background.
+     */
+    /** CRT scanlines: a 1dp dark line every 3dp across the whole screen. */
+    private static class ScanlineDrawable extends android.graphics.drawable.Drawable {
+        private final Paint paint = new Paint();
+        private final float gap;
+        private final float thickness;
+
+        ScanlineDrawable(float thickness, float gap) {
+            this.thickness = thickness;
+            this.gap = gap;
+            paint.setColor(Color.argb(56, 0, 0, 0));
+        }
+
+        @Override
+        public void draw(Canvas canvas) {
+            Rect b = getBounds();
+            for (float y = b.top; y < b.bottom; y += gap) {
+                canvas.drawRect(b.left, y, b.right, y + thickness, paint);
+            }
+        }
+
+        @Override
+        public void setAlpha(int alpha) {
+        }
+
+        @Override
+        public void setColorFilter(android.graphics.ColorFilter filter) {
+        }
+
+        @Override
+        public int getOpacity() {
+            return android.graphics.PixelFormat.TRANSLUCENT;
+        }
+    }
+
+    /** Arcade grid horizon: perspective floor lines fading upward. */
+    private static class GridHorizonDrawable extends android.graphics.drawable.Drawable {
+        private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final int color;
+        private final float column;
+        private final float rowStep;
+        private final float stroke;
+
+        GridHorizonDrawable(int color, float column, float rowStep, float stroke) {
+            this.color = color;
+            this.column = column;
+            this.rowStep = rowStep;
+            this.stroke = stroke;
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setStrokeWidth(stroke);
+        }
+
+        @Override
+        public void draw(Canvas canvas) {
+            Rect b = getBounds();
+            float horizon = b.top;
+            float bottom = b.bottom;
+            float centreX = b.exactCenterX();
+            // Verticals converge on the vanishing point at the horizon.
+            for (float x = b.left - column * 4; x <= b.right + column * 4; x += column) {
+                float alpha = 46f;
+                paint.setColor(Color.argb((int) alpha, Color.red(color), Color.green(color), Color.blue(color)));
+                canvas.drawLine(x, bottom, centreX + (x - centreX) * 0.12f, horizon, paint);
+            }
+            // Horizontals bunch up towards the horizon and fade out with it.
+            float y = bottom;
+            float step = rowStep;
+            while (y > horizon) {
+                float t = (y - horizon) / Math.max(1f, bottom - horizon);
+                paint.setColor(Color.argb((int) (46 * t), Color.red(color), Color.green(color), Color.blue(color)));
+                canvas.drawLine(b.left, y, b.right, y, paint);
+                y -= step;
+                step *= 0.82f;   // perspective compression
+                if (step < 1.5f) {
+                    break;
+                }
+            }
+        }
+
+        @Override
+        public void setAlpha(int alpha) {
+        }
+
+        @Override
+        public void setColorFilter(android.graphics.ColorFilter filter) {
+        }
+
+        @Override
+        public int getOpacity() {
+            return android.graphics.PixelFormat.TRANSLUCENT;
+        }
+    }
+
+    /** 16-bit masthead rule: repeating colour blocks under the wordmark. */
+    private static class BlockStripe extends View {
+        private final Paint paint = new Paint();
+        private final int[] colors;
+        private final float block;
+
+        BlockStripe(Context context, int[] colors, float block) {
+            super(context);
+            this.colors = colors;
+            this.block = block;
+        }
+
+        @Override
+        protected void onDraw(Canvas canvas) {
+            int i = 0;
+            for (float x = 0; x < getWidth(); x += block) {
+                paint.setColor(colors[i % colors.length]);
+                canvas.drawRect(x, 0, Math.min(x + block, getWidth()), getHeight(), paint);
+                i++;
+            }
+        }
+    }
+
+    private static class BevelDrawable extends android.graphics.drawable.Drawable {
+        private final GradientDrawable base;
+        private final float inset;
+        private final boolean onPanel;
+        private final int panelShade;
+        private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+        BevelDrawable(GradientDrawable base, float inset, boolean onPanel, int panelShade) {
+            this.base = base;
+            this.inset = inset;
+            this.onPanel = onPanel;
+            this.panelShade = panelShade;
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setStrokeWidth(inset);
+        }
+
+        @Override
+        public void draw(Canvas canvas) {
+            Rect b = getBounds();
+            base.setBounds(b);
+            base.draw(canvas);
+
+            float in = inset * 1.5f;
+            Path topLeft = new Path();
+            topLeft.moveTo(b.left + in, b.bottom - in);
+            topLeft.lineTo(b.left + in, b.top + in);
+            topLeft.lineTo(b.right - in, b.top + in);
+            paint.setColor(onPanel ? Color.WHITE : Color.argb(90, 255, 255, 255));
+            canvas.drawPath(topLeft, paint);
+
+            Path bottomRight = new Path();
+            bottomRight.moveTo(b.right - in, b.top + in);
+            bottomRight.lineTo(b.right - in, b.bottom - in);
+            bottomRight.lineTo(b.left + in, b.bottom - in);
+            paint.setColor(onPanel ? panelShade : Color.argb(90, 0, 0, 0));
+            canvas.drawPath(bottomRight, paint);
+        }
+
+        @Override
+        public void setAlpha(int alpha) {
+        }
+
+        @Override
+        public void setColorFilter(android.graphics.ColorFilter filter) {
+        }
+
+        @Override
+        public int getOpacity() {
+            return android.graphics.PixelFormat.TRANSLUCENT;
+        }
+    }
+
     private static class FlowLayout extends ViewGroup {
         private final int hGap;
         private final int vGap;
@@ -5603,18 +5962,36 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         private final int offset;
         private final int radius;
 
+        private final float blur;
+
         ShadowLayout(Activity activity, int color, int offset, int radius) {
+            this(activity, color, offset, radius, 0f);
+        }
+
+        ShadowLayout(Activity activity, int color, int offset, int radius, float blur) {
             super(activity);
             this.offset = offset;
             this.radius = radius;
+            this.blur = blur;
             paint.setColor(color);
+            if (blur > 0) {
+                // Neon glow. Blur masks need a software layer; this app renders
+                // a screen per interaction and never animates, so the cost is
+                // one draw, not per-frame.
+                paint.setMaskFilter(new android.graphics.BlurMaskFilter(blur,
+                        android.graphics.BlurMaskFilter.Blur.NORMAL));
+                setLayerType(LAYER_TYPE_SOFTWARE, null);
+            }
             setWillNotDraw(false);
         }
 
         @Override
         protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
-            RectF rect = new RectF(offset, offset, getWidth(), getHeight());
+            RectF rect = blur > 0
+                    // A glow sits centred behind the card, not offset like a shadow.
+                    ? new RectF(blur, blur, getWidth() - blur, getHeight() - blur)
+                    : new RectF(offset, offset, getWidth(), getHeight());
             canvas.drawRoundRect(rect, radius, radius, paint);
         }
     }
@@ -5653,9 +6030,17 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             float radius = Math.min(getWidth(), getHeight()) / 2f - 2;
             float cx = getWidth() / 2f;
             float cy = getHeight() / 2f;
+            // Square-cornered themes get square swatches, so the shape language
+            // of each theme is visible in its own swatch.
+            boolean square = theme.radius < 6;
+            RectF box = new RectF(2, 2, getWidth() - 2, getHeight() - 2);
             paint.setStyle(Paint.Style.FILL);
             paint.setColor(theme.bg);
-            canvas.drawCircle(cx, cy, radius, paint);
+            if (square) {
+                canvas.drawRect(box, paint);
+            } else {
+                canvas.drawCircle(cx, cy, radius, paint);
+            }
             Path path = new Path();
             path.moveTo(0, getHeight());
             path.lineTo(0, 0);
@@ -5664,13 +6049,21 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             paint.setColor(theme.accent);
             canvas.save();
             canvas.clipPath(path);
-            canvas.drawCircle(cx, cy, radius, paint);
+            if (square) {
+                canvas.drawRect(box, paint);
+            } else {
+                canvas.drawCircle(cx, cy, radius, paint);
+            }
             canvas.restore();
             if (active) {
                 paint.setStyle(Paint.Style.STROKE);
                 paint.setStrokeWidth(4);
                 paint.setColor(theme.ink);
-                canvas.drawCircle(cx, cy, radius, paint);
+                if (square) {
+                    canvas.drawRect(box, paint);
+                } else {
+                    canvas.drawCircle(cx, cy, radius, paint);
+                }
             }
         }
     }
