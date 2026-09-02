@@ -1,8 +1,8 @@
 {
-  "versionCode": 39,
-  "versionName": "1.38",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/ebb1cb33f55706630db52adef802f9681020f9e4/docs/P4B.apk",
-  "apkSha256": "20f078b6ae710e01709122277ba371173b2310373854864050e5bbd62ac5fb90",
-  "apkSizeBytes": 68932253,
-  "releaseNotes": "Conversations: open the scenario filter to see every scenario at once and pick one or several."
+  "versionCode": 40,
+  "versionName": "1.39",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/e0524bc0695e21de7f4040c75a5f2e5e0e60ee86/docs/P4B.apk",
+  "apkSha256": "31083bcf58478e3ed025dfe53bf18a6de72ae538134691d576873ad1c0affd3f",
+  "apkSizeBytes": 69066092,
+  "releaseNotes": "Three new retro console themes: Szesnastka, Automat and Kieszonka. Pick one from the swatches on Home."
 }
