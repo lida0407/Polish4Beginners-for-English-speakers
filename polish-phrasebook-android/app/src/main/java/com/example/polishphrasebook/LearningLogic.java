@@ -106,6 +106,20 @@ public final class LearningLogic {
         return remoteVersion > localVersion;
     }
 
+    /**
+     * Escapes one value for a Markdown table cell: a pipe would end the cell
+     * and any line break would end the row.
+     *
+     * Note the character class rather than \R, which needs API 24 while this
+     * app still supports API 23.
+     */
+    public static String markdownCell(String value) {
+        if (value == null) {
+            return "";
+        }
+        return value.replace("|", "\\|").replaceAll("[\\r\\n]+", " ").replaceAll(" {2,}", " ").trim();
+    }
+
     /** Normalization used for dictionary keys and duplicate detection. */
     public static String normalizeHeadword(String value) {
         if (value == null) {
