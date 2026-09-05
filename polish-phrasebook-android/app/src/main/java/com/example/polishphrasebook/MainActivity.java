@@ -39,6 +39,10 @@ import android.text.TextWatcher;
 import android.text.style.ClickableSpan;
 import android.text.method.LinkMovementMethod;
 import android.text.Spanned;
+import android.text.Layout;
+import android.text.Spannable;
+import android.text.style.BackgroundColorSpan;
+import android.view.ViewConfiguration;
 import android.text.SpannableString;
 import android.util.Base64;
 import android.view.Gravity;
@@ -3900,8 +3904,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
         content.addView(screenTitle(t("Conversations", "Rozmowy")));
         addGap(content, 8);
-        content.addView(bodyText(t("Real-life scenarios, line by line. Tap any line to hear it, or play the whole conversation.",
-                "Scenariusze z życia, linijka po linijce. Dotknij linii, aby ją usłyszeć, lub odtwórz całą rozmowę."), 13, th.muted));
+        content.addView(bodyText(t("Real-life scenarios, line by line. Tap any line to hear it, or play the whole conversation. Inside a conversation, drag across words to save a phrase.",
+                "Scenariusze z życia, linijka po linijce. Dotknij linii, aby ją usłyszeć, lub odtwórz całą rozmowę. W rozmowie przeciągnij palcem po słowach, aby zapisać frazę."), 13, th.muted));
         addGap(content, 14);
 
         // Scenario filter. Collapsed it is one summary row; expanded it lists
@@ -4141,7 +4145,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             addGap(bubble, 4);
             TextView pl = serifText(line.polish, 17, th.ink);
             pl.setLineSpacing(0, 1.05f);
-            makeWordsTappable(pl, line.polish);
+            makeWordsSelectable(pl, line.polish);
             bubble.addView(pl);
             if (dialogShowEnglish && !line.english.isEmpty()) {
                 TextView en = uiText(line.english, 12.5f, th.faint, sansRegular);
@@ -4198,9 +4202,153 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             any = true;
         }
         if (any) {
-            view.setText(span);
+            view.setText(span, TextView.BufferType.SPANNABLE);
             view.setMovementMethod(LinkMovementMethod.getInstance());
             view.setHighlightColor(th.accentSoft);
+        }
+    }
+
+    /**
+     * Tap a word to look it up, or drag across several to grab a phrase.
+     *
+     * The drag only takes over once the finger passes the touch slop, so a
+     * plain tap still reaches the ClickableSpan underneath, and the scrolling
+     * parent is asked to keep its hands off for the duration of a drag.
+     */
+    private void makeWordsSelectable(final TextView view, final String sentence) {
+        makeWordsTappable(view, sentence);
+        final List<int[]> words = new ArrayList<>();
+        Matcher m = WORD_PATTERN.matcher(sentence);
+        while (m.find()) {
+            words.add(new int[]{m.start(), m.end()});
+        }
+        if (words.size() < 2) {
+            return;   // nothing to drag across
+        }
+        final int slop = ViewConfiguration.get(this).getScaledTouchSlop();
+        final BackgroundColorSpan highlight = new BackgroundColorSpan(theme().accentSoft);
+        view.setOnTouchListener(new View.OnTouchListener() {
+            private int anchor = -1;
+            private boolean dragging = false;
+            private float downX;
+            private float downY;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                TextView tv = (TextView) v;
+                switch (event.getActionMasked()) {
+                    case MotionEvent.ACTION_DOWN:
+                        downX = event.getX();
+                        downY = event.getY();
+                        anchor = wordIndexAt(tv, words, event);
+                        dragging = false;
+                        clearHighlight(tv, highlight);
+                        return false;   // a tap must still reach the word link
+                    case MotionEvent.ACTION_MOVE: {
+                        if (anchor < 0) {
+                            return false;
+                        }
+                        if (!dragging) {
+                            float dx = event.getX() - downX;
+                            float dy = event.getY() - downY;
+                            if (Math.sqrt(dx * dx + dy * dy) < slop) {
+                                return false;
+                            }
+                            if (Math.abs(dy) > Math.abs(dx)) {
+                                // Mostly vertical: the user is scrolling the
+                                // conversation, not picking words. Bow out for
+                                // the rest of this gesture.
+                                anchor = -1;
+                                return false;
+                            }
+                            dragging = true;
+                            if (v.getParent() != null) {
+                                v.getParent().requestDisallowInterceptTouchEvent(true);
+                            }
+                        }
+                        int cursor = wordIndexAt(tv, words, event);
+                        if (cursor >= 0) {
+                            showHighlight(tv, words, highlight, anchor, cursor);
+                        }
+                        return true;
+                    }
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL: {
+                        if (!dragging) {
+                            return false;
+                        }
+                        dragging = false;
+                        if (v.getParent() != null) {
+                            v.getParent().requestDisallowInterceptTouchEvent(false);
+                        }
+                        int cursor = wordIndexAt(tv, words, event);
+                        clearHighlight(tv, highlight);
+                        if (cursor >= 0 && event.getActionMasked() == MotionEvent.ACTION_UP) {
+                            int from = words.get(Math.min(anchor, cursor))[0];
+                            int to = words.get(Math.max(anchor, cursor))[1];
+                            String picked = sentence.substring(from, to).trim();
+                            if (anchor == cursor) {
+                                showWordLookup(picked);
+                            } else {
+                                showPhraseSheet(picked);
+                            }
+                        }
+                        return true;   // swallow, so the word link does not also fire
+                    }
+                    default:
+                        return false;
+                }
+            }
+        });
+    }
+
+    /** Which word the finger is over, clamped to the ends of the line. */
+    private int wordIndexAt(TextView view, List<int[]> words, MotionEvent event) {
+        Layout layout = view.getLayout();
+        if (layout == null) {
+            return -1;
+        }
+        int y = (int) (event.getY() - view.getTotalPaddingTop() + view.getScrollY());
+        int x = (int) (event.getX() - view.getTotalPaddingLeft() + view.getScrollX());
+        int line = layout.getLineForVertical(Math.max(0, y));
+        int offset = layout.getOffsetForHorizontal(line, x);
+        for (int i = 0; i < words.size(); i++) {
+            int[] w = words.get(i);
+            if (offset >= w[0] && offset < w[1]) {
+                return i;
+            }
+        }
+        // Between words or past the end: snap to the nearest one so dragging
+        // through spaces and punctuation still feels continuous.
+        int best = -1;
+        int bestDistance = Integer.MAX_VALUE;
+        for (int i = 0; i < words.size(); i++) {
+            int[] w = words.get(i);
+            int distance = offset < w[0] ? w[0] - offset : offset - w[1];
+            if (distance < bestDistance) {
+                bestDistance = distance;
+                best = i;
+            }
+        }
+        return best;
+    }
+
+    private void showHighlight(TextView view, List<int[]> words, BackgroundColorSpan span,
+                               int anchor, int cursor) {
+        CharSequence text = view.getText();
+        if (!(text instanceof Spannable)) {
+            return;
+        }
+        Spannable spannable = (Spannable) text;
+        spannable.removeSpan(span);
+        spannable.setSpan(span, words.get(Math.min(anchor, cursor))[0],
+                words.get(Math.max(anchor, cursor))[1], Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
+
+    private void clearHighlight(TextView view, BackgroundColorSpan span) {
+        CharSequence text = view.getText();
+        if (text instanceof Spannable) {
+            ((Spannable) text).removeSpan(span);
         }
     }
 
@@ -4239,6 +4387,35 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 .addOnFailureListener(e -> presentWordSheet(word,
                         baseHint == null ? "" : t("Dictionary form: ", "Forma słownikowa: ") + baseHint,
                         t("offline dictionary", "słownik offline")));
+    }
+
+    /**
+     * Sheet for a phrase dragged out of a conversation line. Unlike a single
+     * word this will rarely be in the dictionary, so it goes straight to the
+     * on-device translator, and the sheet is shown immediately either way.
+     */
+    private void showPhraseSheet(final String rawPhrase) {
+        final String phrase = rawPhrase.trim();
+        if (phrase.isEmpty()) {
+            return;
+        }
+        if (listenPlaying) {
+            stopListening();
+        }
+        String known = lookupWord(phrase);
+        if (known != null) {
+            presentWordSheet(phrase, known, t("built-in dictionary", "słownik wbudowany"));
+            return;
+        }
+        final Translator tr = translatorFor(false);
+        tr.downloadModelIfNeeded(new DownloadConditions.Builder().build())
+                .addOnSuccessListener(ignored -> tr.translate(phrase)
+                        .addOnSuccessListener(result -> presentWordSheet(phrase, result.trim(),
+                                t("phrase · on-device translation", "fraza · tłumaczenie na urządzeniu")))
+                        .addOnFailureListener(e -> presentWordSheet(phrase, "",
+                                t("phrase", "fraza"))))
+                .addOnFailureListener(e -> presentWordSheet(phrase, "",
+                        t("phrase", "fraza")));
     }
 
     private void presentWordSheet(final String word, final String gloss, String sourceLabel) {
