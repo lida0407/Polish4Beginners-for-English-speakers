@@ -42,8 +42,8 @@ android {
         applicationId = "com.mustardseed.polish4beginners"
         minSdk = 23
         targetSdk = 35
-        versionCode = 40
-        versionName = "1.39"
+        versionCode = 41
+        versionName = "1.40"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
