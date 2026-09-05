@@ -136,6 +136,30 @@ public class LearningLogicTest {
         assertFalse(LearningLogic.isNewerDataVersion(9, 10));
     }
 
+    // ---- markdown export --------------------------------------------------
+
+    @Test
+    public void markdownCellEscapesPipesSoTheTableSurvives() {
+        assertEquals("either \\| or", LearningLogic.markdownCell("either | or"));
+    }
+
+    @Test
+    public void markdownCellFlattensLineBreaksIntoOneRow() {
+        assertEquals("first second", LearningLogic.markdownCell("first\nsecond"));
+        assertEquals("first second", LearningLogic.markdownCell("first\r\nsecond"));
+    }
+
+    @Test
+    public void markdownCellTrimsAndHandlesNull() {
+        assertEquals("dom", LearningLogic.markdownCell("  dom  "));
+        assertEquals("", LearningLogic.markdownCell(null));
+    }
+
+    @Test
+    public void markdownCellKeepsPolishDiacritics() {
+        assertEquals("dziękuję", LearningLogic.markdownCell("dziękuję"));
+    }
+
     // ---- headword normalization ------------------------------------------
 
     @Test

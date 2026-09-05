@@ -142,6 +142,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final int REQ_SAVE_DIALOG_TEMPLATE = 2003;
     private static final int REQ_OPEN_DIALOG = 2004;
     private static final int REQ_OPEN_DICTIONARY = 2005;
+    private static final int REQ_SAVE_MARKDOWN = 2006;
     private static final String DICTIONARY_FILE = "user_dictionary.json";
     // Words for tap-to-translate: letters plus internal apostrophes/hyphens.
     private static final Pattern WORD_PATTERN = Pattern.compile("\\p{L}+(?:['\u2019-]\\p{L}+)*");
@@ -216,6 +217,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private final java.util.Set<String> dialogScenarios = new java.util.LinkedHashSet<>();
     private boolean dialogFilterOpen = false;
     private boolean scanlinesOn = true;   // arcade theme only
+    // What the pending "export to Markdown" file picker is going to write:
+    // "fav" for Favourites, otherwise the name of a My Words list.
+    private String pendingExport = null;
     private int dialogPage = 0;              // 0-based, DIALOG_PAGE_SIZE per page
     private boolean dataReady = false;
     private String dataError = "";
@@ -2365,6 +2369,13 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         fileRow.addView(upload, upParams);
         content.addView(fileRow);
 
+        addGap(content, 10);
+        Button exportMd = flatButton(t("Export to Markdown", "Eksportuj do Markdown"),
+                th.panel, th.ink, th.ink, 13, 46);
+        exportMd.setOnClickListener(v -> exportMarkdown());
+        content.addView(exportMd, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, dp(46)));
+
         for (Map.Entry<String, Integer> entry : tagCounts.entrySet()) {
             final String tag = entry.getKey();
             addGap(content, 10);
@@ -2468,6 +2479,121 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 });
     }
 
+    /** Ask which collection to export, then open the system file picker. */
+    private void exportMarkdown() {
+        final List<String> scopes = new ArrayList<>();
+        final List<String> labels = new ArrayList<>();
+        int favCount = favouriteCount();
+        if (favCount > 0) {
+            scopes.add("fav");
+            labels.add("★ " + t("Favourites", "Ulubione") + "  (" + favCount + ")");
+        }
+        for (Map.Entry<String, Integer> entry : customTagCounts().entrySet()) {
+            scopes.add(entry.getKey());
+            labels.add(entry.getKey() + "  (" + entry.getValue() + ")");
+        }
+        if (scopes.isEmpty()) {
+            Toast.makeText(this, t("Nothing to export yet — star a word or make a list first.",
+                    "Nie ma czego eksportować — oznacz słowo gwiazdką lub utwórz listę."), Toast.LENGTH_LONG).show();
+            return;
+        }
+        new AlertDialog.Builder(this)
+                .setTitle(t("Export to Markdown", "Eksportuj do Markdown"))
+                .setItems(labels.toArray(new String[0]), (dialog, which) -> {
+                    pendingExport = scopes.get(which);
+                    Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+                    intent.addCategory(Intent.CATEGORY_OPENABLE);
+                    intent.setType("text/markdown");
+                    intent.putExtra(Intent.EXTRA_TITLE, exportFileName(pendingExport));
+                    try {
+                        startActivityForResult(intent, REQ_SAVE_MARKDOWN);
+                    } catch (Exception e) {
+                        pendingExport = null;
+                        Toast.makeText(this, t("No app to save files.", "Brak aplikacji do zapisu plików."),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(t("Cancel", "Anuluj"), null)
+                .show();
+    }
+
+    private String exportFileName(String scope) {
+        String stem = "fav".equals(scope) ? "favourites" : scope;
+        // Keep the name safe for any filesystem the picker might land on.
+        stem = stem.toLowerCase(Locale.ROOT).replaceAll("[^a-z0-9]+", "_").replaceAll("^_|_$", "");
+        if (stem.isEmpty()) {
+            stem = "words";
+        }
+        String today = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new java.util.Date());
+        return "polish_" + stem + "_" + today + ".md";
+    }
+
+    private List<Phrase> cardsForExport(String scope) {
+        List<Phrase> picked = new ArrayList<>();
+        for (Phrase phrase : phrases) {
+            if ("fav".equals(scope)) {
+                if (isFavourite(phrase)) {
+                    picked.add(phrase);
+                }
+            } else if (MY_WORDS_CATEGORY.equals(phrase.category)) {
+                String tag = phrase.tag.isEmpty() ? MY_WORDS_CATEGORY : phrase.tag;
+                if (tag.equals(scope)) {
+                    picked.add(phrase);
+                }
+            }
+        }
+        return picked;
+    }
+
+    private String buildMarkdown(String scope) {
+        List<Phrase> cards = cardsForExport(scope);
+        String title = "fav".equals(scope) ? t("Favourites", "Ulubione") : scope;
+        String today = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new java.util.Date());
+
+        StringBuilder out = new StringBuilder();
+        out.append("# ").append(title).append(" — Mój polski\n\n");
+        out.append("*").append(cards.size()).append(cards.size() == 1 ? " card" : " cards")
+                .append(" · exported ").append(today).append("*\n\n");
+        out.append("| Polish | English | Level | Pronunciation | Example |\n");
+        out.append("|---|---|---|---|---|\n");
+        for (Phrase card : cards) {
+            out.append("| ").append(LearningLogic.markdownCell(card.polish))
+                    .append(" | ").append(LearningLogic.markdownCell(card.english))
+                    .append(" | ").append(LearningLogic.markdownCell(card.level))
+                    .append(" | ").append(LearningLogic.markdownCell(card.phonetic))
+                    .append(" | ").append(LearningLogic.markdownCell(card.examplePolish));
+            if (!card.exampleEnglish.trim().isEmpty()) {
+                out.append(" — ").append(LearningLogic.markdownCell(card.exampleEnglish));
+            }
+            out.append(" |\n");
+        }
+
+        // Declension tables are preformatted and multi-line, so they cannot sit
+        // in a table cell; they get their own section instead.
+        StringBuilder extras = new StringBuilder();
+        for (Phrase card : cards) {
+            if (!card.declension.trim().isEmpty()) {
+                extras.append("### ").append(card.polish).append("\n\n```\n")
+                        .append(card.declension.trim()).append("\n```\n\n");
+            }
+        }
+        if (extras.length() > 0) {
+            out.append("\n## Declensions\n\n").append(extras);
+        }
+
+        StringBuilder notes = new StringBuilder();
+        for (Phrase card : cards) {
+            if (!card.notes.trim().isEmpty()) {
+                notes.append("- **").append(card.polish).append("** — ")
+                        .append(card.notes.trim()).append("\n");
+            }
+        }
+        if (notes.length() > 0) {
+            out.append("\n## Notes\n\n").append(notes);
+        }
+        return out.toString();
+    }
+
     private void downloadTemplate() {
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -2507,6 +2633,22 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 Toast.makeText(this, t("Template saved.", "Szablon zapisany."), Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 Toast.makeText(this, t("Could not save the template.", "Nie udało się zapisać szablonu."), Toast.LENGTH_LONG).show();
+            }
+        } else if (requestCode == REQ_SAVE_MARKDOWN) {
+            if (pendingExport == null) {
+                return;
+            }
+            String scope = pendingExport;
+            pendingExport = null;
+            try (java.io.OutputStream out = getContentResolver().openOutputStream(uri)) {
+                if (out != null) {
+                    out.write(buildMarkdown(scope).getBytes(StandardCharsets.UTF_8));
+                }
+                Toast.makeText(this, t("Exported ", "Wyeksportowano ") + cardsForExport(scope).size()
+                        + t(" cards.", " kart."), Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                Toast.makeText(this, t("Could not save the file.", "Nie udało się zapisać pliku."),
+                        Toast.LENGTH_LONG).show();
             }
         } else if (requestCode == REQ_OPEN_DIALOG) {
             importDialogFile(uri);
