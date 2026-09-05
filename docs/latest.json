@@ -1,8 +1,8 @@
 {
-  "versionCode": 40,
-  "versionName": "1.39",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/e0524bc0695e21de7f4040c75a5f2e5e0e60ee86/docs/P4B.apk",
-  "apkSha256": "31083bcf58478e3ed025dfe53bf18a6de72ae538134691d576873ad1c0affd3f",
-  "apkSizeBytes": 69066092,
-  "releaseNotes": "Three new retro console themes: Szesnastka, Automat and Kieszonka. Pick one from the swatches on Home."
+  "versionCode": 41,
+  "versionName": "1.40",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/c5669304740e9a90235204709189fe34d81f2d8e/docs/P4B.apk",
+  "apkSha256": "b20024e1e8094a78d83333662c1e984fb9158a8ae4e0e14fce8fede7dc95e1a3",
+  "apkSizeBytes": 69066097,
+  "releaseNotes": "In a conversation, drag across words to grab a whole phrase and save it to Favourites or a list."
 }
