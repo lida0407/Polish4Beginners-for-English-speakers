@@ -1,8 +1,8 @@
 {
-  "versionCode": 41,
-  "versionName": "1.40",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/c5669304740e9a90235204709189fe34d81f2d8e/docs/P4B.apk",
-  "apkSha256": "b20024e1e8094a78d83333662c1e984fb9158a8ae4e0e14fce8fede7dc95e1a3",
-  "apkSizeBytes": 69066097,
-  "releaseNotes": "In a conversation, drag across words to grab a whole phrase and save it to Favourites or a list."
+  "versionCode": 42,
+  "versionName": "1.41",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/cb5ccaafee2fe7c9f87e3ee92f51b13bca1d38da/docs/P4B.apk",
+  "apkSha256": "abb5bd12c9677d5f29401ed4909dc823a0ecfa7f7d5b002317cff80cfab82bdc",
+  "apkSizeBytes": 69066093,
+  "releaseNotes": "Export your Favourites or any word list to a Markdown file from the Translate tab."
 }
