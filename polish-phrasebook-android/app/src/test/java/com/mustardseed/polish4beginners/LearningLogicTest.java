@@ -136,6 +136,60 @@ public class LearningLogicTest {
         assertFalse(LearningLogic.isNewerDataVersion(9, 10));
     }
 
+    // ---- spoken-answer scoring --------------------------------------------
+
+    @Test
+    public void spokenNormalizationDropsPunctuationButKeepsDiacritics() {
+        assertEquals("dzień dobry", LearningLogic.normalizeSpoken("  Dzień dobry!  "));
+        assertEquals("cześć", LearningLogic.normalizeSpoken("Cześć."));
+    }
+
+    @Test
+    public void anExactMatchScoresFull() {
+        assertEquals(100, LearningLogic.pronunciationScore("Dzień dobry.", "dzień dobry"));
+    }
+
+    @Test
+    public void aNearMissScoresHighButNotFull() {
+        int score = LearningLogic.pronunciationScore("cześć", "czesc");
+        assertTrue("expected a high partial score, got " + score, score >= 55 && score < 100);
+    }
+
+    @Test
+    public void anUnrelatedAnswerScoresLow() {
+        assertTrue(LearningLogic.pronunciationScore("dziękuję", "samochód") < 40);
+    }
+
+    @Test
+    public void emptyOrMissingSpeechScoresZero() {
+        assertEquals(0, LearningLogic.pronunciationScore("dom", ""));
+        assertEquals(0, LearningLogic.pronunciationScore("dom", null));
+        assertEquals(0, LearningLogic.pronunciationScore("", "dom"));
+    }
+
+    @Test
+    public void wordMatchingToleratesASlipButNotADifferentWord() {
+        assertTrue(LearningLogic.wordMatches("dobry", "dobre"));
+        assertFalse(LearningLogic.wordMatches("dobry", "samochód"));
+    }
+
+    @Test
+    public void heardWordsAreMarkedPerWord() {
+        boolean[] marks = LearningLogic.markHeardWords("dzień dobry panie", "dzień dobry");
+        assertTrue(marks[0]);
+        assertTrue(marks[1]);
+        assertFalse("the unspoken third word must not be marked", marks[2]);
+    }
+
+    @Test
+    public void aMissingWordDoesNotDerailTheWordsAfterIt() {
+        // "bardzo" was dropped; "dobry" still has to register.
+        boolean[] marks = LearningLogic.markHeardWords("jest bardzo dobry", "jest dobry");
+        assertTrue(marks[0]);
+        assertFalse(marks[1]);
+        assertTrue("a dropped word must not fail the rest", marks[2]);
+    }
+
     // ---- markdown export --------------------------------------------------
 
     @Test
