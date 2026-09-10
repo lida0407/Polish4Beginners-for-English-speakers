@@ -1,8 +1,8 @@
 {
-  "versionCode": 42,
-  "versionName": "1.41",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/cb5ccaafee2fe7c9f87e3ee92f51b13bca1d38da/docs/P4B.apk",
-  "apkSha256": "abb5bd12c9677d5f29401ed4909dc823a0ecfa7f7d5b002317cff80cfab82bdc",
-  "apkSizeBytes": 69066093,
-  "releaseNotes": "Export your Favourites or any word list to a Markdown file from the Translate tab."
+  "versionCode": 43,
+  "versionName": "1.42",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/f66baa90906d62bda12895b7e9716e3d70a183b6/docs/P4B.apk",
+  "apkSha256": "02ce79b8950f640dba78a18058278e6bb1b8f24016e3147cf56d86da22e8ab8d",
+  "apkSizeBytes": 69066178,
+  "releaseNotes": "New: tap the microphone on a card to say it in Polish and get scored, word by word."
 }
