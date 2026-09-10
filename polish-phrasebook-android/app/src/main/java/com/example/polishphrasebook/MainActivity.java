@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.os.Handler;
 import android.os.Looper;
+import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.speech.tts.Voice;
@@ -148,6 +149,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final int REQ_OPEN_DIALOG = 2004;
     private static final int REQ_OPEN_DICTIONARY = 2005;
     private static final int REQ_SAVE_MARKDOWN = 2006;
+    private static final int REQ_SPEAK_CHECK = 2007;
     private static final String UPDATE_MANIFEST_URL = "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/latest.json?ref=main";
     private static final String APK_MIME_TYPE = "application/vnd.android.package-archive";
     private static final String DICTIONARY_FILE = "user_dictionary.json";
@@ -227,6 +229,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     // What the pending "export to Markdown" file picker is going to write:
     // "fav" for Favourites, otherwise the name of a My Words list.
     private String pendingExport = null;
+    // Phrase the user is being scored against for the open recognizer.
+    private String pendingSpokenTarget = null;
     private int dialogPage = 0;              // 0-based, DIALOG_PAGE_SIZE per page
     private long updateDownloadId = -1L;
     private BroadcastReceiver updateDownloadReceiver;
@@ -1016,6 +1020,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
             LinearLayout tools = row();
             tools.setGravity(Gravity.CENTER);
+            Button say = flatButton("🎤 " + t("Say it", "Powiedz"), th.accentSoft, th.accent, th.accent, 12.5f, 38);
+            say.setOnClickListener(v -> checkPronunciation(card.polish));
+            LinearLayout.LayoutParams sayParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT, dp(38));
+            sayParams.setMargins(dp(10), 0, 0, 0);
+            tools.addView(say, sayParams);
             Button share = flatButton(t("Share", "Udostępnij"), th.panel, th.muted, th.dash, 12.5f, 38);
             share.setOnClickListener(v -> sharePhrase(card));
             tools.addView(share, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(38)));
@@ -2614,6 +2624,100 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         return out.toString();
     }
 
+    /**
+     * Pronunciation check. Uses the recognizer that ships with the phone, so
+     * there is no model to download and — because the recognizer app owns the
+     * microphone — this app needs no RECORD_AUDIO permission of its own.
+     */
+    private void checkPronunciation(String target) {
+        if (target == null || target.trim().isEmpty()) {
+            return;
+        }
+        stopAudioPlayback();   // the mic should not hear our own playback
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "pl-PL");
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, "pl-PL");
+        intent.putExtra(RecognizerIntent.EXTRA_ONLY_RETURN_LANGUAGE_PREFERENCE, "pl-PL");
+        // Several guesses, so a correct reading is not failed by the top pick.
+        intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 5);
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, t("Say it in Polish", "Powiedz to po polsku"));
+        try {
+            pendingSpokenTarget = target.trim();
+            startActivityForResult(intent, REQ_SPEAK_CHECK);
+        } catch (Exception e) {
+            pendingSpokenTarget = null;
+            Toast.makeText(this, t("No speech recognizer on this phone.",
+                    "Brak rozpoznawania mowy na tym telefonie."), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    /** Picks whichever guess the speaker came closest to. */
+    private void showPronunciationResult(String target, List<String> heardOptions) {
+        Theme th = theme();
+        String best = "";
+        int score = 0;
+        if (heardOptions != null) {
+            for (String option : heardOptions) {
+                int candidate = LearningLogic.pronunciationScore(target, option);
+                if (candidate > score) {
+                    score = candidate;
+                    best = option;
+                }
+            }
+        }
+
+        LinearLayout box = vertical();
+        box.setPadding(dp(22), dp(18), dp(22), dp(8));
+
+        int verdictColor = score >= 85 ? th.accent2Text : (score >= 60 ? th.accent : th.faint);
+        String verdict = score >= 85
+                ? t("Sounds right", "Brzmi dobrze")
+                : (score >= 60 ? t("Close", "Blisko") : t("Not quite", "Jeszcze nie"));
+        box.addView(label(verdict, verdictColor, 11, 0.14f));
+        box.addView(serifText(score + "%", 34, verdictColor),
+                topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 2));
+
+        box.addView(label(t("TARGET", "CEL"), th.ghost, 10, 0.1f),
+                topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 14));
+        // Mark the words that did not land, so there is something to work on.
+        String[] words = target.split("\\s+");
+        boolean[] marks = LearningLogic.markHeardWords(target, best);
+        StringBuilder marked = new StringBuilder();
+        for (int i = 0; i < words.length; i++) {
+            if (i > 0) {
+                marked.append("  ");
+            }
+            boolean ok = i < marks.length && marks[i];
+            marked.append(ok ? "✓ " : "✗ ").append(words[i]);
+        }
+        box.addView(bodyText(marked.toString(), 17, th.ink),
+                topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 4));
+
+        box.addView(label(t("HEARD", "USŁYSZANO"), th.ghost, 10, 0.1f),
+                topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 12));
+        box.addView(bodyText(best.isEmpty() ? t("nothing", "nic") : best, 15, th.muted),
+                topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 4));
+
+        final AlertDialog dialog = new AlertDialog.Builder(this).setView(box).create();
+
+        LinearLayout actions = row();
+        Button listen = flatButton("🔊 " + t("Hear it", "Posłuchaj"), th.accentSoft, th.accent, th.accent, 13, 44);
+        listen.setOnClickListener(v -> speak(target, new Locale("pl", "PL")));
+        actions.addView(listen, new LinearLayout.LayoutParams(0, dp(44), 1));
+        Button again = flatButton("🎤 " + t("Try again", "Spróbuj znowu"), th.panel, th.ink, th.dash, 13, 44);
+        again.setOnClickListener(v -> {
+            dialog.dismiss();
+            checkPronunciation(target);
+        });
+        LinearLayout.LayoutParams ap = new LinearLayout.LayoutParams(0, dp(44), 1);
+        ap.setMargins(dp(8), 0, 0, 0);
+        actions.addView(again, ap);
+        box.addView(actions, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(44), 18));
+
+        dialog.show();
+    }
+
     private void downloadTemplate() {
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -2640,6 +2744,15 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQ_SPEAK_CHECK) {
+            String target = pendingSpokenTarget;
+            pendingSpokenTarget = null;
+            if (resultCode == RESULT_OK && target != null) {
+                showPronunciationResult(target,
+                        data == null ? null : data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS));
+            }
+            return;
+        }
         if (resultCode != RESULT_OK || data == null || data.getData() == null) {
             return;
         }
@@ -4588,6 +4701,13 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         fp.setMargins(dp(8), 0, 0, 0);
         actions.addView(fav, fp);
         box.addView(actions, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(44), 16));
+
+        Button say = flatButton("🎤 " + t("Say it", "Powiedz"), th.panel, th.ink, th.dash, 13, 44);
+        say.setOnClickListener(v -> {
+            dialog.dismiss();
+            checkPronunciation(word);
+        });
+        box.addView(say, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(44), 8));
 
         Button addList = filledButton(t("Add to a list", "Dodaj do listy"), th.accent, th.onAccent, 14, 46);
         addList.setOnClickListener(v -> {

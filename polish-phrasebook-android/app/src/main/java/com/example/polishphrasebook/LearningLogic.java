@@ -120,6 +120,110 @@ public final class LearningLogic {
         return value.replace("|", "\\|").replaceAll("[\\r\\n]+", " ").replaceAll(" {2,}", " ").trim();
     }
 
+    // ---- spoken-answer scoring -------------------------------------------
+
+    /**
+     * Normalizes a spoken or written phrase for comparison: lower case, no
+     * punctuation, single spaces. Polish diacritics are kept — a recognizer
+     * returns them, and "cześć" vs "czesc" is a real difference.
+     */
+    public static String normalizeSpoken(String value) {
+        if (value == null) {
+            return "";
+        }
+        String out = value.toLowerCase(java.util.Locale.ROOT);
+        StringBuilder cleaned = new StringBuilder(out.length());
+        for (int i = 0; i < out.length(); i++) {
+            char c = out.charAt(i);
+            if (Character.isLetterOrDigit(c)) {
+                cleaned.append(c);
+            } else {
+                cleaned.append(' ');
+            }
+        }
+        return cleaned.toString().replaceAll(" {2,}", " ").trim();
+    }
+
+    /** Classic edit distance, used to score a near-miss rather than fail it. */
+    public static int editDistance(String a, String b) {
+        if (a == null) {
+            a = "";
+        }
+        if (b == null) {
+            b = "";
+        }
+        int[] previous = new int[b.length() + 1];
+        int[] current = new int[b.length() + 1];
+        for (int j = 0; j <= b.length(); j++) {
+            previous[j] = j;
+        }
+        for (int i = 1; i <= a.length(); i++) {
+            current[0] = i;
+            for (int j = 1; j <= b.length(); j++) {
+                int cost = a.charAt(i - 1) == b.charAt(j - 1) ? 0 : 1;
+                current[j] = Math.min(Math.min(current[j - 1] + 1, previous[j] + 1), previous[j - 1] + cost);
+            }
+            int[] swap = previous;
+            previous = current;
+            current = swap;
+        }
+        return previous[b.length()];
+    }
+
+    /**
+     * How close a heard phrase is to the target, 0-100. This scores the words
+     * a recognizer decided it heard, so it is a usable "did that come out
+     * right?" check, not a phoneme-level assessment.
+     */
+    public static int pronunciationScore(String target, String heard) {
+        String a = normalizeSpoken(target);
+        String b = normalizeSpoken(heard);
+        if (a.isEmpty()) {
+            return 0;
+        }
+        if (a.equals(b)) {
+            return 100;
+        }
+        int distance = editDistance(a, b);
+        int score = Math.round(100f * (a.length() - distance) / a.length());
+        return Math.max(0, Math.min(99, score));   // only an exact match scores 100
+    }
+
+    /** True when one word is close enough to count, allowing a slip or two. */
+    public static boolean wordMatches(String target, String heard) {
+        String a = normalizeSpoken(target);
+        String b = normalizeSpoken(heard);
+        if (a.equals(b)) {
+            return true;
+        }
+        if (a.isEmpty() || b.isEmpty()) {
+            return false;
+        }
+        int allowed = a.length() <= 4 ? 1 : 2;
+        return editDistance(a, b) <= allowed;
+    }
+
+    /**
+     * Marks each word of the target as heard or not. Walks both sides forward
+     * so a missing or inserted word shifts the rest instead of failing it.
+     */
+    public static boolean[] markHeardWords(String target, String heard) {
+        String[] want = normalizeSpoken(target).split(" ");
+        String[] got = normalizeSpoken(heard).split(" ");
+        boolean[] marks = new boolean[want.length];
+        int g = 0;
+        for (int i = 0; i < want.length; i++) {
+            for (int j = g; j < got.length && j <= g + 1; j++) {
+                if (wordMatches(want[i], got[j])) {
+                    marks[i] = true;
+                    g = j + 1;
+                    break;
+                }
+            }
+        }
+        return marks;
+    }
+
     /** Normalization used for dictionary keys and duplicate detection. */
     public static String normalizeHeadword(String value) {
         if (value == null) {
