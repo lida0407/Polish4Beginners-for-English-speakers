@@ -4159,8 +4159,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
         content.addView(screenTitle(t("Conversations", "Rozmowy")));
         addGap(content, 8);
-        content.addView(bodyText(t("Real-life scenarios, line by line. Tap any line to hear it, or play the whole conversation. Inside a conversation, drag across words to save a phrase.",
-                "Scenariusze z życia, linijka po linijce. Dotknij linii, aby ją usłyszeć, lub odtwórz całą rozmowę. W rozmowie przeciągnij palcem po słowach, aby zapisać frazę."), 13, th.muted));
+        content.addView(bodyText(t("Real-life scenarios, line by line. Tap any line to hear it, or play the whole conversation. Inside a conversation, drag across words to save a phrase or say it back.",
+                "Scenariusze z życia, linijka po linijce. Dotknij linii, aby ją usłyszeć, lub odtwórz całą rozmowę. W rozmowie przeciągnij palcem po słowach, aby zapisać frazę lub ją powiedzieć."), 13, th.muted));
         addGap(content, 14);
 
         // Scenario filter. Collapsed it is one summary row; expanded it lists
@@ -4396,7 +4396,17 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             LinearLayout bubble = vertical();
             bubble.setPadding(dp(13), dp(10), dp(13), dp(10));
             bubble.setBackground(rounded(active ? th.accentSoft : th.panel, active ? th.accent : (left ? th.ink : th.dash), th.radius, th.border));
-            bubble.addView(label(d.roleLabel(line.speaker), left ? th.accent : th.accent2, 10, 0.08f));
+            // Speaker on the left, a mic on the right to practise this line.
+            LinearLayout lineHead = row();
+            lineHead.setGravity(Gravity.CENTER_VERTICAL);
+            lineHead.addView(label(d.roleLabel(line.speaker), left ? th.accent : th.accent2, 10, 0.08f),
+                    new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+            TextView mic = uiText("🎤", 13, th.muted, sansBold);
+            mic.setPadding(dp(8), dp(2), 0, dp(2));
+            mic.setOnClickListener(v -> checkPronunciation(line.polish));
+            lineHead.addView(mic);
+            bubble.addView(lineHead, new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             addGap(bubble, 4);
             TextView pl = serifText(line.polish, 17, th.ink);
             pl.setLineSpacing(0, 1.05f);

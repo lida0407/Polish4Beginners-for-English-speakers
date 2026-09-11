@@ -170,6 +170,56 @@ public final class LearningLogic {
         return previous[b.length()];
     }
 
+    /** Raw closeness of two already-normalized strings, 0-100. */
+    private static int closeness(String a, String b) {
+        if (a.equals(b)) {
+            return 100;
+        }
+        int distance = editDistance(a, b);
+        int score = Math.round(100f * (a.length() - distance) / a.length());
+        return Math.max(0, Math.min(99, score));
+    }
+
+    /**
+     * The run of heard words that best matches the target.
+     *
+     * A recognizer given a short phrase routinely returns more than was said —
+     * a trailing "panie", a leading "no". Scored against the whole string that
+     * would fail a perfect reading, and the shorter the target the worse the
+     * penalty, so a two-word phrase suffers most. Matching the best window
+     * instead scores what the speaker actually attempted.
+     */
+    public static String bestMatchWindow(String target, String heard) {
+        String a = normalizeSpoken(target);
+        String normalizedHeard = normalizeSpoken(heard);
+        if (a.isEmpty() || normalizedHeard.isEmpty()) {
+            return normalizedHeard;
+        }
+        String[] got = normalizedHeard.split(" ");
+        int want = a.split(" ").length;
+        String best = normalizedHeard;
+        int bestScore = closeness(a, normalizedHeard);
+        int from = Math.max(1, want - 1);
+        int to = Math.min(got.length, want + 1);
+        for (int size = from; size <= to; size++) {
+            for (int start = 0; start + size <= got.length; start++) {
+                StringBuilder window = new StringBuilder();
+                for (int i = start; i < start + size; i++) {
+                    if (window.length() > 0) {
+                        window.append(' ');
+                    }
+                    window.append(got[i]);
+                }
+                int score = closeness(a, window.toString());
+                if (score > bestScore) {
+                    bestScore = score;
+                    best = window.toString();
+                }
+            }
+        }
+        return best;
+    }
+
     /**
      * How close a heard phrase is to the target, 0-100. This scores the words
      * a recognizer decided it heard, so it is a usable "did that come out
@@ -177,16 +227,10 @@ public final class LearningLogic {
      */
     public static int pronunciationScore(String target, String heard) {
         String a = normalizeSpoken(target);
-        String b = normalizeSpoken(heard);
-        if (a.isEmpty()) {
+        if (a.isEmpty() || normalizeSpoken(heard).isEmpty()) {
             return 0;
         }
-        if (a.equals(b)) {
-            return 100;
-        }
-        int distance = editDistance(a, b);
-        int score = Math.round(100f * (a.length() - distance) / a.length());
-        return Math.max(0, Math.min(99, score));   // only an exact match scores 100
+        return closeness(a, bestMatchWindow(target, heard));
     }
 
     /** True when one word is close enough to count, allowing a slip or two. */
@@ -209,7 +253,7 @@ public final class LearningLogic {
      */
     public static boolean[] markHeardWords(String target, String heard) {
         String[] want = normalizeSpoken(target).split(" ");
-        String[] got = normalizeSpoken(heard).split(" ");
+        String[] got = bestMatchWindow(target, heard).split(" ");
         boolean[] marks = new boolean[want.length];
         int g = 0;
         for (int i = 0; i < want.length; i++) {
