@@ -1,8 +1,8 @@
 {
-  "versionCode": 43,
-  "versionName": "1.42",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/f66baa90906d62bda12895b7e9716e3d70a183b6/docs/P4B.apk",
-  "apkSha256": "02ce79b8950f640dba78a18058278e6bb1b8f24016e3147cf56d86da22e8ab8d",
-  "apkSizeBytes": 69066178,
-  "releaseNotes": "New: tap the microphone on a card to say it in Polish and get scored, word by word."
+  "versionCode": 44,
+  "versionName": "1.43",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/3a0f3fb555fece6f9e417b9c189321eff6b9bb65/docs/P4B.apk",
+  "apkSha256": "28d7b6076a657604815acb04e0ed22aedf4660ce35993093bccf809f0a884801",
+  "apkSizeBytes": 69066165,
+  "releaseNotes": "Pronunciation scoring is fair on short phrases now, and every conversation line has its own microphone."
 }
