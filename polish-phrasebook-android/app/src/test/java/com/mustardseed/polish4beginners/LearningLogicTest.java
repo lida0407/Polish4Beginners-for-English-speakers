@@ -156,6 +156,27 @@ public class LearningLogicTest {
     }
 
     @Test
+    public void aShortPhraseIsNotPunishedForWordsTheRecognizerAddedAround() {
+        // The whole point of matching a window: these were all said correctly.
+        assertEquals(100, LearningLogic.pronunciationScore("dzień dobry", "dzień dobry panie"));
+        assertEquals(100, LearningLogic.pronunciationScore("dzień dobry", "no dzień dobry"));
+        assertEquals(100, LearningLogic.pronunciationScore("do widzenia", "do widzenia pani"));
+    }
+
+    @Test
+    public void aWrongWordInsideAShortPhraseStillFails() {
+        // Leniency about surrounding noise must not excuse the phrase itself.
+        assertTrue(LearningLogic.pronunciationScore("dzień dobry", "dzień samochód") < 70);
+    }
+
+    @Test
+    public void theMarksAgreeWithAWindowedScore() {
+        boolean[] marks = LearningLogic.markHeardWords("dzień dobry", "dzień dobry panie");
+        assertTrue(marks[0]);
+        assertTrue(marks[1]);
+    }
+
+    @Test
     public void anUnrelatedAnswerScoresLow() {
         assertTrue(LearningLogic.pronunciationScore("dziękuję", "samochód") < 40);
     }
