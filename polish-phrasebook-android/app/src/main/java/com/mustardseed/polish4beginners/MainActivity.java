@@ -1307,7 +1307,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private void renderNews(LinearLayout content) {
         Theme th = theme();
         content.addView(screenTitle(t("News Reading", "Czytanie wiadomości")));
-        addGap(content, 12);
+        addGap(content, 6);
+        content.addView(bodyText(t("Tap any Polish word for its translation. Swipe to change article.",
+                "Dotknij polskiego słowa, aby zobaczyć tłumaczenie. Przesuń, aby zmienić artykuł."), 12.5f, th.muted));
+        addGap(content, 10);
 
         LinearLayout controls = row();
         controls.setGravity(Gravity.CENTER_VERTICAL);
@@ -1392,17 +1395,25 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         addGap(card, 8);
 
         loadNewsImages(item);
+        // Warm the next article's pictures so paging forward is instant.
+        int next = newsItems.indexOf(item) + 1;
+        if (next > 0 && next < newsItems.size()) {
+            loadNewsImages(newsItems.get(next));
+        }
         if (!item.images.isEmpty()) {
             card.addView(newsImages(item), topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 2));
             addGap(card, 10);
         }
 
+        // Tap any Polish word for its translation. Text selection is dropped
+        // here because it would swallow the taps; the English panel below
+        // stays selectable for copying.
         TextView title = serifText(item.title, 18.5f, th.ink);
-        title.setTextIsSelectable(true);
+        makeNewsWordsTappable(title, item.title);
         card.addView(title);
         if (!item.description.isEmpty()) {
             TextView description = bodyText(item.description, 13, th.muted);
-            description.setTextIsSelectable(true);
+            makeNewsWordsTappable(description, item.description);
             card.addView(description, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 7));
         }
 
@@ -1533,6 +1544,61 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
     }
 
+    /**
+     * Word taps for news text. Unlike conversation lines there is no drag to
+     * select a phrase here: a sideways swipe on a news card turns the page, and
+     * the two gestures cannot share one direction. A swipe that starts on the
+     * text therefore pages too — before this, text was a dead zone for paging.
+     */
+    private void makeNewsWordsTappable(TextView view, String sentence) {
+        makeWordsTappable(view, sentence);
+        final int slop = ViewConfiguration.get(this).getScaledTouchSlop();
+        view.setOnTouchListener(new View.OnTouchListener() {
+            private float downX;
+            private float downY;
+            private boolean swiping = false;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getActionMasked()) {
+                    case MotionEvent.ACTION_DOWN:
+                        downX = event.getX();
+                        downY = event.getY();
+                        swiping = false;
+                        return false;   // the word link still sees the tap
+                    case MotionEvent.ACTION_MOVE: {
+                        float dx = event.getX() - downX;
+                        float dy = event.getY() - downY;
+                        if (!swiping && Math.abs(dx) > slop && Math.abs(dx) > Math.abs(dy)) {
+                            swiping = true;
+                            if (v.getParent() != null) {
+                                v.getParent().requestDisallowInterceptTouchEvent(true);
+                            }
+                        }
+                        return swiping;
+                    }
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL: {
+                        if (!swiping) {
+                            return false;
+                        }
+                        swiping = false;
+                        if (v.getParent() != null) {
+                            v.getParent().requestDisallowInterceptTouchEvent(false);
+                        }
+                        float dx = event.getX() - downX;
+                        if (event.getActionMasked() == MotionEvent.ACTION_UP && Math.abs(dx) > dp(70)) {
+                            moveNewsPage(dx < 0 ? 1 : -1);
+                        }
+                        return true;   // a swipe is never also a word tap
+                    }
+                    default:
+                        return false;
+                }
+            }
+        });
+    }
+
     private void attachNewsSwipe(View view) {
         view.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {
@@ -1601,57 +1667,215 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
         newsLoading = true;
         newsError = "";
-        newsTranslationStatus = "";
-        newsTranslating = false;
-        if (userStarted && SCREEN_NEWS.equals(screen)) {
+        // Show whatever today's cache holds straight away; the network
+        // refresh then replaces it in place.
+        if (newsItems.isEmpty()) {
+            loadNewsCache();
+        }
+        // The translation model check is independent of the feeds, so start it
+        // now instead of after the slowest feed has answered. A refresh also
+        // retries a translator that failed earlier, e.g. while offline.
+        if (newsTranslationUnavailable) {
+            newsTranslationUnavailable = false;
+            for (NewsItem item : newsItems) {
+                if (item.englishTitle.isEmpty()) {
+                    item.translationFailed = false;
+                }
+            }
+        }
+        prepareNewsTranslations();
+        if (SCREEN_NEWS.equals(screen)) {
             render();
         }
 
         new Thread(() -> {
-            List<NewsItem> fetched = new ArrayList<>();
-            int failedSources = 0;
-            for (NewsSource source : newsSources()) {
+            // All feeds at once: the wait is the slowest feed, not the sum of
+            // them, and one dead feed no longer holds the others back.
+            List<NewsSource> sources = newsSources();
+            java.util.concurrent.ExecutorService pool =
+                    java.util.concurrent.Executors.newFixedThreadPool(sources.size());
+            java.util.concurrent.CompletionService<List<NewsItem>> done =
+                    new java.util.concurrent.ExecutorCompletionService<>(pool);
+            for (NewsSource source : sources) {
+                done.submit(() -> fetchNewsForSource(source));
+            }
+            List<NewsItem> merged = new ArrayList<>();
+            int failures = 0;
+            for (int i = 0; i < sources.size(); i++) {
                 try {
-                    fetched.addAll(fetchNewsForSource(source));
+                    merged.addAll(done.take().get());
+                    // Publish as each feed lands, so the first headlines appear
+                    // after the fastest source rather than the slowest.
+                    final List<NewsItem> partial = newestNews(merged);
+                    runOnUiThread(() -> applyNews(partial, false, 0));
                 } catch (Exception e) {
-                    failedSources++;
+                    failures++;
                 }
             }
-            Collections.sort(fetched, (a, b) -> b.publishedAt.compareTo(a.publishedAt));
-            if (fetched.size() > 30) {
-                fetched = new ArrayList<>(fetched.subList(0, 30));
+            pool.shutdown();
+            final List<NewsItem> result = newestNews(merged);
+            final int failed = failures;
+            runOnUiThread(() -> applyNews(result, true, failed));
+        }).start();
+    }
+
+    private List<NewsItem> newestNews(List<NewsItem> items) {
+        List<NewsItem> sorted = new ArrayList<>(items);
+        Collections.sort(sorted, (a, b) -> b.publishedAt.compareTo(a.publishedAt));
+        return sorted.size() > 30 ? new ArrayList<>(sorted.subList(0, 30)) : sorted;
+    }
+
+    /**
+     * Swaps in a fresh list without losing work or the reader's place:
+     * translations and downloaded images carry over by link, and the article
+     * on screen stays on screen even if newer items arrive above it.
+     */
+    private void applyNews(List<NewsItem> fresh, boolean finished, int failures) {
+        java.util.Map<String, NewsItem> previous = new java.util.HashMap<>();
+        for (NewsItem old : newsItems) {
+            previous.put(old.link, old);
+        }
+        String reading = newsItems.isEmpty() || newsIndex >= newsItems.size()
+                ? null : newsItems.get(newsIndex).link;
+        // Keep the existing object for an article already on the list. Copying
+        // fields across instead would strand a translation or image download
+        // still in flight: its callback holds the old object, not the new one.
+        for (int i = 0; i < fresh.size(); i++) {
+            NewsItem old = previous.get(fresh.get(i).link);
+            if (old != null) {
+                fresh.set(i, old);
             }
-            final List<NewsItem> result = fetched;
-            final int failures = failedSources;
-            runOnUiThread(() -> {
+        }
+        // A partial result that is still smaller than what is on screen (the
+        // cache, say) would make the list shrink and then grow back. Wait for
+        // more feeds instead.
+        if (!finished && fresh.size() < newsItems.size()) {
+            return;
+        }
+        newsItems.clear();
+        newsItems.addAll(fresh);
+        newsIndex = 0;
+        if (reading != null) {
+            for (int i = 0; i < newsItems.size(); i++) {
+                if (newsItems.get(i).link.equals(reading)) {
+                    newsIndex = i;
+                    break;
+                }
+            }
+        }
+        if (finished) {
+            newsLoading = false;
+            newsLastUpdated = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
+            if (failures > 0 && newsItems.isEmpty()) {
+                newsError = t("Could not load today's RSS feeds.", "Nie udało się wczytać dzisiejszych kanałów RSS.");
+            } else if (failures > 0) {
+                newsError = t("Some sources did not respond.", "Niektóre źródła nie odpowiedziały.");
+            } else {
+                newsError = "";
+            }
+            saveNewsCache();
+        }
+        if (finished || !newsItems.isEmpty()) {
+            newsFetchedOnce = true;
+        }
+        if (!newsItems.isEmpty()) {
+            prepareNewsTranslations();
+        }
+        if (SCREEN_NEWS.equals(screen)) {
+            render();
+        }
+    }
+
+    // ---- today's news cache ------------------------------------------------
+
+    private static final String NEWS_CACHE_FILE = "news_cache.json";
+
+    /** Restores today's items, translations included. Older days are ignored. */
+    private void loadNewsCache() {
+        try {
+            File file = new File(getFilesDir(), NEWS_CACHE_FILE);
+            if (!file.exists()) {
+                return;
+            }
+            // Plain streams: java.nio.file needs API 26, and this app supports 23.
+            java.io.ByteArrayOutputStream bytes = new java.io.ByteArrayOutputStream();
+            try (java.io.FileInputStream in = new java.io.FileInputStream(file)) {
+                byte[] buffer = new byte[8192];
+                int read;
+                while ((read = in.read(buffer)) != -1) {
+                    bytes.write(buffer, 0, read);
+                }
+            }
+            JSONObject root = new JSONObject(new String(bytes.toByteArray(), StandardCharsets.UTF_8));
+            JSONArray items = root.optJSONArray("items");
+            if (items == null) {
+                return;
+            }
+            List<NewsItem> restored = new ArrayList<>();
+            for (int i = 0; i < items.length(); i++) {
+                JSONObject o = items.getJSONObject(i);
+                Date published = new Date(o.optLong("publishedAt", 0));
+                if (!isToday(published)) {
+                    continue;   // yesterday's news is not today's reading
+                }
+                List<String> urls = new ArrayList<>();
+                JSONArray imgs = o.optJSONArray("images");
+                for (int j = 0; imgs != null && j < imgs.length(); j++) {
+                    urls.add(imgs.optString(j));
+                }
+                NewsItem item = new NewsItem(o.optString("source"), o.optString("title"),
+                        o.optString("description"), o.optString("link"), o.optString("timeLabel"),
+                        published, urls);
+                item.englishTitle = o.optString("englishTitle");
+                item.englishDescription = o.optString("englishDescription");
+                item.translationComplete = !item.englishTitle.isEmpty();
+                restored.add(item);
+            }
+            if (!restored.isEmpty()) {
                 newsItems.clear();
-                newsItems.addAll(result);
+                newsItems.addAll(restored);
                 newsIndex = 0;
-                newsTranslationUnavailable = false;
-                newsLoading = false;
                 newsFetchedOnce = true;
-                newsLastUpdated = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
-                if (failures > 0 && result.isEmpty()) {
-                    newsError = t("Could not load today's RSS feeds.", "Nie udało się wczytać dzisiejszych kanałów RSS.");
-                } else if (failures > 0) {
-                    newsError = t("Some sources did not respond.", "Niektóre źródła nie odpowiedziały.");
-                } else {
-                    newsError = "";
-                }
-                if (!newsItems.isEmpty()) {
-                    prepareNewsTranslations();
-                }
-                if (SCREEN_NEWS.equals(screen)) {
-                    render();
-                }
-            });
+                newsLastUpdated = root.optString("updated", "");
+            }
+        } catch (Exception ignored) {
+            // A damaged cache only costs the instant start; the fetch still runs.
+        }
+    }
+
+    /** Written off the UI thread; a few KB, so writing often is fine. */
+    private void saveNewsCache() {
+        final JSONObject root = new JSONObject();
+        try {
+            root.put("updated", newsLastUpdated);
+            JSONArray items = new JSONArray();
+            for (NewsItem item : newsItems) {
+                JSONObject o = new JSONObject();
+                o.put("source", item.source);
+                o.put("title", item.title);
+                o.put("description", item.description);
+                o.put("link", item.link);
+                o.put("timeLabel", item.timeLabel);
+                o.put("publishedAt", item.publishedAt.getTime());
+                o.put("images", new JSONArray(item.imageUrls));
+                o.put("englishTitle", item.englishTitle);
+                o.put("englishDescription", item.englishDescription);
+                items.put(o);
+            }
+            root.put("items", items);
+        } catch (Exception e) {
+            return;
+        }
+        new Thread(() -> {
+            try (java.io.FileOutputStream out = new java.io.FileOutputStream(
+                    new File(getFilesDir(), NEWS_CACHE_FILE))) {
+                out.write(root.toString().getBytes(StandardCharsets.UTF_8));
+            } catch (Exception ignored) {
+            }
         }).start();
     }
 
     private void prepareNewsTranslations() {
-        if (newsItems.isEmpty()) {
-            return;
-        }
         if (newsTranslationUnavailable) {
             return;
         }
@@ -1764,6 +1988,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private void finishNewsItemTranslation(int index, NewsItem item) {
         item.translationQueued = false;
         item.translationComplete = true;
+        saveNewsCache();
         int currentIndex = index;
         if (currentIndex < 0 || currentIndex >= newsItems.size() || newsItems.get(currentIndex) != item) {
             currentIndex = newsItems.indexOf(item);
@@ -1812,8 +2037,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private List<NewsItem> fetchNewsForSource(NewsSource source) throws Exception {
         List<NewsItem> items = new ArrayList<>();
         HttpURLConnection connection = (HttpURLConnection) new URL(source.feedUrl).openConnection();
-        connection.setConnectTimeout(9000);
-        connection.setReadTimeout(9000);
+        connection.setConnectTimeout(5000);
+        connection.setReadTimeout(6000);
         connection.setRequestProperty("User-Agent", "Polish4Beginners-Android");
         int code = connection.getResponseCode();
         if (code < 200 || code >= 300) {
