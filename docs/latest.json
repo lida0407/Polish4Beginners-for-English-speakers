@@ -1,8 +1,8 @@
 {
-  "versionCode": 44,
-  "versionName": "1.43",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/3a0f3fb555fece6f9e417b9c189321eff6b9bb65/docs/P4B.apk",
-  "apkSha256": "28d7b6076a657604815acb04e0ed22aedf4660ce35993093bccf809f0a884801",
-  "apkSizeBytes": 69066165,
-  "releaseNotes": "Pronunciation scoring is fair on short phrases now, and every conversation line has its own microphone."
+  "versionCode": 45,
+  "versionName": "1.44",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/8e2e327a23c2bc9f2a921579f6baf486c7d7f174/docs/P4B.apk",
+  "apkSha256": "ac7ed3489f8f39156b6587f672ba4ce4bfa4a973cd26589c79caa6532eee94ac",
+  "apkSizeBytes": 69066171,
+  "releaseNotes": "News: tap any Polish word to translate it, and headlines now appear instantly and load much faster."
 }
