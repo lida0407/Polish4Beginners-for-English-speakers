@@ -231,6 +231,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private String pendingExport = null;
     // Phrase the user is being scored against for the open recognizer.
     private String pendingSpokenTarget = null;
+    // Sentence the word being looked up was tapped in, for the AI prompt.
+    private String lookupContext = "";
     private int dialogPage = 0;              // 0-based, DIALOG_PAGE_SIZE per page
     private long updateDownloadId = -1L;
     private BroadcastReceiver updateDownloadReceiver;
@@ -2565,7 +2567,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             outText.setTextIsSelectable(true);
             outCard.addView(outText);
             addGap(outCard, 12);
-            LinearLayout tools = row();
+            // Wraps rather than clips: three buttons can outgrow a narrow phone
+            // in the Polish UI or the wider pixel fonts.
+            FlowLayout tools = new FlowLayout(this, dp(10), dp(8));
             final Locale outLocale = translateEnToPl ? new Locale("pl", "PL") : Locale.US;
             final String output = translateOutput;
             Button read = flatButton(t("Read", "Czytaj"), th.accentSoft, th.accent, th.accent, 12.5f, 38);
@@ -2582,7 +2586,15 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             LinearLayout.LayoutParams copyParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(38));
             copyParams.setMargins(dp(10), 0, 0, 0);
             tools.addView(copy, copyParams);
-            outCard.addView(tools, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0));
+            // Always explain the Polish side, whichever way the user translated.
+            final String askPolish = translateEnToPl ? translateOutput.trim() : translateInput.trim();
+            final String askEnglish = translateEnToPl ? translateInput.trim() : translateOutput.trim();
+            Button askAi = flatButton("✨ " + t("Ask AI", "Zapytaj AI"), th.panel, th.muted, th.dash, 12.5f, 38);
+            askAi.setOnClickListener(v -> explainWithAi(askPolish, askEnglish, ""));
+            LinearLayout.LayoutParams askParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(38));
+            askParams.setMargins(dp(10), 0, 0, 0);
+            tools.addView(askAi, askParams);
+            outCard.addView(tools, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0));
 
             // Save this translation to the "My Words" study tag, one at a time.
             final String polishSide = translateEnToPl ? translateOutput.trim() : translateInput.trim();
@@ -2854,6 +2866,32 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
      * there is no model to download and — because the recognizer app owns the
      * microphone — this app needs no RECORD_AUDIO permission of its own.
      */
+    /**
+     * Hands a ready-made prompt to whatever AI app the user has. The prompt is
+     * copied as well, because web chats and some apps cannot receive a share.
+     * Nothing leaves the phone unless the user picks an app to send it to.
+     */
+    private void explainWithAi(String text, String gloss, String context) {
+        if (text == null || text.trim().isEmpty()) {
+            return;
+        }
+        String prompt = LearningLogic.explainPrompt(text, gloss, context, level);
+        ClipboardManager clip = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        if (clip != null) {
+            clip.setPrimaryClip(ClipData.newPlainText("AI prompt", prompt));
+        }
+        Toast.makeText(this, t("Prompt copied — paste it into any AI chat, or pick an app.",
+                "Prompt skopiowany — wklej go do dowolnego czatu AI lub wybierz aplikację."), Toast.LENGTH_LONG).show();
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.putExtra(Intent.EXTRA_TEXT, prompt);
+        try {
+            startActivity(Intent.createChooser(share, t("Ask an AI about this", "Zapytaj AI")));
+        } catch (Exception ignored) {
+            // No app to share to; the copied prompt still works.
+        }
+    }
+
     private void checkPronunciation(String target) {
         if (target == null || target.trim().isEmpty()) {
             return;
@@ -4304,6 +4342,17 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 }
             }
             addGap(card, 14);
+            final Phrase explained = now;
+            Button askListen = flatButton("✨ " + t("Ask AI", "Zapytaj AI"), th.panel, th.muted, th.dash, 12.5f, 36);
+            askListen.setOnClickListener(v -> {
+                if (listenPlaying) {
+                    stopListening();   // the user is leaving to read, not listen
+                }
+                explainWithAi(explained.polish, glossFor(explained), explained.examplePolish);
+            });
+            card.addView(askListen, new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT, dp(36)));
+            addGap(card, 10);
             card.addView(uiText((listenIndex + 1) + " / " + listenDeck.size(), 11.5f, th.ghost, sansBold));
         }
         content.addView(card);
@@ -4680,6 +4729,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             span.setSpan(new ClickableSpan() {
                 @Override
                 public void onClick(View widget) {
+                    lookupContext = sentence;
                     showWordLookup(word);
                 }
 
@@ -4777,6 +4827,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                             int from = words.get(Math.min(anchor, cursor))[0];
                             int to = words.get(Math.max(anchor, cursor))[1];
                             String picked = sentence.substring(from, to).trim();
+                            lookupContext = sentence;
                             if (anchor == cursor) {
                                 showWordLookup(picked);
                             } else {
@@ -4937,12 +4988,24 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         actions.addView(fav, fp);
         box.addView(actions, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(44), 16));
 
+        LinearLayout more = row();
         Button say = flatButton("🎤 " + t("Say it", "Powiedz"), th.panel, th.ink, th.dash, 13, 44);
         say.setOnClickListener(v -> {
             dialog.dismiss();
             checkPronunciation(word);
         });
-        box.addView(say, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(44), 8));
+        more.addView(say, new LinearLayout.LayoutParams(0, dp(44), 1));
+        final String context = lookupContext;
+        Button ask = flatButton("✨ " + t("Ask AI", "Zapytaj AI"), th.panel, th.ink, th.dash, 13, 44);
+        ask.setOnClickListener(v -> {
+            dialog.dismiss();
+            explainWithAi(word, gloss, context);
+        });
+        LinearLayout.LayoutParams askParams = new LinearLayout.LayoutParams(0, dp(44), 1);
+        askParams.setMargins(dp(8), 0, 0, 0);
+        more.addView(ask, askParams);
+        box.addView(more, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(44), 8));
+        lookupContext = "";   // one lookup's sentence must not leak into the next
 
         Button addList = filledButton(t("Add to a list", "Dodaj do listy"), th.accent, th.onAccent, 14, 46);
         addList.setOnClickListener(v -> {

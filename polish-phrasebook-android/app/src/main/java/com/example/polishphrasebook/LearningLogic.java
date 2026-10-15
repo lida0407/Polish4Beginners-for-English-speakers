@@ -268,6 +268,74 @@ public final class LearningLogic {
         return marks;
     }
 
+    // ---- "explain with AI" prompt ----------------------------------------
+
+    /**
+     * Builds a prompt the learner can paste into any AI chat to have a word or
+     * phrase explained properly. Nothing is sent anywhere by the app; this is
+     * just text, so it works with whichever assistant the user already has.
+     *
+     * The sentence the word came from matters most: Polish words change form
+     * with case, gender and aspect, so "what does this mean here, and why this
+     * form" is the useful question, and only the context can answer it.
+     *
+     * @param context the sentence the word appeared in, or empty
+     * @param gloss   the app's own translation, or empty
+     * @param level   CEFR level such as "A2", or empty
+     */
+    public static String explainPrompt(String text, String gloss, String context, String level) {
+        String item = text == null ? "" : text.trim();
+        String meaning = gloss == null ? "" : gloss.trim();
+        String sentence = context == null ? "" : context.trim();
+        String cefr = level == null ? "" : level.trim();
+        boolean phrase = item.split("\\s+").length > 1;
+        // A context identical to the item itself adds nothing.
+        if (normalizeSpoken(sentence).equals(normalizeSpoken(item))) {
+            sentence = "";
+        }
+
+        StringBuilder p = new StringBuilder();
+        p.append("I'm an English speaker learning Polish");
+        if (!cefr.isEmpty()) {
+            p.append(" (level ").append(cefr).append(")");
+        }
+        p.append(". Please explain the Polish ").append(phrase ? "phrase" : "word")
+                .append(" \"").append(item).append("\" to me.\n\n");
+        if (!sentence.isEmpty()) {
+            p.append("It appeared in this sentence: \"").append(sentence).append("\"\n");
+        }
+        if (!meaning.isEmpty()) {
+            p.append("My app translates it as: \"").append(meaning).append("\"\n");
+        }
+        if (!sentence.isEmpty() || !meaning.isEmpty()) {
+            p.append('\n');
+        }
+
+        p.append("Please cover:\n");
+        int n = 1;
+        if (phrase) {
+            p.append(n++).append(". What it means").append(sentence.isEmpty() ? "" : " in this sentence")
+                    .append(", both word for word and as a natural English equivalent\n");
+            p.append(n++).append(". The grammar of each word: case, gender, number, verb aspect and tense where relevant\n");
+            p.append(n++).append(". When and with whom to use it (formal, informal, spoken, written)\n");
+        } else {
+            p.append(n++).append(". Its meaning").append(sentence.isEmpty() ? "" : " in this sentence")
+                    .append(", and its other common meanings\n");
+            p.append(n++).append(". Part of speech and grammar. For a noun: gender and the most useful case forms. "
+                    + "For a verb: the infinitive, its aspect and aspect partner, and present and past forms. "
+                    + "For an adjective: its gender forms\n");
+            p.append(n++).append(". If this is not the dictionary form, what the dictionary form is")
+                    .append(sentence.isEmpty() ? "" : " and why it takes this form here").append('\n');
+        }
+        p.append(n++).append(". Pronunciation tips for an English speaker: stress and any tricky sounds\n");
+        p.append(n++).append(". Three short example sentences")
+                .append(cefr.isEmpty() ? "" : " at my level").append(", with English translations\n");
+        p.append(n++).append(". Common phrases or collocations it appears in\n");
+        p.append(n).append(". False friends, common learner mistakes, or anything easy to confuse it with\n\n");
+        p.append("Keep it concise and use simple English.");
+        return p.toString();
+    }
+
     /** Normalization used for dictionary keys and duplicate detection. */
     public static String normalizeHeadword(String value) {
         if (value == null) {
