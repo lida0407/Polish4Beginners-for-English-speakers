@@ -1,8 +1,8 @@
 {
-  "versionCode": 45,
-  "versionName": "1.44",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/8e2e327a23c2bc9f2a921579f6baf486c7d7f174/docs/P4B.apk",
-  "apkSha256": "ac7ed3489f8f39156b6587f672ba4ce4bfa4a973cd26589c79caa6532eee94ac",
-  "apkSizeBytes": 69066171,
-  "releaseNotes": "News: tap any Polish word to translate it, and headlines now appear instantly and load much faster."
+  "versionCode": 46,
+  "versionName": "1.45",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/b588f4570642b208372831e8b2b70f78d342ff80/docs/P4B.apk",
+  "apkSha256": "108872744e1253ffadc785306374fdcb45e4b058efd08c0a09ea24c2d1caa1b9",
+  "apkSizeBytes": 69082545,
+  "releaseNotes": "New: tap ✨ Ask AI on any word to get a ready-made prompt for ChatGPT, Claude or Gemini to explain it in depth."
 }
