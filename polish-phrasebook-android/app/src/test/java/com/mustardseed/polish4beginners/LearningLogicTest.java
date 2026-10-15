@@ -211,6 +211,43 @@ public class LearningLogicTest {
         assertTrue("a dropped word must not fail the rest", marks[2]);
     }
 
+    // ---- explain-with-AI prompt -------------------------------------------
+
+    @Test
+    public void promptCarriesTheWordContextTranslationAndLevel() {
+        String p = LearningLogic.explainPrompt("dzwoni", "is ringing", "Ktoś dzwoni do drzwi.", "A2");
+        assertTrue(p.contains("\"dzwoni\""));
+        assertTrue(p.contains("Ktoś dzwoni do drzwi."));
+        assertTrue(p.contains("is ringing"));
+        assertTrue(p.contains("level A2"));
+        assertTrue("an inflected word needs the 'why this form' question",
+                p.contains("why it takes this form here"));
+    }
+
+    @Test
+    public void aSingleWordAsksForWordGrammarAndAPhraseForPhraseGrammar() {
+        assertTrue(LearningLogic.explainPrompt("dom", "", "", "").contains("Polish word"));
+        assertTrue(LearningLogic.explainPrompt("dom", "", "", "").contains("aspect partner"));
+        String phrase = LearningLogic.explainPrompt("dzień dobry", "", "", "");
+        assertTrue(phrase.contains("Polish phrase"));
+        assertTrue(phrase.contains("word for word"));
+    }
+
+    @Test
+    public void missingPartsAreLeftOutRatherThanPrintedEmpty() {
+        String p = LearningLogic.explainPrompt("dom", null, null, null);
+        assertFalse(p.contains("appeared in this sentence"));
+        assertFalse(p.contains("My app translates"));
+        assertFalse(p.contains("level"));
+        assertFalse(p.contains("why it takes this form"));
+    }
+
+    @Test
+    public void aContextThatIsJustTheWordItselfIsDropped() {
+        assertFalse(LearningLogic.explainPrompt("Dzień dobry.", "", "dzień dobry", "")
+                .contains("appeared in this sentence"));
+    }
+
     // ---- markdown export --------------------------------------------------
 
     @Test
