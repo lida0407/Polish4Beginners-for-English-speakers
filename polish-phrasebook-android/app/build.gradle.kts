@@ -42,8 +42,8 @@ android {
         applicationId = "com.example.polishphrasebook"
         minSdk = 23
         targetSdk = 35
-        versionCode = 46
-        versionName = "1.45"
+        versionCode = 47
+        versionName = "1.46"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

@@ -233,6 +233,20 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private String pendingSpokenTarget = null;
     // Sentence the word being looked up was tapped in, for the AI prompt.
     private String lookupContext = "";
+    // Word notes, keyed by normalized headword so a note follows the word
+    // wherever it appears: cards, Listen, conversations, news.
+    private final Map<String, WordNote> wordNotes = new java.util.LinkedHashMap<>();
+    private static final String NOTES_FILE = "word_notes.json";
+    private static final int NOTE_MAX_CHARS = 20000;
+    // After Ask AI: which word to offer to save the answer for on return.
+    private String pendingNoteWord = null;
+    private String lastAiPrompt = "";
+    private long leftAppAt = 0L;
+    private long askedAiAt = 0L;
+    // One writer thread, so saves land in the order they were made and an
+    // older snapshot can never overwrite a newer one.
+    private final java.util.concurrent.ExecutorService notesWriter =
+            java.util.concurrent.Executors.newSingleThreadExecutor();
     private int dialogPage = 0;              // 0-based, DIALOG_PAGE_SIZE per page
     private long updateDownloadId = -1L;
     private BroadcastReceiver updateDownloadReceiver;
@@ -316,8 +330,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 loadGrammarLessons();
                 loadAlphabet();
                 loadDialogs();
-        loadDialogFilter();
-        scanlinesOn = !"0".equals(getSharedPreferences(PREFS, MODE_PRIVATE).getString("scanlines", "1"));
+                loadDialogFilter();
+                scanlinesOn = !"0".equals(getSharedPreferences(PREFS, MODE_PRIVATE).getString("scanlines", "1"));
+                loadWordNotes();
                 loadMemory();
                 loadFavourites();
             } catch (Throwable error) {
@@ -1037,6 +1052,18 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             translateParams.setMargins(dp(10), 0, 0, 0);
             tools.addView(translate, translateParams);
             face.addView(tools, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 10));
+            // The user's own note sits below the card's built-in notes. It is a
+            // link of its own rather than a fourth tool button, which would
+            // overflow the tools row on a narrow phone.
+            if (noteFor(card.polish) != null) {
+                face.addView(notePreviewBox(card.polish, card.english, card.examplePolish, 160),
+                        topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 10));
+            } else {
+                TextView addNote = uiText("📝 " + t("Add a note", "Dodaj notatkę"), 12.5f, th.muted, sansBold);
+                addNote.setPadding(dp(10), dp(6), dp(10), dp(6));
+                addNote.setOnClickListener(v -> openNoteEditor(card.polish, card.english, card.examplePolish, false));
+                face.addView(addNote, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 6));
+            }
         } else {
             face.addView(label("ODWRÓĆ KARTĘ · TAP TO FLIP", th.ghost, 12, 0.08f));
         }
@@ -2759,6 +2786,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             scopes.add(entry.getKey());
             labels.add(entry.getKey() + "  (" + entry.getValue() + ")");
         }
+        if (!wordNotes.isEmpty()) {
+            scopes.add("notes");
+            labels.add("📝 " + t("All my notes", "Wszystkie notatki") + "  (" + wordNotes.size() + ")");
+        }
         if (scopes.isEmpty()) {
             Toast.makeText(this, t("Nothing to export yet — star a word or make a list first.",
                     "Nie ma czego eksportować — oznacz słowo gwiazdką lub utwórz listę."), Toast.LENGTH_LONG).show();
@@ -2785,7 +2816,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
     private String exportFileName(String scope) {
-        String stem = "fav".equals(scope) ? "favourites" : scope;
+        String stem = "fav".equals(scope) ? "favourites" : ("notes".equals(scope) ? "notes" : scope);
         // Keep the name safe for any filesystem the picker might land on.
         stem = stem.toLowerCase(Locale.ROOT).replaceAll("[^a-z0-9]+", "_").replaceAll("^_|_$", "");
         if (stem.isEmpty()) {
@@ -2812,7 +2843,34 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         return picked;
     }
 
+    /** Every note, newest first, each under its word. */
+    private String buildNotesMarkdown() {
+        List<WordNote> notes = new ArrayList<>(wordNotes.values());
+        Collections.sort(notes, (a, b) -> Long.compare(b.updated, a.updated));
+        String today = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new java.util.Date());
+        StringBuilder out = new StringBuilder();
+        out.append("# ").append(t("My notes", "Moje notatki")).append(" — Mój polski\n\n");
+        out.append("*").append(notes.size()).append(notes.size() == 1 ? " note" : " notes")
+                .append(" · exported ").append(today).append("*\n\n");
+        java.text.SimpleDateFormat stamp = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        for (WordNote note : notes) {
+            out.append("## ").append(note.word).append("\n\n");
+            String gloss = lookupWord(note.word);
+            if (gloss != null && !gloss.trim().isEmpty()) {
+                out.append("*").append(LearningLogic.markdownCell(gloss)).append("*\n\n");
+            }
+            out.append(note.text.trim()).append("\n\n");
+            if (note.updated > 0) {
+                out.append("<sub>").append(stamp.format(new java.util.Date(note.updated))).append("</sub>\n\n");
+            }
+        }
+        return out.toString();
+    }
+
     private String buildMarkdown(String scope) {
+        if ("notes".equals(scope)) {
+            return buildNotesMarkdown();
+        }
         List<Phrase> cards = cardsForExport(scope);
         String title = "fav".equals(scope) ? t("Favourites", "Ulubione") : scope;
         String today = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new java.util.Date());
@@ -2858,6 +2916,20 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         if (notes.length() > 0) {
             out.append("\n## Notes\n\n").append(notes);
         }
+
+        // The user's own notes keep their original Markdown, so an AI answer
+        // pasted in reads properly in the exported file.
+        StringBuilder mine = new StringBuilder();
+        for (Phrase card : cards) {
+            WordNote note = noteFor(card.polish);
+            if (note != null) {
+                mine.append("### ").append(card.polish).append("\n\n")
+                        .append(note.text.trim()).append("\n\n");
+            }
+        }
+        if (mine.length() > 0) {
+            out.append("\n## My notes\n\n").append(mine);
+        }
         return out.toString();
     }
 
@@ -2871,11 +2943,277 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
      * copied as well, because web chats and some apps cannot receive a share.
      * Nothing leaves the phone unless the user picks an app to send it to.
      */
+    // ---- word notes ----------------------------------------------------------
+
+    private WordNote noteFor(String word) {
+        return word == null ? null : wordNotes.get(dictKey(word));
+    }
+
+    private void loadWordNotes() {
+        try {
+            File file = new File(getFilesDir(), NOTES_FILE);
+            if (!file.exists()) {
+                return;
+            }
+            java.io.ByteArrayOutputStream bytes = new java.io.ByteArrayOutputStream();
+            try (java.io.FileInputStream in = new java.io.FileInputStream(file)) {
+                byte[] buffer = new byte[8192];
+                int read;
+                while ((read = in.read(buffer)) != -1) {
+                    bytes.write(buffer, 0, read);
+                }
+            }
+            JSONObject root = new JSONObject(new String(bytes.toByteArray(), StandardCharsets.UTF_8));
+            java.util.Iterator<String> keys = root.keys();
+            while (keys.hasNext()) {
+                String key = keys.next();
+                JSONObject o = root.optJSONObject(key);
+                if (o != null && !o.optString("text").trim().isEmpty()) {
+                    wordNotes.put(key, new WordNote(o.optString("word", key), o.optString("text"),
+                            o.optLong("updated", 0)));
+                }
+            }
+        } catch (Exception ignored) {
+            // An unreadable notes file must not block the app from starting.
+        }
+    }
+
+    /**
+     * Notes are the user's own writing, so the write goes to a temp file first
+     * and is then renamed over the old one: a crash mid-write can never leave
+     * a half-written file in place of everything they had.
+     */
+    private void saveWordNotes() {
+        final JSONObject root = new JSONObject();
+        try {
+            for (Map.Entry<String, WordNote> e : wordNotes.entrySet()) {
+                JSONObject o = new JSONObject();
+                o.put("word", e.getValue().word);
+                o.put("text", e.getValue().text);
+                o.put("updated", e.getValue().updated);
+                root.put(e.getKey(), o);
+            }
+        } catch (Exception e) {
+            return;
+        }
+        final File target = new File(getFilesDir(), NOTES_FILE);
+        final File temp = new File(getFilesDir(), NOTES_FILE + ".tmp");
+        notesWriter.execute(() -> {
+            try (java.io.FileOutputStream out = new java.io.FileOutputStream(temp)) {
+                out.write(root.toString().getBytes(StandardCharsets.UTF_8));
+                out.getFD().sync();
+            } catch (Exception e) {
+                return;
+            }
+            if (!temp.renameTo(target)) {
+                target.delete();
+                temp.renameTo(target);
+            }
+        });
+    }
+
+    private void setWordNote(String word, String text) {
+        String key = dictKey(word);
+        String clean = text == null ? "" : text.trim();
+        if (clean.isEmpty()) {
+            wordNotes.remove(key);
+        } else {
+            wordNotes.put(key, new WordNote(word.trim(), clean, System.currentTimeMillis()));
+        }
+        saveWordNotes();
+    }
+
+    /**
+     * Note editor: free text, a Paste button for an AI answer, and Ask AI.
+     * Paste reads the clipboard only when tapped — Android 10+ allows that
+     * only while the app has focus, and it is the user's explicit action.
+     */
+    private void openNoteEditor(final String word, final String gloss, final String context,
+                                final boolean pasteNow) {
+        Theme th = theme();
+        WordNote existing = noteFor(word);
+        LinearLayout box = vertical();
+        box.setPadding(dp(20), dp(16), dp(20), dp(4));
+        box.addView(label(t("MY NOTE", "MOJA NOTATKA"), th.accent, 10.5f, 0.12f));
+        box.addView(serifText(word, 22, th.ink),
+                topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 2));
+
+        final android.widget.EditText input = new android.widget.EditText(this);
+        input.setText(existing == null ? "" : existing.text);
+        input.setHint(t("Your own notes, or paste an AI answer…", "Twoje notatki lub wklejona odpowiedź AI…"));
+        input.setMinLines(5);
+        input.setMaxLines(14);
+        input.setGravity(Gravity.TOP | Gravity.START);
+        input.setTextSize(14);
+        input.setTextColor(th.ink);
+        input.setHintTextColor(th.faint);
+        input.setPadding(dp(12), dp(10), dp(12), dp(10));
+        input.setBackground(rounded(th.panel, th.dash, Math.min(th.radius, 12), th.border));
+        input.setFilters(new android.text.InputFilter[]{
+                new android.text.InputFilter.LengthFilter(NOTE_MAX_CHARS)});
+        input.setInputType(android.text.InputType.TYPE_CLASS_TEXT
+                | android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
+                | android.text.InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        box.addView(input, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT, 12));
+
+        final AlertDialog dialog = new AlertDialog.Builder(this).setView(box).create();
+
+        LinearLayout tools = row();
+        Button paste = flatButton("📋 " + t("Paste", "Wklej"), th.panel, th.ink, th.dash, 13, 42);
+        paste.setOnClickListener(v -> pasteIntoNote(input));
+        tools.addView(paste, new LinearLayout.LayoutParams(0, dp(42), 1));
+        Button ask = flatButton("✨ " + t("Ask AI", "Zapytaj AI"), th.panel, th.ink, th.dash, 13, 42);
+        ask.setOnClickListener(v -> {
+            // Keep what was typed so far; the AI answer is added on return.
+            setWordNote(word, input.getText().toString());
+            dialog.dismiss();
+            explainWithAi(word, gloss, context);
+        });
+        LinearLayout.LayoutParams ap = new LinearLayout.LayoutParams(0, dp(42), 1);
+        ap.setMargins(dp(8), 0, 0, 0);
+        tools.addView(ask, ap);
+        box.addView(tools, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(42), 10));
+
+        LinearLayout actions = row();
+        if (existing != null) {
+            Button delete = flatButton(t("Delete", "Usuń"), th.panel, th.accent, th.accent, 13, 44);
+            delete.setOnClickListener(v -> new AlertDialog.Builder(this)
+                    .setMessage(t("Delete this note?", "Usunąć tę notatkę?"))
+                    .setPositiveButton(t("Delete", "Usuń"), (d2, w) -> {
+                        setWordNote(word, "");
+                        dialog.dismiss();
+                        render();
+                    })
+                    .setNegativeButton(t("Cancel", "Anuluj"), null)
+                    .show());
+            actions.addView(delete, new LinearLayout.LayoutParams(0, dp(44), 1));
+        }
+        Button save = filledButton(t("Save", "Zapisz"), th.accent, th.onAccent, 14, 44);
+        save.setOnClickListener(v -> {
+            setWordNote(word, input.getText().toString());
+            dialog.dismiss();
+            Toast.makeText(this, input.getText().toString().trim().isEmpty()
+                    ? t("Note removed.", "Notatka usunięta.")
+                    : t("Note saved.", "Notatka zapisana."), Toast.LENGTH_SHORT).show();
+            render();
+        });
+        LinearLayout.LayoutParams sp = new LinearLayout.LayoutParams(0, dp(44), existing != null ? 1 : 2);
+        if (existing != null) {
+            sp.setMargins(dp(8), 0, 0, 0);
+        }
+        actions.addView(save, sp);
+        box.addView(actions, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(44), 14));
+
+        dialog.show();
+        if (pasteNow) {
+            pasteIntoNote(input);
+        }
+    }
+
+    /** Appends the clipboard, unless it still holds our own prompt. */
+    private void pasteIntoNote(android.widget.EditText input) {
+        ClipboardManager clip = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        CharSequence text = null;
+        if (clip != null && clip.hasPrimaryClip() && clip.getPrimaryClip() != null
+                && clip.getPrimaryClip().getItemCount() > 0) {
+            text = clip.getPrimaryClip().getItemAt(0).coerceToText(this);
+        }
+        if (text == null || text.toString().trim().isEmpty()) {
+            Toast.makeText(this, t("The clipboard is empty.", "Schowek jest pusty."), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (text.toString().trim().equals(lastAiPrompt.trim())) {
+            // Pasting the question back as the "answer" would be useless.
+            Toast.makeText(this, t("The clipboard still holds the question. Copy the AI's answer first.",
+                    "W schowku jest wciąż pytanie. Najpierw skopiuj odpowiedź AI."), Toast.LENGTH_LONG).show();
+            return;
+        }
+        String current = input.getText().toString().trim();
+        String joined = current.isEmpty() ? text.toString().trim() : current + "\n\n" + text.toString().trim();
+        if (joined.length() > NOTE_MAX_CHARS) {
+            joined = joined.substring(0, NOTE_MAX_CHARS);
+            Toast.makeText(this, t("Note trimmed to the maximum length.", "Notatka skrócona do maksymalnej długości."),
+                    Toast.LENGTH_SHORT).show();
+        }
+        input.setText(joined);
+        input.setSelection(joined.length());
+    }
+
+    /** A compact, tappable view of a note, for cards and the word sheet. */
+    private View notePreviewBox(final String word, final String gloss, final String context, int maxChars) {
+        Theme th = theme();
+        WordNote note = noteFor(word);
+        LinearLayout box = vertical();
+        box.setPadding(dp(12), dp(9), dp(12), dp(10));
+        box.setBackground(leftBorderBox(th.panel, th.accent, 3));
+        box.addView(label("📝 " + t("My note", "Moja notatka"), th.accent, 10, 0.1f));
+        TextView body = bodyText(note == null ? "" : LearningLogic.notePreview(note.text, maxChars), 13, th.body);
+        box.addView(body, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT, 4));
+        box.setOnClickListener(v -> openNoteEditor(word, gloss, context, false));
+        return box;
+    }
+
+    /** Back from the AI app: offer to keep what it said. */
+    private void offerToSaveAiAnswer() {
+        final String word = pendingNoteWord;
+        pendingNoteWord = null;
+        if (word == null || !dataReady || isFinishing()) {
+            return;
+        }
+        new AlertDialog.Builder(this)
+                .setTitle(t("Keep the AI's answer?", "Zachować odpowiedź AI?"))
+                .setMessage(t("Copy the answer in the AI app, then paste it into a note for „",
+                        "Skopiuj odpowiedź w aplikacji AI i wklej ją do notatki dla „") + word + "”.")
+                .setPositiveButton(t("Paste into note", "Wklej do notatki"),
+                        (d, w) -> openNoteEditor(word, "", "", true))
+                .setNegativeButton(t("Not now", "Nie teraz"), null)
+                .show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        leftAppAt = System.currentTimeMillis();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (!hasFocus || pendingNoteWord == null) {
+            return;
+        }
+        long now = System.currentTimeMillis();
+        if (leftAppAt > 0) {
+            // The app really went to the background after Ask AI. Offer only
+            // after a real visit (backing straight out takes a second or two)
+            // and only for a recent question, never at some unrelated return.
+            boolean realVisit = now - leftAppAt > 8000L;
+            boolean recent = now - askedAiAt < 30L * 60L * 1000L;
+            leftAppAt = 0L;
+            if (realVisit && recent) {
+                offerToSaveAiAnswer();
+            } else {
+                pendingNoteWord = null;
+            }
+        } else if (now - askedAiAt > 3000L) {
+            // Focus came back without the app ever stopping: the share sheet
+            // was cancelled. The short grace period skips focus flicker while
+            // the sheet hands over to the chosen app.
+            pendingNoteWord = null;
+        }
+    }
+
     private void explainWithAi(String text, String gloss, String context) {
         if (text == null || text.trim().isEmpty()) {
             return;
         }
         String prompt = LearningLogic.explainPrompt(text, gloss, context, level);
+        lastAiPrompt = prompt;
+        pendingNoteWord = text.trim();
+        leftAppAt = 0L;
+        askedAiAt = System.currentTimeMillis();
         ClipboardManager clip = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         if (clip != null) {
             clip.setPrimaryClip(ClipData.newPlainText("AI prompt", prompt));
@@ -3040,8 +3378,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 if (out != null) {
                     out.write(buildMarkdown(scope).getBytes(StandardCharsets.UTF_8));
                 }
-                Toast.makeText(this, t("Exported ", "Wyeksportowano ") + cardsForExport(scope).size()
-                        + t(" cards.", " kart."), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "notes".equals(scope)
+                        ? t("Exported ", "Wyeksportowano ") + wordNotes.size() + t(" notes.", " notatek.")
+                        : t("Exported ", "Wyeksportowano ") + cardsForExport(scope).size() + t(" cards.", " kart."),
+                        Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 Toast.makeText(this, t("Could not save the file.", "Nie udało się zapisać pliku."),
                         Toast.LENGTH_LONG).show();
@@ -4350,8 +4690,26 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 }
                 explainWithAi(explained.polish, glossFor(explained), explained.examplePolish);
             });
-            card.addView(askListen, new LinearLayout.LayoutParams(
+            LinearLayout listenTools = row();
+            listenTools.setGravity(Gravity.CENTER);
+            listenTools.addView(askListen, new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT, dp(36)));
+            boolean listenHasNote = noteFor(explained.polish) != null;
+            Button noteListen = flatButton("📝 " + (listenHasNote ? t("My note", "Notatka") : t("Note", "Notatka")),
+                    listenHasNote ? th.accentSoft : th.panel, listenHasNote ? th.accent : th.muted,
+                    listenHasNote ? th.accent : th.dash, 12.5f, 36);
+            noteListen.setOnClickListener(v -> {
+                if (listenPlaying) {
+                    stopListening();   // typing over the audio loop is no good
+                }
+                openNoteEditor(explained.polish, glossFor(explained), explained.examplePolish, false);
+            });
+            LinearLayout.LayoutParams nlp = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT, dp(36));
+            nlp.setMargins(dp(8), 0, 0, 0);
+            listenTools.addView(noteListen, nlp);
+            card.addView(listenTools, new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             addGap(card, 10);
             card.addView(uiText((listenIndex + 1) + " / " + listenDeck.size(), 11.5f, th.ghost, sansBold));
         }
@@ -4971,8 +5329,21 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 4));
         TextView body = bodyText(gloss.isEmpty() ? t("No translation available.", "Brak tłumaczenia.") : gloss, 15, th.body);
         box.addView(body, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 10));
+        View sheetNotePreview = null;
+        if (noteFor(word) != null) {
+            sheetNotePreview = notePreviewBox(word, gloss, lookupContext, 220);
+            box.addView(sheetNotePreview, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT, 12));
+        }
 
         final AlertDialog dialog = new AlertDialog.Builder(this).setView(box).create();
+        if (sheetNotePreview != null) {
+            final String previewContext = lookupContext;
+            sheetNotePreview.setOnClickListener(v -> {
+                dialog.dismiss();   // else the sheet behind would show a stale note
+                openNoteEditor(word, gloss, previewContext, false);
+            });
+        }
 
         LinearLayout actions = row();
         Button speak = flatButton("🔊 " + t("Play", "Odtwórz"), th.accentSoft, th.accent, th.accent, 13, 44);
@@ -5005,6 +5376,14 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         askParams.setMargins(dp(8), 0, 0, 0);
         more.addView(ask, askParams);
         box.addView(more, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(44), 8));
+        boolean hasNote = noteFor(word) != null;
+        Button note = flatButton("📝 " + (hasNote ? t("Edit my note", "Edytuj notatkę") : t("Add a note", "Dodaj notatkę")),
+                th.panel, th.ink, th.dash, 13, 44);
+        note.setOnClickListener(v -> {
+            dialog.dismiss();
+            openNoteEditor(word, gloss, context, false);
+        });
+        box.addView(note, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(44), 8));
         lookupContext = "";   // one lookup's sentence must not leak into the next
 
         Button addList = filledButton(t("Add to a list", "Dodaj do listy"), th.accent, th.onAccent, 14, 46);
@@ -6260,6 +6639,18 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             this.description = description;
             this.url = url;
             this.feedUrl = feedUrl;
+        }
+    }
+
+    private static class WordNote {
+        final String word;
+        final String text;
+        final long updated;
+
+        WordNote(String word, String text, long updated) {
+            this.word = word;
+            this.text = text;
+            this.updated = updated;
         }
     }
 

@@ -21,12 +21,15 @@ This is a factual engineering description, **not legal advice**.
 | Advertising? | **No.** No ad SDK, no ad IDs. | Dependency list |
 | Location accessed? | **No.** No location permission or API use. | Manifest has only `INTERNET` |
 | Contacts accessed? | **No.** | No permission, no API use |
-| Camera / microphone? | **No.** | No permission, no API use |
+| Camera / microphone? | **No permission and no recording.** The pronunciation check hands off to the system speech recognizer, which owns the mic. | Manifest has no `RECORD_AUDIO`; see §3.5 |
 | Photos / media access? | **No.** No storage permissions. | Manifest |
 | Does the app have a backend? | **No.** No server is operated for this app. | No custom endpoints |
 | Is anything sold or shared with third parties? | **No.** The app transmits no user data anywhere. | See §3 |
 
-**Only one Android permission is declared: `INTERNET`.**
+**Only one Android permission is declared: `INTERNET`.** The manifest also
+declares a `<queries>` entry for `android.speech.RecognitionService`, which is
+package visibility, not a permission — it lets the app see that a recognizer
+exists. It grants no access to anything.
 
 ---
 
@@ -54,10 +57,17 @@ All user data stays in app-private storage. Nothing is uploaded.
 | `user_dictionary.json` | The dictionary the user uploaded, normalized |
 | `gloss_cache.json` | Pre-resolved translations (regenerable) |
 | `phrases_remote.json` | Downloaded vocabulary database (regenerable) |
+| `news_cache.json` | Today's news headlines and their translations (regenerable, ignored after the day ends) |
+| `word_notes.json` | The user's own notes on words: free text they typed or pasted, often an AI chat's answer. Stays on the device; included in Android backup (§5) because it is irreplaceable |
 
 None of this is readable by other apps. There is no external/shared storage
 write except files the user explicitly saves via the system file picker
-(templates they asked to download).
+(templates they asked to download, and Markdown exports).
+
+The **Ask AI** button never contacts an AI service. It writes a prompt to the
+clipboard and opens the system share sheet; the user chooses where it goes. A
+note is only created when the user pastes into the note editor, and the paste
+reads the clipboard only on that tap.
 
 ---
 
@@ -113,6 +123,22 @@ https://www.polsatnews.pl/rss/wszystkie.xml
   voice picker). Text sent to synthesis is app vocabulary or the user's own
   words. If you need a definitive statement, scope it to "the app passes text to
   the user's chosen system TTS engine".
+
+### 3.5 Speech recognition — pronunciation check
+- The "Say it" button starts the standard Android
+  `RecognizerIntent.ACTION_RECOGNIZE_SPEECH` activity with the language set to
+  `pl-PL`, and reads back the recognized text.
+- **This app never records audio and holds no `RECORD_AUDIO` permission.** The
+  recognizer app the user has installed owns the microphone, shows its own
+  listening UI and asks for its own permissions. This app receives only a list
+  of candidate strings.
+- ⚠️ **UNCERTAIN, and outside this app's control:** whether that recognizer
+  processes audio on-device or in the cloud depends on which recognizer the
+  user has and whether they installed an offline Polish pack. On most phones
+  this is Google's recognizer. Scope any statement to "the app passes the
+  request to the user's chosen system speech recognizer".
+- Nothing spoken is stored by this app. The recognized text lives only in
+  memory for as long as the result sheet is open.
 
 **There are no other network endpoints.**
 
@@ -178,7 +204,8 @@ A policy can truthfully state:
 
 - No account required; no personal information requested or collected
 - No analytics, no advertising, no crash reporting, no tracking identifiers
-- No location, contacts, camera, microphone or photo access
+- No location, contacts, camera, microphone or photo access (the pronunciation
+  check delegates to the system recognizer and records nothing itself)
 - All learning progress and imported content is stored only on the device
 - The app connects to the internet only to: check for vocabulary updates on
   GitHub, fetch Polish news headlines when the user opens the News tab, and let
