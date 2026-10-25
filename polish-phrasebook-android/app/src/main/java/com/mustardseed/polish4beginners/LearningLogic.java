@@ -336,6 +336,48 @@ public final class LearningLogic {
         return p.toString();
     }
 
+    // ---- word notes --------------------------------------------------------
+
+    /**
+     * A note pasted from an AI chat arrives as Markdown. The app shows plain
+     * text, so this strips the markup that would otherwise show as stray
+     * symbols: **bold**, # headings, `code`, and list bullets become "•".
+     * The stored note keeps the original, so a Markdown export stays intact.
+     */
+    public static String plainNote(String raw) {
+        if (raw == null) {
+            return "";
+        }
+        String[] lines = raw.replace("\r\n", "\n").replace('\r', '\n').split("\n", -1);
+        StringBuilder out = new StringBuilder();
+        for (String line : lines) {
+            String l = line;
+            l = l.replaceAll("^\\s{0,3}#{1,6}\\s+", "");          // headings
+            l = l.replaceAll("^(\\s*)[-*+]\\s+", "$1• ");          // bullets
+            l = l.replace("**", "").replace("__", "");                // bold
+            l = l.replace("`", "");                                   // inline code
+            if (l.trim().matches("[-*_]{3,}")) {
+                l = "";                                                // horizontal rule
+            }
+            out.append(l).append('\n');
+        }
+        // Collapse the blank-line runs AI answers are full of.
+        return out.toString().replaceAll("\n{3,}", "\n\n").trim();
+    }
+
+    /** First part of a note for a compact preview, cut at a word boundary. */
+    public static String notePreview(String raw, int maxChars) {
+        String plain = plainNote(raw);
+        if (plain.length() <= maxChars) {
+            return plain;
+        }
+        int cut = plain.lastIndexOf(' ', maxChars);
+        if (cut < maxChars / 2) {
+            cut = maxChars;
+        }
+        return plain.substring(0, cut).trim() + "…";
+    }
+
     /** Normalization used for dictionary keys and duplicate detection. */
     public static String normalizeHeadword(String value) {
         if (value == null) {

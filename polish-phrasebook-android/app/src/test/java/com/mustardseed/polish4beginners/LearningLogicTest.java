@@ -248,6 +248,38 @@ public class LearningLogicTest {
                 .contains("appeared in this sentence"));
     }
 
+    // ---- word notes ---------------------------------------------------------
+
+    @Test
+    public void aiMarkdownIsShownAsPlainText() {
+        String raw = "## Meaning\n**dzwoni** is the 3rd person of *dzwonić*.\n- one\n* two\n`code`";
+        String plain = LearningLogic.plainNote(raw);
+        assertFalse(plain.contains("##"));
+        assertFalse(plain.contains("**"));
+        assertFalse(plain.contains("`"));
+        assertTrue(plain.contains("Meaning"));
+        assertTrue(plain.contains("• one"));
+        assertTrue(plain.contains("• two"));
+    }
+
+    @Test
+    public void plainNoteKeepsPolishAndCollapsesBlankRuns() {
+        String plain = LearningLogic.plainNote("Cześć\n\n\n\nżółw\r\n---\nźle");
+        assertTrue(plain.contains("Cześć"));
+        assertTrue(plain.contains("żółw"));
+        assertFalse("runs of blank lines collapse", plain.contains("\n\n\n"));
+        assertFalse("a horizontal rule is dropped", plain.contains("---"));
+    }
+
+    @Test
+    public void previewCutsAtAWordAndMarksTheCut() {
+        String p = LearningLogic.notePreview("jeden dwa trzy cztery pięć sześć", 15);
+        assertTrue(p.endsWith("…"));
+        assertFalse("must not split a word", p.contains("trz…"));
+        assertEquals("krótko", LearningLogic.notePreview("krótko", 50));
+        assertEquals("", LearningLogic.notePreview(null, 50));
+    }
+
     // ---- markdown export --------------------------------------------------
 
     @Test

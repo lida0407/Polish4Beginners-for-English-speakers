@@ -3,11 +3,13 @@
      transferred, so regenerable caches need no explicit exclude. -->
 <data-extraction-rules>
     <cloud-backup>
-        <!-- Progress only: keeps the backup small and well within quota. -->
+        <!-- Progress and the user's own notes; both small, well within quota. -->
         <include domain="sharedpref" path="phrasebook.xml" />
+        <include domain="file" path="word_notes.json" />
     </cloud-backup>
     <device-transfer>
         <include domain="sharedpref" path="phrasebook.xml" />
+        <include domain="file" path="word_notes.json" />
         <!-- A direct device-to-device move can afford the user's dictionary. -->
         <include domain="file" path="user_dictionary.json" />
     </device-transfer>

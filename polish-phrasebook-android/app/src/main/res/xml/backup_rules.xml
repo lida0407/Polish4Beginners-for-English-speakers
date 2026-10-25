@@ -5,4 +5,6 @@
 <full-backup-content>
     <!-- Study progress, favourites, custom words and settings. -->
     <include domain="sharedpref" path="phrasebook.xml" />
+    <!-- The user's own word notes: irreplaceable, and small. -->
+    <include domain="file" path="word_notes.json" />
 </full-backup-content>

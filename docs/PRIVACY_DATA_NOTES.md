@@ -57,10 +57,17 @@ All user data stays in app-private storage. Nothing is uploaded.
 | `user_dictionary.json` | The dictionary the user uploaded, normalized |
 | `gloss_cache.json` | Pre-resolved translations (regenerable) |
 | `phrases_remote.json` | Downloaded vocabulary database (regenerable) |
+| `news_cache.json` | Today's news headlines and their translations (regenerable, ignored after the day ends) |
+| `word_notes.json` | The user's own notes on words: free text they typed or pasted, often an AI chat's answer. Stays on the device; included in Android backup (§5) because it is irreplaceable |
 
 None of this is readable by other apps. There is no external/shared storage
 write except files the user explicitly saves via the system file picker
-(templates they asked to download).
+(templates they asked to download, and Markdown exports).
+
+The **Ask AI** button never contacts an AI service. It writes a prompt to the
+clipboard and opens the system share sheet; the user chooses where it goes. A
+note is only created when the user pastes into the note editor, and the paste
+reads the clipboard only on that tap.
 
 ---
 
