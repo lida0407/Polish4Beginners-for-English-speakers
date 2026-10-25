@@ -1,8 +1,8 @@
 {
-  "versionCode": 46,
-  "versionName": "1.45",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/b588f4570642b208372831e8b2b70f78d342ff80/docs/P4B.apk",
-  "apkSha256": "108872744e1253ffadc785306374fdcb45e4b058efd08c0a09ea24c2d1caa1b9",
-  "apkSizeBytes": 69082545,
-  "releaseNotes": "New: tap ✨ Ask AI on any word to get a ready-made prompt for ChatGPT, Claude or Gemini to explain it in depth."
+  "versionCode": 47,
+  "versionName": "1.46",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/e53dfd55eaac339a16d13899c3338a4afa7733bf/docs/P4B.apk",
+  "apkSha256": "7554c69292dcdda58a91d21e2ba1e1eeeb928e7db3c6a1fd300b37bf21b63d39",
+  "apkSizeBytes": 69082492,
+  "releaseNotes": "New: notes on any word. Write your own, or paste an AI's answer after Ask AI. Notes show on cards, in Listen and in exports."
 }
