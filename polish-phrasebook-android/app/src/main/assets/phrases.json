@@ -32649,5 +32649,1461 @@
     "polish": "Muszę się nad tym zastanowić.",
     "english": "I need to think it over.",
     "phonetic": ""
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "niestety",
+    "english": "unfortunately",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "chyba",
+    "english": "probably / I think",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "może",
+    "english": "perhaps",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "na pewno",
+    "english": "definitely",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "zgoda",
+    "english": "agreed",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "na zdrowie",
+    "english": "cheers / bless you",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "wszystkiego najlepszego",
+    "english": "best wishes",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "nie wiem",
+    "english": "I do not know",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "co to znaczy?",
+    "english": "what does that mean?",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "jak to się pisze?",
+    "english": "how do you spell it?",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "proszę powtórzyć",
+    "english": "please repeat",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "po polsku",
+    "english": "in Polish",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Greetings & Essentials",
+    "scenario": "Greetings & Essentials",
+    "level": "A1",
+    "polish": "po angielsku",
+    "english": "in English",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "sąsiadka",
+    "english": "female neighbour",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "People & Family",
+    "scenario": "People & Family",
+    "level": "A1",
+    "polish": "obywatelstwo",
+    "english": "citizenship",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: neuter",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A1",
+    "polish": "parter",
+    "english": "ground floor",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: masculine",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A1",
+    "polish": "schody",
+    "english": "stairs",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Plural-only noun",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A1",
+    "polish": "półka",
+    "english": "shelf",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: feminine",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A1",
+    "polish": "światło",
+    "english": "light",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: neuter",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Home & Daily Life",
+    "scenario": "Home & Daily Life",
+    "level": "A1",
+    "polish": "ładowarka",
+    "english": "charger",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: feminine",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "jedzenie",
+    "english": "food / eating",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: neuter",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "szynka",
+    "english": "ham",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: feminine",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "kiełbasa",
+    "english": "sausage",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: feminine",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "sałatka",
+    "english": "salad",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: feminine",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "gruszka",
+    "english": "pear",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: feminine",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "pomarańcza",
+    "english": "orange",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: feminine",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "lody",
+    "english": "ice cream",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Plural-only noun",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Food & Drink",
+    "scenario": "Food & Drink",
+    "level": "A1",
+    "polish": "butelka",
+    "english": "bottle",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: feminine",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "przejście",
+    "english": "crossing / passage",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: neuter",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "przychodnia",
+    "english": "outpatient clinic",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: feminine",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "komisariat",
+    "english": "police station",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: masculine",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Travel & Transport",
+    "scenario": "Travel & Transport",
+    "level": "A1",
+    "polish": "peron",
+    "english": "platform",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: masculine",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A2",
+    "polish": "reszta",
+    "english": "change / remainder",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: feminine",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A2",
+    "polish": "skarpetka",
+    "english": "sock",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: feminine",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A2",
+    "polish": "przymierzalnia",
+    "english": "fitting room",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: feminine",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Shopping & Money",
+    "scenario": "Shopping & Money",
+    "level": "A2",
+    "polish": "kasa",
+    "english": "checkout / till",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: feminine",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "zawód",
+    "english": "profession",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: masculine",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "pracownica",
+    "english": "female employee",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "szefowa",
+    "english": "female boss",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "studentka",
+    "english": "female university student",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "uczennica",
+    "english": "female school pupil",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "nauczyciel",
+    "english": "teacher",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "egzamin",
+    "english": "exam",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: masculine",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "ćwiczenie",
+    "english": "exercise",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: neuter",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Work & School",
+    "scenario": "Work & School",
+    "level": "A2",
+    "polish": "połączenie",
+    "english": "connection",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: neuter",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A2",
+    "polish": "zdrowie",
+    "english": "health",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: neuter",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A2",
+    "polish": "lekarka",
+    "english": "female doctor",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Health & Body",
+    "scenario": "Health & Body",
+    "level": "A2",
+    "polish": "dentystka",
+    "english": "female dentist",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "czas",
+    "english": "time",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "Gender: masculine",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "potem",
+    "english": "afterwards",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "później",
+    "english": "later",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "wcześniej",
+    "english": "earlier",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "już",
+    "english": "already",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Time & Calendar",
+    "scenario": "Time & Calendar",
+    "level": "A1",
+    "polish": "jeszcze",
+    "english": "still / yet / more",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "nowy",
+    "english": "new",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "stary",
+    "english": "old",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "młody",
+    "english": "young",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "szybki",
+    "english": "fast",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "wolny",
+    "english": "slow; free / available",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "zimny",
+    "english": "cold",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "chłodny",
+    "english": "cool",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "pełny",
+    "english": "full",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "pusty",
+    "english": "empty",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "bliski",
+    "english": "near",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "daleki",
+    "english": "distant",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "potrzebny",
+    "english": "necessary / needed",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "gotowy",
+    "english": "ready",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "własny",
+    "english": "one's own",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Feelings & Qualities",
+    "scenario": "Feelings & Qualities",
+    "level": "A1",
+    "polish": "inny",
+    "english": "different / another",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "taki sam",
+    "english": "the same",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "tutaj",
+    "english": "here",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "tam",
+    "english": "there",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "wszędzie",
+    "english": "everywhere",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "nigdzie",
+    "english": "nowhere",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "razem",
+    "english": "together",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "osobno",
+    "english": "separately",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "tylko",
+    "english": "only",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "też",
+    "english": "also",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "również",
+    "english": "also",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "nawet",
+    "english": "even",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "bardzo",
+    "english": "very",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "trochę",
+    "english": "a little",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "dużo",
+    "english": "a lot",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "mało",
+    "english": "little",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "za dużo",
+    "english": "too much / too many",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "wystarczająco",
+    "english": "enough / sufficiently",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Grammar & Function Words",
+    "scenario": "Grammar & Function Words",
+    "level": "A1",
+    "polish": "prawie",
+    "english": "almost",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Verbs",
+    "scenario": "Verbs",
+    "level": "A1",
+    "polish": "rozmawiać",
+    "english": "to converse",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "imperfective; ja: rozmawiam. Pattern: z kimś (I), o czymś (L)",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Verbs",
+    "scenario": "Verbs",
+    "level": "A1",
+    "polish": "musieć",
+    "english": "to have to",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "imperfective; ja: muszę. Pattern: musieć pracować",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Verbs",
+    "scenario": "Verbs",
+    "level": "A1",
+    "polish": "umieć",
+    "english": "to know how",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "imperfective; ja: umiem. Pattern: umieć pływać",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Verbs",
+    "scenario": "Verbs",
+    "level": "A1",
+    "polish": "podobać się",
+    "english": "to appeal to / to be liked",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "imperfective; ja: podobam się. Pattern: Ten film podoba mi się (D).",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Verbs",
+    "scenario": "Verbs",
+    "level": "A1",
+    "polish": "interesować się",
+    "english": "to be interested in",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "imperfective; ja: interesuję się. Pattern: interesować się historią (I)",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Verbs",
+    "scenario": "Verbs",
+    "level": "A1",
+    "polish": "cieszyć się",
+    "english": "to be glad",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "imperfective; ja: cieszę się. Pattern: cieszyć się z prezentu (G)",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Verbs",
+    "scenario": "Verbs",
+    "level": "A1",
+    "polish": "patrzeć",
+    "english": "to look",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "imperfective; ja: patrzę. Pattern: patrzeć na ekran (A)",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Verbs",
+    "scenario": "Verbs",
+    "level": "A1",
+    "polish": "odwiedzać",
+    "english": "to visit",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "imperfective; ja: odwiedzam. Pattern: odwiedzać znajomych (A)",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Verbs",
+    "scenario": "Verbs",
+    "level": "A1",
+    "polish": "telefonować",
+    "english": "to telephone",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "imperfective; ja: telefonuję. Pattern: telefonować do kolegi (G)",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Verbs",
+    "scenario": "Verbs",
+    "level": "A1",
+    "polish": "czuć się",
+    "english": "to feel",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "imperfective; ja: czuję się. Pattern: czuć się dobrze",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Verbs",
+    "scenario": "Verbs",
+    "level": "A1",
+    "polish": "zajmować się",
+    "english": "to deal with / to look after",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "imperfective; ja: zajmuję się. Pattern: zajmować się dzieckiem (I)",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Verbs",
+    "scenario": "Verbs",
+    "level": "A1",
+    "polish": "grać",
+    "english": "to play",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "imperfective; ja: gram. Pattern: grać w piłkę (A), na gitarze (L)",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Verbs",
+    "scenario": "Verbs",
+    "level": "A1",
+    "polish": "pływać",
+    "english": "to swim",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "imperfective; ja: pływam. Pattern: pływać w jeziorze (L)",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Verbs",
+    "scenario": "Verbs",
+    "level": "A1",
+    "polish": "dostać",
+    "english": "to receive / to get",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "perfective; future: dostanę. Pattern: dostać wiadomość (A)",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Verbs",
+    "scenario": "Verbs",
+    "level": "A1",
+    "polish": "zgubić",
+    "english": "to lose / to mislay",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "perfective; future: zgubię. Pattern: zgubić portfel (A)",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Verbs",
+    "scenario": "Verbs",
+    "level": "A1",
+    "polish": "naprawiać",
+    "english": "to repair",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "imperfective; ja: naprawiam. Pattern: naprawiać rower (A)",
+    "tags": [
+      "grammar-guide"
+    ]
+  },
+  {
+    "category": "Verbs",
+    "scenario": "Verbs",
+    "level": "A1",
+    "polish": "podpisywać",
+    "english": "to sign",
+    "phonetic": "",
+    "examplePolish": "",
+    "exampleEnglish": "",
+    "notes": "imperfective; ja: podpisuję. Pattern: podpisywać umowę (A)",
+    "tags": [
+      "grammar-guide"
+    ]
   }
 ]
