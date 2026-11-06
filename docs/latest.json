@@ -1,8 +1,8 @@
 {
-  "versionCode": 47,
-  "versionName": "1.46",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/e53dfd55eaac339a16d13899c3338a4afa7733bf/docs/P4B.apk",
-  "apkSha256": "7554c69292dcdda58a91d21e2ba1e1eeeb928e7db3c6a1fd300b37bf21b63d39",
-  "apkSizeBytes": 69082492,
-  "releaseNotes": "New: notes on any word. Write your own, or paste an AI's answer after Ask AI. Notes show on cards, in Listen and in exports."
+  "versionCode": 48,
+  "versionName": "1.47",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/e5f278ad6739a3c93e5ead9f212de8aed1c2d08e/docs/P4B.apk",
+  "apkSha256": "77ac51a1506d58ef1d5caed60999d9bf4a16be1d22528b4af132c8cc0b6af70d",
+  "apkSizeBytes": 69133602,
+  "releaseNotes": "New: the Grammar guide under More. 16 chapters with tappable Polish, practice you can type and check, and Study buttons for 500 words."
 }
