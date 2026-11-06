@@ -248,6 +248,51 @@ public class LearningLogicTest {
                 .contains("appeared in this sentence"));
     }
 
+    // ---- typed answers ---------------------------------------------------
+
+    @Test
+    public void exactAnswersIgnoreCaseAndPunctuation() {
+        assertEquals(LearningLogic.ANSWER_EXACT, LearningLogic.checkAnswer("Biletu", "biletu"));
+        assertEquals(LearningLogic.ANSWER_EXACT,
+                LearningLogic.checkAnswer("uczę się polskiego", "Uczę się polskiego."));
+    }
+
+    @Test
+    public void missingPolishLettersAreTheirOwnVerdict() {
+        assertEquals(LearningLogic.ANSWER_DIACRITICS, LearningLogic.checkAnswer("pociagiem", "pociągiem"));
+        assertEquals(LearningLogic.ANSWER_DIACRITICS, LearningLogic.checkAnswer("kolezanka", "koleżanką"));
+        assertEquals("ł has no decomposition and must still map",
+                "zlobek", LearningLogic.stripPolishDiacritics("żłobek"));
+    }
+
+    @Test
+    public void reorderedWordsAreAcceptedAsWordOrder() {
+        assertEquals(LearningLogic.ANSWER_WORD_ORDER,
+                LearningLogic.checkAnswer("Nie muszę jutro pracować", "Nie muszę pracować jutro."));
+    }
+
+    @Test
+    public void anyAcceptedAlternativeCounts() {
+        assertEquals(LearningLogic.ANSWER_EXACT, LearningLogic.checkAnswer("Lubię ten film.",
+                "Ten film mi się podoba.", "Lubię ten film."));
+    }
+
+    @Test
+    public void aWrongCaseEndingIsNotExact() {
+        int verdict = LearningLogic.checkAnswer("bilet", "biletu");
+        assertTrue(verdict != LearningLogic.ANSWER_EXACT && verdict != LearningLogic.ANSWER_DIACRITICS);
+        assertEquals(LearningLogic.ANSWER_WRONG, LearningLogic.checkAnswer("samochód", "biletu"));
+        assertEquals(LearningLogic.ANSWER_WRONG, LearningLogic.checkAnswer("", "biletu"));
+    }
+
+    @Test
+    public void theBestVerdictWinsAcrossAlternatives() {
+        // "pojdziemy" is pójdziemy minus the ó: a letters-only miss on the
+        // second option must beat merely "close" on the first.
+        assertEquals(LearningLogic.ANSWER_DIACRITICS,
+                LearningLogic.checkAnswer("Jutro pojdziemy do kina", "Jutro idziemy do kina.", "Jutro pójdziemy do kina."));
+    }
+
     // ---- word notes ---------------------------------------------------------
 
     @Test

@@ -146,6 +146,106 @@ public class AssetDataTest {
         }
     }
 
+    // ---- grammar guide ----------------------------------------------------
+
+    private static JSONObject guide() throws Exception {
+        File f = new File("src/main/assets/grammar_guide.json");
+        assertTrue("missing grammar_guide.json", f.exists());
+        return new JSONObject(new String(Files.readAllBytes(f.toPath()), StandardCharsets.UTF_8));
+    }
+
+    @Test
+    public void guideParsesIntoChaptersWithKnownBlockTypes() throws Exception {
+        JSONArray chapters = guide().getJSONArray("chapters");
+        assertTrue("expected the guide's chapters", chapters.length() >= 16);
+        Set<String> known = new HashSet<>(java.util.Arrays.asList(
+                "h", "p", "list", "table", "dialogue", "exercise", "study"));
+        for (int i = 0; i < chapters.length(); i++) {
+            JSONObject ch = chapters.getJSONObject(i);
+            assertFalse("chapter without title", ch.optString("title").trim().isEmpty());
+            JSONArray blocks = ch.getJSONArray("blocks");
+            assertTrue("empty chapter " + ch.optString("id"), blocks.length() > 0);
+            for (int j = 0; j < blocks.length(); j++) {
+                String type = blocks.getJSONObject(j).optString("type");
+                assertTrue("unknown block type '" + type + "'", known.contains(type));
+            }
+        }
+    }
+
+    /** A practice item without an answer would mark every reply wrong. */
+    @Test
+    public void everyGuideExerciseHasAnAnswer() throws Exception {
+        JSONArray chapters = guide().getJSONArray("chapters");
+        int items = 0;
+        for (int i = 0; i < chapters.length(); i++) {
+            JSONArray blocks = chapters.getJSONObject(i).getJSONArray("blocks");
+            for (int j = 0; j < blocks.length(); j++) {
+                JSONObject b = blocks.getJSONObject(j);
+                if (!"exercise".equals(b.optString("type"))) {
+                    continue;
+                }
+                JSONArray list = b.getJSONArray("items");
+                for (int k = 0; k < list.length(); k++) {
+                    JSONObject it = list.getJSONObject(k);
+                    boolean has = (it.optJSONArray("a") != null && it.getJSONArray("a").length() > 0)
+                            || (it.optJSONArray("alts") != null && it.getJSONArray("alts").length() > 0);
+                    assertTrue(b.optString("group") + (k + 1) + " has no answer", has);
+                    items++;
+                }
+            }
+        }
+        assertTrue("expected the guide's practice items", items >= 30);
+    }
+
+    /** "Study these words" must find a card for every word it lists. */
+    @Test
+    public void everyGuideStudyWordHasACard() throws Exception {
+        JSONArray cards = asset("phrases.json");
+        Set<String> deck = new HashSet<>();
+        for (int i = 0; i < cards.length(); i++) {
+            deck.add(LearningLogic.normalizeHeadword(cards.getJSONObject(i).optString("polish")));
+        }
+        JSONArray chapters = guide().getJSONArray("chapters");
+        for (int i = 0; i < chapters.length(); i++) {
+            JSONArray blocks = chapters.getJSONObject(i).getJSONArray("blocks");
+            for (int j = 0; j < blocks.length(); j++) {
+                JSONObject b = blocks.getJSONObject(j);
+                if ("study".equals(b.optString("type"))) {
+                    JSONArray entries = b.getJSONArray("entries");
+                    for (int k = 0; k < entries.length(); k++) {
+                        String w = entries.getString(k);
+                        assertTrue("no card for guide word '" + w + "'",
+                                deck.contains(LearningLogic.normalizeHeadword(w)));
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * The app prefers a downloaded deck only when it is newer than the
+     * bundled one, so the bundled version constant must match the manifest
+     * that ships beside it, or new bundled cards would be ignored.
+     */
+    @Test
+    public void bundledDataVersionMatchesTheManifest() throws Exception {
+        File manifest = new File("../../docs/database.json");
+        if (!manifest.exists()) {
+            return;
+        }
+        String source = new String(Files.readAllBytes(new File(
+                "src/main/java/com/mustardseed/polish4beginners/MainActivity.java").toPath()),
+                StandardCharsets.UTF_8);
+        java.util.regex.Matcher m = java.util.regex.Pattern
+                .compile("DEFAULT_DATABASE_VERSION = (\\d+);").matcher(source);
+        assertTrue("DEFAULT_DATABASE_VERSION not found", m.find());
+        int bundled = Integer.parseInt(m.group(1));
+        int published = new JSONObject(new String(Files.readAllBytes(manifest.toPath()),
+                StandardCharsets.UTF_8)).optInt("dataVersion", -1);
+        assertEquals("DEFAULT_DATABASE_VERSION must equal docs/database.json dataVersion",
+                published, bundled);
+    }
+
     // ---- data manifest ----------------------------------------------------
 
     /**

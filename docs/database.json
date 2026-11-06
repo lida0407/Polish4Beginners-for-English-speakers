@@ -1,8 +1,8 @@
 {
-  "dataVersion": 11,
-  "phraseCount": 3170,
+  "dataVersion": 12,
+  "phraseCount": 3274,
   "phrasesUrl": "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/phrases.json?ref=main",
-  "phrasesSha256": "c330b05839bb2c81f46f2ffbf614d8b4a75854b51e79c594e07b5065dab48496",
-  "phrasesSizeBytes": 933186,
-  "releaseNotes": "Extends full case declension tables to 98 common noun cards (100 nouns)."
+  "phrasesSha256": "fd16c391b8961de11d24c5a6585f1dfe750748a5f7ffb063b1373beb7aa4a924",
+  "phrasesSizeBytes": 964411,
+  "releaseNotes": "Adds 104 words from the new Grammar & Vocabulary Guide: courtesy phrases, everyday nouns with gender, high-use adjectives and small words, and 17 verbs with their case patterns."
 }

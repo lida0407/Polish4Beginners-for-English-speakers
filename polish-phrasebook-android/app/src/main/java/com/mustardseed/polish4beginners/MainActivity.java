@@ -118,6 +118,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String SCREEN_READ = "read";
     private static final String SCREEN_MORE = "more";
     private static final String SCREEN_SETTINGS = "settings";
+    private static final String SCREEN_GUIDE = "guide";
     private static final String DEFAULT_THEME = "Komiks";
     private static final String LANG_EN = "en";
     private static final String LANG_PL = "pl";
@@ -131,7 +132,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String SPEED_FASTEST = "fastest";
     private static final String DATA_MANIFEST_URL = "https://api.github.com/repos/lida0407/Polish4Beginners-for-English-speakers/contents/docs/database.json?ref=main";
     private static final String REMOTE_PHRASES_FILE = "phrases_remote.json";
-    private static final int DEFAULT_DATABASE_VERSION = 10;
+    // dataVersion of the phrases.json bundled in this APK. Keep it equal to
+    // docs/database.json at release time (AssetDataTest enforces this).
+    private static final int DEFAULT_DATABASE_VERSION = 12;
     private static final long UPDATE_CHECK_INTERVAL_MS = 24L * 60L * 60L * 1000L;
     private static final int SESSION_SIZE = 10;
     private static final int NEWS_PREFETCH_AHEAD = 5;
@@ -226,6 +229,23 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private String pendingSpokenTarget = null;
     // Sentence the word being looked up was tapped in, for the AI prompt.
     private String lookupContext = "";
+    // Grammar & vocabulary guide (assets/grammar_guide.json, built from
+    // content/grammar_guide.md by scripts/build_grammar_guide.py).
+    private final List<JSONObject> guideChapters = new ArrayList<>();
+    private int guideChapter = -1;                       // -1 = chapter list
+    private final Map<String, String> guideTyped = new HashMap<>();
+    private final Map<String, Integer> guideVerdicts = new HashMap<>();
+    private final Map<String, View> guideSectionViews = new LinkedHashMap<>();
+    private Map<String, Phrase> guideIndex = null;       // headword -> card, built lazily
+    private int guideIndexSize = -1;
+    // Where a finished session returns to, and what "Again" repeats, when it
+    // was started from somewhere other than Home.
+    private String pendingReturnScreen = null;
+    private String sessionReturnScreen = null;
+    private List<Phrase> sessionRepeatPool = null;
+    // Re-rendering the same page keeps its scroll position.
+    private ScrollView currentScroll = null;
+    private String currentScrollKey = "";
     // Word notes, keyed by normalized headword so a note follows the word
     // wherever it appears: cards, Listen, conversations, news.
     private final Map<String, WordNote> wordNotes = new java.util.LinkedHashMap<>();
@@ -323,6 +343,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 loadDialogFilter();
                 scanlinesOn = !"0".equals(getSharedPreferences(PREFS, MODE_PRIVATE).getString("scanlines", "1"));
                 loadWordNotes();
+                loadGuide();
                 loadMemory();
                 loadFavourites();
             } catch (Throwable error) {
@@ -374,6 +395,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("screen", screen);
+        outState.putInt("guideChapter", guideChapter);
         outState.putString("level", level);
         outState.putString("browseTopic", browseTopic);
         outState.putString("browseQuery", browseQuery);
@@ -414,6 +436,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             return;
         }
         screen = in.getString("screen", SCREEN_HOME);
+        guideChapter = in.getInt("guideChapter", -1);
         level = in.getString("level", level);
         browseTopic = in.getString("browseTopic", browseTopic);
         browseQuery = in.getString("browseQuery", browseQuery);
@@ -533,7 +556,17 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     @Override
     public void onBackPressed() {
         if (SCREEN_SESSION.equals(screen)) {
-            screen = SCREEN_HOME;
+            screen = sessionReturnScreen != null ? sessionReturnScreen : SCREEN_HOME;
+            sessionReturnScreen = null;
+            render();
+            return;
+        }
+        if (SCREEN_GUIDE.equals(screen)) {
+            if (guideChapter >= 0) {
+                guideChapter = -1;
+            } else {
+                screen = SCREEN_MORE;
+            }
             render();
             return;
         }
@@ -591,10 +624,22 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             return;
         }
 
+        String scrollKey = scrollKey();
+        int keepScroll = currentScroll != null && scrollKey.equals(currentScrollKey)
+                ? currentScroll.getScrollY() : 0;
+        currentScroll = null;
         if (SCREEN_SESSION.equals(screen)) {
             renderSession(root);
         } else {
-            ScrollView scrollView = new ScrollView(this);
+            final ScrollView scrollView = new ScrollView(this);
+            currentScroll = scrollView;
+            currentScrollKey = scrollKey;
+            if (keepScroll > 0) {
+                final int y = keepScroll;
+                // A re-render of the same page (a favourite saved, a list
+                // filtered) should not throw the reader back to the top.
+                scrollView.post(() -> scrollView.scrollTo(0, y));
+            }
             scrollView.setFillViewport(false);
             LinearLayout content = vertical();
             content.setPadding(dp(20), dp(16), dp(20), dp(24));
@@ -626,6 +671,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 renderDialogs(content);
             } else if (SCREEN_READ.equals(screen)) {
                 renderRead(content);
+            } else if (SCREEN_GUIDE.equals(screen)) {
+                renderGuide(content);
             } else if (SCREEN_MORE.equals(screen)) {
                 renderMore(content);
             } else {
@@ -1101,13 +1148,28 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         TextView summary = bodyText(t("You knew ", "Znasz ") + sessionGot + t(" of ", " z ") + sessionDeck.size() + t(" cards.\nThe rest come back next lesson.", " kart.\nReszta wróci w następnej lekcji."), 14, th.muted);
         summary.setGravity(Gravity.CENTER);
         done.addView(summary, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 14));
+        final String returnTo = sessionReturnScreen;
+        final List<Phrase> repeat = sessionRepeatPool;
         Button again = flatButton(t("Again", "Jeszcze raz"), th.accent, th.onAccent, th.ink, 15, 50);
-        again.setOnClickListener(v -> startSession("All"));
+        again.setOnClickListener(v -> {
+            if (returnTo != null && repeat != null) {
+                // From the guide, "Again" means the same word list again.
+                List<Phrase> copy = new ArrayList<>(repeat);
+                Collections.shuffle(copy);
+                pendingReturnScreen = returnTo;
+                beginSession(copy, 0);
+            } else {
+                startSession("All");
+            }
+        });
         done.addView(again, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(50), 18));
-        Button home = textButton(t("Back home", "Wróć do domu"), th.faint, 13);
+        Button home = textButton(SCREEN_GUIDE.equals(returnTo)
+                ? t("Back to the guide", "Wróć do przewodnika")
+                : t("Back home", "Wróć do domu"), th.faint, 13);
         home.setPaintFlags(home.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         home.setOnClickListener(v -> {
-            screen = SCREEN_HOME;
+            screen = returnTo != null ? returnTo : SCREEN_HOME;
+            sessionReturnScreen = null;
             render();
         });
         done.addView(home, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(40), 8));
@@ -1226,12 +1288,697 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         return outer;
     }
 
+
+    // ---- grammar & vocabulary guide -----------------------------------------
+
+    /** Identifies "the same page", so a re-render of it keeps its scroll. */
+    private String scrollKey() {
+        return screen + "|" + guideChapter + "|" + openDialogId + "|" + dialogPage + "|"
+                + newsIndex + "|" + readShowsDialogs;
+    }
+
+    private void loadGuide() {
+        guideChapters.clear();
+        try {
+            JSONArray chapters = new JSONObject(readAsset("grammar_guide.json")).getJSONArray("chapters");
+            for (int i = 0; i < chapters.length(); i++) {
+                guideChapters.add(chapters.getJSONObject(i));
+            }
+        } catch (Exception ignored) {
+            // No guide is not fatal; the menu entry simply has nothing to show.
+        }
+        try {
+            String saved = getSharedPreferences(PREFS, MODE_PRIVATE).getString("guideAnswers", "");
+            if (!saved.isEmpty()) {
+                JSONObject all = new JSONObject(saved);
+                java.util.Iterator<String> keys = all.keys();
+                while (keys.hasNext()) {
+                    String k = keys.next();
+                    JSONObject a = all.getJSONObject(k);
+                    guideTyped.put(k, a.optString("t"));
+                    guideVerdicts.put(k, a.optInt("v", -1));
+                }
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
+    private void saveGuideAnswers() {
+        JSONObject all = new JSONObject();
+        try {
+            for (Map.Entry<String, Integer> e : guideVerdicts.entrySet()) {
+                JSONObject a = new JSONObject();
+                a.put("t", guideTyped.containsKey(e.getKey()) ? guideTyped.get(e.getKey()) : "");
+                a.put("v", e.getValue());
+                all.put(e.getKey(), a);
+            }
+        } catch (Exception ignored) {
+            return;
+        }
+        saveSetting("guideAnswers", all.toString());
+    }
+
+    /** Headword -> card, rebuilt only when the deck changes size. */
+    private Map<String, Phrase> guideIndex() {
+        if (guideIndex == null || guideIndexSize != phrases.size()) {
+            guideIndex = new HashMap<>();
+            for (Phrase phrase : phrases) {
+                String k = dictKey(phrase.polish);
+                if (!guideIndex.containsKey(k)) {
+                    guideIndex.put(k, phrase);
+                }
+            }
+            guideIndexSize = phrases.size();
+        }
+        return guideIndex;
+    }
+
+    private void renderGuide(LinearLayout content) {
+        Theme th = theme();
+        guideSectionViews.clear();
+        if (guideChapters.isEmpty()) {
+            content.addView(screenTitle(t("Grammar guide", "Przewodnik gramatyczny")));
+            content.addView(bodyText(t("The guide could not be loaded.", "Nie udało się wczytać przewodnika."), 13, th.muted));
+            return;
+        }
+        if (guideChapter >= 0 && guideChapter < guideChapters.size()) {
+            renderGuideChapter(content, guideChapter);
+            return;
+        }
+        guideChapter = -1;
+        content.addView(screenTitle(t("Grammar guide", "Przewodnik gramatyczny")));
+        addGap(content, 8);
+        content.addView(bodyText(t("Sounds, the seven cases, verbs and aspect, 500 words by topic, and practice with answers. "
+                        + "Polish is shown in colour: tap any Polish word for its translation, audio and notes.",
+                "Dźwięki, siedem przypadków, czasowniki i aspekt, 500 słów według tematów oraz ćwiczenia z odpowiedziami. "
+                        + "Polski tekst jest w kolorze: dotknij słowa, aby zobaczyć tłumaczenie."), 13, th.muted));
+        addGap(content, 14);
+
+        int last = -1;
+        try {
+            last = Integer.parseInt(getSharedPreferences(PREFS, MODE_PRIVATE).getString("guideLast", "-1"));
+        } catch (NumberFormatException ignored) {
+        }
+        if (last >= 0 && last < guideChapters.size()) {
+            final int resume = last;
+            Button cont = filledButton(t("Continue: ", "Kontynuuj: ") + guideChapters.get(last).optString("title") + " ›",
+                    th.accent, th.onAccent, 14, 48);
+            cont.setOnClickListener(v -> openGuideChapter(resume));
+            content.addView(cont, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(48)));
+            addGap(content, 14);
+        }
+
+        for (int i = 0; i < guideChapters.size(); i++) {
+            final int index = i;
+            JSONObject ch = guideChapters.get(i);
+            String id = ch.optString("id");
+            LinearLayout row = row();
+            row.setGravity(Gravity.CENTER_VERTICAL);
+            row.setPadding(dp(14), dp(12), dp(14), dp(12));
+            row.setBackground(rounded(th.panel, th.ink, th.radius, th.border));
+            TextView num = uiText("0".equals(id) ? "i" : id, 14, th.onAccent2, sansBold);
+            num.setGravity(Gravity.CENTER);
+            num.setBackground(rounded(th.accent2, th.ink, Math.min(th.radius, 14), th.border));
+            row.addView(num, new LinearLayout.LayoutParams(dp(34), dp(34)));
+            LinearLayout copy = vertical();
+            copy.setPadding(dp(12), 0, dp(6), 0);
+            copy.addView(serifText(ch.optString("title"), 16, th.ink));
+            String meta = guideChapterMeta(ch);
+            if (!meta.isEmpty()) {
+                copy.addView(uiText(meta, 11.5f, th.muted, sansRegular));
+            }
+            row.addView(copy, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+            row.addView(uiText("›", 20, th.ghost, sansBold));
+            row.setOnClickListener(v -> openGuideChapter(index));
+            content.addView(row);
+            addGap(content, 8);
+        }
+    }
+
+    private void openGuideChapter(int index) {
+        guideChapter = index;
+        saveSetting("guideLast", String.valueOf(index));
+        currentScrollKey = "";   // a different chapter starts at the top
+        render();
+    }
+
+    private String guideChapterMeta(JSONObject ch) {
+        JSONArray blocks = ch.optJSONArray("blocks");
+        int tables = 0;
+        int words = 0;
+        int practice = 0;
+        int answered = 0;
+        int dialogues = 0;
+        for (int i = 0; blocks != null && i < blocks.length(); i++) {
+            JSONObject b = blocks.optJSONObject(i);
+            String type = b.optString("type");
+            if ("table".equals(type)) {
+                tables++;
+            } else if ("study".equals(type)) {
+                words += b.optJSONArray("entries").length();
+            } else if ("dialogue".equals(type)) {
+                dialogues++;
+            } else if ("exercise".equals(type)) {
+                JSONArray items = b.optJSONArray("items");
+                practice += items.length();
+                for (int j = 0; j < items.length(); j++) {
+                    Integer v = guideVerdicts.get(b.optString("group") + ":" + j);
+                    if (v != null && v >= 0) {
+                        answered++;
+                    }
+                }
+            }
+        }
+        List<String> parts = new ArrayList<>();
+        if (practice > 0) {
+            parts.add(answered + "/" + practice + t(" answered", " odpowiedzi"));
+        }
+        if (words > 0) {
+            parts.add(words + t(" words", " słów"));
+        }
+        if (dialogues > 0) {
+            parts.add(dialogues + t(" dialogues", " dialogi"));
+        }
+        if (tables > 0 && words == 0) {
+            parts.add(tables + (tables == 1 ? t(" table", " tabela") : t(" tables", " tabel")));
+        }
+        return android.text.TextUtils.join(" · ", parts);
+    }
+
+    private void renderGuideChapter(LinearLayout content, final int index) {
+        Theme th = theme();
+        JSONObject ch = guideChapters.get(index);
+        TextView back = uiText("‹ " + t("All chapters", "Wszystkie rozdziały"), 13, th.accent, sansBold);
+        back.setPadding(0, dp(2), dp(16), dp(10));
+        back.setOnClickListener(v -> {
+            guideChapter = -1;
+            render();
+        });
+        content.addView(back);
+        String id = ch.optString("id");
+        if (!"0".equals(id)) {
+            content.addView(label(t("CHAPTER ", "ROZDZIAŁ ") + id, th.accent, 11, 0.14f));
+        }
+        content.addView(screenTitle(ch.optString("title")));
+        JSONArray blocks = ch.optJSONArray("blocks");
+
+        // Long chapters get a row of section links at the top.
+        List<String> sections = new ArrayList<>();
+        for (int i = 0; blocks != null && i < blocks.length(); i++) {
+            JSONObject b = blocks.optJSONObject(i);
+            if ("h".equals(b.optString("type"))) {
+                sections.add(b.optString("text"));
+            }
+        }
+        if (sections.size() >= 3) {
+            addGap(content, 10);
+            FlowLayout jumps = new FlowLayout(this, dp(6), dp(6));
+            for (final String section : sections) {
+                Button chip = flatButton(section, th.panel, th.muted, th.dash, 11.5f, 30);
+                chip.setOnClickListener(v -> {
+                    View target = guideSectionViews.get(section);
+                    if (target != null && currentScroll != null) {
+                        currentScroll.smoothScrollTo(0, Math.max(0, target.getTop() - dp(8)));
+                    }
+                });
+                jumps.addView(chip);
+            }
+            content.addView(jumps, new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        }
+        addGap(content, 6);
+
+        for (int i = 0; blocks != null && i < blocks.length(); i++) {
+            JSONObject b = blocks.optJSONObject(i);
+            switch (b.optString("type")) {
+                case "h": {
+                    addGap(content, 14);
+                    TextView h = serifText(b.optString("text"), 19, th.ink);
+                    content.addView(h);
+                    guideSectionViews.put(b.optString("text"), h);
+                    addGap(content, 4);
+                    break;
+                }
+                case "p":
+                    addGap(content, 6);
+                    content.addView(guideText(b.optJSONArray("spans"), 14, th.body, true));
+                    break;
+                case "list":
+                    addGuideList(content, b);
+                    break;
+                case "table":
+                    addGap(content, 8);
+                    addGuideTable(content, b);
+                    break;
+                case "dialogue":
+                    addGap(content, 10);
+                    addGuideDialogue(content, b);
+                    break;
+                case "exercise":
+                    addGap(content, 16);
+                    addGuideExercise(content, b);
+                    break;
+                case "study":
+                    addGap(content, 8);
+                    addGuideStudy(content, b);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        addGap(content, 22);
+        LinearLayout nav = row();
+        if (index > 0) {
+            Button prev = flatButton("‹ " + guideChapters.get(index - 1).optString("title"), th.panel, th.ink, th.dash, 12.5f, 46);
+            prev.setSingleLine(true);
+            prev.setEllipsize(TextUtils.TruncateAt.END);
+            prev.setOnClickListener(v -> openGuideChapter(index - 1));
+            nav.addView(prev, new LinearLayout.LayoutParams(0, dp(46), 1));
+        }
+        if (index < guideChapters.size() - 1) {
+            Button next = filledButton(guideChapters.get(index + 1).optString("title") + " ›", th.accent, th.onAccent, 12.5f, 46);
+            next.setSingleLine(true);
+            next.setEllipsize(TextUtils.TruncateAt.END);
+            next.setOnClickListener(v -> openGuideChapter(index + 1));
+            LinearLayout.LayoutParams np = new LinearLayout.LayoutParams(0, dp(46), 1);
+            if (index > 0) {
+                np.setMargins(dp(8), 0, 0, 0);
+            }
+            nav.addView(next, np);
+        }
+        content.addView(nav);
+    }
+
+    /** Text for speech: arrows and pattern notation are not words. */
+    private String speakable(String text) {
+        return text.replace("→", ", ").replace(" / ", ", ").replace("…", "")
+                .replaceAll("\\+\\s*[A-Z]\\b", "").replaceAll("\\s{2,}", " ").trim();
+    }
+
+    /**
+     * Inline spans -> one TextView. Polish runs are coloured and each word is
+     * a link to the word sheet, with the run itself passed as context so Ask
+     * AI sees the whole example. Multi-word Polish runs in prose also get a
+     * speaker that reads the run aloud.
+     */
+    private TextView guideText(JSONArray spans, float size, int color, boolean speakers) {
+        final Theme th = theme();
+        android.text.SpannableStringBuilder sb = new android.text.SpannableStringBuilder();
+        for (int i = 0; spans != null && i < spans.length(); i++) {
+            JSONObject span = spans.optJSONObject(i);
+            String text = span.optString("t");
+            boolean bold = span.optInt("b") == 1;
+            boolean polish = span.optInt("pl") == 1;
+            String body = text.replaceAll("\\s+$", "");
+            String trailing = text.substring(body.length());
+            int start = sb.length();
+            sb.append(body);
+            int end = sb.length();
+            if (bold) {
+                sb.setSpan(new FaceSpan(sansBold), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            if (polish) {
+                sb.setSpan(new android.text.style.ForegroundColorSpan(th.accent2Text), start, end,
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                final String context = body.trim();
+                Matcher m = WORD_PATTERN.matcher(body);
+                int words = 0;
+                while (m.find()) {
+                    final String word = m.group();
+                    words++;
+                    sb.setSpan(new ClickableSpan() {
+                        @Override
+                        public void onClick(View widget) {
+                            lookupContext = context;
+                            showWordLookup(word);
+                        }
+
+                        @Override
+                        public void updateDrawState(android.text.TextPaint ds) {
+                            ds.setColor(th.accent2Text);
+                            ds.setUnderlineText(false);
+                        }
+                    }, start + m.start(), start + m.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                if (speakers && words > 1) {
+                    int s0 = sb.length();
+                    sb.append(" 🔊");
+                    final String say = speakable(context);
+                    sb.setSpan(new ClickableSpan() {
+                        @Override
+                        public void onClick(View widget) {
+                            speak(say, new Locale("pl", "PL"));
+                        }
+
+                        @Override
+                        public void updateDrawState(android.text.TextPaint ds) {
+                            ds.setUnderlineText(false);
+                        }
+                    }, s0 + 1, sb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+            }
+            sb.append(trailing);
+        }
+        TextView view = uiText("", size, color, sansRegular);
+        view.setText(sb, TextView.BufferType.SPANNABLE);
+        view.setMovementMethod(LinkMovementMethod.getInstance());
+        view.setHighlightColor(th.accentSoft);
+        view.setLineSpacing(0, 1.2f);
+        return view;
+    }
+
+    private void addGuideList(LinearLayout content, JSONObject block) {
+        Theme th = theme();
+        JSONArray items = block.optJSONArray("items");
+        boolean ordered = block.optBoolean("ordered");
+        for (int i = 0; items != null && i < items.length(); i++) {
+            LinearLayout line = row();
+            line.setPadding(dp(4), dp(4), 0, dp(2));
+            TextView mark = uiText(ordered ? (i + 1) + "." : "•", 14, th.accent, sansBold);
+            line.addView(mark, new LinearLayout.LayoutParams(dp(22), LinearLayout.LayoutParams.WRAP_CONTENT));
+            line.addView(guideText(items.optJSONArray(i), 14, th.body, true),
+                    new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+            content.addView(line);
+        }
+    }
+
+    /**
+     * A real table with aligned columns. Narrow tables stretch to the screen;
+     * wide ones (case paradigms, conjugations) scroll sideways inside their
+     * own frame rather than squeezing every column.
+     */
+    private void addGuideTable(LinearLayout content, JSONObject block) {
+        Theme th = theme();
+        JSONArray header = block.optJSONArray("header");
+        JSONArray rows = block.optJSONArray("rows");
+        android.widget.TableLayout table = new android.widget.TableLayout(this);
+        table.setStretchAllColumns(true);
+        android.widget.TableRow head = new android.widget.TableRow(this);
+        head.setBackgroundColor(th.accentSoft);
+        for (int c = 0; header != null && c < header.length(); c++) {
+            TextView cell = uiText(header.optString(c), 11.5f, th.accent, sansBold);
+            cell.setPadding(dp(10), dp(7), dp(10), dp(7));
+            cell.setMaxWidth(dp(220));
+            head.addView(cell);
+        }
+        table.addView(head);
+        for (int r = 0; rows != null && r < rows.length(); r++) {
+            JSONArray row = rows.optJSONArray(r);
+            android.widget.TableRow tr = new android.widget.TableRow(this);
+            tr.setBackgroundColor(r % 2 == 0 ? th.panel : th.bg);
+            for (int c = 0; row != null && c < row.length(); c++) {
+                TextView cell = guideText(row.optJSONArray(c), 13, th.body, false);
+                cell.setPadding(dp(10), dp(7), dp(10), dp(7));
+                cell.setMaxWidth(dp(220));
+                tr.addView(cell);
+            }
+            table.addView(tr);
+        }
+        HorizontalScrollView scroller = new HorizontalScrollView(this);
+        scroller.setFillViewport(true);
+        scroller.setHorizontalScrollBarEnabled(true);
+        scroller.addView(table);
+        android.widget.FrameLayout frame = new android.widget.FrameLayout(this);
+        frame.setBackground(rounded(th.panel, th.dash, Math.min(th.radius, 10), th.border));
+        frame.setPadding(dp(2), dp(2), dp(2), dp(2));
+        frame.addView(scroller);
+        content.addView(frame, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+    }
+
+    private void addGuideDialogue(LinearLayout content, JSONObject block) {
+        Theme th = theme();
+        JSONArray lines = block.optJSONArray("lines");
+        LinearLayout card = vertical();
+        card.setPadding(dp(14), dp(12), dp(14), dp(12));
+        card.setBackground(rounded(th.panel, th.ink, th.radius, th.border));
+        LinearLayout head = row();
+        head.setGravity(Gravity.CENTER_VERTICAL);
+        head.addView(label(block.optString("title"), th.accent2, 11, 0.1f),
+                new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        final List<String> all = new ArrayList<>();
+        for (int i = 0; lines != null && i < lines.length(); i++) {
+            all.add(lines.optString(i));
+        }
+        Button play = flatButton("▶ " + t("Play", "Odtwórz"), th.accentSoft, th.accent, th.accent, 12, 32);
+        play.setOnClickListener(v -> speak(android.text.TextUtils.join(" ", all), new Locale("pl", "PL")));
+        head.addView(play, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(32)));
+        card.addView(head);
+        for (int i = 0; i < all.size(); i++) {
+            final String line = all.get(i);
+            addGap(card, 8);
+            LinearLayout turn = row();
+            turn.setGravity(Gravity.CENTER_VERTICAL);
+            turn.setPadding(dp(10), dp(8), dp(6), dp(8));
+            turn.setBackground(rounded(i % 2 == 0 ? th.bg : th.accentSoft, th.dash, Math.min(th.radius, 12), 1));
+            TextView text = serifText(line, 16, th.accent2Text);
+            makeWordsTappable(text, line);
+            turn.addView(text, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+            TextView hear = uiText("🔊", 15, th.muted, sansBold);
+            hear.setPadding(dp(8), dp(4), dp(4), dp(4));
+            hear.setOnClickListener(v -> speak(line, new Locale("pl", "PL")));
+            turn.addView(hear);
+            TextView mic = uiText("🎤", 15, th.muted, sansBold);
+            mic.setPadding(dp(6), dp(4), dp(4), dp(4));
+            mic.setOnClickListener(v -> checkPronunciation(line));
+            turn.addView(mic);
+            card.addView(turn);
+        }
+        String meaning = block.optString("meaning");
+        if (!meaning.isEmpty()) {
+            addGap(card, 8);
+            card.addView(bodyText(meaning, 12.5f, th.muted));
+        }
+        content.addView(card);
+    }
+
+    /** Accepted answers for a practice item, most specific first. */
+    private String[] guideAccepted(JSONObject item) {
+        List<String> out = new ArrayList<>();
+        JSONArray a = item.optJSONArray("a");
+        if (a != null && a.length() > 0) {
+            List<String> parts = new ArrayList<>();
+            for (int i = 0; i < a.length(); i++) {
+                parts.add(a.optString(i));
+            }
+            out.add(android.text.TextUtils.join(" ", parts));   // "książki książek"
+            if (!item.optString("full").isEmpty()) {
+                out.add(item.optString("full"));                    // whole sentence typed
+            }
+        }
+        JSONArray alts = item.optJSONArray("alts");
+        for (int i = 0; alts != null && i < alts.length(); i++) {
+            out.add(alts.optString(i));
+        }
+        return out.toArray(new String[0]);
+    }
+
+    private String guideModel(JSONObject item) {
+        if (!item.optString("full").isEmpty()) {
+            return item.optString("full");
+        }
+        JSONArray alts = item.optJSONArray("alts");
+        List<String> parts = new ArrayList<>();
+        for (int i = 0; alts != null && i < alts.length(); i++) {
+            parts.add(alts.optString(i));
+        }
+        return android.text.TextUtils.join("  /  ", parts);
+    }
+
+    /**
+     * Practice items check in place. Calling render() here would rebuild the
+     * whole chapter, losing other half-typed answers and the keyboard.
+     */
+    private void addGuideExercise(LinearLayout content, JSONObject block) {
+        final Theme th = theme();
+        final String group = block.optString("group");
+        content.addView(label(t("PRACTICE ", "ĆWICZENIE ") + group, th.accent, 11, 0.14f));
+        content.addView(serifText(block.optString("prompt"), 18, th.ink),
+                topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 2));
+        JSONArray items = block.optJSONArray("items");
+        for (int n = 0; items != null && n < items.length(); n++) {
+            final JSONObject item = items.optJSONObject(n);
+            final String key = group + ":" + n;
+            final String[] accepted = guideAccepted(item);
+            final String model = guideModel(item);
+            final String speakModel = accepted.length > 0 ? accepted[accepted.length - 1] : model;
+            addGap(content, 8);
+            LinearLayout card = vertical();
+            card.setPadding(dp(12), dp(10), dp(12), dp(10));
+            card.setBackground(rounded(th.panel, th.dash, Math.min(th.radius, 12), th.border));
+            card.addView(uiText((n + 1) + ".  " + item.optString("q").replace("___", "＿＿＿"), 15, th.ink, sansMedium));
+
+            final android.widget.EditText input = new android.widget.EditText(this);
+            input.setSingleLine(true);
+            input.setTextSize(15);
+            input.setTextColor(th.ink);
+            input.setHintTextColor(th.faint);
+            input.setHint(t("Your answer", "Twoja odpowiedź"));
+            input.setImeOptions(android.view.inputmethod.EditorInfo.IME_ACTION_DONE);
+            input.setPadding(dp(10), dp(8), dp(10), dp(8));
+            input.setBackground(rounded(th.bg, th.dash, Math.min(th.radius, 10), 1.5f));
+            if (guideTyped.containsKey(key)) {
+                input.setText(guideTyped.get(key));
+            }
+            card.addView(input, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT, 8));
+
+            final TextView result = bodyText("", 13.5f, th.body);
+            result.setVisibility(View.GONE);
+            final LinearLayout after = row();
+            after.setVisibility(View.GONE);
+            Button hear = flatButton("🔊 " + t("Hear it", "Posłuchaj"), th.panel, th.ink, th.dash, 12, 34);
+            hear.setOnClickListener(v -> speak(speakModel, new Locale("pl", "PL")));
+            after.addView(hear, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(34)));
+            Button say = flatButton("🎤 " + t("Say it", "Powiedz"), th.panel, th.ink, th.dash, 12, 34);
+            say.setOnClickListener(v -> checkPronunciation(speakModel));
+            LinearLayout.LayoutParams sp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(34));
+            sp.setMargins(dp(8), 0, 0, 0);
+            after.addView(say, sp);
+
+            LinearLayout actions = row();
+            Button check = filledButton(t("Check", "Sprawdź"), th.accent, th.onAccent, 13, 38);
+            Button show = flatButton(t("Show answer", "Pokaż odpowiedź"), th.panel, th.muted, th.dash, 13, 38);
+            final Runnable doCheck = () -> {
+                String typed = input.getText().toString();
+                if (typed.trim().isEmpty()) {
+                    Toast.makeText(this, t("Type an answer first.", "Najpierw wpisz odpowiedź."), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                int verdict = LearningLogic.checkAnswer(typed, accepted);
+                guideTyped.put(key, typed);
+                guideVerdicts.put(key, verdict);
+                saveGuideAnswers();
+                showGuideVerdict(result, after, verdict, model);
+                android.view.inputmethod.InputMethodManager imm =
+                        (android.view.inputmethod.InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
+                }
+            };
+            check.setOnClickListener(v -> doCheck.run());
+            input.setOnEditorActionListener((v, actionId, event) -> {
+                doCheck.run();
+                return true;
+            });
+            show.setOnClickListener(v -> showGuideVerdict(result, after, -2, model));
+            actions.addView(check, new LinearLayout.LayoutParams(0, dp(38), 1));
+            LinearLayout.LayoutParams shp = new LinearLayout.LayoutParams(0, dp(38), 1);
+            shp.setMargins(dp(8), 0, 0, 0);
+            actions.addView(show, shp);
+            card.addView(actions, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(38), 8));
+            card.addView(result, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT, 8));
+            card.addView(after, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT, 6));
+            Integer saved = guideVerdicts.get(key);
+            if (saved != null && saved >= 0) {
+                showGuideVerdict(result, after, saved, model);
+            }
+            content.addView(card);
+        }
+    }
+
+    private void showGuideVerdict(TextView result, View after, int verdict, String model) {
+        Theme th = theme();
+        String text;
+        int color;
+        switch (verdict) {
+            case LearningLogic.ANSWER_EXACT:
+                text = "✓ " + t("Correct: ", "Dobrze: ") + model;
+                color = th.accent2Text;
+                break;
+            case LearningLogic.ANSWER_WORD_ORDER:
+                text = "✓ " + t("Correct. The model answer orders it differently, which is usually fine: ",
+                        "Dobrze. Wzorcowa odpowiedź ma inny szyk, co zwykle jest w porządku: ") + model;
+                color = th.accent2Text;
+                break;
+            case LearningLogic.ANSWER_DIACRITICS:
+                text = "≈ " + t("Almost. Check the Polish letters: ", "Prawie. Sprawdź polskie litery: ") + model;
+                color = th.accent;
+                break;
+            case LearningLogic.ANSWER_CLOSE:
+                text = "≈ " + t("Close. Compare with: ", "Blisko. Porównaj: ") + model;
+                color = th.accent;
+                break;
+            case -2:
+                text = t("Answer: ", "Odpowiedź: ") + model;
+                color = th.body;
+                break;
+            default:
+                text = "✗ " + t("Not quite. Answer: ", "Jeszcze nie. Odpowiedź: ") + model;
+                color = th.muted;
+                break;
+        }
+        result.setText(text);
+        result.setTextColor(color);
+        result.setVisibility(View.VISIBLE);
+        after.setVisibility(View.VISIBLE);
+    }
+
+    private void addGuideStudy(LinearLayout content, JSONObject block) {
+        Theme th = theme();
+        JSONArray entries = block.optJSONArray("entries");
+        Map<String, Phrase> index = guideIndex();
+        final List<Phrase> pool = new ArrayList<>();
+        java.util.Set<Phrase> seen = new java.util.HashSet<>();
+        for (int i = 0; entries != null && i < entries.length(); i++) {
+            Phrase card = index.get(dictKey(entries.optString(i)));
+            if (card != null && seen.add(card)) {
+                pool.add(card);
+            }
+        }
+        if (pool.isEmpty()) {
+            return;
+        }
+        Button study = flatButton("📚 " + t("Study these ", "Ucz się tych ") + pool.size() + t(" words", " słów"),
+                th.accentSoft, th.accent, th.accent, 13, 42);
+        study.setOnClickListener(v -> {
+            List<Phrase> copy = new ArrayList<>(pool);
+            Collections.shuffle(copy);
+            pendingReturnScreen = SCREEN_GUIDE;
+            sessionRepeatPool = new ArrayList<>(pool);
+            beginSession(copy, 0);
+        });
+        content.addView(study, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, dp(42)));
+    }
+
+    /** Typeface for a text run; android's own TypefaceSpan(Typeface) needs API 28. */
+    private static class FaceSpan extends android.text.style.MetricAffectingSpan {
+        private final Typeface face;
+
+        FaceSpan(Typeface face) {
+            this.face = face;
+        }
+
+        @Override
+        public void updateDrawState(android.text.TextPaint paint) {
+            paint.setTypeface(face);
+        }
+
+        @Override
+        public void updateMeasureState(android.text.TextPaint paint) {
+            paint.setTypeface(face);
+        }
+    }
+
     private void renderGrammar(LinearLayout content) {
         Theme th = theme();
         content.addView(screenTitle(t("Grammar", "Gramatyka")));
         addGap(content, 12);
         content.addView(bodyText(t("Short lessons in reading order, each with a self-check.", "Krótkie lekcje w kolejności nauki, każda z auto-sprawdzeniem."), 13, th.muted));
         addGap(content, 12);
+        if (!guideChapters.isEmpty()) {
+            content.addView(listRow("📘 " + t("Full grammar & vocabulary guide", "Pełny przewodnik"), "›",
+                    th.accentSoft, th.accent, th.accent, () -> {
+                        screen = SCREEN_GUIDE;
+                        render();
+                    }), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+            addGap(content, 12);
+        }
 
         for (GrammarLesson lesson : grammarLessons) {
             content.addView(grammarCard(lesson));
@@ -2427,8 +3174,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
     }
 
+    /** Whichever is newer: the bundled deck or the last download. */
     private int currentDatabaseVersion() {
-        return getSharedPreferences(PREFS, MODE_PRIVATE).getInt("dataVersion", DEFAULT_DATABASE_VERSION);
+        return Math.max(DEFAULT_DATABASE_VERSION,
+                getSharedPreferences(PREFS, MODE_PRIVATE).getInt("dataVersion", 0));
     }
 
     private void maybeCheckForDataUpdatesOnStart() {
@@ -3563,6 +4312,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         Theme th = theme();
         content.addView(screenTitle(t("More", "Więcej")));
         addGap(content, 14);
+        addMoreRow(content, t("Grammar guide", "Przewodnik gramatyczny"),
+                t("16 chapters · 500 words · practice", "16 rozdziałów · 500 słów · ćwiczenia"), SCREEN_GUIDE, th.accent2);
         addMoreRow(content, t("Grammar", "Gramatyka"), t("23 lessons with self-checks", "23 lekcje z autotestem"), SCREEN_GRAMMAR, th.accent);
         addMoreRow(content, t("Alphabet", "Alfabet"), t("39 letters and sounds", "39 liter i dźwięków"), SCREEN_ALPHABET, th.accent2);
         addMoreRow(content, t("Translate", "Tłumacz"), t("Dictionary, word lists, imports", "Słownik, listy słów, import"), SCREEN_TRANSLATE, th.accent3);
@@ -3693,6 +4444,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
     private void beginSession(List<Phrase> pool, int limit) {
+        sessionReturnScreen = pendingReturnScreen;
+        if (pendingReturnScreen == null) {
+            sessionRepeatPool = null;
+        }
+        pendingReturnScreen = null;
         if (pool.isEmpty()) {
             Toast.makeText(this, t("Nothing to study here yet.", "Nic tu jeszcze do nauki."), Toast.LENGTH_SHORT).show();
             return;
@@ -5835,9 +6591,17 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
     }
 
+    /**
+     * A downloaded deck is used only while it is newer than the one bundled in
+     * this APK. Before, any downloaded file won forever, so an app update that
+     * shipped new cards kept showing the old download until the next data
+     * update happened to run.
+     */
     private String readPhraseJson() throws Exception {
         File remotePhrases = new File(getFilesDir(), REMOTE_PHRASES_FILE);
-        if (remotePhrases.exists()) {
+        int downloaded = getSharedPreferences(PREFS, MODE_PRIVATE).getInt("dataVersion", 0);
+        if (remotePhrases.exists()
+                && LearningLogic.isNewerDataVersion(downloaded, DEFAULT_DATABASE_VERSION)) {
             return readStream(openFileInput(REMOTE_PHRASES_FILE));
         }
         return readAsset("phrases.json");

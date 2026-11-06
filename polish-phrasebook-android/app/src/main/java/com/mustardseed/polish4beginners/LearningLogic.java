@@ -336,6 +336,81 @@ public final class LearningLogic {
         return p.toString();
     }
 
+    // ---- typed answers (grammar guide practice) ----------------------------
+
+    public static final int ANSWER_WRONG = 0;
+    /** Exactly right (case and punctuation aside). */
+    public static final int ANSWER_EXACT = 1;
+    /** Right word, missing or wrong Polish letters: "biletu" typed as "biletu" without ł etc. */
+    public static final int ANSWER_DIACRITICS = 2;
+    /** Same words as a model answer in another order, usually fine in Polish. */
+    public static final int ANSWER_WORD_ORDER = 3;
+    /** Close to a model answer, but with a real difference worth looking at. */
+    public static final int ANSWER_CLOSE = 4;
+
+    /** ą→a, ł→l and so on. ł has no Unicode decomposition, so it is mapped by hand. */
+    public static String stripPolishDiacritics(String value) {
+        if (value == null) {
+            return "";
+        }
+        String from = "ąćęłńóśźżĄĆĘŁŃÓŚŹŻ";
+        String to = "acelnoszzACELNOSZZ";
+        StringBuilder out = new StringBuilder(value.length());
+        for (int i = 0; i < value.length(); i++) {
+            char c = value.charAt(i);
+            int k = from.indexOf(c);
+            out.append(k >= 0 ? to.charAt(k) : c);
+        }
+        return out.toString();
+    }
+
+    private static String sortedWords(String normalized) {
+        String[] words = normalized.split(" ");
+        java.util.Arrays.sort(words);
+        return String.join(" ", words);
+    }
+
+    /**
+     * Grades a typed answer against one or more accepted answers, most
+     * generous verdict first. Kind feedback matters more than strictness
+     * here: a missing ł is a different lesson from a wrong case ending.
+     */
+    public static int checkAnswer(String typed, String... accepted) {
+        String got = normalizeSpoken(typed);
+        if (got.isEmpty() || accepted == null) {
+            return ANSWER_WRONG;
+        }
+        int best = ANSWER_WRONG;
+        for (String option : accepted) {
+            String want = normalizeSpoken(option);
+            if (want.isEmpty()) {
+                continue;
+            }
+            if (got.equals(want)) {
+                return ANSWER_EXACT;
+            }
+            if (stripPolishDiacritics(got).equals(stripPolishDiacritics(want))) {
+                best = rank(best) >= rank(ANSWER_DIACRITICS) ? best : ANSWER_DIACRITICS;
+            } else if (want.contains(" ") && sortedWords(got).equals(sortedWords(want))) {
+                best = rank(best) >= rank(ANSWER_WORD_ORDER) ? best : ANSWER_WORD_ORDER;
+            } else if (pronunciationScore(want, got) >= 80) {
+                best = rank(best) >= rank(ANSWER_CLOSE) ? best : ANSWER_CLOSE;
+            }
+        }
+        return best;
+    }
+
+    /** Verdict strength for "keep the best one": exact > order > letters > close. */
+    private static int rank(int verdict) {
+        switch (verdict) {
+            case ANSWER_EXACT: return 4;
+            case ANSWER_WORD_ORDER: return 3;
+            case ANSWER_DIACRITICS: return 2;
+            case ANSWER_CLOSE: return 1;
+            default: return 0;
+        }
+    }
+
     // ---- word notes --------------------------------------------------------
 
     /**
