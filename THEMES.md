@@ -1,65 +1,51 @@
 # Themes
 
-Seven user-selectable themes. Pick one from the swatch row on Home, or in
-Settings → Colour Theme. Every screen follows the active theme.
+Three user-selectable themes. Pick one from the swatches on Home or in
+Settings → Colour Theme. Every screen follows the active theme. A saved theme
+that no longer exists falls back to the default.
 
-## Cartoon set (original)
-
-| Name | Character | Radius | Border | Texture |
+| Name | Character | Corners | Border | Faces |
 |---|---|---|---|---|
-| **Komiks** (default) | Violet / lime, comic-book | 12dp | 2.5dp | halftone dots |
-| **Borówka** | Blue / coral | 18dp | 2.5dp | — |
-| **Mięta** | Mint / red | 18dp | 2.5dp | — |
-| **Zachód** | Sunset orange / purple | 18dp | 2.5dp | — |
+| **Komiks** (default) | Violet / lime cartoon, halftone dots | 12dp, pill buttons | 2.5dp | Baloo 2 headings, Nunito text |
+| **Książka** (paper book) | Aged paper, ink-brown text, oxblood rubrics, ink-blue Polish, gilt accents | 2dp | 1.2dp | Literata throughout |
+| **Atrament** (e-ink) | Black on white for e-paper screens such as Boox | 4dp | 2dp | Literata throughout |
 
-Display face: Baloo 2. Buttons are pills.
+## Książka
 
-## Retro console set
+`.book()` sets every UI face in Literata (the reading face of Google Play
+Books): `uiText()` maps the Nunito weights onto Literata Regular and Bold.
+Buttons are rectangular and the hard shadow is a pale paper tone, so cards read
+as stacked pages.
 
-Added alongside the cartoon set — nothing about the four above changed.
+## Atrament (e-ink)
 
-| Name | Character | Radius | Border | Display face |
-|---|---|---|---|---|
-| **Szesnastka** (16-bit) | Muted violet console, bevelled controls | 6dp | 2.5dp | Pixelify Sans |
-| **Automat** (arcade) | Dark neon cabinet, magenta/cyan | 2dp | 2dp | Jersey 15 |
-| **Kieszonka** (handheld) | Teal pocket console, square corners | 0dp | 3dp | Press Start 2P |
+Built for monochrome e-paper:
 
-Console themes use rectangular buttons rather than pills, and set headings,
-kickers, buttons and nav labels in their display face.
-
-### Theme-specific effects
-
-Each is a Canvas drawable — no images, nothing that animates.
-
-- **Szesnastka** — `BevelDrawable` puts an inset highlight on the top-left and
-  a shade on the bottom-right of every button, chip and list row. A
-  `BlockStripe` of repeating 24dp colour blocks runs under the wordmark.
-- **Automat** — `GridHorizonDrawable` draws a perspective grid behind the
-  masthead. `ScanlineDrawable` overlays 1dp CRT lines every 3dp across the
-  whole screen; it is non-interactive, so taps pass through, and it can be
-  turned off in Settings → Colour Theme → *Scanlines*. `ShadowLayout` swaps its
-  hard offset shadow for a blurred neon glow. It is the only dark theme, and
-  the status bar adapts automatically via the luminance check in
-  `isDarkTheme()`.
-- **Kieszonka** — no extra drawables; the look comes from 0dp corners and a
-  3dp border.
+- Black and white only. Greys are kept dark (#2e2e2e–#7a7a7a for text tiers)
+  so they survive 16-level greyscale instead of washing out.
+- No shadows (the shadow colour is the page colour), no halftone or other
+  texture, nothing that would ghost on a slow refresh.
+- `.mono()`: Polish cannot be told apart from English by colour, so the guide
+  and course set Polish in bold instead.
+- Quiz feedback does not rely on colour: the right answer is filled black with
+  white text, a wrong pick is light grey, and the verdict is written out.
 
 ## Adding a theme
 
 Add one entry to `buildThemes()`. The 18 colour + 3 shape tokens are
-positional (the argument order is documented in a comment there), then chain:
+positional (the argument order is documented in a comment there), then chain
+any of:
 
 ```java
-.display(font, scale, maxSp, wordmarkSp)   // font: baloo|pixelify|jersey|pressstart
+.display(font, scale, maxSp, wordmarkSp)   // font: baloo | literata
+.book()                                     // all text in the book serif
+.mono()                                     // mark Polish by weight, not colour
 .effects(bevel, scanlines, gridHorizon, mastheadStripe, glow)
 ```
 
-`display()` exists because display sizes are authored for Baloo 2; pixel faces
-run much wider, so each theme scales the shared type scale rather than every
-call site being rewritten per theme. `scale` multiplies every display size,
-`maxSp` caps it (Press Start 2P is capped at 20sp), and `wordmarkSp` sets the
-masthead independently. Calling `effects()` also switches the theme to
-rectangular buttons.
+`effects()` drives Canvas drawables left from the retired console themes
+(bevelled controls, CRT scanlines, grid horizon, block stripe, neon glow). No
+current theme uses them; they are off by default and cost nothing.
 
 ## Fonts
 
@@ -67,23 +53,9 @@ All bundled, all SIL Open Font License; licences in `docs/licenses/`.
 
 | Face | Used by | Weights |
 |---|---|---|
-| Nunito | body and UI, every theme | 400/700/800/900 |
-| Baloo 2 | cartoon display | 600/700/800 |
-| Pixelify Sans | Szesnastka display | 600/700 (instanced from the variable font) |
-| Jersey 15 | Automat display | 400 |
-| Press Start 2P | Kieszonka display | 400 |
+| Nunito | Komiks text | 400/700/800/900 |
+| Baloo 2 | Komiks headings | 600/700/800 |
+| Literata | Książka and Atrament, all text | 400/650/700, instanced and subset (full Polish) |
 
-### Substitution: Silkscreen → Jersey 15
-
-The design spec asked for **Silkscreen** as the Automat display face. Silkscreen
-ships no Polish diacritics — it is missing 17 of the 18 characters
-`ąćęłńóśźżĄĆĘŁŃÓŚŹŻ` (only `ó` is present). In an app whose entire content is
-Polish, headlines and flashcard words would have fallen back to the system font
-mid-word.
-
-**Jersey 15** was substituted: a blocky pixel face in the same spirit, with
-complete Polish coverage. Press Start 2P and Pixelify Sans were both checked
-and cover Polish in full, so they were used as specified.
-
-If the designer wants a different substitute, VT323 (terminal/CRT), Micro 5 and
-Jersey 10 were also verified as covering Polish completely.
+The pixel faces of the retired console themes (Pixelify Sans, Jersey 15,
+Press Start 2P) were removed with them.
