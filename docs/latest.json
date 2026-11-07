@@ -1,8 +1,8 @@
 {
-  "versionCode": 50,
-  "versionName": "1.49",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/b8ed4e2af362de34bf07521a3d9cfb69c5bda404/docs/P4B.apk",
-  "apkSha256": "ac36ca8b1e19dc6af2114edee3e00ed67bcc85c86134535d579b099d9538f649",
-  "apkSizeBytes": 69254424,
-  "releaseNotes": "New in Settings: put the menu bar at the top or bottom, and choose and reorder its tabs (add Course, Translate, News or Alphabet)."
+  "versionCode": 51,
+  "versionName": "1.50",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/eaedb530de023fd9db805098486d3394b05f4527/docs/P4B.apk",
+  "apkSha256": "6a9c3a8ce0aa08480dd89da2142f5144bb7728a65e8f370cca0a3e55180216ce",
+  "apkSizeBytes": 69136955,
+  "releaseNotes": "New Atrament theme for e-ink screens like Boox. Themes are now Komiks, Książka and Atrament; the others were retired."
 }
