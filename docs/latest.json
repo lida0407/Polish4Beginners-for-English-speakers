@@ -1,8 +1,8 @@
 {
-  "versionCode": 48,
-  "versionName": "1.47",
-  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/e5f278ad6739a3c93e5ead9f212de8aed1c2d08e/docs/P4B.apk",
-  "apkSha256": "77ac51a1506d58ef1d5caed60999d9bf4a16be1d22528b4af132c8cc0b6af70d",
-  "apkSizeBytes": 69133602,
-  "releaseNotes": "New: the Grammar guide under More. 16 chapters with tappable Polish, practice you can type and check, and Study buttons for 500 words."
+  "versionCode": 49,
+  "versionName": "1.48",
+  "apkUrl": "https://raw.githubusercontent.com/lida0407/Polish4Beginners-for-English-speakers/0afa35106f7970690d598b222035a7a1439cb30a/docs/P4B.apk",
+  "apkSha256": "d9e752bfc251533735b1c3afa0cf33817352dcbacece02bb99ce054fd85d424d",
+  "apkSizeBytes": 69254414,
+  "releaseNotes": "New: a Grammar course on Home, 52 short lessons with quizzes. New Książka theme, a paper-book look. Fixes screens overlapping the status bar on Android 15+."
 }
