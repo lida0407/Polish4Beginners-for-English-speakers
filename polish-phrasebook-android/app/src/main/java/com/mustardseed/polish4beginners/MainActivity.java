@@ -323,10 +323,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private Typeface serifBold;
     private Typeface displaySemi;
     private Typeface displayBold;
-    private Typeface pixelifyBold;
-    private Typeface pixelifySemi;
-    private Typeface jerseyRegular;
-    private Typeface pressStart;
     private Typeface bookRegular;
     private Typeface bookBold;
     private Typeface bookDisplay;
@@ -2370,6 +2366,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             if (polish) {
                 sb.setSpan(new android.text.style.ForegroundColorSpan(th.accent2Text), start, end,
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                if (th.mono && !bold) {
+                    sb.setSpan(new FaceSpan(uiFace(sansBold)), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
                 final String context = body.trim();
                 Matcher m = WORD_PATTERN.matcher(body);
                 int words = 0;
@@ -7756,10 +7755,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             serifBold = getResources().getFont(R.font.baloo2_extrabold);
             displaySemi = getResources().getFont(R.font.baloo2_semibold);
             displayBold = getResources().getFont(R.font.baloo2_bold);
-            pixelifyBold = getResources().getFont(R.font.pixelify_bold);
-            pixelifySemi = getResources().getFont(R.font.pixelify_semibold);
-            jerseyRegular = getResources().getFont(R.font.jersey15_regular);
-            pressStart = getResources().getFont(R.font.pressstart2p_regular);
             bookRegular = getResources().getFont(R.font.literata_regular);
             bookBold = getResources().getFont(R.font.literata_bold);
             bookDisplay = getResources().getFont(R.font.literata_display);
@@ -7772,10 +7767,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             displaySemi = serifBold;
             displayBold = serifBold;
             // Below API 26 every face falls back, as the cartoon themes already do.
-            pixelifyBold = serifBold;
-            pixelifySemi = serifBold;
-            jerseyRegular = serifBold;
-            pressStart = serifBold;
             bookRegular = Typeface.create(Typeface.SERIF, Typeface.NORMAL);
             bookBold = Typeface.create(Typeface.SERIF, Typeface.BOLD);
             bookDisplay = bookBold;
@@ -7805,43 +7796,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 "#d9d2f5", "#d9d2f5", "#17141f",
                 "#6c4dff", "#ff5c7a", "#e6dfff", "#ffffff",
                 "#c8f542", "#17141f", "#5a7a0e", "#25c9d0", 12, 2.5f, true));
-        themes.put("Borówka", new Theme(
-                "#e4eaff", "#ffffff", "#232d63", "#3d4780", "#7a86c9", "#939ed4", "#a9b2dd",
-                "#c3cdfa", "#c3cdfa", "#232d63",
-                "#4d6bff", "#ffd94d", "#e4eaff", "#ffffff",
-                "#ff7a59", "#ffffff", "#c94f2e", "#22c4a8", 18, 2.5f, false));
-        themes.put("Mięta", new Theme(
-                "#ddf5e7", "#ffffff", "#1d3f31", "#33574a", "#5f8a75", "#7aa48e", "#93bda8",
-                "#b6e3c9", "#b6e3c9", "#1d3f31",
-                "#ff5c6c", "#ffab2e", "#ffe1e4", "#ffffff",
-                "#17b877", "#ffffff", "#0e7a4e", "#ffd23f", 18, 2.5f, false));
-        themes.put("Zachód", new Theme(
-                "#ffe6d7", "#ffffff", "#4d2545", "#6b4260", "#a8788f", "#bb92a5", "#cfa8b8",
-                "#ffc9a8", "#ffc9a8", "#4d2545",
-                "#ff6b35", "#2fbfde", "#ffe6d7", "#ffffff",
-                "#9b5cff", "#ffffff", "#7a3fd4", "#2fbfde", 18, 2.5f, false));
-
-        // ---- Retro console set -------------------------------------------
-        // Added alongside the cartoon themes, not replacing them.
-
-        // 16-BIT: muted violet console, bevelled controls, block stripe.
-        themes.put("Szesnastka", new Theme(
-                "#d5d3e0", "#f4f3f8", "#2b2660", "#2b2660", "#6a6690", "#9c99b8", "#e6e4ef",
-                "#b9b5d4", "#b9b5d4", "#2b2660",
-                "#5b4fbf", "#4a3fa6", "#ddd9f3", "#ffffff",
-                "#9c8fdc", "#2b2660", "#5b4fbf", "#e94f8a", 6, 2.5f, false)
-                .display("pixelify", 1f, 0f, 28f)
-                .effects(true, false, false, true, false));
-
-        // ARCADE: dark neon cabinet, grid horizon, scanlines, glow.
-        themes.put("Automat", new Theme(
-                "#0b0620", "#160d3a", "#fefefe", "#fefefe", "#9d8fd0", "#6b5fa0", "#1f1448",
-                "#3a2d6e", "#3a2d6e", "#ff2bd6",
-                "#ff2bd6", "#e01dbb", "#3a1338", "#0b0620",
-                "#19e6ff", "#0b0620", "#19e6ff", "#ffe52a", 2, 2f, false)
-                .display("jersey", 0.82f, 0f, 22f)
-                .effects(false, true, true, false, true));
-
         // BOOK: a printed page. Aged paper, ink-brown text, oxblood rubrics
         // for headings and buttons, ink-blue Polish, everything set in
         // Literata (the reading face of Google Play Books), hairline rules
@@ -7854,14 +7808,19 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 .display("literata", 0.95f, 0f, 30f)
                 .book());
 
-        // HANDHELD COLOUR: square-cornered pocket console, thick borders.
-        themes.put("Kieszonka", new Theme(
-                "#d6efe9", "#ffffff", "#173a3a", "#173a3a", "#4f7a78", "#8fb0ae", "#eaf6f3",
-                "#b7d6d1", "#4f7a78", "#173a3a",
-                "#0e9e8a", "#0b8574", "#cfede7", "#ffffff",
-                "#c4287a", "#ffffff", "#c4287a", "#f2c230", 0, 3f, false)
-                .display("pressstart", 0.6f, 20f, 15f)
-                .effects(false, false, false, false, false));
+        // E-INK: built for monochrome e-paper (Boox, Kindle-style screens).
+        // Black on white only, mid greys kept dark enough to survive 16-level
+        // greyscale, no shadows or textures to ghost, Literata throughout as
+        // on e-readers. Polish can't be told apart by colour here, so the
+        // guide sets it in bold instead (see mono).
+        themes.put("Atrament", new Theme(
+                "#ffffff", "#ffffff", "#000000", "#111111", "#2e2e2e", "#4a4a4a", "#7a7a7a",
+                "#bdbdbd", "#8a8a8a", "#ffffff",
+                "#000000", "#d0d0d0", "#e8e8e8", "#ffffff",
+                "#000000", "#ffffff", "#000000", "#444444", 4, 2f, false)
+                .display("literata", 0.95f, 0f, 30f)
+                .book()
+                .mono());
     }
 
     private LinearLayout vertical() {
@@ -7886,24 +7845,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     /** The active theme's display face. */
     private Typeface displayFace() {
-        String font = theme().displayFont;
-        if ("pixelify".equals(font)) {
-            return pixelifyBold;
-        }
-        if ("jersey".equals(font)) {
-            return jerseyRegular;
-        }
-        if ("pressstart".equals(font)) {
-            return pressStart;
-        }
-        if ("literata".equals(font)) {
-            return bookDisplay;
-        }
-        return serifBold;
+        return "literata".equals(theme().displayFont) ? bookDisplay : serifBold;
     }
 
     private Typeface displayFaceLight() {
-        return "pixelify".equals(theme().displayFont) ? pixelifySemi : displayFace();
+        return displayFace();
     }
 
     /** Display sizes are authored for Baloo; other faces scale off that. */
@@ -7955,8 +7901,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     /** Pixel faces need tighter tracking and a size floor; book and cartoon faces do not. */
     private boolean pixelDisplay() {
-        String f = theme().displayFont;
-        return "pixelify".equals(f) || "jersey".equals(f) || "pressstart".equals(f);
+        return false;   // no pixel-font theme remains; kept so label/nav sizing stays one rule
     }
 
     /** In the book theme every UI face maps onto the book serif. */
@@ -8348,6 +8293,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         boolean glow = false;          // blurred neon shadow instead of hard
         boolean pillButtons = true;    // cartoon pills vs console rectangles
         boolean bookText = false;      // set body and UI text in the book serif too
+        boolean mono = false;          // no colour to lean on: mark Polish by weight
+
+        Theme mono() {
+            this.mono = true;
+            return this;
+        }
 
         Theme book() {
             this.bookText = true;
