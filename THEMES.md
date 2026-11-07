@@ -1,6 +1,6 @@
 # Themes
 
-Seven user-selectable themes. Pick one from the swatch row on Home, or in
+Eight user-selectable themes. Pick one from the swatch row on Home, or in
 Settings → Colour Theme. Every screen follows the active theme.
 
 ## Cartoon set (original)
@@ -44,13 +44,26 @@ Each is a Canvas drawable — no images, nothing that animates.
 - **Kieszonka** — no extra drawables; the look comes from 0dp corners and a
   3dp border.
 
+## Book theme
+
+| Name | Character | Radius | Border | Faces |
+|---|---|---|---|---|
+| **Książka** (book) | Aged paper, ink-brown text, oxblood rubrics, ink-blue Polish, gilt accents | 2dp | 1.2dp | Literata throughout |
+
+`.book()` sets every UI face, not only headings, in Literata (the reading face
+of Google Play Books): `uiText()` maps the Nunito weights onto Literata Regular
+and Bold. Three static instances are bundled, subset to Latin and Latin
+Extended-A plus typographic punctuation (about 57 KB each, full Polish
+including „ ”). Buttons are rectangular, and the hard shadow is a pale paper
+tone so cards read as stacked pages.
+
 ## Adding a theme
 
 Add one entry to `buildThemes()`. The 18 colour + 3 shape tokens are
 positional (the argument order is documented in a comment there), then chain:
 
 ```java
-.display(font, scale, maxSp, wordmarkSp)   // font: baloo|pixelify|jersey|pressstart
+.display(font, scale, maxSp, wordmarkSp)   // font: baloo|pixelify|jersey|pressstart|literata
 .effects(bevel, scanlines, gridHorizon, mastheadStripe, glow)
 ```
 
@@ -72,6 +85,7 @@ All bundled, all SIL Open Font License; licences in `docs/licenses/`.
 | Pixelify Sans | Szesnastka display | 600/700 (instanced from the variable font) |
 | Jersey 15 | Automat display | 400 |
 | Press Start 2P | Kieszonka display | 400 |
+| Literata | Książka, all text | 400/650/700 (instanced from the variable font, opsz 12/36) |
 
 ### Substitution: Silkscreen → Jersey 15
 
