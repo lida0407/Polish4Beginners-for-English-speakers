@@ -223,6 +223,58 @@ public class AssetDataTest {
     }
 
     /**
+     * Every lesson points at real blocks, and every multiple-choice question
+     * can be answered: its answer is one of its options, with no duplicates.
+     */
+    @Test
+    public void courseLessonsAndQuestionsAreWellFormed() throws Exception {
+        JSONObject g = guide();
+        JSONArray chapters = g.getJSONArray("chapters");
+        JSONArray units = g.getJSONObject("course").getJSONArray("units");
+        Set<String> ids = new HashSet<>();
+        int lessons = 0;
+        int questions = 0;
+        for (int u = 0; u < units.length(); u++) {
+            JSONObject unit = units.getJSONObject(u);
+            JSONArray blocks = chapters.getJSONObject(unit.getInt("chapter")).getJSONArray("blocks");
+            JSONArray ls = unit.getJSONArray("lessons");
+            for (int l = 0; l < ls.length(); l++) {
+                JSONObject lesson = ls.getJSONObject(l);
+                assertTrue("duplicate lesson id " + lesson.optString("id"), ids.add(lesson.optString("id")));
+                JSONArray refs = lesson.getJSONArray("refs");
+                assertTrue("empty lesson " + lesson.optString("id"), refs.length() > 0);
+                for (int r = 0; r < refs.length(); r++) {
+                    int b = refs.getJSONObject(r).getInt("b");
+                    assertTrue("lesson " + lesson.optString("id") + " points past its chapter",
+                            b >= 0 && b < blocks.length());
+                }
+                JSONArray quiz = lesson.getJSONArray("quiz");
+                for (int q = 0; q < quiz.length(); q++) {
+                    JSONObject item = quiz.getJSONObject(q);
+                    if ("mc".equals(item.optString("kind"))) {
+                        JSONArray options = item.getJSONArray("options");
+                        Set<String> seen = new HashSet<>();
+                        boolean hasAnswer = false;
+                        for (int o = 0; o < options.length(); o++) {
+                            assertTrue("duplicate option in " + item.optString("prompt"), seen.add(options.getString(o)));
+                            hasAnswer |= options.getString(o).equals(item.getString("answer"));
+                        }
+                        assertTrue("answer not offered: " + item.optString("prompt"), hasAnswer);
+                        assertTrue("too few options: " + item.optString("prompt"), options.length() >= 2);
+                    } else {
+                        assertTrue("typed question without answers: " + item.optString("prompt"),
+                                item.getJSONArray("accepted").length() > 0);
+                    }
+                    questions++;
+                }
+                lessons++;
+            }
+        }
+        assertTrue("expected the course's lessons", lessons >= 40);
+        assertTrue("expected the course's questions", questions >= 200);
+    }
+
+    /**
      * The app prefers a downloaded deck only when it is newer than the
      * bundled one, so the bundled version constant must match the manifest
      * that ships beside it, or new bundled cards would be ignored.

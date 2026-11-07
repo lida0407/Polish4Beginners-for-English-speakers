@@ -31,6 +31,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from guide_vocabulary import expand  # noqa: E402  (same splitting as the deck)
+from course_builder import build_course  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE = ROOT / "content" / "grammar_guide.md"
@@ -101,8 +102,14 @@ def build_polish_lexicon(md_lines):
     return words - ENGLISH_HINTS
 
 
+# Grammar notation, not Polish words: sg/pl, impf/pf, m/f/n.
+NOTATION = {"sg", "pl", "impf", "pf", "m", "f", "n"}
+
+
 def is_polish(text, lexicon):
     tokens = [t.lower() for t in WORD.findall(text)]
+    if tokens and all(t in NOTATION for t in tokens):
+        return False
     tokens = [t for t in tokens if len(t) >= 2]
     meaningful = [t for t in tokens if t not in AMBIGUOUS]
     # English cue words first: an English sentence that mentions one Polish
@@ -303,8 +310,14 @@ def main():
                     or (is_polish(plain(header[col]), lexicon) and col > 0)
                 if share >= 0.7 or polish_head:
                     for c in column:
-                        if len(c) == 1 and not any(w.lower() in ENGLISH_HINTS
-                                                   for w in WORD.findall(c[0]["t"])):
+                        words = [w.lower() for w in WORD.findall(c[0]["t"])] if len(c) == 1 else []
+                        # Only forms the deck knows or English does not:
+                        # "Direct address" in a column of Polish questions
+                        # stays English.
+                        if words and (len(words) == 1 or all(
+                                w in lexicon or w in POLISH_FUNCTION or w not in ENGLISH
+                                for w in words)) \
+                                and not any(w in ENGLISH_HINTS for w in words):
                             c[0]["pl"] = 1
             block = {"type": "table",
                      "header": [plain(c) for c in header],
@@ -363,16 +376,31 @@ def main():
             chapter["blocks"].append({"type": "p", "spans": spans(line.strip(), lexicon)})
         i += 1
 
-    guide = {"version": 1, "title": "Grammar & Vocabulary Guide", "chapters": chapters}
+    guide = {"version": 2, "title": "Grammar & Vocabulary Guide", "chapters": chapters,
+             "course": build_course(chapters)}
     OUT.write_text(json.dumps(guide, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
     blocks = sum(len(c["blocks"]) for c in chapters)
     tables = sum(1 for c in chapters for b in c["blocks"] if b["type"] == "table")
     study = sum(len(b["entries"]) for c in chapters for b in c["blocks"] if b["type"] == "study")
     exercises = sum(len(b["items"]) for c in chapters for b in c["blocks"] if b["type"] == "exercise")
+    lessons = [l for u in guide["course"]["units"] for l in u["lessons"]]
+    quizzed = sum(1 for l in lessons if l["quiz"])
+    questions = sum(len(l["quiz"]) for l in lessons)
+    print(f"course: {len(lessons)} lessons, {quizzed} with a quiz, {questions} questions")
     print(f"{len(chapters)} chapters, {blocks} blocks, {tables} tables, "
           f"{study} vocabulary entries, {exercises} exercise items -> {OUT.relative_to(ROOT)} "
           f"({OUT.stat().st_size} bytes)")
+    if "--course" in sys.argv:
+        for u in guide["course"]["units"]:
+            print(f"\n## {u['title']}")
+            for l in u["lessons"]:
+                print(f"  {l['id']:<6} {l['title']}  [{len(l['quiz'])} q]")
+                for q in l["quiz"]:
+                    if q["kind"] == "mc":
+                        print(f"       ? {q['prompt']}  -> {q['answer']}   | {' · '.join(q['options'])}")
+                    else:
+                        print(f"       ✎ {q['prompt']}  -> {q['accepted']}")
     if report:
         pl, en = [], []
         for c in chapters:

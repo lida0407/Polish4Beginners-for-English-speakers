@@ -29,7 +29,7 @@ TOPIC_CATEGORY = {
 }
 TOPIC_LEVEL = {"11.1": "A1", "11.2": "A1", "11.3": "A1", "11.4": "A1", "11.5": "A1",
                "11.6": "A2", "11.7": "A2", "11.8": "A2", "11.9": "A1", "11.10": "A1"}
-FIXES = {"tall-high": "tall / high", "short-low": "short / low"}
+FIXES = {"tall-high": "tall, high", "short-low": "short, low"}
 
 
 def plain(text):
@@ -47,7 +47,7 @@ def split_gender(cell):
 
 def expand(polish, english):
     """One guide cell pair -> list of (polish, english, note)."""
-    english = FIXES.get(english, english)
+    english = " / ".join(FIXES.get(e.strip(), e.strip()) for e in english.split(" / "))
     parts = split_gender(polish)
     cards = []
     if len(parts) == 2 and parts[1][1] == "pl" and "," in english:
