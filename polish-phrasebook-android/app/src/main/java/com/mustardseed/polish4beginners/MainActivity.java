@@ -252,6 +252,13 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private int quizVerdict = -1;                        // typed answer verdict
     private String quizTyped = "";
     private final java.util.Set<String> courseDone = new java.util.LinkedHashSet<>();
+    // Menu bar: which tabs, in what order, and whether it sits at the top or
+    // the bottom. Home and More are always present: More is the way to Settings.
+    private static final String[] NAV_DEFAULT = {"home", "browse", "listen", "read", "more"};
+    private static final String[] NAV_ALL = {"home", "browse", "listen", "read", "course", "translate", "news", "alphabet", "more"};
+    private static final int NAV_MAX = 6;
+    private final List<String> navTabs = new ArrayList<>(java.util.Arrays.asList(NAV_DEFAULT));
+    private boolean navTop = false;
     private final Map<String, Integer> courseBest = new HashMap<>();
     private int guideIndexSize = -1;
     // Where a finished session returns to, and what "Again" repeats, when it
@@ -344,6 +351,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             speechSpeed = SPEED_NORMAL;
         }
         loadFonts();
+        loadNavSettings();
         // Assets are ~1 MB of JSON; parsing them on the main thread delayed the
         // first frame. Show a loading state and finish initialization off-thread.
         pendingState = savedInstanceState;
@@ -638,8 +646,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     private void render() {
         Theme theme = theme();
-        getWindow().setStatusBarColor(theme.bg);
-        getWindow().setNavigationBarColor(theme.panel);
+        // Before Android 15 the bars take a colour: match whatever sits next to them.
+        boolean barOnTop = navTop && !SCREEN_SESSION.equals(screen);
+        getWindow().setStatusBarColor(barOnTop ? theme.panel : theme.bg);
+        getWindow().setNavigationBarColor(barOnTop ? theme.bg : theme.panel);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().getDecorView().setSystemUiVisibility(isDarkTheme() ? 0 : View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
@@ -717,7 +727,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 renderSettings(content);
             }
             View nav = bottomNav();
-            root.addView(nav);
+            if (navTop) {
+                root.addView(nav, 0);
+            } else {
+                root.addView(nav);
+            }
             fitToSystemBars(root, nav);
         }
         if (SCREEN_SESSION.equals(screen)) {
@@ -752,6 +766,13 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                     WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout());
             android.graphics.Insets ime = insets.getInsets(WindowInsets.Type.ime());
             boolean typing = ime.bottom > bars.bottom;
+            if (nav != null && MainActivity.this.navTop) {
+                // Bar on top: it runs up under the status bar, and the page
+                // keeps clear of the gesture bar (or the keyboard) below.
+                v.setPadding(bars.left, 0, bars.right, typing ? ime.bottom : bars.bottom);
+                nav.setPadding(nav.getPaddingLeft(), navTop + bars.top, nav.getPaddingRight(), navBottom);
+                return insets;
+            }
             int pageBottom = typing ? ime.bottom : (nav == null ? bars.bottom : 0);
             v.setPadding(bars.left, bars.top, bars.right, pageBottom);
             if (nav != null) {
@@ -3766,6 +3787,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         content.addView(language);
         addGap(content, 12);
 
+        addMenuSettings(content);
+
         LinearLayout themeCard = settingsCard(t("Color Theme", "Motyw kolorystyczny"), t("The same " + themes.size() + " themes are available from the home header.", "Te same motywy (" + themes.size() + ") są dostępne w nagłówku ekranu głównego."));
         FlowLayout themeRow = new FlowLayout(this, dp(12), dp(12));
         for (String name : themes.keySet()) {
@@ -5099,15 +5122,195 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private View bottomNav() {
         Theme th = theme();
         LinearLayout nav = row();
-        nav.setPadding(dp(8), dp(6), dp(8), dp(2));
+        nav.setPadding(dp(8), navTop ? dp(2) : dp(6), dp(8), navTop ? dp(6) : dp(2));
         nav.setGravity(Gravity.CENTER);
-        nav.setBackground(topBorder(th.panel, th.ink, 2));
-        nav.addView(navItem("home", t("Home", "Dom"), SCREEN_HOME), new LinearLayout.LayoutParams(0, dp(56), 1));
-        nav.addView(navItem("browse", t("Cards", "Karty"), SCREEN_BROWSE), new LinearLayout.LayoutParams(0, dp(56), 1));
-        nav.addView(navItem("listen", t("Listen", "Słuchaj"), SCREEN_LISTEN), new LinearLayout.LayoutParams(0, dp(56), 1));
-        nav.addView(navItem("read", t("Read", "Czytaj"), SCREEN_READ), new LinearLayout.LayoutParams(0, dp(56), 1));
-        nav.addView(navItem("more", t("More", "Więcej"), SCREEN_MORE), new LinearLayout.LayoutParams(0, dp(56), 1));
+        // The rule faces the content: above the bar at the bottom, below it at the top.
+        nav.setBackground(navTop
+                ? new BorderDrawable(th.panel, th.ink, 0, 0, 0, dpFloat(2))
+                : topBorder(th.panel, th.ink, 2));
+        for (String key : navTabs) {
+            nav.addView(navItem(navIcon(key), navLabel(key), navTarget(key)),
+                    new LinearLayout.LayoutParams(0, dp(56), 1));
+        }
         return nav;
+    }
+
+    private String navLabel(String key) {
+        switch (key) {
+            case "home": return t("Home", "Dom");
+            case "browse": return t("Cards", "Karty");
+            case "listen": return t("Listen", "Słuchaj");
+            case "read": return t("Read", "Czytaj");
+            case "course": return t("Course", "Kurs");
+            case "translate": return t("Translate", "Tłumacz");
+            case "news": return t("News", "Wiadomości");
+            case "alphabet": return t("Alphabet", "Alfabet");
+            default: return t("More", "Więcej");
+        }
+    }
+
+    private String navIcon(String key) {
+        return "course".equals(key) ? "grammar" : key;
+    }
+
+    private String navTarget(String key) {
+        switch (key) {
+            case "home": return SCREEN_HOME;
+            case "browse": return SCREEN_BROWSE;
+            case "listen": return SCREEN_LISTEN;
+            case "read": return SCREEN_READ;
+            case "course": return SCREEN_COURSE;
+            case "translate": return SCREEN_TRANSLATE;
+            case "news": return SCREEN_NEWS;
+            case "alphabet": return SCREEN_ALPHABET;
+            default: return SCREEN_MORE;
+        }
+    }
+
+    /** Settings: menu bar position, and which tabs it shows in what order. */
+    private void addMenuSettings(LinearLayout content) {
+        Theme th = theme();
+        LinearLayout card = settingsCard(t("Menu Bar", "Pasek menu"),
+                t("Put the menu at the top or bottom, and choose its tabs (up to " + NAV_MAX + "). Home and More always stay.",
+                        "Umieść menu u góry lub na dole i wybierz zakładki (do " + NAV_MAX + "). Dom i Więcej zostają zawsze."));
+
+        LinearLayout pos = row();
+        String[][] options = {{"bottom", t("Bottom", "Na dole")}, {"top", t("Top", "U góry")}};
+        for (int i = 0; i < options.length; i++) {
+            final boolean top = "top".equals(options[i][0]);
+            boolean on = top == navTop;
+            Button b = flatButton(options[i][1], on ? th.ink : th.panel, on ? th.bg : th.muted,
+                    on ? th.ink : th.dash, 13, 40);
+            b.setOnClickListener(v -> {
+                navTop = top;
+                saveNavSettings();
+                render();
+            });
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, dp(40), 1);
+            if (i > 0) {
+                lp.setMargins(dp(8), 0, 0, 0);
+            }
+            pos.addView(b, lp);
+        }
+        card.addView(pos, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(40), 12));
+
+        card.addView(label(t("TABS, IN ORDER", "ZAKŁADKI, PO KOLEI"), th.accent, 10.5f, 0.12f),
+                topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 14));
+        for (int i = 0; i < navTabs.size(); i++) {
+            final int index = i;
+            final String key = navTabs.get(i);
+            LinearLayout row = row();
+            row.setGravity(Gravity.CENTER_VERTICAL);
+            row.setPadding(dp(12), dp(4), dp(4), dp(4));
+            row.setBackground(rounded(th.bg, th.dash, Math.min(th.radius, 10), 1));
+            row.addView(uiText((i + 1) + ".  " + navLabel(key), 14, th.ink, sansBold),
+                    new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+            row.addView(navMoveButton("▲", i > 0, () -> {
+                java.util.Collections.swap(navTabs, index, index - 1);
+                saveNavSettings();
+                render();
+            }));
+            row.addView(navMoveButton("▼", i < navTabs.size() - 1, () -> {
+                java.util.Collections.swap(navTabs, index, index + 1);
+                saveNavSettings();
+                render();
+            }));
+            boolean fixed = "home".equals(key) || "more".equals(key);
+            row.addView(navMoveButton("✕", !fixed, () -> {
+                navTabs.remove(index);
+                saveNavSettings();
+                render();
+            }));
+            card.addView(row, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT, 6));
+        }
+
+        List<String> hidden = new ArrayList<>();
+        for (String key : NAV_ALL) {
+            if (!navTabs.contains(key)) {
+                hidden.add(key);
+            }
+        }
+        if (!hidden.isEmpty()) {
+            boolean full = navTabs.size() >= NAV_MAX;
+            card.addView(label(full ? t("ADD A TAB (REMOVE ONE FIRST)", "DODAJ (NAJPIERW USUŃ JEDNĄ)")
+                            : t("ADD A TAB", "DODAJ ZAKŁADKĘ"), th.faint, 10.5f, 0.12f),
+                    topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 12));
+            FlowLayout add = new FlowLayout(this, dp(6), dp(6));
+            for (final String key : hidden) {
+                Button chip = flatButton("+ " + navLabel(key), th.panel, full ? th.ghost : th.ink, th.dash, 12.5f, 34);
+                chip.setEnabled(!full);
+                chip.setOnClickListener(v -> {
+                    // New tabs go just before More, which stays last by default.
+                    int at = navTabs.indexOf("more");
+                    navTabs.add(at < 0 ? navTabs.size() : at, key);
+                    saveNavSettings();
+                    render();
+                });
+                add.addView(chip);
+            }
+            card.addView(add, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT, 6));
+        }
+
+        TextView reset = uiText(t("Reset menu to default", "Przywróć domyślne menu"), 12.5f, th.accent, sansBold);
+        reset.setPadding(0, dp(12), 0, dp(4));
+        reset.setOnClickListener(v -> {
+            navTabs.clear();
+            navTabs.addAll(java.util.Arrays.asList(NAV_DEFAULT));
+            navTop = false;
+            saveNavSettings();
+            render();
+        });
+        card.addView(reset);
+        content.addView(card);
+        addGap(content, 12);
+    }
+
+    private View navMoveButton(String glyph, boolean enabled, Runnable action) {
+        Theme th = theme();
+        TextView b = uiText(glyph, 14, enabled ? th.ink : th.ghost, sansBold);
+        b.setGravity(Gravity.CENTER);
+        b.setMinWidth(dp(40));
+        b.setPadding(dp(6), dp(8), dp(6), dp(8));
+        if (enabled) {
+            b.setOnClickListener(v -> action.run());
+        }
+        return b;
+    }
+
+    private void loadNavSettings() {
+        SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        navTop = "top".equals(prefs.getString("navPosition", "bottom"));
+        String saved = prefs.getString("navTabs", "");
+        List<String> tabs = new ArrayList<>();
+        for (String key : saved.split(",")) {
+            key = key.trim();
+            // Unknown keys (from a future version) and duplicates are dropped.
+            if (java.util.Arrays.asList(NAV_ALL).contains(key) && !tabs.contains(key)) {
+                tabs.add(key);
+            }
+        }
+        // Home and More must always be reachable.
+        if (!tabs.contains("home")) {
+            tabs.add(0, "home");
+        }
+        if (!tabs.contains("more")) {
+            tabs.add("more");
+        }
+        while (tabs.size() > NAV_MAX) {
+            tabs.remove(tabs.size() - 2);
+        }
+        if (saved.isEmpty()) {
+            tabs = new ArrayList<>(java.util.Arrays.asList(NAV_DEFAULT));
+        }
+        navTabs.clear();
+        navTabs.addAll(tabs);
+    }
+
+    private void saveNavSettings() {
+        saveSetting("navPosition", navTop ? "top" : "bottom");
+        saveSetting("navTabs", android.text.TextUtils.join(",", navTabs));
     }
 
     private View navItem(String icon, String text, String target) {
@@ -5120,6 +5323,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         item.setOnClickListener(v -> {
             stopAudioPlayback();
             screen = target;
+            if (SCREEN_COURSE.equals(target)) {
+                courseLesson = null;
+                lessonStage = 0;
+            }
             render();
         });
         item.addView(new NavIcon(this, icon, color), new LinearLayout.LayoutParams(dp(21), dp(21)));
