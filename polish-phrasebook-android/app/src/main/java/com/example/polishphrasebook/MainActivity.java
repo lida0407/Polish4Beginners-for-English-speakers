@@ -49,6 +49,7 @@ import android.util.Base64;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowInsets;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -124,6 +125,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final String SCREEN_MORE = "more";
     private static final String SCREEN_SETTINGS = "settings";
     private static final String SCREEN_GUIDE = "guide";
+    private static final String SCREEN_COURSE = "course";
     private static final String DEFAULT_THEME = "Komiks";
     private static final String LANG_EN = "en";
     private static final String LANG_PL = "pl";
@@ -244,6 +246,20 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private final Map<String, Integer> guideVerdicts = new HashMap<>();
     private final Map<String, View> guideSectionViews = new LinkedHashMap<>();
     private Map<String, Phrase> guideIndex = null;       // headword -> card, built lazily
+    // Grammar course: lessons over the guide's chapters, each with a quiz.
+    private final List<JSONObject> courseUnits = new ArrayList<>();
+    private String courseLesson = null;                  // null = course map
+    private int lessonStage = 0;                         // 0 learn, 1 quiz, 2 done
+    private final List<Integer> quizQueue = new ArrayList<>();
+    private int quizPos = 0;
+    private int quizFirstTry = 0;
+    private int quizTotal = 0;
+    private final java.util.Set<Integer> quizMissed = new java.util.HashSet<>();
+    private String quizPicked = null;                    // option chosen for the current question
+    private int quizVerdict = -1;                        // typed answer verdict
+    private String quizTyped = "";
+    private final java.util.Set<String> courseDone = new java.util.LinkedHashSet<>();
+    private final Map<String, Integer> courseBest = new HashMap<>();
     private int guideIndexSize = -1;
     // Where a finished session returns to, and what "Again" repeats, when it
     // was started from somewhere other than Home.
@@ -313,6 +329,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private Typeface pixelifySemi;
     private Typeface jerseyRegular;
     private Typeface pressStart;
+    private Typeface bookRegular;
+    private Typeface bookBold;
+    private Typeface bookDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -407,6 +426,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         super.onSaveInstanceState(outState);
         outState.putString("screen", screen);
         outState.putInt("guideChapter", guideChapter);
+        outState.putString("courseLesson", courseLesson);
+        // A quiz in progress restarts at its lesson page after rotation.
+        outState.putInt("lessonStage", lessonStage == 1 ? 0 : lessonStage);
         outState.putString("level", level);
         outState.putString("browseTopic", browseTopic);
         outState.putString("browseQuery", browseQuery);
@@ -448,6 +470,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
         screen = in.getString("screen", SCREEN_HOME);
         guideChapter = in.getInt("guideChapter", -1);
+        courseLesson = in.getString("courseLesson");
+        lessonStage = in.getInt("lessonStage", 0);
         level = in.getString("level", level);
         browseTopic = in.getString("browseTopic", browseTopic);
         browseQuery = in.getString("browseQuery", browseQuery);
@@ -582,7 +606,18 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             if (guideChapter >= 0) {
                 guideChapter = -1;
             } else {
-                screen = SCREEN_MORE;
+                screen = SCREEN_COURSE;
+            }
+            render();
+            return;
+        }
+        if (SCREEN_COURSE.equals(screen)) {
+            if (courseLesson != null && lessonStage == 1) {
+                lessonStage = 0;          // leave the quiz, keep the lesson
+            } else if (courseLesson != null) {
+                courseLesson = null;
+            } else {
+                screen = SCREEN_HOME;
             }
             render();
             return;
@@ -637,6 +672,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         // Nothing is interactive until the learning data is in memory.
         if (!dataReady) {
             renderLoading(root);
+            fitToSystemBars(root, null);
             setContentView(withScanlines(root));
             return;
         }
@@ -690,15 +726,57 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 renderRead(content);
             } else if (SCREEN_GUIDE.equals(screen)) {
                 renderGuide(content);
+            } else if (SCREEN_COURSE.equals(screen)) {
+                renderCourse(content);
             } else if (SCREEN_MORE.equals(screen)) {
                 renderMore(content);
             } else {
                 renderSettings(content);
             }
-            root.addView(bottomNav());
+            View nav = bottomNav();
+            root.addView(nav);
+            fitToSystemBars(root, nav);
+        }
+        if (SCREEN_SESSION.equals(screen)) {
+            fitToSystemBars(root, null);
         }
 
         setContentView(withScanlines(root));
+    }
+
+    /**
+     * Android 15+ draws every app edge to edge: the window runs under the
+     * status bar, the gesture bar and the keyboard, and the app must keep its
+     * content clear of them. Without this the clock sat on top of the screen
+     * titles and the gesture bar on the tab labels.
+     *
+     * The top inset pads the page, so the theme colour runs up behind the
+     * status bar. The bottom inset goes inside the tab bar, so its panel
+     * extends under the gesture bar rather than leaving a gap. While the
+     * keyboard is open, the page is padded by the keyboard instead, which is
+     * what adjustResize used to do before edge-to-edge.
+     *
+     * Older Android versions lay the window out inside the bars themselves.
+     */
+    private void fitToSystemBars(final LinearLayout root, final View nav) {
+        if (Build.VERSION.SDK_INT < 35) {
+            return;
+        }
+        final int navTop = nav == null ? 0 : nav.getPaddingTop();
+        final int navBottom = nav == null ? 0 : nav.getPaddingBottom();
+        root.setOnApplyWindowInsetsListener((v, insets) -> {
+            android.graphics.Insets bars = insets.getInsets(
+                    WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout());
+            android.graphics.Insets ime = insets.getInsets(WindowInsets.Type.ime());
+            boolean typing = ime.bottom > bars.bottom;
+            int pageBottom = typing ? ime.bottom : (nav == null ? bars.bottom : 0);
+            v.setPadding(bars.left, bars.top, bars.right, pageBottom);
+            if (nav != null) {
+                nav.setPadding(nav.getPaddingLeft(), navTop, nav.getPaddingRight(),
+                        navBottom + (typing ? 0 : bars.bottom));
+            }
+            return insets;
+        });
     }
 
     /**
@@ -783,6 +861,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         hero.addView(start, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(52), 14));
         content.addView(shadowWrap(hero, 4));
         addGap(content, 16);
+        View courseCard = courseHomeCard();
+        if (courseCard != null) {
+            content.addView(courseCard);
+            addGap(content, 16);
+        }
 
         content.addView(levelSelector());
         addGap(content, 16);
@@ -839,7 +922,14 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         Theme th = theme();
         LinearLayout box = vertical();
         box.setPadding(0, 0, 0, dp(14));
-        box.setBackground(bottomBorder(th.ink, 2));
+        if (th.gridHorizon) {
+            // Arcade: the perspective grid sits behind the whole masthead.
+            box.setBackground(new android.graphics.drawable.LayerDrawable(new android.graphics.drawable.Drawable[]{
+                    new GridHorizonDrawable(th.accent2, dpFloat(28), dpFloat(14), dpFloat(1)),
+                    bottomBorder(th.ink, 2)}));
+        } else {
+            box.setBackground(bottomBorder(th.ink, 2));
+        }
 
         LinearLayout top = row();
         top.setGravity(Gravity.CENTER_VERTICAL);
@@ -868,6 +958,15 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             swatches.addView(swatch, new ViewGroup.LayoutParams(dp(22), dp(22)));
         }
         box.addView(titleRow);
+        if (th.mastheadStripe) {
+            // 16-bit: a rule of repeating colour blocks under the wordmark.
+            addGap(box, 8);
+            box.addView(new BlockStripe(this, new int[]{th.accent, th.accent2, th.accent3, th.panel}, dpFloat(24)),
+                    new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(6)));
+        }
+        addGap(box, 10);
+        box.addView(swatches, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         return box;
     }
 
@@ -1182,6 +1281,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         done.addView(again, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(50), 18));
         Button home = textButton(SCREEN_GUIDE.equals(returnTo)
                 ? t("Back to the guide", "Wróć do przewodnika")
+                : SCREEN_COURSE.equals(returnTo) ? t("Back to the lesson", "Wróć do lekcji")
                 : t("Back home", "Wróć do domu"), th.faint, 13);
         home.setPaintFlags(home.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         home.setOnClickListener(v -> {
@@ -1306,23 +1406,671 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
 
+    // ---- grammar course -----------------------------------------------------
+
+    private int courseLessonCount() {
+        int n = 0;
+        for (JSONObject u : courseUnits) {
+            n += u.optJSONArray("lessons").length();
+        }
+        return n;
+    }
+
+    /** {unit index, lesson index} for an id, or null. */
+    private int[] findLesson(String id) {
+        for (int u = 0; u < courseUnits.size(); u++) {
+            JSONArray lessons = courseUnits.get(u).optJSONArray("lessons");
+            for (int l = 0; l < lessons.length(); l++) {
+                if (lessons.optJSONObject(l).optString("id").equals(id)) {
+                    return new int[]{u, l};
+                }
+            }
+        }
+        return null;
+    }
+
+    private JSONObject lessonAt(int[] at) {
+        return courseUnits.get(at[0]).optJSONArray("lessons").optJSONObject(at[1]);
+    }
+
+    /** The lesson after this one, across units; null at the end. */
+    private String lessonAfter(String id) {
+        boolean found = false;
+        for (JSONObject u : courseUnits) {
+            JSONArray lessons = u.optJSONArray("lessons");
+            for (int l = 0; l < lessons.length(); l++) {
+                String lid = lessons.optJSONObject(l).optString("id");
+                if (found) {
+                    return lid;
+                }
+                found = lid.equals(id);
+            }
+        }
+        return null;
+    }
+
+    /** First lesson not yet done, in course order. */
+    private String nextCourseLesson() {
+        for (JSONObject u : courseUnits) {
+            JSONArray lessons = u.optJSONArray("lessons");
+            for (int l = 0; l < lessons.length(); l++) {
+                String lid = lessons.optJSONObject(l).optString("id");
+                if (!courseDone.contains(lid)) {
+                    return lid;
+                }
+            }
+        }
+        return null;
+    }
+
+    private int lessonNumber(String id) {
+        int n = 0;
+        for (JSONObject u : courseUnits) {
+            JSONArray lessons = u.optJSONArray("lessons");
+            for (int l = 0; l < lessons.length(); l++) {
+                n++;
+                if (lessons.optJSONObject(l).optString("id").equals(id)) {
+                    return n;
+                }
+            }
+        }
+        return n;
+    }
+
+    private void saveCourseProgress() {
+        saveSetting("courseDone", android.text.TextUtils.join(",", courseDone));
+        JSONObject best = new JSONObject();
+        try {
+            for (Map.Entry<String, Integer> e : courseBest.entrySet()) {
+                best.put(e.getKey(), e.getValue());
+            }
+        } catch (Exception ignored) {
+        }
+        saveSetting("courseBest", best.toString());
+    }
+
+    private void openLesson(String id) {
+        screen = SCREEN_COURSE;
+        courseLesson = id;
+        lessonStage = 0;
+        currentScrollKey = "";
+        render();
+    }
+
+    /** Home: the course's next step, so it is visible without digging in More. */
+    private View courseHomeCard() {
+        if (courseUnits.isEmpty()) {
+            return null;
+        }
+        Theme th = theme();
+        int total = courseLessonCount();
+        final String next = nextCourseLesson();
+        LinearLayout card = vertical();
+        card.setPadding(dp(16), dp(14), dp(16), dp(14));
+        card.setBackground(rounded(th.panel, th.ink, th.radius, th.border));
+        LinearLayout head = row();
+        head.setGravity(Gravity.CENTER_VERTICAL);
+        head.addView(label("📘 " + t("GRAMMAR COURSE", "KURS GRAMATYKI"), th.accent2Text, 11, 0.14f),
+                new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        head.addView(uiText(courseDone.size() + " / " + total, 12, th.muted, sansBold));
+        card.addView(head);
+        addGap(card, 8);
+        card.addView(new StripeProgress(this, th, total == 0 ? 0 : (float) courseDone.size() / total),
+                new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(10)));
+        addGap(card, 10);
+        if (next == null) {
+            card.addView(serifText(t("Course complete!", "Kurs ukończony!"), 19, th.ink));
+            card.addView(bodyText(t("Review any lesson, or retake a quiz to beat your score.",
+                    "Powtórz dowolną lekcję albo popraw wynik quizu."), 12.5f, th.muted));
+        } else {
+            JSONObject lesson = lessonAt(findLesson(next));
+            card.addView(uiText(t("Lesson ", "Lekcja ") + lessonNumber(next) + t(" of ", " z ") + total,
+                    11.5f, th.faint, sansBold));
+            card.addView(serifText(lesson.optString("title"), 19, th.ink));
+        }
+        addGap(card, 10);
+        Button go = filledButton(next == null ? t("Open course", "Otwórz kurs")
+                        : (courseDone.isEmpty() ? t("Start the course", "Zacznij kurs") : t("Continue", "Kontynuuj")),
+                th.accent2, th.onAccent2, 14, 44);
+        go.setOnClickListener(v -> {
+            if (next == null) {
+                screen = SCREEN_COURSE;
+                courseLesson = null;
+                render();
+            } else {
+                openLesson(next);
+            }
+        });
+        card.addView(go, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(44)));
+        return shadowWrap(card, 4);
+    }
+
+    private void renderCourse(LinearLayout content) {
+        if (courseUnits.isEmpty()) {
+            content.addView(screenTitle(t("Grammar course", "Kurs gramatyki")));
+            content.addView(bodyText(t("The course could not be loaded.", "Nie udało się wczytać kursu."), 13, theme().muted));
+            return;
+        }
+        int[] at = courseLesson == null ? null : findLesson(courseLesson);
+        if (at == null) {
+            courseLesson = null;
+            renderCourseMap(content);
+        } else if (lessonStage == 1 && !quizQueue.isEmpty()) {
+            renderLessonQuiz(content, at);
+        } else if (lessonStage == 2) {
+            renderLessonDone(content, at);
+        } else {
+            lessonStage = 0;
+            renderLessonLearn(content, at);
+        }
+    }
+
+    private void renderCourseMap(LinearLayout content) {
+        Theme th = theme();
+        content.addView(screenTitle(t("Grammar course", "Kurs gramatyki")));
+        addGap(content, 8);
+        int total = courseLessonCount();
+        content.addView(bodyText(t("Short lessons in order, each ending in a quick quiz. Polish is shown in colour: tap any word for its translation.",
+                "Krótkie lekcje po kolei, każda kończy się quizem. Polski tekst jest w kolorze: dotknij słowa, aby zobaczyć tłumaczenie."),
+                13, th.muted));
+        addGap(content, 12);
+        LinearLayout prog = row();
+        prog.setGravity(Gravity.CENTER_VERTICAL);
+        prog.addView(new StripeProgress(this, th, total == 0 ? 0 : (float) courseDone.size() / total),
+                new LinearLayout.LayoutParams(0, dp(12), 1));
+        TextView count = uiText("  " + courseDone.size() + " / " + total, 12.5f, th.muted, sansBold);
+        prog.addView(count);
+        content.addView(prog);
+        final String next = nextCourseLesson();
+        if (next != null) {
+            addGap(content, 12);
+            Button cont = filledButton((courseDone.isEmpty() ? t("Start: ", "Start: ") : t("Continue: ", "Dalej: "))
+                    + lessonAt(findLesson(next)).optString("title") + " ›", th.accent, th.onAccent, 14, 48);
+            cont.setSingleLine(true);
+            cont.setEllipsize(TextUtils.TruncateAt.END);
+            cont.setOnClickListener(v -> openLesson(next));
+            content.addView(cont, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(48)));
+        }
+
+        for (int u = 0; u < courseUnits.size(); u++) {
+            JSONObject unit = courseUnits.get(u);
+            JSONArray lessons = unit.optJSONArray("lessons");
+            int done = 0;
+            for (int l = 0; l < lessons.length(); l++) {
+                if (courseDone.contains(lessons.optJSONObject(l).optString("id"))) {
+                    done++;
+                }
+            }
+            addGap(content, 20);
+            LinearLayout uh = row();
+            uh.setGravity(Gravity.CENTER_VERTICAL);
+            String num = guideChapters.get(unit.optInt("chapter")).optString("id");
+            uh.addView(label(("0".equals(num) ? t("START", "START") : t("UNIT ", "DZIAŁ ") + num), th.accent, 10.5f, 0.14f),
+                    new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+            uh.addView(uiText(done + "/" + lessons.length(), 11.5f,
+                    done == lessons.length() ? th.accent2Text : th.faint, sansBold));
+            content.addView(uh);
+            content.addView(serifText(unit.optString("title"), 18, th.ink));
+            addGap(content, 6);
+            for (int l = 0; l < lessons.length(); l++) {
+                final JSONObject lesson = lessons.optJSONObject(l);
+                final String id = lesson.optString("id");
+                boolean isDone = courseDone.contains(id);
+                boolean isNext = id.equals(next);
+                LinearLayout row = row();
+                row.setGravity(Gravity.CENTER_VERTICAL);
+                row.setPadding(dp(12), dp(10), dp(12), dp(10));
+                row.setBackground(rounded(isNext ? th.accentSoft : th.panel,
+                        isNext ? th.accent : th.dash, Math.min(th.radius, 14), th.border));
+                TextView mark = uiText(isDone ? "✓" : (isNext ? "▶" : "○"), 15,
+                        isDone ? th.accent2Text : (isNext ? th.accent : th.ghost), sansBold);
+                mark.setGravity(Gravity.CENTER);
+                row.addView(mark, new LinearLayout.LayoutParams(dp(26), LinearLayout.LayoutParams.WRAP_CONTENT));
+                LinearLayout copy = vertical();
+                copy.setPadding(dp(8), 0, 0, 0);
+                copy.addView(uiText(lesson.optString("title"), 14.5f, th.ink, sansBold));
+                int questions = lesson.optJSONArray("quiz").length();
+                Integer best = courseBest.get(id);
+                String meta = questions == 0 ? t("Read", "Lektura")
+                        : (best != null ? t("Best ", "Najlepiej ") + best + "/" + questions
+                        : questions + (questions == 1 ? t(" question", " pytanie") : t(" questions", " pytań")));
+                copy.addView(uiText(meta, 11.5f, th.muted, sansRegular));
+                row.addView(copy, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+                row.addView(uiText("›", 18, th.ghost, sansBold));
+                row.setOnClickListener(v -> openLesson(id));
+                content.addView(row);
+                addGap(content, 6);
+            }
+        }
+        addGap(content, 20);
+        TextView reader = uiText("📖 " + t("Read the whole guide as chapters", "Czytaj cały przewodnik"), 13, th.accent, sansBold);
+        reader.setPadding(0, dp(8), 0, dp(8));
+        reader.setOnClickListener(v -> {
+            screen = SCREEN_GUIDE;
+            guideChapter = -1;
+            render();
+        });
+        content.addView(reader);
+    }
+
+    private void renderLessonLearn(LinearLayout content, int[] at) {
+        Theme th = theme();
+        final JSONObject lesson = lessonAt(at);
+        final String id = lesson.optString("id");
+        JSONObject unit = courseUnits.get(at[0]);
+        int chapterIndex = unit.optInt("chapter");
+        JSONArray blocks = guideChapters.get(chapterIndex).optJSONArray("blocks");
+        int lessonsInUnit = unit.optJSONArray("lessons").length();
+
+        TextView back = uiText("‹ " + t("Course", "Kurs"), 13, th.accent, sansBold);
+        back.setPadding(0, dp(2), dp(16), dp(10));
+        back.setOnClickListener(v -> {
+            courseLesson = null;
+            render();
+        });
+        content.addView(back);
+        content.addView(label(unit.optString("title") + " · " + t("lesson ", "lekcja ") + (at[1] + 1)
+                + t(" of ", " z ") + lessonsInUnit, th.accent, 10.5f, 0.12f));
+        content.addView(screenTitle(lesson.optString("title")));
+        guideSectionViews.clear();
+
+        JSONArray refs = lesson.optJSONArray("refs");
+        for (int i = 0; refs != null && i < refs.length(); i++) {
+            JSONObject ref = refs.optJSONObject(i);
+            JSONObject b = blocks.optJSONObject(ref.optInt("b"));
+            if (b == null) {
+                continue;
+            }
+            String type = b.optString("type");
+            try {
+                if ("table".equals(type) && ref.has("rows")) {
+                    JSONArray range = ref.getJSONArray("rows");
+                    JSONArray all = b.getJSONArray("rows");
+                    JSONArray slice = new JSONArray();
+                    for (int r = range.getInt(0); r < Math.min(range.getInt(1), all.length()); r++) {
+                        slice.put(all.get(r));
+                    }
+                    b = new JSONObject(b.toString()).put("rows", slice);
+                } else if ("study".equals(type) && ref.has("words")) {
+                    b = new JSONObject().put("type", "study").put("entries", ref.getJSONArray("words"));
+                }
+            } catch (Exception ignored) {
+            }
+            switch (type) {
+                case "h":
+                    addGap(content, 14);
+                    content.addView(serifText(b.optString("text"), 18, th.ink));
+                    break;
+                case "p":
+                    addGap(content, 6);
+                    content.addView(guideText(b.optJSONArray("spans"), 14.5f, th.body, true));
+                    break;
+                case "list":
+                    addGuideList(content, b);
+                    break;
+                case "table":
+                    addGap(content, 8);
+                    addGuideTable(content, b);
+                    break;
+                case "dialogue":
+                    addGap(content, 10);
+                    addGuideDialogue(content, b);
+                    break;
+                case "study":
+                    addGap(content, 10);
+                    addGuideStudy(content, b);
+                    break;
+                case "exercise":
+                    // Practice lessons: the items are the quiz, so only the task shows here.
+                    addGap(content, 10);
+                    content.addView(bodyText(b.optString("prompt") + ". "
+                            + t("Type each answer; the app checks it and shows the model answer.",
+                            "Wpisz każdą odpowiedź; aplikacja ją sprawdzi i pokaże wzór."), 14, th.body));
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        addGap(content, 24);
+        int questions = lesson.optJSONArray("quiz").length();
+        if (questions > 0) {
+            Button quiz = filledButton(t("Start quiz · ", "Quiz · ") + questions
+                    + (questions == 1 ? t(" question", " pytanie") : t(" questions", " pytań")) + " ›",
+                    th.accent, th.onAccent, 15, 52);
+            quiz.setOnClickListener(v -> startQuiz(lesson));
+            content.addView(quiz, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(52)));
+        } else {
+            Button done = filledButton(t("Mark as done ✓", "Oznacz jako ukończoną ✓"), th.accent, th.onAccent, 15, 52);
+            done.setOnClickListener(v -> {
+                courseDone.add(id);
+                saveCourseProgress();
+                quizTotal = 0;
+                lessonStage = 2;
+                render();
+            });
+            content.addView(done, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(52)));
+        }
+        addGap(content, 10);
+        final int chapter = chapterIndex;
+        TextView whole = uiText("📖 " + t("Read the whole chapter", "Czytaj cały rozdział"), 12.5f, th.muted, sansBold);
+        whole.setPadding(0, dp(6), 0, dp(6));
+        whole.setOnClickListener(v -> {
+            screen = SCREEN_GUIDE;
+            guideChapter = chapter;
+            currentScrollKey = "";
+            render();
+        });
+        content.addView(whole);
+    }
+
+    private void startQuiz(JSONObject lesson) {
+        quizQueue.clear();
+        int n = lesson.optJSONArray("quiz").length();
+        for (int i = 0; i < n; i++) {
+            quizQueue.add(i);
+        }
+        quizPos = 0;
+        quizFirstTry = 0;
+        quizTotal = n;
+        quizMissed.clear();
+        quizPicked = null;
+        quizVerdict = -1;
+        quizTyped = "";
+        lessonStage = 1;
+        render();
+    }
+
+    /** A Polish string worth reading aloud, else empty. */
+    private String quizSay(JSONObject q) {
+        return speakable(q.optString("say"));
+    }
+
+    private void renderLessonQuiz(LinearLayout content, int[] at) {
+        final Theme th = theme();
+        final JSONObject lesson = lessonAt(at);
+        final int qi = quizQueue.get(quizPos);
+        final JSONObject q = lesson.optJSONArray("quiz").optJSONObject(qi);
+        final boolean retry = quizPos >= quizTotal;
+
+        LinearLayout top = row();
+        top.setGravity(Gravity.CENTER_VERTICAL);
+        TextView back = uiText("✕", 18, th.muted, sansBold);
+        back.setPadding(0, dp(4), dp(14), dp(4));
+        back.setOnClickListener(v -> {
+            lessonStage = 0;
+            render();
+        });
+        top.addView(back);
+        top.addView(new StripeProgress(this, th, quizQueue.isEmpty() ? 0 : (float) quizPos / quizQueue.size()),
+                new LinearLayout.LayoutParams(0, dp(12), 1));
+        top.addView(uiText("  " + Math.min(quizPos + 1, quizQueue.size()) + "/" + quizQueue.size(), 12, th.muted, sansBold));
+        content.addView(top);
+        addGap(content, 18);
+        content.addView(label(retry ? t("ONE MORE TRY", "JESZCZE RAZ") : lesson.optString("title"),
+                th.accent, 10.5f, 0.12f));
+        addGap(content, 6);
+        content.addView(serifText(q.optString("prompt").replace("___", "＿＿＿"), 22, th.ink));
+        addGap(content, 18);
+
+        final boolean answered = quizPicked != null || quizVerdict >= 0;
+        boolean correct;
+        if ("type".equals(q.optString("kind"))) {
+            final android.widget.EditText input = new android.widget.EditText(this);
+            input.setSingleLine(true);
+            input.setTextSize(17);
+            input.setTextColor(th.ink);
+            input.setHintTextColor(th.faint);
+            input.setHint(t("Type in Polish", "Wpisz po polsku"));
+            input.setText(quizTyped);
+            input.setEnabled(!answered);
+            input.setImeOptions(android.view.inputmethod.EditorInfo.IME_ACTION_DONE);
+            input.setPadding(dp(14), dp(12), dp(14), dp(12));
+            input.setBackground(rounded(th.panel, th.dash, Math.min(th.radius, 12), th.border));
+            content.addView(input, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+            JSONArray acc = q.optJSONArray("accepted");
+            final String[] accepted = new String[acc == null ? 0 : acc.length()];
+            for (int i = 0; i < accepted.length; i++) {
+                accepted[i] = acc.optString(i);
+            }
+            Runnable check = () -> {
+                String typed = input.getText().toString();
+                if (typed.trim().isEmpty()) {
+                    return;
+                }
+                quizTyped = typed;
+                quizVerdict = LearningLogic.checkAnswer(typed, accepted);
+                android.view.inputmethod.InputMethodManager imm =
+                        (android.view.inputmethod.InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
+                }
+                recordQuizAnswer(qi, quizVerdict == LearningLogic.ANSWER_EXACT
+                        || quizVerdict == LearningLogic.ANSWER_WORD_ORDER
+                        || quizVerdict == LearningLogic.ANSWER_DIACRITICS);
+            };
+            input.setOnEditorActionListener((v, actionId, event) -> {
+                check.run();
+                return true;
+            });
+            correct = quizVerdict == LearningLogic.ANSWER_EXACT || quizVerdict == LearningLogic.ANSWER_WORD_ORDER
+                    || quizVerdict == LearningLogic.ANSWER_DIACRITICS;
+            if (!answered) {
+                addGap(content, 12);
+                Button go = filledButton(t("Check", "Sprawdź"), th.accent, th.onAccent, 15, 50);
+                go.setOnClickListener(v -> check.run());
+                content.addView(go, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(50)));
+            }
+        } else {
+            final String answer = q.optString("answer");
+            JSONArray options = q.optJSONArray("options");
+            correct = answer.equals(quizPicked);
+            for (int i = 0; options != null && i < options.length(); i++) {
+                final String option = options.optString(i);
+                int fill = th.panel;
+                int ink = th.ink;
+                int stroke = th.dash;
+                if (answered && option.equals(answer)) {
+                    fill = th.accent2;
+                    ink = th.onAccent2;
+                    stroke = th.accent2;
+                } else if (answered && option.equals(quizPicked)) {
+                    fill = th.accentSoft;
+                    ink = th.accent;
+                    stroke = th.accent;
+                } else if (answered) {
+                    ink = th.ghost;
+                }
+                Button b = flatButton(option, fill, ink, stroke, 15, 54);
+                b.setTypeface(uiFace(sansBold));
+                b.setTextSize(15);
+                b.setAllCaps(false);
+                if (!answered) {
+                    b.setOnClickListener(v -> {
+                        quizPicked = option;
+                        recordQuizAnswer(qi, option.equals(answer));
+                    });
+                }
+                content.addView(b, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(54)));
+                addGap(content, 8);
+            }
+        }
+
+        if (answered) {
+            addGap(content, 10);
+            LinearLayout box = vertical();
+            box.setPadding(dp(14), dp(12), dp(14), dp(12));
+            box.setBackground(leftBorderBox(th.panel, correct ? th.accent2 : th.accent, 4));
+            String verdict;
+            if ("type".equals(q.optString("kind"))) {
+                verdict = quizVerdict == LearningLogic.ANSWER_DIACRITICS
+                        ? t("Almost: check the Polish letters.", "Prawie: sprawdź polskie litery.")
+                        : (correct ? t("Correct!", "Dobrze!") : t("Not quite.", "Jeszcze nie."));
+                box.addView(uiText(verdict, 16, correct ? th.accent2Text : th.accent, sansBold));
+                box.addView(bodyText(q.optString("model"), 15, th.ink));
+            } else {
+                verdict = correct ? t("Correct!", "Dobrze!")
+                        : t("Not quite. The answer is ", "Jeszcze nie. Poprawnie: ") + q.optString("answer");
+                box.addView(uiText(verdict, 16, correct ? th.accent2Text : th.accent, sansBold));
+                if (!q.optString("explain").isEmpty()) {
+                    box.addView(bodyText(q.optString("explain"), 13.5f, th.body));
+                }
+            }
+            final String say = quizSay(q);
+            if (!say.isEmpty()) {
+                LinearLayout tools = row();
+                Button hear = flatButton("🔊 " + t("Hear it", "Posłuchaj"), th.panel, th.ink, th.dash, 12, 34);
+                hear.setOnClickListener(v -> speak(say, new Locale("pl", "PL")));
+                tools.addView(hear, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(34)));
+                Button sayIt = flatButton("🎤 " + t("Say it", "Powiedz"), th.panel, th.ink, th.dash, 12, 34);
+                sayIt.setOnClickListener(v -> checkPronunciation(say));
+                LinearLayout.LayoutParams sp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(34));
+                sp.setMargins(dp(8), 0, 0, 0);
+                tools.addView(sayIt, sp);
+                box.addView(tools, topMarginParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT, 10));
+            }
+            content.addView(box);
+            addGap(content, 14);
+            Button next = filledButton(quizPos + 1 >= quizQueue.size() ? t("Finish", "Zakończ") : t("Continue", "Dalej"),
+                    correct ? th.accent2 : th.accent, correct ? th.onAccent2 : th.onAccent, 15, 52);
+            next.setOnClickListener(v -> {
+                quizPos++;
+                quizPicked = null;
+                quizVerdict = -1;
+                quizTyped = "";
+                if (quizPos >= quizQueue.size()) {
+                    finishLesson(lesson);
+                } else {
+                    render();
+                }
+            });
+            content.addView(next, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(52)));
+        }
+    }
+
+    /**
+     * Counts first tries only. A miss is asked again once at the end, so the
+     * lesson closes on the right answer rather than on a wrong one.
+     */
+    private void recordQuizAnswer(int qi, boolean right) {
+        boolean firstTime = quizPos < quizTotal;
+        if (right && firstTime) {
+            quizFirstTry++;
+        }
+        if (!right && firstTime && !quizMissed.contains(qi)) {
+            quizMissed.add(qi);
+            quizQueue.add(qi);
+        }
+        render();
+    }
+
+    private void finishLesson(JSONObject lesson) {
+        String id = lesson.optString("id");
+        courseDone.add(id);
+        Integer best = courseBest.get(id);
+        if (best == null || quizFirstTry > best) {
+            courseBest.put(id, quizFirstTry);
+        }
+        saveCourseProgress();
+        lessonStage = 2;
+        render();
+    }
+
+    private void renderLessonDone(LinearLayout content, int[] at) {
+        Theme th = theme();
+        final JSONObject lesson = lessonAt(at);
+        final String id = lesson.optString("id");
+        final String next = lessonAfter(id);
+        LinearLayout done = vertical();
+        done.setGravity(Gravity.CENTER);
+        done.setPadding(dp(16), dp(40), dp(16), dp(16));
+        TextView kicker = label(t("LESSON COMPLETE", "LEKCJA UKOŃCZONA"), th.accent2Text, 11.5f, 0.16f);
+        kicker.setGravity(Gravity.CENTER);
+        done.addView(kicker, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        TextView title = serifText(lesson.optString("title"), 26, th.ink);
+        title.setGravity(Gravity.CENTER);
+        done.addView(title, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 10));
+        if (quizTotal > 0) {
+            TextView score = serifText(quizFirstTry + " / " + quizTotal, 44, th.accent);
+            done.addView(score, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 14));
+            String note = quizFirstTry == quizTotal ? t("Perfect, all right first time.", "Idealnie, wszystko za pierwszym razem.")
+                    : t("right first time. The ones you missed came back until you got them.",
+                    "dobrze za pierwszym razem. Pomyłki wróciły, aż je poprawisz.");
+            TextView n = bodyText(quizFirstTry == quizTotal ? note : note, 13.5f, th.muted);
+            n.setGravity(Gravity.CENTER);
+            done.addView(n, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 6));
+        }
+        TextView progress = uiText(courseDone.size() + " / " + courseLessonCount() + t(" lessons done", " lekcji ukończonych"),
+                12.5f, th.faint, sansBold);
+        done.addView(progress, topMarginParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 16));
+        content.addView(done);
+        addGap(content, 18);
+        if (next != null) {
+            Button go = filledButton(t("Next: ", "Dalej: ") + lessonAt(findLesson(next)).optString("title") + " ›",
+                    th.accent, th.onAccent, 15, 52);
+            go.setSingleLine(true);
+            go.setEllipsize(TextUtils.TruncateAt.END);
+            go.setOnClickListener(v -> openLesson(next));
+            content.addView(go, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(52)));
+            addGap(content, 10);
+        }
+        if (lesson.optJSONArray("quiz").length() > 0) {
+            Button again = flatButton(t("Retake the quiz", "Powtórz quiz"), th.panel, th.ink, th.dash, 14, 46);
+            again.setOnClickListener(v -> startQuiz(lesson));
+            content.addView(again, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(46)));
+            addGap(content, 10);
+        }
+        Button map = flatButton(t("Back to the course", "Wróć do kursu"), th.panel, th.muted, th.dash, 14, 46);
+        map.setOnClickListener(v -> {
+            courseLesson = null;
+            lessonStage = 0;
+            render();
+        });
+        content.addView(map, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(46)));
+    }
+
     // ---- grammar & vocabulary guide -----------------------------------------
 
     /** Identifies "the same page", so a re-render of it keeps its scroll. */
     private String scrollKey() {
         return screen + "|" + guideChapter + "|" + openDialogId + "|" + dialogPage + "|"
-                + newsIndex + "|" + readShowsDialogs;
+                + newsIndex + "|" + readShowsDialogs + "|" + courseLesson + "|" + lessonStage + "|" + quizPos;
     }
 
     private void loadGuide() {
         guideChapters.clear();
+        courseUnits.clear();
         try {
-            JSONArray chapters = new JSONObject(readAsset("grammar_guide.json")).getJSONArray("chapters");
+            JSONObject root = new JSONObject(readAsset("grammar_guide.json"));
+            JSONArray chapters = root.getJSONArray("chapters");
             for (int i = 0; i < chapters.length(); i++) {
                 guideChapters.add(chapters.getJSONObject(i));
             }
+            JSONObject course = root.optJSONObject("course");
+            JSONArray units = course == null ? null : course.optJSONArray("units");
+            for (int i = 0; units != null && i < units.length(); i++) {
+                courseUnits.add(units.getJSONObject(i));
+            }
         } catch (Exception ignored) {
             // No guide is not fatal; the menu entry simply has nothing to show.
+        }
+        SharedPreferences coursePrefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        for (String id : coursePrefs.getString("courseDone", "").split(",")) {
+            if (!id.trim().isEmpty()) {
+                courseDone.add(id.trim());
+            }
+        }
+        try {
+            JSONObject best = new JSONObject(coursePrefs.getString("courseBest", "{}"));
+            java.util.Iterator<String> keys = best.keys();
+            while (keys.hasNext()) {
+                String k = keys.next();
+                courseBest.put(k, best.optInt(k));
+            }
+        } catch (Exception ignored) {
         }
         try {
             String saved = getSharedPreferences(PREFS, MODE_PRIVATE).getString("guideAnswers", "");
@@ -1613,7 +2361,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             sb.append(body);
             int end = sb.length();
             if (bold) {
-                sb.setSpan(new FaceSpan(sansBold), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                sb.setSpan(new FaceSpan(uiFace(sansBold)), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
             if (polish) {
                 sb.setSpan(new android.text.style.ForegroundColorSpan(th.accent2Text), start, end,
@@ -1954,7 +2702,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         study.setOnClickListener(v -> {
             List<Phrase> copy = new ArrayList<>(pool);
             Collections.shuffle(copy);
-            pendingReturnScreen = SCREEN_GUIDE;
+            pendingReturnScreen = screen;   // back to the course lesson or the guide
             sessionRepeatPool = new ArrayList<>(pool);
             beginSession(copy, 0);
         });
@@ -1988,9 +2736,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         content.addView(bodyText(t("Short lessons in reading order, each with a self-check.", "Krótkie lekcje w kolejności nauki, każda z auto-sprawdzeniem."), 13, th.muted));
         addGap(content, 12);
         if (!guideChapters.isEmpty()) {
-            content.addView(listRow("📘 " + t("Full grammar & vocabulary guide", "Pełny przewodnik"), "›",
+            content.addView(listRow("📘 " + t("Grammar course: lessons with quizzes", "Kurs gramatyki: lekcje i quizy"), "›",
                     th.accentSoft, th.accent, th.accent, () -> {
-                        screen = SCREEN_GUIDE;
+                        screen = SCREEN_COURSE;
                         render();
                     }), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -4332,8 +5080,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         Theme th = theme();
         content.addView(screenTitle(t("More", "Więcej")));
         addGap(content, 14);
-        addMoreRow(content, t("Grammar guide", "Przewodnik gramatyczny"),
-                t("16 chapters · 500 words · practice", "16 rozdziałów · 500 słów · ćwiczenia"), SCREEN_GUIDE, th.accent2);
+        addMoreRow(content, t("Grammar course", "Kurs gramatyki"),
+                courseDone.size() + " / " + courseLessonCount() + t(" lessons done", " lekcji ukończonych"),
+                SCREEN_COURSE, th.accent2);
         addMoreRow(content, t("Grammar", "Gramatyka"), t("23 lessons with self-checks", "23 lekcje z autotestem"), SCREEN_GRAMMAR, th.accent);
         addMoreRow(content, t("Alphabet", "Alfabet"), t("39 letters and sounds", "39 liter i dźwięków"), SCREEN_ALPHABET, th.accent2);
         addMoreRow(content, t("Translate", "Tłumacz"), t("Dictionary, word lists, imports", "Słownik, listy słów, import"), SCREEN_TRANSLATE, th.accent3);
@@ -4357,6 +5106,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         row.addView(uiText("›", 20, th.ghost, sansBold));
         row.setOnClickListener(v -> {
             screen = target;
+            if (SCREEN_COURSE.equals(target)) {
+                courseLesson = null;
+                lessonStage = 0;
+            }
             render();
         });
         content.addView(shadowWrap(row, 4));
@@ -4523,7 +5276,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         // long words (Translate, Grammar) can't bleed into their neighbours.
         // Console themes label the nav in their display face; the floor keeps
         // the widest pixel face from dropping below a readable size.
-        boolean pixelNav = !"baloo".equals(th.displayFont);
+        boolean pixelNav = pixelDisplay();
         TextView label = uiText(text, pixelNav ? Math.max(8f, displaySize(9.5f)) : 9.5f, color,
                 pixelNav ? displayFaceLight() : sansBold);
         label.setGravity(Gravity.CENTER);
@@ -6949,6 +7702,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             pixelifySemi = getResources().getFont(R.font.pixelify_semibold);
             jerseyRegular = getResources().getFont(R.font.jersey15_regular);
             pressStart = getResources().getFont(R.font.pressstart2p_regular);
+            bookRegular = getResources().getFont(R.font.literata_regular);
+            bookBold = getResources().getFont(R.font.literata_bold);
+            bookDisplay = getResources().getFont(R.font.literata_display);
         } else {
             sansRegular = Typeface.create("sans-serif", Typeface.NORMAL);
             sansMedium = Typeface.create("sans-serif", Typeface.BOLD);
@@ -6962,6 +7718,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             pixelifySemi = serifBold;
             jerseyRegular = serifBold;
             pressStart = serifBold;
+            bookRegular = Typeface.create(Typeface.SERIF, Typeface.NORMAL);
+            bookBold = Typeface.create(Typeface.SERIF, Typeface.BOLD);
+            bookDisplay = bookBold;
         }
     }
 
@@ -7025,6 +7784,18 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 .display("jersey", 0.82f, 0f, 22f)
                 .effects(false, true, true, false, true));
 
+        // BOOK: a printed page. Aged paper, ink-brown text, oxblood rubrics
+        // for headings and buttons, ink-blue Polish, everything set in
+        // Literata (the reading face of Google Play Books), hairline rules
+        // and nearly square corners.
+        themes.put("Książka", new Theme(
+                "#f3ead6", "#fbf7ec", "#2a2118", "#3a2e22", "#6d5c49", "#95836c", "#c4b49b",
+                "#e4d8bf", "#cdbb9c", "#d8c8a8",
+                "#8a2c1f", "#d9b36a", "#f1e1cf", "#fbf7ec",
+                "#24426b", "#fbf7ec", "#24426b", "#a8822f", 2, 1.2f, false)
+                .display("literata", 0.95f, 0f, 30f)
+                .book());
+
         // HANDHELD COLOUR: square-cornered pocket console, thick borders.
         themes.put("Kieszonka", new Theme(
                 "#d6efe9", "#ffffff", "#173a3a", "#173a3a", "#4f7a78", "#8fb0ae", "#eaf6f3",
@@ -7067,6 +7838,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         if ("pressstart".equals(font)) {
             return pressStart;
         }
+        if ("literata".equals(font)) {
+            return bookDisplay;
+        }
         return serifBold;
     }
 
@@ -7108,17 +7882,37 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     private TextView label(String text, int color, float size, float letterSpacing) {
         Theme th = theme();
-        boolean pixel = !"baloo".equals(th.displayFont);
+        boolean pixel = pixelDisplay();
         // Console kickers are set in the display face. Pixel faces are already
         // wide, so they take less tracking and a size floor keeps the smallest
         // ones (Press Start 2P) readable.
         float size2 = pixel ? Math.max(8f, displaySize(size)) : size;
         TextView view = uiText(text.toUpperCase(Locale.ROOT), size2, color,
-                pixel ? displayFaceLight() : sansBold);
+                pixel ? displayFaceLight() : sansBold);   // uiText maps this for the book theme
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             view.setLetterSpacing(pixel ? letterSpacing * 0.4f : letterSpacing);
         }
         return view;
+    }
+
+    /** Pixel faces need tighter tracking and a size floor; book and cartoon faces do not. */
+    private boolean pixelDisplay() {
+        String f = theme().displayFont;
+        return "pixelify".equals(f) || "jersey".equals(f) || "pressstart".equals(f);
+    }
+
+    /** In the book theme every UI face maps onto the book serif. */
+    private Typeface uiFace(Typeface typeface) {
+        if (!theme().bookText) {
+            return typeface;
+        }
+        if (typeface == sansRegular) {
+            return bookRegular;
+        }
+        if (typeface == sansMedium || typeface == sansSemiBold || typeface == sansBold) {
+            return bookBold;
+        }
+        return typeface;
     }
 
     private TextView uiText(String text, float size, int color, Typeface typeface) {
@@ -7126,7 +7920,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         view.setText(text);
         view.setTextSize(size);
         view.setTextColor(color);
-        view.setTypeface(typeface);
+        view.setTypeface(uiFace(typeface));
         view.setIncludeFontPadding(true);
         return view;
     }
@@ -7495,6 +8289,13 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         boolean mastheadStripe = false;// colour block stripe under the wordmark
         boolean glow = false;          // blurred neon shadow instead of hard
         boolean pillButtons = true;    // cartoon pills vs console rectangles
+        boolean bookText = false;      // set body and UI text in the book serif too
+
+        Theme book() {
+            this.bookText = true;
+            this.pillButtons = false;
+            return this;
+        }
 
         Theme display(String font, float scale, float max, float wordmarkSp) {
             this.displayFont = font;
