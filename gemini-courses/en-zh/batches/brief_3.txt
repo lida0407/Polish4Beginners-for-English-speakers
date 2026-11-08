@@ -1,0 +1,355 @@
+You are adapting a set of spoken-practice scenarios into an English-learning course for adult Chinese speakers (Simplified Chinese, mainland usage) at CEFR level A1 or A2, as given per scenario.
+
+The scenarios come from a Polish course; the English text below was written as glosses of Polish lines. Your job:
+1. Make every English line natural spoken English that a friendly native speaker would say in that situation, at the scenario's level (A1: short, present tense, very common words; A2: everyday topics, past/future allowed). Keep the meaning and the situation. Keep it short.
+2. Clean the learner phrases: remove gender markers like "(m / f)", remove notes in brackets, and turn each into a phrase the learner would actually say in English (e.g. "I'm a programmer (m / f)" -> "I'm a programmer"; "@ / dot" -> "at / dot"). Keep 4 to 6 phrases.
+3. Character names: keep the names, but drop Polish titles in English: "Pan Marek" -> "Marek", "Pani Basia" -> "Basia", "Doktor Nowak" -> "Dr Nowak", "Sierżant Lis" -> "Officer Lis". The setting stays in Kraków, Poland; Polish dishes and places (pierogi, żurek, bar mleczny, Wigilia, Zakopane) may stay, but explain them briefly in the Chinese.
+4. Translate everything into natural Simplified Chinese (not word-for-word, no pinyin). Chinese for a phrase gives its meaning so a Chinese speaker knows when to use it.
+5. Write one English grammar focus that fits each scene at its level, for a Chinese speaker (for example "I'd like + noun for polite orders", "How much is / are…?", "past simple: I went, I saw"), in English with a short Chinese explanation.
+
+Output ONLY a JSON array, no prose, no code fences. One object per input scenario, same order, exactly these keys:
+{"id": same as input,
+ "title": {"en": "...", "zh": "..."},
+ "can_do": {"en": "I can ...", "zh": "..."},
+ "scene": {"en": "...", "zh": "..."},
+ "learner_role": {"en": "...", "zh": "..."},
+ "mission": [{"en": "...", "zh": "..."}, {"en": "...", "zh": "..."}, {"en": "...", "zh": "..."}],
+ "complication": {"en": "...", "zh": "..."},
+ "opener": {"en": "...", "zh": "..."},
+ "first_question": {"en": "...", "zh": "..."},
+ "closer": {"en": "...", "zh": "..."},
+ "phrases": [{"en": "...", "zh": "..."}],
+ "grammar_focus": {"en": "...", "zh": "..."}}
+Use straight double quotes for JSON and keep the JSON valid. Do not write or edit any files.
+
+Scenarios:
+[
+ {
+  "id": "at-the-doctor",
+  "level": "A2",
+  "unit": "Health",
+  "character": "Doktor Nowak",
+  "character_bio": "45, Ewa Nowak, a family doctor",
+  "title": "At the doctor's",
+  "can_do": "describe symptoms and understand advice",
+  "scene": "Doktor Nowak's surgery",
+  "learner_role": "a patient",
+  "mission": [
+   "Describe your symptoms",
+   "Say how long you've had them",
+   "Ask a question about the treatment"
+  ],
+  "complication": "She asks if you're allergic to anything; you're allergic to penicillin.",
+  "opener": "Good morning. Please sit down.",
+  "first_question": "What's the matter?",
+  "closer": "Take these tablets and rest. Get well soon!",
+  "phrases": [
+   "I have a headache / a sore throat",
+   "I have a fever",
+   "For three days",
+   "I'm allergic to penicillin (m / f)",
+   "How many times a day?",
+   "Can I go to work?"
+  ]
+ },
+ {
+  "id": "pharmacy",
+  "level": "A2",
+  "unit": "Health",
+  "character": "Pani Ela",
+  "character_bio": "40, a pharmacist",
+  "title": "At the pharmacy",
+  "can_do": "ask for medicine and understand how to take it",
+  "scene": "a pharmacy; you need something for a cold",
+  "learner_role": "a customer",
+  "mission": [
+   "Say what's wrong",
+   "Ask for something without a prescription",
+   "Ask how to take it"
+  ],
+  "complication": "What you ask for needs a prescription; she suggests something else.",
+  "opener": "Hello, how can I help?",
+  "first_question": "What are you looking for?",
+  "closer": "Drink plenty and rest. Goodbye!",
+  "phrases": [
+   "I have a runny nose and a cough",
+   "Something for a cold, please",
+   "Is this prescription-only?",
+   "How do I take it?",
+   "Twice a day, after meals"
+  ]
+ },
+ {
+  "id": "calling-in-sick",
+  "level": "A2",
+  "unit": "Health",
+  "character": "Ania",
+  "character_bio": "35, the learner's team lead at work, from Warsaw",
+  "title": "Calling in sick",
+  "can_do": "explain you're ill and rearrange work",
+  "scene": "you call Ania, your team lead, early in the morning",
+  "learner_role": "a member of her team",
+  "mission": [
+   "Say you're ill and can't come in",
+   "Say what's wrong",
+   "Agree what happens with today's meeting"
+  ],
+  "complication": "She asks if you could join the meeting online.",
+  "opener": "Hello, hi! Has something happened?",
+  "first_question": "Is everything OK?",
+  "closer": "Get well soon! Get in touch tomorrow.",
+  "phrases": [
+   "I'm ill (m / f)",
+   "I won't come to work today",
+   "I have a fever",
+   "Can we move the meeting?",
+   "I can join online",
+   "I'll be back on Thursday"
+  ]
+ },
+ {
+  "id": "at-the-gym",
+  "level": "A2",
+  "unit": "Health",
+  "character": "Tomek",
+  "character_bio": "31, physiotherapist, the learner's friend",
+  "title": "At the gym",
+  "can_do": "talk about sport and say what's too hard",
+  "scene": "Tomek takes you to his gym for the first time",
+  "learner_role": "his friend",
+  "mission": [
+   "Say what sport you do and how often",
+   "Say what's hard for you",
+   "Agree on a plan"
+  ],
+  "complication": "He pushes you to try something too hard; say it hurts.",
+  "opener": "So, shall we work out?",
+  "first_question": "What sport do you like?",
+  "closer": "Well done! Until next time!",
+  "phrases": [
+   "I play football",
+   "I swim",
+   "I run twice a week",
+   "That's too hard",
+   "My knee hurts",
+   "Let's take a break"
+  ]
+ },
+ {
+  "id": "your-weekend",
+  "level": "A2",
+  "unit": "What happened?",
+  "character": "Kasia",
+  "character_bio": "22, computer science student, the learner's friend",
+  "title": "How was your weekend?",
+  "can_do": "say what you did and where you were",
+  "scene": "Monday morning coffee with Kasia",
+  "learner_role": "her friend",
+  "mission": [
+   "Say two things you did at the weekend",
+   "Say where you were",
+   "Ask about her weekend"
+  ],
+  "complication": "She doesn't believe your story; add one more detail.",
+  "opener": "So, how was the weekend?",
+  "first_question": "What did you do?",
+  "closer": "OK, I'm off to class. Bye!",
+  "phrases": [
+   "I was at the cinema (m / f)",
+   "I met up with friends (m / f)",
+   "I rested (m / f)",
+   "It was great / boring",
+   "And what did you do? (to Kasia)"
+  ]
+ },
+ {
+  "id": "trip-to-gdansk",
+  "level": "A2",
+  "unit": "What happened?",
+  "character": "Pan Marek",
+  "character_bio": "68, retired tram driver, the learner's neighbour",
+  "title": "A trip to Gdańsk",
+  "can_do": "describe a trip and give an opinion",
+  "scene": "Pan Marek asks about your trip to Gdańsk",
+  "learner_role": "his neighbour",
+  "mission": [
+   "Say how you travelled and how long it took",
+   "Say what you saw",
+   "Say what you liked most"
+  ],
+  "complication": "He insists Kraków is more beautiful; disagree politely.",
+  "opener": "Oh, hello! I hear you were at the seaside?",
+  "first_question": "How was Gdańsk?",
+  "closer": "Well, next time bring me some amber! Goodbye.",
+  "phrases": [
+   "I went by train (m / f)",
+   "The journey took five hours",
+   "I saw the old town (m / f)",
+   "I liked the sea most",
+   "In my opinion…"
+  ]
+ },
+ {
+  "id": "funny-story",
+  "level": "A2",
+  "unit": "What happened?",
+  "character": "Tomek",
+  "character_bio": "31, physiotherapist, the learner's friend",
+  "title": "You won't believe it!",
+  "can_do": "tell a short story in order",
+  "scene": "an evening chat; Tomek has a story and wants to hear yours",
+  "learner_role": "his friend",
+  "mission": [
+   "Tell a short story about something that happened to you",
+   "React to his story",
+   "Use first, then, finally"
+  ],
+  "complication": "He interrupts with questions; answer and carry on.",
+  "opener": "You won't believe what happened to me today!",
+  "first_question": "And did anything interesting happen to you today?",
+  "closer": "Ha! Good story. Good night!",
+  "phrases": [
+   "First…, then…, finally…",
+   "You won't believe it!",
+   "I lost my phone (m / f)",
+   "Luckily…",
+   "Unfortunately…",
+   "Really?"
+  ]
+ },
+ {
+  "id": "lost-wallet",
+  "level": "A2",
+  "unit": "What happened?",
+  "character": "Sierżant Lis",
+  "character_bio": "40, Piotr Lis, a police officer at the city police station",
+  "title": "A stolen wallet",
+  "can_do": "report what happened and describe an object",
+  "scene": "a police station; your wallet was stolen on the tram",
+  "learner_role": "the person reporting it",
+  "mission": [
+   "Say what happened and when",
+   "Describe the wallet and what was in it",
+   "Give your contact details"
+  ],
+  "complication": "He asks where exactly it happened, and you're not sure.",
+  "opener": "Good afternoon. How can I help?",
+  "first_question": "What happened?",
+  "closer": "Report taken. We'll call if we find anything.",
+  "phrases": [
+   "My wallet was stolen",
+   "On the tram, yesterday evening",
+   "It was black, leather",
+   "My cards and ID card were in it",
+   "I'm not sure (m / f)"
+  ]
+ },
+ {
+  "id": "return-jacket",
+  "level": "A2",
+  "unit": "Shops and services",
+  "character": "Pani Monika",
+  "character_bio": "28, a shop assistant in a clothes store",
+  "title": "Returning a jacket",
+  "can_do": "return or exchange something and explain why",
+  "scene": "a clothes shop; the jacket you bought is too small",
+  "learner_role": "a customer",
+  "mission": [
+   "Say you want to return or exchange it",
+   "Say what's wrong",
+   "Choose another size or colour"
+  ],
+  "complication": "You don't have the receipt; you paid by card.",
+  "opener": "Hello! How can I help?",
+  "first_question": "Something wrong with the jacket?",
+  "closer": "All done. Thank you and come again!",
+  "phrases": [
+   "I'd like to return this jacket (m / f)",
+   "It's too small",
+   "Can I exchange it for a bigger one?",
+   "I don't have the receipt",
+   "I paid by card (m / f)"
+  ]
+ },
+ {
+  "id": "post-office",
+  "level": "A2",
+  "unit": "Shops and services",
+  "character": "Pani Wiesia",
+  "character_bio": "57, a clerk at the post office",
+  "title": "Sending a parcel",
+  "can_do": "send a parcel and choose a service",
+  "scene": "the post office; you're sending a parcel abroad",
+  "learner_role": "a customer",
+  "mission": [
+   "Say where you're sending it",
+   "Choose fast or cheap",
+   "Answer her questions about the contents"
+  ],
+  "complication": "The parcel is too big for the box; buy a bigger one.",
+  "opener": "Next, please.",
+  "first_question": "Where's the parcel going?",
+  "closer": "Here's the tracking number. Goodbye.",
+  "phrases": [
+   "I want to send a parcel to England",
+   "How long will it take?",
+   "As cheaply as possible",
+   "There are books inside",
+   "A bigger box, please"
+  ]
+ },
+ {
+  "id": "bank-account",
+  "level": "A2",
+  "unit": "Shops and services",
+  "character": "Pan Tadeusz",
+  "character_bio": "45, an adviser at a bank branch",
+  "title": "Opening a bank account",
+  "can_do": "open an account and ask about costs",
+  "scene": "a bank branch",
+  "learner_role": "a new customer",
+  "mission": [
+   "Say you want to open an account",
+   "Answer his questions about ID and address",
+   "Ask about the card and fees"
+  ],
+  "complication": "You need a Polish phone number; give one or ask what else works.",
+  "opener": "Good morning, come in. Please take a seat.",
+  "first_question": "How can I help?",
+  "closer": "All done. The card will come by post.",
+  "phrases": [
+   "I want to open an account",
+   "I have a passport",
+   "My address is…",
+   "How much is the card?",
+   "Is there an account fee?"
+  ]
+ },
+ {
+  "id": "hairdresser",
+  "level": "A2",
+  "unit": "Shops and services",
+  "character": "Pani Jola",
+  "character_bio": "38, a hairdresser who loves to chat",
+  "title": "At the hairdresser's",
+  "can_do": "say how you want something done and stop a mistake",
+  "scene": "a hair salon",
+  "learner_role": "a client",
+  "mission": [
+   "Say what you want: a trim, shorter, a colour",
+   "Say how short",
+   "Chat about your week"
+  ],
+  "complication": "She starts cutting too much; stop her politely.",
+  "opener": "Hello! Have a seat!",
+  "first_question": "So, what are we doing?",
+  "closer": "And done! Do you like it?",
+  "phrases": [
+   "Just a trim",
+   "Short at the sides",
+   "Not too short, please",
+   "Just a moment, that's enough!",
+   "I really like it"
+  ]
+ }
+]

@@ -1,0 +1,355 @@
+You are adapting a set of spoken-practice scenarios into an English-learning course for adult Chinese speakers (Simplified Chinese, mainland usage) at CEFR level A1 or A2, as given per scenario.
+
+The scenarios come from a Polish course; the English text below was written as glosses of Polish lines. Your job:
+1. Make every English line natural spoken English that a friendly native speaker would say in that situation, at the scenario's level (A1: short, present tense, very common words; A2: everyday topics, past/future allowed). Keep the meaning and the situation. Keep it short.
+2. Clean the learner phrases: remove gender markers like "(m / f)", remove notes in brackets, and turn each into a phrase the learner would actually say in English (e.g. "I'm a programmer (m / f)" -> "I'm a programmer"; "@ / dot" -> "at / dot"). Keep 4 to 6 phrases.
+3. Character names: keep the names, but drop Polish titles in English: "Pan Marek" -> "Marek", "Pani Basia" -> "Basia", "Doktor Nowak" -> "Dr Nowak", "Sierżant Lis" -> "Officer Lis". The setting stays in Kraków, Poland; Polish dishes and places (pierogi, żurek, bar mleczny, Wigilia, Zakopane) may stay, but explain them briefly in the Chinese.
+4. Translate everything into natural Simplified Chinese (not word-for-word, no pinyin). Chinese for a phrase gives its meaning so a Chinese speaker knows when to use it.
+5. Write one English grammar focus that fits each scene at its level, for a Chinese speaker (for example "I'd like + noun for polite orders", "How much is / are…?", "past simple: I went, I saw"), in English with a short Chinese explanation.
+
+Output ONLY a JSON array, no prose, no code fences. One object per input scenario, same order, exactly these keys:
+{"id": same as input,
+ "title": {"en": "...", "zh": "..."},
+ "can_do": {"en": "I can ...", "zh": "..."},
+ "scene": {"en": "...", "zh": "..."},
+ "learner_role": {"en": "...", "zh": "..."},
+ "mission": [{"en": "...", "zh": "..."}, {"en": "...", "zh": "..."}, {"en": "...", "zh": "..."}],
+ "complication": {"en": "...", "zh": "..."},
+ "opener": {"en": "...", "zh": "..."},
+ "first_question": {"en": "...", "zh": "..."},
+ "closer": {"en": "...", "zh": "..."},
+ "phrases": [{"en": "...", "zh": "..."}],
+ "grammar_focus": {"en": "...", "zh": "..."}}
+Use straight double quotes for JSON and keep the JSON valid. Do not write or edit any files.
+
+Scenarios:
+[
+ {
+  "id": "hello-neighbour",
+  "level": "A1",
+  "unit": "First days in Kraków",
+  "character": "Pan Marek",
+  "character_bio": "68, retired tram driver, the learner's neighbour",
+  "title": "Hello, neighbour",
+  "can_do": "introduce yourself and say where you are from",
+  "scene": "the stairwell of your new block of flats; you have just moved in",
+  "learner_role": "the new neighbour",
+  "mission": [
+   "Say hello and tell him your name",
+   "Say where you are from",
+   "Ask him one question"
+  ],
+  "complication": "He mishears your name; say it again or spell it.",
+  "opener": "Good morning! I'm Marek, I live at number seven.",
+  "first_question": "And you're the new neighbour?",
+  "closer": "Very nice to meet you. Goodbye!",
+  "phrases": [
+   "Good morning / hello",
+   "My name is…",
+   "I'm from England / India / China",
+   "Nice to meet you",
+   "Sorry, what?",
+   "And you? (to a man, formal)"
+  ]
+ },
+ {
+  "id": "first-coffee",
+  "level": "A1",
+  "unit": "First days in Kraków",
+  "character": "Ola",
+  "character_bio": "26, barista at Kawiarnia pod Lipą, a small café in Kazimierz, Kraków",
+  "title": "Your first coffee",
+  "can_do": "order a drink and a snack and pay",
+  "scene": "Kawiarnia pod Lipą, a small café in Kazimierz; your first visit",
+  "learner_role": "a customer",
+  "mission": [
+   "Order a drink",
+   "Order something to eat",
+   "Ask how much it is and pay"
+  ],
+  "complication": "The cheesecake (sernik) has just sold out; choose something else.",
+  "opener": "Hello! What can I get you?",
+  "first_question": "Coffee, tea? We also have fresh cheesecake today.",
+  "closer": "Enjoy! See you!",
+  "phrases": [
+   "A coffee, please",
+   "Tea with lemon, please",
+   "To have here / to take away",
+   "How much do I pay?",
+   "Can I pay by card?",
+   "Thank you"
+  ]
+ },
+ {
+  "id": "new-colleague",
+  "level": "A1",
+  "unit": "First days in Kraków",
+  "character": "Ania",
+  "character_bio": "35, the learner's team lead at work, from Warsaw",
+  "title": "A new colleague",
+  "can_do": "say what you do and where you live",
+  "scene": "the office kitchen on your first day at work",
+  "learner_role": "the new colleague",
+  "mission": [
+   "Say what your job is",
+   "Say where you live",
+   "Ask her one question"
+  ],
+  "complication": "She thinks you work in another team; correct her.",
+  "opener": "Hi! Are you new?",
+  "first_question": "I'm Ania from marketing. Which department do you work in?",
+  "closer": "OK, I have to run to a meeting. See you!",
+  "phrases": [
+   "I'm a programmer (m / f)",
+   "I work in IT",
+   "I live in the centre",
+   "No, I work in…",
+   "And you?"
+  ]
+ },
+ {
+  "id": "how-are-you",
+  "level": "A1",
+  "unit": "First days in Kraków",
+  "character": "Kasia",
+  "character_bio": "22, computer science student, the learner's friend",
+  "title": "How are you?",
+  "can_do": "say how you are and what you are doing",
+  "scene": "a video call with your friend Kasia late in the evening",
+  "learner_role": "her friend",
+  "mission": [
+   "Say how you are",
+   "Say what you are doing right now",
+   "Ask what she is doing"
+  ],
+  "complication": "Her internet keeps cutting out; ask her to repeat.",
+  "opener": "Hey! Can you hear me?",
+  "first_question": "How are you? What are you doing?",
+  "closer": "OK, I'm going to bed. Good night!",
+  "phrases": [
+   "Fine, thanks",
+   "I'm tired (m / f)",
+   "Right now I'm cooking / reading / watching a film",
+   "I can't hear you",
+   "Can you repeat that?"
+  ]
+ },
+ {
+  "id": "tram-tickets",
+  "level": "A1",
+  "unit": "Numbers and shopping",
+  "character": "Pan Zbyszek",
+  "character_bio": "50, runs a kiosk at a tram stop and drives a taxi at weekends",
+  "title": "Tram tickets",
+  "can_do": "buy tickets and understand prices",
+  "scene": "Pan Zbyszek's kiosk at a tram stop",
+  "learner_role": "a customer",
+  "mission": [
+   "Ask for tickets: how many and what kind",
+   "Ask the price",
+   "Pay and say thank you"
+  ],
+  "complication": "He has no change for a 100-złoty note.",
+  "opener": "Hello, yes?",
+  "first_question": "Which tickets? Standard or reduced?",
+  "closer": "Here you are. Have a nice day!",
+  "phrases": [
+   "Two tickets, please",
+   "Standard / reduced",
+   "How much is it?",
+   "I don't have small change",
+   "Can I pay by card?"
+  ]
+ },
+ {
+  "id": "at-the-market",
+  "level": "A1",
+  "unit": "Numbers and shopping",
+  "character": "Pani Basia",
+  "character_bio": "55, owns a fruit and vegetable stall at Stary Kleparz market and rents out a small flat",
+  "title": "At the market",
+  "can_do": "buy food by weight and pay",
+  "scene": "Pani Basia's fruit and vegetable stall at Stary Kleparz market",
+  "learner_role": "a customer",
+  "mission": [
+   "Buy a kilo of apples",
+   "Buy one more thing",
+   "Ask the total and pay"
+  ],
+  "complication": "She tries to sell you strawberries as well; say no politely.",
+  "opener": "Hello, dear! What will it be today?",
+  "first_question": "I've got beautiful Polish apples. How many?",
+  "closer": "Thank you, dear. Come again!",
+  "phrases": [
+   "A kilo of apples, please",
+   "Half a kilo of tomatoes",
+   "That's all",
+   "No, thank you",
+   "How much do I pay?"
+  ]
+ },
+ {
+  "id": "swapping-numbers",
+  "level": "A1",
+  "unit": "Numbers and shopping",
+  "character": "Kasia",
+  "character_bio": "22, computer science student, the learner's friend",
+  "title": "Swapping numbers",
+  "can_do": "give and check a phone number and an email address",
+  "scene": "after a party; Kasia wants your phone number and email",
+  "learner_role": "her new friend",
+  "mission": [
+   "Give your phone number",
+   "Spell your email address",
+   "Ask for her number"
+  ],
+  "complication": "She writes one digit wrong; correct her.",
+  "opener": "Listen, give me your number!",
+  "first_question": "What's your phone number?",
+  "closer": "Great, got it! I'll text tomorrow. Bye!",
+  "phrases": [
+   "My number is…",
+   "0, 1, 2, 3…",
+   "Not seven, eight",
+   "@ / dot",
+   "And your number?"
+  ]
+ },
+ {
+  "id": "the-bakery",
+  "level": "A1",
+  "unit": "Numbers and shopping",
+  "character": "Ola",
+  "character_bio": "26, barista at Kawiarnia pod Lipą, a small café in Kazimierz, Kraków",
+  "title": "Fresh bread",
+  "can_do": "buy several items and handle a short wait",
+  "scene": "Ola's café, which also sells fresh bread in the morning",
+  "learner_role": "a regular customer",
+  "mission": [
+   "Ask for bread rolls: say how many",
+   "Ask what else is fresh today",
+   "Pay"
+  ],
+  "complication": "The rolls are still in the oven: wait five minutes or choose something else.",
+  "opener": "Hi! Back again?",
+  "first_question": "Rolls, bread? Everything's fresh.",
+  "closer": "Here you are. Enjoy!",
+  "phrases": [
+   "Four rolls, please",
+   "One loaf of bread",
+   "Is there wholemeal bread?",
+   "I'll wait",
+   "How much do I pay?"
+  ]
+ },
+ {
+  "id": "milk-bar",
+  "level": "A1",
+  "unit": "Food and eating out",
+  "character": "Pani Halina",
+  "character_bio": "60, serves at the counter of a traditional bar mleczny (milk bar)",
+  "title": "Lunch at a milk bar",
+  "can_do": "order a full meal at a counter",
+  "scene": "a bar mleczny at lunchtime, with a queue",
+  "learner_role": "a customer",
+  "mission": [
+   "Order a soup",
+   "Order a main dish",
+   "Order a drink and pay"
+  ],
+  "complication": "The pierogi ruskie are sold out; choose something else.",
+  "opener": "Next, please!",
+  "first_question": "Today there's tomato soup and żurek. What can I get you?",
+  "closer": "Here you are, enjoy. Next!",
+  "phrases": [
+   "Tomato soup, please",
+   "Pierogi with cheese and potato, please",
+   "And a compote (fruit drink)",
+   "What do you recommend?",
+   "That's all"
+  ]
+ },
+ {
+  "id": "dinner-at-tomeks",
+  "level": "A1",
+  "unit": "Food and eating out",
+  "character": "Tomek",
+  "character_bio": "31, physiotherapist, the learner's friend",
+  "title": "Dinner at Tomek's",
+  "can_do": "say what you like and don't like to eat",
+  "scene": "Tomek's flat; he has cooked dinner for you",
+  "learner_role": "his guest",
+  "mission": [
+   "Say what you like and don't like",
+   "Say you are full, or ask for more",
+   "Compliment the food"
+  ],
+  "complication": "He offers you mushrooms; you don't eat them.",
+  "opener": "Hi! Come in! Are you hungry?",
+  "first_question": "I made bigos and a salad. Do you like bigos?",
+  "closer": "I'm glad you liked it. See you!",
+  "phrases": [
+   "I like…",
+   "I don't like mushrooms",
+   "I don't eat meat",
+   "This is delicious!",
+   "A bit more, please",
+   "Thanks, I can't eat any more"
+  ]
+ },
+ {
+  "id": "shopping-list",
+  "level": "A1",
+  "unit": "Food and eating out",
+  "character": "Kasia",
+  "character_bio": "22, computer science student, the learner's friend",
+  "title": "Party shopping",
+  "can_do": "say what you need, have and don't have",
+  "scene": "a supermarket with Kasia, shopping for a party",
+  "learner_role": "her friend",
+  "mission": [
+   "Say what you need to buy",
+   "Say what you already have or don't have",
+   "Agree on drinks"
+  ],
+  "complication": "Kasia wants to buy only crisps; suggest something healthier.",
+  "opener": "Right, what are we buying?",
+  "first_question": "Do we have bread? Because I've got nothing in the fridge.",
+  "closer": "OK, let's pay and go!",
+  "phrases": [
+   "I need…",
+   "We have cheese",
+   "We don't have bread",
+   "Let's buy fruit",
+   "Maybe juice?",
+   "Too expensive"
+  ]
+ },
+ {
+  "id": "wrong-order",
+  "level": "A1",
+  "unit": "Food and eating out",
+  "character": "Ola",
+  "character_bio": "26, barista at Kawiarnia pod Lipą, a small café in Kazimierz, Kraków",
+  "title": "The wrong order",
+  "can_do": "explain a simple problem politely",
+  "scene": "Ola's café on a busy afternoon; your order comes out wrong",
+  "learner_role": "a customer",
+  "mission": [
+   "Say what you ordered",
+   "Say what is wrong",
+   "Accept her offer or ask for something else"
+  ],
+  "complication": "She brings tea instead of coffee, and there's no oat milk today.",
+  "opener": "Here you are, tea with lemon!",
+  "first_question": "Is everything all right?",
+  "closer": "Sorry again! Have a nice day!",
+  "phrases": [
+   "Sorry, but I ordered coffee (m / f)",
+   "This isn't my tea",
+   "No problem",
+   "With milk is fine",
+   "Without sugar, please"
+  ]
+ }
+]

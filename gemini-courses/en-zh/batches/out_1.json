@@ -1,0 +1,915 @@
+[
+  {
+    "id": "hello-neighbour",
+    "title": {
+      "en": "Hello, Neighbour",
+      "zh": "你好，新邻居"
+    },
+    "can_do": {
+      "en": "I can introduce myself and say where I am from.",
+      "zh": "我能作自我介绍并说明自己来自哪里。"
+    },
+    "scene": {
+      "en": "The stairwell of your new block of flats; you have just moved in.",
+      "zh": "在你刚搬进的新公寓楼梯间里。"
+    },
+    "learner_role": {
+      "en": "The new neighbour",
+      "zh": "新搬来的邻居"
+    },
+    "mission": [
+      {
+        "en": "Say hello and give your name",
+        "zh": "打招呼并告知自己的名字"
+      },
+      {
+        "en": "Say where you are from",
+        "zh": "说明自己来自哪里"
+      },
+      {
+        "en": "Ask him a question",
+        "zh": "向他提一个问题"
+      }
+    ],
+    "complication": {
+      "en": "He mishears your name; say it again or spell it.",
+      "zh": "他没听清你的名字；请重说一遍或拼写出来。"
+    },
+    "opener": {
+      "en": "Good morning! I'm Marek, I live at number seven.",
+      "zh": "早上好！我是马雷克，住在7号。"
+    },
+    "first_question": {
+      "en": "And you're the new neighbour?",
+      "zh": "你是新搬来的邻居吧？"
+    },
+    "closer": {
+      "en": "Very nice to meet you. Goodbye!",
+      "zh": "很高兴认识你。再见！"
+    },
+    "phrases": [
+      {
+        "en": "Hello, good morning",
+        "zh": "你好 / 早上好（礼貌问候）"
+      },
+      {
+        "en": "My name is…",
+        "zh": "我叫……（自我介绍姓名）"
+      },
+      {
+        "en": "I'm from China",
+        "zh": "我来自中国（介绍国籍或家乡）"
+      },
+      {
+        "en": "Nice to meet you",
+        "zh": "很高兴认识你（初次见面礼貌语）"
+      },
+      {
+        "en": "Sorry, what was that?",
+        "zh": "不好意思，您刚才说什么？（没听清时请对方重复）"
+      },
+      {
+        "en": "And you?",
+        "zh": "你呢？（礼貌反问对方）"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Verb 'to be': I am (I'm) / You are (You're)",
+      "zh": "be动词用法：用于自我介绍与说明出处（I'm... / You're...）"
+    }
+  },
+  {
+    "id": "first-coffee",
+    "title": {
+      "en": "Your First Coffee",
+      "zh": "你的第一杯咖啡"
+    },
+    "can_do": {
+      "en": "I can order a drink and a snack and pay.",
+      "zh": "我能点饮品、点心并完成付款。"
+    },
+    "scene": {
+      "en": "Kawiarnia pod Lipą, a small café in Kazimierz, Kraków; your first visit.",
+      "zh": "在克拉科夫卡齐米日历史街区的小咖啡馆“菩提树下”；这是你第一次进店。"
+    },
+    "learner_role": {
+      "en": "A customer",
+      "zh": "顾客"
+    },
+    "mission": [
+      {
+        "en": "Order a drink",
+        "zh": "点一杯饮品"
+      },
+      {
+        "en": "Order something to eat",
+        "zh": "点一份吃的"
+      },
+      {
+        "en": "Ask how much it is and pay",
+        "zh": "询问价格并付款"
+      }
+    ],
+    "complication": {
+      "en": "The cheesecake (sernik) has just sold out; choose something else.",
+      "zh": "店里的传统波兰芝士蛋糕（sernik）刚卖完，换选其他点心。"
+    },
+    "opener": {
+      "en": "Hello! What can I get you?",
+      "zh": "你好！想喝点什么？"
+    },
+    "first_question": {
+      "en": "Coffee, tea? We also have fresh cheesecake today.",
+      "zh": "喝咖啡还是茶？我们今天还有新鲜的芝士蛋糕。"
+    },
+    "closer": {
+      "en": "Enjoy! See you!",
+      "zh": "请慢用！回头见！"
+    },
+    "phrases": [
+      {
+        "en": "A coffee, please",
+        "zh": "请给我一杯咖啡（礼貌点单）"
+      },
+      {
+        "en": "Tea with lemon, please",
+        "zh": "请来一杯柠檬茶（说明加料需求）"
+      },
+      {
+        "en": "To have here",
+        "zh": "在这里喝 / 堂食（说明就餐方式）"
+      },
+      {
+        "en": "To take away",
+        "zh": "打包带走 / 外带（说明外带需求）"
+      },
+      {
+        "en": "How much is that?",
+        "zh": "一共多少钱？（结账询问价格）"
+      },
+      {
+        "en": "Can I pay by card?",
+        "zh": "可以刷卡吗？（询问付款方式）"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Polite requests: noun + 'please' and 'Can I have...?'",
+      "zh": "礼貌点单表达：使用名词加 please 或 'Can I have...?' 提出请求"
+    }
+  },
+  {
+    "id": "new-colleague",
+    "title": {
+      "en": "A New Colleague",
+      "zh": "新同事"
+    },
+    "can_do": {
+      "en": "I can say what I do and where I live.",
+      "zh": "我能介绍自己的职业以及居住区域。"
+    },
+    "scene": {
+      "en": "The office kitchen on your first day at work.",
+      "zh": "第一天入职时办公室的茶水间。"
+    },
+    "learner_role": {
+      "en": "The new colleague",
+      "zh": "新入职的同事"
+    },
+    "mission": [
+      {
+        "en": "Say what your job is",
+        "zh": "说明自己的岗位与工作"
+      },
+      {
+        "en": "Say where you live",
+        "zh": "说明自己住在哪里"
+      },
+      {
+        "en": "Ask her a question",
+        "zh": "向她提一个问题"
+      }
+    ],
+    "complication": {
+      "en": "She thinks you work in another team; correct her.",
+      "zh": "她以为你在另一个团队，向她说明正确的部门。"
+    },
+    "opener": {
+      "en": "Hi! Are you new?",
+      "zh": "嗨！你是新来的吗？"
+    },
+    "first_question": {
+      "en": "I'm Ania from marketing. Which department do you work in?",
+      "zh": "我是市场部的阿尼亚。你在哪个部门工作？"
+    },
+    "closer": {
+      "en": "OK, I have to run to a meeting. See you!",
+      "zh": "好啦，我得赶去开会了。回头见！"
+    },
+    "phrases": [
+      {
+        "en": "I'm a programmer",
+        "zh": "我是程序员（介绍具体职业）"
+      },
+      {
+        "en": "I work in IT",
+        "zh": "我在IT部门工作（说明所属行业或领域）"
+      },
+      {
+        "en": "I live in the centre",
+        "zh": "我住在市中心（介绍居住地）"
+      },
+      {
+        "en": "Actually, I work in…",
+        "zh": "其实我在……部门工作（委婉纠正对方）"
+      },
+      {
+        "en": "What about you?",
+        "zh": "你呢？（反问对方情况）"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Present simple: 'I work in...', 'I live in...'",
+      "zh": "一般现在时：用动词原形表达长期的工作与居住状态（I work in... / I live in...）"
+    }
+  },
+  {
+    "id": "how-are-you",
+    "title": {
+      "en": "How Are You?",
+      "zh": "你最近怎么样？"
+    },
+    "can_do": {
+      "en": "I can say how I am and what I am doing.",
+      "zh": "我能表达自己的近况和当下正在做的事情。"
+    },
+    "scene": {
+      "en": "A video call with your friend Kasia late in the evening.",
+      "zh": "深夜与好友卡夏进行视频通话。"
+    },
+    "learner_role": {
+      "en": "Her friend",
+      "zh": "她的朋友"
+    },
+    "mission": [
+      {
+        "en": "Say how you are",
+        "zh": "说明自己的身体状态或心情"
+      },
+      {
+        "en": "Say what you are doing right now",
+        "zh": "说明自己当下正在做的事情"
+      },
+      {
+        "en": "Ask what she is doing",
+        "zh": "询问对方此刻在做什么"
+      }
+    ],
+    "complication": {
+      "en": "Her internet keeps cutting out; ask her to repeat.",
+      "zh": "她的网络信号老断线卡顿，请她重说一遍。"
+    },
+    "opener": {
+      "en": "Hey! Can you hear me?",
+      "zh": "嗨！听得清我说话吗？"
+    },
+    "first_question": {
+      "en": "How are you? What are you doing?",
+      "zh": "你最近怎么样？手头上在忙什么呢？"
+    },
+    "closer": {
+      "en": "OK, I'm going to bed. Good night!",
+      "zh": "好啦，我准备睡了。晚安！"
+    },
+    "phrases": [
+      {
+        "en": "Fine, thanks",
+        "zh": "挺好的，谢谢（回应日常问候）"
+      },
+      {
+        "en": "I'm a bit tired",
+        "zh": "我有点累（表达身心状态）"
+      },
+      {
+        "en": "Right now I'm cooking",
+        "zh": "我现在正在做饭（描述此刻正在做的事）"
+      },
+      {
+        "en": "I can't hear you",
+        "zh": "我听不到你的声音（说明通话设备或网络问题）"
+      },
+      {
+        "en": "Can you repeat that?",
+        "zh": "你能再说一遍吗？（请求对方重复）"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Present continuous (am/is/are + -ing) for actions happening now",
+      "zh": "现在进行时（be + 动词ing）：表达讲话当下正在进行的动作"
+    }
+  },
+  {
+    "id": "tram-tickets",
+    "title": {
+      "en": "Tram Tickets",
+      "zh": "买电车票"
+    },
+    "can_do": {
+      "en": "I can buy tickets and understand prices.",
+      "zh": "我能购买车票并听懂价格。"
+    },
+    "scene": {
+      "en": "Zbyszek's kiosk at a tram stop.",
+      "zh": "电车站旁兹比谢克的便民售货亭。"
+    },
+    "learner_role": {
+      "en": "A customer",
+      "zh": "乘客 / 顾客"
+    },
+    "mission": [
+      {
+        "en": "Ask for tickets: say how many and what kind",
+        "zh": "买车票并说明数量与票种"
+      },
+      {
+        "en": "Ask the price",
+        "zh": "询问价格"
+      },
+      {
+        "en": "Pay and say thank you",
+        "zh": "付款并致谢"
+      }
+    ],
+    "complication": {
+      "en": "He has no change for a 100-złoty note.",
+      "zh": "他找不开100波兰兹罗提的大面额钞票。"
+    },
+    "opener": {
+      "en": "Hello, yes?",
+      "zh": "你好，要买点什么？"
+    },
+    "first_question": {
+      "en": "Which tickets? Standard or reduced?",
+      "zh": "要哪种票？全价票还是优惠票？"
+    },
+    "closer": {
+      "en": "Here you are. Have a nice day!",
+      "zh": "拿好您的票。祝您今天过得愉快！"
+    },
+    "phrases": [
+      {
+        "en": "Two tickets, please",
+        "zh": "请给我两张票（购买车票）"
+      },
+      {
+        "en": "One standard and one reduced",
+        "zh": "一张全价票，一张优惠票（说明票种）"
+      },
+      {
+        "en": "How much is it?",
+        "zh": "多少钱？（询问价格）"
+      },
+      {
+        "en": "I don't have any change",
+        "zh": "我没有零钱（说明现金情况）"
+      },
+      {
+        "en": "Can I pay by card?",
+        "zh": "可以刷卡吗？（询问付款方式）"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Asking for prices: 'How much is it / are they?'",
+      "zh": "询问价格的基本句型：'How much is...?' 配合基数词回答"
+    }
+  },
+  {
+    "id": "at-the-market",
+    "title": {
+      "en": "At the Market",
+      "zh": "集市买菜"
+    },
+    "can_do": {
+      "en": "I can buy food by weight and pay.",
+      "zh": "我能按重量称重买菜并付款。"
+    },
+    "scene": {
+      "en": "Basia's fruit and vegetable stall at Stary Kleparz market.",
+      "zh": "老克莱帕日露天生鲜集市上巴夏的水果蔬菜摊前。"
+    },
+    "learner_role": {
+      "en": "A customer",
+      "zh": "顾客"
+    },
+    "mission": [
+      {
+        "en": "Buy a kilo of apples",
+        "zh": "买一公斤苹果"
+      },
+      {
+        "en": "Buy one more thing",
+        "zh": "再买一样水果或蔬菜"
+      },
+      {
+        "en": "Ask the total and pay",
+        "zh": "询问总价并付款"
+      }
+    ],
+    "complication": {
+      "en": "She tries to sell you strawberries as well; say no politely.",
+      "zh": "她顺带向你推销草莓，请礼貌拒绝。"
+    },
+    "opener": {
+      "en": "Hello, dear! What will it be today?",
+      "zh": "你好呀，亲爱的！今天想要点什么？"
+    },
+    "first_question": {
+      "en": "I've got beautiful Polish apples. How many?",
+      "zh": "今天刚运来的波兰苹果顶顶好。要来几公斤？"
+    },
+    "closer": {
+      "en": "Thank you, dear. Come again!",
+      "zh": "谢谢你，亲爱的。常来啊！"
+    },
+    "phrases": [
+      {
+        "en": "A kilo of apples, please",
+        "zh": "请给我一公斤苹果（按重量称重购买）"
+      },
+      {
+        "en": "Half a kilo of tomatoes",
+        "zh": "半公斤西红柿（说明具体分量）"
+      },
+      {
+        "en": "That's all, thanks",
+        "zh": "就买这些，谢谢（表示选购完毕）"
+      },
+      {
+        "en": "No, thank you",
+        "zh": "不用了，谢谢（礼貌婉拒额外推销）"
+      },
+      {
+        "en": "How much do I owe you?",
+        "zh": "一共多少钱？（结账询问应付金额）"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Quantities with 'of': 'a kilo of...', 'half a kilo of...'",
+      "zh": "重量与度量表达法：'a kilo of...' 与 'half a kilo of...' 的连用"
+    }
+  },
+  {
+    "id": "swapping-numbers",
+    "title": {
+      "en": "Swapping Numbers",
+      "zh": "交换联系方式"
+    },
+    "can_do": {
+      "en": "I can give and check a phone number and an email address.",
+      "zh": "我能告知并核对电话号码与电子邮箱。"
+    },
+    "scene": {
+      "en": "After a party; Kasia wants your phone number and email.",
+      "zh": "派对散场后；卡夏想留你的电话号码与邮箱。"
+    },
+    "learner_role": {
+      "en": "Her new friend",
+      "zh": "她的新朋友"
+    },
+    "mission": [
+      {
+        "en": "Give your phone number",
+        "zh": "报出自己的电话号码"
+      },
+      {
+        "en": "Spell your email address",
+        "zh": "拼读出自己的电子邮箱"
+      },
+      {
+        "en": "Ask for her number",
+        "zh": "询问她的电话号码"
+      }
+    ],
+    "complication": {
+      "en": "She writes one digit wrong; correct her.",
+      "zh": "她记错了一位数字，向她指出并更正。"
+    },
+    "opener": {
+      "en": "Listen, give me your number!",
+      "zh": "哎，留个电话呗！"
+    },
+    "first_question": {
+      "en": "What's your phone number?",
+      "zh": "你的手机号是多少？"
+    },
+    "closer": {
+      "en": "Great, got it! I'll text tomorrow. Bye!",
+      "zh": "太好啦，记下啦！明天发短信给你。拜拜！"
+    },
+    "phrases": [
+      {
+        "en": "My number is…",
+        "zh": "我的号码是……（告知联系电话）"
+      },
+      {
+        "en": "Not seven, eight",
+        "zh": "不是7，是8（纠正听错的数字）"
+      },
+      {
+        "en": "at / dot",
+        "zh": "电子邮箱符号 @ / . 的读法（at 与 dot）"
+      },
+      {
+        "en": "What's your number?",
+        "zh": "你的电话是多少？（询问对方电话）"
+      },
+      {
+        "en": "Can you say that again?",
+        "zh": "你能再说一遍吗？（请对方重报一遍）"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Giving contact details: single digits and email words 'at' / 'dot'",
+      "zh": "联系方式表达：电话号码逐位读出，邮箱中 @ 读作 'at'、. 读作 'dot'"
+    }
+  },
+  {
+    "id": "the-bakery",
+    "title": {
+      "en": "Fresh Bread",
+      "zh": "新鲜出炉的面包"
+    },
+    "can_do": {
+      "en": "I can buy several items and handle a short wait.",
+      "zh": "我能购买多样烘焙食品并应对短时间等待。"
+    },
+    "scene": {
+      "en": "Ola's café, which also sells fresh bread in the morning.",
+      "zh": "奥拉的咖啡馆，清晨这里也兼卖新鲜出炉的面包。"
+    },
+    "learner_role": {
+      "en": "A regular customer",
+      "zh": "老顾客"
+    },
+    "mission": [
+      {
+        "en": "Ask for bread rolls: say how many",
+        "zh": "购买小圆面包并说出数量"
+      },
+      {
+        "en": "Ask what else is fresh today",
+        "zh": "询问今天还有什么新鲜面包"
+      },
+      {
+        "en": "Pay",
+        "zh": "结账付款"
+      }
+    ],
+    "complication": {
+      "en": "The rolls are still in the oven: wait five minutes or choose something else.",
+      "zh": "小面包还在烤箱里烤着，需要等五分钟或选别的点心。"
+    },
+    "opener": {
+      "en": "Hi! Back again?",
+      "zh": "嗨！又来啦？"
+    },
+    "first_question": {
+      "en": "Rolls, bread? Everything's fresh.",
+      "zh": "要小面包还是大面包？全都是新鲜的。"
+    },
+    "closer": {
+      "en": "Here you are. Enjoy!",
+      "zh": "给您拿好。请慢用！"
+    },
+    "phrases": [
+      {
+        "en": "Four rolls, please",
+        "zh": "请给我四个小圆面包（说明购买数量）"
+      },
+      {
+        "en": "One loaf of bread, please",
+        "zh": "请来一条整面包（使用量词 loaf）"
+      },
+      {
+        "en": "Do you have wholemeal bread?",
+        "zh": "有全麦面包吗？（询问特定品类）"
+      },
+      {
+        "en": "I'll wait",
+        "zh": "我等等没关系（表示愿意等待）"
+      },
+      {
+        "en": "How much do I pay?",
+        "zh": "我该付多少钱？（询问应付金额）"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Countable vs uncountable food nouns: 'a loaf of bread' vs plural 'rolls'",
+      "zh": "可数与不可数名词搭配：面包用 a loaf of bread，小圆面包用复数 rolls"
+    }
+  },
+  {
+    "id": "milk-bar",
+    "title": {
+      "en": "Lunch at a Milk Bar",
+      "zh": "在平民食堂吃午饭"
+    },
+    "can_do": {
+      "en": "I can order a full meal at a counter.",
+      "zh": "我能在柜台前点一套完整的正餐。"
+    },
+    "scene": {
+      "en": "A bar mleczny (traditional Polish cafeteria) at lunchtime, with a queue.",
+      "zh": "午饭高峰期的波兰平民食堂（bar mleczny，供应经典实惠家常菜），身后排着队。"
+    },
+    "learner_role": {
+      "en": "A customer",
+      "zh": "排队点餐的顾客"
+    },
+    "mission": [
+      {
+        "en": "Order a soup",
+        "zh": "点一份例汤"
+      },
+      {
+        "en": "Order a main dish",
+        "zh": "点一份主菜"
+      },
+      {
+        "en": "Order a drink and pay",
+        "zh": "点一份饮品并结账"
+      }
+    ],
+    "complication": {
+      "en": "The pierogi ruskie are sold out; choose something else.",
+      "zh": "土豆干酪馅的传统波兰饺子（pierogi ruskie）卖光了，换点其他菜品。"
+    },
+    "opener": {
+      "en": "Next, please!",
+      "zh": "下一位，请！"
+    },
+    "first_question": {
+      "en": "Today there's tomato soup and żurek. What can I get you?",
+      "zh": "今天有西红柿汤和传统黑麦酸汤（żurek）。你想喝哪种？"
+    },
+    "closer": {
+      "en": "Here you are, enjoy. Next!",
+      "zh": "给您，慢用。下一位！"
+    },
+    "phrases": [
+      {
+        "en": "Tomato soup, please",
+        "zh": "请来一份西红柿汤（点汤品）"
+      },
+      {
+        "en": "Pierogi with meat, please",
+        "zh": "请给我一份肉馅波兰饺子（点主菜）"
+      },
+      {
+        "en": "And a compote, please",
+        "zh": "再来一杯传统果脯甜饮（compote 果干煮甜水）"
+      },
+      {
+        "en": "What do you recommend?",
+        "zh": "你有什么推荐的吗？（请服务员推荐菜品）"
+      },
+      {
+        "en": "That's all, thank you",
+        "zh": "就点这些，谢谢（点单结束）"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Polite orders: 'I'd like...' and '... please'",
+      "zh": "点单礼貌句型：'I'd like + 名词' 或 '名词 + please'"
+    }
+  },
+  {
+    "id": "dinner-at-tomeks",
+    "title": {
+      "en": "Dinner at Tomek's",
+      "zh": "在托梅克家做客"
+    },
+    "can_do": {
+      "en": "I can say what I like and don't like to eat.",
+      "zh": "我能表达对食物的喜好与饮食忌口。"
+    },
+    "scene": {
+      "en": "Tomek's flat; he has cooked dinner for you.",
+      "zh": "托梅克的公寓；他为你亲自下厨做好了晚饭。"
+    },
+    "learner_role": {
+      "en": "His guest",
+      "zh": "做客的朋友"
+    },
+    "mission": [
+      {
+        "en": "Say what you like and don't like",
+        "zh": "说明自己喜欢吃什么、不爱吃什么"
+      },
+      {
+        "en": "Say you are full, or ask for more",
+        "zh": "表示已经吃饱了，或者礼貌加菜"
+      },
+      {
+        "en": "Compliment the food",
+        "zh": "夸奖主人做的菜好吃"
+      }
+    ],
+    "complication": {
+      "en": "He offers you mushrooms; you don't eat them.",
+      "zh": "他热情给你夹蘑菇，但你平时不吃蘑菇。"
+    },
+    "opener": {
+      "en": "Hi! Come in! Are you hungry?",
+      "zh": "嗨！快进来！饿了吗？"
+    },
+    "first_question": {
+      "en": "I made bigos and a salad. Do you like bigos?",
+      "zh": "我做了波兰猎人炖肉（bigos，酸菜烩肉）和沙拉。你喜欢吃炖肉吗？"
+    },
+    "closer": {
+      "en": "I'm glad you liked it. See you!",
+      "zh": "你吃得高兴就太好了。回头见！"
+    },
+    "phrases": [
+      {
+        "en": "I don't like mushrooms",
+        "zh": "我不爱吃蘑菇（表达不喜欢的食物）"
+      },
+      {
+        "en": "I don't eat meat",
+        "zh": "我不吃肉（表达素食等忌口）"
+      },
+      {
+        "en": "This is delicious!",
+        "zh": "这太好吃了！（赞美食物美味）"
+      },
+      {
+        "en": "A bit more, please",
+        "zh": "请再给我添一点点（礼貌要求加菜）"
+      },
+      {
+        "en": "Thanks, I'm full",
+        "zh": "谢谢，我吃饱了（礼貌婉拒继续加菜）"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Expressing likes and dislikes: 'I like...', 'I don't like...'",
+      "zh": "喜好表达：'I like + 名词'（我喜欢……）与 'I don't like + 名词'（我不喜欢……）"
+    }
+  },
+  {
+    "id": "shopping-list",
+    "title": {
+      "en": "Party Shopping",
+      "zh": "派对采购"
+    },
+    "can_do": {
+      "en": "I can say what we need, have and don't have.",
+      "zh": "我能说明需要买什么、家里有什么以及缺少什么。"
+    },
+    "scene": {
+      "en": "A supermarket with Kasia, shopping for a party.",
+      "zh": "在超市里和卡夏一起为派对买东西。"
+    },
+    "learner_role": {
+      "en": "Her friend",
+      "zh": "一起采购的朋友"
+    },
+    "mission": [
+      {
+        "en": "Say what you need to buy",
+        "zh": "说出需要采购的物品"
+      },
+      {
+        "en": "Say what you already have or don't have",
+        "zh": "说出哪些东西家里有、哪些没有"
+      },
+      {
+        "en": "Agree on drinks",
+        "zh": "就买什么饮料达成一致"
+      }
+    ],
+    "complication": {
+      "en": "Kasia wants to buy only crisps; suggest something healthier.",
+      "zh": "卡夏只想买薯片膨化食品，建议买些更健康的食品。"
+    },
+    "opener": {
+      "en": "Right, what are we buying?",
+      "zh": "好啦，咱们都买些什么？"
+    },
+    "first_question": {
+      "en": "Do we have bread? Because I've got nothing in the fridge.",
+      "zh": "咱们家里有面包吗？我的冰箱里可什么都没有。"
+    },
+    "closer": {
+      "en": "OK, let's pay and go!",
+      "zh": "好啦，结账走人！"
+    },
+    "phrases": [
+      {
+        "en": "I need…",
+        "zh": "我需要买……（表达购物需求）"
+      },
+      {
+        "en": "We have cheese",
+        "zh": "我们家里有奶酪（说明现有储备）"
+      },
+      {
+        "en": "We don't have bread",
+        "zh": "我们没有面包了（说明缺少某物）"
+      },
+      {
+        "en": "Let's buy fruit",
+        "zh": "咱们买点水果吧（提出替代建议）"
+      },
+      {
+        "en": "Maybe some juice?",
+        "zh": "要不要来点果汁？（提出饮料提议）"
+      },
+      {
+        "en": "Too expensive",
+        "zh": "太贵了（表达对价格的顾虑）"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Suggestions with 'Let's + verb' and expressing need with 'We need...'",
+      "zh": "提出建议与表达需求：'Let's + 动词原形'（咱们……吧）与 'We need + 名词'（我们需要……）"
+    }
+  },
+  {
+    "id": "wrong-order",
+    "title": {
+      "en": "The Wrong Order",
+      "zh": "弄错的点单"
+    },
+    "can_do": {
+      "en": "I can explain a simple problem politely.",
+      "zh": "我能礼貌说明点单出现的小差错。"
+    },
+    "scene": {
+      "en": "Ola's café on a busy afternoon; your order comes out wrong.",
+      "zh": "下午客流高峰期奥拉的咖啡馆；店员端上来的东西弄错了。"
+    },
+    "learner_role": {
+      "en": "A customer",
+      "zh": "顾客"
+    },
+    "mission": [
+      {
+        "en": "Say what you ordered",
+        "zh": "说明自己刚才点的是什么"
+      },
+      {
+        "en": "Say what is wrong",
+        "zh": "指出目前上的餐品哪里错了"
+      },
+      {
+        "en": "Accept her offer or ask for something else",
+        "zh": "接受店员的补救提议或改选其他饮品"
+      }
+    ],
+    "complication": {
+      "en": "She brings tea instead of coffee, and there's no oat milk today.",
+      "zh": "她错把咖啡上成了茶，而且店里今天的燕麦奶刚好用完了。"
+    },
+    "opener": {
+      "en": "Here you are, tea with lemon!",
+      "zh": "来啦，您的柠檬茶！"
+    },
+    "first_question": {
+      "en": "Is everything all right?",
+      "zh": "请问有什么不对吗？"
+    },
+    "closer": {
+      "en": "Sorry again! Have a nice day!",
+      "zh": "实在不好意思！祝您今天过得愉快！"
+    },
+    "phrases": [
+      {
+        "en": "Sorry, but I ordered coffee",
+        "zh": "不好意思，但我刚才点的是咖啡（礼貌指出上错了）"
+      },
+      {
+        "en": "This isn't my tea",
+        "zh": "这不是我点的茶（指出送错的餐品）"
+      },
+      {
+        "en": "No problem",
+        "zh": "没关系 / 不要紧（礼貌回应对方的道歉）"
+      },
+      {
+        "en": "With milk is fine",
+        "zh": "加普通牛奶就行（接受替代方案）"
+      },
+      {
+        "en": "Without sugar, please",
+        "zh": "请不要放糖（说明饮品细节要求）"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Past simple for past actions: 'I ordered...'",
+      "zh": "一般过去时：用 'I ordered...' 说明刚刚点过的餐品以纠正差错"
+    }
+  }
+]
+

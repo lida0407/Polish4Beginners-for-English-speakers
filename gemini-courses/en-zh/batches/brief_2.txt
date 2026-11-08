@@ -1,0 +1,353 @@
+You are adapting a set of spoken-practice scenarios into an English-learning course for adult Chinese speakers (Simplified Chinese, mainland usage) at CEFR level A1 or A2, as given per scenario.
+
+The scenarios come from a Polish course; the English text below was written as glosses of Polish lines. Your job:
+1. Make every English line natural spoken English that a friendly native speaker would say in that situation, at the scenario's level (A1: short, present tense, very common words; A2: everyday topics, past/future allowed). Keep the meaning and the situation. Keep it short.
+2. Clean the learner phrases: remove gender markers like "(m / f)", remove notes in brackets, and turn each into a phrase the learner would actually say in English (e.g. "I'm a programmer (m / f)" -> "I'm a programmer"; "@ / dot" -> "at / dot"). Keep 4 to 6 phrases.
+3. Character names: keep the names, but drop Polish titles in English: "Pan Marek" -> "Marek", "Pani Basia" -> "Basia", "Doktor Nowak" -> "Dr Nowak", "Sierżant Lis" -> "Officer Lis". The setting stays in Kraków, Poland; Polish dishes and places (pierogi, żurek, bar mleczny, Wigilia, Zakopane) may stay, but explain them briefly in the Chinese.
+4. Translate everything into natural Simplified Chinese (not word-for-word, no pinyin). Chinese for a phrase gives its meaning so a Chinese speaker knows when to use it.
+5. Write one English grammar focus that fits each scene at its level, for a Chinese speaker (for example "I'd like + noun for polite orders", "How much is / are…?", "past simple: I went, I saw"), in English with a short Chinese explanation.
+
+Output ONLY a JSON array, no prose, no code fences. One object per input scenario, same order, exactly these keys:
+{"id": same as input,
+ "title": {"en": "...", "zh": "..."},
+ "can_do": {"en": "I can ...", "zh": "..."},
+ "scene": {"en": "...", "zh": "..."},
+ "learner_role": {"en": "...", "zh": "..."},
+ "mission": [{"en": "...", "zh": "..."}, {"en": "...", "zh": "..."}, {"en": "...", "zh": "..."}],
+ "complication": {"en": "...", "zh": "..."},
+ "opener": {"en": "...", "zh": "..."},
+ "first_question": {"en": "...", "zh": "..."},
+ "closer": {"en": "...", "zh": "..."},
+ "phrases": [{"en": "...", "zh": "..."}],
+ "grammar_focus": {"en": "...", "zh": "..."}}
+Use straight double quotes for JSON and keep the JSON valid. Do not write or edit any files.
+
+Scenarios:
+[
+ {
+  "id": "way-to-station",
+  "level": "A1",
+  "unit": "Getting around",
+  "character": "Pan Marek",
+  "character_bio": "68, retired tram driver, the learner's neighbour",
+  "title": "Which way to the station?",
+  "can_do": "ask for and understand simple directions",
+  "scene": "a street in the centre; you bump into Pan Marek and ask the way to the main station",
+  "learner_role": "his neighbour",
+  "mission": [
+   "Ask the way to the station",
+   "Ask if it's far",
+   "Thank him"
+  ],
+  "complication": "He describes a shortcut through the park too fast; ask him to repeat slowly.",
+  "opener": "Oh, hello! What are you doing here?",
+  "first_question": "Are you looking for something?",
+  "closer": "You're welcome. Goodbye!",
+  "phrases": [
+   "Where is the station?",
+   "How do I get to… (on foot)?",
+   "Is it far?",
+   "straight on / left / right",
+   "Please repeat more slowly"
+  ]
+ },
+ {
+  "id": "train-ticket",
+  "level": "A1",
+  "unit": "Getting around",
+  "character": "Pani Grażyna",
+  "character_bio": "58, ticket clerk at Kraków Główny station",
+  "title": "A ticket to Warsaw",
+  "can_do": "buy a train ticket and understand times and platforms",
+  "scene": "the ticket office at Kraków Główny station",
+  "learner_role": "a traveller",
+  "mission": [
+   "Ask for a ticket to Warsaw: one way or return",
+   "Choose a departure time",
+   "Ask which platform"
+  ],
+  "complication": "The 10:00 train is full; take a later one.",
+  "opener": "Good morning. Where to?",
+  "first_question": "One way or return?",
+  "closer": "Platform three. Have a good journey!",
+  "phrases": [
+   "A ticket to Warsaw, please",
+   "One way / return",
+   "What time is the train?",
+   "From which platform?",
+   "Later is fine"
+  ]
+ },
+ {
+  "id": "taxi",
+  "level": "A1",
+  "unit": "Getting around",
+  "character": "Pan Zbyszek",
+  "character_bio": "50, runs a kiosk at a tram stop and drives a taxi at weekends",
+  "title": "Taxi to the hotel",
+  "can_do": "say where you're going and talk about time and price",
+  "scene": "a taxi from the airport; Pan Zbyszek is driving",
+  "learner_role": "a passenger",
+  "mission": [
+   "Say where you're going",
+   "Ask how long it takes",
+   "Ask the price and pay"
+  ],
+  "complication": "There's a traffic jam; he asks if a longer route is OK.",
+  "opener": "Good afternoon. Where are we going?",
+  "first_question": "To the centre? What's the address?",
+  "closer": "Here we are. Enjoy your stay!",
+  "phrases": [
+   "To Hotel Pod Różą, please",
+   "Floriańska Street",
+   "How long?",
+   "How much is it?",
+   "Please stop here"
+  ]
+ },
+ {
+  "id": "lost-on-tram",
+  "level": "A1",
+  "unit": "Getting around",
+  "character": "Kasia",
+  "character_bio": "22, computer science student, the learner's friend",
+  "title": "Where are you?",
+  "can_do": "say where you are and when you'll arrive",
+  "scene": "Kasia is waiting for you at a café, but you're lost; she calls",
+  "learner_role": "her friend",
+  "mission": [
+   "Say where you are and what you can see",
+   "Follow her directions",
+   "Say when you'll get there"
+  ],
+  "complication": "You realise you took the wrong tram.",
+  "opener": "Hello? Where are you?",
+  "first_question": "What can you see? Is there a shop or a stop?",
+  "closer": "OK, I'm waiting! See you in a bit.",
+  "phrases": [
+   "I'm at the … stop",
+   "I can see a church / a park / a shop",
+   "I think I'm on the wrong tram",
+   "Where should I get off?",
+   "I'll be there in ten minutes"
+  ]
+ },
+ {
+  "id": "flat-viewing",
+  "level": "A1",
+  "unit": "Home",
+  "character": "Pani Basia",
+  "character_bio": "55, owns a fruit and vegetable stall at Stary Kleparz market and rents out a small flat",
+  "title": "Viewing a flat",
+  "can_do": "ask about a flat and say what you think of it",
+  "scene": "viewing a small flat that Pani Basia rents out",
+  "learner_role": "someone looking for a flat",
+  "mission": [
+   "Ask how many rooms there are",
+   "Ask about the rent and bills",
+   "Say what you like or don't like"
+  ],
+  "complication": "The washing machine doesn't work; ask when it will be fixed.",
+  "opener": "Hello, dear! Come on in.",
+  "first_question": "This is the living room. Nice, isn't it?",
+  "closer": "Have a think and give me a call. Goodbye!",
+  "phrases": [
+   "How many rooms are there?",
+   "How much is it per month?",
+   "Are the bills included?",
+   "The kitchen is small",
+   "The washing machine doesn't work",
+   "I like it"
+  ]
+ },
+ {
+  "id": "my-room",
+  "level": "A1",
+  "unit": "Home",
+  "character": "Kasia",
+  "character_bio": "22, computer science student, the learner's friend",
+  "title": "Show me your room",
+  "can_do": "describe a room and say what's missing",
+  "scene": "a video call; Kasia wants to see your new room",
+  "learner_role": "her friend",
+  "mission": [
+   "Describe three things in your room",
+   "Say what's missing",
+   "Ask about her room"
+  ],
+  "complication": "She says your room looks empty; say what you want to buy.",
+  "opener": "Show me your room!",
+  "first_question": "Have you got a big bed?",
+  "closer": "Nice room! OK, bye!",
+  "phrases": [
+   "I have a big window",
+   "There's a desk and a chair here",
+   "I don't have a wardrobe",
+   "I want to buy a lamp",
+   "My room is small but nice"
+  ]
+ },
+ {
+  "id": "morning-run",
+  "level": "A1",
+  "unit": "Home",
+  "character": "Tomek",
+  "character_bio": "31, physiotherapist, the learner's friend",
+  "title": "A morning run",
+  "can_do": "talk about your daily routine and times",
+  "scene": "Tomek wants to go running with you and asks about your routine",
+  "learner_role": "his friend",
+  "mission": [
+   "Say what time you get up",
+   "Say what you do in the morning",
+   "Agree on a time to run"
+  ],
+  "complication": "He wants to run at six; suggest a later time.",
+  "opener": "Hi! Are we running tomorrow morning?",
+  "first_question": "What time do you get up?",
+  "closer": "Great, see you tomorrow!",
+  "phrases": [
+   "I get up at seven",
+   "In the morning I drink coffee",
+   "Too early!",
+   "Maybe at eight?",
+   "I go to work at nine"
+  ]
+ },
+ {
+  "id": "no-hot-water",
+  "level": "A1",
+  "unit": "Home",
+  "character": "Pan Marek",
+  "character_bio": "68, retired tram driver, the learner's neighbour",
+  "title": "No hot water",
+  "can_do": "explain a problem at home and ask for advice",
+  "scene": "there's no hot water in your flat, so you knock on Pan Marek's door",
+  "learner_role": "his neighbour",
+  "mission": [
+   "Explain the problem",
+   "Ask what to do or who to call",
+   "Thank him"
+  ],
+  "complication": "He says it's the whole building; you need to call the building management.",
+  "opener": "Hello! Has something happened?",
+  "first_question": "Can I help somehow?",
+  "closer": "Call the building management. Good luck!",
+  "phrases": [
+   "There's no hot water",
+   "Something doesn't work",
+   "What should I do?",
+   "Who should I call?",
+   "Thanks for your help"
+  ]
+ },
+ {
+  "id": "cinema-plan",
+  "level": "A1",
+  "unit": "Time and plans",
+  "character": "Kasia",
+  "character_bio": "22, computer science student, the learner's friend",
+  "title": "When are you free?",
+  "can_do": "arrange a day, time and place to meet",
+  "scene": "planning to go to the cinema with Kasia this week",
+  "learner_role": "her friend",
+  "mission": [
+   "Suggest a day",
+   "Agree on a time",
+   "Decide where to meet"
+  ],
+  "complication": "She's busy on the day you suggest.",
+  "opener": "Hey! Shall we go to the cinema this week?",
+  "first_question": "When are you free?",
+  "closer": "Great, see you at the cinema!",
+  "phrases": [
+   "I'm free on Friday",
+   "I can't on Saturday",
+   "What time?",
+   "Maybe at seven?",
+   "Let's meet in front of the cinema"
+  ]
+ },
+ {
+  "id": "weekend-mountains",
+  "level": "A1",
+  "unit": "Time and plans",
+  "character": "Tomek",
+  "character_bio": "31, physiotherapist, the learner's friend",
+  "title": "Weekend in the mountains?",
+  "can_do": "talk about weekend plans and accept or decline",
+  "scene": "Tomek invites you to the mountains this weekend",
+  "learner_role": "his friend",
+  "mission": [
+   "Say what you usually do at weekends",
+   "Say if you can come",
+   "Ask what to bring"
+  ],
+  "complication": "The forecast says rain; suggest something else.",
+  "opener": "Hi! Shall we go to the mountains on Saturday?",
+  "first_question": "What do you usually do at weekends?",
+  "closer": "OK, I'll text you the details. See you!",
+  "phrases": [
+   "At weekends I usually rest",
+   "Gladly!",
+   "Unfortunately I can't",
+   "What should I bring?",
+   "It's going to rain",
+   "Maybe the cinema?"
+  ]
+ },
+ {
+  "id": "book-doctor",
+  "level": "A1",
+  "unit": "Time and plans",
+  "character": "Pani Krysia",
+  "character_bio": "50, receptionist at the Zdrowie health clinic",
+  "title": "Booking the doctor",
+  "can_do": "book an appointment by phone",
+  "scene": "a phone call to the clinic to book an appointment",
+  "learner_role": "a patient",
+  "mission": [
+   "Say you want an appointment",
+   "Agree on a day and time",
+   "Give your name"
+  ],
+  "complication": "The doctor is only free next week; ask if there's anything earlier.",
+  "opener": "Zdrowie clinic, good morning.",
+  "first_question": "How can I help?",
+  "closer": "You're booked in. Goodbye!",
+  "phrases": [
+   "I'd like to make an appointment",
+   "With the family doctor",
+   "Is there anything earlier?",
+   "Tuesday is fine",
+   "My name is…"
+  ]
+ },
+ {
+  "id": "birthday-invite",
+  "level": "A1",
+  "unit": "Time and plans",
+  "character": "Ania",
+  "character_bio": "35, the learner's team lead at work, from Warsaw",
+  "title": "A birthday invitation",
+  "can_do": "accept an invitation and ask for details",
+  "scene": "Ania invites you to her birthday party",
+  "learner_role": "her colleague",
+  "mission": [
+   "Accept the invitation",
+   "Ask when and where",
+   "Ask what to bring"
+  ],
+  "complication": "It clashes with another plan; ask if you can come later.",
+  "opener": "Listen, it's my birthday on Saturday!",
+  "first_question": "Will you come?",
+  "closer": "Great! See you on Saturday!",
+  "phrases": [
+   "Happy birthday!",
+   "I'd love to come",
+   "What time? Where?",
+   "Can I come later?",
+   "What should I bring?"
+  ]
+ }
+]

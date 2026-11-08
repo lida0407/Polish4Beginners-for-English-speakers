@@ -1,0 +1,911 @@
+[
+  {
+    "id": "way-to-station",
+    "title": {
+      "en": "Which way to the station?",
+      "zh": "去火车站怎么走？"
+    },
+    "can_do": {
+      "en": "I can ask for and understand simple directions.",
+      "zh": "我能询问并听懂简单的路线指引。"
+    },
+    "scene": {
+      "en": "A street in central Kraków; you bump into Marek and ask the way to the main train station.",
+      "zh": "在波兰克拉科夫市中心的一条街上，你偶遇了邻居马雷克（Marek），向他询问去中央火车站怎么走。"
+    },
+    "learner_role": {
+      "en": "his neighbour",
+      "zh": "他的邻居"
+    },
+    "mission": [
+      {
+        "en": "Ask the way to the station",
+        "zh": "询问去火车站的路"
+      },
+      {
+        "en": "Ask if it is far",
+        "zh": "询问远不远"
+      },
+      {
+        "en": "Thank him",
+        "zh": "向他道谢"
+      }
+    ],
+    "complication": {
+      "en": "He describes a shortcut through the park too fast; ask him to repeat it slowly.",
+      "zh": "他语速太快地解释穿过公园的捷径；请他慢点再说一遍。"
+    },
+    "opener": {
+      "en": "Oh, hello! What are you doing here?",
+      "zh": "哎，你好！你怎么在这儿？"
+    },
+    "first_question": {
+      "en": "Are you looking for something?",
+      "zh": "你在找什么地方吗？"
+    },
+    "closer": {
+      "en": "You're welcome. Have a good day!",
+      "zh": "不客气，祝你今天顺心，再见！"
+    },
+    "phrases": [
+      {
+        "en": "Where is the station?",
+        "zh": "火车站怎么走/在哪儿？"
+      },
+      {
+        "en": "How do I get to the station?",
+        "zh": "请问去火车站该怎么走？"
+      },
+      {
+        "en": "Is it far?",
+        "zh": "离这儿远吗？"
+      },
+      {
+        "en": "Go straight on, then turn left.",
+        "zh": "直走，然后左转。"
+      },
+      {
+        "en": "Could you say that more slowly, please?",
+        "zh": "能请你说得慢一点吗？"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Asking for directions: 'Where is...?' and 'How do I get to...?'",
+      "zh": "问路句型：用“Where is...?”（…在哪儿？）或“How do I get to...?”（去…怎么走？）直接礼貌询问地点和路线。"
+    }
+  },
+  {
+    "id": "train-ticket",
+    "title": {
+      "en": "A ticket to Warsaw",
+      "zh": "买一张去华沙的火车票"
+    },
+    "can_do": {
+      "en": "I can buy a train ticket and understand departure times and platforms.",
+      "zh": "我能购买火车票，并听懂发车时间和站台信息。"
+    },
+    "scene": {
+      "en": "The ticket office at Kraków Główny railway station.",
+      "zh": "在克拉科夫中央火车站（Kraków Główny）的售票窗口前。"
+    },
+    "learner_role": {
+      "en": "a traveller",
+      "zh": "旅客"
+    },
+    "mission": [
+      {
+        "en": "Ask for a ticket to Warsaw: single or return",
+        "zh": "买一张去华沙的车票，说明是单程还是往返"
+      },
+      {
+        "en": "Choose a departure time",
+        "zh": "选择发车时间"
+      },
+      {
+        "en": "Ask which platform it leaves from",
+        "zh": "询问在哪个站台乘车"
+      }
+    ],
+    "complication": {
+      "en": "The 10:00 train is full; take a later one.",
+      "zh": "上午10点的车次满员了，需要改选稍晚的车次。"
+    },
+    "opener": {
+      "en": "Good morning. Where to?",
+      "zh": "早上好，请问去哪里？"
+    },
+    "first_question": {
+      "en": "One-way or return?",
+      "zh": "买单程还是往返？"
+    },
+    "closer": {
+      "en": "Platform three. Have a good journey!",
+      "zh": "在三站台，祝您旅途愉快！"
+    },
+    "phrases": [
+      {
+        "en": "A ticket to Warsaw, please.",
+        "zh": "请给我一张去华沙的票。"
+      },
+      {
+        "en": "One-way or return?",
+        "zh": "单程还是往返？"
+      },
+      {
+        "en": "What time is the train?",
+        "zh": "火车是几点的？"
+      },
+      {
+        "en": "Which platform is it?",
+        "zh": "在哪个站台上车？"
+      },
+      {
+        "en": "A later train is fine.",
+        "zh": "晚一点的车次也可以。"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Polite requests with '... please' and choosing options with 'or'",
+      "zh": "简短礼貌表达与二选一：名词后加“please”（如“A ticket to Warsaw, please”），以及用“or”连接选项（如“One-way or return?”）。"
+    }
+  },
+  {
+    "id": "taxi",
+    "title": {
+      "en": "Taxi to the hotel",
+      "zh": "乘出租车去酒店"
+    },
+    "can_do": {
+      "en": "I can say where I want to go and ask about the time and price.",
+      "zh": "我能告诉司机目的地，并询问所需时间和车费。"
+    },
+    "scene": {
+      "en": "In a taxi from the airport; Zbyszek is driving.",
+      "zh": "在从机场开往市区的出租车上，兹比谢克（Zbyszek）正在开车。"
+    },
+    "learner_role": {
+      "en": "a passenger",
+      "zh": "乘客"
+    },
+    "mission": [
+      {
+        "en": "Say where you are going",
+        "zh": "说明你要去哪里"
+      },
+      {
+        "en": "Ask how long the ride takes",
+        "zh": "询问需要多长时间"
+      },
+      {
+        "en": "Ask for the price and pay",
+        "zh": "询问车费并付款"
+      }
+    ],
+    "complication": {
+      "en": "There is a traffic jam; he asks if a longer route is okay.",
+      "zh": "路上堵车，司机询问是否可以改走稍远但畅通的路线。"
+    },
+    "opener": {
+      "en": "Good afternoon. Where are we going?",
+      "zh": "下午好，咱们去哪儿？"
+    },
+    "first_question": {
+      "en": "To the centre? What is the address?",
+      "zh": "去市中心吗？具体地址是哪儿？"
+    },
+    "closer": {
+      "en": "Here we are. Enjoy your stay!",
+      "zh": "到了！祝你在克拉科夫玩得开心！"
+    },
+    "phrases": [
+      {
+        "en": "To Hotel Pod Różą, please.",
+        "zh": "请去“玫瑰之下”酒店（Hotel Pod Różą，克拉科夫著名老牌酒店）。"
+      },
+      {
+        "en": "It's on Floriańska Street.",
+        "zh": "在弗洛里安大街（Floriańska Street）。"
+      },
+      {
+        "en": "How long will it take?",
+        "zh": "大概要多久？"
+      },
+      {
+        "en": "How much is it?",
+        "zh": "多少钱？"
+      },
+      {
+        "en": "Please stop here.",
+        "zh": "请在这儿停车。"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Asking about duration and cost: 'How long...?' and 'How much...?'",
+      "zh": "疑问句“How long...?”与“How much...?”：分别用来询问耗时（多久）和费用（多少钱）。"
+    }
+  },
+  {
+    "id": "lost-on-tram",
+    "title": {
+      "en": "Where are you?",
+      "zh": "你在哪儿呢？"
+    },
+    "can_do": {
+      "en": "I can say where I am and when I will arrive.",
+      "zh": "我能描述自己目前的位置，并告知对方何时到达。"
+    },
+    "scene": {
+      "en": "Kasia is waiting for you at a café, but you are lost; she calls you.",
+      "zh": "卡夏（Kasia）在咖啡馆等你，但你迷路了，她给你打来了电话。"
+    },
+    "learner_role": {
+      "en": "her friend",
+      "zh": "她的朋友"
+    },
+    "mission": [
+      {
+        "en": "Say where you are and what you can see",
+        "zh": "说明你在哪里以及周围能看到什么"
+      },
+      {
+        "en": "Follow her directions",
+        "zh": "按她的路线指引去做"
+      },
+      {
+        "en": "Say when you will get there",
+        "zh": "说明你大概几分钟后能到"
+      }
+    ],
+    "complication": {
+      "en": "You realise you took the wrong tram.",
+      "zh": "你发现自己坐错了有轨电车。"
+    },
+    "opener": {
+      "en": "Hello? Where are you?",
+      "zh": "喂？你在哪儿呢？"
+    },
+    "first_question": {
+      "en": "What can you see? Is there a shop or a stop?",
+      "zh": "你周围能看到什么？有商店或者车站吗？"
+    },
+    "closer": {
+      "en": "OK, I'm waiting! See you in a bit.",
+      "zh": "好，我等你！一会儿见。"
+    },
+    "phrases": [
+      {
+        "en": "I'm at the tram stop.",
+        "zh": "我在有轨电车站。"
+      },
+      {
+        "en": "I can see a church and a park.",
+        "zh": "我能看到一座教堂和一个公园。"
+      },
+      {
+        "en": "I think I'm on the wrong tram.",
+        "zh": "我想我坐错电车了。"
+      },
+      {
+        "en": "Where should I get off?",
+        "zh": "我应该在哪一站下车？"
+      },
+      {
+        "en": "I'll be there in ten minutes.",
+        "zh": "我十分钟后到。"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Perception with 'can see' and future arrival with 'I'll be there in...'",
+      "zh": "视觉描述与将来到达时间：用“I can see + 名词”（我能看见…）描述周围标志，用“I'll be there in + 时间”（我…之后到）表达预计到达时刻。"
+    }
+  },
+  {
+    "id": "flat-viewing",
+    "title": {
+      "en": "Viewing a flat",
+      "zh": "看房"
+    },
+    "can_do": {
+      "en": "I can ask about a flat and say what I think of it.",
+      "zh": "我能询问房屋的基本情况，并表达对房子的看法。"
+    },
+    "scene": {
+      "en": "Viewing a small flat that Basia rents out.",
+      "zh": "在克拉科夫看房，房东巴夏（Basia）正在带你参观她出租的一套小公寓。"
+    },
+    "learner_role": {
+      "en": "someone looking for a flat",
+      "zh": "租房客"
+    },
+    "mission": [
+      {
+        "en": "Ask how many rooms there are",
+        "zh": "询问有几个房间"
+      },
+      {
+        "en": "Ask about the rent and bills",
+        "zh": "询问租金及水电杂费是否包含在内"
+      },
+      {
+        "en": "Say what you like or don't like",
+        "zh": "表达你满意或不满意的地方"
+      }
+    ],
+    "complication": {
+      "en": "The washing machine doesn't work; ask when it will be fixed.",
+      "zh": "洗衣机坏了，询问房东什么时候能修好。"
+    },
+    "opener": {
+      "en": "Hello, dear! Come on in.",
+      "zh": "你好呀，快请进！"
+    },
+    "first_question": {
+      "en": "This is the living room. Nice, isn't it?",
+      "zh": "这是客厅，挺不错的对吧？"
+    },
+    "closer": {
+      "en": "Have a think and give me a call. Goodbye!",
+      "zh": "你好好考虑考虑，之后给我打电话。再见！"
+    },
+    "phrases": [
+      {
+        "en": "How many rooms are there?",
+        "zh": "这里一共有几个房间？"
+      },
+      {
+        "en": "How much is it per month?",
+        "zh": "一个月租金多少钱？"
+      },
+      {
+        "en": "Are bills included?",
+        "zh": "水电杂费都包含在内吗？"
+      },
+      {
+        "en": "The washing machine doesn't work.",
+        "zh": "洗衣机是坏的/不能用。"
+      },
+      {
+        "en": "When will it be fixed?",
+        "zh": "什么时候能修好？"
+      },
+      {
+        "en": "I like the living room.",
+        "zh": "我很喜欢这个客厅。"
+      }
+    ],
+    "grammar_focus": {
+      "en": "'How many + plural noun + are there?' for asking about quantities",
+      "zh": "提问数量：“How many + 可数名词复数 + are there?”（有几个/多少…？），常用于看房时询问房间或设施数量。"
+    }
+  },
+  {
+    "id": "my-room",
+    "title": {
+      "en": "Show me your room",
+      "zh": "看看你的新房间"
+    },
+    "can_do": {
+      "en": "I can describe a room and say what is missing.",
+      "zh": "我能描述房间里的摆设，并说出还缺少什么家具。"
+    },
+    "scene": {
+      "en": "A video call; Kasia wants to see your new room.",
+      "zh": "在视频通话中，卡夏（Kasia）想看看你在克拉科夫租的新房间。"
+    },
+    "learner_role": {
+      "en": "her friend",
+      "zh": "她的朋友"
+    },
+    "mission": [
+      {
+        "en": "Describe three things in your room",
+        "zh": "描述房间里的三样东西"
+      },
+      {
+        "en": "Say what is missing",
+        "zh": "说出房间里还缺少什么"
+      },
+      {
+        "en": "Ask about her room",
+        "zh": "询问她的房间是什么样的"
+      }
+    ],
+    "complication": {
+      "en": "She says your room looks empty; say what you want to buy.",
+      "zh": "她说你的房间看起来有点空，告诉她你想买些什么东西。"
+    },
+    "opener": {
+      "en": "Show me your room!",
+      "zh": "快让我看看你的房间！"
+    },
+    "first_question": {
+      "en": "Have you got a big bed?",
+      "zh": "你房间里有一张大床吗？"
+    },
+    "closer": {
+      "en": "Nice room! OK, bye!",
+      "zh": "房间很棒！好啦，先挂啦，拜拜！"
+    },
+    "phrases": [
+      {
+        "en": "There's a desk and a chair.",
+        "zh": "这里有一张书桌和一把椅子。"
+      },
+      {
+        "en": "I have a big window.",
+        "zh": "我这儿有一扇大窗户。"
+      },
+      {
+        "en": "I don't have a wardrobe.",
+        "zh": "我还没有衣柜。"
+      },
+      {
+        "en": "I want to buy a lamp.",
+        "zh": "我想买一盏台灯。"
+      },
+      {
+        "en": "My room is small but nice.",
+        "zh": "我的房间虽小，但挺温馨的。"
+      }
+    ],
+    "grammar_focus": {
+      "en": "'There is / There's + singular noun' and 'I don't have + noun'",
+      "zh": "房间陈设与物品拥有：用“There's a...”（有一个…）表示房间里存在某物，用“I don't have a...”（我没有…）说明缺少某物。"
+    }
+  },
+  {
+    "id": "morning-run",
+    "title": {
+      "en": "A morning run",
+      "zh": "早起晨跑"
+    },
+    "can_do": {
+      "en": "I can talk about my daily routine and times.",
+      "zh": "我能谈论自己的日常作息并约定时间。"
+    },
+    "scene": {
+      "en": "Tomek wants to go running with you and asks about your routine.",
+      "zh": "托梅克（Tomek）想和你一起晨跑，正在询问你的日常作息习惯。"
+    },
+    "learner_role": {
+      "en": "his friend",
+      "zh": "他的朋友"
+    },
+    "mission": [
+      {
+        "en": "Say what time you get up",
+        "zh": "说出你通常几点起床"
+      },
+      {
+        "en": "Say what you do in the morning",
+        "zh": "说明你早晨通常做些什么"
+      },
+      {
+        "en": "Agree on a time to run",
+        "zh": "商定一起跑步的时间"
+      }
+    ],
+    "complication": {
+      "en": "He wants to run at six; suggest a later time.",
+      "zh": "他想早上6点去跑，但对你太早了，建议一个稍晚的时间。"
+    },
+    "opener": {
+      "en": "Hi! Are we running tomorrow morning?",
+      "zh": "嗨！咱们明早一起去跑步吗？"
+    },
+    "first_question": {
+      "en": "What time do you get up?",
+      "zh": "你平时一般几点起床？"
+    },
+    "closer": {
+      "en": "Great, see you tomorrow!",
+      "zh": "太好了，明天见！"
+    },
+    "phrases": [
+      {
+        "en": "I get up at seven.",
+        "zh": "我早上7点起床。"
+      },
+      {
+        "en": "In the morning I have a coffee.",
+        "zh": "早晨我通常先喝杯咖啡。"
+      },
+      {
+        "en": "That's too early!",
+        "zh": "那太早啦！"
+      },
+      {
+        "en": "How about eight?",
+        "zh": "八点怎么样？"
+      },
+      {
+        "en": "I go to work at nine.",
+        "zh": "我9点去上班。"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Present simple for routines and time preposition 'at': 'I get up at seven'",
+      "zh": "一般现在时谈论日常习惯与时间介词“at”：描述规律作息时，具体钟点前使用介词“at”（如“at seven”）。"
+    }
+  },
+  {
+    "id": "no-hot-water",
+    "title": {
+      "en": "No hot water",
+      "zh": "没有热水了"
+    },
+    "can_do": {
+      "en": "I can explain a problem at home and ask for advice.",
+      "zh": "我能描述家里的维修故障并向他人寻求建议。"
+    },
+    "scene": {
+      "en": "There is no hot water in your flat, so you knock on Marek's door.",
+      "zh": "你住的公寓没有热水了，于是你去敲邻居马雷克（Marek）的房门求助。"
+    },
+    "learner_role": {
+      "en": "his neighbour",
+      "zh": "他的邻居"
+    },
+    "mission": [
+      {
+        "en": "Explain the problem",
+        "zh": "说明没有热水的问题"
+      },
+      {
+        "en": "Ask what to do or who to call",
+        "zh": "询问该怎么做或者该联系谁"
+      },
+      {
+        "en": "Thank him",
+        "zh": "感谢他的热心建议"
+      }
+    ],
+    "complication": {
+      "en": "He says it is the whole building; you need to call the building management.",
+      "zh": "他说整栋楼都没热水，你需要给公寓物业管理处打电话报修。"
+    },
+    "opener": {
+      "en": "Hello! Has something happened?",
+      "zh": "你好！出什么事了吗？"
+    },
+    "first_question": {
+      "en": "Can I help with something?",
+      "zh": "有什么我可以帮忙的吗？"
+    },
+    "closer": {
+      "en": "Call the building management. Good luck!",
+      "zh": "直接给物业管理处打电话就行。祝你顺利！"
+    },
+    "phrases": [
+      {
+        "en": "There is no hot water.",
+        "zh": "家里没有热水了。"
+      },
+      {
+        "en": "Something isn't working.",
+        "zh": "有东西坏了/不能正常使用了。"
+      },
+      {
+        "en": "What should I do?",
+        "zh": "那我该怎么办呢？"
+      },
+      {
+        "en": "Who should I call?",
+        "zh": "我应该给谁打电话？"
+      },
+      {
+        "en": "Thanks for your help.",
+        "zh": "谢谢你的帮忙。"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Asking for advice with modal verb 'should': 'What should I do?'",
+      "zh": "用情态动词“should”询问建议：“What should I do?”（我该怎么办？）和“Who should I call?”（我该联系谁？）。"
+    }
+  },
+  {
+    "id": "cinema-plan",
+    "title": {
+      "en": "When are you free?",
+      "zh": "你什么时候有空？"
+    },
+    "can_do": {
+      "en": "I can arrange a day, time, and place to meet.",
+      "zh": "我能和朋友商定见面的日期、时间和地点。"
+    },
+    "scene": {
+      "en": "Planning to go to the cinema with Kasia this week.",
+      "zh": "这周打算和卡夏（Kasia）一起去电影院看电影，正在商量安排。"
+    },
+    "learner_role": {
+      "en": "her friend",
+      "zh": "她的朋友"
+    },
+    "mission": [
+      {
+        "en": "Suggest a day",
+        "zh": "提议一个见面的日子"
+      },
+      {
+        "en": "Agree on a time",
+        "zh": "商定碰头时间"
+      },
+      {
+        "en": "Decide where to meet",
+        "zh": "决定碰面地点"
+      }
+    ],
+    "complication": {
+      "en": "She is busy on the day you suggest; choose another day.",
+      "zh": "你提议的那天她有事，需要改选其他日子。"
+    },
+    "opener": {
+      "en": "Hey! Shall we go to the cinema this week?",
+      "zh": "嗨！这周咱们一起去电影院看电影好吗？"
+    },
+    "first_question": {
+      "en": "When are you free?",
+      "zh": "你哪天/什么时候有空？"
+    },
+    "closer": {
+      "en": "Great, see you at the cinema!",
+      "zh": "太好了，那咱们电影院见！"
+    },
+    "phrases": [
+      {
+        "en": "I'm free on Friday.",
+        "zh": "我周五有空。"
+      },
+      {
+        "en": "I can't make it on Saturday.",
+        "zh": "我周六去不了/没时间。"
+      },
+      {
+        "en": "What time?",
+        "zh": "几点见？"
+      },
+      {
+        "en": "How about seven?",
+        "zh": "七点怎么样？"
+      },
+      {
+        "en": "Let's meet in front of the cinema.",
+        "zh": "我们在电影院门口见吧。"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Preposition 'on' for days of the week: 'on Friday', 'on Saturday'",
+      "zh": "星期前的时间介词“on”：在具体的星期几前面要用介词“on”（如“on Friday”、“on Saturday”）。"
+    }
+  },
+  {
+    "id": "weekend-mountains",
+    "title": {
+      "en": "Weekend in the mountains?",
+      "zh": "周末去山里徒步吗？"
+    },
+    "can_do": {
+      "en": "I can talk about weekend plans and accept or decline an invitation.",
+      "zh": "我能谈论周末计划，并能礼貌接受或婉拒邀请。"
+    },
+    "scene": {
+      "en": "Tomek invites you to the mountains near Zakopane this weekend.",
+      "zh": "托梅克（Tomek）邀请你周末去波兰著名的度假滑雪小镇扎科帕内（Zakopane）附近的山里爬山。"
+    },
+    "learner_role": {
+      "en": "his friend",
+      "zh": "他的朋友"
+    },
+    "mission": [
+      {
+        "en": "Say what you usually do at weekends",
+        "zh": "说说你平时周末一般怎么过"
+      },
+      {
+        "en": "Say if you can come",
+        "zh": "说明你能否一起去"
+      },
+      {
+        "en": "Ask what to bring",
+        "zh": "询问需要带些什么"
+      }
+    ],
+    "complication": {
+      "en": "The forecast says rain; suggest something else instead.",
+      "zh": "天气预报说要下雨，建议改去别的室内活动。"
+    },
+    "opener": {
+      "en": "Hi! Shall we go to the mountains on Saturday?",
+      "zh": "嗨！这周六一起去山里徒步怎么样？"
+    },
+    "first_question": {
+      "en": "What do you usually do at weekends?",
+      "zh": "你平时周末一般都做些什么？"
+    },
+    "closer": {
+      "en": "OK, I'll text you the details. See you!",
+      "zh": "好，我发短信把具体安排发你。回头见！"
+    },
+    "phrases": [
+      {
+        "en": "At weekends I usually rest.",
+        "zh": "周末我通常就在家休息。"
+      },
+      {
+        "en": "I'd love to!",
+        "zh": "我很想去！/太好啦！"
+      },
+      {
+        "en": "Unfortunately, I can't.",
+        "zh": "真遗憾，我去不了。"
+      },
+      {
+        "en": "What should I bring?",
+        "zh": "我需要带些什么东西？"
+      },
+      {
+        "en": "It's going to rain.",
+        "zh": "天要下雨了。"
+      },
+      {
+        "en": "Maybe the cinema instead?",
+        "zh": "要不改去看电影？"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Weather prediction with 'going to': 'It's going to rain'",
+      "zh": "用“be going to”预测天气：“It's going to rain”（要下雨了），用于根据当前迹象或预报对即将来临的情况作推测。"
+    }
+  },
+  {
+    "id": "book-doctor",
+    "title": {
+      "en": "Booking a doctor's appointment",
+      "zh": "预约看医生"
+    },
+    "can_do": {
+      "en": "I can book a doctor's appointment by phone.",
+      "zh": "我能通过电话预约医生门诊。"
+    },
+    "scene": {
+      "en": "A phone call to the Zdrowie clinic to book an appointment.",
+      "zh": "给克拉科夫的“健康”（Zdrowie）社区诊所打电话，预约全科医生门诊。"
+    },
+    "learner_role": {
+      "en": "a patient",
+      "zh": "就诊患者"
+    },
+    "mission": [
+      {
+        "en": "Say you want an appointment",
+        "zh": "说明你想预约医生看诊"
+      },
+      {
+        "en": "Agree on a day and time",
+        "zh": "商定门诊日期和时间"
+      },
+      {
+        "en": "Give your name",
+        "zh": "报上自己的姓名"
+      }
+    ],
+    "complication": {
+      "en": "The doctor is only free next week; ask if there is anything earlier.",
+      "zh": "医生本周都满了，只有下周的号；询问有没有更早一点的时间。"
+    },
+    "opener": {
+      "en": "Zdrowie clinic, good morning.",
+      "zh": "您好，这里是Zdrowie诊所。"
+    },
+    "first_question": {
+      "en": "How can I help you?",
+      "zh": "请问有什么可以帮您？"
+    },
+    "closer": {
+      "en": "You're all booked in. Goodbye!",
+      "zh": "已经为您登记预约好了。再见！"
+    },
+    "phrases": [
+      {
+        "en": "I'd like to make an appointment, please.",
+        "zh": "你好，我想预约看病。"
+      },
+      {
+        "en": "With the family doctor.",
+        "zh": "看全科/家庭医生。"
+      },
+      {
+        "en": "Is there anything earlier?",
+        "zh": "请问有更早一点的时间吗？"
+      },
+      {
+        "en": "Tuesday is fine.",
+        "zh": "周二可以。"
+      },
+      {
+        "en": "My name is...",
+        "zh": "我的名字是……"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Polite requests with 'I'd like to + verb': 'I'd like to make an appointment'",
+      "zh": "礼貌提出需求：“I'd like to + 动词原形”（我想…），在预约挂号、办事时比“I want to...”更加客气得体。"
+    }
+  },
+  {
+    "id": "birthday-invite",
+    "title": {
+      "en": "A birthday invitation",
+      "zh": "生日聚会邀请"
+    },
+    "can_do": {
+      "en": "I can accept an invitation and ask for details.",
+      "zh": "我能接受邀请并询问活动细节。"
+    },
+    "scene": {
+      "en": "Ania invites you to her birthday party.",
+      "zh": "你的团队主管安妮亚（Ania）邀请你参加她的生日聚会。"
+    },
+    "learner_role": {
+      "en": "her colleague",
+      "zh": "她的同事"
+    },
+    "mission": [
+      {
+        "en": "Accept the invitation",
+        "zh": "欣然接受生日邀请"
+      },
+      {
+        "en": "Ask when and where it is",
+        "zh": "询问聚会的时间和地点"
+      },
+      {
+        "en": "Ask what to bring",
+        "zh": "询问需要带些什么"
+      }
+    ],
+    "complication": {
+      "en": "It clashes with another plan; ask if you can come later.",
+      "zh": "聚会时间和你的另一项安排冲突了；询问能否晚一点到场。"
+    },
+    "opener": {
+      "en": "Listen, it's my birthday on Saturday!",
+      "zh": "跟你说个事，这周六是我的生日！"
+    },
+    "first_question": {
+      "en": "Can you come?",
+      "zh": "你能来吗？"
+    },
+    "closer": {
+      "en": "Great! See you on Saturday!",
+      "zh": "太好了！周六见！"
+    },
+    "phrases": [
+      {
+        "en": "Happy birthday!",
+        "zh": "生日快乐！"
+      },
+      {
+        "en": "I'd love to come!",
+        "zh": "我很乐意去！"
+      },
+      {
+        "en": "What time and where?",
+        "zh": "几点开始？在哪里？"
+      },
+      {
+        "en": "Can I come later?",
+        "zh": "我可以稍晚一点到吗？"
+      },
+      {
+        "en": "What should I bring?",
+        "zh": "我需要带点什么东西去吗？"
+      }
+    ],
+    "grammar_focus": {
+      "en": "Asking for permission with 'Can I + verb?': 'Can I come later?'",
+      "zh": "用“Can I + 动词原形...?”礼貌请求许可：“Can I come later?”（我可以晚点到吗？）。"
+    }
+  }
+]
+

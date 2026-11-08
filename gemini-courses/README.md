@@ -140,3 +140,18 @@ when quality matters more than running offline.
 - Role-plays and goals: written for this pack (`scenarios.json`). The Polish
   openers avoid gendered forms (pan/pani, robiłeś/robiłaś) so they suit any
   learner.
+
+## English calls for Chinese speakers
+
+The same 48 scenario calls, turned around: the character speaks English and the learner is a Chinese speaker at A1–A2. Same cast and Kraków setting (names lose their Polish titles: Dr Nowak, Officer Lis), English phrases and grammar focus, Simplified Chinese for every title, mission, phrase and hint, and the post-call feedback is written in Chinese.
+
+```
+python3 gemini-courses/build_en_zh.py
+```
+
+- `en-zh/batches/brief_N.txt` — the four translation briefs; `out_N.json` — what Gemini 3.8 Flash Medium returned (run through Antigravity, read-only, one batch of 12 scenarios each).
+- `en-zh/scenarios_en_zh.json` — merged and validated (every field an `{en, zh}` pair, Chinese present in `zh`, none in `en`, 3 mission tasks, 3–7 phrases). The build stops on any gap.
+- `out/english_live_courses.json` — the app pack, same shape as the Polish one (`cast`, `call_templates`, `courses[0].units[].lessons[]`) plus `learner_language: zh-CN`. Each lesson carries its English `system_prompt`, coach notes, and the `{en, zh}` fields for the screen.
+- `out/COURSES_en_zh.md` — the catalogue.
+
+In the call the character speaks only English, recasts mistakes instead of correcting them, and says the key word in Chinese once if the learner is lost twice in a row. Show the learner the `zh` mission and phrases before the call.
