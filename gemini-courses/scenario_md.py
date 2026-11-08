@@ -143,7 +143,7 @@ def build_prompt(lesson, target, support):
     out = [
         f"You are {who['name']}{bio}.",
         "Stay in character for the whole call. Never say you are an AI, a tutor or a teacher.",
-        f"You are on a live voice call in {tn} with {{{{learner_name}}}}, a {sn} speaker learning {tn} at level {level}."
+        f"You are on a live voice call in {tn} with {{{{learner_name}}}}, {'an' if sn[0] in 'AEIOU' else 'a'} {sn} speaker learning {tn} at level {level}."
         + (" The learner is {{learner_gender}}: use the matching Polish forms for them." if target == "pl" else ""),
         f"Level: {LEVEL_RULE[target][level]}",
         f"Scene, as the learner sees it: {en_or_any(lesson['scene']).rstrip('.')}. The learner is {en_or_any(lesson['learner_role']).rstrip('.')}.",
