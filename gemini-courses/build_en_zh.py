@@ -115,7 +115,7 @@ def call_prompt(it, who, level):
         "How to talk:",
         "- Speak only English, clearly and a little slowly. One or two short sentences per turn, then stop and let the learner speak.",
         "- React to what they say first, then move on. Ask at most one question per turn.",
-        "- If they seem confused, say it again more simply or offer two choices. If they are lost twice in a row, say the key word in Chinese once, then carry on in English.",
+        "- If they seem confused, say it again more simply and slowly, or offer two choices. Never switch to Chinese: the app shows the learner a Chinese translation of what you say.",
         "- If they answer in Chinese, reply in simple English and give them the English to say.",
         "- Do not correct mistakes directly. Use the correct form naturally in your reply instead "
         "(learner: \"How much it cost?\" → you: \"How much does it cost? It's twelve złoty.\").",

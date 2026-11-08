@@ -1,0 +1,658 @@
+You are adding Simplified Chinese (mainland usage) to a Polish speaking course. The learner is an adult Chinese speaker learning Polish at CEFR level A1 or A2; her English is weak, so the Chinese must stand on its own. The Polish stays exactly as it is; you only write Chinese.
+
+For each scenario below, write natural Chinese (not word-for-word, no pinyin) for:
+- title, can_do ("我能……"), scene, learner_role, each of the 3 mission tasks, complication;
+- opener, first_question, closer: the Chinese meaning of the Polish line (use the English gloss only as help);
+- phrases: one Chinese entry per Polish phrase, same number and same order. Give the meaning and, in brackets, when to use it. If the Polish contains "/" alternatives or a {m:…|f:…} pair, explain the choice briefly (e.g. "（男性说 …，女性说 …）", "（对男士的尊称）");
+- grammar_focus: explain the Polish grammar point in Chinese in one or two sentences, keeping the Polish examples as they are.
+Names: write Polish names as a common Chinese transliteration with the Polish in brackets the first time in each scenario, e.g. "马雷克先生（Pan Marek）", "诺瓦克医生（Doktor Nowak）". Places and dishes (Kraków, Kazimierz, pierogi, żurek, bar mleczny, Wigilia) get a short Chinese explanation.
+
+Output ONLY a JSON array, no prose, no code fences. One object per input scenario, same order, exactly these keys, every value a Chinese string except the two arrays:
+{"id": same as input, "title": "...", "can_do": "...", "scene": "...", "learner_role": "...",
+ "mission": ["...", "...", "..."], "complication": "...", "opener": "...", "first_question": "...",
+ "closer": "...", "phrases": ["...", ...], "grammar_focus": "..."}
+Use straight double quotes and keep the JSON valid. Do not write or edit any files.
+
+Scenarios:
+[
+ {
+  "id": "call-u07-at-the-doctor",
+  "level": "A2",
+  "unit": "Health",
+  "character": "Doktor Nowak",
+  "character_bio": "45, Ewa Nowak, a family doctor",
+  "title": "At the doctor's",
+  "can_do": "I can describe symptoms and understand advice.",
+  "scene": "Doktor Nowak's surgery",
+  "learner_role": "a patient",
+  "mission": [
+   "Describe your symptoms",
+   "Say how long you've had them",
+   "Ask a question about the treatment"
+  ],
+  "complication": "She asks if you're allergic to anything; you're allergic to penicillin.",
+  "opener": {
+   "pl": "Dzień dobry. Proszę usiąść.",
+   "en": "Good morning. Please sit down."
+  },
+  "first_question": {
+   "pl": "Co dolega?",
+   "en": "What's the matter?"
+  },
+  "closer": {
+   "pl": "Proszę brać te tabletki i odpoczywać. Dużo zdrowia!",
+   "en": "Take these tablets and rest. Get well soon!"
+  },
+  "phrases": [
+   {
+    "pl": "Boli mnie głowa / gardło",
+    "en": "I have a headache / a sore throat"
+   },
+   {
+    "pl": "Mam gorączkę",
+    "en": "I have a fever"
+   },
+   {
+    "pl": "Od trzech dni",
+    "en": "For three days"
+   },
+   {
+    "pl": "Jestem uczulony / uczulona na penicylinę",
+    "en": "I'm allergic to penicillin (m / f)"
+   },
+   {
+    "pl": "Ile razy dziennie?",
+    "en": "How many times a day?"
+   },
+   {
+    "pl": "Czy mogę iść do pracy?",
+    "en": "Can I go to work?"
+   }
+  ],
+  "grammar_focus": "boli mnie + noun; od + genitive for how long"
+ },
+ {
+  "id": "call-u07-pharmacy",
+  "level": "A2",
+  "unit": "Health",
+  "character": "Pani Ela",
+  "character_bio": "40, a pharmacist",
+  "title": "At the pharmacy",
+  "can_do": "I can ask for medicine and understand how to take it.",
+  "scene": "a pharmacy; you need something for a cold",
+  "learner_role": "a customer",
+  "mission": [
+   "Say what's wrong",
+   "Ask for something without a prescription",
+   "Ask how to take it"
+  ],
+  "complication": "What you ask for needs a prescription; she suggests something else.",
+  "opener": {
+   "pl": "Dzień dobry, słucham?",
+   "en": "Hello, how can I help?"
+  },
+  "first_question": {
+   "pl": "{m:Czego pan szuka?|f:Czego pani szuka?}",
+   "en": "What are you looking for?"
+  },
+  "closer": {
+   "pl": "Proszę dużo pić i odpoczywać. Do widzenia!",
+   "en": "Drink plenty and rest. Goodbye!"
+  },
+  "phrases": [
+   {
+    "pl": "Mam katar i kaszel",
+    "en": "I have a runny nose and a cough"
+   },
+   {
+    "pl": "Poproszę coś na przeziębienie",
+    "en": "Something for a cold, please"
+   },
+   {
+    "pl": "Czy to jest na receptę?",
+    "en": "Is this prescription-only?"
+   },
+   {
+    "pl": "Jak to brać?",
+    "en": "How do I take it?"
+   },
+   {
+    "pl": "Dwa razy dziennie, po jedzeniu",
+    "en": "Twice a day, after meals"
+   }
+  ],
+  "grammar_focus": "na + accusative for purpose: coś na przeziębienie, na kaszel"
+ },
+ {
+  "id": "call-u07-calling-in-sick",
+  "level": "A2",
+  "unit": "Health",
+  "character": "Ania",
+  "character_bio": "35, the learner's team lead at work, from Warsaw",
+  "title": "Calling in sick",
+  "can_do": "I can explain you're ill and rearrange work.",
+  "scene": "you call Ania, your team lead, early in the morning",
+  "learner_role": "a member of her team",
+  "mission": [
+   "Say you're ill and can't come in",
+   "Say what's wrong",
+   "Agree what happens with today's meeting"
+  ],
+  "complication": "She asks if you could join the meeting online.",
+  "opener": {
+   "pl": "Halo, cześć! Coś się stało?",
+   "en": "Hello, hi! Has something happened?"
+  },
+  "first_question": {
+   "pl": "Wszystko w porządku?",
+   "en": "Is everything OK?"
+  },
+  "closer": {
+   "pl": "Wracaj do zdrowia! Odezwij się jutro.",
+   "en": "Get well soon! Get in touch tomorrow."
+  },
+  "phrases": [
+   {
+    "pl": "Jestem chory / chora",
+    "en": "I'm ill (m / f)"
+   },
+   {
+    "pl": "Dzisiaj nie przyjdę do pracy",
+    "en": "I won't come to work today"
+   },
+   {
+    "pl": "Mam gorączkę",
+    "en": "I have a fever"
+   },
+   {
+    "pl": "Czy możemy przełożyć spotkanie?",
+    "en": "Can we move the meeting?"
+   },
+   {
+    "pl": "Mogę dołączyć online",
+    "en": "I can join online"
+   },
+   {
+    "pl": "Wrócę w czwartek",
+    "en": "I'll be back on Thursday"
+   }
+  ],
+  "grammar_focus": "perfective future for one-off events: przyjdę, wrócę"
+ },
+ {
+  "id": "call-u07-at-the-gym",
+  "level": "A2",
+  "unit": "Health",
+  "character": "Tomek",
+  "character_bio": "31, physiotherapist, the learner's friend",
+  "title": "At the gym",
+  "can_do": "I can talk about sport and say what's too hard.",
+  "scene": "Tomek takes you to his gym for the first time",
+  "learner_role": "his friend",
+  "mission": [
+   "Say what sport you do and how often",
+   "Say what's hard for you",
+   "Agree on a plan"
+  ],
+  "complication": "He pushes you to try something too hard; say it hurts.",
+  "opener": {
+   "pl": "No to co, ćwiczymy?",
+   "en": "So, shall we work out?"
+  },
+  "first_question": {
+   "pl": "Jaki sport lubisz?",
+   "en": "What sport do you like?"
+  },
+  "closer": {
+   "pl": "Brawo! Do następnego razu!",
+   "en": "Well done! Until next time!"
+  },
+  "phrases": [
+   {
+    "pl": "Gram w piłkę",
+    "en": "I play football"
+   },
+   {
+    "pl": "Pływam",
+    "en": "I swim"
+   },
+   {
+    "pl": "Biegam dwa razy w tygodniu",
+    "en": "I run twice a week"
+   },
+   {
+    "pl": "To za trudne",
+    "en": "That's too hard"
+   },
+   {
+    "pl": "Boli mnie kolano",
+    "en": "My knee hurts"
+   },
+   {
+    "pl": "Zróbmy przerwę",
+    "en": "Let's take a break"
+   }
+  ],
+  "grammar_focus": "grać w + accusative (grać w piłkę), grać na + locative (grać na gitarze)"
+ },
+ {
+  "id": "call-u08-your-weekend",
+  "level": "A2",
+  "unit": "What happened?",
+  "character": "Kasia",
+  "character_bio": "22, computer science student, the learner's friend",
+  "title": "How was your weekend?",
+  "can_do": "I can say what you did and where you were.",
+  "scene": "Monday morning coffee with Kasia",
+  "learner_role": "her friend",
+  "mission": [
+   "Say two things you did at the weekend",
+   "Say where you were",
+   "Ask about her weekend"
+  ],
+  "complication": "She doesn't believe your story; add one more detail.",
+  "opener": {
+   "pl": "No i jak tam weekend?",
+   "en": "So, how was the weekend?"
+  },
+  "first_question": {
+   "pl": "{m:Co robiłeś?|f:Co robiłaś?}",
+   "en": "What did you do?"
+  },
+  "closer": {
+   "pl": "Dobra, lecę na zajęcia. Pa!",
+   "en": "OK, I'm off to class. Bye!"
+  },
+  "phrases": [
+   {
+    "pl": "Byłem / byłam w kinie",
+    "en": "I was at the cinema (m / f)"
+   },
+   {
+    "pl": "Spotkałem / spotkałam się z przyjaciółmi",
+    "en": "I met up with friends (m / f)"
+   },
+   {
+    "pl": "Odpoczywałem / odpoczywałam",
+    "en": "I rested (m / f)"
+   },
+   {
+    "pl": "Było super / nudno",
+    "en": "It was great / boring"
+   },
+   {
+    "pl": "A ty co robiłaś?",
+    "en": "And what did you do? (to Kasia)"
+   }
+  ],
+  "grammar_focus": "past tense with gender: byłem / byłam"
+ },
+ {
+  "id": "call-u08-trip-to-gdansk",
+  "level": "A2",
+  "unit": "What happened?",
+  "character": "Pan Marek",
+  "character_bio": "68, retired tram driver, the learner's neighbour",
+  "title": "A trip to Gdańsk",
+  "can_do": "I can describe a trip and give an opinion.",
+  "scene": "Pan Marek asks about your trip to Gdańsk",
+  "learner_role": "his neighbour",
+  "mission": [
+   "Say how you travelled and how long it took",
+   "Say what you saw",
+   "Say what you liked most"
+  ],
+  "complication": "He insists Kraków is more beautiful; disagree politely.",
+  "opener": {
+   "pl": "{m:O, dzień dobry! Podobno był pan nad morzem?|f:O, dzień dobry! Podobno była pani nad morzem?}",
+   "en": "Oh, hello! I hear you were at the seaside?"
+  },
+  "first_question": {
+   "pl": "Jak było w Gdańsku?",
+   "en": "How was Gdańsk?"
+  },
+  "closer": {
+   "pl": "No, następnym razem proszę mi przywieźć bursztyn! Do widzenia.",
+   "en": "Well, next time bring me some amber! Goodbye."
+  },
+  "phrases": [
+   {
+    "pl": "Pojechałem / pojechałam pociągiem",
+    "en": "I went by train (m / f)"
+   },
+   {
+    "pl": "Podróż trwała pięć godzin",
+    "en": "The journey took five hours"
+   },
+   {
+    "pl": "Widziałem / widziałam stare miasto",
+    "en": "I saw the old town (m / f)"
+   },
+   {
+    "pl": "Najbardziej podobało mi się morze",
+    "en": "I liked the sea most"
+   },
+   {
+    "pl": "Moim zdaniem…",
+    "en": "In my opinion…"
+   }
+  ],
+  "grammar_focus": "past tense; jechać pociągiem (instrumental for transport)"
+ },
+ {
+  "id": "call-u08-funny-story",
+  "level": "A2",
+  "unit": "What happened?",
+  "character": "Tomek",
+  "character_bio": "31, physiotherapist, the learner's friend",
+  "title": "You won't believe it!",
+  "can_do": "I can tell a short story in order.",
+  "scene": "an evening chat; Tomek has a story and wants to hear yours",
+  "learner_role": "his friend",
+  "mission": [
+   "Tell a short story about something that happened to you",
+   "React to his story",
+   "Use first, then, finally"
+  ],
+  "complication": "He interrupts with questions; answer and carry on.",
+  "opener": {
+   "pl": "Nie uwierzysz, co mi się dzisiaj stało!",
+   "en": "You won't believe what happened to me today!"
+  },
+  "first_question": {
+   "pl": "A tobie przydarzyło się dzisiaj coś ciekawego?",
+   "en": "And did anything interesting happen to you today?"
+  },
+  "closer": {
+   "pl": "Ha! Dobra historia. Dobranoc!",
+   "en": "Ha! Good story. Good night!"
+  },
+  "phrases": [
+   {
+    "pl": "Najpierw…, potem…, w końcu…",
+    "en": "First…, then…, finally…"
+   },
+   {
+    "pl": "Nie uwierzysz!",
+    "en": "You won't believe it!"
+   },
+   {
+    "pl": "Zgubiłem / zgubiłam telefon",
+    "en": "I lost my phone (m / f)"
+   },
+   {
+    "pl": "Na szczęście…",
+    "en": "Luckily…"
+   },
+   {
+    "pl": "Niestety…",
+    "en": "Unfortunately…"
+   },
+   {
+    "pl": "Naprawdę?",
+    "en": "Really?"
+   }
+  ],
+  "grammar_focus": "perfective past for finished events in a story: zgubiłem, znalazłem"
+ },
+ {
+  "id": "call-u08-lost-wallet",
+  "level": "A2",
+  "unit": "What happened?",
+  "character": "Sierżant Lis",
+  "character_bio": "40, Piotr Lis, a police officer at the city police station",
+  "title": "A stolen wallet",
+  "can_do": "I can report what happened and describe an object.",
+  "scene": "a police station; your wallet was stolen on the tram",
+  "learner_role": "the person reporting it",
+  "mission": [
+   "Say what happened and when",
+   "Describe the wallet and what was in it",
+   "Give your contact details"
+  ],
+  "complication": "He asks where exactly it happened, and you're not sure.",
+  "opener": {
+   "pl": "Dzień dobry. W czym mogę pomóc?",
+   "en": "Good afternoon. How can I help?"
+  },
+  "first_question": {
+   "pl": "Co się stało?",
+   "en": "What happened?"
+  },
+  "closer": {
+   "pl": "Zgłoszenie przyjęte. Zadzwonimy, jeśli coś znajdziemy.",
+   "en": "Report taken. We'll call if we find anything."
+  },
+  "phrases": [
+   {
+    "pl": "Ukradli mi portfel",
+    "en": "My wallet was stolen"
+   },
+   {
+    "pl": "W tramwaju, wczoraj wieczorem",
+    "en": "On the tram, yesterday evening"
+   },
+   {
+    "pl": "Był czarny, skórzany",
+    "en": "It was black, leather"
+   },
+   {
+    "pl": "Były w nim karty i dowód osobisty",
+    "en": "My cards and ID card were in it"
+   },
+   {
+    "pl": "Nie jestem pewny / pewna",
+    "en": "I'm not sure (m / f)"
+   }
+  ],
+  "grammar_focus": "past tense of być: był, była, było, były"
+ },
+ {
+  "id": "call-u09-return-jacket",
+  "level": "A2",
+  "unit": "Shops and services",
+  "character": "Pani Monika",
+  "character_bio": "28, a shop assistant in a clothes store",
+  "title": "Returning a jacket",
+  "can_do": "I can return or exchange something and explain why.",
+  "scene": "a clothes shop; the jacket you bought is too small",
+  "learner_role": "a customer",
+  "mission": [
+   "Say you want to return or exchange it",
+   "Say what's wrong",
+   "Choose another size or colour"
+  ],
+  "complication": "You don't have the receipt; you paid by card.",
+  "opener": {
+   "pl": "Dzień dobry! W czym mogę pomóc?",
+   "en": "Hello! How can I help?"
+  },
+  "first_question": {
+   "pl": "Coś nie tak z kurtką?",
+   "en": "Something wrong with the jacket?"
+  },
+  "closer": {
+   "pl": "Gotowe. Dziękujemy i zapraszamy ponownie!",
+   "en": "All done. Thank you and come again!"
+  },
+  "phrases": [
+   {
+    "pl": "Chciałbym / chciałabym oddać tę kurtkę",
+    "en": "I'd like to return this jacket (m / f)"
+   },
+   {
+    "pl": "Jest za mała",
+    "en": "It's too small"
+   },
+   {
+    "pl": "Czy mogę wymienić na większą?",
+    "en": "Can I exchange it for a bigger one?"
+   },
+   {
+    "pl": "Nie mam paragonu",
+    "en": "I don't have the receipt"
+   },
+   {
+    "pl": "Płaciłem / płaciłam kartą",
+    "en": "I paid by card (m / f)"
+   }
+  ],
+  "grammar_focus": "polite conditional: chciałbym / chciałabym"
+ },
+ {
+  "id": "call-u09-post-office",
+  "level": "A2",
+  "unit": "Shops and services",
+  "character": "Pani Wiesia",
+  "character_bio": "57, a clerk at the post office",
+  "title": "Sending a parcel",
+  "can_do": "I can send a parcel and choose a service.",
+  "scene": "the post office; you're sending a parcel abroad",
+  "learner_role": "a customer",
+  "mission": [
+   "Say where you're sending it",
+   "Choose fast or cheap",
+   "Answer her questions about the contents"
+  ],
+  "complication": "The parcel is too big for the box; buy a bigger one.",
+  "opener": {
+   "pl": "Następny, proszę.",
+   "en": "Next, please."
+  },
+  "first_question": {
+   "pl": "Dokąd paczka?",
+   "en": "Where's the parcel going?"
+  },
+  "closer": {
+   "pl": "Proszę, tu jest numer przesyłki. Do widzenia.",
+   "en": "Here's the tracking number. Goodbye."
+  },
+  "phrases": [
+   {
+    "pl": "Chcę wysłać paczkę do Anglii",
+    "en": "I want to send a parcel to England"
+   },
+   {
+    "pl": "Ile to potrwa?",
+    "en": "How long will it take?"
+   },
+   {
+    "pl": "Jak najtaniej",
+    "en": "As cheaply as possible"
+   },
+   {
+    "pl": "W środku są książki",
+    "en": "There are books inside"
+   },
+   {
+    "pl": "Poproszę większe pudełko",
+    "en": "A bigger box, please"
+   }
+  ],
+  "grammar_focus": "comparatives of adverbs: taniej, szybciej"
+ },
+ {
+  "id": "call-u09-bank-account",
+  "level": "A2",
+  "unit": "Shops and services",
+  "character": "Pan Tadeusz",
+  "character_bio": "45, an adviser at a bank branch",
+  "title": "Opening a bank account",
+  "can_do": "I can open an account and ask about costs.",
+  "scene": "a bank branch",
+  "learner_role": "a new customer",
+  "mission": [
+   "Say you want to open an account",
+   "Answer his questions about ID and address",
+   "Ask about the card and fees"
+  ],
+  "complication": "You need a Polish phone number; give one or ask what else works.",
+  "opener": {
+   "pl": "Dzień dobry, zapraszam. Proszę usiąść.",
+   "en": "Good morning, come in. Please take a seat."
+  },
+  "first_question": {
+   "pl": "Jak mogę pomóc?",
+   "en": "How can I help?"
+  },
+  "closer": {
+   "pl": "Wszystko gotowe. Karta przyjdzie pocztą.",
+   "en": "All done. The card will come by post."
+  },
+  "phrases": [
+   {
+    "pl": "Chcę założyć konto",
+    "en": "I want to open an account"
+   },
+   {
+    "pl": "Mam paszport",
+    "en": "I have a passport"
+   },
+   {
+    "pl": "Mój adres to…",
+    "en": "My address is…"
+   },
+   {
+    "pl": "Ile kosztuje karta?",
+    "en": "How much is the card?"
+   },
+   {
+    "pl": "Czy jest opłata za konto?",
+    "en": "Is there an account fee?"
+   }
+  ],
+  "grammar_focus": "płacić za + accusative: opłata za konto"
+ },
+ {
+  "id": "call-u09-hairdresser",
+  "level": "A2",
+  "unit": "Shops and services",
+  "character": "Pani Jola",
+  "character_bio": "38, a hairdresser who loves to chat",
+  "title": "At the hairdresser's",
+  "can_do": "I can say how you want something done and stop a mistake.",
+  "scene": "a hair salon",
+  "learner_role": "a client",
+  "mission": [
+   "Say what you want: a trim, shorter, a colour",
+   "Say how short",
+   "Chat about your week"
+  ],
+  "complication": "She starts cutting too much; stop her politely.",
+  "opener": {
+   "pl": "Dzień dobry! Siadamy!",
+   "en": "Hello! Have a seat!"
+  },
+  "first_question": {
+   "pl": "To co robimy?",
+   "en": "So, what are we doing?"
+  },
+  "closer": {
+   "pl": "I gotowe! Jak się podoba?",
+   "en": "And done! Do you like it?"
+  },
+  "phrases": [
+   {
+    "pl": "Tylko podciąć",
+    "en": "Just a trim"
+   },
+   {
+    "pl": "Krótko po bokach",
+    "en": "Short at the sides"
+   },
+   {
+    "pl": "Nie za krótko, proszę",
+    "en": "Not too short, please"
+   },
+   {
+    "pl": "Chwileczkę, wystarczy!",
+    "en": "Just a moment, that's enough!"
+   },
+   {
+    "pl": "Bardzo mi się podoba",
+    "en": "I really like it"
+   }
+  ],
+  "grammar_focus": "adverbs and comparatives: krótko, krócej"
+ }
+]

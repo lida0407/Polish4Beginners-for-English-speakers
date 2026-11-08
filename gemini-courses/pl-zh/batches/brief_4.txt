@@ -1,0 +1,646 @@
+You are adding Simplified Chinese (mainland usage) to a Polish speaking course. The learner is an adult Chinese speaker learning Polish at CEFR level A1 or A2; her English is weak, so the Chinese must stand on its own. The Polish stays exactly as it is; you only write Chinese.
+
+For each scenario below, write natural Chinese (not word-for-word, no pinyin) for:
+- title, can_do ("我能……"), scene, learner_role, each of the 3 mission tasks, complication;
+- opener, first_question, closer: the Chinese meaning of the Polish line (use the English gloss only as help);
+- phrases: one Chinese entry per Polish phrase, same number and same order. Give the meaning and, in brackets, when to use it. If the Polish contains "/" alternatives or a {m:…|f:…} pair, explain the choice briefly (e.g. "（男性说 …，女性说 …）", "（对男士的尊称）");
+- grammar_focus: explain the Polish grammar point in Chinese in one or two sentences, keeping the Polish examples as they are.
+Names: write Polish names as a common Chinese transliteration with the Polish in brackets the first time in each scenario, e.g. "马雷克先生（Pan Marek）", "诺瓦克医生（Doktor Nowak）". Places and dishes (Kraków, Kazimierz, pierogi, żurek, bar mleczny, Wigilia) get a short Chinese explanation.
+
+Output ONLY a JSON array, no prose, no code fences. One object per input scenario, same order, exactly these keys, every value a Chinese string except the two arrays:
+{"id": same as input, "title": "...", "can_do": "...", "scene": "...", "learner_role": "...",
+ "mission": ["...", "...", "..."], "complication": "...", "opener": "...", "first_question": "...",
+ "closer": "...", "phrases": ["...", ...], "grammar_focus": "..."}
+Use straight double quotes and keep the JSON valid. Do not write or edit any files.
+
+Scenarios:
+[
+ {
+  "id": "call-u10-job-interview",
+  "level": "A2",
+  "unit": "Work and study",
+  "character": "Pani Dorota",
+  "character_bio": "42, HR manager at a software company in Kraków",
+  "title": "A job interview",
+  "can_do": "I can talk about your experience and ask about a job.",
+  "scene": "a short video interview for a job",
+  "learner_role": "the candidate",
+  "mission": [
+   "Introduce yourself and your experience",
+   "Say why you want the job",
+   "Ask one question about the job"
+  ],
+  "complication": "She asks about your weak points.",
+  "opener": {
+   "pl": "Dzień dobry, miło mi. Zaczynamy?",
+   "en": "Good morning, nice to meet you. Shall we start?"
+  },
+  "first_question": {
+   "pl": "Proszę powiedzieć coś o sobie.",
+   "en": "Please tell me a little about yourself."
+  },
+  "closer": {
+   "pl": "Dziękuję, odezwiemy się w przyszłym tygodniu.",
+   "en": "Thank you, we'll be in touch next week."
+  },
+  "phrases": [
+   {
+    "pl": "Od pięciu lat pracuję jako…",
+    "en": "I've been working as … for five years"
+   },
+   {
+    "pl": "Znam angielski i trochę polski",
+    "en": "I know English and some Polish"
+   },
+   {
+    "pl": "Interesuje mnie ta praca, bo…",
+    "en": "I'm interested in this job because…"
+   },
+   {
+    "pl": "Moją mocną stroną jest…",
+    "en": "My strength is…"
+   },
+   {
+    "pl": "Czy jest możliwość pracy zdalnej?",
+    "en": "Is remote work possible?"
+   }
+  ],
+  "grammar_focus": "od + genitive with the present tense: od pięciu lat pracuję"
+ },
+ {
+  "id": "call-u10-language-course",
+  "level": "A2",
+  "unit": "Work and study",
+  "character": "Pan Paweł",
+  "character_bio": "30, secretary at a language school",
+  "title": "Signing up for a Polish course",
+  "can_do": "I can enrol on a course and ask practical questions.",
+  "scene": "a language school office",
+  "learner_role": "a new student",
+  "mission": [
+   "Say your level and your goal",
+   "Choose days and times",
+   "Ask the price and what's included"
+  ],
+  "complication": "The group you want is full; choose another.",
+  "opener": {
+   "pl": "Dzień dobry! Zapraszam.",
+   "en": "Hello! Come in."
+  },
+  "first_question": {
+   "pl": "{m:Jaki kurs pana interesuje?|f:Jaki kurs panią interesuje?}",
+   "en": "Which course are you interested in?"
+  },
+  "closer": {
+   "pl": "Do zobaczenia na pierwszych zajęciach!",
+   "en": "See you at the first class!"
+  },
+  "phrases": [
+   {
+    "pl": "Jestem na poziomie A2",
+    "en": "I'm at level A2"
+   },
+   {
+    "pl": "Chcę lepiej mówić",
+    "en": "I want to speak better"
+   },
+   {
+    "pl": "Wieczorem, dwa razy w tygodniu",
+    "en": "In the evening, twice a week"
+   },
+   {
+    "pl": "Ile kosztuje semestr?",
+    "en": "How much is a semester?"
+   },
+   {
+    "pl": "Czy podręcznik jest w cenie?",
+    "en": "Is the textbook included?"
+   }
+  ],
+  "grammar_focus": "interesować się + instrumental; interesuje mnie + nominative"
+ },
+ {
+  "id": "call-u10-ask-for-help",
+  "level": "A2",
+  "unit": "Work and study",
+  "character": "Ania",
+  "character_bio": "35, the learner's team lead at work, from Warsaw",
+  "title": "Can you help me?",
+  "can_do": "I can ask for help politely and agree a time.",
+  "scene": "at work; you need Ania's help with a report",
+  "learner_role": "a member of her team",
+  "mission": [
+   "Ask politely for help",
+   "Explain the problem",
+   "Agree on a time"
+  ],
+  "complication": "She's busy until three o'clock.",
+  "opener": {
+   "pl": "Cześć! Co tam?",
+   "en": "Hi! What's up?"
+  },
+  "first_question": {
+   "pl": "Potrzebujesz czegoś?",
+   "en": "Do you need something?"
+  },
+  "closer": {
+   "pl": "Dobra, to o piętnastej u mnie. Na razie!",
+   "en": "OK, at three at my desk. See you!"
+  },
+  "phrases": [
+   {
+    "pl": "Czy możesz mi pomóc?",
+    "en": "Can you help me?"
+   },
+   {
+    "pl": "Mam problem z raportem",
+    "en": "I have a problem with the report"
+   },
+   {
+    "pl": "Nie rozumiem tej tabeli",
+    "en": "I don't understand this table"
+   },
+   {
+    "pl": "Na kiedy?",
+    "en": "By when?"
+   },
+   {
+    "pl": "Dzięki, jesteś super!",
+    "en": "Thanks, you're great!"
+   }
+  ],
+  "grammar_focus": "polite requests: czy możesz + infinitive"
+ },
+ {
+  "id": "call-u10-move-meeting",
+  "level": "A2",
+  "unit": "Work and study",
+  "character": "Ania",
+  "character_bio": "35, the learner's team lead at work, from Warsaw",
+  "title": "Moving a meeting",
+  "can_do": "I can reschedule with a reason.",
+  "scene": "you need to move tomorrow's meeting",
+  "learner_role": "a member of her team",
+  "mission": [
+   "Say you can't make the meeting and why",
+   "Suggest another day and time",
+   "Confirm the new time"
+  ],
+  "complication": "Everyone else is only free on Friday morning.",
+  "opener": {
+   "pl": "Hej, mam chwilę. O co chodzi?",
+   "en": "Hey, I've got a minute. What's it about?"
+  },
+  "first_question": {
+   "pl": "Chodzi o jutrzejsze spotkanie?",
+   "en": "Is it about tomorrow's meeting?"
+  },
+  "closer": {
+   "pl": "Dobra, wysyłam nowe zaproszenie. Pa!",
+   "en": "OK, I'm sending a new invite. Bye!"
+  },
+  "phrases": [
+   {
+    "pl": "Jutro nie mogę, bo…",
+    "en": "I can't tomorrow because…"
+   },
+   {
+    "pl": "Czy możemy przełożyć spotkanie?",
+    "en": "Can we move the meeting?"
+   },
+   {
+    "pl": "Pasuje ci czwartek?",
+    "en": "Does Thursday suit you?"
+   },
+   {
+    "pl": "W piątek rano mogę",
+    "en": "I can on Friday morning"
+   },
+   {
+    "pl": "Potwierdzam",
+    "en": "Confirmed"
+   }
+  ],
+  "grammar_focus": "joining ideas: bo, ale, więc"
+ },
+ {
+  "id": "call-u11-hotel-check-in",
+  "level": "A2",
+  "unit": "Travel",
+  "character": "Pan Adam",
+  "character_bio": "34, receptionist at a guesthouse in Zakopane",
+  "title": "Checking in",
+  "can_do": "I can check in and sort out a problem with a room.",
+  "scene": "the reception of a guesthouse in Zakopane",
+  "learner_role": "a guest",
+  "mission": [
+   "Check in with your reservation",
+   "Ask about breakfast and Wi-Fi",
+   "Report a problem with the room"
+  ],
+  "complication": "Your room faces a noisy street; ask for another.",
+  "opener": {
+   "pl": "Dobry wieczór, witamy w Zakopanem!",
+   "en": "Good evening, welcome to Zakopane!"
+  },
+  "first_question": {
+   "pl": "Na jakie nazwisko jest rezerwacja?",
+   "en": "What name is the reservation under?"
+  },
+  "closer": {
+   "pl": "Życzę miłego pobytu!",
+   "en": "Enjoy your stay!"
+  },
+  "phrases": [
+   {
+    "pl": "Mam rezerwację na nazwisko…",
+    "en": "I have a reservation under the name…"
+   },
+   {
+    "pl": "O której jest śniadanie?",
+    "en": "What time is breakfast?"
+   },
+   {
+    "pl": "Jakie jest hasło do Wi-Fi?",
+    "en": "What's the Wi-Fi password?"
+   },
+   {
+    "pl": "Pokój jest bardzo głośny",
+    "en": "The room is very noisy"
+   },
+   {
+    "pl": "Czy mogę zmienić pokój?",
+    "en": "Can I change rooms?"
+   }
+  ],
+  "grammar_focus": "na + accusative (na nazwisko); o której? o ósmej"
+ },
+ {
+  "id": "call-u11-plan-tatras",
+  "level": "A2",
+  "unit": "Travel",
+  "character": "Tomek",
+  "character_bio": "31, physiotherapist, the learner's friend",
+  "title": "Planning a trip",
+  "can_do": "I can plan a trip and share tasks.",
+  "scene": "planning a weekend in the Tatra mountains with Tomek",
+  "learner_role": "his friend",
+  "mission": [
+   "Agree how to get there",
+   "Agree where to sleep",
+   "Split the tasks: who buys what"
+  ],
+  "complication": "The bus is sold out; find another way.",
+  "opener": {
+   "pl": "Słuchaj, jedziemy w Tatry!",
+   "en": "Listen, we're going to the Tatras!"
+  },
+  "first_question": {
+   "pl": "Jak jedziemy: pociągiem czy autobusem?",
+   "en": "How are we going: by train or by bus?"
+  },
+  "closer": {
+   "pl": "Super, będzie świetnie! Do soboty!",
+   "en": "Great, it'll be brilliant! See you Saturday!"
+  },
+  "phrases": [
+   {
+    "pl": "Pojedźmy pociągiem",
+    "en": "Let's go by train"
+   },
+   {
+    "pl": "Możemy spać w schronisku",
+    "en": "We can sleep in a mountain hostel"
+   },
+   {
+    "pl": "Ja kupię bilety",
+    "en": "I'll buy the tickets"
+   },
+   {
+    "pl": "Ty weź mapę",
+    "en": "You take the map"
+   },
+   {
+    "pl": "A jeśli nie ma miejsc?",
+    "en": "And if there are no seats?"
+   }
+  ],
+  "grammar_focus": "instrumental for transport (pociągiem); perfective future (kupię)"
+ },
+ {
+  "id": "call-u11-weather-trip",
+  "level": "A2",
+  "unit": "Travel",
+  "character": "Pan Marek",
+  "character_bio": "68, retired tram driver, the learner's neighbour",
+  "title": "What will the weather be like?",
+  "can_do": "I can talk about the weather and future plans.",
+  "scene": "you meet Pan Marek on your way out with a big backpack",
+  "learner_role": "his neighbour",
+  "mission": [
+   "Say where and when you're going",
+   "Ask about the weather forecast",
+   "Say what you'll take"
+  ],
+  "complication": "He says there'll be a storm; ask if you should still go.",
+  "opener": {
+   "pl": "{m:Dzień dobry! Gdzie się pan wybiera z tym plecakiem?|f:Dzień dobry! Gdzie się pani wybiera z tym plecakiem?}",
+   "en": "Hello! Where are you off to with that backpack?"
+  },
+  "first_question": {
+   "pl": "{m:A sprawdzał pan pogodę?|f:A sprawdzała pani pogodę?}",
+   "en": "And have you checked the weather?"
+  },
+  "closer": {
+   "pl": "Proszę uważać na siebie. Szczęśliwej drogi!",
+   "en": "Take care. Have a safe trip!"
+  },
+  "phrases": [
+   {
+    "pl": "Jadę w góry na weekend",
+    "en": "I'm going to the mountains for the weekend"
+   },
+   {
+    "pl": "Jaka będzie pogoda?",
+    "en": "What will the weather be like?"
+   },
+   {
+    "pl": "Będzie padać?",
+    "en": "Will it rain?"
+   },
+   {
+    "pl": "Wezmę kurtkę przeciwdeszczową",
+    "en": "I'll take a raincoat"
+   },
+   {
+    "pl": "Mam nadzieję, że będzie słońce",
+    "en": "I hope it'll be sunny"
+   }
+  ],
+  "grammar_focus": "future: będzie + adjective / noun; wezmę"
+ },
+ {
+  "id": "call-u11-restaurant-complaint",
+  "level": "A2",
+  "unit": "Travel",
+  "character": "Pan Kuba",
+  "character_bio": "24, a waiter at a restaurant in the Old Town",
+  "title": "A problem with the meal",
+  "can_do": "I can complain politely and ask for something else.",
+  "scene": "a restaurant in the Old Town; something is wrong with your meal",
+  "learner_role": "a guest",
+  "mission": [
+   "Say what's wrong with the food",
+   "Say what you'd like instead",
+   "Ask for the bill"
+  ],
+  "complication": "The kitchen is closing; they can only offer a dessert.",
+  "opener": {
+   "pl": "Smakowało?",
+   "en": "Did you enjoy it?"
+  },
+  "first_question": {
+   "pl": "Coś nie tak?",
+   "en": "Is something wrong?"
+  },
+  "closer": {
+   "pl": "Bardzo przepraszamy. Deser na koszt firmy!",
+   "en": "We're very sorry. Dessert is on the house!"
+  },
+  "phrases": [
+   {
+    "pl": "Zupa jest zimna",
+    "en": "The soup is cold"
+   },
+   {
+    "pl": "To nie jest to, co zamawiałem / zamawiałam",
+    "en": "This isn't what I ordered (m / f)"
+   },
+   {
+    "pl": "Czy mogę prosić o coś innego?",
+    "en": "Could I have something else?"
+   },
+   {
+    "pl": "Poproszę rachunek",
+    "en": "The bill, please"
+   },
+   {
+    "pl": "Nic nie szkodzi",
+    "en": "It doesn't matter"
+   }
+  ],
+  "grammar_focus": "prosić o + accusative: prosić o rachunek"
+ },
+ {
+  "id": "call-u12-film-night",
+  "level": "A2",
+  "unit": "Opinions and culture",
+  "character": "Kasia",
+  "character_bio": "22, computer science student, the learner's friend",
+  "title": "Film night",
+  "can_do": "I can give and defend an opinion.",
+  "scene": "choosing a film to watch with Kasia",
+  "learner_role": "her friend",
+  "mission": [
+   "Say what films you like and why",
+   "Disagree politely with her choice",
+   "Agree on one film"
+  ],
+  "complication": "She only wants horror films, and you can't stand them.",
+  "opener": {
+   "pl": "To co oglądamy?",
+   "en": "So what are we watching?"
+  },
+  "first_question": {
+   "pl": "Jakie filmy lubisz?",
+   "en": "What films do you like?"
+  },
+  "closer": {
+   "pl": "Dobra, włączam! Popcorn gotowy?",
+   "en": "OK, I'm putting it on! Popcorn ready?"
+  },
+  "phrases": [
+   {
+    "pl": "Lubię komedie, bo…",
+    "en": "I like comedies because…"
+   },
+   {
+    "pl": "Nie znoszę horrorów",
+    "en": "I can't stand horror films"
+   },
+   {
+    "pl": "Moim zdaniem…",
+    "en": "In my opinion…"
+   },
+   {
+    "pl": "Masz rację, ale…",
+    "en": "You're right, but…"
+   },
+   {
+    "pl": "Może coś lżejszego?",
+    "en": "Maybe something lighter?"
+   },
+   {
+    "pl": "Zgoda!",
+    "en": "Agreed!"
+   }
+  ],
+  "grammar_focus": "joining ideas: bo, ale, więc"
+ },
+ {
+  "id": "call-u12-christmas-eve",
+  "level": "A2",
+  "unit": "Opinions and culture",
+  "character": "Pan Marek",
+  "character_bio": "68, retired tram driver, the learner's neighbour",
+  "title": "Christmas Eve",
+  "can_do": "I can accept an invitation and talk about traditions.",
+  "scene": "December; Pan Marek invites you to Wigilia with his family",
+  "learner_role": "his neighbour",
+  "mission": [
+   "Thank him and accept",
+   "Ask about Polish Christmas traditions",
+   "Say how you celebrate at home"
+  ],
+  "complication": "He asks you to bring something; ask what's traditional.",
+  "opener": {
+   "pl": "{m:Dzień dobry! Co pan robi w Wigilię?|f:Dzień dobry! Co pani robi w Wigilię?}",
+   "en": "Hello! What are you doing on Christmas Eve?"
+  },
+  "first_question": {
+   "pl": "{m:Może przyjdzie pan do nas na kolację?|f:Może przyjdzie pani do nas na kolację?}",
+   "en": "Would you like to come to us for dinner?"
+  },
+  "closer": {
+   "pl": "To czekamy! Wesołych Świąt!",
+   "en": "We'll expect you then! Merry Christmas!"
+  },
+  "phrases": [
+   {
+    "pl": "Bardzo dziękuję za zaproszenie",
+    "en": "Thank you very much for the invitation"
+   },
+   {
+    "pl": "Z przyjemnością przyjdę",
+    "en": "I'll be glad to come"
+   },
+   {
+    "pl": "Co się je na Wigilię?",
+    "en": "What do people eat on Christmas Eve?"
+   },
+   {
+    "pl": "U nas w domu…",
+    "en": "Back home, we…"
+   },
+   {
+    "pl": "Wesołych Świąt!",
+    "en": "Merry Christmas!"
+   }
+  ],
+  "grammar_focus": "impersonal się: co się je, jak się świętuje"
+ },
+ {
+  "id": "call-u12-krakow-or-warsaw",
+  "level": "A2",
+  "unit": "Opinions and culture",
+  "character": "Ania",
+  "character_bio": "35, the learner's team lead at work, from Warsaw",
+  "title": "Kraków or Warsaw?",
+  "can_do": "I can compare two things and give reasons.",
+  "scene": "lunch break; Ania, who is from Warsaw, says it's better than Kraków",
+  "learner_role": "her colleague",
+  "mission": [
+   "Compare the two cities on two points",
+   "Give your opinion with a reason",
+   "Find something you agree on"
+  ],
+  "complication": "She asks where you'd like to live in ten years.",
+  "opener": {
+   "pl": "Przyznaj, Warszawa jest lepsza niż Kraków!",
+   "en": "Admit it, Warsaw is better than Kraków!"
+  },
+  "first_question": {
+   "pl": "No powiedz, gdzie jest lepiej?",
+   "en": "Go on, where is it better?"
+  },
+  "closer": {
+   "pl": "Dobra, remis! Wracamy do pracy.",
+   "en": "OK, it's a draw! Back to work."
+  },
+  "phrases": [
+   {
+    "pl": "Kraków jest mniejszy, ale ładniejszy",
+    "en": "Kraków is smaller but prettier"
+   },
+   {
+    "pl": "W Warszawie jest więcej pracy",
+    "en": "There's more work in Warsaw"
+   },
+   {
+    "pl": "Zgadzam się / nie zgadzam się",
+    "en": "I agree / I disagree"
+   },
+   {
+    "pl": "Moim zdaniem…",
+    "en": "In my opinion…"
+   },
+   {
+    "pl": "Za dziesięć lat chciałbym / chciałabym mieszkać…",
+    "en": "In ten years I'd like to live… (m / f)"
+   }
+  ],
+  "grammar_focus": "comparatives: większy, ładniejszy, lepszy niż"
+ },
+ {
+  "id": "call-u12-dreams",
+  "level": "A2",
+  "unit": "Opinions and culture",
+  "character": "Kasia",
+  "character_bio": "22, computer science student, the learner's friend",
+  "title": "If you could…",
+  "can_do": "I can talk about plans and imagine what you would do.",
+  "scene": "a late-night chat with Kasia about plans and dreams",
+  "learner_role": "her friend",
+  "mission": [
+   "Say what you'll do next year",
+   "Say what you would do with more time or money",
+   "Ask her the same"
+  ],
+  "complication": "She asks why you're learning Polish.",
+  "opener": {
+   "pl": "Słuchaj, masz jakieś plany na przyszły rok?",
+   "en": "Listen, do you have any plans for next year?"
+  },
+  "first_question": {
+   "pl": "Co będziesz robić?",
+   "en": "What will you be doing?"
+  },
+  "closer": {
+   "pl": "Dobra, czas spać. Dobranoc!",
+   "en": "OK, time for bed. Good night!"
+  },
+  "phrases": [
+   {
+    "pl": "W przyszłym roku chcę…",
+    "en": "Next year I want to…"
+   },
+   {
+    "pl": "Gdybym miał / miała więcej czasu, …",
+    "en": "If I had more time, … (m / f)"
+   },
+   {
+    "pl": "…podróżowałbym / podróżowałabym",
+    "en": "…I would travel (m / f)"
+   },
+   {
+    "pl": "Uczę się polskiego, bo…",
+    "en": "I'm learning Polish because…"
+   },
+   {
+    "pl": "To moje marzenie",
+    "en": "It's my dream"
+   }
+  ],
+  "grammar_focus": "conditional: gdybym miał…, zrobiłbym"
+ }
+]

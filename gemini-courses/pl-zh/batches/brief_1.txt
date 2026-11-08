@@ -1,0 +1,658 @@
+You are adding Simplified Chinese (mainland usage) to a Polish speaking course. The learner is an adult Chinese speaker learning Polish at CEFR level A1 or A2; her English is weak, so the Chinese must stand on its own. The Polish stays exactly as it is; you only write Chinese.
+
+For each scenario below, write natural Chinese (not word-for-word, no pinyin) for:
+- title, can_do ("我能……"), scene, learner_role, each of the 3 mission tasks, complication;
+- opener, first_question, closer: the Chinese meaning of the Polish line (use the English gloss only as help);
+- phrases: one Chinese entry per Polish phrase, same number and same order. Give the meaning and, in brackets, when to use it. If the Polish contains "/" alternatives or a {m:…|f:…} pair, explain the choice briefly (e.g. "（男性说 …，女性说 …）", "（对男士的尊称）");
+- grammar_focus: explain the Polish grammar point in Chinese in one or two sentences, keeping the Polish examples as they are.
+Names: write Polish names as a common Chinese transliteration with the Polish in brackets the first time in each scenario, e.g. "马雷克先生（Pan Marek）", "诺瓦克医生（Doktor Nowak）". Places and dishes (Kraków, Kazimierz, pierogi, żurek, bar mleczny, Wigilia) get a short Chinese explanation.
+
+Output ONLY a JSON array, no prose, no code fences. One object per input scenario, same order, exactly these keys, every value a Chinese string except the two arrays:
+{"id": same as input, "title": "...", "can_do": "...", "scene": "...", "learner_role": "...",
+ "mission": ["...", "...", "..."], "complication": "...", "opener": "...", "first_question": "...",
+ "closer": "...", "phrases": ["...", ...], "grammar_focus": "..."}
+Use straight double quotes and keep the JSON valid. Do not write or edit any files.
+
+Scenarios:
+[
+ {
+  "id": "call-u01-hello-neighbour",
+  "level": "A1",
+  "unit": "First days in Kraków",
+  "character": "Pan Marek",
+  "character_bio": "68, retired tram driver, the learner's neighbour",
+  "title": "Hello, neighbour",
+  "can_do": "I can introduce yourself and say where you are from.",
+  "scene": "the stairwell of your new block of flats; you have just moved in",
+  "learner_role": "the new neighbour",
+  "mission": [
+   "Say hello and tell him your name",
+   "Say where you are from",
+   "Ask him one question"
+  ],
+  "complication": "He mishears your name; say it again or spell it.",
+  "opener": {
+   "pl": "Dzień dobry! Jestem Marek, mieszkam pod siódemką.",
+   "en": "Good morning! I'm Marek, I live at number seven."
+  },
+  "first_question": {
+   "pl": "{m:A pan to nowy sąsiad?|f:A pani to nowa sąsiadka?}",
+   "en": "And you're the new neighbour?"
+  },
+  "closer": {
+   "pl": "Bardzo mi miło. Do widzenia!",
+   "en": "Very nice to meet you. Goodbye!"
+  },
+  "phrases": [
+   {
+    "pl": "Dzień dobry",
+    "en": "Good morning / hello"
+   },
+   {
+    "pl": "Mam na imię…",
+    "en": "My name is…"
+   },
+   {
+    "pl": "Jestem z Anglii / z Indii / z Chin",
+    "en": "I'm from England / India / China"
+   },
+   {
+    "pl": "Bardzo mi miło",
+    "en": "Nice to meet you"
+   },
+   {
+    "pl": "Przepraszam, jak?",
+    "en": "Sorry, what?"
+   },
+   {
+    "pl": "A pan?",
+    "en": "And you? (to a man, formal)"
+   }
+  ],
+  "grammar_focus": "być z + genitive for where you're from: z Polski, z Anglii"
+ },
+ {
+  "id": "call-u01-first-coffee",
+  "level": "A1",
+  "unit": "First days in Kraków",
+  "character": "Ola",
+  "character_bio": "26, barista at Kawiarnia pod Lipą, a small café in Kazimierz, Kraków",
+  "title": "Your first coffee",
+  "can_do": "I can order a drink and a snack and pay.",
+  "scene": "Kawiarnia pod Lipą, a small café in Kazimierz; your first visit",
+  "learner_role": "a customer",
+  "mission": [
+   "Order a drink",
+   "Order something to eat",
+   "Ask how much it is and pay"
+  ],
+  "complication": "The cheesecake (sernik) has just sold out; choose something else.",
+  "opener": {
+   "pl": "Dzień dobry! Co podać?",
+   "en": "Hello! What can I get you?"
+  },
+  "first_question": {
+   "pl": "Kawa, herbata? Mamy też dzisiaj świeży sernik.",
+   "en": "Coffee, tea? We also have fresh cheesecake today."
+  },
+  "closer": {
+   "pl": "Smacznego! Do zobaczenia!",
+   "en": "Enjoy! See you!"
+  },
+  "phrases": [
+   {
+    "pl": "Poproszę kawę",
+    "en": "A coffee, please"
+   },
+   {
+    "pl": "Poproszę herbatę z cytryną",
+    "en": "Tea with lemon, please"
+   },
+   {
+    "pl": "Na miejscu / na wynos",
+    "en": "To have here / to take away"
+   },
+   {
+    "pl": "Ile płacę?",
+    "en": "How much do I pay?"
+   },
+   {
+    "pl": "Czy mogę zapłacić kartą?",
+    "en": "Can I pay by card?"
+   },
+   {
+    "pl": "Dziękuję",
+    "en": "Thank you"
+   }
+  ],
+  "grammar_focus": "poproszę + accusative: kawa → kawę, herbata → herbatę"
+ },
+ {
+  "id": "call-u01-new-colleague",
+  "level": "A1",
+  "unit": "First days in Kraków",
+  "character": "Ania",
+  "character_bio": "35, the learner's team lead at work, from Warsaw",
+  "title": "A new colleague",
+  "can_do": "I can say what you do and where you live.",
+  "scene": "the office kitchen on your first day at work",
+  "learner_role": "the new colleague",
+  "mission": [
+   "Say what your job is",
+   "Say where you live",
+   "Ask her one question"
+  ],
+  "complication": "She thinks you work in another team; correct her.",
+  "opener": {
+   "pl": "{m:Cześć! Ty jesteś nowy?|f:Cześć! Ty jesteś nowa?}",
+   "en": "Hi! Are you new?"
+  },
+  "first_question": {
+   "pl": "Jestem Ania, z marketingu. A ty w jakim dziale pracujesz?",
+   "en": "I'm Ania from marketing. Which department do you work in?"
+  },
+  "closer": {
+   "pl": "Dobra, muszę lecieć na spotkanie. Na razie!",
+   "en": "OK, I have to run to a meeting. See you!"
+  },
+  "phrases": [
+   {
+    "pl": "Jestem programistą / programistką",
+    "en": "I'm a programmer (m / f)"
+   },
+   {
+    "pl": "Pracuję w dziale IT",
+    "en": "I work in IT"
+   },
+   {
+    "pl": "Mieszkam w centrum",
+    "en": "I live in the centre"
+   },
+   {
+    "pl": "Nie, pracuję w…",
+    "en": "No, I work in…"
+   },
+   {
+    "pl": "A ty?",
+    "en": "And you?"
+   }
+  ],
+  "grammar_focus": "być + instrumental for jobs (jestem nauczycielem); w + locative for places (w centrum)"
+ },
+ {
+  "id": "call-u01-how-are-you",
+  "level": "A1",
+  "unit": "First days in Kraków",
+  "character": "Kasia",
+  "character_bio": "22, computer science student, the learner's friend",
+  "title": "How are you?",
+  "can_do": "I can say how you are and what you are doing.",
+  "scene": "a video call with your friend Kasia late in the evening",
+  "learner_role": "her friend",
+  "mission": [
+   "Say how you are",
+   "Say what you are doing right now",
+   "Ask what she is doing"
+  ],
+  "complication": "Her internet keeps cutting out; ask her to repeat.",
+  "opener": {
+   "pl": "Hej! Słyszysz mnie?",
+   "en": "Hey! Can you hear me?"
+  },
+  "first_question": {
+   "pl": "Jak się masz? Co robisz?",
+   "en": "How are you? What are you doing?"
+  },
+  "closer": {
+   "pl": "Dobra, idę spać. Dobranoc!",
+   "en": "OK, I'm going to bed. Good night!"
+  },
+  "phrases": [
+   {
+    "pl": "Dobrze, dziękuję",
+    "en": "Fine, thanks"
+   },
+   {
+    "pl": "Jestem zmęczony / zmęczona",
+    "en": "I'm tired (m / f)"
+   },
+   {
+    "pl": "Teraz gotuję / czytam / oglądam film",
+    "en": "Right now I'm cooking / reading / watching a film"
+   },
+   {
+    "pl": "Nie słyszę cię",
+    "en": "I can't hear you"
+   },
+   {
+    "pl": "Możesz powtórzyć?",
+    "en": "Can you repeat that?"
+   }
+  ],
+  "grammar_focus": "present tense: czytam, czytasz; piszę, piszesz"
+ },
+ {
+  "id": "call-u02-tram-tickets",
+  "level": "A1",
+  "unit": "Numbers and shopping",
+  "character": "Pan Zbyszek",
+  "character_bio": "50, runs a kiosk at a tram stop and drives a taxi at weekends",
+  "title": "Tram tickets",
+  "can_do": "I can buy tickets and understand prices.",
+  "scene": "Pan Zbyszek's kiosk at a tram stop",
+  "learner_role": "a customer",
+  "mission": [
+   "Ask for tickets: how many and what kind",
+   "Ask the price",
+   "Pay and say thank you"
+  ],
+  "complication": "He has no change for a 100-złoty note.",
+  "opener": {
+   "pl": "Dzień dobry, słucham.",
+   "en": "Hello, yes?"
+  },
+  "first_question": {
+   "pl": "Jakie bilety? Normalne czy ulgowe?",
+   "en": "Which tickets? Standard or reduced?"
+  },
+  "closer": {
+   "pl": "Proszę bardzo. Miłego dnia!",
+   "en": "Here you are. Have a nice day!"
+  },
+  "phrases": [
+   {
+    "pl": "Poproszę dwa bilety",
+    "en": "Two tickets, please"
+   },
+   {
+    "pl": "Normalny / ulgowy",
+    "en": "Standard / reduced"
+   },
+   {
+    "pl": "Ile to kosztuje?",
+    "en": "How much is it?"
+   },
+   {
+    "pl": "Nie mam drobnych",
+    "en": "I don't have small change"
+   },
+   {
+    "pl": "Mogę zapłacić kartą?",
+    "en": "Can I pay by card?"
+   }
+  ],
+  "grammar_focus": "numbers with nouns: jeden bilet, dwa bilety, pięć biletów"
+ },
+ {
+  "id": "call-u02-at-the-market",
+  "level": "A1",
+  "unit": "Numbers and shopping",
+  "character": "Pani Basia",
+  "character_bio": "55, owns a fruit and vegetable stall at Stary Kleparz market and rents out a small flat",
+  "title": "At the market",
+  "can_do": "I can buy food by weight and pay.",
+  "scene": "Pani Basia's fruit and vegetable stall at Stary Kleparz market",
+  "learner_role": "a customer",
+  "mission": [
+   "Buy a kilo of apples",
+   "Buy one more thing",
+   "Ask the total and pay"
+  ],
+  "complication": "She tries to sell you strawberries as well; say no politely.",
+  "opener": {
+   "pl": "Dzień dobry, kochanie! Co dzisiaj?",
+   "en": "Hello, dear! What will it be today?"
+  },
+  "first_question": {
+   "pl": "Jabłka mam piękne, polskie. Ile?",
+   "en": "I've got beautiful Polish apples. How many?"
+  },
+  "closer": {
+   "pl": "Dziękuję, złotko. Zapraszam znowu!",
+   "en": "Thank you, dear. Come again!"
+  },
+  "phrases": [
+   {
+    "pl": "Poproszę kilo jabłek",
+    "en": "A kilo of apples, please"
+   },
+   {
+    "pl": "Pół kilo pomidorów",
+    "en": "Half a kilo of tomatoes"
+   },
+   {
+    "pl": "To wszystko",
+    "en": "That's all"
+   },
+   {
+    "pl": "Nie, dziękuję",
+    "en": "No, thank you"
+   },
+   {
+    "pl": "Ile płacę?",
+    "en": "How much do I pay?"
+   }
+  ],
+  "grammar_focus": "quantity + genitive plural: kilo jabłek, pół kilo pomidorów"
+ },
+ {
+  "id": "call-u02-swapping-numbers",
+  "level": "A1",
+  "unit": "Numbers and shopping",
+  "character": "Kasia",
+  "character_bio": "22, computer science student, the learner's friend",
+  "title": "Swapping numbers",
+  "can_do": "I can give and check a phone number and an email address.",
+  "scene": "after a party; Kasia wants your phone number and email",
+  "learner_role": "her new friend",
+  "mission": [
+   "Give your phone number",
+   "Spell your email address",
+   "Ask for her number"
+  ],
+  "complication": "She writes one digit wrong; correct her.",
+  "opener": {
+   "pl": "Słuchaj, daj mi swój numer!",
+   "en": "Listen, give me your number!"
+  },
+  "first_question": {
+   "pl": "Jaki masz numer telefonu?",
+   "en": "What's your phone number?"
+  },
+  "closer": {
+   "pl": "Super, mam! Napiszę jutro. Pa!",
+   "en": "Great, got it! I'll text tomorrow. Bye!"
+  },
+  "phrases": [
+   {
+    "pl": "Mój numer to…",
+    "en": "My number is…"
+   },
+   {
+    "pl": "zero, jeden, dwa, trzy…",
+    "en": "0, 1, 2, 3…"
+   },
+   {
+    "pl": "Nie siedem, tylko osiem",
+    "en": "Not seven, eight"
+   },
+   {
+    "pl": "małpa / kropka",
+    "en": "@ / dot"
+   },
+   {
+    "pl": "A twój numer?",
+    "en": "And your number?"
+   }
+  ],
+  "grammar_focus": "numbers 0–100"
+ },
+ {
+  "id": "call-u02-the-bakery",
+  "level": "A1",
+  "unit": "Numbers and shopping",
+  "character": "Ola",
+  "character_bio": "26, barista at Kawiarnia pod Lipą, a small café in Kazimierz, Kraków",
+  "title": "Fresh bread",
+  "can_do": "I can buy several items and handle a short wait.",
+  "scene": "Ola's café, which also sells fresh bread in the morning",
+  "learner_role": "a regular customer",
+  "mission": [
+   "Ask for bread rolls: say how many",
+   "Ask what else is fresh today",
+   "Pay"
+  ],
+  "complication": "The rolls are still in the oven: wait five minutes or choose something else.",
+  "opener": {
+   "pl": "Cześć! Znowu u nas?",
+   "en": "Hi! Back again?"
+  },
+  "first_question": {
+   "pl": "Bułki, chleb? Wszystko świeże.",
+   "en": "Rolls, bread? Everything's fresh."
+  },
+  "closer": {
+   "pl": "Proszę bardzo. Smacznego!",
+   "en": "Here you are. Enjoy!"
+  },
+  "phrases": [
+   {
+    "pl": "Poproszę cztery bułki",
+    "en": "Four rolls, please"
+   },
+   {
+    "pl": "Jeden chleb",
+    "en": "One loaf of bread"
+   },
+   {
+    "pl": "Czy jest chleb razowy?",
+    "en": "Is there wholemeal bread?"
+   },
+   {
+    "pl": "Poczekam",
+    "en": "I'll wait"
+   },
+   {
+    "pl": "Ile płacę?",
+    "en": "How much do I pay?"
+   }
+  ],
+  "grammar_focus": "dwie, trzy, cztery bułki but pięć bułek"
+ },
+ {
+  "id": "call-u03-milk-bar",
+  "level": "A1",
+  "unit": "Food and eating out",
+  "character": "Pani Halina",
+  "character_bio": "60, serves at the counter of a traditional bar mleczny (milk bar)",
+  "title": "Lunch at a milk bar",
+  "can_do": "I can order a full meal at a counter.",
+  "scene": "a bar mleczny at lunchtime, with a queue",
+  "learner_role": "a customer",
+  "mission": [
+   "Order a soup",
+   "Order a main dish",
+   "Order a drink and pay"
+  ],
+  "complication": "The pierogi ruskie are sold out; choose something else.",
+  "opener": {
+   "pl": "Następny, proszę!",
+   "en": "Next, please!"
+  },
+  "first_question": {
+   "pl": "Dzisiaj jest pomidorowa i żurek. Co podać?",
+   "en": "Today there's tomato soup and żurek. What can I get you?"
+  },
+  "closer": {
+   "pl": "Proszę, smacznego. Następny!",
+   "en": "Here you are, enjoy. Next!"
+  },
+  "phrases": [
+   {
+    "pl": "Poproszę pomidorową",
+    "en": "Tomato soup, please"
+   },
+   {
+    "pl": "Poproszę pierogi ruskie",
+    "en": "Pierogi with cheese and potato, please"
+   },
+   {
+    "pl": "I kompot",
+    "en": "And a compote (fruit drink)"
+   },
+   {
+    "pl": "Co pani poleca?",
+    "en": "What do you recommend?"
+   },
+   {
+    "pl": "To wszystko",
+    "en": "That's all"
+   }
+  ],
+  "grammar_focus": "poproszę + accusative"
+ },
+ {
+  "id": "call-u03-dinner-at-tomeks",
+  "level": "A1",
+  "unit": "Food and eating out",
+  "character": "Tomek",
+  "character_bio": "31, physiotherapist, the learner's friend",
+  "title": "Dinner at Tomek's",
+  "can_do": "I can say what you like and don't like to eat.",
+  "scene": "Tomek's flat; he has cooked dinner for you",
+  "learner_role": "his guest",
+  "mission": [
+   "Say what you like and don't like",
+   "Say you are full, or ask for more",
+   "Compliment the food"
+  ],
+  "complication": "He offers you mushrooms; you don't eat them.",
+  "opener": {
+   "pl": "{m:Cześć! Wchodź! Jesteś głodny?|f:Cześć! Wchodź! Jesteś głodna?}",
+   "en": "Hi! Come in! Are you hungry?"
+  },
+  "first_question": {
+   "pl": "Zrobiłem bigos i sałatkę. Lubisz bigos?",
+   "en": "I made bigos and a salad. Do you like bigos?"
+  },
+  "closer": {
+   "pl": "Cieszę się, że ci smakowało. Do zobaczenia!",
+   "en": "I'm glad you liked it. See you!"
+  },
+  "phrases": [
+   {
+    "pl": "Lubię…",
+    "en": "I like…"
+   },
+   {
+    "pl": "Nie lubię grzybów",
+    "en": "I don't like mushrooms"
+   },
+   {
+    "pl": "Nie jem mięsa",
+    "en": "I don't eat meat"
+   },
+   {
+    "pl": "To jest pyszne!",
+    "en": "This is delicious!"
+   },
+   {
+    "pl": "Poproszę jeszcze trochę",
+    "en": "A bit more, please"
+   },
+   {
+    "pl": "Dziękuję, już nie mogę",
+    "en": "Thanks, I can't eat any more"
+   }
+  ],
+  "grammar_focus": "nie + genitive: nie lubię grzybów, nie jem mięsa"
+ },
+ {
+  "id": "call-u03-shopping-list",
+  "level": "A1",
+  "unit": "Food and eating out",
+  "character": "Kasia",
+  "character_bio": "22, computer science student, the learner's friend",
+  "title": "Party shopping",
+  "can_do": "I can say what you need, have and don't have.",
+  "scene": "a supermarket with Kasia, shopping for a party",
+  "learner_role": "her friend",
+  "mission": [
+   "Say what you need to buy",
+   "Say what you already have or don't have",
+   "Agree on drinks"
+  ],
+  "complication": "Kasia wants to buy only crisps; suggest something healthier.",
+  "opener": {
+   "pl": "Dobra, co kupujemy?",
+   "en": "Right, what are we buying?"
+  },
+  "first_question": {
+   "pl": "Mamy chleb? Bo ja nie mam nic w lodówce.",
+   "en": "Do we have bread? Because I've got nothing in the fridge."
+  },
+  "closer": {
+   "pl": "Okej, płacimy i idziemy!",
+   "en": "OK, let's pay and go!"
+  },
+  "phrases": [
+   {
+    "pl": "Potrzebuję…",
+    "en": "I need…"
+   },
+   {
+    "pl": "Mamy ser",
+    "en": "We have cheese"
+   },
+   {
+    "pl": "Nie mamy chleba",
+    "en": "We don't have bread"
+   },
+   {
+    "pl": "Kupmy owoce",
+    "en": "Let's buy fruit"
+   },
+   {
+    "pl": "Może sok?",
+    "en": "Maybe juice?"
+   },
+   {
+    "pl": "Za drogo",
+    "en": "Too expensive"
+   }
+  ],
+  "grammar_focus": "potrzebuję + genitive; nie mamy + genitive"
+ },
+ {
+  "id": "call-u03-wrong-order",
+  "level": "A1",
+  "unit": "Food and eating out",
+  "character": "Ola",
+  "character_bio": "26, barista at Kawiarnia pod Lipą, a small café in Kazimierz, Kraków",
+  "title": "The wrong order",
+  "can_do": "I can explain a simple problem politely.",
+  "scene": "Ola's café on a busy afternoon; your order comes out wrong",
+  "learner_role": "a customer",
+  "mission": [
+   "Say what you ordered",
+   "Say what is wrong",
+   "Accept her offer or ask for something else"
+  ],
+  "complication": "She brings tea instead of coffee, and there's no oat milk today.",
+  "opener": {
+   "pl": "Proszę, herbata z cytryną!",
+   "en": "Here you are, tea with lemon!"
+  },
+  "first_question": {
+   "pl": "Wszystko w porządku?",
+   "en": "Is everything all right?"
+  },
+  "closer": {
+   "pl": "Jeszcze raz przepraszam! Miłego dnia!",
+   "en": "Sorry again! Have a nice day!"
+  },
+  "phrases": [
+   {
+    "pl": "Przepraszam, ale zamawiałem / zamawiałam kawę",
+    "en": "Sorry, but I ordered coffee (m / f)"
+   },
+   {
+    "pl": "To nie moja herbata",
+    "en": "This isn't my tea"
+   },
+   {
+    "pl": "Nie ma problemu",
+    "en": "No problem"
+   },
+   {
+    "pl": "Może być z mlekiem",
+    "en": "With milk is fine"
+   },
+   {
+    "pl": "Bez cukru, proszę",
+    "en": "Without sugar, please"
+   }
+  ],
+  "grammar_focus": "bez + genitive: bez cukru, bez mleka"
+ }
+]

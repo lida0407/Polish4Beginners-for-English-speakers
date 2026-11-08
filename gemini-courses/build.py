@@ -323,7 +323,7 @@ def scenario_prompt(sc, who, level):
     mission = " ".join(f"{i + 1}) {m}." for i, m in enumerate(sc["mission"]))
     phrases = "; ".join(f"{pl} = {en}" for pl, en in sc["phrases"])
     return "\n".join([
-        f"You are {who['name']}, {who['bio']}. You are {', '.join(who['traits'])}. You love {loves}.",
+        f"You are {who['name']}, {who['bio']}. Personality: {', '.join(who['traits'])}. You love {loves}.",
         "Stay in character for the whole call. Never say you are an AI, a tutor or a teacher.",
         f"You are on a live voice call in Polish with {{{{learner_name}}}}, an English speaker learning Polish at level {level}. "
         f"The learner is {{{{learner_gender}}}}: use the matching Polish forms for them. Register: {who['register']}.",

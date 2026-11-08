@@ -1,0 +1,650 @@
+You are adding Simplified Chinese (mainland usage) to a Polish speaking course. The learner is an adult Chinese speaker learning Polish at CEFR level A1 or A2; her English is weak, so the Chinese must stand on its own. The Polish stays exactly as it is; you only write Chinese.
+
+For each scenario below, write natural Chinese (not word-for-word, no pinyin) for:
+- title, can_do ("我能……"), scene, learner_role, each of the 3 mission tasks, complication;
+- opener, first_question, closer: the Chinese meaning of the Polish line (use the English gloss only as help);
+- phrases: one Chinese entry per Polish phrase, same number and same order. Give the meaning and, in brackets, when to use it. If the Polish contains "/" alternatives or a {m:…|f:…} pair, explain the choice briefly (e.g. "（男性说 …，女性说 …）", "（对男士的尊称）");
+- grammar_focus: explain the Polish grammar point in Chinese in one or two sentences, keeping the Polish examples as they are.
+Names: write Polish names as a common Chinese transliteration with the Polish in brackets the first time in each scenario, e.g. "马雷克先生（Pan Marek）", "诺瓦克医生（Doktor Nowak）". Places and dishes (Kraków, Kazimierz, pierogi, żurek, bar mleczny, Wigilia) get a short Chinese explanation.
+
+Output ONLY a JSON array, no prose, no code fences. One object per input scenario, same order, exactly these keys, every value a Chinese string except the two arrays:
+{"id": same as input, "title": "...", "can_do": "...", "scene": "...", "learner_role": "...",
+ "mission": ["...", "...", "..."], "complication": "...", "opener": "...", "first_question": "...",
+ "closer": "...", "phrases": ["...", ...], "grammar_focus": "..."}
+Use straight double quotes and keep the JSON valid. Do not write or edit any files.
+
+Scenarios:
+[
+ {
+  "id": "call-u04-way-to-station",
+  "level": "A1",
+  "unit": "Getting around",
+  "character": "Pan Marek",
+  "character_bio": "68, retired tram driver, the learner's neighbour",
+  "title": "Which way to the station?",
+  "can_do": "I can ask for and understand simple directions.",
+  "scene": "a street in the centre; you bump into Pan Marek and ask the way to the main station",
+  "learner_role": "his neighbour",
+  "mission": [
+   "Ask the way to the station",
+   "Ask if it's far",
+   "Thank him"
+  ],
+  "complication": "He describes a shortcut through the park too fast; ask him to repeat slowly.",
+  "opener": {
+   "pl": "{m:O, dzień dobry! Co pan tu robi?|f:O, dzień dobry! Co pani tu robi?}",
+   "en": "Oh, hello! What are you doing here?"
+  },
+  "first_question": {
+   "pl": "{m:Szuka pan czegoś?|f:Szuka pani czegoś?}",
+   "en": "Are you looking for something?"
+  },
+  "closer": {
+   "pl": "Nie ma za co. Do widzenia!",
+   "en": "You're welcome. Goodbye!"
+  },
+  "phrases": [
+   {
+    "pl": "Gdzie jest dworzec?",
+    "en": "Where is the station?"
+   },
+   {
+    "pl": "Jak dojść do…?",
+    "en": "How do I get to… (on foot)?"
+   },
+   {
+    "pl": "Czy to daleko?",
+    "en": "Is it far?"
+   },
+   {
+    "pl": "prosto / w lewo / w prawo",
+    "en": "straight on / left / right"
+   },
+   {
+    "pl": "Proszę powtórzyć wolniej",
+    "en": "Please repeat more slowly"
+   }
+  ],
+  "grammar_focus": "do + genitive: do dworca, do centrum"
+ },
+ {
+  "id": "call-u04-train-ticket",
+  "level": "A1",
+  "unit": "Getting around",
+  "character": "Pani Grażyna",
+  "character_bio": "58, ticket clerk at Kraków Główny station",
+  "title": "A ticket to Warsaw",
+  "can_do": "I can buy a train ticket and understand times and platforms.",
+  "scene": "the ticket office at Kraków Główny station",
+  "learner_role": "a traveller",
+  "mission": [
+   "Ask for a ticket to Warsaw: one way or return",
+   "Choose a departure time",
+   "Ask which platform"
+  ],
+  "complication": "The 10:00 train is full; take a later one.",
+  "opener": {
+   "pl": "Dzień dobry. Dokąd?",
+   "en": "Good morning. Where to?"
+  },
+  "first_question": {
+   "pl": "W jedną stronę czy powrotny?",
+   "en": "One way or return?"
+  },
+  "closer": {
+   "pl": "Peron trzeci. Szczęśliwej podróży!",
+   "en": "Platform three. Have a good journey!"
+  },
+  "phrases": [
+   {
+    "pl": "Poproszę bilet do Warszawy",
+    "en": "A ticket to Warsaw, please"
+   },
+   {
+    "pl": "W jedną stronę / powrotny",
+    "en": "One way / return"
+   },
+   {
+    "pl": "O której jest pociąg?",
+    "en": "What time is the train?"
+   },
+   {
+    "pl": "Z którego peronu?",
+    "en": "From which platform?"
+   },
+   {
+    "pl": "Może być później",
+    "en": "Later is fine"
+   }
+  ],
+  "grammar_focus": "do + genitive (do Warszawy); o + locative for clock time (o dziesiątej)"
+ },
+ {
+  "id": "call-u04-taxi",
+  "level": "A1",
+  "unit": "Getting around",
+  "character": "Pan Zbyszek",
+  "character_bio": "50, runs a kiosk at a tram stop and drives a taxi at weekends",
+  "title": "Taxi to the hotel",
+  "can_do": "I can say where you're going and talk about time and price.",
+  "scene": "a taxi from the airport; Pan Zbyszek is driving",
+  "learner_role": "a passenger",
+  "mission": [
+   "Say where you're going",
+   "Ask how long it takes",
+   "Ask the price and pay"
+  ],
+  "complication": "There's a traffic jam; he asks if a longer route is OK.",
+  "opener": {
+   "pl": "Dzień dobry. Dokąd jedziemy?",
+   "en": "Good afternoon. Where are we going?"
+  },
+  "first_question": {
+   "pl": "Do centrum? Jaki adres?",
+   "en": "To the centre? What's the address?"
+  },
+  "closer": {
+   "pl": "Jesteśmy na miejscu. Miłego pobytu!",
+   "en": "Here we are. Enjoy your stay!"
+  },
+  "phrases": [
+   {
+    "pl": "Do hotelu Pod Różą, poproszę",
+    "en": "To Hotel Pod Różą, please"
+   },
+   {
+    "pl": "Ulica Floriańska",
+    "en": "Floriańska Street"
+   },
+   {
+    "pl": "Jak długo?",
+    "en": "How long?"
+   },
+   {
+    "pl": "Ile to kosztuje?",
+    "en": "How much is it?"
+   },
+   {
+    "pl": "Proszę się zatrzymać tutaj",
+    "en": "Please stop here"
+   }
+  ],
+  "grammar_focus": "jechać do + genitive"
+ },
+ {
+  "id": "call-u04-lost-on-tram",
+  "level": "A1",
+  "unit": "Getting around",
+  "character": "Kasia",
+  "character_bio": "22, computer science student, the learner's friend",
+  "title": "Where are you?",
+  "can_do": "I can say where you are and when you'll arrive.",
+  "scene": "Kasia is waiting for you at a café, but you're lost; she calls",
+  "learner_role": "her friend",
+  "mission": [
+   "Say where you are and what you can see",
+   "Follow her directions",
+   "Say when you'll get there"
+  ],
+  "complication": "You realise you took the wrong tram.",
+  "opener": {
+   "pl": "Halo? Gdzie jesteś?",
+   "en": "Hello? Where are you?"
+  },
+  "first_question": {
+   "pl": "Co widzisz? Jest tam jakiś sklep albo przystanek?",
+   "en": "What can you see? Is there a shop or a stop?"
+  },
+  "closer": {
+   "pl": "Dobra, czekam! Do zobaczenia za chwilę.",
+   "en": "OK, I'm waiting! See you in a bit."
+  },
+  "phrases": [
+   {
+    "pl": "Jestem na przystanku…",
+    "en": "I'm at the … stop"
+   },
+   {
+    "pl": "Widzę kościół / park / sklep",
+    "en": "I can see a church / a park / a shop"
+   },
+   {
+    "pl": "Chyba jestem w złym tramwaju",
+    "en": "I think I'm on the wrong tram"
+   },
+   {
+    "pl": "Gdzie mam wysiąść?",
+    "en": "Where should I get off?"
+   },
+   {
+    "pl": "Będę za dziesięć minut",
+    "en": "I'll be there in ten minutes"
+   }
+  ],
+  "grammar_focus": "na / w + locative: na przystanku, w tramwaju"
+ },
+ {
+  "id": "call-u05-flat-viewing",
+  "level": "A1",
+  "unit": "Home",
+  "character": "Pani Basia",
+  "character_bio": "55, owns a fruit and vegetable stall at Stary Kleparz market and rents out a small flat",
+  "title": "Viewing a flat",
+  "can_do": "I can ask about a flat and say what you think of it.",
+  "scene": "viewing a small flat that Pani Basia rents out",
+  "learner_role": "someone looking for a flat",
+  "mission": [
+   "Ask how many rooms there are",
+   "Ask about the rent and bills",
+   "Say what you like or don't like"
+  ],
+  "complication": "The washing machine doesn't work; ask when it will be fixed.",
+  "opener": {
+   "pl": "Dzień dobry, kochanie! Zapraszam do środka.",
+   "en": "Hello, dear! Come on in."
+  },
+  "first_question": {
+   "pl": "To jest salon. Ładny, prawda?",
+   "en": "This is the living room. Nice, isn't it?"
+  },
+  "closer": {
+   "pl": "Proszę się zastanowić i zadzwonić. Do widzenia!",
+   "en": "Have a think and give me a call. Goodbye!"
+  },
+  "phrases": [
+   {
+    "pl": "Ile jest pokoi?",
+    "en": "How many rooms are there?"
+   },
+   {
+    "pl": "Ile kosztuje miesięcznie?",
+    "en": "How much is it per month?"
+   },
+   {
+    "pl": "Czy opłaty są w cenie?",
+    "en": "Are the bills included?"
+   },
+   {
+    "pl": "Kuchnia jest mała",
+    "en": "The kitchen is small"
+   },
+   {
+    "pl": "Pralka nie działa",
+    "en": "The washing machine doesn't work"
+   },
+   {
+    "pl": "Podoba mi się",
+    "en": "I like it"
+   }
+  ],
+  "grammar_focus": "jest / nie ma + genitive: nie ma windy"
+ },
+ {
+  "id": "call-u05-my-room",
+  "level": "A1",
+  "unit": "Home",
+  "character": "Kasia",
+  "character_bio": "22, computer science student, the learner's friend",
+  "title": "Show me your room",
+  "can_do": "I can describe a room and say what's missing.",
+  "scene": "a video call; Kasia wants to see your new room",
+  "learner_role": "her friend",
+  "mission": [
+   "Describe three things in your room",
+   "Say what's missing",
+   "Ask about her room"
+  ],
+  "complication": "She says your room looks empty; say what you want to buy.",
+  "opener": {
+   "pl": "Pokaż swój pokój!",
+   "en": "Show me your room!"
+  },
+  "first_question": {
+   "pl": "Masz duże łóżko?",
+   "en": "Have you got a big bed?"
+  },
+  "closer": {
+   "pl": "Fajny pokój! Dobra, pa!",
+   "en": "Nice room! OK, bye!"
+  },
+  "phrases": [
+   {
+    "pl": "Mam duże okno",
+    "en": "I have a big window"
+   },
+   {
+    "pl": "Jest tu biurko i krzesło",
+    "en": "There's a desk and a chair here"
+   },
+   {
+    "pl": "Nie mam szafy",
+    "en": "I don't have a wardrobe"
+   },
+   {
+    "pl": "Chcę kupić lampę",
+    "en": "I want to buy a lamp"
+   },
+   {
+    "pl": "Mój pokój jest mały, ale ładny",
+    "en": "My room is small but nice"
+   }
+  ],
+  "grammar_focus": "adjectives agree: duże okno, mały stół, ładna lampa"
+ },
+ {
+  "id": "call-u05-morning-run",
+  "level": "A1",
+  "unit": "Home",
+  "character": "Tomek",
+  "character_bio": "31, physiotherapist, the learner's friend",
+  "title": "A morning run",
+  "can_do": "I can talk about your daily routine and times.",
+  "scene": "Tomek wants to go running with you and asks about your routine",
+  "learner_role": "his friend",
+  "mission": [
+   "Say what time you get up",
+   "Say what you do in the morning",
+   "Agree on a time to run"
+  ],
+  "complication": "He wants to run at six; suggest a later time.",
+  "opener": {
+   "pl": "Cześć! Biegamy jutro rano?",
+   "en": "Hi! Are we running tomorrow morning?"
+  },
+  "first_question": {
+   "pl": "O której wstajesz?",
+   "en": "What time do you get up?"
+  },
+  "closer": {
+   "pl": "Świetnie, do jutra!",
+   "en": "Great, see you tomorrow!"
+  },
+  "phrases": [
+   {
+    "pl": "Wstaję o siódmej",
+    "en": "I get up at seven"
+   },
+   {
+    "pl": "Rano piję kawę",
+    "en": "In the morning I drink coffee"
+   },
+   {
+    "pl": "Za wcześnie!",
+    "en": "Too early!"
+   },
+   {
+    "pl": "Może o ósmej?",
+    "en": "Maybe at eight?"
+   },
+   {
+    "pl": "Idę do pracy o dziewiątej",
+    "en": "I go to work at nine"
+   }
+  ],
+  "grammar_focus": "o + locative for clock time: o siódmej, o ósmej"
+ },
+ {
+  "id": "call-u05-no-hot-water",
+  "level": "A1",
+  "unit": "Home",
+  "character": "Pan Marek",
+  "character_bio": "68, retired tram driver, the learner's neighbour",
+  "title": "No hot water",
+  "can_do": "I can explain a problem at home and ask for advice.",
+  "scene": "there's no hot water in your flat, so you knock on Pan Marek's door",
+  "learner_role": "his neighbour",
+  "mission": [
+   "Explain the problem",
+   "Ask what to do or who to call",
+   "Thank him"
+  ],
+  "complication": "He says it's the whole building; you need to call the building management.",
+  "opener": {
+   "pl": "Dzień dobry! Coś się stało?",
+   "en": "Hello! Has something happened?"
+  },
+  "first_question": {
+   "pl": "Mogę jakoś pomóc?",
+   "en": "Can I help somehow?"
+  },
+  "closer": {
+   "pl": "Proszę dzwonić do administracji. Powodzenia!",
+   "en": "Call the building management. Good luck!"
+  },
+  "phrases": [
+   {
+    "pl": "Nie ma ciepłej wody",
+    "en": "There's no hot water"
+   },
+   {
+    "pl": "Coś nie działa",
+    "en": "Something doesn't work"
+   },
+   {
+    "pl": "Co mam zrobić?",
+    "en": "What should I do?"
+   },
+   {
+    "pl": "Do kogo zadzwonić?",
+    "en": "Who should I call?"
+   },
+   {
+    "pl": "Dziękuję za pomoc",
+    "en": "Thanks for your help"
+   }
+  ],
+  "grammar_focus": "nie ma + genitive: nie ma wody"
+ },
+ {
+  "id": "call-u06-cinema-plan",
+  "level": "A1",
+  "unit": "Time and plans",
+  "character": "Kasia",
+  "character_bio": "22, computer science student, the learner's friend",
+  "title": "When are you free?",
+  "can_do": "I can arrange a day, time and place to meet.",
+  "scene": "planning to go to the cinema with Kasia this week",
+  "learner_role": "her friend",
+  "mission": [
+   "Suggest a day",
+   "Agree on a time",
+   "Decide where to meet"
+  ],
+  "complication": "She's busy on the day you suggest.",
+  "opener": {
+   "pl": "Hej! Idziemy w tym tygodniu do kina?",
+   "en": "Hey! Shall we go to the cinema this week?"
+  },
+  "first_question": {
+   "pl": "Kiedy masz czas?",
+   "en": "When are you free?"
+  },
+  "closer": {
+   "pl": "Super, do zobaczenia w kinie!",
+   "en": "Great, see you at the cinema!"
+  },
+  "phrases": [
+   {
+    "pl": "W piątek mam czas",
+    "en": "I'm free on Friday"
+   },
+   {
+    "pl": "W sobotę nie mogę",
+    "en": "I can't on Saturday"
+   },
+   {
+    "pl": "O której?",
+    "en": "What time?"
+   },
+   {
+    "pl": "Może o siódmej?",
+    "en": "Maybe at seven?"
+   },
+   {
+    "pl": "Spotkajmy się przed kinem",
+    "en": "Let's meet in front of the cinema"
+   }
+  ],
+  "grammar_focus": "w + accusative for days: w piątek, w sobotę"
+ },
+ {
+  "id": "call-u06-weekend-mountains",
+  "level": "A1",
+  "unit": "Time and plans",
+  "character": "Tomek",
+  "character_bio": "31, physiotherapist, the learner's friend",
+  "title": "Weekend in the mountains?",
+  "can_do": "I can talk about weekend plans and accept or decline.",
+  "scene": "Tomek invites you to the mountains this weekend",
+  "learner_role": "his friend",
+  "mission": [
+   "Say what you usually do at weekends",
+   "Say if you can come",
+   "Ask what to bring"
+  ],
+  "complication": "The forecast says rain; suggest something else.",
+  "opener": {
+   "pl": "Cześć! Jedziemy w sobotę w góry?",
+   "en": "Hi! Shall we go to the mountains on Saturday?"
+  },
+  "first_question": {
+   "pl": "Co zwykle robisz w weekend?",
+   "en": "What do you usually do at weekends?"
+  },
+  "closer": {
+   "pl": "Dobra, napiszę ci szczegóły. Na razie!",
+   "en": "OK, I'll text you the details. See you!"
+  },
+  "phrases": [
+   {
+    "pl": "W weekend zwykle odpoczywam",
+    "en": "At weekends I usually rest"
+   },
+   {
+    "pl": "Chętnie!",
+    "en": "Gladly!"
+   },
+   {
+    "pl": "Niestety nie mogę",
+    "en": "Unfortunately I can't"
+   },
+   {
+    "pl": "Co mam zabrać?",
+    "en": "What should I bring?"
+   },
+   {
+    "pl": "Będzie padać",
+    "en": "It's going to rain"
+   },
+   {
+    "pl": "Może kino?",
+    "en": "Maybe the cinema?"
+   }
+  ],
+  "grammar_focus": "jechać w góry / nad morze (direction)"
+ },
+ {
+  "id": "call-u06-book-doctor",
+  "level": "A1",
+  "unit": "Time and plans",
+  "character": "Pani Krysia",
+  "character_bio": "50, receptionist at the Zdrowie health clinic",
+  "title": "Booking the doctor",
+  "can_do": "I can book an appointment by phone.",
+  "scene": "a phone call to the clinic to book an appointment",
+  "learner_role": "a patient",
+  "mission": [
+   "Say you want an appointment",
+   "Agree on a day and time",
+   "Give your name"
+  ],
+  "complication": "The doctor is only free next week; ask if there's anything earlier.",
+  "opener": {
+   "pl": "Przychodnia Zdrowie, dzień dobry.",
+   "en": "Zdrowie clinic, good morning."
+  },
+  "first_question": {
+   "pl": "W czym mogę pomóc?",
+   "en": "How can I help?"
+  },
+  "closer": {
+   "pl": "{m:Zapisałam pana.|f:Zapisałam panią.} Do widzenia!",
+   "en": "You're booked in. Goodbye!"
+  },
+  "phrases": [
+   {
+    "pl": "Chcę się umówić na wizytę",
+    "en": "I'd like to make an appointment"
+   },
+   {
+    "pl": "Do lekarza rodzinnego",
+    "en": "With the family doctor"
+   },
+   {
+    "pl": "Czy jest coś wcześniej?",
+    "en": "Is there anything earlier?"
+   },
+   {
+    "pl": "Może być wtorek",
+    "en": "Tuesday is fine"
+   },
+   {
+    "pl": "Nazywam się…",
+    "en": "My name is…"
+   }
+  ],
+  "grammar_focus": "days and times: we wtorek o dziesiątej"
+ },
+ {
+  "id": "call-u06-birthday-invite",
+  "level": "A1",
+  "unit": "Time and plans",
+  "character": "Ania",
+  "character_bio": "35, the learner's team lead at work, from Warsaw",
+  "title": "A birthday invitation",
+  "can_do": "I can accept an invitation and ask for details.",
+  "scene": "Ania invites you to her birthday party",
+  "learner_role": "her colleague",
+  "mission": [
+   "Accept the invitation",
+   "Ask when and where",
+   "Ask what to bring"
+  ],
+  "complication": "It clashes with another plan; ask if you can come later.",
+  "opener": {
+   "pl": "Słuchaj, w sobotę mam urodziny!",
+   "en": "Listen, it's my birthday on Saturday!"
+  },
+  "first_question": {
+   "pl": "Przyjdziesz?",
+   "en": "Will you come?"
+  },
+  "closer": {
+   "pl": "Super! To do soboty!",
+   "en": "Great! See you on Saturday!"
+  },
+  "phrases": [
+   {
+    "pl": "Wszystkiego najlepszego!",
+    "en": "Happy birthday!"
+   },
+   {
+    "pl": "Chętnie przyjdę",
+    "en": "I'd love to come"
+   },
+   {
+    "pl": "O której? Gdzie?",
+    "en": "What time? Where?"
+   },
+   {
+    "pl": "Mogę przyjść później?",
+    "en": "Can I come later?"
+   },
+   {
+    "pl": "Co przynieść?",
+    "en": "What should I bring?"
+   }
+  ],
+  "grammar_focus": "simple future of przyjść: przyjdę, przyjdziesz"
+ }
+]

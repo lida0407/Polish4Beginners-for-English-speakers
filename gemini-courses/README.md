@@ -154,4 +154,8 @@ python3 gemini-courses/build_en_zh.py
 - `out/english_live_courses.json` — the app pack, same shape as the Polish one (`cast`, `call_templates`, `courses[0].units[].lessons[]`) plus `learner_language: zh-CN`. Each lesson carries its English `system_prompt`, coach notes, and the `{en, zh}` fields for the screen.
 - `out/COURSES_en_zh.md` — the catalogue.
 
-In the call the character speaks only English, recasts mistakes instead of correcting them, and says the key word in Chinese once if the learner is lost twice in a row. Show the learner the `zh` mission and phrases before the call.
+In the call the character speaks only English, recasts mistakes instead of correcting them, and never switches to Chinese (its voice is English); when the learner is lost it slows down or offers two choices, and the app shows the Chinese translation. Show the learner the `zh` mission and phrases before the call.
+
+## Shared lesson library (Pixel translator app)
+
+`publish_lessons.py` writes three self-contained packs (`en-for-zh`, `pl-for-zh`, `pl-for-en`) plus `catalog.json` to `~/agent-share/lessons/`. That folder is where the Pixel translator app's Lesson calls mode loads its lessons from. The Chinese layer for the Polish calls is `pl-zh/batches/out_*.json`, made by Gemini 3.8 Flash Medium through Antigravity; `pl-zh/make_briefs.py` writes the briefs. Custom lessons are Markdown scenario cards. `scenario_md.py` is the reference parser and prompt builder that the app's importer ports; the format and the ChatGPT/Gemini prompt are in `~/agent-share/lessons/templates/`.
