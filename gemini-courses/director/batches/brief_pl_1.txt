@@ -1,0 +1,332 @@
+Each lesson is a short voice role-play: a character (played by a small on-device AI model) talks with a beginner learner. The small model is weak at planning and at grammar, so for every lesson write a step-by-step plan with ready-made, perfectly correct lines it can use or copy.
+
+For each scenario write:
+1. "beats": the call in 5-7 steps, in order. Step 1 is the character's first question (use the given first_question as the first line). Then one step per mission task, the complication step where it fits, and a last step "wrap up". Each beat has:
+   - "goal": what the character does in this step, in English, imperative, max 8 words (e.g. "Ask where she is from").
+   - "lines": 2 or 3 alternative things the character can say for this step, each 1-2 short sentences, at the scenario's level. The lines must invite the learner to do the matching mission task (ask, offer a choice, prompt).
+   - "expect": 3-6 short words or stems the learner's answer would likely contain if they did the task (in the language being learnt, lower case, e.g. "chin", "jestem z", "from"). Used to tick the step.
+   The last beat's first line must be exactly the given closer.
+2. "example": a model call of 8-10 lines alternating character / learner, as it should go at this level, using the learner phrases. Speaker is "C" or "L".
+3. "reactions": 6 short neutral or positive reactions the character can say to almost anything (e.g. "Ah, I see.", "Great!", "Really?"), in the character's style.
+4. "repair": 2 lines the character says when it did not understand (ask to repeat, offer two choices).
+
+Level rules: A1 = present tense, very common words, max 8 words per sentence. A2 = past and future allowed, max 12 words per sentence.
+
+Language being learnt: POLISH. Every line must be correct, natural spoken Polish with all diacritics, in the character's register (given per scenario: formal pan/pani, or informal ty). When a line addresses the learner and the Polish form depends on the learner's gender, write both forms as {m:male form|f:female form} around the smallest part that changes, e.g. "Skąd {m:pan jest|f:pani jest}?" or "Jesteś {m:głodny|f:głodna}?". Use this token only for the learner's gender, never for the character's own.
+Every line is an object {"pl": "...", "en": "...", "zh": "..."}: the Polish, a natural English translation, and natural Simplified Chinese (for the zh side of a gender token line, translate neutrally). "expect" stays Polish only.
+
+Output ONLY a JSON array, no prose, no code fences. One object per input scenario, same order:
+{"id": same as input,
+ "beats": [{"goal": "...", "lines": [{"pl":"...","en":"...","zh":"..."}], "expect": ["..."]}],
+ "example": [{"s": "C", "pl": "...", "en": "...", "zh": "..."}, {"s": "L", ...}],
+ "reactions": [{"pl":"...","en":"...","zh":"..."}],
+ "repair": [{"pl":"...","en":"...","zh":"..."}]}
+Keep the JSON valid with straight double quotes. Do not write or edit any files.
+
+Scenarios:
+[
+ {
+  "id": "pl-call-u01-hello-neighbour",
+  "level": "A1",
+  "character": "Pan Marek",
+  "bio": "68, retired tram driver, the learner's neighbour",
+  "register": "formal (pan/pani)",
+  "scene": "the stairwell of your new block of flats; you have just moved in",
+  "learner_role": "the new neighbour",
+  "mission": [
+   "Say hello and tell him your name",
+   "Say where you are from",
+   "Ask him one question"
+  ],
+  "complication": "He mishears your name; say it again or spell it.",
+  "opener": "Dzień dobry! Jestem Marek, mieszkam pod siódemką.",
+  "first_question": "{m:A pan to nowy sąsiad?|f:A pani to nowa sąsiadka?}",
+  "closer": "Bardzo mi miło. Do widzenia!",
+  "phrases": [
+   "Dzień dobry",
+   "Mam na imię…",
+   "Jestem z Anglii / z Indii / z Chin",
+   "Bardzo mi miło",
+   "Przepraszam, jak?",
+   "A pan?"
+  ]
+ },
+ {
+  "id": "pl-call-u01-first-coffee",
+  "level": "A1",
+  "character": "Ola",
+  "bio": "26, barista at Kawiarnia pod Lipą, a small café in Kazimierz, Kraków",
+  "register": "neutral with new customers, informal (ty) with regulars",
+  "scene": "Kawiarnia pod Lipą, a small café in Kazimierz; your first visit",
+  "learner_role": "a customer",
+  "mission": [
+   "Order a drink",
+   "Order something to eat",
+   "Ask how much it is and pay"
+  ],
+  "complication": "The cheesecake (sernik) has just sold out; choose something else.",
+  "opener": "Dzień dobry! Co podać?",
+  "first_question": "Kawa, herbata? Mamy też dzisiaj świeży sernik.",
+  "closer": "Smacznego! Do zobaczenia!",
+  "phrases": [
+   "Poproszę kawę",
+   "Poproszę herbatę z cytryną",
+   "Na miejscu / na wynos",
+   "Ile płacę?",
+   "Czy mogę zapłacić kartą?",
+   "Dziękuję"
+  ]
+ },
+ {
+  "id": "pl-call-u01-new-colleague",
+  "level": "A1",
+  "character": "Ania",
+  "bio": "35, the learner's team lead at work, from Warsaw",
+  "register": "informal (ty)",
+  "scene": "the office kitchen on your first day at work",
+  "learner_role": "the new colleague",
+  "mission": [
+   "Say what your job is",
+   "Say where you live",
+   "Ask her one question"
+  ],
+  "complication": "She thinks you work in another team; correct her.",
+  "opener": "{m:Cześć! Ty jesteś nowy?|f:Cześć! Ty jesteś nowa?}",
+  "first_question": "Jestem Ania, z marketingu. A ty w jakim dziale pracujesz?",
+  "closer": "Dobra, muszę lecieć na spotkanie. Na razie!",
+  "phrases": [
+   "Jestem programistą / programistką",
+   "Pracuję w dziale IT",
+   "Mieszkam w centrum",
+   "Nie, pracuję w…",
+   "A ty?"
+  ]
+ },
+ {
+  "id": "pl-call-u01-how-are-you",
+  "level": "A1",
+  "character": "Kasia",
+  "bio": "22, computer science student, the learner's friend",
+  "register": "informal (ty)",
+  "scene": "a video call with your friend Kasia late in the evening",
+  "learner_role": "her friend",
+  "mission": [
+   "Say how you are",
+   "Say what you are doing right now",
+   "Ask what she is doing"
+  ],
+  "complication": "Her internet keeps cutting out; ask her to repeat.",
+  "opener": "Hej! Słyszysz mnie?",
+  "first_question": "Jak się masz? Co robisz?",
+  "closer": "Dobra, idę spać. Dobranoc!",
+  "phrases": [
+   "Dobrze, dziękuję",
+   "Jestem zmęczony / zmęczona",
+   "Teraz gotuję / czytam / oglądam film",
+   "Nie słyszę cię",
+   "Możesz powtórzyć?"
+  ]
+ },
+ {
+  "id": "pl-call-u02-tram-tickets",
+  "level": "A1",
+  "character": "Pan Zbyszek",
+  "bio": "50, runs a kiosk at a tram stop and drives a taxi at weekends",
+  "register": "formal (pan/pani)",
+  "scene": "Pan Zbyszek's kiosk at a tram stop",
+  "learner_role": "a customer",
+  "mission": [
+   "Ask for tickets: how many and what kind",
+   "Ask the price",
+   "Pay and say thank you"
+  ],
+  "complication": "He has no change for a 100-złoty note.",
+  "opener": "Dzień dobry, słucham.",
+  "first_question": "Jakie bilety? Normalne czy ulgowe?",
+  "closer": "Proszę bardzo. Miłego dnia!",
+  "phrases": [
+   "Poproszę dwa bilety",
+   "Normalny / ulgowy",
+   "Ile to kosztuje?",
+   "Nie mam drobnych",
+   "Mogę zapłacić kartą?"
+  ]
+ },
+ {
+  "id": "pl-call-u02-at-the-market",
+  "level": "A1",
+  "character": "Pani Basia",
+  "bio": "55, owns a fruit and vegetable stall at Stary Kleparz market and rents out a small flat",
+  "register": "formal but friendly",
+  "scene": "Pani Basia's fruit and vegetable stall at Stary Kleparz market",
+  "learner_role": "a customer",
+  "mission": [
+   "Buy a kilo of apples",
+   "Buy one more thing",
+   "Ask the total and pay"
+  ],
+  "complication": "She tries to sell you strawberries as well; say no politely.",
+  "opener": "Dzień dobry, kochanie! Co dzisiaj?",
+  "first_question": "Jabłka mam piękne, polskie. Ile?",
+  "closer": "Dziękuję, złotko. Zapraszam znowu!",
+  "phrases": [
+   "Poproszę kilo jabłek",
+   "Pół kilo pomidorów",
+   "To wszystko",
+   "Nie, dziękuję",
+   "Ile płacę?"
+  ]
+ },
+ {
+  "id": "pl-call-u02-swapping-numbers",
+  "level": "A1",
+  "character": "Kasia",
+  "bio": "22, computer science student, the learner's friend",
+  "register": "informal (ty)",
+  "scene": "after a party; Kasia wants your phone number and email",
+  "learner_role": "her new friend",
+  "mission": [
+   "Give your phone number",
+   "Spell your email address",
+   "Ask for her number"
+  ],
+  "complication": "She writes one digit wrong; correct her.",
+  "opener": "Słuchaj, daj mi swój numer!",
+  "first_question": "Jaki masz numer telefonu?",
+  "closer": "Super, mam! Napiszę jutro. Pa!",
+  "phrases": [
+   "Mój numer to…",
+   "zero, jeden, dwa, trzy…",
+   "Nie siedem, tylko osiem",
+   "małpa / kropka",
+   "A twój numer?"
+  ]
+ },
+ {
+  "id": "pl-call-u02-the-bakery",
+  "level": "A1",
+  "character": "Ola",
+  "bio": "26, barista at Kawiarnia pod Lipą, a small café in Kazimierz, Kraków",
+  "register": "neutral with new customers, informal (ty) with regulars",
+  "scene": "Ola's café, which also sells fresh bread in the morning",
+  "learner_role": "a regular customer",
+  "mission": [
+   "Ask for bread rolls: say how many",
+   "Ask what else is fresh today",
+   "Pay"
+  ],
+  "complication": "The rolls are still in the oven: wait five minutes or choose something else.",
+  "opener": "Cześć! Znowu u nas?",
+  "first_question": "Bułki, chleb? Wszystko świeże.",
+  "closer": "Proszę bardzo. Smacznego!",
+  "phrases": [
+   "Poproszę cztery bułki",
+   "Jeden chleb",
+   "Czy jest chleb razowy?",
+   "Poczekam",
+   "Ile płacę?"
+  ]
+ },
+ {
+  "id": "pl-call-u03-milk-bar",
+  "level": "A1",
+  "character": "Pani Halina",
+  "bio": "60, serves at the counter of a traditional bar mleczny (milk bar)",
+  "register": "neutral",
+  "scene": "a bar mleczny at lunchtime, with a queue",
+  "learner_role": "a customer",
+  "mission": [
+   "Order a soup",
+   "Order a main dish",
+   "Order a drink and pay"
+  ],
+  "complication": "The pierogi ruskie are sold out; choose something else.",
+  "opener": "Następny, proszę!",
+  "first_question": "Dzisiaj jest pomidorowa i żurek. Co podać?",
+  "closer": "Proszę, smacznego. Następny!",
+  "phrases": [
+   "Poproszę pomidorową",
+   "Poproszę pierogi ruskie",
+   "I kompot",
+   "Co pani poleca?",
+   "To wszystko"
+  ]
+ },
+ {
+  "id": "pl-call-u03-dinner-at-tomeks",
+  "level": "A1",
+  "character": "Tomek",
+  "bio": "31, physiotherapist, the learner's friend",
+  "register": "informal (ty)",
+  "scene": "Tomek's flat; he has cooked dinner for you",
+  "learner_role": "his guest",
+  "mission": [
+   "Say what you like and don't like",
+   "Say you are full, or ask for more",
+   "Compliment the food"
+  ],
+  "complication": "He offers you mushrooms; you don't eat them.",
+  "opener": "{m:Cześć! Wchodź! Jesteś głodny?|f:Cześć! Wchodź! Jesteś głodna?}",
+  "first_question": "Zrobiłem bigos i sałatkę. Lubisz bigos?",
+  "closer": "Cieszę się, że ci smakowało. Do zobaczenia!",
+  "phrases": [
+   "Lubię…",
+   "Nie lubię grzybów",
+   "Nie jem mięsa",
+   "To jest pyszne!",
+   "Poproszę jeszcze trochę",
+   "Dziękuję, już nie mogę"
+  ]
+ },
+ {
+  "id": "pl-call-u03-shopping-list",
+  "level": "A1",
+  "character": "Kasia",
+  "bio": "22, computer science student, the learner's friend",
+  "register": "informal (ty)",
+  "scene": "a supermarket with Kasia, shopping for a party",
+  "learner_role": "her friend",
+  "mission": [
+   "Say what you need to buy",
+   "Say what you already have or don't have",
+   "Agree on drinks"
+  ],
+  "complication": "Kasia wants to buy only crisps; suggest something healthier.",
+  "opener": "Dobra, co kupujemy?",
+  "first_question": "Mamy chleb? Bo ja nie mam nic w lodówce.",
+  "closer": "Okej, płacimy i idziemy!",
+  "phrases": [
+   "Potrzebuję…",
+   "Mamy ser",
+   "Nie mamy chleba",
+   "Kupmy owoce",
+   "Może sok?",
+   "Za drogo"
+  ]
+ },
+ {
+  "id": "pl-call-u03-wrong-order",
+  "level": "A1",
+  "character": "Ola",
+  "bio": "26, barista at Kawiarnia pod Lipą, a small café in Kazimierz, Kraków",
+  "register": "neutral with new customers, informal (ty) with regulars",
+  "scene": "Ola's café on a busy afternoon; your order comes out wrong",
+  "learner_role": "a customer",
+  "mission": [
+   "Say what you ordered",
+   "Say what is wrong",
+   "Accept her offer or ask for something else"
+  ],
+  "complication": "She brings tea instead of coffee, and there's no oat milk today.",
+  "opener": "Proszę, herbata z cytryną!",
+  "first_question": "Wszystko w porządku?",
+  "closer": "Jeszcze raz przepraszam! Miłego dnia!",
+  "phrases": [
+   "Przepraszam, ale zamawiałem / zamawiałam kawę",
+   "To nie moja herbata",
+   "Nie ma problemu",
+   "Może być z mlekiem",
+   "Bez cukru, proszę"
+  ]
+ }
+]

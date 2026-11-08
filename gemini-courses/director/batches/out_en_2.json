@@ -1,0 +1,831 @@
+[
+ {
+  "id": "en-call-u04-way-to-station",
+  "beats": [
+   {
+    "goal": "Ask if they are looking for something",
+    "lines": [
+     {"en": "Are you looking for something?", "zh": "你在找什么地方吗？"},
+     {"en": "Do you need some help?", "zh": "你需要帮忙吗？"}
+    ],
+    "expect": ["station", "where", "how", "get"]
+   },
+   {
+    "goal": "Give directions to the train station",
+    "lines": [
+     {"en": "Go straight on, then turn left.", "zh": "一直往前走，然后左转。"},
+     {"en": "Walk straight ahead and turn left.", "zh": "笔直往前走，然后向左拐。"}
+    ],
+    "expect": ["far", "walk", "minutes", "long"]
+   },
+   {
+    "goal": "Give fast shortcut through the park",
+    "lines": [
+     {"en": "Take the park path very quickly.", "zh": "从公园小路抄近道走非常快。"},
+     {"en": "Cut through the park right now.", "zh": "现在穿过公园抄近道走。"}
+    ],
+    "expect": ["slowly", "repeat", "again", "say", "could"]
+   },
+   {
+    "goal": "Repeat the park shortcut slowly",
+    "lines": [
+     {"en": "Go slowly through the park.", "zh": "慢点穿过公园走。"},
+     {"en": "Walk through the park slowly.", "zh": "慢慢穿过公园走。"}
+    ],
+    "expect": ["thank", "thanks", "lot", "much", "help"]
+   },
+   {
+    "goal": "Wrap up the conversation",
+    "lines": [
+     {"en": "You're welcome. Have a good day!", "zh": "不客气。祝你一天愉快！"},
+     {"en": "No problem. See you later!", "zh": "没问题。回头见！"}
+    ],
+    "expect": ["bye", "goodbye", "day", "see"]
+   }
+  ],
+  "example": [
+   {"s": "C", "en": "Are you looking for something?", "zh": "你在找什么地方吗？"},
+   {"s": "L", "en": "How do I get to the station?", "zh": "去火车站怎么走？"},
+   {"s": "C", "en": "Go straight on, then turn left.", "zh": "一直往前走，然后左转。"},
+   {"s": "L", "en": "Is it far?", "zh": "远吗？"},
+   {"s": "C", "en": "Take the park path very quickly.", "zh": "从公园小路抄近道走非常快。"},
+   {"s": "L", "en": "Could you say that more slowly, please?", "zh": "请问你能说慢一点吗？"},
+   {"s": "C", "en": "Go slowly through the park.", "zh": "慢点穿过公园走。"},
+   {"s": "L", "en": "Thanks for your help.", "zh": "谢谢你的帮忙。"},
+   {"s": "C", "en": "You're welcome. Have a good day!", "zh": "不客气。祝你一天愉快！"},
+   {"s": "L", "en": "Goodbye!", "zh": "再见！"}
+  ],
+  "reactions": [
+   {"en": "Ah, I see.", "zh": "啊，我明白了。"},
+   {"en": "Good.", "zh": "很好。"},
+   {"en": "Right.", "zh": "对的。"},
+   {"en": "Yes, of course.", "zh": "是的，当然。"},
+   {"en": "That is fine.", "zh": "挺好的。"},
+   {"en": "No problem.", "zh": "没问题。"}
+  ],
+  "repair": [
+   {"en": "Sorry, can you say that again?", "zh": "不好意思，你能再说一遍吗？"},
+   {"en": "Are you lost or just walking?", "zh": "你是迷路了还是随便走走？"}
+  ]
+ },
+ {
+  "id": "en-call-u04-train-ticket",
+  "beats": [
+   {
+    "goal": "Ask if ticket is one-way or return",
+    "lines": [
+     {"en": "One-way or return?", "zh": "单程还是往返？"},
+     {"en": "Is it a single or return ticket?", "zh": "是单程票还是往返票？"}
+    ],
+    "expect": ["warsaw", "single", "return", "ticket", "please"]
+   },
+   {
+    "goal": "Say ten o'clock train is full",
+    "lines": [
+     {"en": "The ten o'clock train is full.", "zh": "十点的火车满了。"},
+     {"en": "Ten is full. Try a later train?", "zh": "十点满了。要坐晚一点的车吗？"}
+    ],
+    "expect": ["later", "fine", "time", "train", "okay"]
+   },
+   {
+    "goal": "Offer departure times for later trains",
+    "lines": [
+     {"en": "There is eleven or twelve. Which one?", "zh": "有十一点或者十二点的。你要哪趟？"},
+     {"en": "We have eleven or twelve. Which time?", "zh": "我们有十一点或十二点的。哪个时间？"}
+    ],
+    "expect": ["eleven", "twelve", "time", "take", "please"]
+   },
+   {
+    "goal": "Hand over ticket and invite questions",
+    "lines": [
+     {"en": "Here is your ticket. Any other questions?", "zh": "这是您的票。还有其他问题吗？"},
+     {"en": "Your ticket is ready. Anything else?", "zh": "您的票好了。还需要别的吗？"}
+    ],
+    "expect": ["which", "platform", "leaves", "where"]
+   },
+   {
+    "goal": "Give platform number and wrap up",
+    "lines": [
+     {"en": "Platform three. Have a good journey!", "zh": "三号站台。祝您旅途愉快！"},
+     {"en": "Track three. Have a nice trip!", "zh": "三号道。祝您旅途愉快！"}
+    ],
+    "expect": ["thank", "thanks", "bye", "goodbye"]
+   }
+  ],
+  "example": [
+   {"s": "C", "en": "One-way or return?", "zh": "单程还是往返？"},
+   {"s": "L", "en": "A ticket to Warsaw, please.", "zh": "请给我一张去华沙的票。"},
+   {"s": "C", "en": "The ten o'clock train is full.", "zh": "十点的火车满了。"},
+   {"s": "L", "en": "A later train is fine.", "zh": "晚一点的车也可以。"},
+   {"s": "C", "en": "There is eleven or twelve. Which one?", "zh": "有十一点或者十二点的。你要哪趟？"},
+   {"s": "L", "en": "Eleven o'clock, please.", "zh": "请给我十一点的。"},
+   {"s": "C", "en": "Here is your ticket. Any other questions?", "zh": "这是您的票。还有其他问题吗？"},
+   {"s": "L", "en": "Which platform is it?", "zh": "请问在哪个站台？"},
+   {"s": "C", "en": "Platform three. Have a good journey!", "zh": "三号站台。祝您旅途愉快！"},
+   {"s": "L", "en": "Thank you. Goodbye!", "zh": "谢谢您。再见！"}
+  ],
+  "reactions": [
+   {"en": "Understood.", "zh": "明白了。"},
+   {"en": "All right.", "zh": "好的。"},
+   {"en": "Yes.", "zh": "是的。"},
+   {"en": "Okay.", "zh": "可以。"},
+   {"en": "One moment.", "zh": "请稍候。"},
+   {"en": "Sure.", "zh": "好的。"}
+  ],
+  "repair": [
+   {"en": "Please say that again.", "zh": "请再说一遍。"},
+   {"en": "Do you want Warsaw or another city?", "zh": "您是要去华沙还是其他城市？"}
+  ]
+ },
+ {
+  "id": "en-call-u04-taxi",
+  "beats": [
+   {
+    "goal": "Ask for the destination address",
+    "lines": [
+     {"en": "To the centre? What is the address?", "zh": "去市中心吗？地址是哪里？"},
+     {"en": "Where to? Which street or hotel?", "zh": "去哪儿？哪条街还是哪个酒店？"}
+    ],
+    "expect": ["hotel", "różą", "roza", "floriańska", "florianska", "street"]
+   },
+   {
+    "goal": "Confirm destination and start driving",
+    "lines": [
+     {"en": "Got it. We are on our way.", "zh": "收到。我们出发了。"},
+     {"en": "All right. We are starting now.", "zh": "好的。我们现在出发。"}
+    ],
+    "expect": ["how", "long", "take", "minutes", "time"]
+   },
+   {
+    "goal": "Mention traffic jam and ask about detour",
+    "lines": [
+     {"en": "Traffic jam ahead. Is a longer route okay?", "zh": "前面堵车了。走远一点的路可以吗？"},
+     {"en": "There is traffic. Take another road?", "zh": "路上堵车了。换另一条路走吗？"}
+    ],
+    "expect": ["fine", "okay", "yes", "sure", "route"]
+   },
+   {
+    "goal": "Arrive at destination and request fare",
+    "lines": [
+     {"en": "We are here. That is fifty zloty.", "zh": "我们到了。一共五十兹罗提。"},
+     {"en": "Here is the hotel. Fifty zloty, please.", "zh": "酒店到了。请付五十兹罗提。"}
+    ],
+    "expect": ["how", "much", "cost", "price", "pay"]
+   },
+   {
+    "goal": "Wrap up the taxi ride",
+    "lines": [
+     {"en": "Here we are. Enjoy your stay!", "zh": "到了。祝你过得开心！"},
+     {"en": "Thank you. Have a great time!", "zh": "谢谢你。祝你玩得愉快！"}
+    ],
+    "expect": ["thank", "thanks", "bye", "goodbye"]
+   }
+  ],
+  "example": [
+   {"s": "C", "en": "To the centre? What is the address?", "zh": "去市中心吗？地址是哪里？"},
+   {"s": "L", "en": "To Hotel Pod Różą, please.", "zh": "去玫瑰饭店，谢谢。"},
+   {"s": "C", "en": "Got it. We are on our way.", "zh": "收到。我们出发了。"},
+   {"s": "L", "en": "How long will it take?", "zh": "大概要多久？"},
+   {"s": "C", "en": "Traffic jam ahead. Is a longer route okay?", "zh": "前面堵车了。走远一点的路可以吗？"},
+   {"s": "L", "en": "That is fine. Please stop here.", "zh": "可以。请停在这里。"},
+   {"s": "C", "en": "We are here. That is fifty zloty.", "zh": "我们到了。一共五十兹罗提。"},
+   {"s": "L", "en": "How much is it? Here you go.", "zh": "多少钱？给你钱。"},
+   {"s": "C", "en": "Here we are. Enjoy your stay!", "zh": "到了。祝你过得开心！"},
+   {"s": "L", "en": "Thank you. Goodbye!", "zh": "谢谢你。再见！"}
+  ],
+  "reactions": [
+   {"en": "Sure thing.", "zh": "没问题。"},
+   {"en": "All good.", "zh": "挺好的。"},
+   {"en": "I know that place.", "zh": "我知道那个地方。"},
+   {"en": "No problem at all.", "zh": "一点问题没有。"},
+   {"en": "Got you.", "zh": "明白了。"},
+   {"en": "Very good.", "zh": "很好。"}
+  ],
+  "repair": [
+   {"en": "Sorry, can you repeat that address?", "zh": "不好意思，你能重复一下地址吗？"},
+   {"en": "Do you want this hotel or that one?", "zh": "你要去这家酒店还是那家？"}
+  ]
+ },
+ {
+  "id": "en-call-u04-lost-on-tram",
+  "beats": [
+   {
+    "goal": "Ask what learner can see outside",
+    "lines": [
+     {"en": "What can you see? Is there a shop or a stop?", "zh": "你能看到什么？有商店还是车站？"},
+     {"en": "Tell me what you see right now.", "zh": "快告诉我你现在看到了什么。"}
+    ],
+    "expect": ["stop", "tram", "church", "park", "see"]
+   },
+   {
+    "goal": "Ask which tram number they took",
+    "lines": [
+     {"en": "A church? Which tram are you on?", "zh": "教堂？你在坐哪路电车？"},
+     {"en": "That is strange. What tram is that?", "zh": "真奇怪。那是哪路电车？"}
+    ],
+    "expect": ["wrong", "tram", "think", "number", "lost"]
+   },
+   {
+    "goal": "Give directions to get off and switch",
+    "lines": [
+     {"en": "Get off now and take tram four.", "zh": "现在下车，然后坐四路电车。"},
+     {"en": "Get off there. Take the number four.", "zh": "在那里下车。坐四路车。"}
+    ],
+    "expect": ["where", "off", "get", "four", "okay"]
+   },
+   {
+    "goal": "Ask when they will arrive at cafe",
+    "lines": [
+     {"en": "Get off at the next stop, please.", "zh": "请在下一站下车。"},
+     {"en": "Next stop is best. When will you arrive?", "zh": "下一站最好。你什么时候到？"}
+    ],
+    "expect": ["ten", "minutes", "there", "soon", "arrive"]
+   },
+   {
+    "goal": "Wrap up the call with friend",
+    "lines": [
+     {"en": "OK, I'm waiting! See you in a bit.", "zh": "好的，我等你！一会儿见。"},
+     {"en": "See you soon. Do not get lost!", "zh": "待会儿见。别再迷路啦！"}
+    ],
+    "expect": ["see", "soon", "bye", "wait", "thanks"]
+   }
+  ],
+  "example": [
+   {"s": "C", "en": "What can you see? Is there a shop or a stop?", "zh": "你能看到什么？有商店还是车站？"},
+   {"s": "L", "en": "I'm at the tram stop.", "zh": "我在电车站。"},
+   {"s": "C", "en": "A church? Which tram are you on?", "zh": "教堂？你在坐哪路电车？"},
+   {"s": "L", "en": "I think I'm on the wrong tram.", "zh": "我想我坐错电车了。"},
+   {"s": "C", "en": "Get off now and take tram four.", "zh": "现在下车，然后坐四路电车。"},
+   {"s": "L", "en": "Where should I get off?", "zh": "我应该在哪里下车？"},
+   {"s": "C", "en": "Get off at the next stop, please.", "zh": "请在下一站下车。"},
+   {"s": "L", "en": "I'll be there in ten minutes.", "zh": "我十分钟后到那里。"},
+   {"s": "C", "en": "OK, I'm waiting! See you in a bit.", "zh": "好的，我等你！一会儿见。"},
+   {"s": "L", "en": "See you soon. Bye!", "zh": "一会儿见。拜拜！"}
+  ],
+  "reactions": [
+   {"en": "Oh no!", "zh": "天哪！"},
+   {"en": "Don't worry.", "zh": "别担心。"},
+   {"en": "Cool.", "zh": "太酷了。"},
+   {"en": "I see.", "zh": "我知道了。"},
+   {"en": "Sounds good!", "zh": "听起来不错！"},
+   {"en": "Got it.", "zh": "明白了。"}
+  ],
+  "repair": [
+   {"en": "Sorry, can you repeat that?", "zh": "对不起，你能重复一遍吗？"},
+   {"en": "Are you on the tram or walking?", "zh": "你是在电车上还是在走路？"}
+  ]
+ },
+ {
+  "id": "en-call-u05-flat-viewing",
+  "beats": [
+   {
+    "goal": "Show living room and ask learner's opinion",
+    "lines": [
+     {"en": "This is the living room. Nice, isn't it?", "zh": "这是客厅。挺不错的，对吧？"},
+     {"en": "Look around. Do you like this room?", "zh": "看看四周。你喜欢这个房间吗？"}
+    ],
+    "expect": ["like", "nice", "rooms", "how", "many"]
+   },
+   {
+    "goal": "Answer room count and show the kitchen",
+    "lines": [
+     {"en": "Two rooms. Here is the kitchen.", "zh": "两个房间。这是厨房。"},
+     {"en": "There are two rooms. Look at the kitchen.", "zh": "有两间房。看看厨房吧。"}
+    ],
+    "expect": ["washing", "machine", "work", "broken", "when", "fixed"]
+   },
+   {
+    "goal": "Explain repair time and invite price questions",
+    "lines": [
+     {"en": "It is fixed tomorrow. Any price questions?", "zh": "明天就修好。对价格有什么疑问吗？"},
+     {"en": "A man fixes it soon. Ask about rent?", "zh": "师傅很快来修。想问问房租吗？"}
+    ],
+    "expect": ["how", "much", "month", "rent", "bills", "included"]
+   },
+   {
+    "goal": "State rent and mention included bills",
+    "lines": [
+     {"en": "Two thousand zloty. All bills are included.", "zh": "两千兹罗提。水电全包。"},
+     {"en": "Rent is two thousand. Bills are free.", "zh": "房租两千。账单全免。"}
+    ],
+    "expect": ["like", "good", "nice", "flat", "think", "great"]
+   },
+   {
+    "goal": "Wrap up flat viewing with goodbye",
+    "lines": [
+     {"en": "Have a think and give me a call. Goodbye!", "zh": "考虑一下，给我打电话。再见！"},
+     {"en": "Take your time. Call me later. Bye!", "zh": "慢慢考虑。回头打给我。拜拜！"}
+    ],
+    "expect": ["thank", "thanks", "call", "bye", "goodbye"]
+   }
+  ],
+  "example": [
+   {"s": "C", "en": "This is the living room. Nice, isn't it?", "zh": "这是客厅。挺不错的，对吧？"},
+   {"s": "L", "en": "I like the living room. How many rooms?", "zh": "我喜欢这个客厅。一共有几间房？"},
+   {"s": "C", "en": "Two rooms. Here is the kitchen.", "zh": "两个房间。这是厨房。"},
+   {"s": "L", "en": "The washing machine doesn't work. When fixed?", "zh": "洗衣机坏了。什么时候修好？"},
+   {"s": "C", "en": "It is fixed tomorrow. Any price questions?", "zh": "明天就修好。对价格有什么疑问吗？"},
+   {"s": "L", "en": "How much is it per month?", "zh": "每个月多少钱？"},
+   {"s": "C", "en": "Two thousand zloty. All bills are included.", "zh": "两千兹罗提。水电全包。"},
+   {"s": "L", "en": "Are bills included? That is very good.", "zh": "包水电账单吗？那太好了。"},
+   {"s": "C", "en": "Have a think and give me a call. Goodbye!", "zh": "考虑一下，给我打电话。再见！"},
+   {"s": "L", "en": "Thank you, Basia. Goodbye!", "zh": "谢谢你，巴夏。再见！"}
+  ],
+  "reactions": [
+   {"en": "Oh, wonderful!", "zh": "噢，太好了！"},
+   {"en": "Yes, of course.", "zh": "是的，当然。"},
+   {"en": "That is right.", "zh": "没错。"},
+   {"en": "Very good, dear.", "zh": "很好，亲爱的。"},
+   {"en": "Don't worry about it.", "zh": "别担心这个。"},
+   {"en": "I understand.", "zh": "我明白。"}
+  ],
+  "repair": [
+   {"en": "Sorry, dear. Can you say that again?", "zh": "对不起亲爱的。你能再说一遍吗？"},
+   {"en": "Do you mean the rent or the rooms?", "zh": "你是说房租还是房间？"}
+  ]
+ },
+ {
+  "id": "en-call-u05-my-room",
+  "beats": [
+   {
+    "goal": "Ask about bed and room furniture",
+    "lines": [
+     {"en": "Have you got a big bed?", "zh": "你有一张大床吗？"},
+     {"en": "Is your bed big? Show me more!", "zh": "你的床大吗？多给我看看！"}
+    ],
+    "expect": ["desk", "chair", "window", "bed", "table"]
+   },
+   {
+    "goal": "Notice empty room and prompt for missing furniture",
+    "lines": [
+     {"en": "Your room looks empty. What is missing?", "zh": "你的房间看起来空空的。缺了什么？"},
+     {"en": "It looks quite empty. What do you need?", "zh": "看起来挺空的。你需要什么？"}
+    ],
+    "expect": ["wardrobe", "don't", "have", "missing", "cupboard"]
+   },
+   {
+    "goal": "Suggest shopping and ask what to buy",
+    "lines": [
+     {"en": "You need more furniture. What do you want?", "zh": "你需要更多家具。你想要什么？"},
+     {"en": "Let's go shopping. What do you want to buy?", "zh": "我们去逛街吧。你想买什么？"}
+    ],
+    "expect": ["want", "buy", "lamp", "sofa", "shelf"]
+   },
+   {
+    "goal": "Praise item and invite questions about her room",
+    "lines": [
+     {"en": "A lamp is nice. Any questions about me?", "zh": "台灯很不错。想问问我的情况吗？"},
+     {"en": "Good idea. Do you want to see my room?", "zh": "好主意。你想看看我的房间吗？"}
+    ],
+    "expect": ["your", "room", "about", "how", "what"]
+   },
+   {
+    "goal": "Wrap up the video call",
+    "lines": [
+     {"en": "Nice room! OK, bye!", "zh": "房间很赞！好啦，拜拜！"},
+     {"en": "Talk to you later. Bye!", "zh": "回头聊。拜拜！"}
+    ],
+    "expect": ["bye", "see", "later", "goodbye"]
+   }
+  ],
+  "example": [
+   {"s": "C", "en": "Have you got a big bed?", "zh": "你有一张大床吗？"},
+   {"s": "L", "en": "There's a desk and a chair.", "zh": "有一张书桌和一把椅子。"},
+   {"s": "C", "en": "Your room looks empty. What is missing?", "zh": "你的房间看起来空空的。缺了什么？"},
+   {"s": "L", "en": "I don't have a wardrobe.", "zh": "我没有衣柜。"},
+   {"s": "C", "en": "You need more furniture. What do you want?", "zh": "你需要更多家具。你想要什么？"},
+   {"s": "L", "en": "I want to buy a lamp.", "zh": "我想买一盏台灯。"},
+   {"s": "C", "en": "A lamp is nice. Any questions about me?", "zh": "台灯很不错。想问问我的情况吗？"},
+   {"s": "L", "en": "My room is small. How about yours?", "zh": "我的房间挺小。你的呢？"},
+   {"s": "C", "en": "Nice room! OK, bye!", "zh": "房间很赞！好啦，拜拜！"},
+   {"s": "L", "en": "See you later! Bye!", "zh": "回头见！拜拜！"}
+  ],
+  "reactions": [
+   {"en": "Cool!", "zh": "酷！"},
+   {"en": "Oh, really?", "zh": "噢，真的吗？"},
+   {"en": "That is nice.", "zh": "挺好的。"},
+   {"en": "I love that.", "zh": "我很喜欢。"},
+   {"en": "Pretty good!", "zh": "挺不错的！"},
+   {"en": "Awesome!", "zh": "太棒了！"}
+  ],
+  "repair": [
+   {"en": "Sorry, I can't hear you clearly.", "zh": "对不起，我听不太清。"},
+   {"en": "Do you want a lamp or a desk?", "zh": "你是想要台灯还是书桌？"}
+  ]
+ },
+ {
+  "id": "en-call-u05-morning-run",
+  "beats": [
+   {
+    "goal": "Ask wake-up time",
+    "lines": [
+     {"en": "What time do you get up?", "zh": "你平时几点起床？"},
+     {"en": "Tell me. When do you wake up?", "zh": "告诉我。你平时几点醒？"}
+    ],
+    "expect": ["seven", "eight", "get", "up", "wake"]
+   },
+   {
+    "goal": "Ask about morning habits",
+    "lines": [
+     {"en": "What do you do in the morning?", "zh": "你早上一般做什么？"},
+     {"en": "Do you eat breakfast or drink coffee?", "zh": "你吃早饭还是喝咖啡？"}
+    ],
+    "expect": ["morning", "coffee", "tea", "breakfast", "work"]
+   },
+   {
+    "goal": "Propose running early at six",
+    "lines": [
+     {"en": "Let's run at six in the morning.", "zh": "我们早上六点去跑步吧。"},
+     {"en": "Can we run at six o'clock?", "zh": "我们六点跑步可以吗？"}
+    ],
+    "expect": ["early", "too", "eight", "later", "how", "about"]
+   },
+   {
+    "goal": "Agree on suggested running time",
+    "lines": [
+     {"en": "Eight is good for me. Eight o'clock?", "zh": "八点对我挺合适。八点整吗？"},
+     {"en": "Eight works for me. Are we ready?", "zh": "八点行。我们说好了？"}
+    ],
+    "expect": ["work", "nine", "fine", "see", "agree"]
+   },
+   {
+    "goal": "Wrap up running plan",
+    "lines": [
+     {"en": "Great, see you tomorrow!", "zh": "太好了，明天见！"},
+     {"en": "Awesome. See you in the morning!", "zh": "太棒了。明天早上见！"}
+    ],
+    "expect": ["see", "tomorrow", "bye", "goodbye"]
+   }
+  ],
+  "example": [
+   {"s": "C", "en": "What time do you get up?", "zh": "你平时几点起床？"},
+   {"s": "L", "en": "I get up at seven.", "zh": "我七点起床。"},
+   {"s": "C", "en": "What do you do in the morning?", "zh": "你早上一般做什么？"},
+   {"s": "L", "en": "In the morning I have a coffee.", "zh": "早上我会喝杯咖啡。"},
+   {"s": "C", "en": "Let's run at six in the morning.", "zh": "我们早上六点去跑步吧。"},
+   {"s": "L", "en": "That's too early! How about eight?", "zh": "太早了！八点怎么样？"},
+   {"s": "C", "en": "Eight is good for me. Eight o'clock?", "zh": "八点对我挺合适。八点整吗？"},
+   {"s": "L", "en": "I go to work at nine.", "zh": "我九点去上班。"},
+   {"s": "C", "en": "Great, see you tomorrow!", "zh": "太好了，明天见！"},
+   {"s": "L", "en": "See you tomorrow! Bye!", "zh": "明天见！拜拜！"}
+  ],
+  "reactions": [
+   {"en": "Sounds good!", "zh": "听起来不错！"},
+   {"en": "Nice!", "zh": "太好了！"},
+   {"en": "I agree.", "zh": "我同意。"},
+   {"en": "No problem, mate.", "zh": "没问题，兄弟。"},
+   {"en": "Perfect.", "zh": "完美。"},
+   {"en": "Good idea.", "zh": "好主意。"}
+  ],
+  "repair": [
+   {"en": "Sorry, can you say that again?", "zh": "不好意思，你能再说一遍吗？"},
+   {"en": "Do you mean seven or eight?", "zh": "你是说七点还是八点？"}
+  ]
+ },
+ {
+  "id": "en-call-u05-no-hot-water",
+  "beats": [
+   {
+    "goal": "Ask neighbour what is wrong",
+    "lines": [
+     {"en": "Can I help with something?", "zh": "有什么我可以帮忙的吗？"},
+     {"en": "What is wrong, neighbour?", "zh": "怎么了，邻居？"}
+    ],
+    "expect": ["water", "hot", "problem", "working", "isn't"]
+   },
+   {
+    "goal": "Explain problem affects the whole building",
+    "lines": [
+     {"en": "It is the whole building today.", "zh": "今天整栋楼都这样。"},
+     {"en": "I have no hot water too.", "zh": "我这儿也没有热水。"}
+    ],
+    "expect": ["what", "do", "who", "call", "should"]
+   },
+   {
+    "goal": "Advise calling the building management",
+    "lines": [
+     {"en": "You must call the building management.", "zh": "你必须给物业管理处打电话。"},
+     {"en": "Phone the building management office now.", "zh": "现在给物业管理办公室打电话吧。"}
+    ],
+    "expect": ["number", "office", "have", "management", "phone", "who"]
+   },
+   {
+    "goal": "Give phone number location from hallway",
+    "lines": [
+     {"en": "The number is in the hallway.", "zh": "号码就在楼道里。"},
+     {"en": "Check the notice board downstairs.", "zh": "看看楼下的布告栏。"}
+    ],
+    "expect": ["thanks", "thank", "help", "much", "neighbour"]
+   },
+   {
+    "goal": "Wrap up and give final reminder",
+    "lines": [
+     {"en": "Call the building management. Good luck!", "zh": "给物业打电话吧。祝你好运！"},
+     {"en": "Call them right away. Good luck!", "zh": "马上打给他们。祝你好运！"}
+    ],
+    "expect": ["thanks", "bye", "goodbye", "day"]
+   }
+  ],
+  "example": [
+   {"s": "C", "en": "Can I help with something?", "zh": "有什么我可以帮忙的吗？"},
+   {"s": "L", "en": "There is no hot water.", "zh": "这里没有热水。"},
+   {"s": "C", "en": "It is the whole building today.", "zh": "今天整栋楼都这样。"},
+   {"s": "L", "en": "Something isn't working. What should I do?", "zh": "出故障了。我该怎么办？"},
+   {"s": "C", "en": "You must call the building management.", "zh": "你必须给物业管理处打电话。"},
+   {"s": "L", "en": "Who should I call?", "zh": "我应该给谁打电话？"},
+   {"s": "C", "en": "The number is in the hallway.", "zh": "号码就在楼道里。"},
+   {"s": "L", "en": "Thanks for your help.", "zh": "谢谢你的帮助。"},
+   {"s": "C", "en": "Call the building management. Good luck!", "zh": "给物业打电话吧。祝你好运！"},
+   {"s": "L", "en": "Thank you. Goodbye!", "zh": "谢谢你。再见！"}
+  ],
+  "reactions": [
+   {"en": "Oh dear.", "zh": "哎呀。"},
+   {"en": "I see.", "zh": "我明白了。"},
+   {"en": "That is bad.", "zh": "真糟糕。"},
+   {"en": "Don't worry.", "zh": "别担心。"},
+   {"en": "Yes, exactly.", "zh": "对，没错。"},
+   {"en": "You are right.", "zh": "你说得对。"}
+  ],
+  "repair": [
+   {"en": "Sorry, can you say that again?", "zh": "不好意思，你能再说一遍吗？"},
+   {"en": "Is it the water or electricity?", "zh": "是水的问题还是电的问题？"}
+  ]
+ },
+ {
+  "id": "en-call-u06-cinema-plan",
+  "beats": [
+   {
+    "goal": "Ask when friend is free",
+    "lines": [
+     {"en": "When are you free?", "zh": "你什么时候有空？"},
+     {"en": "Which day is good for you?", "zh": "哪天对你合适？"}
+    ],
+    "expect": ["friday", "saturday", "free", "day", "sunday"]
+   },
+   {
+    "goal": "Say busy on Friday and suggest Saturday",
+    "lines": [
+     {"en": "Friday is bad. How about Saturday?", "zh": "周五不行。周六怎么样？"},
+     {"en": "I am busy Friday. Is Saturday okay?", "zh": "我周五很忙。周六可以吗？"}
+    ],
+    "expect": ["saturday", "sunday", "free", "make", "can't"]
+   },
+   {
+    "goal": "Agree on day and ask time",
+    "lines": [
+     {"en": "Sunday works. What time?", "zh": "周日行。几点？"},
+     {"en": "Sunday is great. What time is good?", "zh": "周日太好了。几点合适？"}
+    ],
+    "expect": ["seven", "eight", "six", "about", "time"]
+   },
+   {
+    "goal": "Agree on time and ask meeting place",
+    "lines": [
+     {"en": "Seven is fine. Where do we meet?", "zh": "七点可以。我们在哪儿见？"},
+     {"en": "Seven sounds good. Where shall we meet?", "zh": "七点听起来不错。我们在哪儿碰头？"}
+    ],
+    "expect": ["meet", "front", "cinema", "outside", "station"]
+   },
+   {
+    "goal": "Confirm meeting place and wrap up",
+    "lines": [
+     {"en": "Great, see you at the cinema!", "zh": "太好了，电影院见！"},
+     {"en": "Perfect. See you there!", "zh": "完美。那里见！"}
+    ],
+    "expect": ["see", "bye", "cinema", "goodbye"]
+   }
+  ],
+  "example": [
+   {"s": "C", "en": "When are you free?", "zh": "你什么时候有空？"},
+   {"s": "L", "en": "I'm free on Friday.", "zh": "我周五有空。"},
+   {"s": "C", "en": "Friday is bad. How about Saturday?", "zh": "周五不行。周六怎么样？"},
+   {"s": "L", "en": "I can't make it on Saturday.", "zh": "我周六去不了。"},
+   {"s": "C", "en": "Sunday works. What time?", "zh": "周日行。几点？"},
+   {"s": "L", "en": "What time? How about seven?", "zh": "什么时间？七点怎么样？"},
+   {"s": "C", "en": "Seven is fine. Where do we meet?", "zh": "七点可以。我们在哪儿见？"},
+   {"s": "L", "en": "Let's meet in front of the cinema.", "zh": "我们在电影院门前碰头吧。"},
+   {"s": "C", "en": "Great, see you at the cinema!", "zh": "太好了，电影院见！"},
+   {"s": "L", "en": "See you there! Bye!", "zh": "到时见！拜拜！"}
+  ],
+  "reactions": [
+   {"en": "Sounds great!", "zh": "听起来太棒了！"},
+   {"en": "Oh, nice.", "zh": "噢，不错。"},
+   {"en": "Cool with me.", "zh": "我没问题。"},
+   {"en": "I like that film.", "zh": "我喜欢那部电影。"},
+   {"en": "Perfect!", "zh": "完美！"},
+   {"en": "Yay!", "zh": "太好啦！"}
+  ],
+  "repair": [
+   {"en": "Sorry, can you repeat that?", "zh": "对不起，你能重说一次吗？"},
+   {"en": "Do you mean Friday or Saturday?", "zh": "你是说周五还是周六？"}
+  ]
+ },
+ {
+  "id": "en-call-u06-weekend-mountains",
+  "beats": [
+   {
+    "goal": "Ask weekend routine",
+    "lines": [
+     {"en": "What do you usually do at weekends?", "zh": "你周末通常做什么？"},
+     {"en": "How do you spend your weekends?", "zh": "你周末一般怎么过？"}
+    ],
+    "expect": ["rest", "usually", "home", "relax", "weekends"]
+   },
+   {
+    "goal": "Invite to mountains this weekend",
+    "lines": [
+     {"en": "Come to the mountains! Can you come?", "zh": "去爬山吧！你能来吗？"},
+     {"en": "We can hike together. Can you come?", "zh": "我们可以一起徒步。你能来吗？"}
+    ],
+    "expect": ["love", "can", "come", "rain", "unfortunately"]
+   },
+   {
+    "goal": "Mention rain and ask alternatives",
+    "lines": [
+     {"en": "Oh, rain is bad. Any other ideas?", "zh": "噢，下雨真扫兴。有别的想法吗？"},
+     {"en": "Yes, rain all day. What instead?", "zh": "是的，一整天下雨。那换成什么？"}
+    ],
+    "expect": ["cinema", "instead", "maybe", "film", "movie"]
+   },
+   {
+    "goal": "Agree to cinema and ask preparation",
+    "lines": [
+     {"en": "The cinema sounds fun. Are you ready?", "zh": "看电影听起来挺好玩。你准备好了吗？"},
+     {"en": "Good idea. Do you need anything?", "zh": "好主意。你需要带什么吗？"}
+    ],
+    "expect": ["what", "bring", "should", "take", "need"]
+   },
+   {
+    "goal": "Say nothing needed and wrap up",
+    "lines": [
+     {"en": "OK, I'll text you the details. See you!", "zh": "好的，我把具体信息发你。回见！"},
+     {"en": "Bring snacks. See you this weekend!", "zh": "带点零食。这周末见！"}
+    ],
+    "expect": ["see", "thanks", "text", "bye", "details"]
+   }
+  ],
+  "example": [
+   {"s": "C", "en": "What do you usually do at weekends?", "zh": "你周末通常做什么？"},
+   {"s": "L", "en": "At weekends I usually rest.", "zh": "周末我通常休息。"},
+   {"s": "C", "en": "Come to the mountains! Can you come?", "zh": "去爬山吧！你能来吗？"},
+   {"s": "L", "en": "I'd love to! But it's going to rain.", "zh": "我很想去！但是要下雨了。"},
+   {"s": "C", "en": "Oh, rain is bad. Any other ideas?", "zh": "噢，下雨真扫兴。有别的想法吗？"},
+   {"s": "L", "en": "Maybe the cinema instead?", "zh": "换成去电影院怎么样？"},
+   {"s": "C", "en": "The cinema sounds fun. Are you ready?", "zh": "看电影听起来挺好玩。你准备好了吗？"},
+   {"s": "L", "en": "What should I bring?", "zh": "我应该带点什么？"},
+   {"s": "C", "en": "OK, I'll text you the details. See you!", "zh": "好的，我把具体信息发你。回见！"},
+   {"s": "L", "en": "Great, thanks! See you!", "zh": "太好了，谢谢！回见！"}
+  ],
+  "reactions": [
+   {"en": "Sounds like a plan!", "zh": "好主意！"},
+   {"en": "Nice one.", "zh": "不错。"},
+   {"en": "I agree with you.", "zh": "我同意你的看法。"},
+   {"en": "That works.", "zh": "那样行。"},
+   {"en": "Cool!", "zh": "酷！"},
+   {"en": "Good thinking.", "zh": "想得挺周到。"}
+  ],
+  "repair": [
+   {"en": "Sorry, can you say that again?", "zh": "不好意思，你能再说一遍吗？"},
+   {"en": "Do you want hiking or cinema?", "zh": "你是想徒步还是看电影？"}
+  ]
+ },
+ {
+  "id": "en-call-u06-book-doctor",
+  "beats": [
+   {
+    "goal": "Ask reason for call",
+    "lines": [
+     {"en": "How can I help you?", "zh": "请问有什么可以帮您？"},
+     {"en": "Good morning. How can I help?", "zh": "早上好。我能帮您什么？"}
+    ],
+    "expect": ["appointment", "doctor", "make", "like", "see"]
+   },
+   {
+    "goal": "State doctor is free only next week",
+    "lines": [
+     {"en": "The doctor is free next Thursday.", "zh": "医生下周四有空。"},
+     {"en": "We only have slots next week.", "zh": "我们只有下周有名额。"}
+    ],
+    "expect": ["earlier", "anything", "sooner", "before", "possible"]
+   },
+   {
+    "goal": "Offer earlier slot on Tuesday",
+    "lines": [
+     {"en": "Someone cancelled. Is Tuesday at ten fine?", "zh": "有人取消了。周二十点可以吗？"},
+     {"en": "We have Tuesday at ten. Okay?", "zh": "周二上午十点有名额。可以吗？"}
+    ],
+    "expect": ["tuesday", "fine", "ten", "good", "okay"]
+   },
+   {
+    "goal": "Ask patient's full name",
+    "lines": [
+     {"en": "What is your full name, please?", "zh": "请问您的全名是什么？"},
+     {"en": "May I have your name, please?", "zh": "请问您的姓名是？"}
+    ],
+    "expect": ["name", "is", "my", "i'm", "am"]
+   },
+   {
+    "goal": "Confirm booking and wrap up",
+    "lines": [
+     {"en": "You're all booked in. Goodbye!", "zh": "都为您登记好了。再见！"},
+     {"en": "Appointment confirmed for Tuesday. Have a good day!", "zh": "周二的预约已确认。祝您生活愉快！"}
+    ],
+    "expect": ["thank", "thanks", "bye", "goodbye"]
+   }
+  ],
+  "example": [
+   {"s": "C", "en": "How can I help you?", "zh": "请问有什么可以帮您？"},
+   {"s": "L", "en": "I'd like to make an appointment, please.", "zh": "我想预约看医生。"},
+   {"s": "C", "en": "The doctor is free next Thursday.", "zh": "医生下周四有空。"},
+   {"s": "L", "en": "Is there anything earlier?", "zh": "有更早一点的时间吗？"},
+   {"s": "C", "en": "Someone cancelled. Is Tuesday at ten fine?", "zh": "有人取消了。周二十点可以吗？"},
+   {"s": "L", "en": "Tuesday is fine.", "zh": "周二可以。"},
+   {"s": "C", "en": "What is your full name, please?", "zh": "请问您的全名是什么？"},
+   {"s": "L", "en": "My name is Li Ming.", "zh": "我的名字叫李明。"},
+   {"s": "C", "en": "You're all booked in. Goodbye!", "zh": "都为您登记好了。再见！"},
+   {"s": "L", "en": "Thank you. Goodbye!", "zh": "谢谢您。再见！"}
+  ],
+  "reactions": [
+   {"en": "Understood.", "zh": "明白了。"},
+   {"en": "Of course.", "zh": "当然。"},
+   {"en": "Very well.", "zh": "好的。"},
+   {"en": "Let me see.", "zh": "让我看一下。"},
+   {"en": "Certainly.", "zh": "好的。"},
+   {"en": "One moment, please.", "zh": "请稍候。"}
+  ],
+  "repair": [
+   {"en": "Could you repeat that, please?", "zh": "请您重复一遍好吗？"},
+   {"en": "Do you want morning or afternoon?", "zh": "您想要上午还是下午？"}
+  ]
+ },
+ {
+  "id": "en-call-u06-birthday-invite",
+  "beats": [
+   {
+    "goal": "Ask if colleague can come",
+    "lines": [
+     {"en": "Can you come?", "zh": "你能来吗？"},
+     {"en": "Are you free this Saturday?", "zh": "这周六有空吗？"}
+    ],
+    "expect": ["love", "come", "happy", "birthday", "free"]
+   },
+   {
+    "goal": "Give party time and location",
+    "lines": [
+     {"en": "Six at my flat. Is that okay?", "zh": "六点在我家。可以吗？"},
+     {"en": "At my flat at six pm.", "zh": "晚上六点在我家。"}
+    ],
+    "expect": ["later", "can", "come", "busy", "seven"]
+   },
+   {
+    "goal": "Agree to a later arrival",
+    "lines": [
+     {"en": "Yes, sure! Later is totally fine.", "zh": "当然行！晚点来完全没问题。"},
+     {"en": "That is fine. Come at seven.", "zh": "没问题。七点来吧。"}
+    ],
+    "expect": ["what", "bring", "should", "take", "food"]
+   },
+   {
+    "goal": "Suggest bringing drinks or snacks",
+    "lines": [
+     {"en": "Just bring some drinks or snacks.", "zh": "带点饮料或零食就行。"},
+     {"en": "Bring your favourite drinks, please.", "zh": "请带上你最喜欢的饮品。"}
+    ],
+    "expect": ["what", "time", "where", "great", "perfect"]
+   },
+   {
+    "goal": "Wrap up party invitation",
+    "lines": [
+     {"en": "Great! See you on Saturday!", "zh": "太好了！周六见！"},
+     {"en": "See you Saturday at my party!", "zh": "周六我的派对见！"}
+    ],
+    "expect": ["see", "saturday", "bye", "goodbye"]
+   }
+  ],
+  "example": [
+   {"s": "C", "en": "Can you come?", "zh": "你能来吗？"},
+   {"s": "L", "en": "Happy birthday! I'd love to come!", "zh": "生日快乐！我很想去！"},
+   {"s": "C", "en": "Six at my flat. Is that okay?", "zh": "六点在我家。可以吗？"},
+   {"s": "L", "en": "Can I come later?", "zh": "我可以晚点来吗？"},
+   {"s": "C", "en": "Yes, sure! Later is totally fine.", "zh": "当然行！晚点来完全没问题。"},
+   {"s": "L", "en": "What should I bring?", "zh": "我应该带点什么？"},
+   {"s": "C", "en": "Just bring some drinks or snacks.", "zh": "带点饮料或零食就行。"},
+   {"s": "L", "en": "What time and where again?", "zh": "再说一遍时间和地点？"},
+   {"s": "C", "en": "Great! See you on Saturday!", "zh": "太好了！周六见！"},
+   {"s": "L", "en": "See you on Saturday! Bye!", "zh": "周六见！拜拜！"}
+  ],
+  "reactions": [
+   {"en": "Sounds fun!", "zh": "听起来真好玩！"},
+   {"en": "Oh, lovely!", "zh": "噢，太棒了！"},
+   {"en": "That's great!", "zh": "太好了！"},
+   {"en": "Don't worry at all.", "zh": "完全不用担心。"},
+   {"en": "Fantastic!", "zh": "太棒啦！"},
+   {"en": "Super!", "zh": "超级棒！"}
+  ],
+  "repair": [
+   {"en": "Sorry, can you say that again?", "zh": "不好意思，你能再说一遍吗？"},
+   {"en": "Do you mean six or seven?", "zh": "你是说六点还是七点？"}
+  ]
+ }
+]
+

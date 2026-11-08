@@ -1,0 +1,2583 @@
+[
+ {
+  "id": "pl-call-u04-way-to-station",
+  "beats": [
+   {
+    "goal": "Ask what the neighbour is looking for",
+    "lines": [
+     {
+      "pl": "{m:Szuka pan czegoś?|f:Szuka pani czegoś?}",
+      "en": "Are you looking for something?",
+      "zh": "您在找什么吗？"
+     },
+     {
+      "pl": "{m:Zgubił się pan?|f:Zgubiła się pani?} Mogę pomóc?",
+      "en": "Are you lost? Can I help?",
+      "zh": "您迷路了吗？需要帮忙吗？"
+     }
+    ],
+    "expect": [
+     "dworzec",
+     "gdzie",
+     "dojść",
+     "jak",
+     "szukam"
+    ]
+   },
+   {
+    "goal": "Give directions through park too fast",
+    "lines": [
+     {
+      "pl": "Dworzec jest za parkiem. Szybko w prawo, w lewo, prosto!",
+      "en": "The station is behind the park. Quick right, left, straight ahead!",
+      "zh": "火车站就在公园后面。右拐、左拐、直走，快得很！"
+     },
+     {
+      "pl": "Proszę iść przez park, potem w lewo i prosto!",
+      "en": "Go through the park, then left and straight ahead!",
+      "zh": "请穿过公园，然后向左再直走！"
+     }
+    ],
+    "expect": [
+     "wolniej",
+     "powtórzyć",
+     "proszę",
+     "jeszcze",
+     "raz"
+    ]
+   },
+   {
+    "goal": "Repeat the directions slowly and clearly",
+    "lines": [
+     {
+      "pl": "A, przepraszam. Idziemy przez park. Potem w prawo.",
+      "en": "Ah, sorry. We go through the park. Then right.",
+      "zh": "啊，抱歉。穿过公园，然后向右拐。"
+     },
+     {
+      "pl": "Dobrze, powoli. Najpierw park, potem prosto. Jasne?",
+      "en": "Okay, slowly. First the park, then straight. Clear?",
+      "zh": "好的，慢慢说。先穿过公园，然后直走。清楚了吗？"
+     }
+    ],
+    "expect": [
+     "daleko",
+     "czy",
+     "ile",
+     "minut",
+     "czasu"
+    ]
+   },
+   {
+    "goal": "Confirm that it is very close",
+    "lines": [
+     {
+      "pl": "Nie, to bardzo blisko. Może pięć minut piechotą.",
+      "en": "No, it's very close. Maybe five minutes on foot.",
+      "zh": "不远，非常近。步行大概五分钟。"
+     },
+     {
+      "pl": "Niedaleko! To tylko dwie ulice stąd.",
+      "en": "Not far! It's only two streets away.",
+      "zh": "不远！离这儿就两条街。"
+     }
+    ],
+    "expect": [
+     "dziękuję",
+     "dzięki",
+     "panu",
+     "bardzo",
+     "miłego"
+    ]
+   },
+   {
+    "goal": "Say goodbye to the neighbour",
+    "lines": [
+     {
+      "pl": "Nie ma za co. Do widzenia!",
+      "en": "You're welcome. Goodbye!",
+      "zh": "不客气。再见！"
+     },
+     {
+      "pl": "Proszę bardzo. Miłego dnia!",
+      "en": "You are welcome. Have a nice day!",
+      "zh": "不客气。祝您一天愉快！"
+     }
+    ],
+    "expect": [
+     "do widzenia",
+     "miłego",
+     "dnia",
+     "dziękuję",
+     "nawzajem"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "{m:Dzień dobry! Szuka pan czegoś?|f:Dzień dobry! Szuka pani czegoś?}",
+    "en": "Good morning! Are you looking for something?",
+    "zh": "早上好！您在找什么吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Dzień dobry. Gdzie jest dworzec?",
+    "en": "Good morning. Where is the station?",
+    "zh": "早上好。请问火车站在哪里？"
+   },
+   {
+    "s": "C",
+    "pl": "Przez park, potem w lewo, w prawo i prosto!",
+    "en": "Through the park, then left, right and straight!",
+    "zh": "穿过公园，然后向左、向右再直走！"
+   },
+   {
+    "s": "L",
+    "pl": "Proszę powtórzyć wolniej.",
+    "en": "Please repeat more slowly.",
+    "zh": "请说慢一点，重复一遍。"
+   },
+   {
+    "s": "C",
+    "pl": "Dobrze. Prosto przez park, potem w prawo.",
+    "en": "Okay. Straight through the park, then right.",
+    "zh": "好的。直穿公园，然后向右。"
+   },
+   {
+    "s": "L",
+    "pl": "Dziękuję. Czy to daleko?",
+    "en": "Thank you. Is it far?",
+    "zh": "谢谢。离这里远吗？"
+   },
+   {
+    "s": "C",
+    "pl": "Nie, to blisko. Pięć minut.",
+    "en": "No, it's close. Five minutes.",
+    "zh": "不远，很近。五分钟。"
+   },
+   {
+    "s": "L",
+    "pl": "Świetnie, dziękuję bardzo!",
+    "en": "Great, thank you very much!",
+    "zh": "太好了，非常感谢！"
+   },
+   {
+    "s": "C",
+    "pl": "Nie ma za co. Do widzenia!",
+    "en": "You're welcome. Goodbye!",
+    "zh": "不客气。再见！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Rozumiem.",
+    "en": "I understand.",
+    "zh": "我明白了。"
+   },
+   {
+    "pl": "Aha, jasne.",
+    "en": "Aha, clear.",
+    "zh": "啊，明白。"
+   },
+   {
+    "pl": "Tak, oczywiście.",
+    "en": "Yes, of course.",
+    "zh": "是的，当然。"
+   },
+   {
+    "pl": "Bardzo dobrze.",
+    "en": "Very good.",
+    "zh": "很好。"
+   },
+   {
+    "pl": "Nie ma problemu.",
+    "en": "No problem.",
+    "zh": "没问题。"
+   },
+   {
+    "pl": "W porządku.",
+    "en": "All right.",
+    "zh": "好的。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Słucham? Proszę powtórzyć.",
+    "en": "Pardon? Please repeat.",
+    "zh": "什么？请再说一遍。"
+   },
+   {
+    "pl": "Dworzec czy przystanek tramwajowy?",
+    "en": "The station or the tram stop?",
+    "zh": "火车站还是电车站？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u04-train-ticket",
+  "beats": [
+   {
+    "goal": "Ask if ticket is one way or return",
+    "lines": [
+     {
+      "pl": "W jedną stronę czy powrotny?",
+      "en": "One way or return?",
+      "zh": "单程还是往返？"
+     },
+     {
+      "pl": "Dzień dobry. Bilet w jedną stronę czy powrotny?",
+      "en": "Good morning. One-way or return ticket?",
+      "zh": "您好。单程票还是往返票？"
+     }
+    ],
+    "expect": [
+     "jedną",
+     "stronę",
+     "powrotny",
+     "poproszę",
+     "warszawy"
+    ]
+   },
+   {
+    "goal": "State that the early train is full",
+    "lines": [
+     {
+      "pl": "Pociąg o dziesiątej jest pełny. Brak miejsc.",
+      "en": "The 10:00 train is full. No seats.",
+      "zh": "十点的火车满了。没有座位了。"
+     },
+     {
+      "pl": "Niestety, o dziesiątej nie ma miejsc. Co robimy?",
+      "en": "Unfortunately, no seats at ten. What do we do?",
+      "zh": "抱歉，十点那趟没票了。怎么选？"
+     }
+    ],
+    "expect": [
+     "później",
+     "której",
+     "jest",
+     "może",
+     "inny"
+    ]
+   },
+   {
+    "goal": "Offer alternative departure times",
+    "lines": [
+     {
+      "pl": "Jest pociąg o jedenastej lub o dwunastej. Który?",
+      "en": "There is a train at eleven or twelve. Which one?",
+      "zh": "有十一点或十二点的车。您选哪一趟？"
+     },
+     {
+      "pl": "Może być o jedenastej? Czy woli {m:pan|f:pani} później?",
+      "en": "Can it be at eleven? Or do you prefer later?",
+      "zh": "十一点可以吗？还是您想更晚一点？"
+     }
+    ],
+    "expect": [
+     "jedenastej",
+     "dwunastej",
+     "poproszę",
+     "może",
+     "być"
+    ]
+   },
+   {
+    "goal": "Confirm booking and prompt for platform question",
+    "lines": [
+     {
+      "pl": "Dobrze, bilet na jedenastą gotowy. Coś jeszcze?",
+      "en": "Good, ticket for eleven ready. Anything else?",
+      "zh": "好的，十一点的票出好了。还需要别的吗？"
+     },
+     {
+      "pl": "Świetnie. Pięćdziesiąt złotych. Ma {m:pan|f:pani} pytania?",
+      "en": "Great. Fifty zlotys. Do you have questions?",
+      "zh": "太好了。五十兹罗提。您有问题吗？"
+     }
+    ],
+    "expect": [
+     "peronu",
+     "peron",
+     "którego",
+     "odjeżdża",
+     "gdzie"
+    ]
+   },
+   {
+    "goal": "Give platform number and wish good trip",
+    "lines": [
+     {
+      "pl": "Peron trzeci. Szczęśliwej podróży!",
+      "en": "Platform three. Have a safe trip!",
+      "zh": "第三站台。旅途愉快！"
+     },
+     {
+      "pl": "Odjazd z peronu trzeciego. Dobrej podróży!",
+      "en": "Departure from platform three. Have a good trip!",
+      "zh": "在第三站台发车。祝旅途顺利！"
+     }
+    ],
+    "expect": [
+     "dziękuję",
+     "dzięki",
+     "widzenia",
+     "miłego",
+     "dnia"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Dzień dobry. W jedną stronę czy powrotny?",
+    "en": "Good morning. One way or return?",
+    "zh": "早上好。单程还是往返？"
+   },
+   {
+    "s": "L",
+    "pl": "Poproszę bilet do Warszawy w jedną stronę.",
+    "en": "A one-way ticket to Warsaw, please.",
+    "zh": "请给我一张去华沙的单程票。"
+   },
+   {
+    "s": "C",
+    "pl": "Pociąg o dziesiątej jest pełny. Brak wolnych miejsc.",
+    "en": "The ten o'clock train is full. No free seats.",
+    "zh": "十点的那趟车满了。没有空位。"
+   },
+   {
+    "s": "L",
+    "pl": "O której jest następny pociąg?",
+    "en": "What time is the next train?",
+    "zh": "下一班车是几点？"
+   },
+   {
+    "s": "C",
+    "pl": "Jest o jedenastej. Może być?",
+    "en": "There is one at eleven. Is that okay?",
+    "zh": "十一点有一班。可以吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Tak, może być później. O jedenastej poproszę.",
+    "en": "Yes, later is fine. At eleven, please.",
+    "zh": "可以，晚点没事。请给我十一点的。"
+   },
+   {
+    "s": "C",
+    "pl": "Proszę, oto bilet. Coś jeszcze?",
+    "en": "Here is your ticket. Anything else?",
+    "zh": "给您，这是车票。还需要别的吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Z którego peronu odjeżdża?",
+    "en": "Which platform does it leave from?",
+    "zh": "从几号站台发车？"
+   },
+   {
+    "s": "C",
+    "pl": "Peron trzeci. Szczęśliwej podróży!",
+    "en": "Platform three. Have a safe trip!",
+    "zh": "第三站台。旅途愉快！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Dobrze.",
+    "en": "Good.",
+    "zh": "好的。"
+   },
+   {
+    "pl": "Jasne.",
+    "en": "Sure.",
+    "zh": "明白。"
+   },
+   {
+    "pl": "Rozumiem.",
+    "en": "I understand.",
+    "zh": "了解。"
+   },
+   {
+    "pl": "Już sprawdzam.",
+    "en": "Checking now.",
+    "zh": "我这就查。"
+   },
+   {
+    "pl": "Świetnie.",
+    "en": "Great.",
+    "zh": "很好。"
+   },
+   {
+    "pl": "Oczywiście.",
+    "en": "Of course.",
+    "zh": "当然。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Słucham? Proszę powtórzyć godzinę.",
+    "en": "Pardon? Please repeat the hour.",
+    "zh": "什么？请再说一遍时间。"
+   },
+   {
+    "pl": "Chodzi o bilet normalny czy ulgowy?",
+    "en": "Standard or discounted ticket?",
+    "zh": "是全价票还是优惠票？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u04-taxi",
+  "beats": [
+   {
+    "goal": "Ask for the destination address",
+    "lines": [
+     {
+      "pl": "Do centrum? Jaki adres?",
+      "en": "To the centre? What address?",
+      "zh": "去市中心吗？哪个地址？"
+     },
+     {
+      "pl": "Dokąd dokładnie jedziemy? Znam całe miasto.",
+      "en": "Where exactly are we going? I know the whole city.",
+      "zh": "我们具体去哪里？全城我都熟。"
+     }
+    ],
+    "expect": [
+     "hotelu",
+     "ulica",
+     "proszę",
+     "różą",
+     "floriańska"
+    ]
+   },
+   {
+    "goal": "Warn about traffic jam and detour",
+    "lines": [
+     {
+      "pl": "W centrum jest korek. Możemy jechać obwodnicą?",
+      "en": "There's a jam in the centre. Can we take the bypass?",
+      "zh": "市中心堵车。我们走外环路行吗？"
+     },
+     {
+      "pl": "Straszliwy korek na trasie. Dłuższa droga pasuje?",
+      "en": "Terrible traffic jam on the route. Is a longer route okay?",
+      "zh": "路上大堵车。绕远一点的路可以吗？"
+     }
+    ],
+    "expect": [
+     "długo",
+     "jak",
+     "dobrze",
+     "może",
+     "pasuje"
+    ]
+   },
+   {
+    "goal": "Answer how long the trip takes",
+    "lines": [
+     {
+      "pl": "To zajmie około dwudziestu minut. Zgoda?",
+      "en": "It will take about twenty minutes. Agreed?",
+      "zh": "大概需要二十分钟。同意吗？"
+     },
+     {
+      "pl": "Około pół godziny przez ten korek.",
+      "en": "About half an hour because of this traffic jam.",
+      "zh": "因为堵车，大概半小时。"
+     }
+    ],
+    "expect": [
+     "kosztuje",
+     "ile",
+     "płacę",
+     "to",
+     "karta"
+    ]
+   },
+   {
+    "goal": "State total fare and request payment",
+    "lines": [
+     {
+      "pl": "Sześćdziesiąt złotych. Płatność kartą czy gotówką?",
+      "en": "Sixty zlotys. Card or cash payment?",
+      "zh": "六十兹罗提。刷卡还是现金？"
+     },
+     {
+      "pl": "Równe pięćdziesiąt złotych, poproszę. Karta działa.",
+      "en": "Exactly fifty zlotys, please. Card works.",
+      "zh": "整好五十兹罗提，谢谢。可以刷卡。"
+     }
+    ],
+    "expect": [
+     "kartą",
+     "gotówką",
+     "proszę",
+     "zatrzymać",
+     "tutaj"
+    ]
+   },
+   {
+    "goal": "Announce arrival and wish good stay",
+    "lines": [
+     {
+      "pl": "Jesteśmy na miejscu. Miłego pobytu!",
+      "en": "We have arrived. Enjoy your stay!",
+      "zh": "我们到了。祝您居留愉快！"
+     },
+     {
+      "pl": "To tutaj. Życzę udanego pobytu!",
+      "en": "Here it is. Have a wonderful stay!",
+      "zh": "就在这里。祝您过得愉快！"
+     }
+    ],
+    "expect": [
+     "dziękuję",
+     "dzięki",
+     "widzenia",
+     "miłego",
+     "dnia"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Dzień dobry. Do centrum? Jaki adres?",
+    "en": "Good morning. To the centre? What address?",
+    "zh": "早上好。去市中心吗？哪个地址？"
+   },
+   {
+    "s": "L",
+    "pl": "Do hotelu Pod Różą, poproszę. Ulica Floriańska.",
+    "en": "To hotel Pod Różą, please. Floriańska Street.",
+    "zh": "去波德鲁扎酒店，谢谢。弗洛里安斯卡街。"
+   },
+   {
+    "s": "C",
+    "pl": "Tam jest wielki korek. Dłuższa trasa pasuje?",
+    "en": "There is a big jam there. Is a longer route okay?",
+    "zh": "那边大堵车。走稍远一点的路线可以吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Tak, dobrze. Jak długo to potrwa?",
+    "en": "Yes, fine. How long will it take?",
+    "zh": "行，好的。大概要多久？"
+   },
+   {
+    "s": "C",
+    "pl": "Około dwudziestu minut. Już jedziemy.",
+    "en": "About twenty minutes. We are on our way.",
+    "zh": "大约二十分钟。我们出发了。"
+   },
+   {
+    "s": "L",
+    "pl": "Dobrze. Ile to kosztuje?",
+    "en": "Good. How much does it cost?",
+    "zh": "好的。这要多少钱？"
+   },
+   {
+    "s": "C",
+    "pl": "Pięćdziesiąt złotych. Może być karta.",
+    "en": "Fifty zlotys. Card is fine.",
+    "zh": "五十兹罗提。可以刷卡。"
+   },
+   {
+    "s": "L",
+    "pl": "Płacę kartą. Proszę się zatrzymać tutaj.",
+    "en": "I'll pay by card. Please stop here.",
+    "zh": "我刷卡。请停在这里。"
+   },
+   {
+    "s": "C",
+    "pl": "Jesteśmy na miejscu. Miłego pobytu!",
+    "en": "We have arrived. Enjoy your stay!",
+    "zh": "我们到了。祝您居留愉快！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Jasna sprawa.",
+    "en": "Clear thing.",
+    "zh": "明白。"
+   },
+   {
+    "pl": "Bez problemu.",
+    "en": "No problem.",
+    "zh": "没问题。"
+   },
+   {
+    "pl": "W porządku.",
+    "en": "All right.",
+    "zh": "好的。"
+   },
+   {
+    "pl": "Znam tę ulicę.",
+    "en": "I know this street.",
+    "zh": "我认得这条街。"
+   },
+   {
+    "pl": "Świetnie.",
+    "en": "Great.",
+    "zh": "很好。"
+   },
+   {
+    "pl": "Zaraz tam będziemy.",
+    "en": "We will be there soon.",
+    "zh": "我们马上就到。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Proszę powtórzyć nazwę ulicy.",
+    "en": "Please repeat the street name.",
+    "zh": "请再说一遍街名。"
+   },
+   {
+    "pl": "Płaci {m:pan|f:pani} kartą czy gotówką?",
+    "en": "Are you paying by card or cash?",
+    "zh": "您刷卡还是付现金？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u04-lost-on-tram",
+  "beats": [
+   {
+    "goal": "Ask friend what landmarks they see",
+    "lines": [
+     {
+      "pl": "Co widzisz? Jest tam jakiś sklep albo przystanek?",
+      "en": "What do you see? Is there a shop or stop there?",
+      "zh": "你看到什么了？那里有商店或车站吗？"
+     },
+     {
+      "pl": "Gdzie jesteś? Jaki widzisz budynek?",
+      "en": "Where are you? What building do you see?",
+      "zh": "你在哪儿？能看到什么建筑？"
+     }
+    ],
+    "expect": [
+     "widzę",
+     "jestem",
+     "przystanku",
+     "kościół",
+     "sklep"
+    ]
+   },
+   {
+    "goal": "Ask which tram line they boarded",
+    "lines": [
+     {
+      "pl": "Czekaj, w jakim tramwaju jesteś? Jaki numer?",
+      "en": "Wait, what tram are you on? What number?",
+      "zh": "等等，你在哪一路电车上？几路？"
+     },
+     {
+      "pl": "To zły kierunek! Jaki to numer tramwaju?",
+      "en": "That's the wrong direction! What tram number is that?",
+      "zh": "那是反方向！这是几路电车站？"
+     }
+    ],
+    "expect": [
+     "złym",
+     "tramwaju",
+     "numer",
+     "chyba",
+     "cztery"
+    ]
+   },
+   {
+    "goal": "Give directions on where to get off",
+    "lines": [
+     {
+      "pl": "Wysiądź na następnym przystanku. Przejdź na drugą stronę.",
+      "en": "Get off at the next stop. Cross to the other side.",
+      "zh": "在下一站下车。过马路到对面去。"
+     },
+     {
+      "pl": "Musisz szybko wysiąść! Wróć tramwajem numer trzy.",
+      "en": "You have to get off quickly! Come back on tram number three.",
+      "zh": "你得赶紧下车！换乘3路电车回来。"
+     }
+    ],
+    "expect": [
+     "wysiąść",
+     "gdzie",
+     "mam",
+     "dobrze",
+     "zaraz"
+    ]
+   },
+   {
+    "goal": "Ask when friend will arrive",
+    "lines": [
+     {
+      "pl": "Okej, a kiedy będziesz w kawiarni?",
+      "en": "Okay, and when will you be at the café?",
+      "zh": "好的，那你什么时候到咖啡馆？"
+     },
+     {
+      "pl": "Za ile minut możesz tu dojechać?",
+      "en": "In how many minutes can you get here?",
+      "zh": "你大概几分钟后能到？"
+     }
+    ],
+    "expect": [
+     "będę",
+     "za",
+     "dziesięć",
+     "minut",
+     "pięć"
+    ]
+   },
+   {
+    "goal": "Agree to wait and say goodbye",
+    "lines": [
+     {
+      "pl": "Dobra, czekam! Do zobaczenia za chwilę.",
+      "en": "All right, I'm waiting! See you in a moment.",
+      "zh": "好的，我等你！一会儿见。"
+     },
+     {
+      "pl": "Super, stolik czeka. Do zobaczenia!",
+      "en": "Great, table is waiting. See you!",
+      "zh": "太好了，桌子留着呢。回头见！"
+     }
+    ],
+    "expect": [
+     "zobaczenia",
+     "pa",
+     "zaraz",
+     "będę",
+     "cześć"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Halo? Co widzisz? Jest tam jakiś sklep albo przystanek?",
+    "en": "Hello? What do you see? Is there a shop or stop there?",
+    "zh": "喂？你看到什么了？那里有商店或电车站吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Jestem na przystanku. Widzę park i stary kościół.",
+    "en": "I'm at a stop. I see a park and an old church.",
+    "zh": "我在车站。我看到一个公园和一座老教堂。"
+   },
+   {
+    "s": "C",
+    "pl": "O nie, to nie ta trasa. Jaki masz numer?",
+    "en": "Oh no, that's not the route. What number do you have?",
+    "zh": "哎呀，这不是那条线。你是几路车？"
+   },
+   {
+    "s": "L",
+    "pl": "Chyba jestem w złym tramwaju. Gdzie mam wysiąść?",
+    "en": "I think I'm on the wrong tram. Where should I get off?",
+    "zh": "我好像坐错电车了。我该在哪儿下车？"
+   },
+   {
+    "s": "C",
+    "pl": "Wysiądź teraz. Weź tramwaj numer cztery w drugą stronę.",
+    "en": "Get off now. Take tram number four the other way.",
+    "zh": "现在就下车。坐反方向的4路电车。"
+   },
+   {
+    "s": "L",
+    "pl": "Dobrze, już wysiadam. Widzę tramwaj numer cztery.",
+    "en": "Okay, I'm getting off now. I see tram number four.",
+    "zh": "好的，我现在就下。我看到4路车了。"
+   },
+   {
+    "s": "C",
+    "pl": "Świetnie! Kiedy będziesz na miejscu?",
+    "en": "Great! When will you be here?",
+    "zh": "太棒了！你什么时候能到？"
+   },
+   {
+    "s": "L",
+    "pl": "Będę za dziesięć minut.",
+    "en": "I will be there in ten minutes.",
+    "zh": "我十分钟后到。"
+   },
+   {
+    "s": "C",
+    "pl": "Dobra, czekam! Do zobaczenia za chwilę.",
+    "en": "All right, I'm waiting! See you in a moment.",
+    "zh": "好的，我等你！一会儿见。"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Ojej!",
+    "en": "Oh dear!",
+    "zh": "天呐！"
+   },
+   {
+    "pl": "Spokojnie.",
+    "en": "Calm down.",
+    "zh": "别急。"
+   },
+   {
+    "pl": "Aha, rozumiem.",
+    "en": "Aha, I understand.",
+    "zh": "啊，明白了。"
+   },
+   {
+    "pl": "W porządku.",
+    "en": "All right.",
+    "zh": "没事。"
+   },
+   {
+    "pl": "To proste.",
+    "en": "That's simple.",
+    "zh": "这很简单。"
+   },
+   {
+    "pl": "Super.",
+    "en": "Great.",
+    "zh": "太好了。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Co mówisz? Słabo cię słyszę.",
+    "en": "What are you saying? I hear you poorly.",
+    "zh": "你说什么？我听不太清。"
+   },
+   {
+    "pl": "Jesteś w tramwaju czy na przystanku?",
+    "en": "Are you on the tram or at the stop?",
+    "zh": "你是在电车里还是在站台上？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u05-flat-viewing",
+  "beats": [
+   {
+    "goal": "Show the living room and ask opinion",
+    "lines": [
+     {
+      "pl": "To jest salon. Ładny, prawda?",
+      "en": "This is the living room. Nice, isn't it?",
+      "zh": "这是客厅。挺漂亮的，对吧？"
+     },
+     {
+      "pl": "Oto duży salon. Jak {m:panu|f:pani} się podoba?",
+      "en": "Here is a large living room. How do you like it?",
+      "zh": "这是大客厅。您觉得怎么样？"
+     }
+    ],
+    "expect": [
+     "ile",
+     "pokoi",
+     "jest",
+     "ładny",
+     "podoba"
+    ]
+   },
+   {
+    "goal": "Show the kitchen and mention rooms",
+    "lines": [
+     {
+      "pl": "Są dwa pokoje i kuchnia. Chodźmy dalej!",
+      "en": "There are two rooms and a kitchen. Let's go further!",
+      "zh": "有两间房和一个厨房。咱们往里走！"
+     },
+     {
+      "pl": "Mamy salon i sypialnię. Chce {m:pan|f:pani} zapytać o cenę?",
+      "en": "We have a living room and bedroom. Do you want to ask about price?",
+      "zh": "有一间客厅和一间卧室。您想问价格吗？"
+     }
+    ],
+    "expect": [
+     "kosztuje",
+     "ile",
+     "opłaty",
+     "miesięcznie",
+     "czynsz"
+    ]
+   },
+   {
+    "goal": "Mention broken washing machine in bathroom",
+    "lines": [
+     {
+      "pl": "Czynsz to dwa tysiące. Ale ta pralka nie działa.",
+      "en": "The rent is two thousand. But this washing machine doesn't work.",
+      "zh": "租金是两千。但是这台洗衣机坏了。"
+     },
+     {
+      "pl": "Opłaty są osobno. Niestety, pralka jest teraz zepsuta.",
+      "en": "Bills are separate. Unfortunately, the washer is broken now.",
+      "zh": "水电杂费另算。很遗憾，洗衣机现在坏了。"
+     }
+    ],
+    "expect": [
+     "kiedy",
+     "naprawa",
+     "pralka",
+     "będzie",
+     "działać"
+    ]
+   },
+   {
+    "goal": "Promise repair date and ask impressions",
+    "lines": [
+     {
+      "pl": "Hydraulik będzie w piątek. Co {m:pan myśli|f:pani myśli} o mieszkaniu?",
+      "en": "The plumber will be here on Friday. What do you think of the flat?",
+      "zh": "水管工周五会来。您觉得这套房子怎么样？"
+     },
+     {
+      "pl": "Naprawimy to w weekend. Podoba się {m:panu|f:pani} tutaj?",
+      "en": "We will fix it over the weekend. Do you like it here?",
+      "zh": "我们周末修好。您喜欢这里吗？"
+     }
+    ],
+    "expect": [
+     "podoba",
+     "mała",
+     "mi",
+     "ale",
+     "kuchnia"
+    ]
+   },
+   {
+    "goal": "Wrap up and offer time to think",
+    "lines": [
+     {
+      "pl": "Proszę się zastanowić i zadzwonić. Do widzenia!",
+      "en": "Please think it over and call. Goodbye!",
+      "zh": "请考虑一下并给我打电话。再见！"
+     },
+     {
+      "pl": "Czekam na telefon do jutra. Do widzenia!",
+      "en": "I'll wait for a phone call until tomorrow. Goodbye!",
+      "zh": "我等到明天您的电话。再见！"
+     }
+    ],
+    "expect": [
+     "dziękuję",
+     "widzenia",
+     "zadzwonię",
+     "zastanowię",
+     "miłego"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Dzień dobry! To jest salon. Ładny, prawda?",
+    "en": "Good morning! This is the living room. Nice, isn't it?",
+    "zh": "早上好！这是客厅。挺好看的吧？"
+   },
+   {
+    "s": "L",
+    "pl": "Dzień dobry. Tak, ładny. Ile jest pokoi?",
+    "en": "Good morning. Yes, nice. How many rooms are there?",
+    "zh": "早上好。是的，很漂亮。一共有几间房间？"
+   },
+   {
+    "s": "C",
+    "pl": "Są dwa pokoje. Tu jest sypialnia.",
+    "en": "There are two rooms. Here is the bedroom.",
+    "zh": "有两间房。这里是卧室。"
+   },
+   {
+    "s": "L",
+    "pl": "Ile kosztuje miesięcznie? Czy opłaty są w cenie?",
+    "en": "How much does it cost monthly? Are bills included in the price?",
+    "zh": "每月租金多少？杂费包含在内吗？"
+   },
+   {
+    "s": "C",
+    "pl": "Czynsz to dwa tysiące. Ale pralka nie działa.",
+    "en": "The rent is two thousand. But the washing machine doesn't work.",
+    "zh": "租金是两千。但是洗衣机不转了。"
+   },
+   {
+    "s": "L",
+    "pl": "Rozumiem. Kiedy pralka będzie działać?",
+    "en": "I understand. When will the washer work?",
+    "zh": "明白了。洗衣机什么时候能修好？"
+   },
+   {
+    "s": "C",
+    "pl": "W piątek będzie nowa pralka.",
+    "en": "There will be a new washing machine on Friday.",
+    "zh": "周五就会换新洗衣机。"
+   },
+   {
+    "s": "L",
+    "pl": "Kuchnia jest mała, ale mieszkanie podoba mi się.",
+    "en": "The kitchen is small, but I like the flat.",
+    "zh": "厨房有点小，但我挺喜欢这套公寓的。"
+   },
+   {
+    "s": "C",
+    "pl": "Proszę się zastanowić i zadzwonić. Do widzenia!",
+    "en": "Please think it over and call. Goodbye!",
+    "zh": "请考虑一下并打电话给我。再见！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Oczywiście, kochanie.",
+    "en": "Of course, dear.",
+    "zh": "当然了，亲爱的。"
+   },
+   {
+    "pl": "Bardzo ładne, prawda?",
+    "en": "Very nice, right?",
+    "zh": "很好看，对吧？"
+   },
+   {
+    "pl": "To prawda.",
+    "en": "That's true.",
+    "zh": "确实如此。"
+   },
+   {
+    "pl": "Rozumiem.",
+    "en": "I understand.",
+    "zh": "我明白。"
+   },
+   {
+    "pl": "Świetnie.",
+    "en": "Great.",
+    "zh": "太好了。"
+   },
+   {
+    "pl": "Wszystko jasne.",
+    "en": "Everything clear.",
+    "zh": "全都很清楚。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Nie dosłyszałam, kochanie. Co mówisz?",
+    "en": "I didn't hear clearly, dear. What are you saying?",
+    "zh": "我没听清，亲爱的。你说什么？"
+   },
+   {
+    "pl": "Pyta {m:pan|f:pani} o czynsz czy o pralkę?",
+    "en": "Are you asking about rent or the washer?",
+    "zh": "您是问租金还是问洗衣机？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u05-my-room",
+  "beats": [
+   {
+    "goal": "Ask if friend has a big bed",
+    "lines": [
+     {
+      "pl": "Masz duże łóżko?",
+      "en": "Do you have a big bed?",
+      "zh": "你的床大吗？"
+     },
+     {
+      "pl": "Pokaż łóżko! Jest duże czy małe?",
+      "en": "Show the bed! Is it big or small?",
+      "zh": "让我看看床！是大床还是小床？"
+     }
+    ],
+    "expect": [
+     "mam",
+     "jest",
+     "biurko",
+     "okno",
+     "krzesło"
+    ]
+   },
+   {
+    "goal": "Comment that the room looks empty",
+    "lines": [
+     {
+      "pl": "Ale twój pokój wygląda pusto! Czegoś brakuje?",
+      "en": "But your room looks empty! Is something missing?",
+      "zh": "可是你的房间看起来好空啊！缺什么东西吗？"
+     },
+     {
+      "pl": "Pusto tu! Nie masz jeszcze mebli?",
+      "en": "It's empty here! Don't you have furniture yet?",
+      "zh": "这里好空！你还没有家具吗？"
+     }
+    ],
+    "expect": [
+     "nie",
+     "mam",
+     "brakuje",
+     "szafy",
+     "lampy"
+    ]
+   },
+   {
+    "goal": "Ask what items friend plans to buy",
+    "lines": [
+     {
+      "pl": "No tak. Co chcesz kupić najpierw?",
+      "en": "Well yes. What do you want to buy first?",
+      "zh": "可不是嘛。你想先买什么？"
+     },
+     {
+      "pl": "A co musisz szybko dokupić do pokoju?",
+      "en": "And what do you need to buy quickly for the room?",
+      "zh": "那你房间急需添置些什么？"
+     }
+    ],
+    "expect": [
+     "chcę",
+     "kupić",
+     "lampę",
+     "szafę",
+     "dywan"
+    ]
+   },
+   {
+    "goal": "Encourage friend to ask about her room",
+    "lines": [
+     {
+      "pl": "Dobra lampa to podstawa. A mój pokój znasz?",
+      "en": "A good lamp is essential. And do you know my room?",
+      "zh": "好台灯是必需的。那你了解我的房间吗？"
+     },
+     {
+      "pl": "Fajny pomysł! Chcesz zobaczyć mój pokój?",
+      "en": "Cool idea! Do you want to see my room?",
+      "zh": "好主意！你想看我的房间吗？"
+     }
+    ],
+    "expect": [
+     "twój",
+     "pokój",
+     "masz",
+     "jaki",
+     "jest"
+    ]
+   },
+   {
+    "goal": "Compliment room and say goodbye",
+    "lines": [
+     {
+      "pl": "Fajny pokój! Dobra, pa!",
+      "en": "Cool room! Okay, bye!",
+      "zh": "房间很酷！好啦，拜拜！"
+     },
+     {
+      "pl": "Bardzo przytulnie! Muszę lecieć, pa!",
+      "en": "Very cozy! I have to run, bye!",
+      "zh": "特别温馨！我得走了，拜拜！"
+     }
+    ],
+    "expect": [
+     "pa",
+     "cześć",
+     "dzięki",
+     "razie",
+     "pa pa"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Hej! Pokaż pokój. Masz duże łóżko?",
+    "en": "Hey! Show the room. Do you have a big bed?",
+    "zh": "嗨！看下房间。你有大床吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Tak, mam łóżko. Jest tu biurko i krzesło.",
+    "en": "Yes, I have a bed. There is a desk and a chair here.",
+    "zh": "有，我有床。这里有一张书桌和一把椅子。"
+   },
+   {
+    "s": "C",
+    "pl": "Twój pokój wygląda pusto. Czego brakuje?",
+    "en": "Your room looks empty. What is missing?",
+    "zh": "你的房间看起来很空。缺什么？"
+   },
+   {
+    "s": "L",
+    "pl": "Nie mam szafy. Pokój jest mały, ale ładny.",
+    "en": "I don't have a wardrobe. The room is small, but nice.",
+    "zh": "我没有衣柜。房间虽小，但挺好看的。"
+   },
+   {
+    "s": "C",
+    "pl": "Rozumiem. Co chcesz jeszcze kupić?",
+    "en": "I understand. What else do you want to buy?",
+    "zh": "明白。你还想买什么？"
+   },
+   {
+    "s": "L",
+    "pl": "Chcę kupić lampę i mały dywan.",
+    "en": "I want to buy a lamp and a small rug.",
+    "zh": "我想买一盏灯和一块小地毯。"
+   },
+   {
+    "s": "C",
+    "pl": "Super! Mój pokój jest pełen książek.",
+    "en": "Great! My room is full of books.",
+    "zh": "太棒了！我的房间堆满了书。"
+   },
+   {
+    "s": "L",
+    "pl": "A masz duży pokój?",
+    "en": "And do you have a big room?",
+    "zh": "那你房间大吗？"
+   },
+   {
+    "s": "C",
+    "pl": "Fajny pokój! Dobra, pa!",
+    "en": "Cool room! Okay, bye!",
+    "zh": "挺棒的房间！好啦，拜拜！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Naprawdę?",
+    "en": "Really?",
+    "zh": "真的吗？"
+   },
+   {
+    "pl": "Ekstra!",
+    "en": "Awesome!",
+    "zh": "太棒了！"
+   },
+   {
+    "pl": "No jasne.",
+    "en": "Well, sure.",
+    "zh": "当然啦。"
+   },
+   {
+    "pl": "Bardzo ładnie.",
+    "en": "Very pretty.",
+    "zh": "真好看。"
+   },
+   {
+    "pl": "Widzę!",
+    "en": "I see!",
+    "zh": "我看到了！"
+   },
+   {
+    "pl": "Ciekawe.",
+    "en": "Interesting.",
+    "zh": "有意思。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Pokaż jeszcze raz, obraz się zacina.",
+    "en": "Show it again, video is lagging.",
+    "zh": "再照一下，画面卡住了。"
+   },
+   {
+    "pl": "Mówisz o szafie czy o biurku?",
+    "en": "Are you talking about wardrobe or desk?",
+    "zh": "你说的是衣柜还是书桌？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u05-morning-run",
+  "beats": [
+   {
+    "goal": "Ask what time friend gets up",
+    "lines": [
+     {
+      "pl": "O której wstajesz?",
+      "en": "What time do you get up?",
+      "zh": "你几点起床？"
+     },
+     {
+      "pl": "Cześć! O której zwykle wstajesz rano?",
+      "en": "Hi! What time do you usually get up in the morning?",
+      "zh": "嗨！你早晨通常几点起？"
+     }
+    ],
+    "expect": [
+     "wstaję",
+     "siódmej",
+     "ósmej",
+     "rano",
+     "godzinie"
+    ]
+   },
+   {
+    "goal": "Ask about friend morning routine",
+    "lines": [
+     {
+      "pl": "Co robisz rano przed pracą?",
+      "en": "What do you do in the morning before work?",
+      "zh": "上班前你早上都做些什么？"
+     },
+     {
+      "pl": "Masz czas na śniadanie i kawę?",
+      "en": "Do you have time for breakfast and coffee?",
+      "zh": "你有时间吃早饭喝咖啡吗？"
+     }
+    ],
+    "expect": [
+     "piję",
+     "kawę",
+     "jem",
+     "śniadanie",
+     "pracuję"
+    ]
+   },
+   {
+    "goal": "Propose early running time at six",
+    "lines": [
+     {
+      "pl": "Super. Pobiegajmy jutro o szóstej rano!",
+      "en": "Great. Let's run tomorrow at six in the morning!",
+      "zh": "太好了。咱们明天早上六点跑步吧！"
+     },
+     {
+      "pl": "To co, biegamy o szóstej rano?",
+      "en": "So, are we running at six in the morning?",
+      "zh": "怎么样，早上六点跑？"
+     }
+    ],
+    "expect": [
+     "wcześnie",
+     "za",
+     "ósmej",
+     "siódmej",
+     "może"
+    ]
+   },
+   {
+    "goal": "Agree to friend proposed later time",
+    "lines": [
+     {
+      "pl": "Okej, ósma może być. Gdzie biegniemy?",
+      "en": "Okay, eight works. Where do we run?",
+      "zh": "行，八点可以。咱们去哪儿跑？"
+     },
+     {
+      "pl": "Dobra, niech będzie ósma rano. Park?",
+      "en": "All right, let it be eight in the morning. Park?",
+      "zh": "好吧，那就早上八点。去公园吗？"
+     }
+    ],
+    "expect": [
+     "park",
+     "parku",
+     "dobrze",
+     "pasuje",
+     "super"
+    ]
+   },
+   {
+    "goal": "Confirm plans and say goodbye",
+    "lines": [
+     {
+      "pl": "Świetnie, do jutra!",
+      "en": "Great, see you tomorrow!",
+      "zh": "太棒了，明天见！"
+     },
+     {
+      "pl": "Umowa stoi! Do jutra o ósmej.",
+      "en": "Deal! See you tomorrow at eight.",
+      "zh": "说定了！明天八点见。"
+     }
+    ],
+    "expect": [
+     "jutra",
+     "cześć",
+     "dzięki",
+     "do",
+     "widzenia"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Cześć! Biegamy jutro rano? O której wstajesz?",
+    "en": "Hi! Are we running tomorrow morning? What time do you get up?",
+    "zh": "嗨！明天早上跑步吗？你几点起床？"
+   },
+   {
+    "s": "L",
+    "pl": "Cześć! Wstaję o siódmej rano.",
+    "en": "Hi! I get up at seven in the morning.",
+    "zh": "嗨！我早上七点起床。"
+   },
+   {
+    "s": "C",
+    "pl": "A co zwykle robisz rano?",
+    "en": "And what do you usually do in the morning?",
+    "zh": "那你早上一般干什么？"
+   },
+   {
+    "s": "L",
+    "pl": "Rano piję kawę i jem małe śniadanie.",
+    "en": "In the morning I drink coffee and eat a small breakfast.",
+    "zh": "早晨我喝咖啡，吃点简单的早餐。"
+   },
+   {
+    "s": "C",
+    "pl": "To biegamy jutro o szóstej rano?",
+    "en": "So are we running tomorrow at six in the morning?",
+    "zh": "那咱们明天早上六点跑？"
+   },
+   {
+    "s": "L",
+    "pl": "Za wcześnie! Może o ósmej?",
+    "en": "Too early! Maybe at eight?",
+    "zh": "太早了！八点行吗？"
+   },
+   {
+    "s": "C",
+    "pl": "Dobra, ósma rano w parku pasuje?",
+    "en": "All right, eight in the morning in the park okay?",
+    "zh": "行，早上八点在公园可以吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Tak, super. Idę do pracy o dziewiątej.",
+    "en": "Yes, super. I go to work at nine.",
+    "zh": "可以，太好了。我九点去上班。"
+   },
+   {
+    "s": "C",
+    "pl": "Świetnie, do jutra!",
+    "en": "Great, see you tomorrow!",
+    "zh": "太棒了，明天见！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Super!",
+    "en": "Super!",
+    "zh": "太棒了！"
+   },
+   {
+    "pl": "Rozumiem.",
+    "en": "I understand.",
+    "zh": "明白了。"
+   },
+   {
+    "pl": "Jasne.",
+    "en": "Sure.",
+    "zh": "当然。"
+   },
+   {
+    "pl": "W porządku.",
+    "en": "All right.",
+    "zh": "好的。"
+   },
+   {
+    "pl": "Nie ma sprawy.",
+    "en": "No problem.",
+    "zh": "没问题。"
+   },
+   {
+    "pl": "Dobra opcja.",
+    "en": "Good option.",
+    "zh": "挺好的选择。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Nie dosłyszałem. O której godzinie?",
+    "en": "I didn't hear. At what time?",
+    "zh": "我没听清。几点来着？"
+   },
+   {
+    "pl": "Wolisz biegać o siódmej czy ósmej?",
+    "en": "Do you prefer running at seven or eight?",
+    "zh": "你更想七点还是八点跑？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u05-no-hot-water",
+  "beats": [
+   {
+    "goal": "Ask how he can help neighbour",
+    "lines": [
+     {
+      "pl": "Mogę jakoś pomóc?",
+      "en": "Can I help somehow?",
+      "zh": "我能帮上什么忙吗？"
+     },
+     {
+      "pl": "Dzień dobry. Co się stało?",
+      "en": "Good morning. What happened?",
+      "zh": "早上好。发生什么事了？"
+     }
+    ],
+    "expect": [
+     "nie",
+     "ma",
+     "wody",
+     "ciepłej",
+     "działa"
+    ]
+   },
+   {
+    "goal": "Explain whole building has no hot water",
+    "lines": [
+     {
+      "pl": "W całym bloku jest awaria. U mnie też zimno.",
+      "en": "There's an outage in the whole block. Cold at my place too.",
+      "zh": "整栋楼都出故障了。我家也是冷水。"
+     },
+     {
+      "pl": "To problem w całym budynku. Nikt nie ma ciepłej wody.",
+      "en": "It's a problem in the whole building. Nobody has hot water.",
+      "zh": "这是整栋楼的问题。大家都没有热水。"
+     }
+    ],
+    "expect": [
+     "zrobić",
+     "mam",
+     "zadzwonić",
+     "kogo",
+     "do"
+    ]
+   },
+   {
+    "goal": "Advise calling building management",
+    "lines": [
+     {
+      "pl": "Trzeba zadzwonić do administracji. Mam ich numer.",
+      "en": "You need to call the management. I have their number.",
+      "zh": "得给物业打电话。我有他们的号码。"
+     },
+     {
+      "pl": "Proszę zgłosić to administracji. Naprawią rury.",
+      "en": "Please report it to the management. They will fix the pipes.",
+      "zh": "请向物业报修。他们会修理水管。"
+     }
+    ],
+    "expect": [
+     "numer",
+     "dziękuję",
+     "proszę",
+     "pomoc",
+     "bardzo"
+    ]
+   },
+   {
+    "goal": "Provide management office phone number",
+    "lines": [
+     {
+      "pl": "Numer to: dwanaście, trzysta, czterdzieści. Proszę zapisać.",
+      "en": "The number is: twelve, three hundred, forty. Please write it down.",
+      "zh": "电话号码是：12 300 40。请记一下。"
+     },
+     {
+      "pl": "Oto numer do biura. Odbierają do szesnastej.",
+      "en": "Here is the office number. They answer until four.",
+      "zh": "这是办公室电话。他们四点前有人接。"
+     }
+    ],
+    "expect": [
+     "dziękuję",
+     "dzięki",
+     "panu",
+     "pomoc",
+     "zadzwonię"
+    ]
+   },
+   {
+    "goal": "Advise calling management and say goodbye",
+    "lines": [
+     {
+      "pl": "Proszę dzwonić do administracji. Powodzenia!",
+      "en": "Please call the administration. Good luck!",
+      "zh": "请打给物业吧。祝一切顺利！"
+     },
+     {
+      "pl": "Nie ma za co. Do widzenia!",
+      "en": "You are welcome. Goodbye!",
+      "zh": "不用谢。再见！"
+     }
+    ],
+    "expect": [
+     "widzenia",
+     "dziękuję",
+     "dnia",
+     "miłego",
+     "panu"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Dzień dobry! Coś się stało? Mogę jakoś pomóc?",
+    "en": "Good morning! Did something happen? Can I help somehow?",
+    "zh": "早上好！发生什么事了吗？我能帮上忙吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Dzień dobry. W moim mieszkaniu nie ma ciepłej wody.",
+    "en": "Good morning. There is no hot water in my flat.",
+    "zh": "早上好。我房间里没有热水。"
+   },
+   {
+    "s": "C",
+    "pl": "W całym bloku jest awaria. U mnie też zimno.",
+    "en": "There is a breakdown in the whole block. Cold at my place too.",
+    "zh": "整栋楼都出故障了。我家也只有冷水。"
+   },
+   {
+    "s": "L",
+    "pl": "Ojej! Co mam zrobić? Do kogo zadzwonić?",
+    "en": "Oh dear! What should I do? Who should I call?",
+    "zh": "天呐！我该怎么办？该给谁打电话？"
+   },
+   {
+    "s": "C",
+    "pl": "Trzeba dzwonić do administracji.",
+    "en": "You have to call the management.",
+    "zh": "得给物业办公室打电话。"
+   },
+   {
+    "s": "L",
+    "pl": "Ma pan numer telefonu do administracji?",
+    "en": "Do you have the phone number to the management?",
+    "zh": "您有物业的电话号码吗？"
+   },
+   {
+    "s": "C",
+    "pl": "Tak. Numer to dwanaście, trzysta, czterdzieści.",
+    "en": "Yes. The number is twelve, three hundred, forty.",
+    "zh": "有的。号码是 12 300 40。"
+   },
+   {
+    "s": "L",
+    "pl": "Bardzo dziękuję panu za pomoc.",
+    "en": "Thank you very much for your help.",
+    "zh": "非常感谢您的帮助。"
+   },
+   {
+    "s": "C",
+    "pl": "Proszę dzwonić do administracji. Powodzenia!",
+    "en": "Please call the administration. Good luck!",
+    "zh": "快打给物业吧。祝顺利！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Rozumiem.",
+    "en": "I understand.",
+    "zh": "明白。"
+   },
+   {
+    "pl": "Ojej, fatalnie.",
+    "en": "Oh dear, terrible.",
+    "zh": "哎呀，太糟了。"
+   },
+   {
+    "pl": "Znam ten problem.",
+    "en": "I know this problem.",
+    "zh": "我知道这毛病。"
+   },
+   {
+    "pl": "W porządku.",
+    "en": "All right.",
+    "zh": "好的。"
+   },
+   {
+    "pl": "Oczywiście.",
+    "en": "Of course.",
+    "zh": "当然。"
+   },
+   {
+    "pl": "Tak, to prawda.",
+    "en": "Yes, that's true.",
+    "zh": "是的，确实如此。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Słucham? Co nie działa w mieszkaniu?",
+    "en": "Pardon? What doesn't work in the flat?",
+    "zh": "您说什么？房间里什么坏了？"
+   },
+   {
+    "pl": "Chodzi o wodę czy o ogrzewanie?",
+    "en": "Is it about water or heating?",
+    "zh": "是水的问题还是暖气的问题？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u06-cinema-plan",
+  "beats": [
+   {
+    "goal": "Ask when friend is free for cinema",
+    "lines": [
+     {
+      "pl": "Kiedy masz czas?",
+      "en": "When do you have time?",
+      "zh": "你什么时候有空？"
+     },
+     {
+      "pl": "W który dzień masz wolny wieczór?",
+      "en": "Which day do you have a free evening?",
+      "zh": "你哪天晚上有空？"
+     }
+    ],
+    "expect": [
+     "piątek",
+     "sobotę",
+     "mam",
+     "czas",
+     "może"
+    ]
+   },
+   {
+    "goal": "Explain she is busy on Friday",
+    "lines": [
+     {
+      "pl": "W piątek niestety pracuję. A sobota lub niedziela?",
+      "en": "On Friday unfortunately I work. What about Saturday or Sunday?",
+      "zh": "周五我很遗憾要加班。周六或周日行吗？"
+     },
+     {
+      "pl": "W piątek nie mogę, mam kurs. Może sobota?",
+      "en": "Friday I can't, I have a course. Maybe Saturday?",
+      "zh": "周五我走不开，得上课。周六怎么样？"
+     }
+    ],
+    "expect": [
+     "sobotę",
+     "niedzielę",
+     "może",
+     "mogę",
+     "dobrze"
+    ]
+   },
+   {
+    "goal": "Agree on day and ask about time",
+    "lines": [
+     {
+      "pl": "Sobota jest super. O której godzinie?",
+      "en": "Saturday is great. At what time?",
+      "zh": "周六太棒了。几点呢？"
+     },
+     {
+      "pl": "Świetnie! O której pasuje ci seans?",
+      "en": "Great! What time does the screening suit you?",
+      "zh": "太好了！哪场电影时间适合你？"
+     }
+    ],
+    "expect": [
+     "siódmej",
+     "ósmej",
+     "wieczorem",
+     "o",
+     "może"
+    ]
+   },
+   {
+    "goal": "Confirm time and ask meeting location",
+    "lines": [
+     {
+      "pl": "Siódma jest okej. Gdzie się spotkamy?",
+      "en": "Seven is okay. Where shall we meet?",
+      "zh": "七点可以。我们在哪儿碰头？"
+     },
+     {
+      "pl": "Dobra, godzina dziewiętnasta. Gdzie czekasz?",
+      "en": "All right, seven PM. Where are you waiting?",
+      "zh": "行，晚上七点。你在哪儿等？"
+     }
+    ],
+    "expect": [
+     "przed",
+     "kinem",
+     "spotkajmy",
+     "się",
+     "kawiarni"
+    ]
+   },
+   {
+    "goal": "Confirm cinema meeting and say goodbye",
+    "lines": [
+     {
+      "pl": "Super, do zobaczenia w kinie!",
+      "en": "Super, see you at the cinema!",
+      "zh": "太棒了，电影院见！"
+     },
+     {
+      "pl": "Ekstra, widzimy się przed wejściem! Pa!",
+      "en": "Awesome, see you in front of the entrance! Bye!",
+      "zh": "太棒了，门口见！拜拜！"
+     }
+    ],
+    "expect": [
+     "zobaczenia",
+     "do",
+     "cześć",
+     "pa",
+     "super"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Hej! Idziemy w tym tygodniu do kina? Kiedy masz czas?",
+    "en": "Hey! Are we going to the cinema this week? When do you have time?",
+    "zh": "嗨！这周去电影院吗？你什么时候有空？"
+   },
+   {
+    "s": "L",
+    "pl": "Chętnie! W piątek mam czas.",
+    "en": "Gladly! I have time on Friday.",
+    "zh": "好呀！我周五有空。"
+   },
+   {
+    "s": "C",
+    "pl": "W piątek nie mogę. Może w sobotę?",
+    "en": "Friday I can't. Maybe on Saturday?",
+    "zh": "周五我不行。周六可以吗？"
+   },
+   {
+    "s": "L",
+    "pl": "W sobotę też mogę. O której?",
+    "en": "Saturday works for me too. At what time?",
+    "zh": "周六我也行。几点？"
+   },
+   {
+    "s": "C",
+    "pl": "Może o siódmej wieczorem?",
+    "en": "Maybe at seven in the evening?",
+    "zh": "晚上七点怎么样？"
+   },
+   {
+    "s": "L",
+    "pl": "Tak, idealnie. Gdzie się spotkamy?",
+    "en": "Yes, perfect. Where shall we meet?",
+    "zh": "可以，很合适。我们在哪儿见？"
+   },
+   {
+    "s": "C",
+    "pl": "Przed kinem Pod Baranami pasuje?",
+    "en": "In front of Pod Baranami cinema okay?",
+    "zh": "在波德巴拉纳米电影院门前行吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Tak. Spotkajmy się przed kinem.",
+    "en": "Yes. Let's meet in front of the cinema.",
+    "zh": "行。我们在电影院门前见。"
+   },
+   {
+    "s": "C",
+    "pl": "Super, do zobaczenia w kinie!",
+    "en": "Super, see you at the cinema!",
+    "zh": "太棒了，电影院见！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Świetnie!",
+    "en": "Great!",
+    "zh": "太棒了！"
+   },
+   {
+    "pl": "Pasuje mi.",
+    "en": "Suits me.",
+    "zh": "适合我。"
+   },
+   {
+    "pl": "Dobra.",
+    "en": "Good.",
+    "zh": "好。"
+   },
+   {
+    "pl": "Ekstra pomysł.",
+    "en": "Awesome idea.",
+    "zh": "绝妙的主意。"
+   },
+   {
+    "pl": "Jasne.",
+    "en": "Sure.",
+    "zh": "当然。"
+   },
+   {
+    "pl": "Nie ma sprawy.",
+    "en": "No problem.",
+    "zh": "没问题。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Nie usłyszałam. Piątek czy sobota?",
+    "en": "I didn't hear. Friday or Saturday?",
+    "zh": "我没听清。是周五还是周六？"
+   },
+   {
+    "pl": "O której godzinie? Powtórz, proszę.",
+    "en": "At what time? Repeat, please.",
+    "zh": "几点来着？请再说一次。"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u06-weekend-mountains",
+  "beats": [
+   {
+    "goal": "Ask what friend usually does weekends",
+    "lines": [
+     {
+      "pl": "Co zwykle robisz w weekend?",
+      "en": "What do you usually do at weekends?",
+      "zh": "你周末一般都做些什么？"
+     },
+     {
+      "pl": "Cześć! Jak spędzasz wolne weekendy?",
+      "en": "Hi! How do you spend free weekends?",
+      "zh": "嗨！你平时周末怎么过？"
+     }
+    ],
+    "expect": [
+     "odpoczywam",
+     "weekend",
+     "zwykle",
+     "domu",
+     "chętnie"
+    ]
+   },
+   {
+    "goal": "Invite to mountains and check availability",
+    "lines": [
+     {
+      "pl": "Jedziemy w sobotę w góry? Możesz?",
+      "en": "Are we going to the mountains on Saturday? Can you?",
+      "zh": "周六去爬山吗？你能去吗？"
+     },
+     {
+      "pl": "Mam wolne auto. Chcesz jechać ze mną?",
+      "en": "I have free car space. Want to come with me?",
+      "zh": "我车上有空位。想和我一起去吗？"
+     }
+    ],
+    "expect": [
+     "chętnie",
+     "mogę",
+     "niestety",
+     "super",
+     "jechać"
+    ]
+   },
+   {
+    "goal": "Warn about rain forecast and adjust",
+    "lines": [
+     {
+      "pl": "Prognoza mówi, że będzie padać. Co robimy?",
+      "en": "Forecast says it will rain. What do we do?",
+      "zh": "天气预报说要下雨。怎么办？"
+     },
+     {
+      "pl": "W górach ma lać deszcz. Masz inny plan?",
+      "en": "It's supposed to pour rain in mountains. Other plan?",
+      "zh": "山里据说有大暴雨。你有别的打算吗？"
+     }
+    ],
+    "expect": [
+     "padać",
+     "będzie",
+     "kino",
+     "może",
+     "kawiarni"
+    ]
+   },
+   {
+    "goal": "Agree on alternative plan and ask gear",
+    "lines": [
+     {
+      "pl": "Kino zamiast gór to świetny pomysł! Pytaj o cokolwiek.",
+      "en": "Cinema instead of mountains is great! Ask anything.",
+      "zh": "不去爬山改看电影挺好！想问什么尽管问。"
+     },
+     {
+      "pl": "Dobrze, odpuszczamy góry. Chcesz coś zabrać?",
+      "en": "Okay, skipping the mountains. Want to bring anything?",
+      "zh": "行，那不去山里了。你想带点什么吗？"
+     }
+    ],
+    "expect": [
+     "zabrać",
+     "mam",
+     "co",
+     "przynieść",
+     "kupić"
+    ]
+   },
+   {
+    "goal": "Promise details message and wrap up",
+    "lines": [
+     {
+      "pl": "Dobra, napiszę ci szczegóły. Na razie!",
+      "en": "All right, I'll text you the details. See you!",
+      "zh": "好的，我把细节发信息给你。回见！"
+     },
+     {
+      "pl": "Wyślę ci wiadomość z adresem. Cześć!",
+      "en": "I'll send you a message with address. Bye!",
+      "zh": "我把地址发信息给你。拜拜！"
+     }
+    ],
+    "expect": [
+     "cześć",
+     "razie",
+     "dzięki",
+     "pa",
+     "czekam"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Cześć! Co zwykle robisz w weekend?",
+    "en": "Hi! What do you usually do at weekends?",
+    "zh": "嗨！你周末一般都做些什么？"
+   },
+   {
+    "s": "L",
+    "pl": "W weekend zwykle odpoczywam w domu.",
+    "en": "At the weekend I usually rest at home.",
+    "zh": "周末我通常在家里休息。"
+   },
+   {
+    "s": "C",
+    "pl": "Jedziemy w sobotę w góry? Dasz radę?",
+    "en": "Are we going to mountains on Saturday? Can you manage?",
+    "zh": "周六去爬山吗？你行不行？"
+   },
+   {
+    "s": "L",
+    "pl": "Chętnie! Ale w sobotę będzie padać.",
+    "en": "Gladly! But on Saturday it will rain.",
+    "zh": "我很想去！但周六要下雨。"
+   },
+   {
+    "s": "C",
+    "pl": "Faktycznie, sprawdziłem prognozę. Co proponujesz zamiast gór?",
+    "en": "Indeed, I checked the forecast. What do you suggest instead of mountains?",
+    "zh": "确实，我看了预报。不去爬山你提议去哪儿？"
+   },
+   {
+    "s": "L",
+    "pl": "Może kino albo dobra kawiarnia?",
+    "en": "Maybe cinema or a good café?",
+    "zh": "或者看电影，去家好咖啡馆？"
+   },
+   {
+    "s": "C",
+    "pl": "Super pomysł! Idziemy do kina.",
+    "en": "Great idea! We are going to cinema.",
+    "zh": "好主意！咱们去看电影。"
+   },
+   {
+    "s": "L",
+    "pl": "Ekstra. Co mam zabrać?",
+    "en": "Awesome. What should I bring?",
+    "zh": "太棒了。我需要带点什么吗？"
+   },
+   {
+    "s": "C",
+    "pl": "Dobra, napiszę ci szczegóły. Na razie!",
+    "en": "All right, I'll write you the details. See you!",
+    "zh": "行，我把细节发信息给你。回见！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Ekstra!",
+    "en": "Awesome!",
+    "zh": "太棒了！"
+   },
+   {
+    "pl": "Masz rację.",
+    "en": "You are right.",
+    "zh": "你说得对。"
+   },
+   {
+    "pl": "Dobra opcja.",
+    "en": "Good option.",
+    "zh": "挺好的选项。"
+   },
+   {
+    "pl": "Jasne.",
+    "en": "Sure.",
+    "zh": "当然。"
+   },
+   {
+    "pl": "Nie ma problemu.",
+    "en": "No problem.",
+    "zh": "没问题。"
+   },
+   {
+    "pl": "Rozumiem cię.",
+    "en": "I understand you.",
+    "zh": "我懂你。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Co wolisz? Góry czy kino?",
+    "en": "What do you prefer? Mountains or cinema?",
+    "zh": "你更想去哪儿？爬山还是电影院？"
+   },
+   {
+    "pl": "Powtórz, bo u mnie przerywa.",
+    "en": "Repeat, because it's breaking up for me.",
+    "zh": "请再说一遍，我这边信号断断续续的。"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u06-book-doctor",
+  "beats": [
+   {
+    "goal": "Ask how receptionist can help patient",
+    "lines": [
+     {
+      "pl": "W czym mogę pomóc?",
+      "en": "How can I help?",
+      "zh": "请问有什么可以帮您？"
+     },
+     {
+      "pl": "Dzień dobry. Do jakiego lekarza?",
+      "en": "Good morning. Which doctor for?",
+      "zh": "早上好。看哪位医生？"
+     }
+    ],
+    "expect": [
+     "umówić",
+     "wizytę",
+     "lekarza",
+     "chcę",
+     "rodzinnego"
+    ]
+   },
+   {
+    "goal": "Offer appointment only for next week",
+    "lines": [
+     {
+      "pl": "Doktor ma wolny termin za tydzień.",
+      "en": "The doctor has an opening in a week.",
+      "zh": "医生下周才有空档。"
+     },
+     {
+      "pl": "W tym tygodniu brak miejsc. Dopiero wtorek.",
+      "en": "No openings this week. Not until Tuesday.",
+      "zh": "这周都满了。最早要下周二。"
+     }
+    ],
+    "expect": [
+     "wcześniej",
+     "czy",
+     "jest",
+     "coś",
+     "jutro"
+    ]
+   },
+   {
+    "goal": "Check schedule and propose earlier slot",
+    "lines": [
+     {
+      "pl": "Zwolnił się piątek o dziewiątej. Pasuje?",
+      "en": "Friday at nine opened up. Does it suit?",
+      "zh": "周五早上九点刚好空出了一个名额。合适吗？"
+     },
+     {
+      "pl": "Jest jedno miejsce w piątek rano. Może być?",
+      "en": "There is one spot on Friday morning. Can it be?",
+      "zh": "周五上午有一个空位。可以吗？"
+     }
+    ],
+    "expect": [
+     "może",
+     "być",
+     "pasuje",
+     "piątek",
+     "dobrze"
+    ]
+   },
+   {
+    "goal": "Request patient full name for booking",
+    "lines": [
+     {
+      "pl": "Dobrze. Jak się {m:pan nazywa|f:pani nazywa}?",
+      "en": "Good. What is your name?",
+      "zh": "好的。请问您的姓名？"
+     },
+     {
+      "pl": "Proszę podać imię i nazwisko.",
+      "en": "Please give your first and last name.",
+      "zh": "请提供您的姓名。"
+     }
+    ],
+    "expect": [
+     "nazywam",
+     "się",
+     "jestem",
+     "imię",
+     "nazwisko"
+    ]
+   },
+   {
+    "goal": "Confirm booking and say goodbye",
+    "lines": [
+     {
+      "pl": "{m:Zapisałam pana.|f:Zapisałam panią.} Do widzenia!",
+      "en": "I have registered you. Goodbye!",
+      "zh": "已经为您登记好了。再见！"
+     },
+     {
+      "pl": "Wizyta zapisana. Do widzenia!",
+      "en": "Appointment booked. Goodbye!",
+      "zh": "预约成功。再见！"
+     }
+    ],
+    "expect": [
+     "dziękuję",
+     "bardzo",
+     "widzenia",
+     "do",
+     "miłego"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Przychodnia Zdrowie, dzień dobry. W czym mogę pomóc?",
+    "en": "Zdrowie clinic, good morning. How can I help?",
+    "zh": "兹德罗维诊所，您好。有什么可以帮您？"
+   },
+   {
+    "s": "L",
+    "pl": "Dzień dobry. Chcę się umówić na wizytę.",
+    "en": "Good morning. I want to book an appointment.",
+    "zh": "早上好。我想预约看病。"
+   },
+   {
+    "s": "C",
+    "pl": "Lekarz przyjmuje dopiero w przyszłym tygodniu.",
+    "en": "The doctor is seeing patients only next week.",
+    "zh": "医生下周才接诊。"
+   },
+   {
+    "s": "L",
+    "pl": "Czy jest coś wcześniej?",
+    "en": "Is there anything earlier?",
+    "zh": "有更早的时间吗？"
+   },
+   {
+    "s": "C",
+    "pl": "Zaraz sprawdzę. Może być piątek o dziewiątej?",
+    "en": "Checking now. Can it be Friday at nine?",
+    "zh": "我查一下。周五早上九点可以吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Tak, może być piątek.",
+    "en": "Yes, Friday is fine.",
+    "zh": "可以，周五就行。"
+   },
+   {
+    "s": "C",
+    "pl": "Dobrze. Jak się {m:pan nazywa|f:pani nazywa}?",
+    "en": "Good. What is your name?",
+    "zh": "好的。请问您的名字是？"
+   },
+   {
+    "s": "L",
+    "pl": "Nazywam się Jan Kowalski.",
+    "en": "My name is Jan Kowalski.",
+    "zh": "我叫扬·科瓦尔斯基。"
+   },
+   {
+    "s": "C",
+    "pl": "{m:Zapisałam pana.|f:Zapisałam panią.} Do widzenia!",
+    "en": "I booked you in. Goodbye!",
+    "zh": "已为您预约好。再见！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Rozumiem.",
+    "en": "I understand.",
+    "zh": "明白了。"
+   },
+   {
+    "pl": "Już sprawdzam w kalendarzu.",
+    "en": "Checking the calendar right now.",
+    "zh": "我这就查日程表。"
+   },
+   {
+    "pl": "Dobrze.",
+    "en": "Good.",
+    "zh": "好的。"
+   },
+   {
+    "pl": "Oczywiście.",
+    "en": "Of course.",
+    "zh": "当然。"
+   },
+   {
+    "pl": "W porządku.",
+    "en": "All right.",
+    "zh": "没问题。"
+   },
+   {
+    "pl": "Jasna sprawa.",
+    "en": "Clear matter.",
+    "zh": "清楚了。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Proszę powtórzyć nazwisko, nie zrozumiałam.",
+    "en": "Please repeat the surname, I didn't understand.",
+    "zh": "请再说一遍姓氏，我没听懂。"
+   },
+   {
+    "pl": "Woli {m:pan|f:pani} rano czy po południu?",
+    "en": "Do you prefer morning or afternoon?",
+    "zh": "您倾向上午还是下午？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u06-birthday-invite",
+  "beats": [
+   {
+    "goal": "Ask if colleague will attend party",
+    "lines": [
+     {
+      "pl": "Przyjdziesz?",
+      "en": "Will you come?",
+      "zh": "你会来吗？"
+     },
+     {
+      "pl": "Będziesz na mojej imprezie w sobotę?",
+      "en": "Will you be at my party on Saturday?",
+      "zh": "周六你会来参加我的聚会吗？"
+     }
+    ],
+    "expect": [
+     "chętnie",
+     "przyjdę",
+     "będę",
+     "wszystkiego",
+     "najlepszego"
+    ]
+   },
+   {
+    "goal": "Give time and location details",
+    "lines": [
+     {
+      "pl": "Zaczynamy o osiemnastej w moim mieszkaniu.",
+      "en": "We start at six PM in my flat.",
+      "zh": "我们晚上六点在我家开始。"
+     },
+     {
+      "pl": "O siódmej wieczorem u mnie w domu.",
+      "en": "At seven in the evening at my house.",
+      "zh": "晚上七点在我家。"
+     }
+    ],
+    "expect": [
+     "mogę",
+     "później",
+     "przyjść",
+     "czy",
+     "dziewiątej"
+    ]
+   },
+   {
+    "goal": "Agree to friend arriving later",
+    "lines": [
+     {
+      "pl": "Jasne, możesz przyjść później! Żaden problem.",
+      "en": "Sure, you can come later! No problem at all.",
+      "zh": "当然，你可以晚点来！完全没问题。"
+     },
+     {
+      "pl": "Oczywiście, wpadaj kiedy chcesz. Będziemy do nocy.",
+      "en": "Of course, drop by whenever you want. We'll stay late.",
+      "zh": "没问题，随时过来。我们会玩到很晚。"
+     }
+    ],
+    "expect": [
+     "przynieść",
+     "zabrać",
+     "co",
+     "kupić",
+     "mam"
+    ]
+   },
+   {
+    "goal": "Suggest what food or drinks bring",
+    "lines": [
+     {
+      "pl": "Przynieś sok albo jakieś małe przekąski.",
+      "en": "Bring juice or some small snacks.",
+      "zh": "带点果汁或者小零食就行。"
+     },
+     {
+      "pl": "Możesz kupić owoce lub dobre ciasto.",
+      "en": "You can buy fruit or a good cake.",
+      "zh": "你可以买点水果或者好吃的蛋糕。"
+     }
+    ],
+    "expect": [
+     "przyniosę",
+     "kupię",
+     "dobrze",
+     "ciasto",
+     "super"
+    ]
+   },
+   {
+    "goal": "Confirm plans and look forward party",
+    "lines": [
+     {
+      "pl": "Super! To do soboty!",
+      "en": "Super! See you Saturday then!",
+      "zh": "太棒了！那周六见！"
+     },
+     {
+      "pl": "Bardzo się cieszę. Do zobaczenia!",
+      "en": "I'm very glad. See you!",
+      "zh": "我真高兴。回头见！"
+     }
+    ],
+    "expect": [
+     "soboty",
+     "do",
+     "zobaczenia",
+     "cześć",
+     "pa"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Słuchaj, w sobotę mam urodziny! Przyjdziesz?",
+    "en": "Listen, it's my birthday on Saturday! Will you come?",
+    "zh": "听着，我周六过生日！你会来吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Wszystkiego najlepszego! Bardzo chętnie przyjdę.",
+    "en": "Happy birthday! I will gladly come.",
+    "zh": "生日快乐！我非常乐意去。"
+   },
+   {
+    "s": "C",
+    "pl": "Świetnie! Impreza jest u mnie w domu.",
+    "en": "Great! The party is at my home.",
+    "zh": "太好了！聚会在我家办。"
+   },
+   {
+    "s": "L",
+    "pl": "O której? Gdzie mieszkasz?",
+    "en": "At what time? Where do you live?",
+    "zh": "几点？你住在哪里？"
+   },
+   {
+    "s": "C",
+    "pl": "O szóstej wieczorem na ulicy Długiej.",
+    "en": "At six in the evening on Długa Street.",
+    "zh": "晚上六点，在德武加街。"
+   },
+   {
+    "s": "L",
+    "pl": "Mogę przyjść później? Mam zajęcia.",
+    "en": "Can I come later? I have classes.",
+    "zh": "我能晚点去吗？我有课。"
+   },
+   {
+    "s": "C",
+    "pl": "Jasne, nie ma problemu!",
+    "en": "Sure, no problem!",
+    "zh": "当然，没问题！"
+   },
+   {
+    "s": "L",
+    "pl": "Co przynieść? Jakieś jedzenie?",
+    "en": "What to bring? Some food?",
+    "zh": "带点什么？带些吃的吗？"
+   },
+   {
+    "s": "C",
+    "pl": "Super! To do soboty!",
+    "en": "Super! See you Saturday then!",
+    "zh": "太棒了！那周六见！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Super!",
+    "en": "Super!",
+    "zh": "太好了！"
+   },
+   {
+    "pl": "Dzięki!",
+    "en": "Thanks!",
+    "zh": "谢谢！"
+   },
+   {
+    "pl": "Bardzo się cieszę.",
+    "en": "I'm very glad.",
+    "zh": "我很高兴。"
+   },
+   {
+    "pl": "Ekstra.",
+    "en": "Awesome.",
+    "zh": "太棒了。"
+   },
+   {
+    "pl": "Jasna sprawa.",
+    "en": "Sure thing.",
+    "zh": "没问题。"
+   },
+   {
+    "pl": "Nie ma sprawy.",
+    "en": "No problem.",
+    "zh": "小事一桩。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "O której możesz być? Powtórz, proszę.",
+    "en": "What time can you make it? Repeat, please.",
+    "zh": "你大概几点能到？请再说一遍。"
+   },
+   {
+    "pl": "Wolisz sok czy herbatę?",
+    "en": "Do you prefer juice or tea?",
+    "zh": "你喜欢果汁还是茶？"
+   }
+  ]
+ }
+]
+

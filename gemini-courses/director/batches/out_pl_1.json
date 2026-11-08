@@ -1,0 +1,2627 @@
+[
+ {
+  "id": "pl-call-u01-hello-neighbour",
+  "beats": [
+   {
+    "goal": "Ask if learner is the new neighbour",
+    "lines": [
+     {
+      "pl": "{m:A pan to nowy sąsiad?|f:A pani to nowa sąsiadka?}",
+      "en": "And are you the new neighbour?",
+      "zh": "您是新搬来的邻居吗？"
+     },
+     {
+      "pl": "Dzień dobry! {m:Pan się wprowadził?|f:Pani się wprowadziła?}",
+      "en": "Good morning! Did you just move in?",
+      "zh": "早上好！您是新搬来的吗？"
+     }
+    ],
+    "expect": [
+     "dzień dobry",
+     "mam na imię",
+     "jestem",
+     "nazywam się"
+    ]
+   },
+   {
+    "goal": "Ask to repeat name after mishearing",
+    "lines": [
+     {
+      "pl": "Przepraszam, jak {m:pan|f:pani} mówi? Jan?",
+      "en": "Excuse me, what did you say? Jan?",
+      "zh": "不好意思，您说什么？扬？"
+     },
+     {
+      "pl": "Nie dosłyszałem. Może {m:pan|f:pani} powtórzyć imię?",
+      "en": "I didn't hear clearly. Could you repeat your name?",
+      "zh": "我没听清。您可以再重复一下名字吗？"
+     }
+    ],
+    "expect": [
+     "nie",
+     "mam na imię",
+     "jestem",
+     "moje imię"
+    ]
+   },
+   {
+    "goal": "Ask where learner is from",
+    "lines": [
+     {
+      "pl": "A skąd {m:pan jest|f:pani jest}?",
+      "en": "And where are you from?",
+      "zh": "那您来自哪里呢？"
+     },
+     {
+      "pl": "Z jakiego kraju {m:pan|f:pani} pochodzi?",
+      "en": "Which country do you come from?",
+      "zh": "您来自哪个国家？"
+     }
+    ],
+    "expect": [
+     "jestem z",
+     "pochodzę z",
+     "anglii",
+     "chin",
+     "polski"
+    ]
+   },
+   {
+    "goal": "Invite learner to ask a question",
+    "lines": [
+     {
+      "pl": "Ma {m:pan|f:pani} jakieś pytanie o blok?",
+      "en": "Do you have any questions about the building?",
+      "zh": "关于这栋楼您有什么问题吗？"
+     },
+     {
+      "pl": "Chce {m:pan|f:pani} o coś zapytać?",
+      "en": "Would you like to ask something?",
+      "zh": "您想问点什么吗？"
+     }
+    ],
+    "expect": [
+     "a pan",
+     "gdzie jest",
+     "czy tutaj",
+     "jak długo"
+    ]
+   },
+   {
+    "goal": "Say goodbye and wrap up",
+    "lines": [
+     {
+      "pl": "Bardzo mi miło. Do widzenia!",
+      "en": "Nice to meet you. Goodbye!",
+      "zh": "很高兴认识您。再见！"
+     },
+     {
+      "pl": "Miłego dnia. Do widzenia!",
+      "en": "Have a nice day. Goodbye!",
+      "zh": "祝您愉快。再见！"
+     }
+    ],
+    "expect": [
+     "do widzenia",
+     "miłego dnia",
+     "dziękuję",
+     "nawzajem"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "{m:A pan to nowy sąsiad?|f:A pani to nowa sąsiadka?}",
+    "en": "And are you the new neighbour?",
+    "zh": "您是新搬来的邻居吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Dzień dobry! Tak, mam na imię David.",
+    "en": "Good morning! Yes, my name is David.",
+    "zh": "早上好！是的，我叫大卫。"
+   },
+   {
+    "s": "C",
+    "pl": "Przepraszam, jak {m:pan|f:pani} mówi? Jan?",
+    "en": "Excuse me, what did you say? Jan?",
+    "zh": "不好意思，您说什么？扬？"
+   },
+   {
+    "s": "L",
+    "pl": "Nie Jan. Mam na imię David.",
+    "en": "Not Jan. My name is David.",
+    "zh": "不是扬。我叫大卫。"
+   },
+   {
+    "s": "C",
+    "pl": "A, David! A skąd {m:pan jest|f:pani jest}?",
+    "en": "Ah, David! And where are you from?",
+    "zh": "啊，大卫！那您来自哪里呢？"
+   },
+   {
+    "s": "L",
+    "pl": "Jestem z Anglii. A pan?",
+    "en": "I am from England. And you, sir?",
+    "zh": "我来自英国。您呢？"
+   },
+   {
+    "s": "C",
+    "pl": "Ja jestem z Krakowa. Długo tu mieszkam.",
+    "en": "I am from Krakow. I have lived here a long time.",
+    "zh": "我来自克拉科夫。我在这里住了很久。"
+   },
+   {
+    "s": "L",
+    "pl": "Bardzo mi miło.",
+    "en": "Nice to meet you.",
+    "zh": "很高兴认识您。"
+   },
+   {
+    "s": "C",
+    "pl": "Bardzo mi miło. Do widzenia!",
+    "en": "Nice to meet you. Goodbye!",
+    "zh": "很高兴认识您。再见！"
+   },
+   {
+    "s": "L",
+    "pl": "Do widzenia!",
+    "en": "Goodbye!",
+    "zh": "再见！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Rozumiem.",
+    "en": "I see.",
+    "zh": "我明白了。"
+   },
+   {
+    "pl": "Bardzo dobrze.",
+    "en": "Very good.",
+    "zh": "很好。"
+   },
+   {
+    "pl": "Aha, jasne.",
+    "en": "Aha, sure.",
+    "zh": "啊哈，清楚了。"
+   },
+   {
+    "pl": "Ciekawe!",
+    "en": "Interesting!",
+    "zh": "很有意思！"
+   },
+   {
+    "pl": "To prawda.",
+    "en": "That is true.",
+    "zh": "确实如此。"
+   },
+   {
+    "pl": "Świetnie.",
+    "en": "Great.",
+    "zh": "太好了。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Przepraszam, może {m:pan|f:pani} powtórzyć?",
+    "en": "Excuse me, could you repeat that?",
+    "zh": "不好意思，您可以重复一遍吗？"
+   },
+   {
+    "pl": "Mówi {m:pan|f:pani} tak czy nie?",
+    "en": "Are you saying yes or no?",
+    "zh": "您是说是还是不是？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u01-first-coffee",
+  "beats": [
+   {
+    "goal": "Ask what drink learner wants",
+    "lines": [
+     {
+      "pl": "Kawa, herbata? Mamy też dzisiaj świeży sernik.",
+      "en": "Coffee, tea? We also have fresh cheesecake today.",
+      "zh": "咖啡还是茶？我们今天还有新鲜芝士蛋糕。"
+     },
+     {
+      "pl": "Co podać do picia? Kawę czy herbatę?",
+      "en": "What can I get you to drink? Coffee or tea?",
+      "zh": "喝点什么？咖啡还是茶？"
+     }
+    ],
+    "expect": [
+     "kawę",
+     "herbatę",
+     "poproszę",
+     "espresso"
+    ]
+   },
+   {
+    "goal": "Explain cheesecake sold out and suggest alternative",
+    "lines": [
+     {
+      "pl": "Sernik właśnie się skończył. Może szarlotka?",
+      "en": "The cheesecake just sold out. Maybe apple pie?",
+      "zh": "芝士蛋糕刚卖完了。要尝尝苹果派吗？"
+     },
+     {
+      "pl": "Niestety, nie ma sernika. Mamy rogaliki.",
+      "en": "Unfortunately, no cheesecake left. We have croissants.",
+      "zh": "不好意思，没有芝士蛋糕了。我们有牛角面包。"
+     }
+    ],
+    "expect": [
+     "szarlotkę",
+     "rogalik",
+     "poproszę",
+     "dobrze"
+    ]
+   },
+   {
+    "goal": "Ask if here or takeaway",
+    "lines": [
+     {
+      "pl": "Na miejscu czy na wynos?",
+      "en": "For here or to go?",
+      "zh": "在这吃还是打包带走？"
+     },
+     {
+      "pl": "Pije {m:pan|f:pani} tutaj czy bierze na wynos?",
+      "en": "Are you drinking here or taking away?",
+      "zh": "您在这喝还是带走？"
+     }
+    ],
+    "expect": [
+     "na miejscu",
+     "na wynos",
+     "tutaj",
+     "proszę"
+    ]
+   },
+   {
+    "goal": "Prompt learner to pay",
+    "lines": [
+     {
+      "pl": "Razem dwadzieścia złotych. Płatność kartą?",
+      "en": "Twenty zlotys total. Paying by card?",
+      "zh": "一共二十兹罗提。刷卡吗？"
+     },
+     {
+      "pl": "To wszystko. Jak {m:pan płaci|f:pani płaci}?",
+      "en": "That is all. How are you paying?",
+      "zh": "就这些。您怎么付？"
+     }
+    ],
+    "expect": [
+     "ile płacę",
+     "kartą",
+     "gotówką",
+     "mogę"
+    ]
+   },
+   {
+    "goal": "Give order and say goodbye",
+    "lines": [
+     {
+      "pl": "Smacznego! Do zobaczenia!",
+      "en": "Enjoy! See you soon!",
+      "zh": "请慢用！回头见！"
+     },
+     {
+      "pl": "Dziękuję bardzo. Do widzenia!",
+      "en": "Thank you very much. Goodbye!",
+      "zh": "非常感谢。再见！"
+     }
+    ],
+    "expect": [
+     "dziękuję",
+     "do widzenia",
+     "do zobaczenia",
+     "miłego dnia"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Kawa, herbata? Mamy też dzisiaj świeży sernik.",
+    "en": "Coffee, tea? We also have fresh cheesecake today.",
+    "zh": "咖啡还是茶？我们今天还有新鲜芝士蛋糕。"
+   },
+   {
+    "s": "L",
+    "pl": "Dzień dobry! Poproszę kawę i sernik.",
+    "en": "Good morning! Coffee and cheesecake, please.",
+    "zh": "早上好！请给我一杯咖啡和一块芝士蛋糕。"
+   },
+   {
+    "s": "C",
+    "pl": "Sernik właśnie się skończył. Może szarlotka?",
+    "en": "The cheesecake just sold out. Maybe apple pie?",
+    "zh": "芝士蛋糕刚卖完了。要尝尝苹果派吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Dobrze, poproszę szarlotkę.",
+    "en": "All right, apple pie please.",
+    "zh": "好的，那请给我苹果派。"
+   },
+   {
+    "s": "C",
+    "pl": "Na miejscu czy na wynos?",
+    "en": "For here or to go?",
+    "zh": "在这吃还是打包带走？"
+   },
+   {
+    "s": "L",
+    "pl": "Na miejscu. Ile płacę?",
+    "en": "For here. How much do I pay?",
+    "zh": "在这吃。一共多少钱？"
+   },
+   {
+    "s": "C",
+    "pl": "Dwadzieścia złotych. Płatność kartą?",
+    "en": "Twenty zlotys. Paying by card?",
+    "zh": "二十兹罗提。刷卡吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Tak, płacę kartą. Dziękuję!",
+    "en": "Yes, I am paying by card. Thank you!",
+    "zh": "对，我刷卡。谢谢！"
+   },
+   {
+    "s": "C",
+    "pl": "Smacznego! Do zobaczenia!",
+    "en": "Enjoy! See you soon!",
+    "zh": "请慢用！回头见！"
+   },
+   {
+    "s": "L",
+    "pl": "Dziękuję, do zobaczenia!",
+    "en": "Thank you, see you!",
+    "zh": "谢谢，再见！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Świetny wybór!",
+    "en": "Great choice!",
+    "zh": "选得好！"
+   },
+   {
+    "pl": "Oczywiście.",
+    "en": "Of course.",
+    "zh": "当然。"
+   },
+   {
+    "pl": "Już robię.",
+    "en": "Making it right away.",
+    "zh": "马上做。"
+   },
+   {
+    "pl": "Super.",
+    "en": "Super.",
+    "zh": "太好了。"
+   },
+   {
+    "pl": "Jasne!",
+    "en": "Sure thing!",
+    "zh": "好咧！"
+   },
+   {
+    "pl": "Bez problemu.",
+    "en": "No problem.",
+    "zh": "没问题。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Przepraszam, co podać? Nie dosłyszałam.",
+    "en": "Excuse me, what can I get you? I didn't hear.",
+    "zh": "不好意思，要点什么？我没听清。"
+   },
+   {
+    "pl": "Kawa czarna czy z mlekiem?",
+    "en": "Black coffee or with milk?",
+    "zh": "黑咖啡还是加奶？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u01-new-colleague",
+  "beats": [
+   {
+    "goal": "Ask which department learner works in",
+    "lines": [
+     {
+      "pl": "Jestem Ania, z marketingu. A ty w jakim dziale pracujesz?",
+      "en": "I'm Ania, from marketing. And which department do you work in?",
+      "zh": "我是市场部的阿妮亚。你在哪个部门工作？"
+     },
+     {
+      "pl": "Cześć! W jakim dziale pracujesz?",
+      "en": "Hi! What department do you work in?",
+      "zh": "嗨！你在哪个部门工作？"
+     }
+    ],
+    "expect": [
+     "pracuję w",
+     "jestem",
+     "dziale",
+     "it",
+     "marketingu"
+    ]
+   },
+   {
+    "goal": "Assume wrong team and wait for correction",
+    "lines": [
+     {
+      "pl": "A, to ty jesteś {m:nowym grafikiem|f:nową graficzką}?",
+      "en": "Ah, so you are the new graphic designer?",
+      "zh": "啊，所以你是新来的平面设计师吗？"
+     },
+     {
+      "pl": "Pracujesz w zespole HR, prawda?",
+      "en": "You work in the HR team, right?",
+      "zh": "你是在人事团队工作，对吧？"
+     }
+    ],
+    "expect": [
+     "nie",
+     "pracuję w",
+     "jestem programistą",
+     "programistką",
+     "it"
+    ]
+   },
+   {
+    "goal": "Ask where learner lives in city",
+    "lines": [
+     {
+      "pl": "Super! A gdzie mieszkasz w Warszawie?",
+      "en": "Great! And where do you live in Warsaw?",
+      "zh": "太棒了！你在华沙住在哪里？"
+     },
+     {
+      "pl": "Mieszkasz blisko biura czy w centrum?",
+      "en": "Do you live near the office or in the centre?",
+      "zh": "你住得离办公室近还是在市中心？"
+     }
+    ],
+    "expect": [
+     "mieszkam w",
+     "centrum",
+     "blisko",
+     "daleko"
+    ]
+   },
+   {
+    "goal": "Prompt learner to ask a question",
+    "lines": [
+     {
+      "pl": "Chcesz o coś zapytać? Znam firmę.",
+      "en": "Do you want to ask something? I know the company.",
+      "zh": "想问点什么吗？我对公司很熟。"
+     },
+     {
+      "pl": "Masz jakieś pytania na pierwszy dzień?",
+      "en": "Do you have any questions for your first day?",
+      "zh": "第一天有什么想问的吗？"
+     }
+    ],
+    "expect": [
+     "a ty",
+     "gdzie jest",
+     "lubisz",
+     "jak długo"
+    ]
+   },
+   {
+    "goal": "Say goodbye and leave for meeting",
+    "lines": [
+     {
+      "pl": "Dobra, muszę lecieć na spotkanie. Na razie!",
+      "en": "All right, I have to run to a meeting. See you!",
+      "zh": "好啦，我得赶去开会了。回头见！"
+     },
+     {
+      "pl": "Cześć, do zobaczenia później!",
+      "en": "Bye, see you later!",
+      "zh": "拜拜，晚点见！"
+     }
+    ],
+    "expect": [
+     "na razie",
+     "cześć",
+     "pa",
+     "do zobaczenia"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Jestem Ania, z marketingu. A ty w jakim dziale pracujesz?",
+    "en": "I'm Ania, from marketing. And which department do you work in?",
+    "zh": "我是市场部的阿妮亚。你在哪个部门工作？"
+   },
+   {
+    "s": "L",
+    "pl": "Cześć! Jestem {m:programistą|f:programistką}.",
+    "en": "Hi! I am a programmer.",
+    "zh": "嗨！我是程序员。"
+   },
+   {
+    "s": "C",
+    "pl": "A, to ty pracujesz w zespole HR?",
+    "en": "Ah, so you work in the HR team?",
+    "zh": "啊，那你是在人事团队工作吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Nie, pracuję w dziale IT.",
+    "en": "No, I work in the IT department.",
+    "zh": "不是，我在IT部门工作。"
+   },
+   {
+    "s": "C",
+    "pl": "Aha, rozumiem! A gdzie mieszkasz?",
+    "en": "Aha, I see! And where do you live?",
+    "zh": "啊哈，明白了！你住在哪里？"
+   },
+   {
+    "s": "L",
+    "pl": "Mieszkam w centrum. A ty?",
+    "en": "I live in the centre. And you?",
+    "zh": "我住在市中心。你呢？"
+   },
+   {
+    "s": "C",
+    "pl": "Ja mieszkam na Mokotowie.",
+    "en": "I live in Mokotów.",
+    "zh": "我住在莫科托夫区。"
+   },
+   {
+    "s": "L",
+    "pl": "To blisko biura?",
+    "en": "Is that close to the office?",
+    "zh": "离办公室近吗？"
+   },
+   {
+    "s": "C",
+    "pl": "Dobra, muszę lecieć na spotkanie. Na razie!",
+    "en": "All right, I have to run to a meeting. See you!",
+    "zh": "好啦，我得赶去开会了。回头见！"
+   },
+   {
+    "s": "L",
+    "pl": "Na razie! Miłego dnia!",
+    "en": "See you! Have a nice day!",
+    "zh": "回头见！祝你顺利！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Super!",
+    "en": "Super!",
+    "zh": "太棒了！"
+   },
+   {
+    "pl": "Ekstra.",
+    "en": "Cool.",
+    "zh": "酷。"
+   },
+   {
+    "pl": "Aha, rozumiem.",
+    "en": "Aha, I see.",
+    "zh": "啊哈，懂了。"
+   },
+   {
+    "pl": "Fajnie!",
+    "en": "Nice!",
+    "zh": "挺好！"
+   },
+   {
+    "pl": "Naprawdę?",
+    "en": "Really?",
+    "zh": "真的吗？"
+   },
+   {
+    "pl": "Dokładnie tak.",
+    "en": "Exactly so.",
+    "zh": "确实如此。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Sorki, możesz powtórzyć? Nie dosłyszałam.",
+    "en": "Sorry, can you repeat? I didn't hear.",
+    "zh": "抱歉，你能再说一遍吗？我没听清。"
+   },
+   {
+    "pl": "Pracujesz w IT czy w marketingu?",
+    "en": "Do you work in IT or in marketing?",
+    "zh": "你是在IT部还是市场部工作？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u01-how-are-you",
+  "beats": [
+   {
+    "goal": "Ask how learner is and doing",
+    "lines": [
+     {
+      "pl": "Jak się masz? Co robisz?",
+      "en": "How are you? What are you doing?",
+      "zh": "你最近怎么样？在做什么呢？"
+     },
+     {
+      "pl": "Hej! Jak leci? Masz wolny czas?",
+      "en": "Hey! How is it going? Do you have free time?",
+      "zh": "嗨！最近如何？有空吗？"
+     }
+    ],
+    "expect": [
+     "dobrze",
+     "zmęczony",
+     "zmęczona",
+     "dziękuję",
+     "robię"
+    ]
+   },
+   {
+    "goal": "Ask what learner is doing now",
+    "lines": [
+     {
+      "pl": "Co ciekawego robisz teraz w domu?",
+      "en": "What interesting thing are you doing at home now?",
+      "zh": "你现在在家里做什么有意思的事？"
+     },
+     {
+      "pl": "Uczysz się teraz czy odpoczywasz?",
+      "en": "Are you studying now or resting?",
+      "zh": "你现在在学习还是在休息？"
+     }
+    ],
+    "expect": [
+     "teraz",
+     "gotuję",
+     "czytam",
+     "oglądam",
+     "odpoczywam"
+    ]
+   },
+   {
+    "goal": "Break up speech when internet lags",
+    "lines": [
+     {
+      "pl": "Czekaj... Przerywa mi internet. Co mówiłeś?",
+      "en": "Wait... My internet is cutting out. What did you say?",
+      "zh": "等等……我网络断断续续的。你说什么？"
+     },
+     {
+      "pl": "Halo? Przerywa połączenie. Słyszysz mnie dobrze?",
+      "en": "Hello? The connection is breaking. Can you hear me well?",
+      "zh": "喂？连接卡住了。你能听清我说话吗？"
+     }
+    ],
+    "expect": [
+     "słyszę",
+     "nie słyszę",
+     "powtórzyć",
+     "możesz"
+    ]
+   },
+   {
+    "goal": "Invite learner to ask about Kasia",
+    "lines": [
+     {
+      "pl": "A ty nie pytasz, co u mnie?",
+      "en": "And you don't ask what's up with me?",
+      "zh": "你都不问问我在干嘛吗？"
+     },
+     {
+      "pl": "Zgadnij, co ja teraz robię!",
+      "en": "Guess what I am doing right now!",
+      "zh": "猜猜我现在在干嘛！"
+     }
+    ],
+    "expect": [
+     "co robisz",
+     "a ty",
+     "co u ciebie",
+     "jak ty"
+    ]
+   },
+   {
+    "goal": "Say goodnight and end call",
+    "lines": [
+     {
+      "pl": "Dobra, idę spać. Dobranoc!",
+      "en": "All right, I am going to sleep. Goodnight!",
+      "zh": "好啦，我要去睡了。晚安！"
+     },
+     {
+      "pl": "Jestem zmęczona. Cześć, pa!",
+      "en": "I am tired. Bye, see ya!",
+      "zh": "我好累。拜拜！"
+     }
+    ],
+    "expect": [
+     "dobranoc",
+     "pa",
+     "cześć",
+     "dobrej nocy"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Jak się masz? Co robisz?",
+    "en": "How are you? What are you doing?",
+    "zh": "你最近怎么样？在做什么呢？"
+   },
+   {
+    "s": "L",
+    "pl": "Dobrze, dziękuję. Jestem {m:trochę zmęczony|f:trochę zmęczona}.",
+    "en": "Good, thank you. I am a bit tired.",
+    "zh": "挺好，谢谢。我有点累。"
+   },
+   {
+    "s": "C",
+    "pl": "Co ciekawego robisz teraz w domu?",
+    "en": "What interesting thing are you doing at home now?",
+    "zh": "你现在在家里做什么有意思的事？"
+   },
+   {
+    "s": "L",
+    "pl": "Teraz gotuję i oglądam film.",
+    "en": "Right now I am cooking and watching a movie.",
+    "zh": "我现在在做饭看电影。"
+   },
+   {
+    "s": "C",
+    "pl": "Czekaj... Przerywa mi internet. Co mówiłeś?",
+    "en": "Wait... My internet is cutting out. What did you say?",
+    "zh": "等等……我网络断断续续的。你说什么？"
+   },
+   {
+    "s": "L",
+    "pl": "Nie słyszę cię. Możesz powtórzyć?",
+    "en": "I can't hear you. Can you repeat?",
+    "zh": "我听不清你。你能重复一遍吗？"
+   },
+   {
+    "s": "C",
+    "pl": "Już lepiej! A co u mnie, nie pytasz?",
+    "en": "Better now! And what about me, you don't ask?",
+    "zh": "现在好点了！你都不问问我最近怎么样吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Co robisz teraz, Kasia?",
+    "en": "What are you doing now, Kasia?",
+    "zh": "卡霞，你现在在做什么？"
+   },
+   {
+    "s": "C",
+    "pl": "Dobra, idę spać. Dobranoc!",
+    "en": "All right, I am going to sleep. Goodnight!",
+    "zh": "好啦，我要去睡了。晚安！"
+   },
+   {
+    "s": "L",
+    "pl": "Dobranoc, pa!",
+    "en": "Goodnight, bye!",
+    "zh": "晚安，拜拜！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Naprawdę?",
+    "en": "Really?",
+    "zh": "真的吗？"
+   },
+   {
+    "pl": "Ojej!",
+    "en": "Oh dear!",
+    "zh": "哎呀！"
+   },
+   {
+    "pl": "Fajnie masz.",
+    "en": "Nice for you.",
+    "zh": "你挺爽呀。"
+   },
+   {
+    "pl": "Rozumiem cię.",
+    "en": "I understand you.",
+    "zh": "我理解你。"
+   },
+   {
+    "pl": "Super!",
+    "en": "Super!",
+    "zh": "太棒了！"
+   },
+   {
+    "pl": "No tak.",
+    "en": "Well, yeah.",
+    "zh": "可不是嘛。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Przerywa dźwięk. Możesz powtórzyć jeszcze raz?",
+    "en": "The sound is breaking up. Can you repeat once more?",
+    "zh": "声音卡了。你能再说一遍吗？"
+   },
+   {
+    "pl": "Mówisz o filmie czy o obiedzie?",
+    "en": "Are you talking about the movie or dinner?",
+    "zh": "你是在说电影还是在说晚饭？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u02-tram-tickets",
+  "beats": [
+   {
+    "goal": "Ask ticket type and how many",
+    "lines": [
+     {
+      "pl": "Jakie bilety? Normalne czy ulgowe?",
+      "en": "What tickets? Standard or discounted?",
+      "zh": "要什么票？全价票还是优惠票？"
+     },
+     {
+      "pl": "Dzień dobry. Ile biletów podać?",
+      "en": "Good morning. How many tickets can I get you?",
+      "zh": "早上好。要几张票？"
+     }
+    ],
+    "expect": [
+     "poproszę",
+     "bilety",
+     "normalny",
+     "ulgowy",
+     "dwa"
+    ]
+   },
+   {
+    "goal": "State price for the tickets",
+    "lines": [
+     {
+      "pl": "Dwa bilety to osiem złotych.",
+      "en": "Two tickets is eight zlotys.",
+      "zh": "两张票一共八兹罗提。"
+     },
+     {
+      "pl": "Razem dziesięć złotych. Coś jeszcze?",
+      "en": "Ten zlotys total. Anything else?",
+      "zh": "一共十兹罗提。还要别的吗？"
+     }
+    ],
+    "expect": [
+     "ile",
+     "kosztuje",
+     "płacę",
+     "proszę"
+    ]
+   },
+   {
+    "goal": "Refuse 100 note due no change",
+    "lines": [
+     {
+      "pl": "Ze stu złotych nie mam wydać.",
+      "en": "I don't have change for a hundred zlotys.",
+      "zh": "一百块我找不开。"
+     },
+     {
+      "pl": "Nie mam reszty. Ma {m:pan|f:pani} drobne?",
+      "en": "I have no change. Do you have coins?",
+      "zh": "我没有零钱。您有零钱吗？"
+     }
+    ],
+    "expect": [
+     "nie mam",
+     "drobnych",
+     "kartą",
+     "mogę",
+     "zapłacić"
+    ]
+   },
+   {
+    "goal": "Accept card payment and hand tickets",
+    "lines": [
+     {
+      "pl": "Można kartą, proszę przyłożyć tutaj.",
+      "en": "Card is fine, please tap here.",
+      "zh": "可以刷卡，请贴在这里。"
+     },
+     {
+      "pl": "Tak, terminal działa. Proszę bardzo.",
+      "en": "Yes, terminal works. Here you go.",
+      "zh": "可以，刷卡机好用。请。"
+     }
+    ],
+    "expect": [
+     "dziękuję",
+     "proszę",
+     "kartą",
+     "gotowe"
+    ]
+   },
+   {
+    "goal": "Hand over tickets and say goodbye",
+    "lines": [
+     {
+      "pl": "Proszę bardzo. Miłego dnia!",
+      "en": "Here you go. Have a nice day!",
+      "zh": "给您。祝您愉快！"
+     },
+     {
+      "pl": "Dziękuję. Do widzenia!",
+      "en": "Thank you. Goodbye!",
+      "zh": "谢谢。再见！"
+     }
+    ],
+    "expect": [
+     "dziękuję",
+     "do widzenia",
+     "miłego dnia",
+     "nawzajem"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Jakie bilety? Normalne czy ulgowe?",
+    "en": "What tickets? Standard or discounted?",
+    "zh": "要什么票？全价票还是优惠票？"
+   },
+   {
+    "s": "L",
+    "pl": "Dzień dobry! Poproszę dwa bilety normalne.",
+    "en": "Good morning! Two standard tickets, please.",
+    "zh": "早上好！请给我两张全价票。"
+   },
+   {
+    "s": "C",
+    "pl": "Dwa bilety to osiem złotych.",
+    "en": "Two tickets is eight zlotys.",
+    "zh": "两张票一共八兹罗提。"
+   },
+   {
+    "s": "L",
+    "pl": "Ile to kosztuje? Proszę, sto złotych.",
+    "en": "How much does it cost? Here, a hundred zlotys.",
+    "zh": "一共多少钱？给您，一百兹罗提。"
+   },
+   {
+    "s": "C",
+    "pl": "Ze stu złotych nie mam wydać.",
+    "en": "I don't have change for a hundred zlotys.",
+    "zh": "一百块我找不开。"
+   },
+   {
+    "s": "L",
+    "pl": "Nie mam drobnych. Mogę zapłacić kartą?",
+    "en": "I don't have change. Can I pay by card?",
+    "zh": "我没有零钱。我能刷卡吗？"
+   },
+   {
+    "s": "C",
+    "pl": "Można kartą, proszę przyłożyć tutaj.",
+    "en": "Card is fine, please tap here.",
+    "zh": "可以刷卡，请贴在这里。"
+   },
+   {
+    "s": "L",
+    "pl": "Dziękuję bardzo.",
+    "en": "Thank you very much.",
+    "zh": "非常感谢。"
+   },
+   {
+    "s": "C",
+    "pl": "Proszę bardzo. Miłego dnia!",
+    "en": "Here you go. Have a nice day!",
+    "zh": "给您。祝您愉快！"
+   },
+   {
+    "s": "L",
+    "pl": "Dziękuję, nawzajem! Do widzenia!",
+    "en": "Thank you, likewise! Goodbye!",
+    "zh": "谢谢，您也一样！再见！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Jasne.",
+    "en": "Sure.",
+    "zh": "明白。"
+   },
+   {
+    "pl": "W porządku.",
+    "en": "All right.",
+    "zh": "行。"
+   },
+   {
+    "pl": "Dobrze.",
+    "en": "Good.",
+    "zh": "好的。"
+   },
+   {
+    "pl": "Bez problemu.",
+    "en": "No problem.",
+    "zh": "没问题。"
+   },
+   {
+    "pl": "Tak jest.",
+    "en": "Yes indeed.",
+    "zh": "正是。"
+   },
+   {
+    "pl": "Rozumiem.",
+    "en": "I see.",
+    "zh": "理解。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Nie zrozumiałem. Ile tych biletów?",
+    "en": "I didn't understand. How many tickets?",
+    "zh": "我没听懂。要几张票？"
+   },
+   {
+    "pl": "Bilet normalny czy ulgowy?",
+    "en": "Standard or discounted ticket?",
+    "zh": "全价票还是优惠票？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u02-at-the-market",
+  "beats": [
+   {
+    "goal": "Ask how many apples learner wants",
+    "lines": [
+     {
+      "pl": "Jabłka mam piękne, polskie. Ile?",
+      "en": "I have beautiful Polish apples. How many?",
+      "zh": "我的苹果又漂亮又是本地的。要多少？"
+     },
+     {
+      "pl": "Ile tych jabłek zważyć, kochanie?",
+      "en": "How many apples should I weigh, dear?",
+      "zh": "亲爱的，称多少苹果？"
+     }
+    ],
+    "expect": [
+     "poproszę",
+     "kilo",
+     "jabłek",
+     "dwa"
+    ]
+   },
+   {
+    "goal": "Offer fresh strawberries enthusiastically",
+    "lines": [
+     {
+      "pl": "A truskawki? Słodkie jak miód! Zapakować?",
+      "en": "And strawberries? Sweet as honey! Pack some?",
+      "zh": "那草莓呢？甜得像蜜一样！装点吗？"
+     },
+     {
+      "pl": "Może jeszcze piękny koszyk świeżych truskawek?",
+      "en": "Maybe also a lovely basket of fresh strawberries?",
+      "zh": "要不要再来一盒漂亮的新鲜草莓？"
+     }
+    ],
+    "expect": [
+     "nie",
+     "dziękuję",
+     "nie chcę",
+     "tylko"
+    ]
+   },
+   {
+    "goal": "Ask what else learner needs",
+    "lines": [
+     {
+      "pl": "Dobrze. Co jeszcze dla {m:pana|f:pani}?",
+      "en": "All right. What else for you?",
+      "zh": "行。您还要点别的什么？"
+     },
+     {
+      "pl": "Co jeszcze podać? Pomidory, ogórki?",
+      "en": "What else can I get you? Tomatoes, cucumbers?",
+      "zh": "还要点什么？西红柿，黄瓜？"
+     }
+    ],
+    "expect": [
+     "pomidorów",
+     "ogórki",
+     "poproszę",
+     "pół kilo",
+     "to wszystko"
+    ]
+   },
+   {
+    "goal": "State total amount and ask payment",
+    "lines": [
+     {
+      "pl": "Razem czternaście złotych. Gotówka czy karta?",
+      "en": "Fourteen zlotys total. Cash or card?",
+      "zh": "一共十四兹罗提。现金还是刷卡？"
+     },
+     {
+      "pl": "To wszystko. Płaci {m:pan|f:pani} kartą?",
+      "en": "That is all. Are you paying by card?",
+      "zh": "就这些。您刷卡吗？"
+     }
+    ],
+    "expect": [
+     "ile płacę",
+     "proszę",
+     "gotówką",
+     "kartą"
+    ]
+   },
+   {
+    "goal": "Thank learner and invite again",
+    "lines": [
+     {
+      "pl": "Dziękuję, złotko. Zapraszam znowu!",
+      "en": "Thank you, sweetheart. Come again!",
+      "zh": "谢谢宝贝。欢迎再来！"
+     },
+     {
+      "pl": "Smacznego i miłego dnia! Do widzenia!",
+      "en": "Enjoy and have a nice day! Goodbye!",
+      "zh": "请慢用，祝您愉快！再见！"
+     }
+    ],
+    "expect": [
+     "dziękuję",
+     "do widzenia",
+     "miłego dnia"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Jabłka mam piękne, polskie. Ile?",
+    "en": "I have beautiful Polish apples. How many?",
+    "zh": "我的苹果又漂亮又是本地的。要多少？"
+   },
+   {
+    "s": "L",
+    "pl": "Dzień dobry! Poproszę kilo jabłek.",
+    "en": "Good morning! A kilo of apples, please.",
+    "zh": "早上好！请给我一公斤苹果。"
+   },
+   {
+    "s": "C",
+    "pl": "A truskawki? Słodkie jak miód! Zapakować?",
+    "en": "And strawberries? Sweet as honey! Pack some?",
+    "zh": "那草莓呢？甜得像蜜一样！装点吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Nie, dziękuję. Nie dzisiaj.",
+    "en": "No, thank you. Not today.",
+    "zh": "不用了，谢谢。今天不要。"
+   },
+   {
+    "s": "C",
+    "pl": "Dobrze. Co jeszcze dla {m:pana|f:pani}?",
+    "en": "All right. What else for you?",
+    "zh": "行。您还要点别的什么？"
+   },
+   {
+    "s": "L",
+    "pl": "Poproszę jeszcze pół kilo pomidorów.",
+    "en": "Half a kilo of tomatoes as well, please.",
+    "zh": "还要半公斤西红柿，谢谢。"
+   },
+   {
+    "s": "C",
+    "pl": "Proszę bardzo. To wszystko?",
+    "en": "Here you are. Is that all?",
+    "zh": "给您。就这些吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Tak, to wszystko. Ile płacę?",
+    "en": "Yes, that is all. How much do I pay?",
+    "zh": "对，就这些。一共多少钱？"
+   },
+   {
+    "s": "C",
+    "pl": "Razem czternaście złotych.",
+    "en": "Fourteen zlotys total.",
+    "zh": "一共十四兹罗提。"
+   },
+   {
+    "s": "L",
+    "pl": "Proszę, płacę gotówką.",
+    "en": "Here you go, paying with cash.",
+    "zh": "给您，现金付。"
+   },
+   {
+    "s": "C",
+    "pl": "Dziękuję, złotko. Zapraszam znowu!",
+    "en": "Thank you, sweetheart. Come again!",
+    "zh": "谢谢宝贝。欢迎再来！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Pięknie!",
+    "en": "Lovely!",
+    "zh": "太好了！"
+   },
+   {
+    "pl": "Pyszne są dzisiaj.",
+    "en": "They are delicious today.",
+    "zh": "今天的新鲜好吃。"
+   },
+   {
+    "pl": "Bardzo proszę.",
+    "en": "Here you are.",
+    "zh": "给您。"
+   },
+   {
+    "pl": "Jasne, kochanie.",
+    "en": "Sure, sweetheart.",
+    "zh": "当然，宝贝。"
+   },
+   {
+    "pl": "Oczywiście.",
+    "en": "Of course.",
+    "zh": "当然。"
+   },
+   {
+    "pl": "Już ważę.",
+    "en": "Weighing it now.",
+    "zh": "马上称。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Ile kochanie? Kilo czy dwa?",
+    "en": "How much, dear? A kilo or two?",
+    "zh": "多少，亲爱的？一公斤还是两公斤？"
+   },
+   {
+    "pl": "Przepraszam, jabłka czy pomidory?",
+    "en": "Excuse me, apples or tomatoes?",
+    "zh": "不好意思，是苹果还是西红柿？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u02-swapping-numbers",
+  "beats": [
+   {
+    "goal": "Ask for phone number",
+    "lines": [
+     {
+      "pl": "Jaki masz numer telefonu?",
+      "en": "What is your phone number?",
+      "zh": "你的电话号码是多少？"
+     },
+     {
+      "pl": "Podasz mi swój numer telefonu?",
+      "en": "Will you give me your phone number?",
+      "zh": "你能把电话号码给我吗？"
+     }
+    ],
+    "expect": [
+     "mój numer",
+     "telefonu",
+     "jeden",
+     "dwa",
+     "zero"
+    ]
+   },
+   {
+    "goal": "Repeat digit wrong to invite correction",
+    "lines": [
+     {
+      "pl": "Czekaj, sześć, siedem, dziewięć... Tak?",
+      "en": "Wait, six, seven, nine... Right?",
+      "zh": "等等，六、七、九……对吗？"
+     },
+     {
+      "pl": "Zapisałam siedem. Dobrze mam?",
+      "en": "I wrote down seven. Do I have it right?",
+      "zh": "我记了七。没记错吧？"
+     }
+    ],
+    "expect": [
+     "nie",
+     "tylko",
+     "osiem",
+     "siedem",
+     "źle"
+    ]
+   },
+   {
+    "goal": "Ask to spell email address",
+    "lines": [
+     {
+      "pl": "Super. A jaki masz adres e-mail?",
+      "en": "Great. And what is your email address?",
+      "zh": "太好了。那你的电子邮箱是什么？"
+     },
+     {
+      "pl": "Podaj mi jeszcze swój e-mail, powoli.",
+      "en": "Give me your email too, slowly.",
+      "zh": "再把你的邮箱告诉我吧，慢一点说。"
+     }
+    ],
+    "expect": [
+     "małpa",
+     "kropka",
+     "gmail",
+     "com",
+     "pl"
+    ]
+   },
+   {
+    "goal": "Invite learner to ask Kasia's number",
+    "lines": [
+     {
+      "pl": "Zapisujesz też mój numer w telefonie?",
+      "en": "Are you saving my number in your phone too?",
+      "zh": "你也在手机里存一下我的号码吗？"
+     },
+     {
+      "pl": "Chcesz też mój numer telefonu?",
+      "en": "Do you want my phone number too?",
+      "zh": "你要我的电话号码吗？"
+     }
+    ],
+    "expect": [
+     "a twój",
+     "jaki masz",
+     "numer",
+     "podaj"
+    ]
+   },
+   {
+    "goal": "Confirm saved details and say bye",
+    "lines": [
+     {
+      "pl": "Super, mam! Napiszę jutro. Pa!",
+      "en": "Super, got it! I'll text tomorrow. Bye!",
+      "zh": "太棒了，记下了！我明天发信息。拜拜！"
+     },
+     {
+      "pl": "Dzięki wielkie! Do jutra, cześć!",
+      "en": "Thanks a lot! See you tomorrow, bye!",
+      "zh": "多谢啦！明天见，拜拜！"
+     }
+    ],
+    "expect": [
+     "pa",
+     "cześć",
+     "do jutra",
+     "dzięki"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Jaki masz numer telefonu?",
+    "en": "What is your phone number?",
+    "zh": "你的电话号码是多少？"
+   },
+   {
+    "s": "L",
+    "pl": "Mój numer to pięć, zero, osiem.",
+    "en": "My number is five, zero, eight.",
+    "zh": "我的号码是五、零、八。"
+   },
+   {
+    "s": "C",
+    "pl": "Czekaj, pięć, zero, siedem... Tak?",
+    "en": "Wait, five, zero, seven... Right?",
+    "zh": "等等，五、零、七……对吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Nie siedem, tylko osiem.",
+    "en": "Not seven, but eight.",
+    "zh": "不是七，是八。"
+   },
+   {
+    "s": "C",
+    "pl": "A, okej! A jaki masz adres e-mail?",
+    "en": "Ah, okay! And what is your email address?",
+    "zh": "啊，好的！那你的电子邮箱是什么？"
+   },
+   {
+    "s": "L",
+    "pl": "David małpa gmail kropka com.",
+    "en": "David at gmail dot com.",
+    "zh": "David 艾特 gmail 点 com。"
+   },
+   {
+    "s": "C",
+    "pl": "Mam zapisane. Chcesz też mój numer?",
+    "en": "I have it saved. Do you want my number too?",
+    "zh": "我记下来了。你也要我的号码吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Tak, a twój numer jaki jest?",
+    "en": "Yes, and what is your number?",
+    "zh": "对，你的号码是多少？"
+   },
+   {
+    "s": "C",
+    "pl": "Super, mam! Napiszę jutro. Pa!",
+    "en": "Super, got it! I'll text tomorrow. Bye!",
+    "zh": "太棒了，记下了！我明天发信息。拜拜！"
+   },
+   {
+    "s": "L",
+    "pl": "Dzięki, do jutra! Pa!",
+    "en": "Thanks, see you tomorrow! Bye!",
+    "zh": "谢谢，明天见！拜拜！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Okej, mam.",
+    "en": "Okay, got it.",
+    "zh": "好，记下了。"
+   },
+   {
+    "pl": "Już zapisuję.",
+    "en": "Writing it down now.",
+    "zh": "我这就记。"
+   },
+   {
+    "pl": "Świetnie!",
+    "en": "Great!",
+    "zh": "太好了！"
+   },
+   {
+    "pl": "Czekaj chwilę.",
+    "en": "Wait a second.",
+    "zh": "等一下下。"
+   },
+   {
+    "pl": "Jasne.",
+    "en": "Sure.",
+    "zh": "清楚。"
+   },
+   {
+    "pl": "Dobra robota.",
+    "en": "Good job.",
+    "zh": "干得好。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Szybko mówisz. Możesz podać powoli cyfry?",
+    "en": "You speak fast. Can you give the digits slowly?",
+    "zh": "你说得好快。你能慢慢报数字吗？"
+   },
+   {
+    "pl": "Tam jest gmail czy onet?",
+    "en": "Is it gmail or onet there?",
+    "zh": "那是gmail还是onet？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u02-the-bakery",
+  "beats": [
+   {
+    "goal": "Ask how many rolls learner wants",
+    "lines": [
+     {
+      "pl": "Bułki, chleb? Wszystko świeże.",
+      "en": "Rolls, bread? Everything is fresh.",
+      "zh": "圆面包还是面包？全都是新鲜的。"
+     },
+     {
+      "pl": "Cześć! Ile bułek dzisiaj dla ciebie?",
+      "en": "Hi! How many rolls for you today?",
+      "zh": "嗨！今天给你来几个小圆面包？"
+     }
+    ],
+    "expect": [
+     "poproszę",
+     "bułki",
+     "cztery",
+     "dwa",
+     "chleb"
+    ]
+   },
+   {
+    "goal": "Explain rolls in oven and offer choice",
+    "lines": [
+     {
+      "pl": "Bułki są w piecu. Pięć minut?",
+      "en": "Rolls are in the oven. Five minutes?",
+      "zh": "圆面包还在烤箱里。等五分钟吗？"
+     },
+     {
+      "pl": "Bułki jeszcze gorące. Poczekasz czy chleb?",
+      "en": "Rolls are still hot. Will you wait or take bread?",
+      "zh": "圆面包还热着呢。你等一下还是拿大面包？"
+     }
+    ],
+    "expect": [
+     "poczekam",
+     "chleb",
+     "dobrze",
+     "minut"
+    ]
+   },
+   {
+    "goal": "Answer what else is fresh today",
+    "lines": [
+     {
+      "pl": "Mamy świeży chleb razowy i chałkę.",
+      "en": "We have fresh wholemeal bread and challah.",
+      "zh": "我们有新鲜全麦面包和甜辫子面包。"
+     },
+     {
+      "pl": "Wszystko prosto z pieca. Co wybierasz?",
+      "en": "Everything straight from the oven. What do you choose?",
+      "zh": "全是刚出炉的。你选哪样？"
+     }
+    ],
+    "expect": [
+     "chleb",
+     "razowy",
+     "poproszę",
+     "czy jest"
+    ]
+   },
+   {
+    "goal": "Prompt learner to pay",
+    "lines": [
+     {
+      "pl": "To będzie jedenaście złotych. Karta?",
+      "en": "That will be eleven zlotys. Card?",
+      "zh": "一共十一兹罗提。刷卡吗？"
+     },
+     {
+      "pl": "Razem dziesięć złotych. Jak płacisz?",
+      "en": "Ten zlotys total. How are you paying?",
+      "zh": "一共十兹罗提。你怎么付？"
+     }
+    ],
+    "expect": [
+     "ile płacę",
+     "kartą",
+     "proszę",
+     "gotówką"
+    ]
+   },
+   {
+    "goal": "Hand over baked goods and wrap up",
+    "lines": [
+     {
+      "pl": "Proszę bardzo. Smacznego!",
+      "en": "Here you go. Enjoy your meal!",
+      "zh": "给您。请慢用！"
+     },
+     {
+      "pl": "Dzięki wielkie! Miłego poranka!",
+      "en": "Thanks a lot! Have a nice morning!",
+      "zh": "多谢啦！祝你早晨愉快！"
+     }
+    ],
+    "expect": [
+     "dziękuję",
+     "do widzenia",
+     "miłego dnia",
+     "pa"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Bułki, chleb? Wszystko świeże.",
+    "en": "Rolls, bread? Everything is fresh.",
+    "zh": "圆面包还是面包？全都是新鲜的。"
+   },
+   {
+    "s": "L",
+    "pl": "Cześć! Poproszę cztery bułki.",
+    "en": "Hi! Four rolls, please.",
+    "zh": "嗨！请给我四个小圆面包。"
+   },
+   {
+    "s": "C",
+    "pl": "Bułki są w piecu. Pięć minut?",
+    "en": "Rolls are in the oven. Five minutes?",
+    "zh": "圆面包还在烤箱里。等五分钟吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Dobrze, poczekam pięć minut.",
+    "en": "Fine, I will wait five minutes.",
+    "zh": "好的，我等五分钟。"
+   },
+   {
+    "s": "C",
+    "pl": "Co jeszcze podać? Mamy chleb razowy.",
+    "en": "What else can I get you? We have wholemeal bread.",
+    "zh": "还要点别的吗？我们有全麦面包。"
+   },
+   {
+    "s": "L",
+    "pl": "Czy ten chleb razowy jest świeży?",
+    "en": "Is this wholemeal bread fresh?",
+    "zh": "这个全麦面包新鲜吗？"
+   },
+   {
+    "s": "C",
+    "pl": "Tak, bardzo świeży. Jeden chleb?",
+    "en": "Yes, very fresh. One bread?",
+    "zh": "对，非常新鲜。要一个吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Tak, jeden chleb. Ile płacę?",
+    "en": "Yes, one bread. How much do I pay?",
+    "zh": "对，一个面包。一共多少钱？"
+   },
+   {
+    "s": "C",
+    "pl": "Razem dwanaście złotych.",
+    "en": "Twelve zlotys total.",
+    "zh": "一共十二兹罗提。"
+   },
+   {
+    "s": "L",
+    "pl": "Płacę kartą. Dziękuję!",
+    "en": "I'm paying by card. Thank you!",
+    "zh": "我刷卡。谢谢！"
+   },
+   {
+    "s": "C",
+    "pl": "Proszę bardzo. Smacznego!",
+    "en": "Here you go. Enjoy your meal!",
+    "zh": "给您。请慢用！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Świetnie.",
+    "en": "Great.",
+    "zh": "太好了。"
+   },
+   {
+    "pl": "Okej!",
+    "en": "Okay!",
+    "zh": "好咧！"
+   },
+   {
+    "pl": "Pachnie cudownie.",
+    "en": "Smells wonderful.",
+    "zh": "闻起来真香。"
+   },
+   {
+    "pl": "Już pakuję.",
+    "en": "Packing it now.",
+    "zh": "我这就装袋。"
+   },
+   {
+    "pl": "Jasna sprawa.",
+    "en": "Sure thing.",
+    "zh": "没问题。"
+   },
+   {
+    "pl": "Bardzo proszę.",
+    "en": "You're welcome.",
+    "zh": "不客气。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Przepraszam, ile bułek? Trzy czy cztery?",
+    "en": "Excuse me, how many rolls? Three or four?",
+    "zh": "不好意思，几个圆面包？三个还是四个？"
+   },
+   {
+    "pl": "Chcesz poczekać czy wolisz chleb?",
+    "en": "Do you want to wait or prefer bread?",
+    "zh": "你想等还是想要大面包？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u03-milk-bar",
+  "beats": [
+   {
+    "goal": "Ask which soup customer wants",
+    "lines": [
+     {
+      "pl": "Dzisiaj jest pomidorowa i żurek. Co podać?",
+      "en": "Today we have tomato soup and sour rye soup. What can I get you?",
+      "zh": "今天有番茄汤和酸黑麦汤。要哪个？"
+     },
+     {
+      "pl": "Słucham! Jaką zupę podać na początek?",
+      "en": "Listening! What soup to start with?",
+      "zh": "请讲！开头来碗什么汤？"
+     }
+    ],
+    "expect": [
+     "poproszę",
+     "pomidorową",
+     "żurek",
+     "zupę"
+    ]
+   },
+   {
+    "goal": "Explain ruskie sold out and offer others",
+    "lines": [
+     {
+      "pl": "Ruskie się skończyły. Są z mięsem.",
+      "en": "Ruskie pierogi are finished. There are meat ones.",
+      "zh": "土豆奶酪饺子卖光了。有肉馅的。"
+     },
+     {
+      "pl": "Nie ma ruskich. Polecam pierogi z kapustą.",
+      "en": "No ruskie pierogi left. I recommend cabbage pierogi.",
+      "zh": "没有土豆奶酪饺子了。我推荐酸菜馅饺子。"
+     }
+    ],
+    "expect": [
+     "z mięsem",
+     "z kapustą",
+     "kotlet",
+     "poproszę"
+    ]
+   },
+   {
+    "goal": "Ask about drink and extra side",
+    "lines": [
+     {
+      "pl": "Do tego kompot czy herbata?",
+      "en": "With that, compote or tea?",
+      "zh": "配果脯水还是茶？"
+     },
+     {
+      "pl": "Coś do picia? Jest świeży kompot.",
+      "en": "Something to drink? There is fresh compote.",
+      "zh": "喝点什么？有新鲜果脯水。"
+     }
+    ],
+    "expect": [
+     "kompot",
+     "herbatę",
+     "wodę",
+     "i kompot"
+    ]
+   },
+   {
+    "goal": "State total price and demand payment",
+    "lines": [
+     {
+      "pl": "Razem dwadzieścia cztery złote. Gotówka?",
+      "en": "Twenty-four zlotys total. Cash?",
+      "zh": "一共二十四兹罗提。现金吗？"
+     },
+     {
+      "pl": "Płatność przy kasie. Płaci {m:pan|f:pani} kartą?",
+      "en": "Payment at register. Paying by card?",
+      "zh": "在收银台结账。您刷卡吗？"
+     }
+    ],
+    "expect": [
+     "ile",
+     "płacę",
+     "kartą",
+     "proszę"
+    ]
+   },
+   {
+    "goal": "Hand tray and call next customer",
+    "lines": [
+     {
+      "pl": "Proszę, smacznego. Następny!",
+      "en": "Here you go, enjoy your meal. Next!",
+      "zh": "给您，请慢用。下一位！"
+     },
+     {
+      "pl": "Odbiór za parawanem. Następny, proszę!",
+      "en": "Pickup behind the screen. Next, please!",
+      "zh": "屏风后面取餐。下一位，请！"
+     }
+    ],
+    "expect": [
+     "dziękuję",
+     "do widzenia"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Dzisiaj jest pomidorowa i żurek. Co podać?",
+    "en": "Today we have tomato soup and sour rye soup. What can I get you?",
+    "zh": "今天有番茄汤和酸黑麦汤。要哪个？"
+   },
+   {
+    "s": "L",
+    "pl": "Dzień dobry! Poproszę zupę pomidorową.",
+    "en": "Good morning! Tomato soup, please.",
+    "zh": "早上好！请给我番茄汤。"
+   },
+   {
+    "s": "C",
+    "pl": "A na drugie danie? Kotlet, pierogi?",
+    "en": "And for the main course? Cutlet, pierogi?",
+    "zh": "那第二道主菜呢？炸肉排还是饺子？"
+   },
+   {
+    "s": "L",
+    "pl": "Poproszę pierogi ruskie.",
+    "en": "Ruskie pierogi, please.",
+    "zh": "请给我土豆奶酪饺子。"
+   },
+   {
+    "s": "C",
+    "pl": "Ruskie się skończyły. Są z mięsem.",
+    "en": "Ruskie pierogi are finished. There are meat ones.",
+    "zh": "土豆奶酪饺子卖光了。有肉馅的。"
+   },
+   {
+    "s": "L",
+    "pl": "Dobrze, to poproszę z mięsem.",
+    "en": "All right, meat ones then please.",
+    "zh": "好的，那就来肉馅的吧。"
+   },
+   {
+    "s": "C",
+    "pl": "Do tego kompot czy herbata?",
+    "en": "With that, compote or tea?",
+    "zh": "配果脯水还是茶？"
+   },
+   {
+    "s": "L",
+    "pl": "I kompot, dziękuję. To wszystko.",
+    "en": "And compote, thank you. That is all.",
+    "zh": "还要果脯水，谢谢。就这些。"
+   },
+   {
+    "s": "C",
+    "pl": "Razem dwadzieścia cztery złote. Gotówka?",
+    "en": "Twenty-four zlotys total. Cash?",
+    "zh": "一共二十四兹罗提。现金吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Płacę kartą. Dziękuję!",
+    "en": "I'm paying by card. Thank you!",
+    "zh": "我刷卡。谢谢！"
+   },
+   {
+    "s": "C",
+    "pl": "Proszę, smacznego. Następny!",
+    "en": "Here you go, enjoy your meal. Next!",
+    "zh": "给您，请慢用。下一位！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Dobrze.",
+    "en": "Good.",
+    "zh": "好的。"
+   },
+   {
+    "pl": "Jasne.",
+    "en": "Sure.",
+    "zh": "清楚。"
+   },
+   {
+    "pl": "Już nakładam.",
+    "en": "Serving it now.",
+    "zh": "马上盛出来。"
+   },
+   {
+    "pl": "Proszę czekać.",
+    "en": "Please wait.",
+    "zh": "请稍候。"
+   },
+   {
+    "pl": "Tak jest.",
+    "en": "Yes.",
+    "zh": "行。"
+   },
+   {
+    "pl": "Okej.",
+    "en": "Okay.",
+    "zh": "好。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Głośniej, proszę! Pomidorowa czy żurek?",
+    "en": "Louder, please! Tomato soup or sour rye soup?",
+    "zh": "请大声点！番茄汤还是酸黑麦汤？"
+   },
+   {
+    "pl": "Pierogi z serem czy z mięsem?",
+    "en": "Pierogi with cheese or with meat?",
+    "zh": "奶酪饺子还是肉馅饺子？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u03-dinner-at-tomeks",
+  "beats": [
+   {
+    "goal": "Ask if learner likes bigos",
+    "lines": [
+     {
+      "pl": "Zrobiłem bigos i sałatkę. Lubisz bigos?",
+      "en": "I made bigos and salad. Do you like bigos?",
+      "zh": "我做了猎人炖肉和沙拉。你喜欢猎人炖肉吗？"
+     },
+     {
+      "pl": "Mam świeży domowy bigos. Chcesz spróbować?",
+      "en": "I have fresh homemade bigos. Do you want to try?",
+      "zh": "我有新鲜的自制猎人炖肉。想尝尝吗？"
+     }
+    ],
+    "expect": [
+     "lubię",
+     "nie lubię",
+     "bardzo",
+     "tak",
+     "nie jem"
+    ]
+   },
+   {
+    "goal": "Offer dish with mushrooms to learner",
+    "lines": [
+     {
+      "pl": "Tu są też grzyby leśne. Spróbujesz?",
+      "en": "There are forest mushrooms here too. Will you try?",
+      "zh": "这里还有野蘑菇。你要尝尝吗？"
+     },
+     {
+      "pl": "Dołożyłem grzyby z lasu. Lubisz je?",
+      "en": "I added mushrooms from the forest. Do you like them?",
+      "zh": "我加了树林里采的野蘑菇。你喜欢吗？"
+     }
+    ],
+    "expect": [
+     "nie lubię",
+     "grzybów",
+     "nie jem",
+     "dziękuję"
+    ]
+   },
+   {
+    "goal": "Ask if food is tasty",
+    "lines": [
+     {
+      "pl": "I jak sałatka? Smakuje ci kolacja?",
+      "en": "And how is the salad? Do you like the dinner?",
+      "zh": "沙拉怎么样？晚饭合你胃口吗？"
+     },
+     {
+      "pl": "Dobre jedzenie? Sam wszystko przygotowałem.",
+      "en": "Is the food good? I prepared everything myself.",
+      "zh": "好吃吗？全是我自己亲手做的。"
+     }
+    ],
+    "expect": [
+     "pyszne",
+     "bardzo dobre",
+     "smakuje",
+     "dziękuję"
+    ]
+   },
+   {
+    "goal": "Offer second helping to learner",
+    "lines": [
+     {
+      "pl": "Chcesz dokładkę? Jest jeszcze dużo jedzenia.",
+      "en": "Do you want seconds? There is still lots of food.",
+      "zh": "要再来一份吗？还有很多吃的呢。"
+     },
+     {
+      "pl": "Nałożyć ci jeszcze trochę sałatki?",
+      "en": "Shall I put a bit more salad on your plate?",
+      "zh": "再给你夹点沙拉吗？"
+     }
+    ],
+    "expect": [
+     "już nie mogę",
+     "jeszcze trochę",
+     "dziękuję",
+     "poproszę"
+    ]
+   },
+   {
+    "goal": "Say glad you enjoyed and wrap up",
+    "lines": [
+     {
+      "pl": "Cieszę się, że ci smakowało. Do zobaczenia!",
+      "en": "Glad that you enjoyed it. See you!",
+      "zh": "你喜欢吃我真高兴。回头见！"
+     },
+     {
+      "pl": "Dzięki za miły wieczór. Do zobaczenia!",
+      "en": "Thanks for a lovely evening. See you!",
+      "zh": "谢谢你陪伴的美好夜晚。回头见！"
+     }
+    ],
+    "expect": [
+     "dziękuję",
+     "do zobaczenia",
+     "cześć",
+     "pa"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Zrobiłem bigos i sałatkę. Lubisz bigos?",
+    "en": "I made bigos and salad. Do you like bigos?",
+    "zh": "我做了猎人炖肉和沙拉。你喜欢猎人炖肉吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Tak, bardzo lubię bigos!",
+    "en": "Yes, I really like bigos!",
+    "zh": "对，我很喜欢猎人炖肉！"
+   },
+   {
+    "s": "C",
+    "pl": "Tu są też grzyby leśne. Spróbujesz?",
+    "en": "There are forest mushrooms here too. Will you try?",
+    "zh": "这里还有野蘑菇。你要尝尝吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Nie dziękuję, nie lubię grzybów.",
+    "en": "No thank you, I don't like mushrooms.",
+    "zh": "不用了谢谢，我不喜欢吃蘑菇。"
+   },
+   {
+    "s": "C",
+    "pl": "Okej, rozumiem. A sałatka ci smakuje?",
+    "en": "Okay, I understand. And do you like the salad?",
+    "zh": "好的，理解。沙拉合口味吗？"
+   },
+   {
+    "s": "L",
+    "pl": "To jest pyszne! Gotujesz wspaniale.",
+    "en": "This is delicious! You cook wonderfully.",
+    "zh": "太好吃了！你厨艺真棒。"
+   },
+   {
+    "s": "C",
+    "pl": "Chcesz dokładkę? Jest jeszcze dużo jedzenia.",
+    "en": "Do you want seconds? There is still lots of food.",
+    "zh": "要再来一份吗？还有很多吃的呢。"
+   },
+   {
+    "s": "L",
+    "pl": "Dziękuję, już nie mogę. Jestem {m:pełny|f:pełna}.",
+    "en": "Thank you, I can't eat any more. I'm full.",
+    "zh": "谢谢，我实在吃不下了。我饱了。"
+   },
+   {
+    "s": "C",
+    "pl": "Cieszę się, że ci smakowało. Do zobaczenia!",
+    "en": "Glad that you enjoyed it. See you!",
+    "zh": "你喜欢吃我真高兴。回头见！"
+   },
+   {
+    "s": "L",
+    "pl": "Dziękuję za kolację! Do zobaczenia!",
+    "en": "Thank you for dinner! See you!",
+    "zh": "谢谢你的晚餐！回头见！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Cieszę się!",
+    "en": "I'm glad!",
+    "zh": "我很高兴！"
+   },
+   {
+    "pl": "Nie ma sprawy.",
+    "en": "No worries.",
+    "zh": "没事儿。"
+   },
+   {
+    "pl": "Smacznego!",
+    "en": "Enjoy!",
+    "zh": "请慢用！"
+   },
+   {
+    "pl": "Fajnie, że jesteś.",
+    "en": "Nice having you here.",
+    "zh": "你能来真好。"
+   },
+   {
+    "pl": "Jasne, rozumiem.",
+    "en": "Sure, I understand.",
+    "zh": "当然，我懂。"
+   },
+   {
+    "pl": "Dzięki!",
+    "en": "Thanks!",
+    "zh": "谢谢！"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Nie dosłyszałem. Chcesz jeszcze dokładkę?",
+    "en": "I didn't hear. Do you want seconds?",
+    "zh": "我没听清。你还要再来一份吗？"
+   },
+   {
+    "pl": "Lubisz bigos czy wolisz samą sałatkę?",
+    "en": "Do you like bigos or prefer just salad?",
+    "zh": "你喜欢猎人炖肉还是只想吃沙拉？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u03-shopping-list",
+  "beats": [
+   {
+    "goal": "Ask if we have bread at home",
+    "lines": [
+     {
+      "pl": "Mamy chleb? Bo ja nie mam nic w lodówce.",
+      "en": "Do we have bread? Because I have nothing in the fridge.",
+      "zh": "我们有面包吗？因为我冰箱里什么都没有。"
+     },
+     {
+      "pl": "Sprawdźmy listę. Mamy chleb w domu?",
+      "en": "Let's check the list. Do we have bread at home?",
+      "zh": "我们对一下清单。家里有面包吗？"
+     }
+    ],
+    "expect": [
+     "mamy",
+     "nie mamy",
+     "chleba",
+     "chleb"
+    ]
+   },
+   {
+    "goal": "Ask what items need buying",
+    "lines": [
+     {
+      "pl": "Czego jeszcze potrzebujemy na imprezę?",
+      "en": "What else do we need for the party?",
+      "zh": "聚会我们还需要买什么？"
+     },
+     {
+      "pl": "Co musimy kupić do jedzenia?",
+      "en": "What do we have to buy to eat?",
+      "zh": "我们要买什么吃的？"
+     }
+    ],
+    "expect": [
+     "potrzebuję",
+     "potrzebujemy",
+     "ser",
+     "owoce",
+     "kupmy"
+    ]
+   },
+   {
+    "goal": "Propose buying only crisps",
+    "lines": [
+     {
+      "pl": "Kupmy tylko czipsy i orzeszki, okej?",
+      "en": "Let's buy only crisps and peanuts, okay?",
+      "zh": "我们就光买薯片和花生，好吗？"
+     },
+     {
+      "pl": "Same czipsy wystarczą na wieczór. Co myślisz?",
+      "en": "Just crisps are enough for the evening. What do you think?",
+      "zh": "晚上光吃薯片就够了。你觉得呢？"
+     }
+    ],
+    "expect": [
+     "nie",
+     "owoce",
+     "kupmy",
+     "jabłka",
+     "zdrowe"
+    ]
+   },
+   {
+    "goal": "Ask which drinks to take",
+    "lines": [
+     {
+      "pl": "Dobrze. A jakie napoje bierzemy?",
+      "en": "Fine. And what drinks are we taking?",
+      "zh": "好吧。那我们拿什么饮料？"
+     },
+     {
+      "pl": "Sok pomarańczowy czy woda niegazowana?",
+      "en": "Orange juice or still water?",
+      "zh": "橙汁还是纯净水？"
+     }
+    ],
+    "expect": [
+     "może sok",
+     "wodę",
+     "sok",
+     "napoje"
+    ]
+   },
+   {
+    "goal": "Go to checkout and wrap up",
+    "lines": [
+     {
+      "pl": "Okej, płacimy i idziemy!",
+      "en": "Okay, we pay and go!",
+      "zh": "好啦，买单走人！"
+     },
+     {
+      "pl": "Mamy wszystko. Chodźmy do kasy!",
+      "en": "We have everything. Let's go to the cash desk!",
+      "zh": "东西全齐了。去收银台吧！"
+     }
+    ],
+    "expect": [
+     "chodźmy",
+     "dobrze",
+     "okej",
+     "super"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Mamy chleb? Bo ja nie mam nic w lodówce.",
+    "en": "Do we have bread? Because I have nothing in the fridge.",
+    "zh": "我们有面包吗？因为我冰箱里什么都没有。"
+   },
+   {
+    "s": "L",
+    "pl": "Nie mamy chleba. Mamy tylko ser.",
+    "en": "We don't have bread. We only have cheese.",
+    "zh": "我们没有面包。只有奶酪。"
+   },
+   {
+    "s": "C",
+    "pl": "Czego jeszcze potrzebujemy na imprezę?",
+    "en": "What else do we need for the party?",
+    "zh": "聚会我们还需要买什么？"
+   },
+   {
+    "s": "L",
+    "pl": "Potrzebujemy chleb i pomidory.",
+    "en": "We need bread and tomatoes.",
+    "zh": "我们需要面包和西红柿。"
+   },
+   {
+    "s": "C",
+    "pl": "Kupmy tylko czipsy i orzeszki, okej?",
+    "en": "Let's buy only crisps and peanuts, okay?",
+    "zh": "我们就光买薯片和花生，好吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Nie, to niezdrowe! Kupmy też owoce.",
+    "en": "No, that's unhealthy! Let's buy fruit too.",
+    "zh": "别，那不健康！我们也买点水果吧。"
+   },
+   {
+    "s": "C",
+    "pl": "Dobra, owoce są zdrowe. A co do picia?",
+    "en": "All right, fruit is healthy. And what to drink?",
+    "zh": "好吧，水果健康。喝什么呢？"
+   },
+   {
+    "s": "L",
+    "pl": "Może sok jabłkowy i woda?",
+    "en": "Maybe apple juice and water?",
+    "zh": "苹果汁和水怎么样？"
+   },
+   {
+    "s": "C",
+    "pl": "Okej, płacimy i idziemy!",
+    "en": "Okay, we pay and go!",
+    "zh": "好啦，买单走人！"
+   },
+   {
+    "s": "L",
+    "pl": "Super, chodźmy do kasy!",
+    "en": "Super, let's go to the cash desk!",
+    "zh": "太棒了，去收银台吧！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Świetny pomysł!",
+    "en": "Great idea!",
+    "zh": "好主意！"
+   },
+   {
+    "pl": "Masz rację.",
+    "en": "You are right.",
+    "zh": "你说得对。"
+   },
+   {
+    "pl": "Jasne, bierzemy.",
+    "en": "Sure, let's take it.",
+    "zh": "好，拿上。"
+   },
+   {
+    "pl": "Dobra.",
+    "en": "All right.",
+    "zh": "行。"
+   },
+   {
+    "pl": "Okej, pasuje.",
+    "en": "Okay, suits me.",
+    "zh": "好的，没问题。"
+   },
+   {
+    "pl": "No tak.",
+    "en": "Yeah, right.",
+    "zh": "确实。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Co wybierasz? Sok czy colę?",
+    "en": "What do you choose? Juice or cola?",
+    "zh": "你选哪个？果汁还是可乐？"
+   },
+   {
+    "pl": "Nie słyszałam cię w sklepie. Powtórzysz?",
+    "en": "I didn't hear you in the store. Will you repeat?",
+    "zh": "店里太吵我没听清。你能再说一遍吗？"
+   }
+  ]
+ },
+ {
+  "id": "pl-call-u03-wrong-order",
+  "beats": [
+   {
+    "goal": "Check if served drink is fine",
+    "lines": [
+     {
+      "pl": "Wszystko w porządku?",
+      "en": "Is everything fine?",
+      "zh": "一切都好吗？"
+     },
+     {
+      "pl": "Proszę bardzo. Smakuje herbata?",
+      "en": "Here you go. Is the tea good?",
+      "zh": "请用。茶合口味吗？"
+     }
+    ],
+    "expect": [
+     "przepraszam",
+     "nie",
+     "zamawiałem",
+     "zamawiałam",
+     "kawa"
+    ]
+   },
+   {
+    "goal": "Acknowledge mistake and explain oat milk out",
+    "lines": [
+     {
+      "pl": "Ojej, pomyłka! Ale mleka owsianego brak.",
+      "en": "Oh dear, a mistake! But we're out of oat milk.",
+      "zh": "哎呀，弄错了！不过今天燕麦奶用完了。"
+     },
+     {
+      "pl": "Przepraszam! Zrobię kawę, ale bez mleka owsianego.",
+      "en": "Sorry! I'll make coffee, but without oat milk.",
+      "zh": "对不起！我重新做咖啡，但没有燕麦奶了。"
+     }
+    ],
+    "expect": [
+     "nie ma problemu",
+     "może być",
+     "zwykłe mleko",
+     "czarna",
+     "kawa"
+    ]
+   },
+   {
+    "goal": "Ask how learner wants replacement coffee",
+    "lines": [
+     {
+      "pl": "Może być zwykłe mleko czy czarna?",
+      "en": "Can it be regular milk or black?",
+      "zh": "加普通牛奶可以吗，还是纯黑咖啡？"
+     },
+     {
+      "pl": "Zrobić z mlekiem krowim czy bez?",
+      "en": "Make it with cow's milk or without?",
+      "zh": "做加牛奶的还是不加奶的？"
+     }
+    ],
+    "expect": [
+     "może być",
+     "z mlekiem",
+     "czarna",
+     "bez cukru"
+    ]
+   },
+   {
+    "goal": "Hand correct coffee with apology",
+    "lines": [
+     {
+      "pl": "Proszę, świeża ciepła kawa. Przepraszam!",
+      "en": "Here you go, fresh warm coffee. Sorry!",
+      "zh": "给您，刚做好的热咖啡。抱歉！"
+     },
+     {
+      "pl": "Już gotowe! Kawa dla {m:pana|f:pani}.",
+      "en": "Ready now! Coffee for you.",
+      "zh": "做好了！您的咖啡。"
+     }
+    ],
+    "expect": [
+     "dziękuję",
+     "nie ma za co",
+     "jest w porządku",
+     "super"
+    ]
+   },
+   {
+    "goal": "Apologise once more and wrap up",
+    "lines": [
+     {
+      "pl": "Jeszcze raz przepraszam! Miłego dnia!",
+      "en": "Apologies once again! Have a nice day!",
+      "zh": "再次抱歉！祝您愉快！"
+     },
+     {
+      "pl": "Bardzo dziękuję za cierpliwość. Do widzenia!",
+      "en": "Thank you very much for patience. Goodbye!",
+      "zh": "非常感谢您的耐心包容。再见！"
+     }
+    ],
+    "expect": [
+     "miłego dnia",
+     "dziękuję",
+     "do widzenia",
+     "do zobaczenia"
+    ]
+   }
+  ],
+  "example": [
+   {
+    "s": "C",
+    "pl": "Wszystko w porządku?",
+    "en": "Is everything fine?",
+    "zh": "一切都好吗？"
+   },
+   {
+    "s": "L",
+    "pl": "Przepraszam, ale {m:zamawiałem|f:zamawiałam} kawę.",
+    "en": "Excuse me, but I ordered coffee.",
+    "zh": "不好意思，但我点的是咖啡。"
+   },
+   {
+    "s": "C",
+    "pl": "Ojej, pomyłka! Ale mleka owsianego brak.",
+    "en": "Oh dear, a mistake! But we're out of oat milk.",
+    "zh": "哎呀，弄错了！不过今天燕麦奶用完了。"
+   },
+   {
+    "s": "L",
+    "pl": "Nie ma problemu. Może być zwykłe.",
+    "en": "No problem. Regular milk can do.",
+    "zh": "没关系。普通牛奶也可以。"
+   },
+   {
+    "s": "C",
+    "pl": "Może być zwykłe mleko czy czarna?",
+    "en": "Can it be regular milk or black?",
+    "zh": "加普通牛奶可以吗，还是纯黑咖啡？"
+   },
+   {
+    "s": "L",
+    "pl": "Może być z mlekiem. Bez cukru, proszę.",
+    "en": "It can be with milk. No sugar, please.",
+    "zh": "可以加奶。请不要放糖。"
+   },
+   {
+    "s": "C",
+    "pl": "Proszę, świeża ciepła kawa. Przepraszam!",
+    "en": "Here you go, fresh warm coffee. Sorry!",
+    "zh": "给您，刚做好的热咖啡。抱歉！"
+   },
+   {
+    "s": "L",
+    "pl": "Dziękuję bardzo, teraz jest super.",
+    "en": "Thank you very much, now it is great.",
+    "zh": "非常感谢，现在完美了。"
+   },
+   {
+    "s": "C",
+    "pl": "Jeszcze raz przepraszam! Miłego dnia!",
+    "en": "Apologies once again! Have a nice day!",
+    "zh": "再次抱歉！祝您愉快！"
+   },
+   {
+    "s": "L",
+    "pl": "Dziękuję, miłego dnia! Do widzenia!",
+    "en": "Thank you, have a nice day! Goodbye!",
+    "zh": "谢谢，祝你愉快！再见！"
+   }
+  ],
+  "reactions": [
+   {
+    "pl": "Oczywiście.",
+    "en": "Of course.",
+    "zh": "当然。"
+   },
+   {
+    "pl": "Już poprawiam.",
+    "en": "Correcting it right away.",
+    "zh": "马上重做。"
+   },
+   {
+    "pl": "Przepraszam bardzo.",
+    "en": "I am very sorry.",
+    "zh": "实在抱歉。"
+   },
+   {
+    "pl": "Jasne.",
+    "en": "Sure.",
+    "zh": "明白。"
+   },
+   {
+    "pl": "Bez problemu.",
+    "en": "No problem.",
+    "zh": "没问题。"
+   },
+   {
+    "pl": "W porządku.",
+    "en": "All right.",
+    "zh": "好的。"
+   }
+  ],
+  "repair": [
+   {
+    "pl": "Przepraszam, woli {m:pan|f:pani} kawę czarną czy z mlekiem?",
+    "en": "Excuse me, do you prefer black coffee or with milk?",
+    "zh": "不好意思，您喜欢黑咖啡还是加奶咖啡？"
+   },
+   {
+    "pl": "Nie zrozumiałam. Z cukrem czy bez?",
+    "en": "I didn't understand. With sugar or without?",
+    "zh": "我没听懂。加糖还是不加糖？"
+   }
+  ]
+ }
+]
+

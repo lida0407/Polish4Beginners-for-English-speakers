@@ -1,0 +1,332 @@
+Each lesson is a short voice role-play: a character (played by a small on-device AI model) talks with a beginner learner. The small model is weak at planning and at grammar, so for every lesson write a step-by-step plan with ready-made, perfectly correct lines it can use or copy.
+
+For each scenario write:
+1. "beats": the call in 5-7 steps, in order. Step 1 is the character's first question (use the given first_question as the first line). Then one step per mission task, the complication step where it fits, and a last step "wrap up". Each beat has:
+   - "goal": what the character does in this step, in English, imperative, max 8 words (e.g. "Ask where she is from").
+   - "lines": 2 or 3 alternative things the character can say for this step, each 1-2 short sentences, at the scenario's level. The lines must invite the learner to do the matching mission task (ask, offer a choice, prompt).
+   - "expect": 3-6 short words or stems the learner's answer would likely contain if they did the task (in the language being learnt, lower case, e.g. "chin", "jestem z", "from"). Used to tick the step.
+   The last beat's first line must be exactly the given closer.
+2. "example": a model call of 8-10 lines alternating character / learner, as it should go at this level, using the learner phrases. Speaker is "C" or "L".
+3. "reactions": 6 short neutral or positive reactions the character can say to almost anything (e.g. "Ah, I see.", "Great!", "Really?"), in the character's style.
+4. "repair": 2 lines the character says when it did not understand (ask to repeat, offer two choices).
+
+Level rules: A1 = present tense, very common words, max 8 words per sentence. A2 = past and future allowed, max 12 words per sentence.
+
+Language being learnt: POLISH. Every line must be correct, natural spoken Polish with all diacritics, in the character's register (given per scenario: formal pan/pani, or informal ty). When a line addresses the learner and the Polish form depends on the learner's gender, write both forms as {m:male form|f:female form} around the smallest part that changes, e.g. "Skąd {m:pan jest|f:pani jest}?" or "Jesteś {m:głodny|f:głodna}?". Use this token only for the learner's gender, never for the character's own.
+Every line is an object {"pl": "...", "en": "...", "zh": "..."}: the Polish, a natural English translation, and natural Simplified Chinese (for the zh side of a gender token line, translate neutrally). "expect" stays Polish only.
+
+Output ONLY a JSON array, no prose, no code fences. One object per input scenario, same order:
+{"id": same as input,
+ "beats": [{"goal": "...", "lines": [{"pl":"...","en":"...","zh":"..."}], "expect": ["..."]}],
+ "example": [{"s": "C", "pl": "...", "en": "...", "zh": "..."}, {"s": "L", ...}],
+ "reactions": [{"pl":"...","en":"...","zh":"..."}],
+ "repair": [{"pl":"...","en":"...","zh":"..."}]}
+Keep the JSON valid with straight double quotes. Do not write or edit any files.
+
+Scenarios:
+[
+ {
+  "id": "pl-call-u07-at-the-doctor",
+  "level": "A2",
+  "character": "Doktor Nowak",
+  "bio": "45, Ewa Nowak, a family doctor",
+  "register": "formal (pan/pani)",
+  "scene": "Doktor Nowak's surgery",
+  "learner_role": "a patient",
+  "mission": [
+   "Describe your symptoms",
+   "Say how long you've had them",
+   "Ask a question about the treatment"
+  ],
+  "complication": "She asks if you're allergic to anything; you're allergic to penicillin.",
+  "opener": "Dzień dobry. Proszę usiąść.",
+  "first_question": "Co dolega?",
+  "closer": "Proszę brać te tabletki i odpoczywać. Dużo zdrowia!",
+  "phrases": [
+   "Boli mnie głowa / gardło",
+   "Mam gorączkę",
+   "Od trzech dni",
+   "Jestem uczulony / uczulona na penicylinę",
+   "Ile razy dziennie?",
+   "Czy mogę iść do pracy?"
+  ]
+ },
+ {
+  "id": "pl-call-u07-pharmacy",
+  "level": "A2",
+  "character": "Pani Ela",
+  "bio": "40, a pharmacist",
+  "register": "neutral",
+  "scene": "a pharmacy; you need something for a cold",
+  "learner_role": "a customer",
+  "mission": [
+   "Say what's wrong",
+   "Ask for something without a prescription",
+   "Ask how to take it"
+  ],
+  "complication": "What you ask for needs a prescription; she suggests something else.",
+  "opener": "Dzień dobry, słucham?",
+  "first_question": "{m:Czego pan szuka?|f:Czego pani szuka?}",
+  "closer": "Proszę dużo pić i odpoczywać. Do widzenia!",
+  "phrases": [
+   "Mam katar i kaszel",
+   "Poproszę coś na przeziębienie",
+   "Czy to jest na receptę?",
+   "Jak to brać?",
+   "Dwa razy dziennie, po jedzeniu"
+  ]
+ },
+ {
+  "id": "pl-call-u07-calling-in-sick",
+  "level": "A2",
+  "character": "Ania",
+  "bio": "35, the learner's team lead at work, from Warsaw",
+  "register": "informal (ty)",
+  "scene": "you call Ania, your team lead, early in the morning",
+  "learner_role": "a member of her team",
+  "mission": [
+   "Say you're ill and can't come in",
+   "Say what's wrong",
+   "Agree what happens with today's meeting"
+  ],
+  "complication": "She asks if you could join the meeting online.",
+  "opener": "Halo, cześć! Coś się stało?",
+  "first_question": "Wszystko w porządku?",
+  "closer": "Wracaj do zdrowia! Odezwij się jutro.",
+  "phrases": [
+   "Jestem chory / chora",
+   "Dzisiaj nie przyjdę do pracy",
+   "Mam gorączkę",
+   "Czy możemy przełożyć spotkanie?",
+   "Mogę dołączyć online",
+   "Wrócę w czwartek"
+  ]
+ },
+ {
+  "id": "pl-call-u07-at-the-gym",
+  "level": "A2",
+  "character": "Tomek",
+  "bio": "31, physiotherapist, the learner's friend",
+  "register": "informal (ty)",
+  "scene": "Tomek takes you to his gym for the first time",
+  "learner_role": "his friend",
+  "mission": [
+   "Say what sport you do and how often",
+   "Say what's hard for you",
+   "Agree on a plan"
+  ],
+  "complication": "He pushes you to try something too hard; say it hurts.",
+  "opener": "No to co, ćwiczymy?",
+  "first_question": "Jaki sport lubisz?",
+  "closer": "Brawo! Do następnego razu!",
+  "phrases": [
+   "Gram w piłkę",
+   "Pływam",
+   "Biegam dwa razy w tygodniu",
+   "To za trudne",
+   "Boli mnie kolano",
+   "Zróbmy przerwę"
+  ]
+ },
+ {
+  "id": "pl-call-u08-your-weekend",
+  "level": "A2",
+  "character": "Kasia",
+  "bio": "22, computer science student, the learner's friend",
+  "register": "informal (ty)",
+  "scene": "Monday morning coffee with Kasia",
+  "learner_role": "her friend",
+  "mission": [
+   "Say two things you did at the weekend",
+   "Say where you were",
+   "Ask about her weekend"
+  ],
+  "complication": "She doesn't believe your story; add one more detail.",
+  "opener": "No i jak tam weekend?",
+  "first_question": "{m:Co robiłeś?|f:Co robiłaś?}",
+  "closer": "Dobra, lecę na zajęcia. Pa!",
+  "phrases": [
+   "Byłem / byłam w kinie",
+   "Spotkałem / spotkałam się z przyjaciółmi",
+   "Odpoczywałem / odpoczywałam",
+   "Było super / nudno",
+   "A ty co robiłaś?"
+  ]
+ },
+ {
+  "id": "pl-call-u08-trip-to-gdansk",
+  "level": "A2",
+  "character": "Pan Marek",
+  "bio": "68, retired tram driver, the learner's neighbour",
+  "register": "formal (pan/pani)",
+  "scene": "Pan Marek asks about your trip to Gdańsk",
+  "learner_role": "his neighbour",
+  "mission": [
+   "Say how you travelled and how long it took",
+   "Say what you saw",
+   "Say what you liked most"
+  ],
+  "complication": "He insists Kraków is more beautiful; disagree politely.",
+  "opener": "{m:O, dzień dobry! Podobno był pan nad morzem?|f:O, dzień dobry! Podobno była pani nad morzem?}",
+  "first_question": "Jak było w Gdańsku?",
+  "closer": "No, następnym razem proszę mi przywieźć bursztyn! Do widzenia.",
+  "phrases": [
+   "Pojechałem / pojechałam pociągiem",
+   "Podróż trwała pięć godzin",
+   "Widziałem / widziałam stare miasto",
+   "Najbardziej podobało mi się morze",
+   "Moim zdaniem…"
+  ]
+ },
+ {
+  "id": "pl-call-u08-funny-story",
+  "level": "A2",
+  "character": "Tomek",
+  "bio": "31, physiotherapist, the learner's friend",
+  "register": "informal (ty)",
+  "scene": "an evening chat; Tomek has a story and wants to hear yours",
+  "learner_role": "his friend",
+  "mission": [
+   "Tell a short story about something that happened to you",
+   "React to his story",
+   "Use first, then, finally"
+  ],
+  "complication": "He interrupts with questions; answer and carry on.",
+  "opener": "Nie uwierzysz, co mi się dzisiaj stało!",
+  "first_question": "A tobie przydarzyło się dzisiaj coś ciekawego?",
+  "closer": "Ha! Dobra historia. Dobranoc!",
+  "phrases": [
+   "Najpierw…, potem…, w końcu…",
+   "Nie uwierzysz!",
+   "Zgubiłem / zgubiłam telefon",
+   "Na szczęście…",
+   "Niestety…",
+   "Naprawdę?"
+  ]
+ },
+ {
+  "id": "pl-call-u08-lost-wallet",
+  "level": "A2",
+  "character": "Sierżant Lis",
+  "bio": "40, Piotr Lis, a police officer at the city police station",
+  "register": "neutral",
+  "scene": "a police station; your wallet was stolen on the tram",
+  "learner_role": "the person reporting it",
+  "mission": [
+   "Say what happened and when",
+   "Describe the wallet and what was in it",
+   "Give your contact details"
+  ],
+  "complication": "He asks where exactly it happened, and you're not sure.",
+  "opener": "Dzień dobry. W czym mogę pomóc?",
+  "first_question": "Co się stało?",
+  "closer": "Zgłoszenie przyjęte. Zadzwonimy, jeśli coś znajdziemy.",
+  "phrases": [
+   "Ukradli mi portfel",
+   "W tramwaju, wczoraj wieczorem",
+   "Był czarny, skórzany",
+   "Były w nim karty i dowód osobisty",
+   "Nie jestem pewny / pewna"
+  ]
+ },
+ {
+  "id": "pl-call-u09-return-jacket",
+  "level": "A2",
+  "character": "Pani Monika",
+  "bio": "28, a shop assistant in a clothes store",
+  "register": "neutral",
+  "scene": "a clothes shop; the jacket you bought is too small",
+  "learner_role": "a customer",
+  "mission": [
+   "Say you want to return or exchange it",
+   "Say what's wrong",
+   "Choose another size or colour"
+  ],
+  "complication": "You don't have the receipt; you paid by card.",
+  "opener": "Dzień dobry! W czym mogę pomóc?",
+  "first_question": "Coś nie tak z kurtką?",
+  "closer": "Gotowe. Dziękujemy i zapraszamy ponownie!",
+  "phrases": [
+   "Chciałbym / chciałabym oddać tę kurtkę",
+   "Jest za mała",
+   "Czy mogę wymienić na większą?",
+   "Nie mam paragonu",
+   "Płaciłem / płaciłam kartą"
+  ]
+ },
+ {
+  "id": "pl-call-u09-post-office",
+  "level": "A2",
+  "character": "Pani Wiesia",
+  "bio": "57, a clerk at the post office",
+  "register": "neutral",
+  "scene": "the post office; you're sending a parcel abroad",
+  "learner_role": "a customer",
+  "mission": [
+   "Say where you're sending it",
+   "Choose fast or cheap",
+   "Answer her questions about the contents"
+  ],
+  "complication": "The parcel is too big for the box; buy a bigger one.",
+  "opener": "Następny, proszę.",
+  "first_question": "Dokąd paczka?",
+  "closer": "Proszę, tu jest numer przesyłki. Do widzenia.",
+  "phrases": [
+   "Chcę wysłać paczkę do Anglii",
+   "Ile to potrwa?",
+   "Jak najtaniej",
+   "W środku są książki",
+   "Poproszę większe pudełko"
+  ]
+ },
+ {
+  "id": "pl-call-u09-bank-account",
+  "level": "A2",
+  "character": "Pan Tadeusz",
+  "bio": "45, an adviser at a bank branch",
+  "register": "neutral",
+  "scene": "a bank branch",
+  "learner_role": "a new customer",
+  "mission": [
+   "Say you want to open an account",
+   "Answer his questions about ID and address",
+   "Ask about the card and fees"
+  ],
+  "complication": "You need a Polish phone number; give one or ask what else works.",
+  "opener": "Dzień dobry, zapraszam. Proszę usiąść.",
+  "first_question": "Jak mogę pomóc?",
+  "closer": "Wszystko gotowe. Karta przyjdzie pocztą.",
+  "phrases": [
+   "Chcę założyć konto",
+   "Mam paszport",
+   "Mój adres to…",
+   "Ile kosztuje karta?",
+   "Czy jest opłata za konto?"
+  ]
+ },
+ {
+  "id": "pl-call-u09-hairdresser",
+  "level": "A2",
+  "character": "Pani Jola",
+  "bio": "38, a hairdresser who loves to chat",
+  "register": "neutral",
+  "scene": "a hair salon",
+  "learner_role": "a client",
+  "mission": [
+   "Say what you want: a trim, shorter, a colour",
+   "Say how short",
+   "Chat about your week"
+  ],
+  "complication": "She starts cutting too much; stop her politely.",
+  "opener": "Dzień dobry! Siadamy!",
+  "first_question": "To co robimy?",
+  "closer": "I gotowe! Jak się podoba?",
+  "phrases": [
+   "Tylko podciąć",
+   "Krótko po bokach",
+   "Nie za krótko, proszę",
+   "Chwileczkę, wystarczy!",
+   "Bardzo mi się podoba"
+  ]
+ }
+]

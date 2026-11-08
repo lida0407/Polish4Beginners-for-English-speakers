@@ -1,0 +1,331 @@
+Each lesson is a short voice role-play: a character (played by a small on-device AI model) talks with a beginner learner. The small model is weak at planning and at grammar, so for every lesson write a step-by-step plan with ready-made, perfectly correct lines it can use or copy.
+
+For each scenario write:
+1. "beats": the call in 5-7 steps, in order. Step 1 is the character's first question (use the given first_question as the first line). Then one step per mission task, the complication step where it fits, and a last step "wrap up". Each beat has:
+   - "goal": what the character does in this step, in English, imperative, max 8 words (e.g. "Ask where she is from").
+   - "lines": 2 or 3 alternative things the character can say for this step, each 1-2 short sentences, at the scenario's level. The lines must invite the learner to do the matching mission task (ask, offer a choice, prompt).
+   - "expect": 3-6 short words or stems the learner's answer would likely contain if they did the task (in the language being learnt, lower case, e.g. "chin", "jestem z", "from"). Used to tick the step.
+   The last beat's first line must be exactly the given closer.
+2. "example": a model call of 8-10 lines alternating character / learner, as it should go at this level, using the learner phrases. Speaker is "C" or "L".
+3. "reactions": 6 short neutral or positive reactions the character can say to almost anything (e.g. "Ah, I see.", "Great!", "Really?"), in the character's style.
+4. "repair": 2 lines the character says when it did not understand (ask to repeat, offer two choices).
+
+Level rules: A1 = present tense, very common words, max 8 words per sentence. A2 = past and future allowed, max 12 words per sentence.
+
+Language being learnt: ENGLISH (the learner is a Chinese speaker). Every line must be natural, friendly spoken English at the level. Every line is an object {"en": "...", "zh": "..."}: the English and natural Simplified Chinese. "expect" stays English only.
+
+Output ONLY a JSON array, no prose, no code fences. One object per input scenario, same order:
+{"id": same as input,
+ "beats": [{"goal": "...", "lines": [{"en":"...","zh":"..."}], "expect": ["..."]}],
+ "example": [{"s": "C", "en": "...", "zh": "..."}, {"s": "L", ...}],
+ "reactions": [{"en":"...","zh":"..."}],
+ "repair": [{"en":"...","zh":"..."}]}
+Keep the JSON valid with straight double quotes. Do not write or edit any files.
+
+Scenarios:
+[
+ {
+  "id": "en-call-u07-at-the-doctor",
+  "level": "A2",
+  "character": "Dr Nowak",
+  "bio": "45, Ewa Nowak, a family doctor",
+  "register": "friendly, natural spoken English",
+  "scene": "Dr Nowak's clinic in Kraków.",
+  "learner_role": "a patient",
+  "mission": [
+   "Describe your symptoms clearly.",
+   "Say how long you've felt unwell.",
+   "Ask a question about your treatment or medication."
+  ],
+  "complication": "Dr Nowak asks if you're allergic to any medication; you're allergic to penicillin.",
+  "opener": "Good morning. Please have a seat.",
+  "first_question": "What seems to be the problem today?",
+  "closer": "Take these tablets and get plenty of rest. Get well soon!",
+  "phrases": [
+   "I have a headache and a sore throat.",
+   "I have a fever.",
+   "I've had these symptoms for three days.",
+   "I'm allergic to penicillin.",
+   "How many times a day should I take this?",
+   "Can I go to work tomorrow?"
+  ]
+ },
+ {
+  "id": "en-call-u07-pharmacy",
+  "level": "A2",
+  "character": "Ela",
+  "bio": "40, a pharmacist",
+  "register": "neutral",
+  "scene": "A pharmacy in Kraków; you need something for a cold.",
+  "learner_role": "a customer",
+  "mission": [
+   "Explain what cold symptoms you have.",
+   "Ask for medicine that doesn't need a prescription.",
+   "Ask how and when to take it."
+  ],
+  "complication": "The medicine you ask for needs a prescription, but Ela suggests an over-the-counter alternative.",
+  "opener": "Hello! How can I help you today?",
+  "first_question": "What kind of medicine are you looking for?",
+  "closer": "Drink plenty of warm water and get some rest. Goodbye!",
+  "phrases": [
+   "I have a runny nose and a bad cough.",
+   "Could I have something for a cold, please?",
+   "Do I need a prescription for this?",
+   "How should I take this medicine?",
+   "Take it twice a day, after meals."
+  ]
+ },
+ {
+  "id": "en-call-u07-calling-in-sick",
+  "level": "A2",
+  "character": "Ania",
+  "bio": "35, the learner's team lead at work, from Warsaw",
+  "register": "friendly, natural spoken English",
+  "scene": "You call Ania, your team lead, early in the morning before work.",
+  "learner_role": "a team member",
+  "mission": [
+   "Say you're unwell and can't come in today.",
+   "Briefly describe what's wrong.",
+   "Agree on what to do about today's meeting."
+  ],
+  "complication": "Ania asks if you could still join the key meeting online from home.",
+  "opener": "Hi there! Is everything all right?",
+  "first_question": "Are you feeling okay?",
+  "closer": "Get well soon! Check in with me tomorrow morning.",
+  "phrases": [
+   "I'm not feeling well today.",
+   "I won't be able to come to work today.",
+   "I have a fever and feel quite dizzy.",
+   "Could we reschedule our meeting?",
+   "I can join the meeting online if needed.",
+   "I should be back in the office on Thursday."
+  ]
+ },
+ {
+  "id": "en-call-u07-at-the-gym",
+  "level": "A2",
+  "character": "Tomek",
+  "bio": "31, physiotherapist, the learner's friend",
+  "register": "friendly, natural spoken English",
+  "scene": "Tomek takes you to his local gym in Kraków for the first time.",
+  "learner_role": "his friend",
+  "mission": [
+   "Say what sports you play and how often you exercise.",
+   "Say when an exercise feels too hard or painful.",
+   "Agree on a suitable workout plan together."
+  ],
+  "complication": "Tomek encourages you to try a heavier exercise, but your knee starts hurting.",
+  "opener": "Hey! Ready for a good workout?",
+  "first_question": "What sports or exercises do you usually enjoy?",
+  "closer": "Great effort today! See you next time!",
+  "phrases": [
+   "I play football on weekends.",
+   "I go swimming once a week.",
+   "I go for a run twice a week.",
+   "That's a bit too hard for me.",
+   "My right knee hurts a little.",
+   "Let's take a short break."
+  ]
+ },
+ {
+  "id": "en-call-u08-your-weekend",
+  "level": "A2",
+  "character": "Kasia",
+  "bio": "22, computer science student, the learner's friend",
+  "register": "friendly, natural spoken English",
+  "scene": "Monday morning coffee with your friend Kasia in Kraków.",
+  "learner_role": "her friend",
+  "mission": [
+   "Mention two things you did over the weekend.",
+   "Say where you went.",
+   "Ask Kasia how her weekend went."
+  ],
+  "complication": "Kasia teasingly doubts your weekend was that exciting; give one more specific detail.",
+  "opener": "Morning! How was your weekend?",
+  "first_question": "Did you do anything fun?",
+  "closer": "Sounds fun! I have to run to class now. See you later!",
+  "phrases": [
+   "I went to the cinema on Saturday.",
+   "I met up with some friends for lunch.",
+   "I mostly stayed home and rested.",
+   "It was really great!",
+   "What about you? What did you do?"
+  ]
+ },
+ {
+  "id": "en-call-u08-trip-to-gdansk",
+  "level": "A2",
+  "character": "Marek",
+  "bio": "68, retired tram driver, the learner's neighbour",
+  "register": "friendly, natural spoken English",
+  "scene": "Your neighbour Marek asks about your recent trip to Gdańsk, a historic port city on Poland's Baltic coast.",
+  "learner_role": "his neighbour",
+  "mission": [
+   "Explain how you travelled there and how long it took.",
+   "Describe what sights you saw.",
+   "Share what you enjoyed the most."
+  ],
+  "complication": "Marek insists that Kraków is much more beautiful; disagree with him politely.",
+  "opener": "Hello there! I hear you've been away at the seaside?",
+  "first_question": "How was Gdańsk? Did you enjoy it?",
+  "closer": "Well, next time bring me back some amber! Take care.",
+  "phrases": [
+   "I went by train from Kraków.",
+   "The journey took about five hours.",
+   "I visited the beautiful Old Town.",
+   "I liked the sea the most.",
+   "In my opinion, both cities are lovely."
+  ]
+ },
+ {
+  "id": "en-call-u08-funny-story",
+  "level": "A2",
+  "character": "Tomek",
+  "bio": "31, physiotherapist, the learner's friend",
+  "register": "friendly, natural spoken English",
+  "scene": "An evening catch-up; Tomek shares a story and wants to hear yours.",
+  "learner_role": "his friend",
+  "mission": [
+   "Tell a short story about an unexpected thing that happened to you.",
+   "React naturally to his story.",
+   "Use sequence words: first, then, and finally."
+  ],
+  "complication": "Tomek keeps interrupting with curious questions; answer him and finish your story.",
+  "opener": "You won't believe what happened to me today!",
+  "first_question": "Did anything interesting happen to you recently?",
+  "closer": "Haha, what a story! Glad it worked out. Good night!",
+  "phrases": [
+   "You won't believe what happened!",
+   "First, I couldn't find my phone anywhere.",
+   "Then I realised I left it on the tram.",
+   "Luckily, a passenger gave it to the driver.",
+   "Finally, I got it back this afternoon.",
+   "Really? That sounds crazy!"
+  ]
+ },
+ {
+  "id": "en-call-u08-lost-wallet",
+  "level": "A2",
+  "character": "Officer Lis",
+  "bio": "40, Piotr Lis, a police officer at the city police station",
+  "register": "neutral",
+  "scene": "A police station in Kraków; your wallet was stolen on the tram.",
+  "learner_role": "the person reporting the theft",
+  "mission": [
+   "Explain what happened and approximately when it occurred.",
+   "Describe the wallet and list what was inside it.",
+   "Provide your phone number and contact details."
+  ],
+  "complication": "Officer Lis asks exactly which stop you were near when it happened, but you aren't sure.",
+  "opener": "Good afternoon. How can I help you?",
+  "first_question": "Could you tell me what happened?",
+  "closer": "I've taken your report. We'll call you if we find anything.",
+  "phrases": [
+   "My wallet was stolen on the tram.",
+   "It happened yesterday evening around six.",
+   "It was a black leather wallet.",
+   "My bank cards and ID card were inside.",
+   "I'm not completely sure which stop it was."
+  ]
+ },
+ {
+  "id": "en-call-u09-return-jacket",
+  "level": "A2",
+  "character": "Monika",
+  "bio": "28, a shop assistant in a clothes store",
+  "register": "neutral",
+  "scene": "A clothes store in Kraków; the jacket you bought is too small.",
+  "learner_role": "a customer",
+  "mission": [
+   "State that you want to return or exchange the jacket.",
+   "Explain why it doesn't fit.",
+   "Ask to try a bigger size or another colour."
+  ],
+  "complication": "You don't have the paper receipt, but you have the card transaction on your phone.",
+  "opener": "Hello! How can I help you today?",
+  "first_question": "Is there something wrong with the jacket?",
+  "closer": "Here's your new receipt, all sorted! Have a great day!",
+  "phrases": [
+   "I'd like to return this jacket, please.",
+   "It's a bit too small for me.",
+   "Can I exchange it for a bigger size?",
+   "I don't have the paper receipt.",
+   "I paid by card, so I have the record here."
+  ]
+ },
+ {
+  "id": "en-call-u09-post-office",
+  "level": "A2",
+  "character": "Wiesia",
+  "bio": "57, a clerk at the post office",
+  "register": "neutral",
+  "scene": "A post office in Kraków; you are sending a parcel abroad.",
+  "learner_role": "a customer",
+  "mission": [
+   "State the destination country of the parcel.",
+   "Choose between standard or express delivery.",
+   "Answer questions about the parcel's contents."
+  ],
+  "complication": "Your parcel is too large for your box; you need to buy a bigger box from Wiesia.",
+  "opener": "Next customer, please!",
+  "first_question": "Where would you like to send this parcel?",
+  "closer": "Here's your receipt with the tracking number. Have a good day!",
+  "phrases": [
+   "I'd like to send this parcel to the UK.",
+   "How long will delivery take?",
+   "I'd prefer the cheapest option, please.",
+   "There are only some books inside.",
+   "Could I get a bigger box, please?"
+  ]
+ },
+ {
+  "id": "en-call-u09-bank-account",
+  "level": "A2",
+  "character": "Tadeusz",
+  "bio": "45, an adviser at a bank branch",
+  "register": "neutral",
+  "scene": "A bank branch in Kraków.",
+  "learner_role": "a new customer",
+  "mission": [
+   "Explain that you would like to open a bank account.",
+   "Provide your passport and address information.",
+   "Ask about debit card fees and monthly account charges."
+  ],
+  "complication": "Tadeusz explains you need a local Polish phone number; provide one or ask if an international number is accepted.",
+  "opener": "Good morning. Please come in and take a seat.",
+  "first_question": "How can I help you today?",
+  "closer": "All done! Your debit card will arrive in the post in a few days.",
+  "phrases": [
+   "I'd like to open a bank account, please.",
+   "Here is my passport and proof of address.",
+   "My current address is in Kraków.",
+   "How much is the debit card?",
+   "Is there a monthly account fee?"
+  ]
+ },
+ {
+  "id": "en-call-u09-hairdresser",
+  "level": "A2",
+  "character": "Jola",
+  "bio": "38, a hairdresser who loves to chat",
+  "register": "neutral",
+  "scene": "A hair salon in Kraków; Jola loves chatting while she cuts hair.",
+  "learner_role": "a client",
+  "mission": [
+   "Explain what you want done with your hair.",
+   "Specify how short you want the sides and top.",
+   "Make friendly small talk about your week."
+  ],
+  "complication": "Jola starts cutting a bit too much off; stop her politely before it gets too short.",
+  "opener": "Hello! Come on over and have a seat!",
+  "first_question": "So, what are we doing with your hair today?",
+  "closer": "All finished! How do you like your new haircut?",
+  "phrases": [
+   "Just a light trim, please.",
+   "Short at the sides, please.",
+   "Not too short on top, please.",
+   "Just a moment, that's short enough, thank you!",
+   "I really like it, thank you!"
+  ]
+ }
+]

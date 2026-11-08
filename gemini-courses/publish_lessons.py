@@ -50,6 +50,61 @@ def L(**kw):
     return {k: v for k, v in kw.items() if v is not None}
 
 
+TOKEN = re.compile(r"\{m:[^|{}]+\|f:[^|{}]+\}")
+
+
+def norm(t):
+    return re.sub(r"[^\w]+", " ", TOKEN.sub("", t or "").lower()).strip()
+
+
+def director_layer(lang):
+    """id -> director dict from director/batches/out_<lang>_*.json (Gemini via Antigravity)."""
+    merged = {}
+    for f in sorted((HERE / "director" / "batches").glob(f"out_{lang}_*.json")):
+        t = f.read_text(encoding="utf-8").strip()
+        if "[" not in t:
+            continue
+        for it in json.loads(t[t.index("["):t.rindex("]") + 1]):
+            merged[it.get("id")] = it
+    return merged
+
+
+def check_director(d, lesson, target, support_keys):
+    """Validate and normalise one lesson's director. Returns (director, problem)."""
+    def line_ok(x, keys):
+        if not isinstance(x, dict) or not str(x.get(target, "")).strip():
+            return False
+        if target != "zh" and CJK.search(x[target]):
+            return False
+        if "zh" in keys and not CJK.search(str(x.get("zh", ""))):
+            return False
+        if x[target].count("{") != len(TOKEN.findall(x[target])):
+            return False
+        return all(str(x.get(k, "")).strip() for k in keys)
+    beats = d.get("beats") or []
+    if not 4 <= len(beats) <= 8:
+        return None, f"{len(beats)} beats"
+    for b in beats:
+        if not str(b.get("goal", "")).strip() or not 1 <= len(b.get("lines", [])) <= 4 or not b.get("expect"):
+            return None, f"bad beat {str(b)[:80]}"
+        bad = [x for x in b["lines"] if not line_ok(x, support_keys)]
+        if bad:
+            return None, f"bad line {str(bad[0])[:100]}"
+        b["expect"] = [str(e).lower().strip() for e in b["expect"] if str(e).strip()]
+    first, closer = lesson["first_question"], lesson["closer"]
+    if norm(beats[0]["lines"][0][target]) != norm(first[target]):
+        beats[0]["lines"].insert(0, {k: v for k, v in first.items()})
+    if norm(beats[-1]["lines"][0][target]) != norm(closer[target]):
+        beats[-1]["lines"].insert(0, {k: v for k, v in closer.items()})
+    ex = d.get("example") or []
+    if len(ex) < 6 or any(e.get("s") not in ("C", "L") or not line_ok(e, support_keys) for e in ex):
+        return None, "bad example"
+    for k, lo in (("reactions", 4), ("repair", 1)):
+        if len(d.get(k) or []) < lo or not all(line_ok(x, support_keys) for x in d[k]):
+            return None, f"bad {k}"
+    return {"beats": beats, "example": ex, "reactions": d["reactions"], "repair": d["repair"]}, None
+
+
 def zh_layer():
     merged = {}
     for f in sorted((HERE / "pl-zh" / "batches").glob("out_*.json")):
@@ -179,6 +234,29 @@ def main():
                 "\"what they said → better English (why)\"), Try next time (2 phrases), Scores: accuracy N/5, range N/5, "
                 "one sentence of encouragement.\nTranscript:\n{{transcript}}")
 
+    director_problems = []
+    layers = {"pl": director_layer("pl"), "en": director_layer("en")}
+    for p in packs:
+        layer = layers[p["target"]]
+        if not layer:
+            continue
+        keys = [k for k in ("en", "zh") if k != p["target"]]
+        if p["target"] == "pl":
+            keys = ["en", "zh"]
+        for u in p["units"]:
+            for l in u["lessons"]:
+                d = layer.get(l["id"].replace("pl-call-", "call-"))  or layer.get(l["id"])
+                if d is None:
+                    director_problems.append(f"{p['id']}/{l['id']}: no director")
+                    continue
+                import copy
+                fixed, err = check_director(copy.deepcopy(d), l, p["target"], keys)
+                if err:
+                    director_problems.append(f"{p['id']}/{l['id']}: {err}")
+                else:
+                    l["director"] = fixed
+    if director_problems:
+        print(f"director: {len(director_problems)} problems (those lessons ship without it):\n  " + "\n  ".join(director_problems[:40]))
     old = {}
     cat_path = share / "catalog.json"
     if cat_path.exists():

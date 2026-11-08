@@ -1,0 +1,1959 @@
+[
+  {
+    "id": "en-call-u10-job-interview",
+    "beats": [
+      {
+        "goal": "Ask candidate to introduce themselves",
+        "lines": [
+          {
+            "en": "Could you tell me a little about yourself?",
+            "zh": "你能向我做个自我介绍吗？"
+          },
+          {
+            "en": "To start, please introduce yourself and your background.",
+            "zh": "首先，请介绍一下你自己和你的背景。"
+          }
+        ],
+        "expect": ["programmer", "years", "working", "experience", "speak"]
+      },
+      {
+        "goal": "Ask why they want this position",
+        "lines": [
+          {
+            "en": "Why are you interested in this position?",
+            "zh": "你为什么对这个职位感兴趣？"
+          },
+          {
+            "en": "What made you apply to our company?",
+            "zh": "是什么吸引你申请我们公司的？"
+          }
+        ],
+        "expect": ["interested", "position", "company", "because", "skills"]
+      },
+      {
+        "goal": "Ask about candidate's weaknesses",
+        "lines": [
+          {
+            "en": "What would you consider your biggest weakness?",
+            "zh": "你认为自己最大的缺点是什么？"
+          },
+          {
+            "en": "Could you share one area you want to improve?",
+            "zh": "你能分享一个你想改进的方面吗？"
+          }
+        ],
+        "expect": ["weakness", "sometimes", "improve", "hard", "trying"]
+      },
+      {
+        "goal": "Invite candidate to ask a question",
+        "lines": [
+          {
+            "en": "Do you have any questions for me about the role?",
+            "zh": "关于这个职位，你有什么问题要问我吗？"
+          },
+          {
+            "en": "What would you like to know about our team?",
+            "zh": "关于我们团队，你想了解些什么？"
+          }
+        ],
+        "expect": ["remote", "work", "team", "option", "project"]
+      },
+      {
+        "goal": "Wrap up the interview",
+        "lines": [
+          {
+            "en": "Thank you for your time. We'll be in touch next week.",
+            "zh": "感谢你的宝贵时间。我们下周会与你联系。"
+          },
+          {
+            "en": "Thanks for joining today. Have a wonderful afternoon!",
+            "zh": "感谢你今天参加面试。祝你下午愉快！"
+          }
+        ],
+        "expect": ["thank", "touch", "nice", "meeting", "bye"]
+      }
+    ],
+    "example": [
+      {
+        "s": "C",
+        "en": "Good morning. Could you tell me a little about yourself?",
+        "zh": "早上好。你能向我做个自我介绍吗？"
+      },
+      {
+        "s": "L",
+        "en": "I've been working as a programmer for five years.",
+        "zh": "我已经做了五年的程序员了。"
+      },
+      {
+        "s": "C",
+        "en": "That sounds great. Why are you interested in this position?",
+        "zh": "听起来很棒。你为什么对这个职位感兴趣？"
+      },
+      {
+        "s": "L",
+        "en": "I'm interested in this position because I love your products.",
+        "zh": "我对这个职位感兴趣，是因为我非常喜欢你们的产品。"
+      },
+      {
+        "s": "C",
+        "en": "Nice. What is one of your greatest weaknesses?",
+        "zh": "很好。你最大的缺点之一是什么？"
+      },
+      {
+        "s": "L",
+        "en": "Sometimes I focus too much on small details.",
+        "zh": "有时候我过于关注细节了。"
+      },
+      {
+        "s": "C",
+        "en": "I see. Do you have any questions for me?",
+        "zh": "我明白了。你有什么问题想问我吗？"
+      },
+      {
+        "s": "L",
+        "en": "Is remote work an option for this role?",
+        "zh": "这个职位可以选择远程办公吗？"
+      },
+      {
+        "s": "C",
+        "en": "Thank you for your time. We'll be in touch next week.",
+        "zh": "感谢你的宝贵时间。我们下周会与你联系。"
+      },
+      {
+        "s": "L",
+        "en": "Thank you very much. Have a great day!",
+        "zh": "非常感谢您。祝您有美好的一天！"
+      }
+    ],
+    "reactions": [
+      {
+        "en": "That sounds very interesting.",
+        "zh": "听起来很有意思。"
+      },
+      {
+        "en": "I understand completely.",
+        "zh": "我完全理解。"
+      },
+      {
+        "en": "That is good to know.",
+        "zh": "了解到这一点很好。"
+      },
+      {
+        "en": "Thank you for sharing that.",
+        "zh": "感谢你的分享。"
+      },
+      {
+        "en": "That makes a lot of sense.",
+        "zh": "这很有道理。"
+      },
+      {
+        "en": "Excellent point.",
+        "zh": "讲得非常好。"
+      }
+    ],
+    "repair": [
+      {
+        "en": "Sorry, could you repeat that last part?",
+        "zh": "抱歉，你能把最后那部分再说一遍吗？"
+      },
+      {
+        "en": "Did you mean your current job or your past experience?",
+        "zh": "你的意思是指你目前的工作，还是过去的经验？"
+      }
+    ]
+  },
+  {
+    "id": "en-call-u10-language-course",
+    "beats": [
+      {
+        "goal": "Ask learner about course and current level",
+        "lines": [
+          {
+            "en": "Which course are you interested in?",
+            "zh": "你对哪门课程感兴趣？"
+          },
+          {
+            "en": "Welcome! What language level are you looking for?",
+            "zh": "欢迎！你在寻找什么语言级别的课程？"
+          }
+        ],
+        "expect": ["level", "currently", "improve", "speaking", "polish"]
+      },
+      {
+        "goal": "Ask learner for preferred schedule",
+        "lines": [
+          {
+            "en": "Which days and times work best for you?",
+            "zh": "哪几天、什么时间对你最方便？"
+          },
+          {
+            "en": "Do you prefer morning classes or evening classes?",
+            "zh": "你更喜欢上午的课还是晚上的课？"
+          }
+        ],
+        "expect": ["prefer", "evening", "twice", "week", "tuesday"]
+      },
+      {
+        "goal": "Explain group is full and offer alternative",
+        "lines": [
+          {
+            "en": "That evening group is full. Can you do weekends?",
+            "zh": "那个晚班已经满了。周末你可以吗？"
+          },
+          {
+            "en": "Sorry, that group is full. Does Wednesday morning work?",
+            "zh": "抱歉，那个班满员了。周三上午合适吗？"
+          }
+        ],
+        "expect": ["weekend", "saturday", "morning", "fine", "work"]
+      },
+      {
+        "goal": "Invite questions about price and materials",
+        "lines": [
+          {
+            "en": "Do you have questions about the price or materials?",
+            "zh": "关于学费或教材，你有什么问题吗？"
+          },
+          {
+            "en": "What else would you like to ask about the course?",
+            "zh": "关于课程，你还想咨询什么？"
+          }
+        ],
+        "expect": ["much", "course", "textbook", "included", "price"]
+      },
+      {
+        "goal": "Wrap up course registration",
+        "lines": [
+          {
+            "en": "Great, see you at the first class!",
+            "zh": "太好了，第一堂课见！"
+          },
+          {
+            "en": "All set! We will see you next Monday.",
+            "zh": "全部办妥了！下周一见。"
+          }
+        ],
+        "expect": ["thank", "see", "class", "monday", "bye"]
+      }
+    ],
+    "example": [
+      {
+        "s": "C",
+        "en": "Hello! Which course are you interested in?",
+        "zh": "你好！你对哪门课程感兴趣？"
+      },
+      {
+        "s": "L",
+        "en": "I'm currently at level A2. I want to improve my speaking.",
+        "zh": "我目前是A2水平。我想提高口语。"
+      },
+      {
+        "s": "C",
+        "en": "Great! Which days and times work best for you?",
+        "zh": "太好了！哪几天和什么时间最适合你？"
+      },
+      {
+        "s": "L",
+        "en": "I'd prefer evening classes twice a week.",
+        "zh": "我比较想上一周两次的晚班。"
+      },
+      {
+        "s": "C",
+        "en": "That group is full. Can you do Saturday mornings instead?",
+        "zh": "那个班已经满了。换成周六上午可以吗？"
+      },
+      {
+        "s": "L",
+        "en": "Saturday morning works for me.",
+        "zh": "周六上午对我挺合适的。"
+      },
+      {
+        "s": "C",
+        "en": "Perfect. Do you have any other questions?",
+        "zh": "很好。你还有其他问题吗？"
+      },
+      {
+        "s": "L",
+        "en": "How much is the course? Is the textbook included?",
+        "zh": "课程多少钱？包含教材吗？"
+      },
+      {
+        "s": "C",
+        "en": "Great, see you at the first class!",
+        "zh": "太好了，第一堂课见！"
+      },
+      {
+        "s": "L",
+        "en": "Thank you, see you on Saturday!",
+        "zh": "谢谢你，周六见！"
+      }
+    ],
+    "reactions": [
+      {
+        "en": "Sounds good to me.",
+        "zh": "我觉得挺好。"
+      },
+      {
+        "en": "No problem at all.",
+        "zh": "完全没问题。"
+      },
+      {
+        "en": "That is very popular.",
+        "zh": "那门课很受欢迎。"
+      },
+      {
+        "en": "Sure thing.",
+        "zh": "当然可以。"
+      },
+      {
+        "en": "We can easily do that.",
+        "zh": "这个我们完全可以安排。"
+      },
+      {
+        "en": "Got it.",
+        "zh": "明白了。"
+      }
+    ],
+    "repair": [
+      {
+        "en": "Sorry, could you say that again?",
+        "zh": "抱歉，你能再说一遍吗？"
+      },
+      {
+        "en": "Are you asking about weekdays or weekends?",
+        "zh": "你是在问平日还是周末？"
+      }
+    ]
+  },
+  {
+    "id": "en-call-u10-ask-for-help",
+    "beats": [
+      {
+        "goal": "Ask if teammate needs help",
+        "lines": [
+          {
+            "en": "Do you need a hand with something?",
+            "zh": "你需要帮忙吗？"
+          },
+          {
+            "en": "Hi! Did you want to ask me something?",
+            "zh": "嗨！你想问我什么事吗？"
+          }
+        ],
+        "expect": ["hand", "help", "problem", "report", "table"]
+      },
+      {
+        "goal": "Ask teammate to explain the problem",
+        "lines": [
+          {
+            "en": "Sure! What is the problem with the report?",
+            "zh": "当然！报告出了什么问题？"
+          },
+          {
+            "en": "Tell me more. What part is giving you trouble?",
+            "zh": "具体说说，哪一部分让你感到困扰？"
+          }
+        ],
+        "expect": ["understand", "table", "numbers", "data", "report"]
+      },
+      {
+        "goal": "State busy until three and propose time",
+        "lines": [
+          {
+            "en": "I'm busy until three. Can we meet then?",
+            "zh": "我三点前都很忙。我们三点见可以吗？"
+          },
+          {
+            "en": "I have meetings now. Are you free after three?",
+            "zh": "我现在有会。三点后你有空吗？"
+          }
+        ],
+        "expect": ["three", "convenient", "works", "fine", "meet"]
+      },
+      {
+        "goal": "Confirm meeting time and ask about deadline",
+        "lines": [
+          {
+            "en": "When do you need to submit the report?",
+            "zh": "你需要在什么时候提交这份报告？"
+          },
+          {
+            "en": "What is the final deadline for this file?",
+            "zh": "这份文件的最终截止时间是什么时候？"
+          }
+        ],
+        "expect": ["tomorrow", "friday", "today", "need", "finish"]
+      },
+      {
+        "goal": "Wrap up conversation with agreed plan",
+        "lines": [
+          {
+            "en": "OK, come by my desk at three. See you then!",
+            "zh": "好的，三点来我办公桌找我。到时见！"
+          },
+          {
+            "en": "Sounds like a plan. See you at three!",
+            "zh": "就这么定啦。三点见！"
+          }
+        ],
+        "expect": ["thanks", "desk", "great", "help", "see"]
+      }
+    ],
+    "example": [
+      {
+        "s": "C",
+        "en": "Hi! What's up? Do you need a hand with something?",
+        "zh": "嗨！怎么了？你需要帮忙吗？"
+      },
+      {
+        "s": "L",
+        "en": "Could you give me a hand with this report?",
+        "zh": "你能帮我看一下这份报告吗？"
+      },
+      {
+        "s": "C",
+        "en": "Sure. What is the problem with it?",
+        "zh": "当然。它有什么问题？"
+      },
+      {
+        "s": "L",
+        "en": "I don't really understand this table.",
+        "zh": "我不太看得懂这个表格。"
+      },
+      {
+        "s": "C",
+        "en": "I'm busy until three o'clock. Can we meet then?",
+        "zh": "我三点前都很忙。我们三点见面行吗？"
+      },
+      {
+        "s": "L",
+        "en": "Yes, three o'clock works for me.",
+        "zh": "好的，三点对我没问题。"
+      },
+      {
+        "s": "C",
+        "en": "When do you need to finish this by?",
+        "zh": "你需要在什么时候完成？"
+      },
+      {
+        "s": "L",
+        "en": "By tomorrow morning, so three is perfect.",
+        "zh": "明天早上之前，所以三点刚刚好。"
+      },
+      {
+        "s": "C",
+        "en": "OK, come by my desk at three. See you then!",
+        "zh": "好的，三点来我办公桌找我。到时见！"
+      },
+      {
+        "s": "L",
+        "en": "Thanks so much, you've been a great help!",
+        "zh": "太感谢了，你帮了大忙！"
+      }
+    ],
+    "reactions": [
+      {
+        "en": "Sure, no worries.",
+        "zh": "没问题，别担心。"
+      },
+      {
+        "en": "I can help with that.",
+        "zh": "这事我能帮忙。"
+      },
+      {
+        "en": "That makes sense.",
+        "zh": "有道理。"
+      },
+      {
+        "en": "Don't worry about it.",
+        "zh": "别太担心。"
+      },
+      {
+        "en": "We will solve it together.",
+        "zh": "我们一起解决它。"
+      },
+      {
+        "en": "Good to know.",
+        "zh": "知道了。"
+      }
+    ],
+    "repair": [
+      {
+        "en": "Sorry, which part did you mean?",
+        "zh": "抱歉，你指的是哪一部分？"
+      },
+      {
+        "en": "Can you say that once more, please?",
+        "zh": "请你再说一遍好吗？"
+      }
+    ]
+  },
+  {
+    "id": "en-call-u10-move-meeting",
+    "beats": [
+      {
+        "goal": "Ask reason for moving tomorrow's meeting",
+        "lines": [
+          {
+            "en": "Is this about tomorrow's meeting?",
+            "zh": "这是关于明天的会议吗？"
+          },
+          {
+            "en": "Are you calling about our meeting tomorrow?",
+            "zh": "你找我是关于我们明天的会议吗？"
+          }
+        ],
+        "expect": ["cannot", "make", "tomorrow", "came", "reschedule"]
+      },
+      {
+        "goal": "Ask learner to suggest new time",
+        "lines": [
+          {
+            "en": "I see. What day and time do you prefer?",
+            "zh": "明白了。你希望安排在哪一天、什么时间？"
+          },
+          {
+            "en": "When would you like to reschedule it for?",
+            "zh": "你想改约在什么时候？"
+          }
+        ],
+        "expect": ["thursday", "friday", "move", "another", "work"]
+      },
+      {
+        "goal": "Explain team free only Friday morning",
+        "lines": [
+          {
+            "en": "The team is only free on Friday morning.",
+            "zh": "团队其他人只有周五上午有空。"
+          },
+          {
+            "en": "Thursday is fully booked. How about Friday morning?",
+            "zh": "周四全排满了。周五上午怎么样？"
+          }
+        ],
+        "expect": ["friday", "morning", "works", "good", "fine"]
+      },
+      {
+        "goal": "Ask learner to confirm new appointment",
+        "lines": [
+          {
+            "en": "Does Friday morning work for you as well?",
+            "zh": "周五上午对你来说也合适吗？"
+          },
+          {
+            "en": "Shall we confirm Friday at ten o'clock?",
+            "zh": "我们定在周五上午十点好吗？"
+          }
+        ],
+        "expect": ["confirmed", "sounds", "perfect", "yes", "good"]
+      },
+      {
+        "goal": "Wrap up and promise calendar invite",
+        "lines": [
+          {
+            "en": "All right, I'll send out a new invite. Talk later!",
+            "zh": "好的，我会发送新的邀请邮件。回头聊！"
+          },
+          {
+            "en": "Great, I'll update the calendar right now. Bye!",
+            "zh": "太好了，我现在就更新日历。拜拜！"
+          }
+        ],
+        "expect": ["thanks", "talk", "later", "invite", "bye"]
+      }
+    ],
+    "example": [
+      {
+        "s": "C",
+        "en": "Hey! Is this about tomorrow's meeting?",
+        "zh": "嗨！这是关于明天的会议吗？"
+      },
+      {
+        "s": "L",
+        "en": "I can't make it tomorrow because something came up.",
+        "zh": "我明天去不了了，因为突然有点急事。"
+      },
+      {
+        "s": "C",
+        "en": "No problem. Could we move it to another day?",
+        "zh": "没问题。我们可以换一天吗？"
+      },
+      {
+        "s": "L",
+        "en": "Does Thursday work for you?",
+        "zh": "周四对你合适吗？"
+      },
+      {
+        "s": "C",
+        "en": "The rest of the team is only free on Friday morning.",
+        "zh": "团队其他人只有周五上午有空。"
+      },
+      {
+        "s": "L",
+        "en": "Friday morning works for me.",
+        "zh": "周五上午我可以。"
+      },
+      {
+        "s": "C",
+        "en": "Can we confirm it for ten in the morning?",
+        "zh": "我们确定在上午十点可以吗？"
+      },
+      {
+        "s": "L",
+        "en": "Sounds good, it's confirmed!",
+        "zh": "听起来不错，就这么定下了！"
+      },
+      {
+        "s": "C",
+        "en": "All right, I'll send out a new invite. Talk later!",
+        "zh": "好的，我会发送新的邀请邮件。回头聊！"
+      },
+      {
+        "s": "L",
+        "en": "Thanks Ania, talk to you later!",
+        "zh": "谢谢阿妮亚，回头聊！"
+      }
+    ],
+    "reactions": [
+      {
+        "en": "That works for me.",
+        "zh": "我没问题。"
+      },
+      {
+        "en": "I understand completely.",
+        "zh": "我完全理解。"
+      },
+      {
+        "en": "No worries at all.",
+        "zh": "完全用不着担心。"
+      },
+      {
+        "en": "Thanks for letting me know.",
+        "zh": "谢谢你通知我。"
+      },
+      {
+        "en": "Sounds great.",
+        "zh": "听起来很棒。"
+      },
+      {
+        "en": "That makes things easier.",
+        "zh": "这样事情就容易多了。"
+      }
+    ],
+    "repair": [
+      {
+        "en": "Sorry, did you mean Thursday or Friday?",
+        "zh": "抱歉，你的意思是周四还是周五？"
+      },
+      {
+        "en": "Could you please repeat the time?",
+        "zh": "你能把时间重复一遍吗？"
+      }
+    ]
+  },
+  {
+    "id": "en-call-u11-hotel-check-in",
+    "beats": [
+      {
+        "goal": "Ask guest for reservation name",
+        "lines": [
+          {
+            "en": "What name is the booking under?",
+            "zh": "预订登记在谁的名下？"
+          },
+          {
+            "en": "Welcome to Zakopane! May I have your name?",
+            "zh": "欢迎来到扎科帕内！请问您的姓名是？"
+          }
+        ],
+        "expect": ["reservation", "name", "under", "booked", "booking"]
+      },
+      {
+        "goal": "Ask if guest needs hotel information",
+        "lines": [
+          {
+            "en": "Do you need information about breakfast or Wi-Fi?",
+            "zh": "您需要关于早餐或Wi-Fi的信息吗？"
+          },
+          {
+            "en": "Is there anything you would like to ask about?",
+            "zh": "您对宾馆设施有什么想了解的吗？"
+          }
+        ],
+        "expect": ["time", "breakfast", "served", "wifi", "password"]
+      },
+      {
+        "goal": "Ask guest about their room issue",
+        "lines": [
+          {
+            "en": "Did you notice any problem with your room?",
+            "zh": "您发现房间有什么问题吗？"
+          },
+          {
+            "en": "How is the room? Is everything all right?",
+            "zh": "房间怎么样？一切都还满意吗？"
+          }
+        ],
+        "expect": ["room", "noisy", "street", "quiet", "faces"]
+      },
+      {
+        "goal": "Handle room change request",
+        "lines": [
+          {
+            "en": "I can move you to a quiet garden room.",
+            "zh": "我可以帮您换到面向花园的安静房间。"
+          },
+          {
+            "en": "Would you like a quieter room on the second floor?",
+            "zh": "您想要二楼更安静的房间吗？"
+          }
+        ],
+        "expect": ["change", "possible", "quieter", "please", "yes"]
+      },
+      {
+        "goal": "Wrap up check-in with room key",
+        "lines": [
+          {
+            "en": "Here's your key. Enjoy your stay!",
+            "zh": "这是您的钥匙。祝您入住愉快！"
+          },
+          {
+            "en": "Here are your keys. Have a great vacation!",
+            "zh": "这是您的钥匙。祝您假期愉快！"
+          }
+        ],
+        "expect": ["thank", "key", "stay", "much", "bye"]
+      }
+    ],
+    "example": [
+      {
+        "s": "C",
+        "en": "Good evening! What name is the booking under?",
+        "zh": "晚上好！预订登记在谁的名下？"
+      },
+      {
+        "s": "L",
+        "en": "I have a reservation under the name Li.",
+        "zh": "我有一个李姓下的预订。"
+      },
+      {
+        "s": "C",
+        "en": "Found it. Do you need any hotel information?",
+        "zh": "找到了。您需要什么宾馆信息吗？"
+      },
+      {
+        "s": "L",
+        "en": "What time is breakfast served? And the Wi-Fi password?",
+        "zh": "早餐几点供应？还有Wi-Fi密码是多少？"
+      },
+      {
+        "s": "C",
+        "en": "Breakfast is at seven. Did you check your room?",
+        "zh": "早餐七点开始。您去看过房间了吗？"
+      },
+      {
+        "s": "L",
+        "en": "The room is very noisy because it faces the street.",
+        "zh": "房间很吵，因为它是临街的。"
+      },
+      {
+        "s": "C",
+        "en": "I'm sorry. Is it possible you want another room?",
+        "zh": "很抱歉。您是想要换一间房间吗？"
+      },
+      {
+        "s": "L",
+        "en": "Yes, is it possible to change rooms?",
+        "zh": "是的，可以换个房间吗？"
+      },
+      {
+        "s": "C",
+        "en": "Here's your key. Enjoy your stay!",
+        "zh": "这是您的新钥匙。祝您入住愉快！"
+      },
+      {
+        "s": "L",
+        "en": "Thank you so much for your help!",
+        "zh": "非常感谢您的帮助！"
+      }
+    ],
+    "reactions": [
+      {
+        "en": "Certainly, sir.",
+        "zh": "当然可以，先生。"
+      },
+      {
+        "en": "Right away.",
+        "zh": "马上为您办理。"
+      },
+      {
+        "en": "I completely understand.",
+        "zh": "我完全理解。"
+      },
+      {
+        "en": "Let me check that.",
+        "zh": "让我为您查一下。"
+      },
+      {
+        "en": "You are very welcome.",
+        "zh": "非常乐意为您效劳。"
+      },
+      {
+        "en": "No trouble at all.",
+        "zh": "一点也不麻烦。"
+      }
+    ],
+    "repair": [
+      {
+        "en": "Could you spell your last name, please?",
+        "zh": "请问能拼写一下您的姓氏吗？"
+      },
+      {
+        "en": "Did you ask about breakfast or about the Wi-Fi?",
+        "zh": "您刚才问的是早餐还是Wi-Fi？"
+      }
+    ]
+  },
+  {
+    "id": "en-call-u11-plan-tatras",
+    "beats": [
+      {
+        "goal": "Ask whether to travel by train or bus",
+        "lines": [
+          {
+            "en": "How should we go: by train or by bus?",
+            "zh": "我们怎么去：坐火车还是坐大巴？"
+          },
+          {
+            "en": "Should we take the train or the bus tomorrow?",
+            "zh": "我们明天是坐火车还是坐大巴？"
+          }
+        ],
+        "expect": ["train", "bus", "take", "instead", "better"]
+      },
+      {
+        "goal": "Tell bus sold out and decide transport",
+        "lines": [
+          {
+            "en": "The bus is sold out! What should we do?",
+            "zh": "大巴票卖光了！我们该怎么办？"
+          },
+          {
+            "en": "There are no bus tickets left. Any ideas?",
+            "zh": "大巴票一张都没了。有什么主意吗？"
+          }
+        ],
+        "expect": ["train", "tickets", "instead", "book", "seats"]
+      },
+      {
+        "goal": "Ask where to stay overnight",
+        "lines": [
+          {
+            "en": "Where should we spend the night?",
+            "zh": "我们在哪里过夜呢？"
+          },
+          {
+            "en": "Do you want a hotel or a mountain hostel?",
+            "zh": "你想住酒店还是住山间青年旅社？"
+          }
+        ],
+        "expect": ["stay", "mountain", "hostel", "hotel", "cabin"]
+      },
+      {
+        "goal": "Split tasks and packing responsibilities",
+        "lines": [
+          {
+            "en": "How should we split the tasks between us?",
+            "zh": "我们怎么分工准备？"
+          },
+          {
+            "en": "Who is getting the tickets and the trail map?",
+            "zh": "谁来买票，谁来带路线地图？"
+          }
+        ],
+        "expect": ["book", "tickets", "bring", "trail", "map"]
+      },
+      {
+        "goal": "Wrap up mountain trip plans",
+        "lines": [
+          {
+            "en": "Awesome, it's going to be great! See you Saturday!",
+            "zh": "太棒了，一定会超好玩的！周六见！"
+          },
+          {
+            "en": "All set! Pack your warm clothes. See you soon!",
+            "zh": "全定好了！多带点保暖衣服。回头见！"
+          }
+        ],
+        "expect": ["see", "saturday", "awesome", "great", "ready"]
+      }
+    ],
+    "example": [
+      {
+        "s": "C",
+        "en": "Hey! How should we go: by train or by bus?",
+        "zh": "嗨！我们怎么去：坐火车还是坐大巴？"
+      },
+      {
+        "s": "L",
+        "en": "Let's take the bus, it's usually faster.",
+        "zh": "我们坐大巴吧，通常更快一些。"
+      },
+      {
+        "s": "C",
+        "en": "Oh no, the bus is completely sold out!",
+        "zh": "哎呀，大巴票完全卖光了！"
+      },
+      {
+        "s": "L",
+        "en": "Let's take the train instead.",
+        "zh": "那我们改坐火车吧。"
+      },
+      {
+        "s": "C",
+        "en": "Good idea. Where should we stay the night?",
+        "zh": "好主意。我们晚上住哪儿呢？"
+      },
+      {
+        "s": "L",
+        "en": "We can stay at a mountain hostel.",
+        "zh": "我们可以住在山间青年旅社。"
+      },
+      {
+        "s": "C",
+        "en": "Cool. Who will book the train tickets?",
+        "zh": "酷。谁来订火车票？"
+      },
+      {
+        "s": "L",
+        "en": "I'll book the tickets. Can you bring the trail map?",
+        "zh": "我来买票。你能带上登山地图吗？"
+      },
+      {
+        "s": "C",
+        "en": "Awesome, it's going to be great! See you Saturday!",
+        "zh": "太棒了，一定会超好玩的！周六见！"
+      },
+      {
+        "s": "L",
+        "en": "See you Saturday at the station!",
+        "zh": "周六车车站见！"
+      }
+    ],
+    "reactions": [
+      {
+        "en": "Awesome idea!",
+        "zh": "太棒的主意！"
+      },
+      {
+        "en": "I agree with you.",
+        "zh": "我同意你的看法。"
+      },
+      {
+        "en": "That sounds fun.",
+        "zh": "听起来很好玩。"
+      },
+      {
+        "en": "Count me in.",
+        "zh": "算我一个。"
+      },
+      {
+        "en": "Good thinking.",
+        "zh": "考虑得很周到。"
+      },
+      {
+        "en": "Perfect plan.",
+        "zh": "完美的计划。"
+      }
+    ],
+    "repair": [
+      {
+        "en": "Did you say the train or the bus?",
+        "zh": "你刚才说是坐火车还是大巴？"
+      },
+      {
+        "en": "Sorry, Tomek didn't hear you clearly.",
+        "zh": "抱歉，托梅克刚才没听清楚。"
+      }
+    ]
+  },
+  {
+    "id": "en-call-u11-weather-trip",
+    "beats": [
+      {
+        "goal": "Ask neighbor about trip and forecast",
+        "lines": [
+          {
+            "en": "Have you checked the weather forecast?",
+            "zh": "你看过天气预报了吗？"
+          },
+          {
+            "en": "Where are you heading with that big backpack?",
+            "zh": "你背着这么大的包这是要去哪儿呀？"
+          }
+        ],
+        "expect": ["mountains", "weekend", "going", "trip", "weather"]
+      },
+      {
+        "goal": "Ask about expected weekend weather",
+        "lines": [
+          {
+            "en": "What is the weather going to be like?",
+            "zh": "周末天气会怎么样？"
+          },
+          {
+            "en": "Do they say it will stay sunny?",
+            "zh": "预报说会一直晴天吗？"
+          }
+        ],
+        "expect": ["rain", "sunny", "forecast", "cloudy", "warm"]
+      },
+      {
+        "goal": "Warn neighbor about incoming storm",
+        "lines": [
+          {
+            "en": "The radio warned that a storm is coming!",
+            "zh": "收音机预警说暴风雨马上要来了！"
+          },
+          {
+            "en": "A heavy storm is coming tomorrow. Is it safe?",
+            "zh": "明天有一场大暴雨。安全吗？"
+          }
+        ],
+        "expect": ["still", "storm", "safe", "go", "careful"]
+      },
+      {
+        "goal": "Ask what clothes and gear they packed",
+        "lines": [
+          {
+            "en": "What gear and clothes will you take along?",
+            "zh": "你随身带了什么装备和衣服？"
+          },
+          {
+            "en": "Do you have warm clothes inside that bag?",
+            "zh": "你包里装了保暖衣物吗？"
+          }
+        ],
+        "expect": ["pack", "raincoat", "boots", "jacket", "case"]
+      },
+      {
+        "goal": "Wrap up neighborly chat safely",
+        "lines": [
+          {
+            "en": "Take care out there. Have a safe trip!",
+            "zh": "在外面多加小心。祝你旅途平安！"
+          },
+          {
+            "en": "Be careful on the trail. See you Sunday!",
+            "zh": "路上多注意安全。周日见！"
+          }
+        ],
+        "expect": ["thank", "care", "safe", "bye", "marek"]
+      }
+    ],
+    "example": [
+      {
+        "s": "C",
+        "en": "Hello! Have you checked the weather forecast?",
+        "zh": "你好呀！你看过天气预报了吗？"
+      },
+      {
+        "s": "L",
+        "en": "I'm going to the mountains for the weekend.",
+        "zh": "我这周末要去山区度假。"
+      },
+      {
+        "s": "C",
+        "en": "What's the weather going to be like there?",
+        "zh": "那边的天气会怎么样？"
+      },
+      {
+        "s": "L",
+        "en": "Is it going to rain? I hope it stays sunny.",
+        "zh": "会下雨吗？我希望它能一直晴天。"
+      },
+      {
+        "s": "C",
+        "en": "A big storm is coming on Saturday afternoon!",
+        "zh": "周六下午会有一场大暴风雨！"
+      },
+      {
+        "s": "L",
+        "en": "Should I still go if there is a storm?",
+        "zh": "如果有风暴，我还要去吗？"
+      },
+      {
+        "s": "C",
+        "en": "Just stay safe. What clothes will you pack?",
+        "zh": "注意安全就行。你带了什么衣服？"
+      },
+      {
+        "s": "L",
+        "en": "I'll pack a raincoat just in case.",
+        "zh": "我会带上一件雨衣以防万一。"
+      },
+      {
+        "s": "C",
+        "en": "Take care out there. Have a safe trip!",
+        "zh": "在外面多加小心。祝你旅途平安！"
+      },
+      {
+        "s": "L",
+        "en": "Thanks Marek, have a great weekend too!",
+        "zh": "谢谢马雷克先生，也祝您周末愉快！"
+      }
+    ],
+    "reactions": [
+      {
+        "en": "Stay warm out there.",
+        "zh": "在外面注意保暖。"
+      },
+      {
+        "en": "Good thinking, young friend.",
+        "zh": "考虑得很周到，年轻的朋友。"
+      },
+      {
+        "en": "Nature can be unpredictable.",
+        "zh": "大自然变幻莫测呀。"
+      },
+      {
+        "en": "That is very wise.",
+        "zh": "这么做很明智。"
+      },
+      {
+        "en": "You look well prepared.",
+        "zh": "你看起来准备得挺充分。"
+      },
+      {
+        "en": "I remember hiking there.",
+        "zh": "我想起当年我也常去那徒步。"
+      }
+    ],
+    "repair": [
+      {
+        "en": "My old ears missed that. Could you repeat it?",
+        "zh": "我耳朵不太好使没听清。你能重复一遍吗？"
+      },
+      {
+        "en": "Are you leaving today or tomorrow morning?",
+        "zh": "你是今天出发还是明天早晨出发？"
+      }
+    ]
+  },
+  {
+    "id": "en-call-u11-restaurant-complaint",
+    "beats": [
+      {
+        "goal": "Ask customer about meal issue",
+        "lines": [
+          {
+            "en": "Is there something wrong with your dish?",
+            "zh": "您的菜品有什么问题吗？"
+          },
+          {
+            "en": "Excuse me, is everything okay with the food?",
+            "zh": "打扰一下，请问菜品还满意吗？"
+          }
+        ],
+        "expect": ["cold", "ordered", "soup", "wrong", "taste"]
+      },
+      {
+        "goal": "Acknowledge complaint and offer replacement",
+        "lines": [
+          {
+            "en": "I am so sorry. Would you like another dish?",
+            "zh": "非常抱歉。您需要换一道菜吗？"
+          },
+          {
+            "en": "We can replace it immediately. What would you prefer?",
+            "zh": "我们马上为您更换。您想换点别的什么吗？"
+          }
+        ],
+        "expect": ["could", "have", "instead", "something", "else"]
+      },
+      {
+        "goal": "Explain kitchen closed and offer dessert",
+        "lines": [
+          {
+            "en": "Our kitchen is closing. Can I bring you dessert?",
+            "zh": "我们后厨正在打烊。给您上一份甜点可以吗？"
+          },
+          {
+            "en": "The kitchen just closed, but dessert is available.",
+            "zh": "厨房刚打烊了，但我们还可以为您提供甜点。"
+          }
+        ],
+        "expect": ["dessert", "problem", "fine", "cake", "ok"]
+      },
+      {
+        "goal": "Ask if customer wants the bill",
+        "lines": [
+          {
+            "en": "Would you like me to bring the bill now?",
+            "zh": "需要我现在为您拿账单过来吗？"
+          },
+          {
+            "en": "Are you ready for the bill, please?",
+            "zh": "请问您现在准备结账了吗？"
+          }
+        ],
+        "expect": ["bill", "please", "check", "pay", "card"]
+      },
+      {
+        "goal": "Wrap up complaint with free dessert",
+        "lines": [
+          {
+            "en": "We're so sorry about that. Dessert is on the house!",
+            "zh": "实在非常抱歉。这份甜点由餐厅免费赠送！"
+          },
+          {
+            "en": "Our sincere apologies. Please enjoy the dessert for free!",
+            "zh": "我们诚挚道歉。请免费享用这份甜点！"
+          }
+        ],
+        "expect": ["thank", "kind", "dessert", "house", "bye"]
+      }
+    ],
+    "example": [
+      {
+        "s": "C",
+        "en": "Excuse me. Is there something wrong with your dish?",
+        "zh": "打扰一下。您的菜品有什么问题吗？"
+      },
+      {
+        "s": "L",
+        "en": "Excuse me, but the soup is cold.",
+        "zh": "不好意思，这碗汤是凉的。"
+      },
+      {
+        "s": "C",
+        "en": "I'm very sorry. Could I bring you another dish?",
+        "zh": "非常抱歉。我能给您换一道菜吗？"
+      },
+      {
+        "s": "L",
+        "en": "Could I have something else instead?",
+        "zh": "我可以换成别的菜吗？"
+      },
+      {
+        "s": "C",
+        "en": "The kitchen is closing, so we can only offer dessert.",
+        "zh": "厨房正在打烊，所以我们只能为您提供甜点。"
+      },
+      {
+        "s": "L",
+        "en": "No problem, that's fine.",
+        "zh": "没问题，那也行。"
+      },
+      {
+        "s": "C",
+        "en": "Thank you for understanding. Shall I get your bill?",
+        "zh": "谢谢您的理解。需要为您拿账单吗？"
+      },
+      {
+        "s": "L",
+        "en": "Could we have the bill, please?",
+        "zh": "请帮我们结一下账好吗？"
+      },
+      {
+        "s": "C",
+        "en": "We're so sorry about that. Dessert is on the house!",
+        "zh": "实在非常抱歉。这份甜点由餐厅免费赠送！"
+      },
+      {
+        "s": "L",
+        "en": "Thank you, that is very kind.",
+        "zh": "谢谢，您太客气了。"
+      }
+    ],
+    "reactions": [
+      {
+        "en": "I am terribly sorry.",
+        "zh": "我感到非常抱歉。"
+      },
+      {
+        "en": "Of course, right away.",
+        "zh": "当然，马上为您办。"
+      },
+      {
+        "en": "Thank you for your patience.",
+        "zh": "感谢您的耐心等待。"
+      },
+      {
+        "en": "I will fix that.",
+        "zh": "我这就去处理。"
+      },
+      {
+        "en": "You are completely right.",
+        "zh": "您说得完全对。"
+      },
+      {
+        "en": "My pleasure.",
+        "zh": "很乐意为您服务。"
+      }
+    ],
+    "repair": [
+      {
+        "en": "Pardon me, did you say the soup or the salad?",
+        "zh": "对不起，您刚才说的是汤还是沙拉？"
+      },
+      {
+        "en": "Could you repeat that, please?",
+        "zh": "可以请您再说一遍吗？"
+      }
+    ]
+  },
+  {
+    "id": "en-call-u12-film-night",
+    "beats": [
+      {
+        "goal": "Ask what movies friend likes",
+        "lines": [
+          {
+            "en": "What kind of movies do you like?",
+            "zh": "你喜欢什么类型的电影？"
+          },
+          {
+            "en": "What genre do you feel like watching tonight?",
+            "zh": "今晚你想看什么类型的片子？"
+          }
+        ],
+        "expect": ["comedies", "relax", "dramas", "enjoy", "like"]
+      },
+      {
+        "goal": "Suggest horror movie and await reaction",
+        "lines": [
+          {
+            "en": "How about this new horror movie? It looks terrifying!",
+            "zh": "这部新的恐怖片怎么样？看起来超吓人的！"
+          },
+          {
+            "en": "I really want to watch a scary horror movie!",
+            "zh": "我特别想看一部吓人的恐怖片！"
+          }
+        ],
+        "expect": ["stand", "horror", "scary", "boring", "dislike"]
+      },
+      {
+        "goal": "React to disagreement and seek middle ground",
+        "lines": [
+          {
+            "en": "You dislike horror? What should we pick instead?",
+            "zh": "你不喜欢恐怖片呀？那我们换选什么呢？"
+          },
+          {
+            "en": "Okay, no horror. Maybe a funny comedy instead?",
+            "zh": "好吧，不看恐怖片。要不看部搞笑喜剧？"
+          }
+        ],
+        "expect": ["opinion", "lighter", "maybe", "comedy", "funny"]
+      },
+      {
+        "goal": "Propose specific movie to watch together",
+        "lines": [
+          {
+            "en": "How about that new detective comedy with Kowalski?",
+            "zh": "那部科瓦尔斯基主演的侦探喜剧片怎么样？"
+          },
+          {
+            "en": "Shall we watch that travel documentary together?",
+            "zh": "我们一起看那部旅行纪录片好不好？"
+          }
+        ],
+        "expect": ["sounds", "good", "watch", "let", "agree"]
+      },
+      {
+        "goal": "Wrap up film selection and start movie",
+        "lines": [
+          {
+            "en": "Great, I'm pressing play! Is the popcorn ready?",
+            "zh": "太好了，我按播放键啦！爆米花准备好了吗？"
+          },
+          {
+            "en": "Perfect choice! Sit back and enjoy the show.",
+            "zh": "绝佳选择！坐好，准备欣赏电影吧。"
+          }
+        ],
+        "expect": ["ready", "popcorn", "play", "enjoy", "great"]
+      }
+    ],
+    "example": [
+      {
+        "s": "C",
+        "en": "So, what kind of movies do you like?",
+        "zh": "那么，你喜欢什么类型的电影？"
+      },
+      {
+        "s": "L",
+        "en": "I enjoy comedies because they help me relax.",
+        "zh": "我喜欢喜剧，因为它们能帮我放松。"
+      },
+      {
+        "s": "C",
+        "en": "Look at this new horror film. Let's watch it!",
+        "zh": "看看这部新恐怖片。我们看它吧！"
+      },
+      {
+        "s": "L",
+        "en": "I can't stand horror movies.",
+        "zh": "我真的受不了恐怖片。"
+      },
+      {
+        "s": "C",
+        "en": "Come on, horror is so thrilling!",
+        "zh": "哎呀，恐怖片多刺激啊！"
+      },
+      {
+        "s": "L",
+        "en": "You're right, but maybe something lighter tonight?",
+        "zh": "你说得对，但今晚看点轻松的怎么样？"
+      },
+      {
+        "s": "C",
+        "en": "How about that funny Polish road trip comedy?",
+        "zh": "那部搞笑的波兰公路喜剧片怎么样？"
+      },
+      {
+        "s": "L",
+        "en": "Sounds good, let's watch that one!",
+        "zh": "听起来不错，就看那部吧！"
+      },
+      {
+        "s": "C",
+        "en": "Great, I'm pressing play! Is the popcorn ready?",
+        "zh": "太好了，我按播放键啦！爆米花准备好了吗？"
+      },
+      {
+        "s": "L",
+        "en": "Yes, popcorn is ready. Turn off the lights!",
+        "zh": "准备好了，爆米花好啦。关灯吧！"
+      }
+    ],
+    "reactions": [
+      {
+        "en": "That makes total sense.",
+        "zh": "完全说得通。"
+      },
+      {
+        "en": "Good point!",
+        "zh": "很有道理！"
+      },
+      {
+        "en": "Haha, I agree.",
+        "zh": "哈哈，我同意。"
+      },
+      {
+        "en": "Fair enough.",
+        "zh": "那倒也是。"
+      },
+      {
+        "en": "That sounds super fun.",
+        "zh": "听起来超级好玩。"
+      },
+      {
+        "en": "I love that idea.",
+        "zh": "我很喜欢这个想法。"
+      }
+    ],
+    "repair": [
+      {
+        "en": "Did you want action or comedy?",
+        "zh": "你是想看动作片还是喜剧片？"
+      },
+      {
+        "en": "Sorry, what title did you just suggest?",
+        "zh": "抱歉，你刚才建议的是哪部片名？"
+      }
+    ]
+  },
+  {
+    "id": "en-call-u12-christmas-eve",
+    "beats": [
+      {
+        "goal": "Invite neighbor over for dinner",
+        "lines": [
+          {
+            "en": "Would you like to come over to our place for dinner?",
+            "zh": "平安夜你愿意来我们家吃晚饭吗？"
+          },
+          {
+            "en": "Please join my family for Christmas Eve dinner!",
+            "zh": "请来和我家人一起吃圣诞夜晚餐吧！"
+          }
+        ],
+        "expect": ["thank", "invitation", "love", "come", "arrive"]
+      },
+      {
+        "goal": "Share traditional Polish Christmas Eve food",
+        "lines": [
+          {
+            "en": "Do you know what people traditionally eat on Wigilia?",
+            "zh": "你知道波兰人在平安夜传统上吃些什么吗？"
+          },
+          {
+            "en": "We eat twelve dishes like beetroot soup and carp.",
+            "zh": "我们吃十二道菜，比如红菜汤和鲤鱼。"
+          }
+        ],
+        "expect": ["traditionally", "eat", "food", "dishes", "soup"]
+      },
+      {
+        "goal": "Ask neighbor to bring fitting dish",
+        "lines": [
+          {
+            "en": "Could you bring a traditional dish from your home?",
+            "zh": "你能带一道你家乡的传统菜来吗？"
+          },
+          {
+            "en": "Can you bring something to share with everyone?",
+            "zh": "你能带一点特色美食来和大家分享吗？"
+          }
+        ],
+        "expect": ["dumplings", "china", "bring", "dish", "cook"]
+      },
+      {
+        "goal": "Ask how holidays are celebrated in China",
+        "lines": [
+          {
+            "en": "How do you celebrate holidays back home in China?",
+            "zh": "在你的家乡中国，你们是怎么庆祝节日的？"
+          },
+          {
+            "en": "Tell me about winter holiday traditions back home.",
+            "zh": "给我讲讲你们家乡冬季节日的传统吧。"
+          }
+        ],
+        "expect": ["home", "china", "celebrate", "family", "dumplings"]
+      },
+      {
+        "goal": "Wrap up Christmas Eve invitation",
+        "lines": [
+          {
+            "en": "We'll expect you then! Merry Christmas!",
+            "zh": "那我们到时恭候你的到来！圣诞快乐！"
+          },
+          {
+            "en": "See you on Christmas Eve! Merry Christmas to you!",
+            "zh": "平安夜见！祝你圣诞快乐！"
+          }
+        ],
+        "expect": ["merry", "christmas", "family", "see", "thank"]
+      }
+    ],
+    "example": [
+      {
+        "s": "C",
+        "en": "Hello! Would you like to come over for dinner?",
+        "zh": "你好！你愿意来我们家吃晚饭吗？"
+      },
+      {
+        "s": "L",
+        "en": "Thank you so much! I'd love to come.",
+        "zh": "太感谢了！我很乐意来。"
+      },
+      {
+        "s": "C",
+        "en": "We would be delighted to have you.",
+        "zh": "你能来我们会非常高兴的。"
+      },
+      {
+        "s": "L",
+        "en": "What do people traditionally eat on Christmas Eve?",
+        "zh": "大家在平安夜传统上都吃些什么？"
+      },
+      {
+        "s": "C",
+        "en": "We eat fish and pierogi. Could you bring a dish?",
+        "zh": "我们吃鱼肉和饺子。你能带一道菜来吗？"
+      },
+      {
+        "s": "L",
+        "en": "Back home in China, we celebrate with dumplings.",
+        "zh": "在我们中国老家，我们吃饺子庆祝节日。"
+      },
+      {
+        "s": "C",
+        "en": "Dumplings sound delicious! Everyone will love them.",
+        "zh": "饺子听起来太好吃了！大家肯定都会喜欢的。"
+      },
+      {
+        "s": "L",
+        "en": "Merry Christmas to you and your family!",
+        "zh": "祝您和您的全家圣诞快乐！"
+      },
+      {
+        "s": "C",
+        "en": "We'll expect you then! Merry Christmas!",
+        "zh": "那我们到时恭候你的到来！圣诞快乐！"
+      },
+      {
+        "s": "L",
+        "en": "See you on Christmas Eve, Marek!",
+        "zh": "平安夜见，马雷克先生！"
+      }
+    ],
+    "reactions": [
+      {
+        "en": "That sounds wonderful.",
+        "zh": "那听起来太棒了。"
+      },
+      {
+        "en": "How lovely!",
+        "zh": "多么美好啊！"
+      },
+      {
+        "en": "We are so glad.",
+        "zh": "我们太高兴了。"
+      },
+      {
+        "en": "That is so delicious.",
+        "zh": "那一定很美味。"
+      },
+      {
+        "en": "My wife will love that.",
+        "zh": "我老伴一定会很喜欢的。"
+      },
+      {
+        "en": "Traditions are so special.",
+        "zh": "传统总是如此特别。"
+      }
+    ],
+    "repair": [
+      {
+        "en": "Pardon, what kind of food did you say?",
+        "zh": "不好意思，你刚才说的是什么食物？"
+      },
+      {
+        "en": "Will you arrive at five or at six?",
+        "zh": "你打算五点到还是六点到？"
+      }
+    ]
+  },
+  {
+    "id": "en-call-u12-krakow-or-warsaw",
+    "beats": [
+      {
+        "goal": "Challenge colleague on why Kraków is better",
+        "lines": [
+          {
+            "en": "Go on, what makes Kraków any better?",
+            "zh": "说说看，克拉科夫到底哪点比华沙好？"
+          },
+          {
+            "en": "Warsaw has everything! Why do you prefer Kraków?",
+            "zh": "华沙应有尽有！你为什么更喜欢克拉科夫？"
+          }
+        ],
+        "expect": ["smaller", "prettier", "historic", "beautiful", "krakow"]
+      },
+      {
+        "goal": "Defend Warsaw opportunities and ask opinion",
+        "lines": [
+          {
+            "en": "Warsaw has many more career opportunities, right?",
+            "zh": "华沙的职业机会多得多，对吧？"
+          },
+          {
+            "en": "What do you think about the job market?",
+            "zh": "你对两地的就业市场怎么看？"
+          }
+        ],
+        "expect": ["agree", "opportunities", "jobs", "warsaw", "opinion"]
+      },
+      {
+        "goal": "Ask where colleague wants to live",
+        "lines": [
+          {
+            "en": "Where would you like to live in ten years?",
+            "zh": "十年后你想住在哪里？"
+          },
+          {
+            "en": "In ten years, will you still live here?",
+            "zh": "十年之后，你还会住在这里吗？"
+          }
+        ],
+        "expect": ["live", "years", "mountains", "ten", "abroad"]
+      },
+      {
+        "goal": "Find shared ground between the two cities",
+        "lines": [
+          {
+            "en": "Is there something good about both cities?",
+            "zh": "这两座城市有什么共同的优点吗？"
+          },
+          {
+            "en": "Can we agree both have great food and culture?",
+            "zh": "我们能否一致同意它们都有美食和好文化？"
+          }
+        ],
+        "expect": ["agree", "both", "relaxed", "culture", "food"]
+      },
+      {
+        "goal": "Wrap up friendly debate on draw",
+        "lines": [
+          {
+            "en": "All right, let's call it a draw! Back to work.",
+            "zh": "行啦，就算平局吧！回工位干活啦。"
+          },
+          {
+            "en": "Fair enough, a draw it is! Let's get lunch.",
+            "zh": "好吧，就算打个平手！咱们吃午饭去。"
+          }
+        ],
+        "expect": ["draw", "work", "agree", "lunch", "fair"]
+      }
+    ],
+    "example": [
+      {
+        "s": "C",
+        "en": "Come on! Go on, what makes Kraków any better?",
+        "zh": "来吧！说说看，克拉科夫到底哪点更好？"
+      },
+      {
+        "s": "L",
+        "en": "Kraków is smaller, but it's much prettier.",
+        "zh": "克拉科夫虽小，但漂亮得多。"
+      },
+      {
+        "s": "C",
+        "en": "Maybe so, but Warsaw has better career opportunities.",
+        "zh": "也许吧，但华沙有更好的工作机会。"
+      },
+      {
+        "s": "L",
+        "en": "There are more job opportunities in Warsaw, but life is calmer here.",
+        "zh": "华沙的工作机会确实更多，但这里的生活更从容。"
+      },
+      {
+        "s": "C",
+        "en": "Where would you like to live in ten years?",
+        "zh": "十年之后你想在哪里生活？"
+      },
+      {
+        "s": "L",
+        "en": "In ten years, I'd like to live near the mountains.",
+        "zh": "十年后，我想住在靠近山脉的地方。"
+      },
+      {
+        "s": "C",
+        "en": "Can we agree both cities have amazing restaurants?",
+        "zh": "我们能不能一致认为两座城市都有很棒的餐厅？"
+      },
+      {
+        "s": "L",
+        "en": "I agree with you on that, both are great.",
+        "zh": "这一点我同意你的看法，两座城市都很棒。"
+      },
+      {
+        "s": "C",
+        "en": "All right, let's call it a draw! Back to work.",
+        "zh": "行啦，就算平局吧！回工位干活啦。"
+      },
+      {
+        "s": "L",
+        "en": "Deal! Time to get back to work.",
+        "zh": "成交！该回去工作了。"
+      }
+    ],
+    "reactions": [
+      {
+        "en": "I can see that.",
+        "zh": "这我倒是看得出来。"
+      },
+      {
+        "en": "Haha, good point!",
+        "zh": "哈哈，有见地！"
+      },
+      {
+        "en": "I admit you're right.",
+        "zh": "我承认你说得在理。"
+      },
+      {
+        "en": "That is very true.",
+        "zh": "确实非常真实。"
+      },
+      {
+        "en": "Well argued!",
+        "zh": "辩论得漂亮！"
+      },
+      {
+        "en": "I hadn't thought of that.",
+        "zh": "我之前倒没想到这一点。"
+      }
+    ],
+    "repair": [
+      {
+        "en": "Did you mean Kraków or Warsaw?",
+        "zh": "你是指克拉科夫还是华沙？"
+      },
+      {
+        "en": "Sorry, what was that second point again?",
+        "zh": "抱歉，你的第二个论点是什么来着？"
+      }
+    ]
+  },
+  {
+    "id": "en-call-u12-dreams",
+    "beats": [
+      {
+        "goal": "Ask friend about future projects",
+        "lines": [
+          {
+            "en": "What will you be working on?",
+            "zh": "你接下来打算做什么呢？"
+          },
+          {
+            "en": "What are your main plans for next year?",
+            "zh": "你明年的主要计划是什么？"
+          }
+        ],
+        "expect": ["next", "year", "planning", "travel", "europe"]
+      },
+      {
+        "goal": "Ask what they would do with more money",
+        "lines": [
+          {
+            "en": "What would you do with more time or money?",
+            "zh": "如果你有更多的时间或金钱，你会做什么？"
+          },
+          {
+            "en": "If you had endless money, what would you buy?",
+            "zh": "如果你有用不完的钱，你会买什么？"
+          }
+        ],
+        "expect": ["would", "travel", "time", "money", "buy"]
+      },
+      {
+        "goal": "Ask why learner decided to study Polish",
+        "lines": [
+          {
+            "en": "By the way, why did you decide to learn Polish?",
+            "zh": "顺便问问，你当初为什么决定学波兰语呀？"
+          },
+          {
+            "en": "Polish is so hard! Why are you learning it?",
+            "zh": "波兰语这么难！你为什么在学它呢？"
+          }
+        ],
+        "expect": ["learning", "polish", "because", "live", "dream"]
+      },
+      {
+        "goal": "Invite friend to ask about future dreams",
+        "lines": [
+          {
+            "en": "Do you want to know about my dream job?",
+            "zh": "你想知道我的梦想工作是什么吗？"
+          },
+          {
+            "en": "Ask me what my own biggest dream is!",
+            "zh": "快问问我最大的梦想是什么！"
+          }
+        ],
+        "expect": ["what", "dream", "shoes", "future", "yours"]
+      },
+      {
+        "goal": "Wrap up late-night chat before sleeping",
+        "lines": [
+          {
+            "en": "It's getting late—time for bed. Good night!",
+            "zh": "很晚了——该睡啦。晚安！"
+          },
+          {
+            "en": "I'm so sleepy. Let's sleep now. Good night!",
+            "zh": "我好困呀。我们现在睡吧。晚安！"
+          }
+        ],
+        "expect": ["night", "good", "sleep", "dreams", "late"]
+      }
+    ],
+    "example": [
+      {
+        "s": "C",
+        "en": "Hey, what will you be working on next year?",
+        "zh": "嗨，你明年打算做什么？"
+      },
+      {
+        "s": "L",
+        "en": "Next year, I'm planning to travel around Europe.",
+        "zh": "明年我计划环游欧洲。"
+      },
+      {
+        "s": "C",
+        "en": "Wow! What would you do with even more time?",
+        "zh": "哇！如果你有更多的时间，你会做什么？"
+      },
+      {
+        "s": "L",
+        "en": "If I had more time, I would travel more.",
+        "zh": "如果我有更多时间，我会去更多地方旅行。"
+      },
+      {
+        "s": "C",
+        "en": "Nice! Why did you decide to learn Polish?",
+        "zh": "真好！你当初为什么决定学波兰语？"
+      },
+      {
+        "s": "L",
+        "en": "I'm learning Polish because I live here.",
+        "zh": "我学波兰语是因为我住在这里。"
+      },
+      {
+        "s": "C",
+        "en": "That makes sense. It's tough but useful.",
+        "zh": "很有道理。虽然难但很有用。"
+      },
+      {
+        "s": "L",
+        "en": "What would you do in my shoes? What is your dream?",
+        "zh": "换作你在我的处境你会怎么做？你的梦想又是什么？"
+      },
+      {
+        "s": "C",
+        "en": "It's getting late—time for bed. Good night!",
+        "zh": "很晚了——该睡啦。晚安！"
+      },
+      {
+        "s": "L",
+        "en": "Good night, Kasia! Sweet dreams.",
+        "zh": "晚安卡夏！祝你美梦。"
+      }
+    ],
+    "reactions": [
+      {
+        "en": "That sounds like a dream!",
+        "zh": "那听起来像梦一样美好！"
+      },
+      {
+        "en": "I love that idea.",
+        "zh": "我很喜欢那个想法。"
+      },
+      {
+        "en": "You can definitely achieve that.",
+        "zh": "你一定能够实现的。"
+      },
+      {
+        "en": "How inspiring!",
+        "zh": "太鼓舞人心了！"
+      },
+      {
+        "en": "That is so cool.",
+        "zh": "那太酷了。"
+      },
+      {
+        "en": "I totally agree with you.",
+        "zh": "我完全同意你的看法。"
+      }
+    ],
+    "repair": [
+      {
+        "en": "Could you say that goal once more?",
+        "zh": "你能把那个目标再说一遍吗？"
+      },
+      {
+        "en": "Did you say travel or study next year?",
+        "zh": "你刚才说是明年去旅行还是学习？"
+      }
+    ]
+  }
+]
+

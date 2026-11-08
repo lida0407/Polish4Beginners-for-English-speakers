@@ -1,0 +1,327 @@
+Each lesson is a short voice role-play: a character (played by a small on-device AI model) talks with a beginner learner. The small model is weak at planning and at grammar, so for every lesson write a step-by-step plan with ready-made, perfectly correct lines it can use or copy.
+
+For each scenario write:
+1. "beats": the call in 5-7 steps, in order. Step 1 is the character's first question (use the given first_question as the first line). Then one step per mission task, the complication step where it fits, and a last step "wrap up". Each beat has:
+   - "goal": what the character does in this step, in English, imperative, max 8 words (e.g. "Ask where she is from").
+   - "lines": 2 or 3 alternative things the character can say for this step, each 1-2 short sentences, at the scenario's level. The lines must invite the learner to do the matching mission task (ask, offer a choice, prompt).
+   - "expect": 3-6 short words or stems the learner's answer would likely contain if they did the task (in the language being learnt, lower case, e.g. "chin", "jestem z", "from"). Used to tick the step.
+   The last beat's first line must be exactly the given closer.
+2. "example": a model call of 8-10 lines alternating character / learner, as it should go at this level, using the learner phrases. Speaker is "C" or "L".
+3. "reactions": 6 short neutral or positive reactions the character can say to almost anything (e.g. "Ah, I see.", "Great!", "Really?"), in the character's style.
+4. "repair": 2 lines the character says when it did not understand (ask to repeat, offer two choices).
+
+Level rules: A1 = present tense, very common words, max 8 words per sentence. A2 = past and future allowed, max 12 words per sentence.
+
+Language being learnt: ENGLISH (the learner is a Chinese speaker). Every line must be natural, friendly spoken English at the level. Every line is an object {"en": "...", "zh": "..."}: the English and natural Simplified Chinese. "expect" stays English only.
+
+Output ONLY a JSON array, no prose, no code fences. One object per input scenario, same order:
+{"id": same as input,
+ "beats": [{"goal": "...", "lines": [{"en":"...","zh":"..."}], "expect": ["..."]}],
+ "example": [{"s": "C", "en": "...", "zh": "..."}, {"s": "L", ...}],
+ "reactions": [{"en":"...","zh":"..."}],
+ "repair": [{"en":"...","zh":"..."}]}
+Keep the JSON valid with straight double quotes. Do not write or edit any files.
+
+Scenarios:
+[
+ {
+  "id": "en-call-u10-job-interview",
+  "level": "A2",
+  "character": "Dorota",
+  "bio": "42, HR manager at a software company in Kraków",
+  "register": "neutral",
+  "scene": "A short video job interview with Dorota, an HR manager at a software company in Kraków.",
+  "learner_role": "The job candidate",
+  "mission": [
+   "Introduce yourself and your experience",
+   "Explain why you want the job",
+   "Ask one question about the role"
+  ],
+  "complication": "She asks you about your weaknesses.",
+  "opener": "Good morning, nice to meet you. Shall we get started?",
+  "first_question": "Could you tell me a little about yourself?",
+  "closer": "Thank you for your time. We'll be in touch next week.",
+  "phrases": [
+   "I've been working as a programmer for five years.",
+   "I speak English and some Polish.",
+   "I'm interested in this position because...",
+   "One of my greatest strengths is problem-solving.",
+   "Is remote work an option?"
+  ]
+ },
+ {
+  "id": "en-call-u10-language-course",
+  "level": "A2",
+  "character": "Paweł",
+  "bio": "30, secretary at a language school",
+  "register": "neutral",
+  "scene": "The front desk of a language school in Kraków, talking to the receptionist, Paweł.",
+  "learner_role": "A new student",
+  "mission": [
+   "State your current level and learning goals",
+   "Choose your preferred days and times",
+   "Ask about the price and course materials"
+  ],
+  "complication": "The group you want is full, so you need to pick another time.",
+  "opener": "Hello! Come on in.",
+  "first_question": "Which course are you interested in?",
+  "closer": "Great, see you at the first class!",
+  "phrases": [
+   "I'm currently at level A2.",
+   "I want to improve my speaking.",
+   "I'd prefer evening classes twice a week.",
+   "How much is the course per semester?",
+   "Is the textbook included in the price?"
+  ]
+ },
+ {
+  "id": "en-call-u10-ask-for-help",
+  "level": "A2",
+  "character": "Ania",
+  "bio": "35, the learner's team lead at work, from Warsaw",
+  "register": "friendly, natural spoken English",
+  "scene": "At work in Kraków; you need help from your team lead, Ania, with a report.",
+  "learner_role": "A team member",
+  "mission": [
+   "Ask politely for assistance",
+   "Explain what the problem is",
+   "Agree on a convenient time to go over it"
+  ],
+  "complication": "She is busy until three o'clock.",
+  "opener": "Hi! What's up?",
+  "first_question": "Do you need a hand with something?",
+  "closer": "OK, come by my desk at three. See you then!",
+  "phrases": [
+   "Could you give me a hand with this?",
+   "I'm having a problem with the report.",
+   "I don't really understand this table.",
+   "When do you need it by?",
+   "Thanks so much, you've been a great help!"
+  ]
+ },
+ {
+  "id": "en-call-u10-move-meeting",
+  "level": "A2",
+  "character": "Ania",
+  "bio": "35, the learner's team lead at work, from Warsaw",
+  "register": "friendly, natural spoken English",
+  "scene": "You need to move tomorrow's meeting with your team lead, Ania.",
+  "learner_role": "A team member",
+  "mission": [
+   "Explain why you cannot make the meeting tomorrow",
+   "Suggest another day and time",
+   "Confirm the new appointment"
+  ],
+  "complication": "The rest of the team is only free on Friday morning.",
+  "opener": "Hey, I have a quick minute. What did you want to talk about?",
+  "first_question": "Is this about tomorrow's meeting?",
+  "closer": "All right, I'll send out a new invite. Talk later!",
+  "phrases": [
+   "I can't make it tomorrow because something came up.",
+   "Could we move the meeting to another day?",
+   "Does Thursday work for you?",
+   "Friday morning works for me.",
+   "Sounds good, it's confirmed!"
+  ]
+ },
+ {
+  "id": "en-call-u11-hotel-check-in",
+  "level": "A2",
+  "character": "Adam",
+  "bio": "34, receptionist at a guesthouse in Zakopane",
+  "register": "neutral",
+  "scene": "The front desk of a guesthouse in Zakopane, a mountain resort town in southern Poland, talking to the receptionist, Adam.",
+  "learner_role": "A hotel guest",
+  "mission": [
+   "Check in using your reservation name",
+   "Ask about breakfast times and the Wi-Fi password",
+   "Report a problem with your room"
+  ],
+  "complication": "Your room faces a noisy street; ask to switch to a quieter one.",
+  "opener": "Good evening, welcome to Zakopane!",
+  "first_question": "What name is the booking under?",
+  "closer": "Here's your key. Enjoy your stay!",
+  "phrases": [
+   "I have a reservation under the name...",
+   "What time is breakfast served?",
+   "Could you tell me the Wi-Fi password?",
+   "The room is very noisy because it faces the street.",
+   "Is it possible to change rooms?"
+  ]
+ },
+ {
+  "id": "en-call-u11-plan-tatras",
+  "level": "A2",
+  "character": "Tomek",
+  "bio": "31, physiotherapist, the learner's friend",
+  "register": "friendly, natural spoken English",
+  "scene": "Planning a weekend hike in the Tatra Mountains with your friend Tomek.",
+  "learner_role": "Tomek's friend",
+  "mission": [
+   "Agree on how to travel there",
+   "Choose where to spend the night",
+   "Split the tasks and decide who gets what"
+  ],
+  "complication": "The bus is sold out, so you need to find another way.",
+  "opener": "Hey, we're finally going to the Tatras!",
+  "first_question": "How should we go: by train or by bus?",
+  "closer": "Awesome, it's going to be great! See you Saturday!",
+  "phrases": [
+   "Let's take the train instead.",
+   "We can stay at a mountain hostel.",
+   "I'll book the tickets.",
+   "Can you bring the trail map?",
+   "What if there are no seats left?"
+  ]
+ },
+ {
+  "id": "en-call-u11-weather-trip",
+  "level": "A2",
+  "character": "Marek",
+  "bio": "68, retired tram driver, the learner's neighbour",
+  "register": "friendly, natural spoken English",
+  "scene": "You run into your elderly neighbour Marek on the stairs while carrying a large backpack.",
+  "learner_role": "His neighbour",
+  "mission": [
+   "Tell him where you are going and when",
+   "Ask about the weather forecast",
+   "Mention what gear or clothes you will take"
+  ],
+  "complication": "He warns that a storm is coming; ask if you should still go.",
+  "opener": "Hello! Where are you off to with that big backpack?",
+  "first_question": "Have you checked the weather forecast?",
+  "closer": "Take care out there. Have a safe trip!",
+  "phrases": [
+   "I'm going to the mountains for the weekend.",
+   "What's the weather going to be like?",
+   "Is it going to rain?",
+   "I'll pack a raincoat just in case.",
+   "I hope it stays sunny."
+  ]
+ },
+ {
+  "id": "en-call-u11-restaurant-complaint",
+  "level": "A2",
+  "character": "Kuba",
+  "bio": "24, a waiter at a restaurant in the Old Town",
+  "register": "neutral",
+  "scene": "A traditional restaurant in Kraków's Old Town; there is an issue with your meal, and Kuba is your waiter.",
+  "learner_role": "A restaurant guest",
+  "mission": [
+   "Explain politely what is wrong with your food",
+   "Ask for something else instead",
+   "Ask for the bill"
+  ],
+  "complication": "The kitchen is closing, so they can only offer you a dessert.",
+  "opener": "How was everything with your meal?",
+  "first_question": "Is there something wrong with your dish?",
+  "closer": "We're so sorry about that. Dessert is on the house!",
+  "phrases": [
+   "Excuse me, but the soup is cold.",
+   "I'm sorry, but this isn't what I ordered.",
+   "Could I have something else instead?",
+   "Could we have the bill, please?",
+   "No problem, that's fine."
+  ]
+ },
+ {
+  "id": "en-call-u12-film-night",
+  "level": "A2",
+  "character": "Kasia",
+  "bio": "22, computer science student, the learner's friend",
+  "register": "friendly, natural spoken English",
+  "scene": "Choosing a movie to watch together at home with your friend Kasia.",
+  "learner_role": "Her friend",
+  "mission": [
+   "Say what types of movies you like and why",
+   "Politely disagree with her choice",
+   "Agree on one film to watch"
+  ],
+  "complication": "She only wants to watch horror movies, which you really dislike.",
+  "opener": "So, what are we watching tonight?",
+  "first_question": "What kind of movies do you like?",
+  "closer": "Great, I'm pressing play! Is the popcorn ready?",
+  "phrases": [
+   "I enjoy comedies because they help me relax.",
+   "I can't stand horror movies.",
+   "In my opinion, this one looks a bit boring.",
+   "You're right, but maybe something lighter?",
+   "Sounds good, let's watch that one!"
+  ]
+ },
+ {
+  "id": "en-call-u12-christmas-eve",
+  "level": "A2",
+  "character": "Marek",
+  "bio": "68, retired tram driver, the learner's neighbour",
+  "register": "friendly, natural spoken English",
+  "scene": "December in Kraków; your elderly neighbour Marek invites you to Wigilia (traditional Polish Christmas Eve) with his family.",
+  "learner_role": "His neighbour",
+  "mission": [
+   "Thank him warmly and accept the invitation",
+   "Ask about traditional Polish Christmas Eve food",
+   "Explain how you celebrate holidays back home"
+  ],
+  "complication": "He asks you to bring a dish; ask what would fit the tradition.",
+  "opener": "Hello! What are you doing for Christmas Eve?",
+  "first_question": "Would you like to come over to our place for dinner?",
+  "closer": "We'll expect you then! Merry Christmas!",
+  "phrases": [
+   "Thank you so much for the invitation!",
+   "I'd love to come! What time should I arrive?",
+   "What do people traditionally eat on Christmas Eve?",
+   "Back home in China, we celebrate with dumplings.",
+   "Merry Christmas to you and your family!"
+  ]
+ },
+ {
+  "id": "en-call-u12-krakow-or-warsaw",
+  "level": "A2",
+  "character": "Ania",
+  "bio": "35, the learner's team lead at work, from Warsaw",
+  "register": "friendly, natural spoken English",
+  "scene": "Lunch break in Kraków; your team lead Ania, who is originally from Warsaw, says it is much better than Kraków.",
+  "learner_role": "Her colleague",
+  "mission": [
+   "Compare the two cities on two different points",
+   "Give your opinion with clear reasons",
+   "Find something both of you can agree on"
+  ],
+  "complication": "She asks where you would like to live in ten years.",
+  "opener": "Come on, admit it—Warsaw is way better than Kraków!",
+  "first_question": "Go on, what makes Kraków any better?",
+  "closer": "All right, let's call it a draw! Back to work.",
+  "phrases": [
+   "Kraków is smaller, but it's much prettier.",
+   "There are more job opportunities in Warsaw.",
+   "I agree with you on that, but...",
+   "In my opinion, life here is more relaxed.",
+   "In ten years, I'd like to live near the mountains."
+  ]
+ },
+ {
+  "id": "en-call-u12-dreams",
+  "level": "A2",
+  "character": "Kasia",
+  "bio": "22, computer science student, the learner's friend",
+  "register": "friendly, natural spoken English",
+  "scene": "A late-night chat over tea with your friend Kasia about plans, dreams, and bucket lists.",
+  "learner_role": "Her friend",
+  "mission": [
+   "Share what you plan to do next year",
+   "Describe what you would do with more time or money",
+   "Ask her about her own future dreams"
+  ],
+  "complication": "She asks why you decided to learn Polish.",
+  "opener": "Hey, do you have any big plans for next year?",
+  "first_question": "What will you be working on?",
+  "closer": "It's getting late—time for bed. Good night!",
+  "phrases": [
+   "Next year, I'm planning to travel around Europe.",
+   "If I had more time, I would travel more.",
+   "I'm learning Polish because I live here.",
+   "It has always been a dream of mine.",
+   "What would you do in my shoes?"
+  ]
+ }
+]

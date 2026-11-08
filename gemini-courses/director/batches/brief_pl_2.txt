@@ -1,0 +1,330 @@
+Each lesson is a short voice role-play: a character (played by a small on-device AI model) talks with a beginner learner. The small model is weak at planning and at grammar, so for every lesson write a step-by-step plan with ready-made, perfectly correct lines it can use or copy.
+
+For each scenario write:
+1. "beats": the call in 5-7 steps, in order. Step 1 is the character's first question (use the given first_question as the first line). Then one step per mission task, the complication step where it fits, and a last step "wrap up". Each beat has:
+   - "goal": what the character does in this step, in English, imperative, max 8 words (e.g. "Ask where she is from").
+   - "lines": 2 or 3 alternative things the character can say for this step, each 1-2 short sentences, at the scenario's level. The lines must invite the learner to do the matching mission task (ask, offer a choice, prompt).
+   - "expect": 3-6 short words or stems the learner's answer would likely contain if they did the task (in the language being learnt, lower case, e.g. "chin", "jestem z", "from"). Used to tick the step.
+   The last beat's first line must be exactly the given closer.
+2. "example": a model call of 8-10 lines alternating character / learner, as it should go at this level, using the learner phrases. Speaker is "C" or "L".
+3. "reactions": 6 short neutral or positive reactions the character can say to almost anything (e.g. "Ah, I see.", "Great!", "Really?"), in the character's style.
+4. "repair": 2 lines the character says when it did not understand (ask to repeat, offer two choices).
+
+Level rules: A1 = present tense, very common words, max 8 words per sentence. A2 = past and future allowed, max 12 words per sentence.
+
+Language being learnt: POLISH. Every line must be correct, natural spoken Polish with all diacritics, in the character's register (given per scenario: formal pan/pani, or informal ty). When a line addresses the learner and the Polish form depends on the learner's gender, write both forms as {m:male form|f:female form} around the smallest part that changes, e.g. "Skąd {m:pan jest|f:pani jest}?" or "Jesteś {m:głodny|f:głodna}?". Use this token only for the learner's gender, never for the character's own.
+Every line is an object {"pl": "...", "en": "...", "zh": "..."}: the Polish, a natural English translation, and natural Simplified Chinese (for the zh side of a gender token line, translate neutrally). "expect" stays Polish only.
+
+Output ONLY a JSON array, no prose, no code fences. One object per input scenario, same order:
+{"id": same as input,
+ "beats": [{"goal": "...", "lines": [{"pl":"...","en":"...","zh":"..."}], "expect": ["..."]}],
+ "example": [{"s": "C", "pl": "...", "en": "...", "zh": "..."}, {"s": "L", ...}],
+ "reactions": [{"pl":"...","en":"...","zh":"..."}],
+ "repair": [{"pl":"...","en":"...","zh":"..."}]}
+Keep the JSON valid with straight double quotes. Do not write or edit any files.
+
+Scenarios:
+[
+ {
+  "id": "pl-call-u04-way-to-station",
+  "level": "A1",
+  "character": "Pan Marek",
+  "bio": "68, retired tram driver, the learner's neighbour",
+  "register": "formal (pan/pani)",
+  "scene": "a street in the centre; you bump into Pan Marek and ask the way to the main station",
+  "learner_role": "his neighbour",
+  "mission": [
+   "Ask the way to the station",
+   "Ask if it's far",
+   "Thank him"
+  ],
+  "complication": "He describes a shortcut through the park too fast; ask him to repeat slowly.",
+  "opener": "{m:O, dzień dobry! Co pan tu robi?|f:O, dzień dobry! Co pani tu robi?}",
+  "first_question": "{m:Szuka pan czegoś?|f:Szuka pani czegoś?}",
+  "closer": "Nie ma za co. Do widzenia!",
+  "phrases": [
+   "Gdzie jest dworzec?",
+   "Jak dojść do…?",
+   "Czy to daleko?",
+   "prosto / w lewo / w prawo",
+   "Proszę powtórzyć wolniej"
+  ]
+ },
+ {
+  "id": "pl-call-u04-train-ticket",
+  "level": "A1",
+  "character": "Pani Grażyna",
+  "bio": "58, ticket clerk at Kraków Główny station",
+  "register": "neutral",
+  "scene": "the ticket office at Kraków Główny station",
+  "learner_role": "a traveller",
+  "mission": [
+   "Ask for a ticket to Warsaw: one way or return",
+   "Choose a departure time",
+   "Ask which platform"
+  ],
+  "complication": "The 10:00 train is full; take a later one.",
+  "opener": "Dzień dobry. Dokąd?",
+  "first_question": "W jedną stronę czy powrotny?",
+  "closer": "Peron trzeci. Szczęśliwej podróży!",
+  "phrases": [
+   "Poproszę bilet do Warszawy",
+   "W jedną stronę / powrotny",
+   "O której jest pociąg?",
+   "Z którego peronu?",
+   "Może być później"
+  ]
+ },
+ {
+  "id": "pl-call-u04-taxi",
+  "level": "A1",
+  "character": "Pan Zbyszek",
+  "bio": "50, runs a kiosk at a tram stop and drives a taxi at weekends",
+  "register": "formal (pan/pani)",
+  "scene": "a taxi from the airport; Pan Zbyszek is driving",
+  "learner_role": "a passenger",
+  "mission": [
+   "Say where you're going",
+   "Ask how long it takes",
+   "Ask the price and pay"
+  ],
+  "complication": "There's a traffic jam; he asks if a longer route is OK.",
+  "opener": "Dzień dobry. Dokąd jedziemy?",
+  "first_question": "Do centrum? Jaki adres?",
+  "closer": "Jesteśmy na miejscu. Miłego pobytu!",
+  "phrases": [
+   "Do hotelu Pod Różą, poproszę",
+   "Ulica Floriańska",
+   "Jak długo?",
+   "Ile to kosztuje?",
+   "Proszę się zatrzymać tutaj"
+  ]
+ },
+ {
+  "id": "pl-call-u04-lost-on-tram",
+  "level": "A1",
+  "character": "Kasia",
+  "bio": "22, computer science student, the learner's friend",
+  "register": "informal (ty)",
+  "scene": "Kasia is waiting for you at a café, but you're lost; she calls",
+  "learner_role": "her friend",
+  "mission": [
+   "Say where you are and what you can see",
+   "Follow her directions",
+   "Say when you'll get there"
+  ],
+  "complication": "You realise you took the wrong tram.",
+  "opener": "Halo? Gdzie jesteś?",
+  "first_question": "Co widzisz? Jest tam jakiś sklep albo przystanek?",
+  "closer": "Dobra, czekam! Do zobaczenia za chwilę.",
+  "phrases": [
+   "Jestem na przystanku…",
+   "Widzę kościół / park / sklep",
+   "Chyba jestem w złym tramwaju",
+   "Gdzie mam wysiąść?",
+   "Będę za dziesięć minut"
+  ]
+ },
+ {
+  "id": "pl-call-u05-flat-viewing",
+  "level": "A1",
+  "character": "Pani Basia",
+  "bio": "55, owns a fruit and vegetable stall at Stary Kleparz market and rents out a small flat",
+  "register": "formal but friendly",
+  "scene": "viewing a small flat that Pani Basia rents out",
+  "learner_role": "someone looking for a flat",
+  "mission": [
+   "Ask how many rooms there are",
+   "Ask about the rent and bills",
+   "Say what you like or don't like"
+  ],
+  "complication": "The washing machine doesn't work; ask when it will be fixed.",
+  "opener": "Dzień dobry, kochanie! Zapraszam do środka.",
+  "first_question": "To jest salon. Ładny, prawda?",
+  "closer": "Proszę się zastanowić i zadzwonić. Do widzenia!",
+  "phrases": [
+   "Ile jest pokoi?",
+   "Ile kosztuje miesięcznie?",
+   "Czy opłaty są w cenie?",
+   "Kuchnia jest mała",
+   "Pralka nie działa",
+   "Podoba mi się"
+  ]
+ },
+ {
+  "id": "pl-call-u05-my-room",
+  "level": "A1",
+  "character": "Kasia",
+  "bio": "22, computer science student, the learner's friend",
+  "register": "informal (ty)",
+  "scene": "a video call; Kasia wants to see your new room",
+  "learner_role": "her friend",
+  "mission": [
+   "Describe three things in your room",
+   "Say what's missing",
+   "Ask about her room"
+  ],
+  "complication": "She says your room looks empty; say what you want to buy.",
+  "opener": "Pokaż swój pokój!",
+  "first_question": "Masz duże łóżko?",
+  "closer": "Fajny pokój! Dobra, pa!",
+  "phrases": [
+   "Mam duże okno",
+   "Jest tu biurko i krzesło",
+   "Nie mam szafy",
+   "Chcę kupić lampę",
+   "Mój pokój jest mały, ale ładny"
+  ]
+ },
+ {
+  "id": "pl-call-u05-morning-run",
+  "level": "A1",
+  "character": "Tomek",
+  "bio": "31, physiotherapist, the learner's friend",
+  "register": "informal (ty)",
+  "scene": "Tomek wants to go running with you and asks about your routine",
+  "learner_role": "his friend",
+  "mission": [
+   "Say what time you get up",
+   "Say what you do in the morning",
+   "Agree on a time to run"
+  ],
+  "complication": "He wants to run at six; suggest a later time.",
+  "opener": "Cześć! Biegamy jutro rano?",
+  "first_question": "O której wstajesz?",
+  "closer": "Świetnie, do jutra!",
+  "phrases": [
+   "Wstaję o siódmej",
+   "Rano piję kawę",
+   "Za wcześnie!",
+   "Może o ósmej?",
+   "Idę do pracy o dziewiątej"
+  ]
+ },
+ {
+  "id": "pl-call-u05-no-hot-water",
+  "level": "A1",
+  "character": "Pan Marek",
+  "bio": "68, retired tram driver, the learner's neighbour",
+  "register": "formal (pan/pani)",
+  "scene": "there's no hot water in your flat, so you knock on Pan Marek's door",
+  "learner_role": "his neighbour",
+  "mission": [
+   "Explain the problem",
+   "Ask what to do or who to call",
+   "Thank him"
+  ],
+  "complication": "He says it's the whole building; you need to call the building management.",
+  "opener": "Dzień dobry! Coś się stało?",
+  "first_question": "Mogę jakoś pomóc?",
+  "closer": "Proszę dzwonić do administracji. Powodzenia!",
+  "phrases": [
+   "Nie ma ciepłej wody",
+   "Coś nie działa",
+   "Co mam zrobić?",
+   "Do kogo zadzwonić?",
+   "Dziękuję za pomoc"
+  ]
+ },
+ {
+  "id": "pl-call-u06-cinema-plan",
+  "level": "A1",
+  "character": "Kasia",
+  "bio": "22, computer science student, the learner's friend",
+  "register": "informal (ty)",
+  "scene": "planning to go to the cinema with Kasia this week",
+  "learner_role": "her friend",
+  "mission": [
+   "Suggest a day",
+   "Agree on a time",
+   "Decide where to meet"
+  ],
+  "complication": "She's busy on the day you suggest.",
+  "opener": "Hej! Idziemy w tym tygodniu do kina?",
+  "first_question": "Kiedy masz czas?",
+  "closer": "Super, do zobaczenia w kinie!",
+  "phrases": [
+   "W piątek mam czas",
+   "W sobotę nie mogę",
+   "O której?",
+   "Może o siódmej?",
+   "Spotkajmy się przed kinem"
+  ]
+ },
+ {
+  "id": "pl-call-u06-weekend-mountains",
+  "level": "A1",
+  "character": "Tomek",
+  "bio": "31, physiotherapist, the learner's friend",
+  "register": "informal (ty)",
+  "scene": "Tomek invites you to the mountains this weekend",
+  "learner_role": "his friend",
+  "mission": [
+   "Say what you usually do at weekends",
+   "Say if you can come",
+   "Ask what to bring"
+  ],
+  "complication": "The forecast says rain; suggest something else.",
+  "opener": "Cześć! Jedziemy w sobotę w góry?",
+  "first_question": "Co zwykle robisz w weekend?",
+  "closer": "Dobra, napiszę ci szczegóły. Na razie!",
+  "phrases": [
+   "W weekend zwykle odpoczywam",
+   "Chętnie!",
+   "Niestety nie mogę",
+   "Co mam zabrać?",
+   "Będzie padać",
+   "Może kino?"
+  ]
+ },
+ {
+  "id": "pl-call-u06-book-doctor",
+  "level": "A1",
+  "character": "Pani Krysia",
+  "bio": "50, receptionist at the Zdrowie health clinic",
+  "register": "neutral",
+  "scene": "a phone call to the clinic to book an appointment",
+  "learner_role": "a patient",
+  "mission": [
+   "Say you want an appointment",
+   "Agree on a day and time",
+   "Give your name"
+  ],
+  "complication": "The doctor is only free next week; ask if there's anything earlier.",
+  "opener": "Przychodnia Zdrowie, dzień dobry.",
+  "first_question": "W czym mogę pomóc?",
+  "closer": "{m:Zapisałam pana.|f:Zapisałam panią.} Do widzenia!",
+  "phrases": [
+   "Chcę się umówić na wizytę",
+   "Do lekarza rodzinnego",
+   "Czy jest coś wcześniej?",
+   "Może być wtorek",
+   "Nazywam się…"
+  ]
+ },
+ {
+  "id": "pl-call-u06-birthday-invite",
+  "level": "A1",
+  "character": "Ania",
+  "bio": "35, the learner's team lead at work, from Warsaw",
+  "register": "informal (ty)",
+  "scene": "Ania invites you to her birthday party",
+  "learner_role": "her colleague",
+  "mission": [
+   "Accept the invitation",
+   "Ask when and where",
+   "Ask what to bring"
+  ],
+  "complication": "It clashes with another plan; ask if you can come later.",
+  "opener": "Słuchaj, w sobotę mam urodziny!",
+  "first_question": "Przyjdziesz?",
+  "closer": "Super! To do soboty!",
+  "phrases": [
+   "Wszystkiego najlepszego!",
+   "Chętnie przyjdę",
+   "O której? Gdzie?",
+   "Mogę przyjść później?",
+   "Co przynieść?"
+  ]
+ }
+]

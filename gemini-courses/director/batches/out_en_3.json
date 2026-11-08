@@ -1,0 +1,838 @@
+[
+  {
+    "id": "en-call-u07-at-the-doctor",
+    "beats": [
+      {
+        "goal": "Ask about symptoms",
+        "lines": [
+          {"en": "What seems to be the problem today?", "zh": "今天哪里不舒服？"},
+          {"en": "Hello. What symptoms are you having?", "zh": "你好。你有什么症状？"}
+        ],
+        "expect": ["headache", "throat", "fever", "cough"]
+      },
+      {
+        "goal": "Ask how long symptoms lasted",
+        "lines": [
+          {"en": "I see. How long have you felt unwell?", "zh": "我明白了。你不舒服有多久了？"},
+          {"en": "When did these symptoms first start?", "zh": "这些症状最初是什么时候开始的？"}
+        ],
+        "expect": ["days", "for", "since", "yesterday", "started"]
+      },
+      {
+        "goal": "Ask about medicine allergies",
+        "lines": [
+          {"en": "Are you allergic to any medication?", "zh": "你对什么药物过敏吗？"},
+          {"en": "Do you have any drug allergies?", "zh": "你有任何药物过敏史吗？"}
+        ],
+        "expect": ["allergic", "penicillin", "allergy"]
+      },
+      {
+        "goal": "Invite questions about treatment",
+        "lines": [
+          {"en": "Do you have any questions about this medicine?", "zh": "关于这种药你有什么疑问吗？"},
+          {"en": "Here is your prescription. Any questions for me?", "zh": "这是你的处方。有什么要问我的吗？"}
+        ],
+        "expect": ["how many", "times", "take", "day", "work"]
+      },
+      {
+        "goal": "Wrap up the visit",
+        "lines": [
+          {"en": "Take these tablets and get plenty of rest. Get well soon!", "zh": "吃这些药片，多休息。祝你早日康复！"},
+          {"en": "Rest at home for two days. Take care!", "zh": "在家休息两天。多保重！"}
+        ],
+        "expect": ["thank", "thanks", "bye", "goodbye"]
+      }
+    ],
+    "example": [
+      {"s": "C", "en": "What seems to be the problem today?", "zh": "今天哪里不舒服？"},
+      {"s": "L", "en": "I have a headache and a sore throat.", "zh": "我头痛而且喉咙痛。"},
+      {"s": "C", "en": "I see. How long have you felt unwell?", "zh": "我明白了。你不舒服有多久了？"},
+      {"s": "L", "en": "I've had these symptoms for three days.", "zh": "这些症状我已经持续三天了。"},
+      {"s": "C", "en": "Are you allergic to any medication?", "zh": "你对什么药物过敏吗？"},
+      {"s": "L", "en": "I'm allergic to penicillin.", "zh": "我对青霉素过敏。"},
+      {"s": "C", "en": "Good to know. Do you have any questions?", "zh": "好的。你还有什么疑问吗？"},
+      {"s": "L", "en": "How many times a day should I take this?", "zh": "这个药我一天应该吃几次？"},
+      {"s": "C", "en": "Take these tablets and get plenty of rest. Get well soon!", "zh": "吃这些药片，多休息。祝你早日康复！"},
+      {"s": "L", "en": "Thank you very much, doctor. Goodbye!", "zh": "非常感谢您，医生。再见！"}
+    ],
+    "reactions": [
+      {"en": "I see.", "zh": "我明白了。"},
+      {"en": "That makes sense.", "zh": "有道理。"},
+      {"en": "All right.", "zh": "好的。"},
+      {"en": "Okay, let me check.", "zh": "好的，让我检查一下。"},
+      {"en": "Don't worry.", "zh": "别担心。"},
+      {"en": "Good.", "zh": "好的。"}
+    ],
+    "repair": [
+      {"en": "Sorry, could you say that again?", "zh": "抱歉，你能再说一遍吗？"},
+      {"en": "Do you mean your head or your throat?", "zh": "你是说头痛还是喉咙痛？"}
+    ]
+  },
+  {
+    "id": "en-call-u07-pharmacy",
+    "beats": [
+      {
+        "goal": "Ask what medicine is needed",
+        "lines": [
+          {"en": "What kind of medicine are you looking for?", "zh": "你在找什么类型的药？"},
+          {"en": "Hello. What can I get for you today?", "zh": "你好。今天我能为你拿点什么？"}
+        ],
+        "expect": ["cold", "cough", "runny nose", "something for"]
+      },
+      {
+        "goal": "Suggest an over the counter alternative",
+        "lines": [
+          {"en": "That one needs a prescription. Would you like an alternative?", "zh": "那个药需要处方。你需要非处方替代药吗？"},
+          {"en": "You need a prescription for that. Can I suggest another syrup?", "zh": "那个需要处方。我可以推荐另一款止咳糖浆吗？"}
+        ],
+        "expect": ["prescription", "alternative", "yes", "please", "ok"]
+      },
+      {
+        "goal": "Confirm over the counter cold medicine",
+        "lines": [
+          {"en": "This cold medicine is over the counter. Do you want it?", "zh": "这款感冒药是非处方的。你要这个吗？"},
+          {"en": "This does not need a prescription. Would you like this one?", "zh": "这个不需要处方。你想要这个吗？"}
+        ],
+        "expect": ["prescription", "need", "take", "yes", "please"]
+      },
+      {
+        "goal": "Explain dosage and invite questions",
+        "lines": [
+          {"en": "Do you know how to take this medicine?", "zh": "你知道怎么吃这种药吗？"},
+          {"en": "Do you have any questions about the dosage?", "zh": "关于用量你有什么问题吗？"}
+        ],
+        "expect": ["how", "when", "take", "meals", "often"]
+      },
+      {
+        "goal": "Wrap up the pharmacy visit",
+        "lines": [
+          {"en": "Drink plenty of warm water and get some rest. Goodbye!", "zh": "多喝温水，多休息。再见！"},
+          {"en": "Take care and drink warm water. Have a good day!", "zh": "多保重，多喝温水。祝你愉快！"}
+        ],
+        "expect": ["thank", "thanks", "bye", "goodbye"]
+      }
+    ],
+    "example": [
+      {"s": "C", "en": "What kind of medicine are you looking for?", "zh": "你在找什么类型的药？"},
+      {"s": "L", "en": "Could I have something for a cold, please?", "zh": "请问能给我拿点感冒药吗？"},
+      {"s": "C", "en": "Sure. What cold symptoms do you have?", "zh": "当然。你有什么感冒症状？"},
+      {"s": "L", "en": "I have a runny nose and a bad cough.", "zh": "我流鼻涕，咳嗽得很厉害。"},
+      {"s": "C", "en": "That strong medicine needs a prescription. Try this syrup instead?", "zh": "那种强效药需要处方。试试这款糖浆怎么样？"},
+      {"s": "L", "en": "Do I need a prescription for this?", "zh": "这个需要处方吗？"},
+      {"s": "C", "en": "No, this one is over the counter.", "zh": "不需要，这是非处方药。"},
+      {"s": "L", "en": "How should I take this medicine?", "zh": "这种药我应该怎么吃？"},
+      {"s": "C", "en": "Drink plenty of warm water and get some rest. Goodbye!", "zh": "多喝温水，多休息。再见！"},
+      {"s": "L", "en": "Thank you very much for your help. Goodbye!", "zh": "非常感谢你的帮助。再见！"}
+    ],
+    "reactions": [
+      {"en": "Sure thing.", "zh": "当然可以。"},
+      {"en": "Of course.", "zh": "没问题。"},
+      {"en": "I understand.", "zh": "我明白了。"},
+      {"en": "Right away.", "zh": "马上就来。"},
+      {"en": "No problem.", "zh": "没问题。"},
+      {"en": "That is fine.", "zh": "那挺好的。"}
+    ],
+    "repair": [
+      {"en": "Could you repeat that, please?", "zh": "请问你能重复一遍吗？"},
+      {"en": "Do you want tablets or a syrup?", "zh": "你想要药片还是糖浆？"}
+    ]
+  },
+  {
+    "id": "en-call-u07-calling-in-sick",
+    "beats": [
+      {
+        "goal": "Ask how team member feels",
+        "lines": [
+          {"en": "Are you feeling okay?", "zh": "你感觉还好吗？"},
+          {"en": "Hello! How are you feeling this morning?", "zh": "你好！今天早上感觉怎么样？"}
+        ],
+        "expect": ["not feeling well", "unwell", "sick", "work", "come"]
+      },
+      {
+        "goal": "Ask what symptoms they have",
+        "lines": [
+          {"en": "Oh no! What seems to be wrong?", "zh": "糟糕！哪里不舒服吗？"},
+          {"en": "I am sorry to hear that. What symptoms do you have?", "zh": "听到这消息真遗憾。你有什么症状？"}
+        ],
+        "expect": ["fever", "dizzy", "headache", "stomach", "cold"]
+      },
+      {
+        "goal": "Ask to join meeting online",
+        "lines": [
+          {"en": "Can you join our key meeting online from home today?", "zh": "你今天能在家线上参加我们的重要会议吗？"},
+          {"en": "Could you attend the team meeting online if you feel up to it?", "zh": "如果你感觉吃得消，能线上参加团队会议吗？"}
+        ],
+        "expect": ["online", "join", "reschedule", "can", "try"]
+      },
+      {
+        "goal": "Agree on meeting schedule",
+        "lines": [
+          {"en": "Should we reschedule the meeting for Thursday?", "zh": "我们把会议改到周四可以吗？"},
+          {"en": "Would you like me to send you the meeting notes?", "zh": "需要我把会议纪要发给你吗？"}
+        ],
+        "expect": ["reschedule", "thursday", "meeting", "online", "notes"]
+      },
+      {
+        "goal": "Wrap up the phone call",
+        "lines": [
+          {"en": "Get well soon! Check in with me tomorrow morning.", "zh": "祝早日康复！明早跟我联系一下。"},
+          {"en": "Rest well today. Message me tomorrow morning.", "zh": "今天好好休息。明天早上给我发消息。"}
+        ],
+        "expect": ["thanks", "thank you", "bye", "will do"]
+      }
+    ],
+    "example": [
+      {"s": "C", "en": "Are you feeling okay?", "zh": "你感觉还好吗？"},
+      {"s": "L", "en": "I'm not feeling well today.", "zh": "我今天感觉不太舒服。"},
+      {"s": "C", "en": "Oh no! What seems to be wrong?", "zh": "糟糕！哪里不舒服吗？"},
+      {"s": "L", "en": "I have a fever and feel quite dizzy.", "zh": "我发烧了，而且感觉挺头晕的。"},
+      {"s": "C", "en": "Can you join our key meeting online from home today?", "zh": "你今天能在家线上参加我们的重要会议吗？"},
+      {"s": "L", "en": "I can join the meeting online if needed.", "zh": "如果需要的话，我可以线上参会。"},
+      {"s": "C", "en": "Actually, don't worry. Could we reschedule our meeting?", "zh": "算了，别担心。我们改期开会可以吗？"},
+      {"s": "L", "en": "Yes, could we reschedule our meeting?", "zh": "好的，我们可以改期开会吗？"},
+      {"s": "C", "en": "Get well soon! Check in with me tomorrow morning.", "zh": "祝早日康复！明早跟我联系一下。"},
+      {"s": "L", "en": "Thank you, Ania. I will talk to you tomorrow.", "zh": "谢谢你，阿尼亚。明天和你联系。"}
+    ],
+    "reactions": [
+      {"en": "Oh, dear.", "zh": "哎呀。"},
+      {"en": "I understand.", "zh": "我明白了。"},
+      {"en": "Don't worry about work.", "zh": "别担心工作的事。"},
+      {"en": "That sounds rough.", "zh": "听起来挺难受的。"},
+      {"en": "Take it easy.", "zh": "好好休养。"},
+      {"en": "Sounds good.", "zh": "好的。"}
+    ],
+    "repair": [
+      {"en": "Sorry, you broke up. Could you say that again?", "zh": "抱歉，刚才声音卡了。你能再说一遍吗？"},
+      {"en": "Do you want to rest today or work online?", "zh": "你是想今天休息还是线上工作？"}
+    ]
+  },
+  {
+    "id": "en-call-u07-at-the-gym",
+    "beats": [
+      {
+        "goal": "Ask about sports and exercise",
+        "lines": [
+          {"en": "What sports or exercises do you usually enjoy?", "zh": "你平时一般喜欢什么运动或锻炼？"},
+          {"en": "Welcome! What sports do you usually do?", "zh": "欢迎！你平时通常做什么运动？"}
+        ],
+        "expect": ["football", "swimming", "run", "week", "times"]
+      },
+      {
+        "goal": "Encourage trying a heavier weight",
+        "lines": [
+          {"en": "You are doing great! Let's try this heavier weight now.", "zh": "你做得很好！我们现在试试这个更重的重量吧。"},
+          {"en": "Ready for a challenge? Try lifting this heavier barbell.", "zh": "准备好挑战了吗？试试举这个更重的杠铃。"}
+        ],
+        "expect": ["too hard", "knee", "hurts", "heavy", "pain"]
+      },
+      {
+        "goal": "Check on knee pain",
+        "lines": [
+          {"en": "Are you alright? Does your knee hurt?", "zh": "你没事吧？你的膝盖疼吗？"},
+          {"en": "Should we stop here and take a short break?", "zh": "我们要不要停下来稍微休息一下？"}
+        ],
+        "expect": ["break", "rest", "hurts", "hard", "knee"]
+      },
+      {
+        "goal": "Agree on a workout plan",
+        "lines": [
+          {"en": "Let's make a lighter plan. How about twice a week?", "zh": "我们定个更轻松的计划吧。一周两次怎么样？"},
+          {"en": "Should we focus on light cardio and stretching next time?", "zh": "下次我们重点做有氧和拉伸好吗？"}
+        ],
+        "expect": ["plan", "twice", "week", "light", "good"]
+      },
+      {
+        "goal": "Wrap up the gym session",
+        "lines": [
+          {"en": "Great effort today! See you next time!", "zh": "今天练得很棒！下次见！"},
+          {"en": "Awesome workout today! Drink plenty of water!", "zh": "今天锻炼得很棒！多喝水！"}
+        ],
+        "expect": ["thanks", "see you", "bye", "great"]
+      }
+    ],
+    "example": [
+      {"s": "C", "en": "What sports or exercises do you usually enjoy?", "zh": "你平时一般喜欢什么运动或锻炼？"},
+      {"s": "L", "en": "I play football on weekends and run twice a week.", "zh": "我周末踢足球，一周跑两次步。"},
+      {"s": "C", "en": "You are doing great! Let's try this heavier weight now.", "zh": "你做得很好！我们现在试试这个更重的重量吧。"},
+      {"s": "L", "en": "That's a bit too hard for me.", "zh": "那对我来说有点太难了。"},
+      {"s": "C", "en": "Are you feeling any pain in your legs?", "zh": "你的腿感到疼痛吗？"},
+      {"s": "L", "en": "My right knee hurts a little.", "zh": "我的右膝盖有点疼。"},
+      {"s": "C", "en": "Oh, let's take a short break right now.", "zh": "噢，我们现在马上休息一下吧。"},
+      {"s": "L", "en": "Let's take a short break.", "zh": "我们休息一会儿吧。"},
+      {"s": "C", "en": "Great effort today! See you next time!", "zh": "今天练得很棒！下次见！"},
+      {"s": "L", "en": "Thanks for your help, Tomek! See you!", "zh": "谢谢你的指导，托梅克！再见！"}
+    ],
+    "reactions": [
+      {"en": "Nice job!", "zh": "干得漂亮！"},
+      {"en": "Good pace!", "zh": "节奏很好！"},
+      {"en": "I hear you.", "zh": "我懂你的意思。"},
+      {"en": "No worries.", "zh": "别担心。"},
+      {"en": "Keep it up!", "zh": "继续保持！"},
+      {"en": "Take your time.", "zh": "慢慢来。"}
+    ],
+    "repair": [
+      {"en": "Sorry, I missed that. What did you say?", "zh": "抱歉，我刚才没听清。你说了什么？"},
+      {"en": "Does it hurt or is it just tiring?", "zh": "是疼还是只是累了？"}
+    ]
+  },
+  {
+    "id": "en-call-u08-your-weekend",
+    "beats": [
+      {
+        "goal": "Ask about weekend activities",
+        "lines": [
+          {"en": "Did you do anything fun?", "zh": "你周末去做了什么好玩的事吗？"},
+          {"en": "Tell me, what did you do this weekend?", "zh": "快跟我说说，你这周末做什么了？"}
+        ],
+        "expect": ["cinema", "friends", "lunch", "went", "stayed"]
+      },
+      {
+        "goal": "Ask where they went",
+        "lines": [
+          {"en": "Nice! Where did you go on Saturday?", "zh": "真好！你周六去哪儿了？"},
+          {"en": "Which restaurant or cinema did you visit?", "zh": "你去了哪家餐厅或者电影院？"}
+        ],
+        "expect": ["went", "cinema", "centre", "park", "krakow"]
+      },
+      {
+        "goal": "Tease and ask for details",
+        "lines": [
+          {"en": "Really? That sounds a bit boring! Any other details?", "zh": "真的吗？听起来有点无聊呀！还有别的细节吗？"},
+          {"en": "Come on, was it really that exciting?", "zh": "得了吧，真的有那么好玩吗？"}
+        ],
+        "expect": ["really", "great", "movie", "fun", "saw", "food"]
+      },
+      {
+        "goal": "Prompt learner to ask Kasia",
+        "lines": [
+          {"en": "Haha! Do you want to hear about my weekend?", "zh": "哈哈！你想听听我的周末吗？"},
+          {"en": "Well, are you going to ask about my weekend?", "zh": "好吧，你都不打算问问我的周末吗？"}
+        ],
+        "expect": ["what about you", "your weekend", "did you", "how was"]
+      },
+      {
+        "goal": "Wrap up the coffee chat",
+        "lines": [
+          {"en": "Sounds fun! I have to run to class now. See you later!", "zh": "听起来真好玩！我得赶去上课了。回头见！"},
+          {"en": "I must go to my lecture now. Catch you later!", "zh": "我得去上大课了。回头再聊！"}
+        ],
+        "expect": ["see you", "bye", "later", "class", "have fun"]
+      }
+    ],
+    "example": [
+      {"s": "C", "en": "Did you do anything fun?", "zh": "你周末去做了什么好玩的事吗？"},
+      {"s": "L", "en": "I went to the cinema on Saturday.", "zh": "我周六去看了电影。"},
+      {"s": "C", "en": "Nice! Where did you go for lunch after that?", "zh": "太棒了！之后你去了哪里吃午饭？"},
+      {"s": "L", "en": "I met up with some friends for lunch.", "zh": "我和几个朋友碰头吃了午餐。"},
+      {"s": "C", "en": "Really? That sounds a bit boring! Any other details?", "zh": "真的吗？听起来有点无聊呀！还有别的细节吗？"},
+      {"s": "L", "en": "It was really great! We watched an exciting movie.", "zh": "真的很棒！我们看了一部非常刺激的电影。"},
+      {"s": "C", "en": "Haha, okay, I believe you!", "zh": "哈哈，好吧，我相信你！"},
+      {"s": "L", "en": "What about you? What did you do?", "zh": "你呢？你做什么了？"},
+      {"s": "C", "en": "Sounds fun! I have to run to class now. See you later!", "zh": "听起来真好玩！我得赶去上课了。回头见！"},
+      {"s": "L", "en": "See you later! Have a good class!", "zh": "回头见！上课顺利！"}
+    ],
+    "reactions": [
+      {"en": "That sounds awesome!", "zh": "听起来太棒了！"},
+      {"en": "Really?", "zh": "真的吗？"},
+      {"en": "How nice!", "zh": "真好！"},
+      {"en": "Haha, no way!", "zh": "哈哈，不会吧！"},
+      {"en": "I love that.", "zh": "我喜欢这个。"},
+      {"en": "Lucky you!", "zh": "你真走运！"}
+    ],
+    "repair": [
+      {"en": "Wait, I didn't catch that. Say that again?", "zh": "等等，我没听清。能再说一遍吗？"},
+      {"en": "Did you go out or stay at home?", "zh": "你是出去了还是呆在家里？"}
+    ]
+  },
+  {
+    "id": "en-call-u08-trip-to-gdansk",
+    "beats": [
+      {
+        "goal": "Ask about trip to Gdansk",
+        "lines": [
+          {"en": "How was Gdańsk? Did you enjoy it?", "zh": "格但斯克怎么样？玩得开心吗？"},
+          {"en": "Welcome back! How was your trip to Gdańsk?", "zh": "欢迎回来！你的格但斯克之旅怎么样？"}
+        ],
+        "expect": ["train", "went", "journey", "hours", "great"]
+      },
+      {
+        "goal": "Ask about travel method and duration",
+        "lines": [
+          {"en": "How did you travel there? Did it take long?", "zh": "你怎么去那里的？路上花了很久吗？"},
+          {"en": "Did you take the train or drive your car?", "zh": "你是坐火车还是自己开车的？"}
+        ],
+        "expect": ["train", "took", "five", "hours", "journey"]
+      },
+      {
+        "goal": "Ask what sights they saw",
+        "lines": [
+          {"en": "What sights did you see in the city?", "zh": "你在城里参观了哪些景点？"}
+        ],
+        "expect": ["old town", "visited", "sea", "saw", "museum"]
+      },
+      {
+        "goal": "Ask what they liked the most",
+        "lines": [
+          {"en": "What did you like the most about Gdańsk?", "zh": "关于格但斯克，你最喜欢什么？"},
+          {"en": "What was your favourite part of the trip?", "zh": "这次旅行你最喜欢的部分是什么？"}
+        ],
+        "expect": ["liked", "sea", "most", "beach", "food"]
+      },
+      {
+        "goal": "Claim Krakow is more beautiful",
+        "lines": [
+          {"en": "Still, Kraków is much more beautiful than Gdańsk, right?", "zh": "不过，克拉科夫还是比格但斯克美得多，对吧？"},
+          {"en": "Gdańsk is nice, but Kraków has much more history!", "zh": "格但斯克不错，但克拉科夫的历史要悠久得多！"}
+        ],
+        "expect": ["opinion", "both", "lovely", "beautiful", "agree"]
+      },
+      {
+        "goal": "Wrap up neighbourly conversation",
+        "lines": [
+          {"en": "Well, next time bring me back some amber! Take care.", "zh": "好吧，下次记得给我带点琥珀回来！保重。"},
+          {"en": "Enjoy your evening, neighbour! Take care.", "zh": "晚上好好休息，邻居！保重。"}
+        ],
+        "expect": ["take care", "will do", "goodbye", "bye", "thanks"]
+      }
+    ],
+    "example": [
+      {"s": "C", "en": "How was Gdańsk? Did you enjoy it?", "zh": "格但斯克怎么样？玩得开心吗？"},
+      {"s": "L", "en": "I went by train from Kraków. It was great!", "zh": "我从克拉科夫坐火车去的。非常棒！"},
+      {"s": "C", "en": "How did you travel there? Did it take long?", "zh": "你怎么去那里的？路上花了很久吗？"},
+      {"s": "L", "en": "The journey took about five hours.", "zh": "旅程大约花了五个小时。"},
+      {"s": "C", "en": "What sights did you see in the city?", "zh": "你在城里参观了哪些景点？"},
+      {"s": "L", "en": "I visited the beautiful Old Town.", "zh": "我参观了美丽的老城。"},
+      {"s": "C", "en": "What did you like the most about Gdańsk?", "zh": "关于格但斯克，你最喜欢什么？"},
+      {"s": "L", "en": "I liked the sea the most.", "zh": "我最喜欢大海。"},
+      {"s": "C", "en": "Still, Kraków is much more beautiful than Gdańsk, right?", "zh": "不过，克拉科夫还是比格但斯克美得多，对吧？"},
+      {"s": "L", "en": "In my opinion, both cities are lovely.", "zh": "在我看来，两座城市都很可爱。"}
+    ],
+    "reactions": [
+      {"en": "Ah, wonderful!", "zh": "啊，太棒了！"},
+      {"en": "Is that so?", "zh": "是这样吗？"},
+      {"en": "I remember that place well.", "zh": "我清楚记得那个地方。"},
+      {"en": "Very interesting!", "zh": "很有意思！"},
+      {"en": "That sounds lovely.", "zh": "听起来很美妙。"},
+      {"en": "Good for you!", "zh": "真为你高兴！"}
+    ],
+    "repair": [
+      {"en": "Pardon? My hearing isn't great. Say again?", "zh": "什么？我耳朵不太好使。再说一遍？"},
+      {"en": "Did you go by train or by bus?", "zh": "你是坐火车还是坐大巴去的？"}
+    ]
+  },
+  {
+    "id": "en-call-u08-funny-story",
+    "beats": [
+      {
+        "goal": "Ask for an interesting story",
+        "lines": [
+          {"en": "Did anything interesting happen to you recently?", "zh": "你最近发生了什么有趣的事吗？"},
+          {"en": "You look amused! What happened to you today?", "zh": "你看上去挺乐的！今天发生什么了？"}
+        ],
+        "expect": ["believe", "happened", "first", "phone", "lost"]
+      },
+      {
+        "goal": "Interrupt with a curious question",
+        "lines": [
+          {"en": "Wait, your phone was gone? What did you do then?", "zh": "等等，你手机不见了？那你接着怎么办了？"},
+          {"en": "No way! Where did you look for it first?", "zh": "不会吧！你一开始去哪里找的？"}
+        ],
+        "expect": ["then", "tram", "realised", "left", "looked"]
+      },
+      {
+        "goal": "Ask how the story ended",
+        "lines": [
+          {"en": "Wow! And what happened finally?", "zh": "哇！那最后怎么样了？"},
+          {"en": "Did you find it? How did it end?", "zh": "你找到了吗？结局怎么样？"}
+        ],
+        "expect": ["finally", "luckily", "passenger", "driver", "got"]
+      },
+      {
+        "goal": "Tell quick story and ask reaction",
+        "lines": [
+          {"en": "I locked my keys inside my car this morning! Crazy, right?", "zh": "我今早把钥匙锁车里了！太疯狂了吧？"},
+          {"en": "A dog ran away with my shoe in the park today!", "zh": "今天公园里有只狗叼着我的鞋跑了！"}
+        ],
+        "expect": ["crazy", "really", "funny", "sounds", "unbelievable"]
+      },
+      {
+        "goal": "Wrap up the evening chat",
+        "lines": [
+          {"en": "Haha, what a story! Glad it worked out. Good night!", "zh": "哈哈，多精彩的故事！很高兴圆满解决了。晚安！"},
+          {"en": "That was hilarious! Sleep well and good night!", "zh": "太搞笑了！睡个好觉，晚安！"}
+        ],
+        "expect": ["good night", "night", "bye", "see you"]
+      }
+    ],
+    "example": [
+      {"s": "C", "en": "Did anything interesting happen to you recently?", "zh": "你最近发生了什么有趣的事吗？"},
+      {"s": "L", "en": "You won't believe what happened! First, I lost my phone.", "zh": "你肯定不会相信发生了什么！首先，我把手机弄丢了。"},
+      {"s": "C", "en": "Wait, your phone was gone? What did you do then?", "zh": "等等，你手机不见了？那你接着怎么办了？"},
+      {"s": "L", "en": "Then I realised I left it on the tram.", "zh": "然后我意识到我把它落电车上了。"},
+      {"s": "C", "en": "Wow! And what happened finally?", "zh": "哇！那最后怎么样了？"},
+      {"s": "L", "en": "Finally, I got it back this afternoon.", "zh": "最后，我今天下午拿回了手机。"},
+      {"s": "C", "en": "I locked my keys inside my car this morning! Crazy, right?", "zh": "我今早把钥匙锁车里了！太疯狂了吧？"},
+      {"s": "L", "en": "Really? That sounds crazy!", "zh": "真的吗？听起来太疯狂了！"},
+      {"s": "C", "en": "Haha, what a story! Glad it worked out. Good night!", "zh": "哈哈，多精彩的故事！很高兴圆满解决了。晚安！"},
+      {"s": "L", "en": "Haha, good night, Tomek! Talk soon!", "zh": "哈哈，晚安，托梅克！回头聊！"}
+    ],
+    "reactions": [
+      {"en": "No way!", "zh": "不会吧！"},
+      {"en": "That is hilarious!", "zh": "太好笑了！"},
+      {"en": "Oh, man!", "zh": "天呐！"},
+      {"en": "You're kidding!", "zh": "你在开玩笑吧！"},
+      {"en": "That's so lucky!", "zh": "太走运了！"},
+      {"en": "Unbelievable!", "zh": "难以置信！"}
+    ],
+    "repair": [
+      {"en": "Wait, start over. What did you say?", "zh": "等等，重新来一遍。你刚才说什么？"},
+      {"en": "Did you lose it or did someone take it?", "zh": "是你弄丢了还是别人拿走了？"}
+    ]
+  },
+  {
+    "id": "en-call-u08-lost-wallet",
+    "beats": [
+      {
+        "goal": "Ask what happened and when",
+        "lines": [
+          {"en": "Could you tell me what happened?", "zh": "你能告诉我发生了什么事吗？"},
+          {"en": "Hello. What incident are you reporting today?", "zh": "你好。你今天来报什么案？"}
+        ],
+        "expect": ["wallet", "stolen", "tram", "yesterday", "around"]
+      },
+      {
+        "goal": "Ask which stop it occurred near",
+        "lines": [
+          {"en": "Exactly which tram stop were you near when it happened?", "zh": "事情发生时，你究竟靠近哪个电车站？"},
+          {"en": "Do you remember the exact tram stop?", "zh": "你记得确切的电车站名吗？"}
+        ],
+        "expect": ["sure", "stop", "completely", "think", "remember"]
+      },
+      {
+        "goal": "Ask what was inside the wallet",
+        "lines": [
+          {"en": "What did the wallet look like, and what was inside?", "zh": "钱包长什么样？里面有什么东西？"},
+          {"en": "Can you describe your wallet and its contents?", "zh": "你能描述一下你的钱包和里面的物品吗？"}
+        ],
+        "expect": ["black", "leather", "cards", "id", "inside"]
+      },
+      {
+        "goal": "Ask for contact phone number",
+        "lines": [
+          {"en": "Please provide your phone number and contact details.", "zh": "请提供你的电话号码和联系方式。"},
+          {"en": "What is the best phone number to reach you?", "zh": "联系你的最佳电话号码是多少？"}
+        ],
+        "expect": ["number", "phone", "zero", "call", "is"]
+      },
+      {
+        "goal": "Wrap up the police report",
+        "lines": [
+          {"en": "I've taken your report. We'll call you if we find anything.", "zh": "我已做好记录。如果找到任何东西，我们会给你打电话。"},
+          {"en": "Your report is filed. We will contact you soon.", "zh": "报案已受理。我们会尽快联系你。"}
+        ],
+        "expect": ["thank you", "thanks", "goodbye", "officer"]
+      }
+    ],
+    "example": [
+      {"s": "C", "en": "Could you tell me what happened?", "zh": "你能告诉我发生了什么事吗？"},
+      {"s": "L", "en": "My wallet was stolen on the tram yesterday evening.", "zh": "昨晚我的钱包在电车上被偷了。"},
+      {"s": "C", "en": "Exactly which tram stop were you near when it happened?", "zh": "事情发生时，你究竟靠近哪个电车站？"},
+      {"s": "L", "en": "I'm not completely sure which stop it was.", "zh": "我不太确定具体是哪个站。"},
+      {"s": "C", "en": "What did the wallet look like, and what was inside?", "zh": "钱包长什么样？里面有什么东西？"},
+      {"s": "L", "en": "It was a black leather wallet with my bank cards inside.", "zh": "那是一个黑色皮夹，里面有我的银行卡。"},
+      {"s": "C", "en": "Please provide your phone number and contact details.", "zh": "请提供你的电话号码和联系方式。"},
+      {"s": "L", "en": "My phone number is 501 234 567.", "zh": "我的电话号码是501 234 567。"},
+      {"s": "C", "en": "I've taken your report. We'll call you if we find anything.", "zh": "我已做好记录。如果找到任何东西，我们会给你打电话。"},
+      {"s": "L", "en": "Thank you very much, officer. Goodbye.", "zh": "非常感谢您，警官。再见。"}
+    ],
+    "reactions": [
+      {"en": "Understood.", "zh": "明白了。"},
+      {"en": "I see.", "zh": "我知道了。"},
+      {"en": "I am writing that down.", "zh": "我正在记录。"},
+      {"en": "Right.", "zh": "好的。"},
+      {"en": "Got it.", "zh": "收到了。"},
+      {"en": "Okay.", "zh": "好的。"}
+    ],
+    "repair": [
+      {"en": "Could you speak a little louder, please?", "zh": "请问你能说大声一点吗？"},
+      {"en": "Was it cash or cards inside the wallet?", "zh": "钱包里装的是现金还是卡？"}
+    ]
+  },
+  {
+    "id": "en-call-u09-return-jacket",
+    "beats": [
+      {
+        "goal": "Ask about problem with jacket",
+        "lines": [
+          {"en": "Is there something wrong with the jacket?", "zh": "这件夹克有什么问题吗？"},
+          {"en": "Hello! How can I help you with this jacket?", "zh": "你好！关于这件夹克有什么我可以帮你的？"}
+        ],
+        "expect": ["return", "exchange", "small", "jacket", "tight"]
+      },
+      {
+        "goal": "Ask for the paper receipt",
+        "lines": [
+          {"en": "Do you have your paper receipt with you?", "zh": "你带纸质小票了吗？"},
+          {"en": "Can I see your store receipt, please?", "zh": "请问我能看一下你的购物小票吗？"}
+        ],
+        "expect": ["paper", "receipt", "phone", "card", "record"]
+      },
+      {
+        "goal": "Offer a different size or colour",
+        "lines": [
+          {"en": "Card proof is fine! Would you like a bigger size?", "zh": "刷卡记录就可以！你想要大一号的吗？"},
+          {"en": "We have medium and large. Would you prefer another colour?", "zh": "我们有中号和大号。你更想要其他颜色吗？"}
+        ],
+        "expect": ["bigger", "size", "large", "colour", "exchange"]
+      },
+      {
+        "goal": "Ask if new jacket fits",
+        "lines": [
+          {"en": "Here is the larger size. How does it fit?", "zh": "这是大号的。穿起来合适吗？"},
+          {"en": "Does this one feel comfortable on you?", "zh": "这件你穿着感觉舒服吗？"}
+        ],
+        "expect": ["fits", "perfect", "better", "take", "thank"]
+      },
+      {
+        "goal": "Wrap up the store exchange",
+        "lines": [
+          {"en": "Here's your new receipt, all sorted! Have a great day!", "zh": "这是你的新小票，都办好了！祝你愉快！"},
+          {"en": "Here is your bag and receipt. Have a nice day!", "zh": "这是你的袋子和小票。祝你愉快！"}
+        ],
+        "expect": ["thank you", "thanks", "great day", "bye"]
+      }
+    ],
+    "example": [
+      {"s": "C", "en": "Is there something wrong with the jacket?", "zh": "这件夹克有什么问题吗？"},
+      {"s": "L", "en": "I'd like to return this jacket, please.", "zh": "我想退这件夹克。"},
+      {"s": "C", "en": "Sure. Why would you like to return it?", "zh": "当然可以。你为什么要退呢？"},
+      {"s": "L", "en": "It's a bit too small for me.", "zh": "它对我来说有点太小了。"},
+      {"s": "C", "en": "Do you have your paper receipt with you?", "zh": "你带纸质小票了吗？"},
+      {"s": "L", "en": "I don't have the paper receipt.", "zh": "我没有纸质小票。"},
+      {"s": "C", "en": "Card proof is fine! Would you like a bigger size?", "zh": "刷卡记录就可以！你想要大一号的吗？"},
+      {"s": "L", "en": "Can I exchange it for a bigger size?", "zh": "我可以换一件大一号的吗？"},
+      {"s": "C", "en": "Here's your new receipt, all sorted! Have a great day!", "zh": "这是你的新小票，都办好了！祝你愉快！"},
+      {"s": "L", "en": "Thank you very much! Have a great day!", "zh": "非常感谢！祝你愉快！"}
+    ],
+    "reactions": [
+      {"en": "Of course.", "zh": "当然可以。"},
+      {"en": "No problem at all.", "zh": "完全没问题。"},
+      {"en": "That looks nice.", "zh": "那件挺好看的。"},
+      {"en": "Let me check our stock.", "zh": "让我查一下库存。"},
+      {"en": "Sure thing.", "zh": "没问题。"},
+      {"en": "Great choice.", "zh": "选得好。"}
+    ],
+    "repair": [
+      {"en": "Pardon me, could you repeat that please?", "zh": "不好意思，请问你能重说一遍吗？"},
+      {"en": "Would you prefer a refund or an exchange?", "zh": "你想要退款还是换货？"}
+    ]
+  },
+  {
+    "id": "en-call-u09-post-office",
+    "beats": [
+      {
+        "goal": "Ask destination of the parcel",
+        "lines": [
+          {"en": "Where would you like to send this parcel?", "zh": "你想把这个包裹寄到哪里？"},
+          {"en": "Hello! Which country is this parcel going to?", "zh": "你好！这个包裹是寄往哪个国家的？"}
+        ],
+        "expect": ["uk", "send", "parcel", "england", "to"]
+      },
+      {
+        "goal": "Suggest buying a bigger box",
+        "lines": [
+          {"en": "This box is too small. Would you like a bigger box?", "zh": "这个盒子太小了。你需要一个更大的盒子吗？"},
+          {"en": "The item won't fit here. You can buy a larger box.", "zh": "东西装不进这里。你可以买一个更大的箱子。"}
+        ],
+        "expect": ["box", "bigger", "buy", "please", "need"]
+      },
+      {
+        "goal": "Offer standard or express shipping",
+        "lines": [
+          {"en": "Do you prefer standard delivery or express delivery?", "zh": "你更想要普通快递还是特快专递？"},
+          {"en": "Standard takes one week, express takes two days. Which one?", "zh": "平邮要一周，特快只要两天。你要哪种？"}
+        ],
+        "expect": ["cheapest", "standard", "express", "option", "prefer"]
+      },
+      {
+        "goal": "Ask about parcel contents",
+        "lines": [
+          {"en": "What items are inside the parcel?", "zh": "包裹里面装了什么物品？"},
+          {"en": "Are there any liquids or batteries inside?", "zh": "里面有液体或电池吗？"}
+        ],
+        "expect": ["books", "inside", "only", "clothes", "gift"]
+      },
+      {
+        "goal": "Wrap up the parcel dispatch",
+        "lines": [
+          {"en": "Here's your receipt with the tracking number. Have a good day!", "zh": "这是带有追踪单号的收据。祝你愉快！"},
+          {"en": "All paid for. Here is your tracking receipt. Goodbye!", "zh": "全部付清了。这是您的追踪小票。再见！"}
+        ],
+        "expect": ["thank you", "thanks", "good day", "bye"]
+      }
+    ],
+    "example": [
+      {"s": "C", "en": "Where would you like to send this parcel?", "zh": "你想把这个包裹寄到哪里？"},
+      {"s": "L", "en": "I'd like to send this parcel to the UK.", "zh": "我想把这个包裹寄往英国。"},
+      {"s": "C", "en": "This box is too small. Would you like a bigger box?", "zh": "这个盒子太小了。你需要一个更大的盒子吗？"},
+      {"s": "L", "en": "Could I get a bigger box, please?", "zh": "请问我能买个大一点的箱子吗？"},
+      {"s": "C", "en": "Sure! Do you prefer standard delivery or express delivery?", "zh": "当然！你更想要普通快递还是特快专递？"},
+      {"s": "L", "en": "I'd prefer the cheapest option, please.", "zh": "我想要最便宜的那种，谢谢。"},
+      {"s": "C", "en": "What items are inside the parcel?", "zh": "包裹里面装了什么物品？"},
+      {"s": "L", "en": "There are only some books inside.", "zh": "里面只有几本书。"},
+      {"s": "C", "en": "Here's your receipt with the tracking number. Have a good day!", "zh": "这是带有追踪单号的收据。祝你愉快！"},
+      {"s": "L", "en": "Thank you very much! Have a good day!", "zh": "非常感谢！祝你愉快！"}
+    ],
+    "reactions": [
+      {"en": "Very well.", "zh": "好的。"},
+      {"en": "Let me weigh this.", "zh": "让我称一下重量。"},
+      {"en": "All right.", "zh": "好的。"},
+      {"en": "That is fine.", "zh": "没问题。"},
+      {"en": "Got it.", "zh": "收到了。"},
+      {"en": "Just a moment.", "zh": "稍等片刻。"}
+    ],
+    "repair": [
+      {"en": "Sorry, could you speak up a little?", "zh": "抱歉，你能稍微大声点吗？"},
+      {"en": "Do you want air mail or surface mail?", "zh": "你想要航空件还是平信？"}
+    ]
+  },
+  {
+    "id": "en-call-u09-bank-account",
+    "beats": [
+      {
+        "goal": "Ask how to help customer",
+        "lines": [
+          {"en": "How can I help you today?", "zh": "今天我能为您提供什么帮助？"},
+          {"en": "Good morning. What service do you need today?", "zh": "早上好。您今天需要办理什么业务？"}
+        ],
+        "expect": ["open", "account", "bank", "like", "new"]
+      },
+      {
+        "goal": "Ask for passport and address",
+        "lines": [
+          {"en": "May I see your passport and proof of address?", "zh": "我可以看一下您的护照和地址证明吗？"},
+          {"en": "Do you have your passport and local address documents?", "zh": "您带了护照和本地地址文件吗？"}
+        ],
+        "expect": ["passport", "address", "here", "krakow", "proof"]
+      },
+      {
+        "goal": "Ask for a Polish phone number",
+        "lines": [
+          {"en": "We need a local Polish phone number for the system.", "zh": "系统中我们需要一个波兰本地电话号码。"},
+          {"en": "Do you have a Polish mobile phone number?", "zh": "您有波兰的手机号码吗？"}
+        ],
+        "expect": ["number", "polish", "phone", "international", "have"]
+      },
+      {
+        "goal": "Invite questions about account fees",
+        "lines": [
+          {"en": "Do you have any questions about card fees or charges?", "zh": "关于银行卡费用或月费您有什么疑问吗？"},
+          {"en": "Would you like to know about our monthly fees?", "zh": "您想了解我们的月费情况吗？"}
+        ],
+        "expect": ["fee", "monthly", "card", "how much", "charges"]
+      },
+      {
+        "goal": "Wrap up the account setup",
+        "lines": [
+          {"en": "All done! Your debit card will arrive in the post in a few days.", "zh": "全部办妥！您的借记卡几天后会邮寄到达。"},
+          {"en": "Everything is set up. Your card will arrive soon. Goodbye!", "zh": "都办理好了。您的卡很快会寄到。再见！"}
+        ],
+        "expect": ["thank you", "thanks", "goodbye", "bye"]
+      }
+    ],
+    "example": [
+      {"s": "C", "en": "How can I help you today?", "zh": "今天我能为您提供什么帮助？"},
+      {"s": "L", "en": "I'd like to open a bank account, please.", "zh": "我想开一个银行账户。"},
+      {"s": "C", "en": "May I see your passport and proof of address?", "zh": "我可以看一下您的护照和地址证明吗？"},
+      {"s": "L", "en": "Here is my passport and proof of address.", "zh": "这是我的护照和地址证明。"},
+      {"s": "C", "en": "We need a local Polish phone number for the system.", "zh": "系统中我们需要一个波兰本地电话号码。"},
+      {"s": "L", "en": "My current address is in Kraków, and here is my number.", "zh": "我目前的地址在克拉科夫，这是我的号码。"},
+      {"s": "C", "en": "Do you have any questions about card fees or charges?", "zh": "关于银行卡费用或月费您有什么疑问吗？"},
+      {"s": "L", "en": "Is there a monthly account fee?", "zh": "有账户月费吗？"},
+      {"s": "C", "en": "All done! Your debit card will arrive in the post in a few days.", "zh": "全部办妥！您的借记卡几天后会邮寄到达。"},
+      {"s": "L", "en": "Thank you very much for your help. Goodbye!", "zh": "非常感谢您的帮助。再见！"}
+    ],
+    "reactions": [
+      {"en": "Certainly.", "zh": "当然可以。"},
+      {"en": "Thank you.", "zh": "谢谢。"},
+      {"en": "Let me enter that.", "zh": "让我输入一下。"},
+      {"en": "Understood.", "zh": "明白了。"},
+      {"en": "Everything looks correct.", "zh": "一切都正确无误。"},
+      {"en": "No problem.", "zh": "没问题。"}
+    ],
+    "repair": [
+      {"en": "I'm sorry, could you repeat that please?", "zh": "不好意思，请问您能重复一遍吗？"},
+      {"en": "Is this a student account or a standard account?", "zh": "这是学生账户还是标准账户？"}
+    ]
+  },
+  {
+    "id": "en-call-u09-hairdresser",
+    "beats": [
+      {
+        "goal": "Ask how to cut hair",
+        "lines": [
+          {"en": "So, what are we doing with your hair today?", "zh": "那么，我们今天怎么弄你的头发？"},
+          {"en": "Hello! How would you like your hair cut today?", "zh": "你好！今天你想怎么剪头发？"}
+        ],
+        "expect": ["trim", "cut", "hair", "sides", "light"]
+      },
+      {
+        "goal": "Ask about sides and top length",
+        "lines": [
+          {"en": "How short would you like the sides and the top?", "zh": "两侧和头顶你想剪多短？"},
+          {"en": "Do you want the sides faded or just scissor cut?", "zh": "两侧要推短还是只用剪刀剪？"}
+        ],
+        "expect": ["sides", "short", "top", "not too", "trim"]
+      },
+      {
+        "goal": "Make small talk about week",
+        "lines": [
+          {"en": "So, how has your week been going so far?", "zh": "那么，你这周过得怎么样？"},
+          {"en": "Have you had a busy week at work?", "zh": "你这周工作很忙吗？"}
+        ],
+        "expect": ["week", "busy", "work", "good", "fine"]
+      },
+      {
+        "goal": "Check if length is short enough",
+        "lines": [
+          {"en": "I'm cutting a bit more off. Is this short enough?", "zh": "我又多剪短了一点。这样够短了吗？"},
+          {"en": "Shall I cut the top even shorter than this?", "zh": "头顶要剪得比这更短一点吗？"}
+        ],
+        "expect": ["enough", "short", "stop", "moment", "thank"]
+      },
+      {
+        "goal": "Wrap up the haircut",
+        "lines": [
+          {"en": "All finished! How do you like your new haircut?", "zh": "全部剪好了！你觉得你的新发型怎么样？"},
+          {"en": "Here is the mirror. Do you like it?", "zh": "给你镜子。你喜欢吗？"}
+        ],
+        "expect": ["like", "love", "thank you", "looks", "great"]
+      }
+    ],
+    "example": [
+      {"s": "C", "en": "So, what are we doing with your hair today?", "zh": "那么，我们今天怎么弄你的头发？"},
+      {"s": "L", "en": "Just a light trim, please.", "zh": "请稍微修剪一下就好。"},
+      {"s": "C", "en": "How short would you like the sides and the top?", "zh": "两侧和头顶你想剪多短？"},
+      {"s": "L", "en": "Short at the sides and not too short on top.", "zh": "两侧剪短，头顶不要太短。"},
+      {"s": "C", "en": "So, how has your week been going so far?", "zh": "那么，你这周过得怎么样？"},
+      {"s": "L", "en": "It has been a busy week at work!", "zh": "这周工作一直挺忙的！"},
+      {"s": "C", "en": "I'm cutting a bit more off. Is this short enough?", "zh": "我又多剪短了一点。这样够短了吗？"},
+      {"s": "L", "en": "Just a moment, that's short enough, thank you!", "zh": "等一下，这样就够短了，谢谢！"},
+      {"s": "C", "en": "All finished! How do you like your new haircut?", "zh": "全部剪好了！你觉得你的新发型怎么样？"},
+      {"s": "L", "en": "I really like it, thank you!", "zh": "我真的很喜欢，谢谢你！"}
+    ],
+    "reactions": [
+      {"en": "Sounds great!", "zh": "听起来太棒了！"},
+      {"en": "Oh, lovely!", "zh": "噢，真好！"},
+      {"en": "Tell me more!", "zh": "多跟我说说！"},
+      {"en": "I see what you mean.", "zh": "我明白你的意思。"},
+      {"en": "Looking sharp!", "zh": "看着真精神！"},
+      {"en": "Nice!", "zh": "真不错！"}
+    ],
+    "repair": [
+      {"en": "Sorry, the hairdryer was loud. Say that again?", "zh": "抱歉，吹风机声音太响了。能再说一遍吗？"},
+      {"en": "Do you want it shorter or leave it longer?", "zh": "你是想剪短点还是留长点？"}
+    ]
+  }
+]
+
