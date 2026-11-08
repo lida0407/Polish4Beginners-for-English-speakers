@@ -1,13 +1,67 @@
 # Polish live-call courses for a Gemini voice tutor
 
-Lesson content for a voice app where Gemini plays a Polish tutor on a live
-call. Each lesson is about ten minutes: teach, drill aloud, role-play, recap.
+Lesson content for a voice app where Gemini plays characters on live calls,
+modelled on how Duolingo builds its Video Call and Roleplay features: the call
+is a real situation with a character, not a vocabulary drill.
 
-| Course | Units | Lessons | What it covers |
-|---|---|---|---|
-| `grammar` | 14 | 35 | The grammar course rebuilt for speaking: sounds, sentence basics, gender, the cases, pronouns, adjectives, tenses, aspect and motion, requests and conditionals, numbers and time, verb + case patterns, sentence patterns, common errors, translation sprints |
-| `vocab-a1` | 18 | 115 | A1 words by topic, about ten a lesson, each lesson ending in a role-play |
-| `vocab-a2` | 20 | 94 | A2 words by topic, building on A1 (no word is taught twice) |
+| Course | Role | Units | Lessons | What it is |
+|---|---|---|---|---|
+| `calls` | main path | 12 | 48 | Scenario calls with a recurring cast: order coffee, buy tickets, see the doctor, return a jacket, argue Kraków vs Warsaw. Each call has a mission, a complication, natural conversation and feedback afterwards |
+| `grammar` | practice | 14 | 36 | Spoken grammar drills from the grammar course, linked from calls as preparation |
+| `vocab-a1` | practice | 18 | 115 | A1 words by topic, linked from calls as preparation |
+| `vocab-a2` | practice | 20 | 94 | A2 words by topic |
+
+## How the calls are designed
+
+Taken from Duolingo's description of its Video Call system
+(blog.duolingo.com/ai-and-video-call) and Roleplay (blog.duolingo.com/duolingo-max):
+
+- **A character, not a tutor.** Eight recurring people with a personality,
+  a backstory and things they love (Ola the barista, Pan Marek the
+  neighbour, Kasia, Tomek, Pani Basia at the market, Pan Zbyszek at the kiosk,
+  Doktor Nowak, Ania from work), plus one-off characters for single scenes.
+  The prompt tells them never to break character.
+- **A fixed opener and first question.** Duolingo writes the first question
+  separately because asking the model to invent it at the right level
+  overloads it. Here both are hand-written at the right level.
+- **A mission and a complication.** Three tasks the learner can see
+  ("Order a drink", "Ask the price") and one twist ("the cheesecake has sold
+  out") to make them adapt.
+- **Natural conversation.** React first, then continue; one question per
+  turn; rephrase or offer two choices when the learner is lost; follow them
+  if they change topic, then come back.
+- **No corrections during the call.** Mistakes are recast: the character
+  uses the correct form in its reply. Corrections come afterwards.
+- **The app ends the call.** Duolingo has its System whisper "say it's time to
+  go". Here `coach_notes` give the app two cues to inject: bring in the
+  complication after three learner turns, and wrap up after eight (A1) or ten
+  (A2).
+- **Feedback after the call.** `call_templates.feedback_prompt` turns the
+  transcript into: mission ✓/✗, up to three fixes, two phrases for next time,
+  accuracy and range scores out of five.
+- **Memory.** `call_templates.memory_prompt` extracts facts the learner said
+  ("has two dogs", "works in IT"). The app stores them and fills
+  `{{memory}}` in the next call, so characters can ask "How are your dogs?"
+
+## Running a call
+
+1. **Before:** show the scene, the character, the mission and the phrases
+   (with audio). Offer the linked `prep` lessons as optional warm-ups.
+2. **Fill the placeholders** in `system_prompt`:
+   - `{{learner_name}}` and `{{learner_gender}}` ("male" or "female");
+   - `{m:…|f:…}` tokens: keep the side matching the learner's gender
+     (`{m:Co robiłeś?|f:Co robiłaś?}`); the same tokens appear in `opener`,
+     `first_question` and `closer`;
+   - `{{memory}}`: "What you remember about the learner from earlier calls:
+     …" plus the saved facts, or an empty string.
+3. **Start** with the filled prompt as the system instruction; the character
+   speaks the opener first.
+4. **During:** after the learner's turn number given in each `coach_notes`
+   entry, append that note to the learner's message (or send it as a system
+   turn). Speech in with `pl-PL` recognition, speech out with a Polish voice
+   matching `character.voice`.
+5. **After:** run `feedback_prompt` and `memory_prompt` on the transcript;
+   show the feedback, save the facts and mark the call done.
 
 ## Files
 
@@ -17,7 +71,7 @@ call. Each lesson is about ten minutes: teach, drill aloud, role-play, recap.
 - `build.py`: regenerates `out/` from the Polish4Beginners deck and grammar
   guide. Run `python3 gemini-courses/build.py` after changing either.
 
-## Lesson shape
+## Practice lesson shape (grammar and vocabulary)
 
 ```jsonc
 {
