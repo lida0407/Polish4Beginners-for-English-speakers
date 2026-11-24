@@ -153,7 +153,15 @@ export async function loadData() {
     t.levels[p.level] = (t.levels[p.level] || 0) + 1;
     topics.set(p.category, t);
   });
-  Object.assign(data, { phrases, dialogs, guide, grammarLessons: lessons, alphabet, topics: [...topics.values()] });
+  Object.assign(data, { phrases, guide, grammarLessons: lessons, alphabet, topics: [...topics.values()] });
+  const mergeDialogs = () => {
+    // The learner's own conversations (imported from the Android app) come first and replace built-in ones with the same id.
+    const own = store.get('dialogs', []).map((d) => ({ ...d, own: true }));
+    const ids = new Set(own.map((d) => d.id));
+    data.dialogs = [...own, ...dialogs.filter((d) => !ids.has(d.id))];
+  };
+  mergeDialogs();
+  store.on((key) => (key === 'dialogs' || key === '*') && mergeDialogs());
   return data;
 }
 

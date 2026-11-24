@@ -28,6 +28,8 @@ One rule: **every Android release ends with `python3 scripts/sync_web_app.py`, t
 - **Guard:** `python3 scripts/sync_web_app.py --check` exits with an error when the web copy lags (different data or version). Run it before any release.
 - **Progress format:** card ids and the review schedule use the same code (`LearningLogic` ↔ `logic.js`), so a learner's progress means the same thing in both apps. The web app's Settings → Backup exports and imports that progress as a JSON file.
 
+- **Moving a learner from Android to the web:** `scripts/android_to_web_backup.py` converts the Android app's saved data (review memory, favourites, own words, own conversations, notes, course progress) into a backup file for the web app's Settings → Backup → Import. `--list "Name=file.json"` adds any other word list, e.g. words collected from another course. The output is personal data: keep it outside this repository.
+
 A feature added to one app is not automatically in the other: screens are separate code (Java on Android, `js/views` on the web). Add it to both, or note the gap here.
 
 Not in the web app today: news with word translation, on-device translator, offline dictionary upload, custom conversation upload, Polish interface language.
