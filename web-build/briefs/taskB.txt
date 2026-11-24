@@ -1,0 +1,37 @@
+
+==== YOUR TASK: write js/views/listen.js and js/views/talk.js ====
+
+Card shape (data.phrases[i]): {id, polish, english, phonetic, examplePolish, exampleEnglish, level, category}. data.topics = [{name, count, levels: {A1: n, ...}}].
+Dialog shape (data.dialogs[i]): {id, title, titlePolish, level, scenario, description, roles: {A: 'Klient · Customer', B: 'Sprzedawca · Shop assistant'}, lines: [{speaker: 'A' | 'B', polish, english, note?}]}. 33 dialogs, 12 scenarios.
+
+--- listen.js (#/listen) ---
+Hands-free listening practice: the app reads a list of words aloud in a loop.
+State (ctx.state): source, index, playing, plus a run counter to cancel an old loop. The chosen source and the show-English flag persist in store key 'listen' = {source, showEnglish}. Source values: 'fav', 'list:<name>', 'all' (every card at settings().level), 'topic:<category>' (cards of that topic at the level).
+- ui.header('Listen', {kicker: 'Hands-free practice'}).
+- Source chips in a .chips wrap: '★ Favourites', one per word list, 'All <level>', then one per topic that has cards at the level. Changing source stops playback and resets index to 0.
+- Player: ui.card({class: 'flash'}) showing the current item: Polish large (.flash-front via ui.pl; clicking the word opens openWord(item)), phonetic, and the English (.flash-back) only when showEnglish. Below it the position `${index + 1} / ${items.length}` and ui.progress.
+- Controls (.hstack centred): 'Previous', '▶ Play' / '⏸ Pause' (kind primary), 'Next', and 'Hide English' / 'Show English'.
+- Playback loop per item: speak(polish), speak(polish) again, then if showEnglish speak(english, {lang: 'en-US'}), wait 900 ms, advance (wrap to 0 at the end), ctx.refresh(), continue. speak() resolves false when it was interrupted: stop the loop then. Pause calls stopSpeaking(). Each loop run captures a run id; bump the id on pause, source change, manual previous/next and in ctx.onLeave, and have the loop exit when its id is stale. Previous/Next while playing restart the loop at the new index.
+- Keep the screen awake while playing with navigator.wakeLock?.request('screen') (ignore errors) and release it on pause/leave.
+- If !canSpeak(): ui.empty explaining this browser cannot read aloud.
+- Empty source: ui.empty with a sentence telling the learner how to fill it (e.g. 'No favourites yet. Tap ☆ on any card to add it here.').
+- Under the player, section 'Up next': the next 12 items as ui.row(polish, english or '') that jump to that item.
+
+--- talk.js (#/talk and #/talk/<dialogId>) ---
+One file handles both routes: if ctx.params[0] is set and matches a dialog id, show the detail, else the list.
+
+List:
+- ui.header('Conversations', {kicker: `${n} everyday dialogues`}).
+- Scenario filter, expandable, multi-select, persisted in store key 'talkFilter' (array of scenario names; empty = all). Collapsed: one ui.row whose label is '▸ All scenarios (12)' or '▸ 3 of 12 scenarios'. Expanded (ctx.state.filterOpen): a ui.card with a .chips wrap of ui.chip(scenario, {on, count}) for every scenario, and two buttons: 'Show all' (clears the selection) and 'Done' (collapses).
+- Level chips: All, then the levels that occur in the dialogs.
+- The filtered list in a .grid.grid-2, 10 per page (ctx.state.page, reset to 0 when filters change): each ui.card({onclick}) with h3 title, titlePolish via ui.pl, a .hstack of .tag (level) and a muted small scenario name, and the description. -> go('#/talk/' + id).
+- Pager: 'Back' and 'Next' buttons (disabled at the ends) around `Page 1 of 4`. ui.empty when no dialog matches.
+
+Detail:
+- ui.header(title, {back: '#/talk', kicker: scenario + ' · ' + level}) and titlePolish under it as ui.pl.
+- Controls (.hstack): '▶ Play conversation' / '⏸ Pause' (primary), 'Hide English' / 'Show English' (ctx.state.showEn, default settings().showEnglish), and 'Practise as' chips: 'Off', role A label, role B label (ctx.state.role). Use only the Polish part of a role label (before ' · ') on chips.
+- Lines in a .stack: each h('div', {class: 'line' + (speaker B ? ' b' : '') + (i === playingIndex ? ' now' : '')}) containing .line-who (role label), tappable(line.polish, {tag: 'div'}), the English (small muted) when shown, line.note (small muted, italic) when present, and a small row with a '🔊' button (speak that line) and phraseTools({polish: line.polish, english: line.english}).
+- Practise mode: lines of the chosen role are covered until tapped: show 'Your turn · tap to reveal' plus the English as the cue; tapping reveals that line (ctx.state.revealed set). During 'Play conversation' the app does not read those lines: it waits 4 seconds for the learner to say them, then reveals the line and goes on.
+- Play: speaks the lines in order from the current one (speak(line.polish)), marks the line being read with .now, and after ctx.refresh() scrolls it into view (document.querySelector('.line.now')?.scrollIntoView({block: 'center', behavior: 'smooth'}) inside requestAnimationFrame). Same run-id cancellation as in listen.js; stop on pause and in ctx.onLeave.
+- Save a selected phrase: when the learner selects text inside a Polish line (listen for 'mouseup' and 'touchend' on the lines container, read window.getSelection().toString().trim(), 2 to 80 characters), show a small bar under the controls: the selected text in ui.pl and ui.button('★ Save phrase') which calls toggleFavItem({polish: selection, english: ''}) and ui.toast('Saved to favourites'). Keep the pending selection in ctx.state.
+- Unknown id: ui.empty('Conversation not found.', back button).

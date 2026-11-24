@@ -1,0 +1,661 @@
+=== FILE: js/views/listen.js ===
+// Hands-free listening practice view.
+import { h, ui, data, store, settings, canSpeak, speak, stopSpeaking, lists, favourites } from '../core.js';
+import { openWord } from '../word.js';
+
+export default function view(ctx) {
+  if (!canSpeak()) {
+    return h('div', { class: 'view' },
+      ui.header('Listen', { kicker: 'Hands-free practice' }),
+      ui.empty('This browser cannot read aloud. Speech synthesis is not supported.')
+    );
+  }
+
+  const saved = store.get('listen', {}) || {};
+  const level = settings().level || 'A1';
+
+  if (ctx.state.source === undefined) {
+    ctx.state.source = saved.source || 'all';
+  }
+  if (ctx.state.showEnglish === undefined) {
+    ctx.state.showEnglish = saved.showEnglish !== undefined ? saved.showEnglish : (settings().showEnglish ?? true);
+  }
+  if (ctx.state.index === undefined) ctx.state.index = 0;
+  if (ctx.state.playing === undefined) ctx.state.playing = false;
+  if (ctx.state.runId === undefined) ctx.state.runId = 0;
+
+  // Resolve items for the active source
+  let items = [];
+  const src = ctx.state.source;
+  if (src === 'fav') {
+    items = favourites();
+  } else if (src.startsWith('list:')) {
+    const listName = src.slice(5);
+    const found = lists().find((l) => l.name === listName);
+    items = found ? found.items : [];
+  } else if (src === 'all') {
+    items = data.phrases.filter((p) => p.level === level);
+  } else if (src.startsWith('topic:')) {
+    const cat = src.slice(6);
+    items = data.phrases.filter((p) => p.category === cat && p.level === level);
+  }
+
+  if (items.length > 0 && ctx.state.index >= items.length) {
+    ctx.state.index = 0;
+  }
+
+  // Keep screen awake while playing
+  async function acquireWakeLock() {
+    try {
+      if ('wakeLock' in navigator && !ctx.state.wakeLock) {
+        ctx.state.wakeLock = await navigator.wakeLock.request('screen');
+      }
+    } catch (e) {
+      // Ignore wake lock denial
+    }
+  }
+
+  function releaseWakeLock() {
+    if (ctx.state.wakeLock) {
+      ctx.state.wakeLock.release().catch(() => {});
+      ctx.state.wakeLock = null;
+    }
+  }
+
+  function stopPlayback() {
+    ctx.state.playing = false;
+    ctx.state.runId = (ctx.state.runId || 0) + 1;
+    stopSpeaking();
+    releaseWakeLock();
+  }
+
+  // Cancel timers, audio and wake lock when leaving
+  if (!ctx.state._leaveHook) {
+    ctx.state._leaveHook = true;
+    ctx.onLeave(() => {
+      stopPlayback();
+    });
+  }
+
+  function setSource(nextSource) {
+    stopPlayback();
+    ctx.state.source = nextSource;
+    ctx.state.index = 0;
+    store.set('listen', { source: nextSource, showEnglish: ctx.state.showEnglish });
+    ctx.refresh();
+  }
+
+  async function runLoop(runId) {
+    while (ctx.state.playing && ctx.state.runId === runId) {
+      const cur = items[ctx.state.index];
+      if (!cur) break;
+
+      // Polish twice
+      let ok = await speak(cur.polish);
+      if (!ok || ctx.state.runId !== runId || !ctx.state.playing) break;
+
+      ok = await speak(cur.polish);
+      if (!ok || ctx.state.runId !== runId || !ctx.state.playing) break;
+
+      // Optional English reading
+      if (ctx.state.showEnglish && cur.english) {
+        ok = await speak(cur.english, { lang: 'en-US' });
+        if (!ok || ctx.state.runId !== runId || !ctx.state.playing) break;
+      }
+
+      await new Promise((resolve) => setTimeout(resolve, 900));
+      if (ctx.state.runId !== runId || !ctx.state.playing) break;
+
+      ctx.state.index = (ctx.state.index + 1) % items.length;
+      ctx.refresh();
+    }
+
+    if (ctx.state.runId === runId) {
+      ctx.state.playing = false;
+      releaseWakeLock();
+      ctx.refresh();
+    }
+  }
+
+  function togglePlay() {
+    if (ctx.state.playing) {
+      stopPlayback();
+      ctx.refresh();
+    } else {
+      if (!items.length) return;
+      ctx.state.playing = true;
+      const runId = ++ctx.state.runId;
+      acquireWakeLock();
+      ctx.refresh();
+      runLoop(runId);
+    }
+  }
+
+  function prev() {
+    if (!items.length) return;
+    const nextIdx = (ctx.state.index - 1 + items.length) % items.length;
+    ctx.state.index = nextIdx;
+    if (ctx.state.playing) {
+      stopSpeaking();
+      const runId = ++ctx.state.runId;
+      ctx.refresh();
+      runLoop(runId);
+    } else {
+      ctx.refresh();
+    }
+  }
+
+  function next() {
+    if (!items.length) return;
+    const nextIdx = (ctx.state.index + 1) % items.length;
+    ctx.state.index = nextIdx;
+    if (ctx.state.playing) {
+      stopSpeaking();
+      const runId = ++ctx.state.runId;
+      ctx.refresh();
+      runLoop(runId);
+    } else {
+      ctx.refresh();
+    }
+  }
+
+  function jumpTo(targetIdx) {
+    ctx.state.index = targetIdx;
+    if (ctx.state.playing) {
+      stopSpeaking();
+      const runId = ++ctx.state.runId;
+      ctx.refresh();
+      runLoop(runId);
+    } else {
+      ctx.refresh();
+    }
+  }
+
+  function toggleEnglish() {
+    ctx.state.showEnglish = !ctx.state.showEnglish;
+    store.set('listen', { source: ctx.state.source, showEnglish: ctx.state.showEnglish });
+    ctx.refresh();
+  }
+
+  // Source selection chips
+  const sourceChips = [
+    ui.chip('★ Favourites', {
+      on: ctx.state.source === 'fav',
+      onclick: () => setSource('fav'),
+    }),
+    ...lists().map((l) => ui.chip(l.name, {
+      on: ctx.state.source === `list:${l.name}`,
+      onclick: () => setSource(`list:${l.name}`),
+    })),
+    ui.chip(`All ${level}`, {
+      on: ctx.state.source === 'all',
+      onclick: () => setSource('all'),
+    }),
+    ...data.topics
+      .filter((t) => (t.levels?.[level] || 0) > 0)
+      .map((t) => ui.chip(t.name, {
+        on: ctx.state.source === `topic:${t.name}`,
+        onclick: () => setSource(`topic:${t.name}`),
+      })),
+  ];
+
+  const header = ui.header('Listen', { kicker: 'Hands-free practice' });
+  const chipsWrap = h('div', { class: 'chips' }, ...sourceChips);
+
+  if (items.length === 0) {
+    let emptyMsg = 'No cards found for this selection.';
+    if (src === 'fav') {
+      emptyMsg = 'No favourites yet. Tap ☆ on any card to add it here.';
+    } else if (src.startsWith('list:')) {
+      emptyMsg = 'This word list is empty. Add words from cards or dialogues.';
+    } else if (src.startsWith('topic:')) {
+      emptyMsg = `No ${level} cards in this topic yet.`;
+    } else if (src === 'all') {
+      emptyMsg = `No cards found for level ${level}.`;
+    }
+    return h('div', { class: 'view' }, header, chipsWrap, ui.empty(emptyMsg));
+  }
+
+  const currentItem = items[ctx.state.index];
+
+  // Player card
+  const playerCard = ui.card({ class: 'flash' },
+    h('div', {
+      class: 'flash-front',
+      onclick: (e) => {
+        e.stopPropagation();
+        openWord(currentItem);
+      },
+    }, ui.pl(currentItem.polish)),
+    currentItem.phonetic ? h('div', { class: 'phonetic' }, currentItem.phonetic) : null,
+    ctx.state.showEnglish && currentItem.english ? h('div', { class: 'flash-back' }, currentItem.english) : null,
+  );
+
+  const positionLabel = h('div', { class: 'small muted', style: { textAlign: 'center' } }, `${ctx.state.index + 1} / ${items.length}`);
+  const progressBar = ui.progress((ctx.state.index + 1) / items.length);
+
+  // Centred controls
+  const controls = h('div', { class: 'hstack', style: { justifyContent: 'center' } },
+    ui.button('Previous', { onclick: prev }),
+    ui.button(ctx.state.playing ? '⏸ Pause' : '▶ Play', { kind: 'primary', onclick: togglePlay }),
+    ui.button('Next', { onclick: next }),
+    ui.button(ctx.state.showEnglish ? 'Hide English' : 'Show English', { onclick: toggleEnglish }),
+  );
+
+  // Up next list
+  const upNextRows = [];
+  const nextCount = Math.min(12, items.length - 1);
+  for (let i = 1; i <= nextCount; i++) {
+    const targetIdx = (ctx.state.index + i) % items.length;
+    const it = items[targetIdx];
+    upNextRows.push(
+      ui.row(ui.pl(it.polish), it.english || '', () => jumpTo(targetIdx))
+    );
+  }
+
+  const upNextSection = upNextRows.length > 0
+    ? ui.section('Up next', ...upNextRows)
+    : null;
+
+  return h('div', { class: 'view' },
+    header,
+    chipsWrap,
+    playerCard,
+    positionLabel,
+    progressBar,
+    controls,
+    upNextSection,
+  );
+}
+=== FILE: js/views/talk.js ===
+// Conversations list and detail view.
+import { h, ui, data, store, settings, speak, stopSpeaking, go } from '../core.js';
+import { tappable, phraseTools, toggleFavItem } from '../word.js';
+
+export default function view(ctx) {
+  if (ctx.params[0]) {
+    const dialog = data.dialogs.find((d) => d.id === ctx.params[0]);
+    if (!dialog) {
+      return h('div', { class: 'view' },
+        ui.header('Conversations', { back: '#/talk' }),
+        ui.empty('Conversation not found.', ui.button('Back to conversations', { onclick: () => go('#/talk') })),
+      );
+    }
+    return renderDetail(ctx, dialog);
+  }
+  return renderList(ctx);
+}
+
+function renderList(ctx) {
+  const total = data.dialogs.length;
+  const header = ui.header('Conversations', { kicker: `${total} everyday dialogues` });
+
+  // Scenario counts
+  const scenarioCounts = new Map();
+  data.dialogs.forEach((d) => {
+    scenarioCounts.set(d.scenario, (scenarioCounts.get(d.scenario) || 0) + 1);
+  });
+  const scenarios = [...scenarioCounts.keys()];
+
+  const selectedScenarios = store.get('talkFilter', []) || [];
+  if (ctx.state.filterOpen === undefined) ctx.state.filterOpen = false;
+  if (ctx.state.level === undefined) ctx.state.level = 'All';
+  if (ctx.state.page === undefined) ctx.state.page = 0;
+
+  // Expandable multi-select filter
+  let scenarioFilter;
+  if (!ctx.state.filterOpen) {
+    const label = selectedScenarios.length === 0
+      ? `▸ All scenarios (${scenarios.length})`
+      : `▸ ${selectedScenarios.length} of ${scenarios.length} scenarios`;
+    scenarioFilter = ui.row(label, null, () => {
+      ctx.state.filterOpen = true;
+      ctx.refresh();
+    });
+  } else {
+    const chips = scenarios.map((sc) => {
+      const on = selectedScenarios.includes(sc);
+      return ui.chip(sc, {
+        on,
+        count: scenarioCounts.get(sc),
+        onclick: () => {
+          let next;
+          if (on) {
+            next = selectedScenarios.filter((s) => s !== sc);
+          } else {
+            next = [...selectedScenarios, sc];
+          }
+          store.set('talkFilter', next);
+          ctx.state.page = 0;
+          ctx.refresh();
+        },
+      });
+    });
+
+    const showAllBtn = ui.button('Show all', {
+      onclick: () => {
+        store.set('talkFilter', []);
+        ctx.state.page = 0;
+        ctx.refresh();
+      },
+    });
+
+    const doneBtn = ui.button('Done', {
+      kind: 'primary',
+      onclick: () => {
+        ctx.state.filterOpen = false;
+        ctx.refresh();
+      },
+    });
+
+    scenarioFilter = ui.card({},
+      h('div', { class: 'chips' }, ...chips),
+      h('div', { class: 'hstack', style: { marginTop: '10px' } }, showAllBtn, doneBtn),
+    );
+  }
+
+  // Level selector chips
+  const presentLevels = [];
+  data.dialogs.forEach((d) => {
+    if (d.level && !presentLevels.includes(d.level)) presentLevels.push(d.level);
+  });
+  const levelChips = ['All', ...presentLevels].map((lvl) => ui.chip(lvl, {
+    on: ctx.state.level === lvl,
+    onclick: () => {
+      ctx.state.level = lvl;
+      ctx.state.page = 0;
+      ctx.refresh();
+    },
+  }));
+
+  // Filter dialogue cards
+  const filtered = data.dialogs.filter((d) => {
+    if (selectedScenarios.length > 0 && !selectedScenarios.includes(d.scenario)) {
+      return false;
+    }
+    if (ctx.state.level !== 'All' && d.level !== ctx.state.level) {
+      return false;
+    }
+    return true;
+  });
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / 10));
+  if (ctx.state.page >= totalPages) ctx.state.page = totalPages - 1;
+  if (ctx.state.page < 0) ctx.state.page = 0;
+
+  if (filtered.length === 0) {
+    return h('div', { class: 'view' },
+      header,
+      scenarioFilter,
+      h('div', { class: 'chips' }, ...levelChips),
+      ui.empty('No conversations match the selected filters.'),
+    );
+  }
+
+  const pageItems = filtered.slice(ctx.state.page * 10, (ctx.state.page + 1) * 10);
+  const cards = pageItems.map((d) => ui.card({ onclick: () => go('#/talk/' + encodeURIComponent(d.id)) },
+    h('h3', {}, d.title),
+    ui.pl(d.titlePolish, 'div'),
+    h('div', { class: 'hstack' },
+      h('span', { class: 'tag' }, d.level),
+      h('span', { class: 'small muted' }, d.scenario),
+    ),
+    d.description ? h('p', { class: 'small', style: { margin: '6px 0 0' } }, d.description) : null,
+  ));
+
+  const pager = h('div', { class: 'spread' },
+    ui.button('Back', {
+      disabled: ctx.state.page === 0,
+      onclick: () => {
+        ctx.state.page = Math.max(0, ctx.state.page - 1);
+        ctx.refresh();
+      },
+    }),
+    h('span', { class: 'small muted' }, `Page ${ctx.state.page + 1} of ${totalPages}`),
+    ui.button('Next', {
+      disabled: ctx.state.page >= totalPages - 1,
+      onclick: () => {
+        ctx.state.page = Math.min(totalPages - 1, ctx.state.page + 1);
+        ctx.refresh();
+      },
+    }),
+  );
+
+  return h('div', { class: 'view' },
+    header,
+    scenarioFilter,
+    h('div', { class: 'chips' }, ...levelChips),
+    h('div', { class: 'grid grid-2' }, ...cards),
+    pager,
+  );
+}
+
+function renderDetail(ctx, dialog) {
+  if (ctx.state.showEn === undefined) {
+    ctx.state.showEn = settings().showEnglish ?? true;
+  }
+  if (ctx.state.role === undefined) {
+    ctx.state.role = 'off';
+  }
+  if (ctx.state.playingIndex === undefined) {
+    ctx.state.playingIndex = -1;
+  }
+  if (ctx.state.playing === undefined) {
+    ctx.state.playing = false;
+  }
+  if (ctx.state.runId === undefined) {
+    ctx.state.runId = 0;
+  }
+  if (!ctx.state.revealed) {
+    ctx.state.revealed = new Set();
+  }
+
+  // Audio and loop cleanup on route leave
+  if (!ctx.state._leaveHook) {
+    ctx.state._leaveHook = true;
+    ctx.onLeave(() => {
+      ctx.state.playing = false;
+      ctx.state.runId = (ctx.state.runId || 0) + 1;
+      stopSpeaking();
+    });
+  }
+
+  function pause() {
+    ctx.state.playing = false;
+    ctx.state.runId = (ctx.state.runId || 0) + 1;
+    stopSpeaking();
+    ctx.refresh();
+  }
+
+  async function playDialog(runId) {
+    const startIdx = ctx.state.playingIndex >= 0 && ctx.state.playingIndex < dialog.lines.length
+      ? ctx.state.playingIndex
+      : 0;
+
+    for (let i = startIdx; i < dialog.lines.length; i++) {
+      if (!ctx.state.playing || ctx.state.runId !== runId) break;
+
+      ctx.state.playingIndex = i;
+      ctx.refresh();
+
+      requestAnimationFrame(() => {
+        document.querySelector('.line.now')?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      });
+
+      const line = dialog.lines[i];
+      const isLearner = ctx.state.role === line.speaker;
+
+      if (isLearner) {
+        // Wait 4 seconds for learner to practice speaking
+        await new Promise((resolve) => setTimeout(resolve, 4000));
+        if (!ctx.state.playing || ctx.state.runId !== runId) break;
+        ctx.state.revealed.add(i);
+        ctx.refresh();
+      } else {
+        const ok = await speak(line.polish);
+        if (!ok || !ctx.state.playing || ctx.state.runId !== runId) break;
+      }
+
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      if (!ctx.state.playing || ctx.state.runId !== runId) break;
+    }
+
+    if (ctx.state.runId === runId) {
+      ctx.state.playing = false;
+      if (ctx.state.playingIndex >= dialog.lines.length - 1) {
+        ctx.state.playingIndex = -1;
+      }
+      ctx.refresh();
+    }
+  }
+
+  function togglePlay() {
+    if (ctx.state.playing) {
+      pause();
+    } else {
+      ctx.state.playing = true;
+      const runId = ++ctx.state.runId;
+      playDialog(runId);
+    }
+  }
+
+  const roleAPolish = (dialog.roles?.A || 'A').split(' · ')[0].trim();
+  const roleBPolish = (dialog.roles?.B || 'B').split(' · ')[0].trim();
+
+  const controls = h('div', { class: 'hstack' },
+    ui.button(ctx.state.playing ? '⏸ Pause' : '▶ Play conversation', {
+      kind: 'primary',
+      onclick: togglePlay,
+    }),
+    ui.button(ctx.state.showEn ? 'Hide English' : 'Show English', {
+      onclick: () => {
+        ctx.state.showEn = !ctx.state.showEn;
+        ctx.refresh();
+      },
+    }),
+    h('span', { class: 'small muted' }, 'Practise as:'),
+    ui.chip('Off', {
+      on: ctx.state.role === 'off',
+      onclick: () => {
+        ctx.state.role = 'off';
+        ctx.state.revealed = new Set();
+        ctx.refresh();
+      },
+    }),
+    ui.chip(roleAPolish, {
+      on: ctx.state.role === 'A',
+      onclick: () => {
+        ctx.state.role = 'A';
+        ctx.state.revealed = new Set();
+        ctx.refresh();
+      },
+    }),
+    ui.chip(roleBPolish, {
+      on: ctx.state.role === 'B',
+      onclick: () => {
+        ctx.state.role = 'B';
+        ctx.state.revealed = new Set();
+        ctx.refresh();
+      },
+    }),
+  );
+
+  // Selected phrase floating action bar
+  function handleSelection() {
+    const sel = window.getSelection() ? window.getSelection().toString().trim() : '';
+    if (sel.length >= 2 && sel.length <= 80) {
+      if (ctx.state.selection !== sel) {
+        ctx.state.selection = sel;
+        ctx.refresh();
+      }
+    }
+  }
+
+  const selectionBar = ctx.state.selection
+    ? h('div', { class: 'card card-soft spread' },
+        h('div', { class: 'hstack' },
+          h('span', { class: 'small muted' }, 'Selected:'),
+          ui.pl(ctx.state.selection),
+        ),
+        h('div', { class: 'hstack' },
+          ui.button('★ Save phrase', {
+            kind: 'lime',
+            small: true,
+            onclick: () => {
+              toggleFavItem({ polish: ctx.state.selection, english: '' });
+              ui.toast('Saved to favourites');
+              ctx.state.selection = '';
+              ctx.refresh();
+            },
+          }),
+          ui.button('Dismiss', {
+            small: true,
+            onclick: () => {
+              ctx.state.selection = '';
+              ctx.refresh();
+            },
+          }),
+        ),
+      )
+    : null;
+
+  // Dialogue lines
+  const lineNodes = dialog.lines.map((line, i) => {
+    const roleLabel = line.speaker === 'B' ? (dialog.roles?.B || 'B') : (dialog.roles?.A || 'A');
+    const isLearner = ctx.state.role === line.speaker;
+    const isCovered = isLearner && !ctx.state.revealed.has(i);
+
+    let lineContent;
+    if (isCovered) {
+      lineContent = [
+        h('div', { class: 'line-who' }, roleLabel),
+        h('div', { class: 'flash-hint' }, 'Your turn · tap to reveal'),
+        line.english ? h('div', { class: 'small muted' }, line.english) : null,
+      ];
+    } else {
+      lineContent = [
+        h('div', { class: 'line-who' }, roleLabel),
+        tappable(line.polish, { tag: 'div' }),
+        ctx.state.showEn && line.english ? h('div', { class: 'small muted' }, line.english) : null,
+        line.note ? h('div', { class: 'small muted', style: { fontStyle: 'italic' } }, line.note) : null,
+        h('div', { class: 'hstack' },
+          ui.button('🔊', {
+            small: true,
+            title: 'Listen',
+            onclick: (e) => {
+              e.stopPropagation();
+              speak(line.polish);
+            },
+          }),
+          phraseTools({ polish: line.polish, english: line.english }),
+        ),
+      ];
+    }
+
+    return h('div', {
+      class: 'line' + (line.speaker === 'B' ? ' b' : '') + (i === ctx.state.playingIndex ? ' now' : ''),
+      onclick: isCovered
+        ? () => {
+            ctx.state.revealed.add(i);
+            ctx.refresh();
+          }
+        : null,
+      style: isCovered ? { cursor: 'pointer' } : null,
+    }, ...lineContent);
+  });
+
+  const linesContainer = h('div', {
+    class: 'stack',
+    onmouseup: handleSelection,
+    ontouchend: handleSelection,
+  }, ...lineNodes);
+
+  return h('div', { class: 'view' },
+    ui.header(dialog.title, { back: '#/talk', kicker: `${dialog.scenario} · ${dialog.level}` }),
+    ui.pl(dialog.titlePolish, 'h2'),
+    controls,
+    selectionBar,
+    linesContainer,
+  );
+}
+

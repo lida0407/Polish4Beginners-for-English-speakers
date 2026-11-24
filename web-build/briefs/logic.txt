@@ -1,0 +1,851 @@
+Port a Java utility class to a JavaScript ES module, exactly. Reply with text only; do not write or edit files.
+
+Below are two Java files from an Android app: LearningLogic.java (pure static functions, no Android imports) and LearningLogicTest.java (its JUnit tests).
+
+Write TWO files and output them one after the other, each introduced by a marker line exactly like this (no code fences, nothing else before or after the files):
+=== FILE: js/logic.js ===
+=== FILE: js/logic.test.mjs ===
+
+1. js/logic.js: an ES module (browser and Node 20 compatible, no dependencies) that exports every public static constant and function of LearningLogic with the SAME names, argument order and behaviour. Notes:
+   - Java long milliseconds -> JS numbers. Java int/boolean arrays -> JS arrays.
+   - A Java varargs parameter (String... accepted) becomes a JS rest parameter (...accepted).
+   - Reproduce string handling exactly: Java String.trim(), toLowerCase(Locale.ROOT), regex semantics (\\s, \\p{...} classes need the JS "u" flag), Character.isLetterOrDigit (use /[\p{L}\p{N}]/u), java.text.Normalizer forms -> String.prototype.normalize.
+   - null arguments must be handled the way the Java handles them (treat undefined like null).
+   - Keep the comments that explain why something is done.
+2. js/logic.test.mjs: every test in LearningLogicTest ported to Node's built-in test runner (import test from 'node:test'; import assert from 'node:assert/strict'; import * as L from './logic.js'). Same test names, same inputs and expected values. Run with: node --test js/logic.test.mjs
+
+Do not invent behaviour that is not in the Java. If something cannot be ported exactly, port it as closely as possible and add a short comment starting with "PORT NOTE:".
+
+===== LearningLogic.java =====
+package com.mustardseed.polish4beginners;
+
+/**
+ * Pure logic extracted from MainActivity so it can be unit tested without an
+ * Android device. Behaviour here is deliberately identical to what shipped
+ * before extraction — in particular the Leitner intervals and the card key
+ * format, both of which are baked into existing users' saved progress.
+ *
+ * Changing anything in this class can invalidate user data. Do not alter the
+ * card key format or the stored memory encoding without a migration.
+ */
+public final class LearningLogic {
+
+    private LearningLogic() {
+    }
+
+    public static final long DAY_MS = 24L * 60L * 60L * 1000L;
+
+    /** Box 0 = new; boxes 1..5 are reviewed at growing intervals. */
+    public static final long[] BOX_INTERVALS_MS = {
+            0, DAY_MS, 3 * DAY_MS, 7 * DAY_MS, 16 * DAY_MS, 35 * DAY_MS
+    };
+
+    public static final int MAX_BOX = BOX_INTERVALS_MS.length - 1;
+
+    public static final int STATUS_NEW = 0;
+    public static final int STATUS_DUE = 1;
+    public static final int STATUS_SCHEDULED = 2;
+
+    /**
+     * Persistent card identity. Cards carrying a coreIndex keep it forever;
+     * everything else is identified by category + Polish text.
+     *
+     * These strings are SharedPreferences keys for user progress — never
+     * renumber coreIndex values and never change this format.
+     */
+    public static String cardKey(int coreIndex, String category, String polish) {
+        if (coreIndex > 0) {
+            return "core:" + coreIndex;
+        }
+        return category + ":" + polish;
+    }
+
+    /** Next box after an answer: correct promotes (capped), a miss resets to 1. */
+    public static int nextBox(int currentBox, boolean got) {
+        if (!got) {
+            return 1;
+        }
+        int box = currentBox + 1;
+        return Math.min(box, MAX_BOX);
+    }
+
+    /** When the card should next appear. A miss is due immediately. */
+    public static long nextDueAt(int nextBox, boolean got, long now) {
+        if (!got) {
+            return now;
+        }
+        return now + BOX_INTERVALS_MS[nextBox];
+    }
+
+    public static int statusOf(int box, long dueAt, long now) {
+        if (box <= 0) {
+            return STATUS_NEW;
+        }
+        return dueAt <= now ? STATUS_DUE : STATUS_SCHEDULED;
+    }
+
+    public static boolean isDue(int box, long dueAt, long now) {
+        return box > 0 && dueAt <= now;
+    }
+
+    /** Serialized form of a card's memory: "box|dueAtMillis". */
+    public static String encodeMemory(int box, long dueAt) {
+        return box + "|" + dueAt;
+    }
+
+    /**
+     * Parses stored memory, tolerating the pre-scheduling formats that older
+     * installs wrote ("new" / "learnt" / "forgot"). Returns {box, dueAt}.
+     */
+    public static long[] decodeMemory(String stored, long now) {
+        if (stored == null || stored.isEmpty() || "new".equals(stored)) {
+            return new long[]{0, 0};
+        }
+        if ("learnt".equals(stored)) {
+            return new long[]{2, now + BOX_INTERVALS_MS[2]};
+        }
+        if ("forgot".equals(stored)) {
+            return new long[]{1, now};
+        }
+        int split = stored.indexOf('|');
+        if (split > 0) {
+            try {
+                int box = Math.max(0, Math.min(MAX_BOX, Integer.parseInt(stored.substring(0, split))));
+                long dueAt = Long.parseLong(stored.substring(split + 1));
+                return new long[]{box, dueAt};
+            } catch (NumberFormatException ignored) {
+                // fall through to "new"
+            }
+        }
+        return new long[]{0, 0};
+    }
+
+    /** True when the remote data manifest advertises something newer. */
+    public static boolean isNewerDataVersion(int remoteVersion, int localVersion) {
+        return remoteVersion > localVersion;
+    }
+
+    /**
+     * Escapes one value for a Markdown table cell: a pipe would end the cell
+     * and any line break would end the row.
+     *
+     * Note the character class rather than \R, which needs API 24 while this
+     * app still supports API 23.
+     */
+    public static String markdownCell(String value) {
+        if (value == null) {
+            return "";
+        }
+        return value.replace("|", "\\|").replaceAll("[\\r\\n]+", " ").replaceAll(" {2,}", " ").trim();
+    }
+
+    // ---- spoken-answer scoring -------------------------------------------
+
+    /**
+     * Normalizes a spoken or written phrase for comparison: lower case, no
+     * punctuation, single spaces. Polish diacritics are kept — a recognizer
+     * returns them, and "cześć" vs "czesc" is a real difference.
+     */
+    public static String normalizeSpoken(String value) {
+        if (value == null) {
+            return "";
+        }
+        String out = value.toLowerCase(java.util.Locale.ROOT);
+        StringBuilder cleaned = new StringBuilder(out.length());
+        for (int i = 0; i < out.length(); i++) {
+            char c = out.charAt(i);
+            if (Character.isLetterOrDigit(c)) {
+                cleaned.append(c);
+            } else {
+                cleaned.append(' ');
+            }
+        }
+        return cleaned.toString().replaceAll(" {2,}", " ").trim();
+    }
+
+    /** Classic edit distance, used to score a near-miss rather than fail it. */
+    public static int editDistance(String a, String b) {
+        if (a == null) {
+            a = "";
+        }
+        if (b == null) {
+            b = "";
+        }
+        int[] previous = new int[b.length() + 1];
+        int[] current = new int[b.length() + 1];
+        for (int j = 0; j <= b.length(); j++) {
+            previous[j] = j;
+        }
+        for (int i = 1; i <= a.length(); i++) {
+            current[0] = i;
+            for (int j = 1; j <= b.length(); j++) {
+                int cost = a.charAt(i - 1) == b.charAt(j - 1) ? 0 : 1;
+                current[j] = Math.min(Math.min(current[j - 1] + 1, previous[j] + 1), previous[j - 1] + cost);
+            }
+            int[] swap = previous;
+            previous = current;
+            current = swap;
+        }
+        return previous[b.length()];
+    }
+
+    /** Raw closeness of two already-normalized strings, 0-100. */
+    private static int closeness(String a, String b) {
+        if (a.equals(b)) {
+            return 100;
+        }
+        int distance = editDistance(a, b);
+        int score = Math.round(100f * (a.length() - distance) / a.length());
+        return Math.max(0, Math.min(99, score));
+    }
+
+    /**
+     * The run of heard words that best matches the target.
+     *
+     * A recognizer given a short phrase routinely returns more than was said —
+     * a trailing "panie", a leading "no". Scored against the whole string that
+     * would fail a perfect reading, and the shorter the target the worse the
+     * penalty, so a two-word phrase suffers most. Matching the best window
+     * instead scores what the speaker actually attempted.
+     */
+    public static String bestMatchWindow(String target, String heard) {
+        String a = normalizeSpoken(target);
+        String normalizedHeard = normalizeSpoken(heard);
+        if (a.isEmpty() || normalizedHeard.isEmpty()) {
+            return normalizedHeard;
+        }
+        String[] got = normalizedHeard.split(" ");
+        int want = a.split(" ").length;
+        String best = normalizedHeard;
+        int bestScore = closeness(a, normalizedHeard);
+        int from = Math.max(1, want - 1);
+        int to = Math.min(got.length, want + 1);
+        for (int size = from; size <= to; size++) {
+            for (int start = 0; start + size <= got.length; start++) {
+                StringBuilder window = new StringBuilder();
+                for (int i = start; i < start + size; i++) {
+                    if (window.length() > 0) {
+                        window.append(' ');
+                    }
+                    window.append(got[i]);
+                }
+                int score = closeness(a, window.toString());
+                if (score > bestScore) {
+                    bestScore = score;
+                    best = window.toString();
+                }
+            }
+        }
+        return best;
+    }
+
+    /**
+     * How close a heard phrase is to the target, 0-100. This scores the words
+     * a recognizer decided it heard, so it is a usable "did that come out
+     * right?" check, not a phoneme-level assessment.
+     */
+    public static int pronunciationScore(String target, String heard) {
+        String a = normalizeSpoken(target);
+        if (a.isEmpty() || normalizeSpoken(heard).isEmpty()) {
+            return 0;
+        }
+        return closeness(a, bestMatchWindow(target, heard));
+    }
+
+    /** True when one word is close enough to count, allowing a slip or two. */
+    public static boolean wordMatches(String target, String heard) {
+        String a = normalizeSpoken(target);
+        String b = normalizeSpoken(heard);
+        if (a.equals(b)) {
+            return true;
+        }
+        if (a.isEmpty() || b.isEmpty()) {
+            return false;
+        }
+        int allowed = a.length() <= 4 ? 1 : 2;
+        return editDistance(a, b) <= allowed;
+    }
+
+    /**
+     * Marks each word of the target as heard or not. Walks both sides forward
+     * so a missing or inserted word shifts the rest instead of failing it.
+     */
+    public static boolean[] markHeardWords(String target, String heard) {
+        String[] want = normalizeSpoken(target).split(" ");
+        String[] got = bestMatchWindow(target, heard).split(" ");
+        boolean[] marks = new boolean[want.length];
+        int g = 0;
+        for (int i = 0; i < want.length; i++) {
+            for (int j = g; j < got.length && j <= g + 1; j++) {
+                if (wordMatches(want[i], got[j])) {
+                    marks[i] = true;
+                    g = j + 1;
+                    break;
+                }
+            }
+        }
+        return marks;
+    }
+
+    // ---- "explain with AI" prompt ----------------------------------------
+
+    /**
+     * Builds a prompt the learner can paste into any AI chat to have a word or
+     * phrase explained properly. Nothing is sent anywhere by the app; this is
+     * just text, so it works with whichever assistant the user already has.
+     *
+     * The sentence the word came from matters most: Polish words change form
+     * with case, gender and aspect, so "what does this mean here, and why this
+     * form" is the useful question, and only the context can answer it.
+     *
+     * @param context the sentence the word appeared in, or empty
+     * @param gloss   the app's own translation, or empty
+     * @param level   CEFR level such as "A2", or empty
+     */
+    public static String explainPrompt(String text, String gloss, String context, String level) {
+        String item = text == null ? "" : text.trim();
+        String meaning = gloss == null ? "" : gloss.trim();
+        String sentence = context == null ? "" : context.trim();
+        String cefr = level == null ? "" : level.trim();
+        boolean phrase = item.split("\\s+").length > 1;
+        // A context identical to the item itself adds nothing.
+        if (normalizeSpoken(sentence).equals(normalizeSpoken(item))) {
+            sentence = "";
+        }
+
+        StringBuilder p = new StringBuilder();
+        p.append("I'm an English speaker learning Polish");
+        if (!cefr.isEmpty()) {
+            p.append(" (level ").append(cefr).append(")");
+        }
+        p.append(". Please explain the Polish ").append(phrase ? "phrase" : "word")
+                .append(" \"").append(item).append("\" to me.\n\n");
+        if (!sentence.isEmpty()) {
+            p.append("It appeared in this sentence: \"").append(sentence).append("\"\n");
+        }
+        if (!meaning.isEmpty()) {
+            p.append("My app translates it as: \"").append(meaning).append("\"\n");
+        }
+        if (!sentence.isEmpty() || !meaning.isEmpty()) {
+            p.append('\n');
+        }
+
+        p.append("Please cover:\n");
+        int n = 1;
+        if (phrase) {
+            p.append(n++).append(". What it means").append(sentence.isEmpty() ? "" : " in this sentence")
+                    .append(", both word for word and as a natural English equivalent\n");
+            p.append(n++).append(". The grammar of each word: case, gender, number, verb aspect and tense where relevant\n");
+            p.append(n++).append(". When and with whom to use it (formal, informal, spoken, written)\n");
+        } else {
+            p.append(n++).append(". Its meaning").append(sentence.isEmpty() ? "" : " in this sentence")
+                    .append(", and its other common meanings\n");
+            p.append(n++).append(". Part of speech and grammar. For a noun: gender and the most useful case forms. "
+                    + "For a verb: the infinitive, its aspect and aspect partner, and present and past forms. "
+                    + "For an adjective: its gender forms\n");
+            p.append(n++).append(". If this is not the dictionary form, what the dictionary form is")
+                    .append(sentence.isEmpty() ? "" : " and why it takes this form here").append('\n');
+        }
+        p.append(n++).append(". Pronunciation tips for an English speaker: stress and any tricky sounds\n");
+        p.append(n++).append(". Three short example sentences")
+                .append(cefr.isEmpty() ? "" : " at my level").append(", with English translations\n");
+        p.append(n++).append(". Common phrases or collocations it appears in\n");
+        p.append(n).append(". False friends, common learner mistakes, or anything easy to confuse it with\n\n");
+        p.append("Keep it concise and use simple English.");
+        return p.toString();
+    }
+
+    // ---- typed answers (grammar guide practice) ----------------------------
+
+    public static final int ANSWER_WRONG = 0;
+    /** Exactly right (case and punctuation aside). */
+    public static final int ANSWER_EXACT = 1;
+    /** Right word, missing or wrong Polish letters: "biletu" typed as "biletu" without ł etc. */
+    public static final int ANSWER_DIACRITICS = 2;
+    /** Same words as a model answer in another order, usually fine in Polish. */
+    public static final int ANSWER_WORD_ORDER = 3;
+    /** Close to a model answer, but with a real difference worth looking at. */
+    public static final int ANSWER_CLOSE = 4;
+
+    /** ą→a, ł→l and so on. ł has no Unicode decomposition, so it is mapped by hand. */
+    public static String stripPolishDiacritics(String value) {
+        if (value == null) {
+            return "";
+        }
+        String from = "ąćęłńóśźżĄĆĘŁŃÓŚŹŻ";
+        String to = "acelnoszzACELNOSZZ";
+        StringBuilder out = new StringBuilder(value.length());
+        for (int i = 0; i < value.length(); i++) {
+            char c = value.charAt(i);
+            int k = from.indexOf(c);
+            out.append(k >= 0 ? to.charAt(k) : c);
+        }
+        return out.toString();
+    }
+
+    private static String sortedWords(String normalized) {
+        String[] words = normalized.split(" ");
+        java.util.Arrays.sort(words);
+        return String.join(" ", words);
+    }
+
+    /**
+     * Grades a typed answer against one or more accepted answers, most
+     * generous verdict first. Kind feedback matters more than strictness
+     * here: a missing ł is a different lesson from a wrong case ending.
+     */
+    public static int checkAnswer(String typed, String... accepted) {
+        String got = normalizeSpoken(typed);
+        if (got.isEmpty() || accepted == null) {
+            return ANSWER_WRONG;
+        }
+        int best = ANSWER_WRONG;
+        for (String option : accepted) {
+            String want = normalizeSpoken(option);
+            if (want.isEmpty()) {
+                continue;
+            }
+            if (got.equals(want)) {
+                return ANSWER_EXACT;
+            }
+            if (stripPolishDiacritics(got).equals(stripPolishDiacritics(want))) {
+                best = rank(best) >= rank(ANSWER_DIACRITICS) ? best : ANSWER_DIACRITICS;
+            } else if (want.contains(" ") && sortedWords(got).equals(sortedWords(want))) {
+                best = rank(best) >= rank(ANSWER_WORD_ORDER) ? best : ANSWER_WORD_ORDER;
+            } else if (pronunciationScore(want, got) >= 80) {
+                best = rank(best) >= rank(ANSWER_CLOSE) ? best : ANSWER_CLOSE;
+            }
+        }
+        return best;
+    }
+
+    /** Verdict strength for "keep the best one": exact > order > letters > close. */
+    private static int rank(int verdict) {
+        switch (verdict) {
+            case ANSWER_EXACT: return 4;
+            case ANSWER_WORD_ORDER: return 3;
+            case ANSWER_DIACRITICS: return 2;
+            case ANSWER_CLOSE: return 1;
+            default: return 0;
+        }
+    }
+
+    // ---- word notes --------------------------------------------------------
+
+    /**
+     * A note pasted from an AI chat arrives as Markdown. The app shows plain
+     * text, so this strips the markup that would otherwise show as stray
+     * symbols: **bold**, # headings, `code`, and list bullets become "•".
+     * The stored note keeps the original, so a Markdown export stays intact.
+     */
+    public static String plainNote(String raw) {
+        if (raw == null) {
+            return "";
+        }
+        String[] lines = raw.replace("\r\n", "\n").replace('\r', '\n').split("\n", -1);
+        StringBuilder out = new StringBuilder();
+        for (String line : lines) {
+            String l = line;
+            l = l.replaceAll("^\\s{0,3}#{1,6}\\s+", "");          // headings
+            l = l.replaceAll("^(\\s*)[-*+]\\s+", "$1• ");          // bullets
+            l = l.replace("**", "").replace("__", "");                // bold
+            l = l.replace("`", "");                                   // inline code
+            if (l.trim().matches("[-*_]{3,}")) {
+                l = "";                                                // horizontal rule
+            }
+            out.append(l).append('\n');
+        }
+        // Collapse the blank-line runs AI answers are full of.
+        return out.toString().replaceAll("\n{3,}", "\n\n").trim();
+    }
+
+    /** First part of a note for a compact preview, cut at a word boundary. */
+    public static String notePreview(String raw, int maxChars) {
+        String plain = plainNote(raw);
+        if (plain.length() <= maxChars) {
+            return plain;
+        }
+        int cut = plain.lastIndexOf(' ', maxChars);
+        if (cut < maxChars / 2) {
+            cut = maxChars;
+        }
+        return plain.substring(0, cut).trim() + "…";
+    }
+
+    /** Normalization used for dictionary keys and duplicate detection. */
+    public static String normalizeHeadword(String value) {
+        if (value == null) {
+            return "";
+        }
+        String s = value.trim().toLowerCase(java.util.Locale.ROOT);
+        return s.replaceAll("[.!?,;:]+$", "");
+    }
+}
+
+===== LearningLogicTest.java =====
+package com.mustardseed.polish4beginners;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
+/**
+ * Guards the logic that existing users' saved progress depends on.
+ * A failure here means an update would corrupt or orphan real study data.
+ */
+public class LearningLogicTest {
+
+    private static final long NOW = 1_700_000_000_000L;
+
+    // ---- persistent card identity ----------------------------------------
+
+    @Test
+    public void coreIndexCardsKeyOnCoreIndex() {
+        assertEquals("core:321", LearningLogic.cardKey(321, "Work & School", "prezydent"));
+    }
+
+    @Test
+    public void nonCoreCardsKeyOnCategoryAndPolish() {
+        assertEquals("Everyday:Dzień dobry.",
+                LearningLogic.cardKey(0, "Everyday", "Dzień dobry."));
+    }
+
+    @Test
+    public void cardKeyIsStableAcrossCallsAndIgnoresOtherFields() {
+        String a = LearningLogic.cardKey(7, "Food & Drink", "chleb");
+        String b = LearningLogic.cardKey(7, "Anything Else", "different text");
+        // coreIndex wins, so a card can be re-categorized without losing progress.
+        assertEquals(a, b);
+    }
+
+    // ---- Leitner scheduling ----------------------------------------------
+
+    @Test
+    public void correctAnswerPromotesOneBox() {
+        assertEquals(1, LearningLogic.nextBox(0, true));
+        assertEquals(3, LearningLogic.nextBox(2, true));
+    }
+
+    @Test
+    public void promotionIsCappedAtMaxBox() {
+        assertEquals(LearningLogic.MAX_BOX, LearningLogic.nextBox(LearningLogic.MAX_BOX, true));
+    }
+
+    @Test
+    public void missResetsToBoxOne() {
+        assertEquals(1, LearningLogic.nextBox(5, false));
+        assertEquals(1, LearningLogic.nextBox(0, false));
+    }
+
+    @Test
+    public void intervalsFollowTheDocumentedSchedule() {
+        long day = LearningLogic.DAY_MS;
+        assertEquals(day, LearningLogic.BOX_INTERVALS_MS[1]);
+        assertEquals(3 * day, LearningLogic.BOX_INTERVALS_MS[2]);
+        assertEquals(7 * day, LearningLogic.BOX_INTERVALS_MS[3]);
+        assertEquals(16 * day, LearningLogic.BOX_INTERVALS_MS[4]);
+        assertEquals(35 * day, LearningLogic.BOX_INTERVALS_MS[5]);
+    }
+
+    @Test
+    public void correctAnswerSchedulesByNewBoxInterval() {
+        int box = LearningLogic.nextBox(1, true); // -> 2
+        assertEquals(NOW + 3 * LearningLogic.DAY_MS, LearningLogic.nextDueAt(box, true, NOW));
+    }
+
+    @Test
+    public void missIsDueImmediately() {
+        assertEquals(NOW, LearningLogic.nextDueAt(1, false, NOW));
+        assertTrue(LearningLogic.isDue(1, NOW, NOW));
+    }
+
+    @Test
+    public void newCardsAreNotDueAndReportNewStatus() {
+        assertFalse(LearningLogic.isDue(0, 0, NOW));
+        assertEquals(LearningLogic.STATUS_NEW, LearningLogic.statusOf(0, 0, NOW));
+    }
+
+    @Test
+    public void scheduledAheadCardIsNotDue() {
+        long due = NOW + LearningLogic.DAY_MS;
+        assertFalse(LearningLogic.isDue(2, due, NOW));
+        assertEquals(LearningLogic.STATUS_SCHEDULED, LearningLogic.statusOf(2, due, NOW));
+        assertEquals(LearningLogic.STATUS_DUE, LearningLogic.statusOf(2, due, due + 1));
+    }
+
+    // ---- stored memory round-trip ----------------------------------------
+
+    @Test
+    public void memoryRoundTrips() {
+        String encoded = LearningLogic.encodeMemory(3, NOW);
+        long[] decoded = LearningLogic.decodeMemory(encoded, NOW);
+        assertEquals(3, decoded[0]);
+        assertEquals(NOW, decoded[1]);
+    }
+
+    @Test
+    public void legacyStatusStringsMigrateInsteadOfResetting() {
+        long[] learnt = LearningLogic.decodeMemory("learnt", NOW);
+        assertEquals(2, learnt[0]);
+        assertEquals(NOW + 3 * LearningLogic.DAY_MS, learnt[1]);
+
+        long[] forgot = LearningLogic.decodeMemory("forgot", NOW);
+        assertEquals(1, forgot[0]);
+        assertEquals(NOW, forgot[1]);
+
+        assertEquals(0, LearningLogic.decodeMemory("new", NOW)[0]);
+    }
+
+    @Test
+    public void corruptOrEmptyMemoryFallsBackToNewWithoutThrowing() {
+        assertEquals(0, LearningLogic.decodeMemory(null, NOW)[0]);
+        assertEquals(0, LearningLogic.decodeMemory("", NOW)[0]);
+        assertEquals(0, LearningLogic.decodeMemory("garbage", NOW)[0]);
+        assertEquals(0, LearningLogic.decodeMemory("x|y", NOW)[0]);
+    }
+
+    @Test
+    public void decodedBoxIsClampedToValidRange() {
+        assertEquals(LearningLogic.MAX_BOX, LearningLogic.decodeMemory("99|" + NOW, NOW)[0]);
+        assertEquals(0, LearningLogic.decodeMemory("-4|" + NOW, NOW)[0]);
+    }
+
+    // ---- data update version comparison ----------------------------------
+
+    @Test
+    public void onlyStrictlyNewerDataVersionsTriggerAnUpdate() {
+        assertTrue(LearningLogic.isNewerDataVersion(11, 10));
+        assertFalse(LearningLogic.isNewerDataVersion(10, 10));
+        assertFalse(LearningLogic.isNewerDataVersion(9, 10));
+    }
+
+    // ---- spoken-answer scoring --------------------------------------------
+
+    @Test
+    public void spokenNormalizationDropsPunctuationButKeepsDiacritics() {
+        assertEquals("dzień dobry", LearningLogic.normalizeSpoken("  Dzień dobry!  "));
+        assertEquals("cześć", LearningLogic.normalizeSpoken("Cześć."));
+    }
+
+    @Test
+    public void anExactMatchScoresFull() {
+        assertEquals(100, LearningLogic.pronunciationScore("Dzień dobry.", "dzień dobry"));
+    }
+
+    @Test
+    public void aNearMissScoresHighButNotFull() {
+        int score = LearningLogic.pronunciationScore("cześć", "czesc");
+        assertTrue("expected a high partial score, got " + score, score >= 55 && score < 100);
+    }
+
+    @Test
+    public void aShortPhraseIsNotPunishedForWordsTheRecognizerAddedAround() {
+        // The whole point of matching a window: these were all said correctly.
+        assertEquals(100, LearningLogic.pronunciationScore("dzień dobry", "dzień dobry panie"));
+        assertEquals(100, LearningLogic.pronunciationScore("dzień dobry", "no dzień dobry"));
+        assertEquals(100, LearningLogic.pronunciationScore("do widzenia", "do widzenia pani"));
+    }
+
+    @Test
+    public void aWrongWordInsideAShortPhraseStillFails() {
+        // Leniency about surrounding noise must not excuse the phrase itself.
+        assertTrue(LearningLogic.pronunciationScore("dzień dobry", "dzień samochód") < 70);
+    }
+
+    @Test
+    public void theMarksAgreeWithAWindowedScore() {
+        boolean[] marks = LearningLogic.markHeardWords("dzień dobry", "dzień dobry panie");
+        assertTrue(marks[0]);
+        assertTrue(marks[1]);
+    }
+
+    @Test
+    public void anUnrelatedAnswerScoresLow() {
+        assertTrue(LearningLogic.pronunciationScore("dziękuję", "samochód") < 40);
+    }
+
+    @Test
+    public void emptyOrMissingSpeechScoresZero() {
+        assertEquals(0, LearningLogic.pronunciationScore("dom", ""));
+        assertEquals(0, LearningLogic.pronunciationScore("dom", null));
+        assertEquals(0, LearningLogic.pronunciationScore("", "dom"));
+    }
+
+    @Test
+    public void wordMatchingToleratesASlipButNotADifferentWord() {
+        assertTrue(LearningLogic.wordMatches("dobry", "dobre"));
+        assertFalse(LearningLogic.wordMatches("dobry", "samochód"));
+    }
+
+    @Test
+    public void heardWordsAreMarkedPerWord() {
+        boolean[] marks = LearningLogic.markHeardWords("dzień dobry panie", "dzień dobry");
+        assertTrue(marks[0]);
+        assertTrue(marks[1]);
+        assertFalse("the unspoken third word must not be marked", marks[2]);
+    }
+
+    @Test
+    public void aMissingWordDoesNotDerailTheWordsAfterIt() {
+        // "bardzo" was dropped; "dobry" still has to register.
+        boolean[] marks = LearningLogic.markHeardWords("jest bardzo dobry", "jest dobry");
+        assertTrue(marks[0]);
+        assertFalse(marks[1]);
+        assertTrue("a dropped word must not fail the rest", marks[2]);
+    }
+
+    // ---- explain-with-AI prompt -------------------------------------------
+
+    @Test
+    public void promptCarriesTheWordContextTranslationAndLevel() {
+        String p = LearningLogic.explainPrompt("dzwoni", "is ringing", "Ktoś dzwoni do drzwi.", "A2");
+        assertTrue(p.contains("\"dzwoni\""));
+        assertTrue(p.contains("Ktoś dzwoni do drzwi."));
+        assertTrue(p.contains("is ringing"));
+        assertTrue(p.contains("level A2"));
+        assertTrue("an inflected word needs the 'why this form' question",
+                p.contains("why it takes this form here"));
+    }
+
+    @Test
+    public void aSingleWordAsksForWordGrammarAndAPhraseForPhraseGrammar() {
+        assertTrue(LearningLogic.explainPrompt("dom", "", "", "").contains("Polish word"));
+        assertTrue(LearningLogic.explainPrompt("dom", "", "", "").contains("aspect partner"));
+        String phrase = LearningLogic.explainPrompt("dzień dobry", "", "", "");
+        assertTrue(phrase.contains("Polish phrase"));
+        assertTrue(phrase.contains("word for word"));
+    }
+
+    @Test
+    public void missingPartsAreLeftOutRatherThanPrintedEmpty() {
+        String p = LearningLogic.explainPrompt("dom", null, null, null);
+        assertFalse(p.contains("appeared in this sentence"));
+        assertFalse(p.contains("My app translates"));
+        assertFalse(p.contains("level"));
+        assertFalse(p.contains("why it takes this form"));
+    }
+
+    @Test
+    public void aContextThatIsJustTheWordItselfIsDropped() {
+        assertFalse(LearningLogic.explainPrompt("Dzień dobry.", "", "dzień dobry", "")
+                .contains("appeared in this sentence"));
+    }
+
+    // ---- typed answers ---------------------------------------------------
+
+    @Test
+    public void exactAnswersIgnoreCaseAndPunctuation() {
+        assertEquals(LearningLogic.ANSWER_EXACT, LearningLogic.checkAnswer("Biletu", "biletu"));
+        assertEquals(LearningLogic.ANSWER_EXACT,
+                LearningLogic.checkAnswer("uczę się polskiego", "Uczę się polskiego."));
+    }
+
+    @Test
+    public void missingPolishLettersAreTheirOwnVerdict() {
+        assertEquals(LearningLogic.ANSWER_DIACRITICS, LearningLogic.checkAnswer("pociagiem", "pociągiem"));
+        assertEquals(LearningLogic.ANSWER_DIACRITICS, LearningLogic.checkAnswer("kolezanka", "koleżanką"));
+        assertEquals("ł has no decomposition and must still map",
+                "zlobek", LearningLogic.stripPolishDiacritics("żłobek"));
+    }
+
+    @Test
+    public void reorderedWordsAreAcceptedAsWordOrder() {
+        assertEquals(LearningLogic.ANSWER_WORD_ORDER,
+                LearningLogic.checkAnswer("Nie muszę jutro pracować", "Nie muszę pracować jutro."));
+    }
+
+    @Test
+    public void anyAcceptedAlternativeCounts() {
+        assertEquals(LearningLogic.ANSWER_EXACT, LearningLogic.checkAnswer("Lubię ten film.",
+                "Ten film mi się podoba.", "Lubię ten film."));
+    }
+
+    @Test
+    public void aWrongCaseEndingIsNotExact() {
+        int verdict = LearningLogic.checkAnswer("bilet", "biletu");
+        assertTrue(verdict != LearningLogic.ANSWER_EXACT && verdict != LearningLogic.ANSWER_DIACRITICS);
+        assertEquals(LearningLogic.ANSWER_WRONG, LearningLogic.checkAnswer("samochód", "biletu"));
+        assertEquals(LearningLogic.ANSWER_WRONG, LearningLogic.checkAnswer("", "biletu"));
+    }
+
+    @Test
+    public void theBestVerdictWinsAcrossAlternatives() {
+        // "pojdziemy" is pójdziemy minus the ó: a letters-only miss on the
+        // second option must beat merely "close" on the first.
+        assertEquals(LearningLogic.ANSWER_DIACRITICS,
+                LearningLogic.checkAnswer("Jutro pojdziemy do kina", "Jutro idziemy do kina.", "Jutro pójdziemy do kina."));
+    }
+
+    // ---- word notes ---------------------------------------------------------
+
+    @Test
+    public void aiMarkdownIsShownAsPlainText() {
+        String raw = "## Meaning\n**dzwoni** is the 3rd person of *dzwonić*.\n- one\n* two\n`code`";
+        String plain = LearningLogic.plainNote(raw);
+        assertFalse(plain.contains("##"));
+        assertFalse(plain.contains("**"));
+        assertFalse(plain.contains("`"));
+        assertTrue(plain.contains("Meaning"));
+        assertTrue(plain.contains("• one"));
+        assertTrue(plain.contains("• two"));
+    }
+
+    @Test
+    public void plainNoteKeepsPolishAndCollapsesBlankRuns() {
+        String plain = LearningLogic.plainNote("Cześć\n\n\n\nżółw\r\n---\nźle");
+        assertTrue(plain.contains("Cześć"));
+        assertTrue(plain.contains("żółw"));
+        assertFalse("runs of blank lines collapse", plain.contains("\n\n\n"));
+        assertFalse("a horizontal rule is dropped", plain.contains("---"));
+    }
+
+    @Test
+    public void previewCutsAtAWordAndMarksTheCut() {
+        String p = LearningLogic.notePreview("jeden dwa trzy cztery pięć sześć", 15);
+        assertTrue(p.endsWith("…"));
+        assertFalse("must not split a word", p.contains("trz…"));
+        assertEquals("krótko", LearningLogic.notePreview("krótko", 50));
+        assertEquals("", LearningLogic.notePreview(null, 50));
+    }
+
+    // ---- markdown export --------------------------------------------------
+
+    @Test
+    public void markdownCellEscapesPipesSoTheTableSurvives() {
+        assertEquals("either \\| or", LearningLogic.markdownCell("either | or"));
+    }
+
+    @Test
+    public void markdownCellFlattensLineBreaksIntoOneRow() {
+        assertEquals("first second", LearningLogic.markdownCell("first\nsecond"));
+        assertEquals("first second", LearningLogic.markdownCell("first\r\nsecond"));
+    }
+
+    @Test
+    public void markdownCellTrimsAndHandlesNull() {
+        assertEquals("dom", LearningLogic.markdownCell("  dom  "));
+        assertEquals("", LearningLogic.markdownCell(null));
+    }
+
+    @Test
+    public void markdownCellKeepsPolishDiacritics() {
+        assertEquals("dziękuję", LearningLogic.markdownCell("dziękuję"));
+    }
+
+    // ---- headword normalization ------------------------------------------
+
+    @Test
+    public void normalizationLowercasesTrimsAndStripsTrailingPunctuation() {
+        assertEquals("dom", LearningLogic.normalizeHeadword("  Dom. "));
+        assertEquals("dzień dobry", LearningLogic.normalizeHeadword("Dzień dobry!"));
+        assertEquals("", LearningLogic.normalizeHeadword(null));
+    }
+
+    @Test
+    public void normalizationPreservesPolishDiacritics() {
+        assertEquals("gardło", LearningLogic.normalizeHeadword("Gardło"));
+        assertFalse(LearningLogic.normalizeHeadword("gardło").equals("gardlo"));
+    }
+}

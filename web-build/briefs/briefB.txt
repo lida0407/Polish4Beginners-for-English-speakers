@@ -1,0 +1,493 @@
+You are writing view modules for a web app, "Polish4Beginners": a free app for English speakers learning Polish (flashcards, listening, conversations, grammar). It is a no-build vanilla JavaScript app made of ES modules, hosted as static files. The shell, router, data loading, storage, speech and shared UI helpers already exist; you write only the view files named in YOUR TASK at the end. Reply with text only; do not write or edit files.
+
+OUTPUT FORMAT: output each file in full, one after the other, each introduced by a marker line exactly like
+=== FILE: js/views/name.js ===
+No code fences, no commentary before, between or after the files.
+
+VIEW CONTRACT
+- Each view file is an ES module with `export default function view(ctx)` that returns ONE DOM Node (it may be async).
+- ctx = { name, params: string[] (path parts after the route name, already decoded), query: URLSearchParams, state: {} (an object that survives ctx.refresh() and is reset when the route path changes; keep all view state here, never in module-level variables), refresh() (re-runs the view and keeps the scroll position), onLeave(fn) (runs once when the learner leaves the route; use it to stop audio and timers), focusMode(bool) (hides the phone tab bar, for full-screen study) }.
+- The pattern is "change ctx.state or the store, then call ctx.refresh()". Do not hand-patch the DOM, except for text inputs: keep the typed value in ctx.state on the 'input' event and do NOT refresh on every keystroke (refresh would drop focus); refresh on Enter, on blur, or by updating just the results container.
+- Navigate with go('#/route/param') or plain <a href="#/route">. Encode params with encodeURIComponent.
+- Import only from '../core.js', '../word.js' and '../sync.js'. No other imports, no libraries, no CSS files, no inline <style>. Use the existing CSS classes; inline style objects only for one-off layout tweaks.
+- Build DOM with h() and the ui helpers. Never use innerHTML.
+- Every screen must work at 360px wide and on a 1440px desktop: use .grid/.grid-2/.grid-3/.cols so desktop gets multiple columns; do not write media queries.
+- Buttons are real <button> elements (ui.button, ui.chip, ui.row). Text for the learner is English; Polish content uses ui.pl() or tappable().
+- No emojis except the ones in the spec. Sentence case for labels. No em dashes in UI text.
+- Code style: 2-space indent, single quotes, semicolons, const/let, small helper functions, a one-line comment where intent is not obvious. Target modern evergreen browsers.
+
+ROUTES (hash based): #/home, #/cards, #/session/<kind>/<value>, #/listen, #/talk, #/talk/<dialogId>, #/guide, #/guide/<chapterId>, #/course, #/course/<lessonId>, #/grammar, #/alphabet, #/words, #/words/<listName>, #/more, #/settings.
+Session kinds: #/session/topic/<category or All> (10 cards at the learner's level: due first, then new), #/session/status/<0|1|2> (all cards with that memory status: 0 new, 1 due, 2 learnt), #/session/fav (favourites), #/session/list/<listName>, #/session/all/<category> (every card of a topic at the level).
+
+==== js/core.js (already written; this is the API you import) ====
+// Polish4Beginners web app: the shared core. Every view imports from here.
+// Contract for view authors: web-build/CORE_API.md.
+import * as L from './logic.js';
+
+export { L };
+export const APP_VERSION = '0.1.0';
+export const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1'];
+export const THEMES = ['Komiks', 'Książka', 'Atrament'];
+export const SPEEDS = { slowest: 0.55, slow: 0.75, normal: 1, fast: 1.2, fastest: 1.4 };
+
+// ---------------------------------------------------------------- DOM builder
+
+/** h('div', {class: 'card', onclick: fn}, 'text', node, [more], null) -> Element */
+export function h(tag, attrs, ...kids) {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v === null || v === undefined || v === false) continue;
+    if (k === 'class') el.className = v;
+    else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v);
+    else if (k === 'dataset') Object.assign(el.dataset, v);
+    else if (k.startsWith('on') && typeof v === 'function') el.addEventListener(k.slice(2).toLowerCase(), v);
+    else if (k === 'value' || k === 'checked' || k === 'disabled' || k === 'selected') el[k] = v;
+    else el.setAttribute(k, v === true ? '' : v);
+  }
+  const add = (kid) => {
+    if (kid === null || kid === undefined || kid === false) return;
+    if (Array.isArray(kid)) kid.forEach(add);
+    else el.append(kid instanceof Node ? kid : document.createTextNode(String(kid)));
+  };
+  kids.forEach(add);
+  return el;
+}
+
+// ---------------------------------------------------------------------- store
+// Everything the learner owns lives in localStorage under "p4b:<key>" as JSON.
+// Each key carries a last-changed time so sign-in sync can merge per key.
+
+const PREFIX = 'p4b:';
+const listeners = new Set();
+let stamps = readRaw('_t', {});
+
+function readRaw(key, def) {
+  try {
+    const raw = localStorage.getItem(PREFIX + key);
+    return raw === null ? def : JSON.parse(raw);
+  } catch (e) {
+    return def;
+  }
+}
+
+export const store = {
+  get(key, def = null) {
+    return readRaw(key, def);
+  },
+  set(key, value, { silent = false, at = Date.now() } = {}) {
+    localStorage.setItem(PREFIX + key, JSON.stringify(value));
+    stamps[key] = at;
+    localStorage.setItem(PREFIX + '_t', JSON.stringify(stamps));
+    if (!silent) listeners.forEach((fn) => fn(key, value));
+  },
+  /** store.update('fav', (list) => [...list, id], []) */
+  update(key, fn, def = null) {
+    const next = fn(this.get(key, def));
+    this.set(key, next);
+    return next;
+  },
+  on(fn) {
+    listeners.add(fn);
+    return () => listeners.delete(fn);
+  },
+  stamp(key) {
+    return stamps[key] || 0;
+  },
+  /** Every synced key -> {v, t}. Keys starting with "_" stay on this device. */
+  dump() {
+    const out = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (!k.startsWith(PREFIX)) continue;
+      const key = k.slice(PREFIX.length);
+      if (key.startsWith('_')) continue;
+      out[key] = { v: localStorage.getItem(k), t: stamps[key] || 0 };
+    }
+    return out;
+  },
+  /** Take a remote dump; newer remote keys win. Returns the keys that changed. */
+  merge(remote) {
+    const changed = [];
+    for (const [key, entry] of Object.entries(remote || {})) {
+      if (!entry || typeof entry.v !== 'string' || key.startsWith('_')) continue;
+      if ((entry.t || 0) > (stamps[key] || 0)) {
+        localStorage.setItem(PREFIX + key, entry.v);
+        stamps[key] = entry.t;
+        changed.push(key);
+      }
+    }
+    if (changed.length) {
+      localStorage.setItem(PREFIX + '_t', JSON.stringify(stamps));
+      listeners.forEach((fn) => fn('*', changed));
+    }
+    return changed;
+  },
+};
+
+const DEFAULT_SETTINGS = { theme: 'Komiks', speed: 'normal', level: 'A1', voicePl: '', voiceEn: '', showEnglish: true };
+
+export function settings() {
+  return { ...DEFAULT_SETTINGS, ...store.get('settings', {}) };
+}
+
+export function setSetting(key, value) {
+  store.set('settings', { ...settings(), [key]: value });
+  if (key === 'theme') applyTheme();
+}
+
+export function applyTheme() {
+  const theme = THEMES.includes(settings().theme) ? settings().theme : 'Komiks';
+  document.documentElement.dataset.theme = theme;
+}
+
+// ----------------------------------------------------------------------- data
+
+/**
+ * data.phrases[]        cards: {id, polish, english, phonetic, examplePolish, exampleEnglish, level, category, notes?, declension?, tags?}
+ * data.topics[]         {name, count, levels: {A1: n, ...}}, in deck order
+ * data.dialogs[]        {id, title, titlePolish, level, scenario, description, roles: {A, B}, lines: [{speaker, polish, english, note?}]}
+ * data.guide            {title, chapters: [{id, title, blocks: [...]}], course: {units: [...]}}
+ * data.grammarLessons[] {unit, level, scenario, topic, focus, rule, pattern, examples: [{polish, english}], check: {prompt, answer, hint}}
+ * data.alphabet[]       {letter, sound, example, english}
+ */
+export const data = { phrases: [], topics: [], dialogs: [], guide: null, grammarLessons: [], alphabet: [], byId: new Map(), byPolish: new Map() };
+
+async function getJson(url) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`${url}: ${res.status}`);
+  return res.json();
+}
+
+export async function loadData() {
+  const [phrases, dialogs, guide, lessons, alphabet] = await Promise.all([
+    getJson('../phrases.json'), getJson('../dialogs.json'), getJson('data/grammar_guide.json'),
+    getJson('data/grammar_lessons.json'), getJson('data/alphabet.json'),
+  ]);
+  const topics = new Map();
+  phrases.forEach((p, i) => {
+    // Same key the Android app stores progress under.
+    p.id = L.cardKey(p.coreIndex ?? i, p.category, p.polish);
+    data.byId.set(p.id, p);
+    const plain = L.normalizeHeadword(p.polish);
+    if (!data.byPolish.has(plain)) data.byPolish.set(plain, p);
+    const t = topics.get(p.category) || { name: p.category, count: 0, levels: {} };
+    t.count++;
+    t.levels[p.level] = (t.levels[p.level] || 0) + 1;
+    topics.set(p.category, t);
+  });
+  Object.assign(data, { phrases, dialogs, guide, grammarLessons: lessons, alphabet, topics: [...topics.values()] });
+  return data;
+}
+
+/** Find the deck card for a Polish word or phrase, or null. */
+export function findCard(polish) {
+  return data.byPolish.get(L.normalizeHeadword(polish || '')) || null;
+}
+
+// --------------------------------------------------------- memory, favourites
+
+/** Leitner memory of one card: {box, dueAt}. box 0 = never graded. */
+export function memOf(card) {
+  const m = store.get('mem', {})[card.id];
+  return m ? { box: m[0], dueAt: m[1] } : { box: 0, dueAt: 0 };
+}
+
+/** 0 = new, 1 = due for review, 2 = learnt (scheduled ahead). */
+export function statusOf(card) {
+  const m = memOf(card);
+  return L.statusOf(m.box, m.dueAt, Date.now());
+}
+
+/** Record "Umiem!" (true) or "Jeszcze nie" (false) for a card. */
+export function grade(card, got) {
+  const now = Date.now();
+  const box = L.nextBox(memOf(card).box, got);
+  store.update('mem', (mem) => ({ ...mem, [card.id]: [box, L.nextDueAt(box, got, now)] }), {});
+}
+
+export function memoryCounts() {
+  const counts = [0, 0, 0];
+  const mem = store.get('mem', {});
+  const now = Date.now();
+  for (const p of data.phrases) {
+    const m = mem[p.id];
+    counts[m ? L.statusOf(m[0], m[1], now) : 0]++;
+  }
+  return counts; // [new, due, learnt]
+}
+
+export function isFav(id) {
+  return store.get('fav', []).includes(id);
+}
+
+export function toggleFav(id) {
+  store.update('fav', (list) => (list.includes(id) ? list.filter((x) => x !== id) : [...list, id]), []);
+  return isFav(id);
+}
+
+/** Favourite cards, newest first. A favourite can be a deck card id or a free phrase {polish, english}. */
+export function favourites() {
+  return store.get('fav', []).map((f) => (typeof f === 'string' ? data.byId.get(f) : f)).filter(Boolean).reverse();
+}
+
+/** The learner's own word lists: [{name, items: [{polish, english}]}]. */
+export function lists() {
+  return store.get('lists', []);
+}
+
+export function addToList(name, item) {
+  store.update('lists', (all) => {
+    const next = all.map((l) => ({ ...l, items: [...l.items] }));
+    let list = next.find((l) => l.name === name);
+    if (!list) next.push((list = { name, items: [] }));
+    if (!list.items.some((x) => x.polish === item.polish)) list.items.push({ polish: item.polish, english: item.english || '' });
+    return next;
+  }, []);
+}
+
+export function noteFor(polish) {
+  return store.get('notes', {})[L.normalizeHeadword(polish)] || '';
+}
+
+export function setNote(polish, text) {
+  store.update('notes', (notes) => {
+    const next = { ...notes };
+    const key = L.normalizeHeadword(polish);
+    if (text && text.trim()) next[key] = text.trim();
+    else delete next[key];
+    return next;
+  }, {});
+}
+
+// --------------------------------------------------------------------- speech
+
+let voices = [];
+function refreshVoices() {
+  voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+}
+if (window.speechSynthesis) {
+  refreshVoices();
+  window.speechSynthesis.addEventListener('voiceschanged', refreshVoices);
+}
+
+export const canSpeak = () => 'speechSynthesis' in window;
+export const voicesFor = (lang) => voices.filter((v) => v.lang.toLowerCase().startsWith(lang.slice(0, 2).toLowerCase()));
+
+let speakToken = 0;
+/** Read text aloud. lang 'pl-PL' (default) or 'en-US'. Resolves when it ends, is cut off, or cannot play. */
+export function speak(text, { lang = 'pl-PL', rate } = {}) {
+  return new Promise((resolve) => {
+    if (!canSpeak() || !text) return resolve(false);
+    const token = ++speakToken;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(String(text).replace(/[_…]+/g, ' '));
+    const s = settings();
+    const wanted = lang.startsWith('pl') ? s.voicePl : s.voiceEn;
+    const pool = voicesFor(lang);
+    u.voice = pool.find((v) => v.voiceURI === wanted) || pool.find((v) => v.localService) || pool[0] || null;
+    u.lang = lang;
+    u.rate = rate || SPEEDS[s.speed] || 1;
+    const done = (ok) => () => resolve(ok && token === speakToken);
+    u.onend = done(true);
+    u.onerror = done(false);
+    window.speechSynthesis.speak(u);
+  });
+}
+
+export function stopSpeaking() {
+  speakToken++;
+  if (canSpeak()) window.speechSynthesis.cancel();
+}
+
+const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+export const canListen = () => !!Recognition;
+
+/** Listen once. Resolves with what was heard (best guesses first, [] if nothing); rejects with Error(code) when the mic cannot be used. */
+export function listen(lang = 'pl-PL') {
+  return new Promise((resolve, reject) => {
+    if (!Recognition) return reject(new Error('unsupported'));
+    stopSpeaking();
+    const rec = new Recognition();
+    rec.lang = lang;
+    rec.maxAlternatives = 5;
+    rec.interimResults = false;
+    let heard = [];
+    rec.onresult = (e) => {
+      heard = [...e.results[0]].map((alt) => alt.transcript);
+    };
+    rec.onerror = (e) => (e.error === 'no-speech' ? resolve([]) : reject(new Error(e.error)));
+    rec.onend = () => resolve(heard);
+    rec.start();
+  });
+}
+
+// ---------------------------------------------------------------- navigation
+
+/** go('#/cards') or go('#/session/Food') */
+export function go(hash) {
+  location.hash = hash;
+}
+
+export async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch (e) {
+    const area = h('textarea', { style: { position: 'fixed', opacity: 0 } }, text);
+    document.body.append(area);
+    area.select();
+    const ok = document.execCommand('copy');
+    area.remove();
+    return ok;
+  }
+}
+
+export function downloadText(filename, text, type = 'text/markdown') {
+  const url = URL.createObjectURL(new Blob([text], { type: `${type};charset=utf-8` }));
+  h('a', { href: url, download: filename }).click();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+// ---------------------------------------------------------------- UI helpers
+
+let toastTimer = 0;
+
+export const ui = {
+  /** kind: 'primary' | 'lime' | 'ghost' (default) | 'danger'. opts: {onclick, small, block, disabled, title, icon} */
+  button(label, { kind = 'ghost', onclick, small, block, disabled, title } = {}) {
+    return h('button', { class: `btn btn-${kind}${small ? ' btn-sm' : ''}${block ? ' btn-block' : ''}`, type: 'button', onclick, disabled, title }, label);
+  },
+  /** A toggle pill. */
+  chip(label, { on = false, onclick, count } = {}) {
+    return h('button', { class: `chip${on ? ' on' : ''}`, type: 'button', 'aria-pressed': on ? 'true' : 'false', onclick },
+      label, count !== undefined ? h('span', { class: 'chip-count' }, count) : null);
+  },
+  /** A bordered panel with the hard comic shadow. opts: {class, onclick} */
+  card(opts, ...kids) {
+    const o = opts || {};
+    return h(o.onclick ? 'button' : 'div', { class: `card${o.onclick ? ' card-tap' : ''}${o.class ? ' ' + o.class : ''}`, type: o.onclick ? 'button' : null, onclick: o.onclick }, ...kids);
+  },
+  /** A full-width list row: label on the left, count or arrow on the right. */
+  row(label, right, onclick, sub) {
+    return h('button', { class: 'row', type: 'button', onclick },
+      h('span', { class: 'row-main' }, h('span', { class: 'row-label' }, label), sub ? h('span', { class: 'row-sub' }, sub) : null),
+      h('span', { class: 'row-right' }, right ?? '→'));
+  },
+  section(title, ...kids) {
+    return h('section', { class: 'section' }, h('h2', { class: 'section-title' }, title), ...kids);
+  },
+  /** Page header: title, optional back link ('#/home') and right-side nodes. */
+  header(title, { back, kicker, right } = {}) {
+    return h('header', { class: 'page-head' },
+      back ? h('a', { class: 'back', href: back, 'aria-label': 'Back' }, '←') : null,
+      h('div', { class: 'page-head-text' }, kicker ? h('div', { class: 'kicker' }, kicker) : null, h('h1', {}, title)),
+      right ? h('div', { class: 'page-head-right' }, right) : null);
+  },
+  progress(fraction) {
+    return h('div', { class: 'progress', role: 'progressbar', 'aria-valuenow': Math.round(fraction * 100) },
+      h('div', { class: 'progress-fill', style: { width: `${Math.max(0, Math.min(1, fraction)) * 100}%` } }));
+  },
+  empty(text, action) {
+    return h('div', { class: 'empty' }, h('p', {}, text), action || null);
+  },
+  /** Polish text, styled as Polish (colour, or bold in the e-ink theme). */
+  pl(text, tag = 'span') {
+    return h(tag, { class: 'pl', lang: 'pl' }, text);
+  },
+  toast(text) {
+    document.querySelector('.toast')?.remove();
+    const el = h('div', { class: 'toast', role: 'status' }, text);
+    document.body.append(el);
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.remove(), 2600);
+  },
+  /** Bottom sheet on phones, centred dialog on desktop. Returns {close}. */
+  sheet(content, { onclose } = {}) {
+    ui.closeSheet();
+    const close = () => {
+      wrap.remove();
+      document.removeEventListener('keydown', onKey);
+      if (onclose) onclose();
+    };
+    const onKey = (e) => e.key === 'Escape' && close();
+    const wrap = h('div', { class: 'sheet-wrap', onclick: (e) => e.target === wrap && close() },
+      h('div', { class: 'sheet', role: 'dialog', 'aria-modal': 'true' },
+        h('button', { class: 'sheet-close', type: 'button', 'aria-label': 'Close', onclick: close }, '×'), content));
+    document.addEventListener('keydown', onKey);
+    document.body.append(wrap);
+    return { close };
+  },
+  closeSheet() {
+    document.querySelector('.sheet-wrap')?.remove();
+  },
+};
+
+==== L (re-exported from core.js as `L`): a port of the Android app's LearningLogic ====
+Exports: DAY_MS BOX_INTERVALS_MS MAX_BOX STATUS_NEW STATUS_DUE STATUS_SCHEDULED cardKey nextBox nextDueAt statusOf isDue encodeMemory decodeMemory isNewerDataVersion markdownCell normalizeSpoken editDistance bestMatchWindow pronunciationScore wordMatches markHeardWords explainPrompt ANSWER_WRONG ANSWER_EXACT ANSWER_DIACRITICS ANSWER_WORD_ORDER ANSWER_CLOSE stripPolishDiacritics checkAnswer plainNote notePreview normalizeHeadword 
+Useful ones:
+- L.checkAnswer(typed, ...accepted) -> L.ANSWER_WRONG (0) | L.ANSWER_EXACT (1) | L.ANSWER_DIACRITICS (2, right but missing Polish accents) | L.ANSWER_WORD_ORDER (3) | L.ANSWER_CLOSE (4, a typo)
+- L.pronunciationScore(target, heard) -> 0..100; L.markHeardWords(target, heard) -> boolean[] per word of target
+- L.explainPrompt(text, gloss, context, level) -> a prompt string for an AI chat
+- L.markdownCell(value) -> text safe for a Markdown table cell
+- L.notePreview(raw, maxChars), L.plainNote(raw), L.normalizeSpoken(s), L.normalizeHeadword(s), L.stripPolishDiacritics(s)
+- L.statusOf(box, dueAt, now) -> L.STATUS_NEW 0 | L.STATUS_DUE 1 | L.STATUS_SCHEDULED 2; L.MAX_BOX
+
+==== js/word.js (already written) ====
+- openWord({polish, english?, context?, id?, level?}): opens the lookup sheet (play, favourite, add to list, say it, ask AI, note).
+- tappable(polishText, {tag = 'span'} = {}): returns an element with class "pl" where each word opens the lookup sheet when tapped. Use it for every Polish sentence the learner reads (conversation lines, examples).
+- phraseTools(item, {onchange}): a small row with a play button and a favourite star for {polish, english, id?}.
+- isFavItem(item), toggleFavItem(item): favourites for deck cards (have id) and free phrases.
+
+==== js/sync.js (already written) ====
+- account = {status: 'off' | 'out' | 'in' | 'error', user: {uid, name, photo} | null, lastSync: ms, error: string}. 'off' means sign-in is not configured on this deployment.
+- onAccount(fn) -> unsubscribe; signIn('google' | 'github') -> Promise (may throw Error with a message for the learner); signOut(); deleteAccount().
+
+==== CSS classes available (css/app.css) ====
+Layout: .stack (vertical gap 10), .hstack (wrapping row), .spread (space-between row), .grid + .grid-2 (cards min 300px) / .grid-3 (min 220px) / .grid-tiles (min 104px), .cols (two columns on desktop: main 1.4fr + side 1fr; one column on phones), .center, .section + .section-title, .divider (hr).
+Text: h1/h2/h3, .kicker (small caps label), .muted, .small, .pl (Polish), .phonetic, .tag (small lime pill).
+Controls: .btn (+ .btn-primary .btn-lime .btn-danger .btn-sm .btn-block) via ui.button; .chip (+ .on) via ui.chip, wrap groups in h('div', {class: 'chips'}); .row via ui.row; .input for input/select/textarea; .swatch (+ .on).
+Panels: .card via ui.card (+ class 'card-hero' violet hero, 'card-soft' tinted); .stat (a cell with <b>number</b><span>label</span>); .empty via ui.empty; .progress via ui.progress.
+Flashcard: .flash (a tall centred card), .flash-front (big word), .flash-hint (tiny caps hint), .flash-back (answer).
+Conversation: .line (+ .b for speaker B, right aligned; + .now for the line being played), .line-who.
+Guide: .prose (reading column), .table-wrap > table, ul/ol.
+Quiz: .option (+ .right / .wrong), .verdict (+ .ok / .no).
+
+==== Stored keys (via store) ====
+'settings' (use settings()/setSetting), 'mem' (use memOf/grade/statusOf/memoryCounts), 'fav' (use isFavItem/toggleFavItem/favourites), 'lists' (use lists()/addToList; whole-array edits via store.set('lists', next)), 'notes' (noteFor/setNote), 'course' {done: {lessonId: bestScorePercent}, last: lessonId}, 'talkFilter' string[] of selected scenarios (empty = all), 'listen' {source, showEnglish}.
+
+==== YOUR TASK: write js/views/listen.js and js/views/talk.js ====
+
+Card shape (data.phrases[i]): {id, polish, english, phonetic, examplePolish, exampleEnglish, level, category}. data.topics = [{name, count, levels: {A1: n, ...}}].
+Dialog shape (data.dialogs[i]): {id, title, titlePolish, level, scenario, description, roles: {A: 'Klient · Customer', B: 'Sprzedawca · Shop assistant'}, lines: [{speaker: 'A' | 'B', polish, english, note?}]}. 33 dialogs, 12 scenarios.
+
+--- listen.js (#/listen) ---
+Hands-free listening practice: the app reads a list of words aloud in a loop.
+State (ctx.state): source, index, playing, plus a run counter to cancel an old loop. The chosen source and the show-English flag persist in store key 'listen' = {source, showEnglish}. Source values: 'fav', 'list:<name>', 'all' (every card at settings().level), 'topic:<category>' (cards of that topic at the level).
+- ui.header('Listen', {kicker: 'Hands-free practice'}).
+- Source chips in a .chips wrap: '★ Favourites', one per word list, 'All <level>', then one per topic that has cards at the level. Changing source stops playback and resets index to 0.
+- Player: ui.card({class: 'flash'}) showing the current item: Polish large (.flash-front via ui.pl; clicking the word opens openWord(item)), phonetic, and the English (.flash-back) only when showEnglish. Below it the position `${index + 1} / ${items.length}` and ui.progress.
+- Controls (.hstack centred): 'Previous', '▶ Play' / '⏸ Pause' (kind primary), 'Next', and 'Hide English' / 'Show English'.
+- Playback loop per item: speak(polish), speak(polish) again, then if showEnglish speak(english, {lang: 'en-US'}), wait 900 ms, advance (wrap to 0 at the end), ctx.refresh(), continue. speak() resolves false when it was interrupted: stop the loop then. Pause calls stopSpeaking(). Each loop run captures a run id; bump the id on pause, source change, manual previous/next and in ctx.onLeave, and have the loop exit when its id is stale. Previous/Next while playing restart the loop at the new index.
+- Keep the screen awake while playing with navigator.wakeLock?.request('screen') (ignore errors) and release it on pause/leave.
+- If !canSpeak(): ui.empty explaining this browser cannot read aloud.
+- Empty source: ui.empty with a sentence telling the learner how to fill it (e.g. 'No favourites yet. Tap ☆ on any card to add it here.').
+- Under the player, section 'Up next': the next 12 items as ui.row(polish, english or '') that jump to that item.
+
+--- talk.js (#/talk and #/talk/<dialogId>) ---
+One file handles both routes: if ctx.params[0] is set and matches a dialog id, show the detail, else the list.
+
+List:
+- ui.header('Conversations', {kicker: `${n} everyday dialogues`}).
+- Scenario filter, expandable, multi-select, persisted in store key 'talkFilter' (array of scenario names; empty = all). Collapsed: one ui.row whose label is '▸ All scenarios (12)' or '▸ 3 of 12 scenarios'. Expanded (ctx.state.filterOpen): a ui.card with a .chips wrap of ui.chip(scenario, {on, count}) for every scenario, and two buttons: 'Show all' (clears the selection) and 'Done' (collapses).
+- Level chips: All, then the levels that occur in the dialogs.
+- The filtered list in a .grid.grid-2, 10 per page (ctx.state.page, reset to 0 when filters change): each ui.card({onclick}) with h3 title, titlePolish via ui.pl, a .hstack of .tag (level) and a muted small scenario name, and the description. -> go('#/talk/' + id).
+- Pager: 'Back' and 'Next' buttons (disabled at the ends) around `Page 1 of 4`. ui.empty when no dialog matches.
+
+Detail:
+- ui.header(title, {back: '#/talk', kicker: scenario + ' · ' + level}) and titlePolish under it as ui.pl.
+- Controls (.hstack): '▶ Play conversation' / '⏸ Pause' (primary), 'Hide English' / 'Show English' (ctx.state.showEn, default settings().showEnglish), and 'Practise as' chips: 'Off', role A label, role B label (ctx.state.role). Use only the Polish part of a role label (before ' · ') on chips.
+- Lines in a .stack: each h('div', {class: 'line' + (speaker B ? ' b' : '') + (i === playingIndex ? ' now' : '')}) containing .line-who (role label), tappable(line.polish, {tag: 'div'}), the English (small muted) when shown, line.note (small muted, italic) when present, and a small row with a '🔊' button (speak that line) and phraseTools({polish: line.polish, english: line.english}).
+- Practise mode: lines of the chosen role are covered until tapped: show 'Your turn · tap to reveal' plus the English as the cue; tapping reveals that line (ctx.state.revealed set). During 'Play conversation' the app does not read those lines: it waits 4 seconds for the learner to say them, then reveals the line and goes on.
+- Play: speaks the lines in order from the current one (speak(line.polish)), marks the line being read with .now, and after ctx.refresh() scrolls it into view (document.querySelector('.line.now')?.scrollIntoView({block: 'center', behavior: 'smooth'}) inside requestAnimationFrame). Same run-id cancellation as in listen.js; stop on pause and in ctx.onLeave.
+- Save a selected phrase: when the learner selects text inside a Polish line (listen for 'mouseup' and 'touchend' on the lines container, read window.getSelection().toString().trim(), 2 to 80 characters), show a small bar under the controls: the selected text in ui.pl and ui.button('★ Save phrase') which calls toggleFavItem({polish: selection, english: ''}) and ui.toast('Saved to favourites'). Keep the pending selection in ctx.state.
+- Unknown id: ui.empty('Conversation not found.', back button).

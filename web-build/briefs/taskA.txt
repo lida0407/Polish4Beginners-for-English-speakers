@@ -1,0 +1,44 @@
+
+==== YOUR TASK: write js/views/home.js, js/views/cards.js and js/views/session.js ====
+
+Card shape (data.phrases[i]): {id, polish, english, phonetic, examplePolish, exampleEnglish, level: 'A1'..'C1', category, notes?, declension?, tags?}. 3,274 cards, 34 categories (data.topics = [{name, count, levels: {A1: n, ...}}]).
+
+--- home.js (#/home) ---
+Top: ui.header('Mój polski', {kicker: 'Polish4Beginners', right: the three theme swatches}). A swatch is h('button', {class: 'swatch' + (' on' if active), title: name, style: {background: colour}}) for THEMES ['Komiks', 'Książka', 'Atrament'] with colours '#6c4dff', '#8a2c1f', '#000000'; clicking calls setSetting('theme', name) then ctx.refresh().
+Then a .cols layout. Main column:
+1. Level chips A1..C1 (setSetting('level', l); ctx.refresh()).
+2. Hero: ui.card({class: 'card-hero'}) with kicker "Today's lesson", h2 "10 flashcards, level <level>", and ui.button('Zaczynamy · start session', {kind: 'lime'}) -> go('#/session/topic/All').
+3. Three buttons in an .hstack: '🎧 Listen' -> #/listen, '💬 Conversations' -> #/talk, '🎓 Course' -> #/course.
+4. Section 'Topics': a .grid.grid-2 of ui.row(topic.name, `${n} cards`, ...) where n = topic.levels[level] (skip topics with none at this level) -> go('#/session/topic/' + encodeURIComponent(name)).
+Side column:
+1. A ui.card holding a 3-column grid of .stat cells from memoryCounts(): [New, To review, Learnt]. Each stat is a button-like element that goes to #/session/status/0, /1, /2. Label 'To review' gets emphasis when its count > 0.
+2. If store.get('course', {}).last exists: a ui.card({class: 'card-soft', onclick}) "Continue the course" with the lesson title (find it in data.guide.course.units[].lessons[] by id) -> #/course/<id>. If not, the same card says "Start the grammar course" -> #/course.
+3. If favourites().length: ui.row('★ Favourites', `${n} cards`) -> #/session/fav.
+4. Section 'My word lists' (only if lists().length): ui.row(list.name, `${list.items.length} words`) -> #/words/<name>.
+
+--- cards.js (#/cards) ---
+A searchable catalogue. State: q (string), level ('All' or a level; default 'All'), topic ('All' default), shown (default 40).
+- ui.header('Cards', {kicker: `${data.phrases.length} flashcards`}).
+- A search input (class input, placeholder 'Search: dworzec, to eat…'). Matching is case-insensitive and ignores Polish diacritics on both sides (L.stripPolishDiacritics), against polish and english. Update results on input WITHOUT calling ctx.refresh (re-render only the results container).
+- Level chips (All, A1..C1) and a <select class="input"> of topics (All topics + each topic name).
+- A line with the result count and, when a topic is chosen, ui.button('Study this topic', {kind: 'primary', small: true}) -> #/session/all/<topic>.
+- Results in a .grid.grid-2: each a ui.card({onclick: () => openWord(card)}) with a .spread row [ui.pl(card.polish) + phraseTools(card)], the english, the phonetic (class phonetic) and a .tag with the level plus a small muted status word ('new', 'to review', 'learnt' from statusOf(card)).
+- 'Show more' button adds 40 when more remain. ui.empty('No cards match.') when none.
+
+--- session.js (#/session/<kind>/<value>) ---
+The flashcard study loop, full screen (call ctx.focusMode(true) on every render).
+Deck building, once, into ctx.state.deck (and index = 0, revealed = false, known = 0, done = false):
+- kind 'topic': cards with level === settings().level and (value === 'All' or category === value). Order: cards with statusOf === 1 (due) shuffled, then statusOf === 0 (new) shuffled; if that pool is empty use the learnt ones sorted by memOf(card).dueAt ascending. Take the first 10.
+- kind 'all': every card of category === value at the level, shuffled.
+- kind 'status': every card (any level) with statusOf(card) === Number(value), shuffled, at most 50.
+- kind 'fav': favourites() (items may lack id).
+- kind 'list': the items of the list named value ({polish, english} only).
+Also pick per card whether the English side is shown first (random boolean, stored in state so it survives refresh).
+Screen:
+- A .spread row: ui.progress(index / deck.length) taking the width, the text `card ${index + 1} / ${deck.length}`, and a close link (<a class="back" href="#/home">×</a>).
+- The flashcard: ui.card({class: 'flash', onclick: reveal}). Before reveal: the front text (.flash-front; Polish via ui.pl when Polish is the front) and the hint 'Odwróć kartę · tap to flip' (.flash-hint). After reveal: Polish (.flash-front, as tappable(polish, {tag: 'div'})), phonetic, english (.flash-back), then if present the example (tappable(examplePolish) + english in muted small), card.notes, and the learner's own note (L.notePreview(noteFor(polish), 160)) labelled 'Your note'.
+- Tools row (.hstack, centred): phraseTools(card), ui.button('Read PL', {small: true}) -> speak(card.polish), ui.button('More', {small: true}) -> openWord(card).
+- Buttons: before reveal one ui.button('Pokaż odpowiedź · show answer', {kind: 'primary', block: true}); after reveal two side by side: 'Jeszcze nie · not yet' (ghost) and 'Umiem! · got it' (lime). Grading: if the card has an id call grade(card, got); count known; move to the next card (revealed = false); after the last card set done = true.
+- Keyboard: Space or Enter flips; after reveal, 1 or ArrowLeft = not yet, 2 or ArrowRight = got it. Add ONE keydown listener on document (guard with a flag in ctx.state), ignore events whose target is an input/textarea/select, and remove it in ctx.onLeave. The handler must read the latest ctx.state and call ctx.refresh().
+- Finish screen (done): kicker 'Well done!', h1 'Lesson finished', `${known} of ${deck.length} known`, buttons 'Again' (clear ctx.state keys so the deck is rebuilt, refresh) and 'Back home'.
+- Empty deck: ui.empty('Nothing to study here yet.', a Back home button).

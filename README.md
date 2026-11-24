@@ -1,5 +1,7 @@
 # Polish for Beginners: Android App for English Speakers
 
+**Web app:** <https://lida0407.github.io/Polish4Beginners-for-English-speakers/app/> (phone and desktop, works offline). How it is built and kept in step with Android: [WEB_APP.md](WEB_APP.md).
+
 Polish4Beginners is an Android app for English speakers who want to learn Polish for beginner travel, daily life, grammar, alphabet pronunciation, and practical phrase practice.
 
 This repository is focused on **Polish for beginners**, especially learners starting from English.

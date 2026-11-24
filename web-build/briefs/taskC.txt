@@ -1,0 +1,52 @@
+
+==== YOUR TASK: write js/views/guide.js, js/views/course.js, js/views/grammar.js and js/views/alphabet.js ====
+course.js may additionally import { renderBlock } from './guide.js'.
+
+data.guide = {title: 'Grammar & Vocabulary Guide', chapters: [{id: '0'..'16', title, blocks: [Block]}], course: {units: [{chapter: <index into chapters>, title, lessons: [{id: '3.1', title, refs: [Ref], quiz: [Question]}]}]}}
+Span = {t: text, b: 0|1 (bold), pl: 0|1 (Polish)}.
+Block types:
+- {type: 'h', text}
+- {type: 'p', spans: [Span]}
+- {type: 'list', ordered: bool, items: [[Span]]}
+- {type: 'table', header: [string], rows: [[ [Span] ]]}   (each row is an array of cells, each cell an array of Spans)
+- {type: 'study', entries: [string]}   (Polish words and phrases to learn)
+- {type: 'dialogue', title, lines: [string] (Polish, speakers alternate), meaning: string (English gist)}
+- {type: 'exercise', group: 'A', prompt, items: [{q: 'Nie mam ___ (bilet).', a: ['biletu'], full: 'Nie mam biletu.'}]}
+Ref = {b: <block index in the unit's chapter>, rows?: [from, to) (only these table rows), words?: [string] (only these study entries)}.
+Question = {kind: 'mc', prompt, options: [string], answer: string, explain: string, say: string (Polish to read aloud, may be '')} or {kind: 'type', prompt, accepted: [string], model: string (the full correct sentence), say: string}.
+52 lessons in 17 units, 242 questions.
+
+--- guide.js (#/guide and #/guide/<chapterId>) ---
+Export `renderBlock(block, {rows, words} = {})` (returns a Node) in addition to the default view, because the course reuses it.
+renderBlock:
+- Spans: Polish spans -> ui.pl(t) (wrapped in <b> when b); other spans -> <b> or plain text.
+- h -> h3. p -> <p>. list -> ul/ol. table -> h('div', {class: 'table-wrap'}, table with thead/tbody); honour `rows` by slicing.
+- study -> a .chips wrap with one button (class 'chip') per entry (honour `words`): Polish text; clicking calls openWord({polish: entry}).
+- dialogue -> ui.card with h3 title, each line as tappable(line, {tag: 'div'}), a small 'Play' button that speaks the lines in order, and the meaning in muted small text.
+- exercise -> ui.card with the prompt as h3 and, per item, the question text, an <input class="input"> and a 'Check' button; on check (or Enter) show a verdict line under it using L.checkAnswer(typed, ...item.a, item.full): ANSWER_EXACT 'Correct', ANSWER_DIACRITICS 'Right, but watch the Polish letters: <full>', ANSWER_WORD_ORDER or ANSWER_CLOSE 'Almost: <full>', ANSWER_WRONG 'Not quite: <full>' (classes 'verdict ok' / 'verdict no'). This block manages its own small DOM updates (no ctx).
+View:
+- #/guide: ui.header(data.guide.title, {kicker: 'Reference'}), a short muted line 'The full guide, chapter by chapter. For step-by-step lessons with quizzes use the course.', a button to #/course, then the chapters as ui.row(`${id} · ${title}`, '→') in a .grid.grid-2 -> #/guide/<id>.
+- #/guide/<id>: ui.header(chapter title, {back: '#/guide', kicker: `Chapter ${id}`}), all blocks inside h('article', {class: 'prose'}), then previous/next chapter buttons. Unknown id: back to the list.
+
+--- course.js (#/course and #/course/<lessonId>) ---
+Progress lives in store key 'course' = {done: {lessonId: bestPercent}, last: lessonId}.
+- #/course (map): ui.header('Grammar course', {kicker: `${doneCount} of ${total} lessons done`}), ui.progress(doneCount / total), then one section per unit (unit.title) with ui.row(lesson.title, right, onclick, sub) per lesson: right = '✓ ' + best + '%' when done, else '→'; sub = `${quiz.length} questions` or 'Reading' when the quiz is empty. The first lesson not yet done gets a ui.button('Continue: <title>', {kind: 'primary', block: true}) at the top of the page.
+- #/course/<lessonId>: find the lesson and its unit; chapter = data.guide.chapters[unit.chapter]. Phases in ctx.state.phase: 'learn' (default), 'quiz', 'done'. Store 'course'.last = lessonId when the lesson opens.
+  - learn: ui.header(lesson.title, {back: '#/course', kicker: unit.title}); the referenced blocks via renderBlock(chapter.blocks[ref.b], {rows: ref.rows, words: ref.words}) inside article.prose; then ui.button(`Start the quiz · ${n} questions`, {kind: 'primary', block: true}), or 'Mark as done' when the quiz is empty (saves 100).
+  - quiz: one question at a time (ctx.state.q index, ctx.state.score). Progress bar and `Question 2 of 6`. Prompt as h2.
+    - mc: the options as ui.button(option, {block: true}) with class 'option' added; after a pick (ctx.state.picked) mark the correct one 'right' and a wrong pick 'wrong', disable them, show a verdict line ('Correct' / 'Not quite') and the explain text.
+    - type: an input and a 'Check' button (Enter also checks); verdict from L.checkAnswer(typed, ...accepted) with the same wording as the guide exercise, always showing `model`. Count EXACT, DIACRITICS, WORD_ORDER and CLOSE as right.
+    - After answering: if q.say is not empty a '🔊' button that speak()s it, and ui.button('Next', {kind: 'primary'}) ('Finish' on the last one).
+  - done: percent = round(score / n * 100); save max(previous best, percent) into 'course'.done[lessonId]. Show kicker 'Lesson finished', h1 `${score} of ${n} correct`, and buttons 'Next lesson' (the following lesson in course order, if any), 'Try again', 'Back to the course'.
+  Unknown lesson id: go back to #/course.
+
+--- grammar.js (#/grammar) ---
+data.grammarLessons[i] = {unit: 'A1-01', level, scenario, topic, focus, rule, pattern, examples: [{polish, english}], check: {prompt: 'Ona ___ nauczycielką.', answer: 'jest', hint}}. 23 quick lessons.
+- ui.header('Grammar basics', {kicker: '23 quick lessons'}); level chips (All + levels present).
+- Each lesson is a ui.card. Collapsed: a button-like header row (the whole header toggles ctx.state.open === unit) with .tag unit, h3 topic, and the focus line in muted small. Expanded adds: 'Rule' + rule; 'Pattern' + ui.pl(pattern); 'Examples' each tappable(polish, {tag: 'div'}) with the English under it, plus ui.button('Read examples', {small: true}) that speaks them in order; 'Check yourself': the prompt (ui.pl), an input, a 'Check' button with a verdict from L.checkAnswer(typed, check.answer) (show the hint when wrong, the answer when right or after a second wrong try).
+
+--- alphabet.js (#/alphabet) ---
+data.alphabet[i] = {letter: 'Ą ą', sound: 'nasal on/om', example: 'mąka', english: 'flour'}. 39 tiles.
+- ui.header('Alphabet', {kicker: '39 letters and sounds'}).
+- A detail ui.card({class: 'card-soft'}) at the top for the selected tile (ctx.state.sel, default 0): the letter very large (style fontSize '3rem', class flash-front), the sound, the example via ui.pl with its English, and ui.button('🔊 Hear the example', {kind: 'primary'}).
+- A .grid.grid-tiles of ui.card({onclick, class: 'center' + (selected ? ' card-hero' : '')}) tiles: letter (h2) and the sound in small text. Clicking selects the tile, calls speak(example) and ctx.refresh().

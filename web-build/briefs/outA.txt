@@ -1,0 +1,549 @@
+=== FILE: js/views/home.js ===
+import { h, ui, LEVELS, THEMES, setSetting, settings, data, memoryCounts, store, favourites, lists, go } from '../core.js';
+
+const THEME_COLORS = {
+  Komiks: '#6c4dff',
+  Książka: '#8a2c1f',
+  Atrament: '#000000',
+};
+
+export default function view(ctx) {
+  const s = settings();
+  const currentTheme = s.theme;
+  const currentLevel = s.level;
+
+  // Header with theme swatches
+  const swatches = h('div', { class: 'hstack', style: { gap: '6px' } },
+    THEMES.map((name) => h('button', {
+      class: `swatch${name === currentTheme ? ' on' : ''}`,
+      type: 'button',
+      title: name,
+      style: { background: THEME_COLORS[name] || '#000000' },
+      onclick: () => {
+        setSetting('theme', name);
+        ctx.refresh();
+      },
+    }))
+  );
+
+  const header = ui.header('Mój polski', {
+    kicker: 'Polish4Beginners',
+    right: swatches,
+  });
+
+  // Main column: level chips, hero card, shortcuts, and topic list
+  const levelChips = h('div', { class: 'chips' },
+    LEVELS.map((lvl) => ui.chip(lvl, {
+      on: lvl === currentLevel,
+      onclick: () => {
+        setSetting('level', lvl);
+        ctx.refresh();
+      },
+    }))
+  );
+
+  const heroCard = ui.card({ class: 'card-hero' },
+    h('div', { class: 'stack' },
+      h('div', { class: 'kicker' }, "Today's lesson"),
+      h('h2', {}, `10 flashcards, level ${currentLevel}`),
+      h('div', {},
+        ui.button('Zaczynamy · start session', {
+          kind: 'lime',
+          onclick: () => go('#/session/topic/All'),
+        })
+      )
+    )
+  );
+
+  const actionButtons = h('div', { class: 'hstack' },
+    ui.button('🎧 Listen', { onclick: () => go('#/listen') }),
+    ui.button('💬 Conversations', { onclick: () => go('#/talk') }),
+    ui.button('🎓 Course', { onclick: () => go('#/course') }),
+  );
+
+  const topicRows = data.topics
+    .filter((topic) => (topic.levels?.[currentLevel] || 0) > 0)
+    .map((topic) => ui.row(
+      topic.name,
+      `${topic.levels[currentLevel]} cards`,
+      () => go('#/session/topic/' + encodeURIComponent(topic.name))
+    ));
+
+  const topicsSection = ui.section('Topics', h('div', { class: 'grid grid-2' }, topicRows));
+
+  const mainCol = h('div', { class: 'stack' },
+    levelChips,
+    heroCard,
+    actionButtons,
+    topicsSection,
+  );
+
+  // Side column: Leitner memory stats, course continuation, favourites, word lists
+  const [cntNew, cntDue, cntLearnt] = memoryCounts();
+
+  const statCard = ui.card({},
+    h('div', { class: 'grid', style: { gridTemplateColumns: 'repeat(3, 1fr)', gap: '4px' } },
+      h('button', {
+        class: 'stat',
+        type: 'button',
+        style: { background: 'none', border: 'none', cursor: 'pointer', font: 'inherit', width: '100%' },
+        onclick: () => go('#/session/status/0'),
+      },
+        h('b', {}, cntNew),
+        h('span', {}, 'New'),
+      ),
+      h('button', {
+        class: 'stat',
+        type: 'button',
+        style: { background: 'none', border: 'none', cursor: 'pointer', font: 'inherit', width: '100%' },
+        onclick: () => go('#/session/status/1'),
+      },
+        h('b', {}, cntDue),
+        h('span', cntDue > 0 ? { style: { color: 'var(--accent)', fontWeight: '900' } } : {}, 'To review'),
+      ),
+      h('button', {
+        class: 'stat',
+        type: 'button',
+        style: { background: 'none', border: 'none', cursor: 'pointer', font: 'inherit', width: '100%' },
+        onclick: () => go('#/session/status/2'),
+      },
+        h('b', {}, cntLearnt),
+        h('span', {}, 'Learnt'),
+      ),
+    )
+  );
+
+  const courseState = store.get('course', {});
+  let courseCard;
+  if (courseState?.last) {
+    let lessonTitle = '';
+    for (const unit of data.guide?.course?.units || []) {
+      const found = unit.lessons?.find((l) => l.id === courseState.last);
+      if (found) {
+        lessonTitle = found.title;
+        break;
+      }
+    }
+    courseCard = ui.card({
+      class: 'card-soft',
+      onclick: () => go('#/course/' + encodeURIComponent(courseState.last)),
+    },
+      h('div', { class: 'stack' },
+        h('div', { class: 'kicker' }, 'Continue the course'),
+        h('h3', {}, lessonTitle || 'Current lesson'),
+      )
+    );
+  } else {
+    courseCard = ui.card({
+      class: 'card-soft',
+      onclick: () => go('#/course'),
+    },
+      h('div', { class: 'stack' },
+        h('div', { class: 'kicker' }, 'Grammar course'),
+        h('h3', {}, 'Start the grammar course'),
+      )
+    );
+  }
+
+  const favs = favourites();
+  const favRow = favs.length > 0
+    ? ui.row('★ Favourites', `${favs.length} cards`, () => go('#/session/fav'))
+    : null;
+
+  const userLists = lists();
+  const listSection = userLists.length > 0
+    ? ui.section(
+        'My word lists',
+        ...userLists.map((l) =>
+          ui.row(l.name, `${l.items.length} words`, () =>
+            go('#/words/' + encodeURIComponent(l.name))
+          )
+        )
+      )
+    : null;
+
+  const sideCol = h('div', { class: 'stack' },
+    statCard,
+    courseCard,
+    favRow,
+    listSection,
+  );
+
+  return h('div', { class: 'stack' },
+    header,
+    h('div', { class: 'cols' }, mainCol, sideCol),
+  );
+}
+=== FILE: js/views/cards.js ===
+import { h, ui, L, LEVELS, data, statusOf, go } from '../core.js';
+import { openWord, phraseTools } from '../word.js';
+
+const STATUS_NAMES = ['new', 'to review', 'learnt'];
+
+export default function view(ctx) {
+  ctx.state.q = ctx.state.q ?? '';
+  ctx.state.level = ctx.state.level ?? 'All';
+  ctx.state.topic = ctx.state.topic ?? 'All';
+  ctx.state.shown = ctx.state.shown ?? 40;
+
+  const header = ui.header('Cards', {
+    kicker: `${data.phrases.length} flashcards`,
+  });
+
+  const searchInput = h('input', {
+    class: 'input',
+    type: 'search',
+    placeholder: 'Search: dworzec, to eat…',
+    value: ctx.state.q,
+    oninput: (e) => {
+      ctx.state.q = e.target.value;
+      ctx.state.shown = 40;
+      renderResults();
+    },
+  });
+
+  const levelChips = h('div', { class: 'chips' },
+    ['All', ...LEVELS].map((lvl) => ui.chip(lvl, {
+      on: ctx.state.level === lvl,
+      onclick: () => {
+        ctx.state.level = lvl;
+        ctx.state.shown = 40;
+        ctx.refresh();
+      },
+    }))
+  );
+
+  const topicSelect = h('select', {
+    class: 'input',
+    'aria-label': 'Select topic',
+    onchange: (e) => {
+      ctx.state.topic = e.target.value;
+      ctx.state.shown = 40;
+      ctx.refresh();
+    },
+  },
+    h('option', { value: 'All', selected: ctx.state.topic === 'All' }, 'All topics'),
+    data.topics.map((t) => h('option', {
+      value: t.name,
+      selected: ctx.state.topic === t.name,
+    }, t.name))
+  );
+
+  const resultsContainer = h('div', { class: 'stack' });
+
+  function renderResults() {
+    const cleanQ = L.stripPolishDiacritics((ctx.state.q || '').trim().toLowerCase());
+    const filtered = data.phrases.filter((c) => {
+      if (ctx.state.level !== 'All' && c.level !== ctx.state.level) return false;
+      if (ctx.state.topic !== 'All' && c.category !== ctx.state.topic) return false;
+      if (cleanQ) {
+        const pl = L.stripPolishDiacritics((c.polish || '').toLowerCase());
+        const en = L.stripPolishDiacritics((c.english || '').toLowerCase());
+        if (!pl.includes(cleanQ) && !en.includes(cleanQ)) return false;
+      }
+      return true;
+    });
+
+    const countLine = h('div', { class: 'spread' },
+      h('span', { class: 'small muted' }, `${filtered.length} ${filtered.length === 1 ? 'card' : 'cards'}`),
+      ctx.state.topic !== 'All'
+        ? ui.button('Study this topic', {
+            kind: 'primary',
+            small: true,
+            onclick: () => go('#/session/all/' + encodeURIComponent(ctx.state.topic)),
+          })
+        : null
+    );
+
+    if (filtered.length === 0) {
+      resultsContainer.replaceChildren(countLine, ui.empty('No cards match.'));
+      return;
+    }
+
+    const visibleCards = filtered.slice(0, ctx.state.shown);
+    const cardNodes = visibleCards.map((card) => {
+      const statusText = STATUS_NAMES[statusOf(card)] || 'new';
+
+      return ui.card({ onclick: () => openWord(card) },
+        h('div', { class: 'stack', style: { gap: '6px' } },
+          h('div', { class: 'spread' },
+            ui.pl(card.polish, 'b'),
+            phraseTools(card, { onchange: () => renderResults() })
+          ),
+          h('div', {}, card.english),
+          card.phonetic ? h('div', { class: 'phonetic' }, card.phonetic) : null,
+          h('div', { class: 'hstack', style: { gap: '8px', marginTop: '2px' } },
+            h('span', { class: 'tag' }, card.level),
+            h('span', { class: 'small muted' }, statusText)
+          )
+        )
+      );
+    });
+
+    const grid = h('div', { class: 'grid grid-2' }, cardNodes);
+
+    const moreButton = filtered.length > ctx.state.shown
+      ? h('div', { class: 'center', style: { marginTop: '8px' } },
+          ui.button('Show more', {
+            onclick: () => {
+              ctx.state.shown += 40;
+              renderResults();
+            },
+          })
+        )
+      : null;
+
+    resultsContainer.replaceChildren(countLine, grid, moreButton);
+  }
+
+  renderResults();
+
+  return h('div', { class: 'stack' },
+    header,
+    searchInput,
+    levelChips,
+    topicSelect,
+    resultsContainer
+  );
+}
+=== FILE: js/views/session.js ===
+import { h, ui, L, settings, data, memOf, statusOf, grade, favourites, lists, noteFor, speak, go } from '../core.js';
+import { phraseTools, tappable, openWord } from '../word.js';
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+export default function view(ctx) {
+  ctx.focusMode(true);
+
+  const kind = ctx.params[0] || 'topic';
+  const val = ctx.params[1] !== undefined ? ctx.params[1] : 'All';
+
+  // Build deck once per session
+  if (ctx.state.deck === undefined) {
+    let deck = [];
+    const lvl = settings().level;
+
+    if (kind === 'topic') {
+      const pool = data.phrases.filter((c) => c.level === lvl && (val === 'All' || c.category === val));
+      const due = shuffle(pool.filter((c) => statusOf(c) === 1));
+      const fresh = shuffle(pool.filter((c) => statusOf(c) === 0));
+      deck = [...due, ...fresh];
+      if (deck.length === 0) {
+        const learnt = pool.filter((c) => statusOf(c) === 2);
+        learnt.sort((a, b) => (memOf(a).dueAt || 0) - (memOf(b).dueAt || 0));
+        deck = learnt;
+      }
+      deck = deck.slice(0, 10);
+    } else if (kind === 'all') {
+      const pool = data.phrases.filter((c) => c.level === lvl && c.category === val);
+      deck = shuffle(pool);
+    } else if (kind === 'status') {
+      const st = Number(val);
+      const pool = data.phrases.filter((c) => statusOf(c) === st);
+      deck = shuffle(pool).slice(0, 50);
+    } else if (kind === 'fav') {
+      deck = favourites();
+    } else if (kind === 'list') {
+      const list = lists().find((l) => l.name === val);
+      deck = list ? [...list.items] : [];
+    }
+
+    ctx.state.deck = deck;
+    ctx.state.index = 0;
+    ctx.state.revealed = false;
+    ctx.state.known = 0;
+    ctx.state.done = false;
+    ctx.state.showEnFirst = deck.map(() => Math.random() < 0.5);
+  }
+
+  // Set up keyboard shortcuts once
+  if (!ctx.state.hasKeyHandler) {
+    ctx.state.hasKeyHandler = true;
+    const onKeyDown = (e) => {
+      const tag = e.target?.tagName?.toLowerCase();
+      if (tag === 'input' || tag === 'textarea' || tag === 'select' || e.target?.isContentEditable) {
+        return;
+      }
+      const st = ctx.state;
+      if (st.done || !st.deck || !st.deck.length) return;
+      const current = st.deck[st.index];
+      if (!current) return;
+
+      if (!st.revealed) {
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          st.revealed = true;
+          ctx.refresh();
+        }
+      } else {
+        if (e.key === '1' || e.key === 'ArrowLeft') {
+          e.preventDefault();
+          if (current.id) grade(current, false);
+          if (st.index + 1 >= st.deck.length) {
+            st.done = true;
+          } else {
+            st.index++;
+            st.revealed = false;
+          }
+          ctx.refresh();
+        } else if (e.key === '2' || e.key === 'ArrowRight') {
+          e.preventDefault();
+          if (current.id) grade(current, true);
+          st.known++;
+          if (st.index + 1 >= st.deck.length) {
+            st.done = true;
+          } else {
+            st.index++;
+            st.revealed = false;
+          }
+          ctx.refresh();
+        }
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    ctx.onLeave(() => {
+      document.removeEventListener('keydown', onKeyDown);
+    });
+  }
+
+  // Handle empty deck
+  if (!ctx.state.deck.length) {
+    return ui.empty(
+      'Nothing to study here yet.',
+      ui.button('Back home', { kind: 'primary', onclick: () => go('#/home') })
+    );
+  }
+
+  // Finish screen
+  if (ctx.state.done) {
+    return h('div', { class: 'stack center', style: { padding: '40px 16px' } },
+      h('div', { class: 'kicker' }, 'Well done!'),
+      h('h1', {}, 'Lesson finished'),
+      h('p', { class: 'muted' }, `${ctx.state.known} of ${ctx.state.deck.length} known`),
+      h('div', { class: 'hstack', style: { justifyContent: 'center', marginTop: '12px' } },
+        ui.button('Again', {
+          kind: 'primary',
+          onclick: () => {
+            delete ctx.state.deck;
+            delete ctx.state.index;
+            delete ctx.state.revealed;
+            delete ctx.state.known;
+            delete ctx.state.done;
+            delete ctx.state.showEnFirst;
+            ctx.refresh();
+          },
+        }),
+        ui.button('Back home', { onclick: () => go('#/home') })
+      )
+    );
+  }
+
+  // Active card screen
+  const card = ctx.state.deck[ctx.state.index];
+  const isEnFirst = Boolean(ctx.state.showEnFirst[ctx.state.index]);
+
+  const reveal = () => {
+    if (!ctx.state.revealed) {
+      ctx.state.revealed = true;
+      ctx.refresh();
+    }
+  };
+
+  const topRow = h('div', { class: 'spread' },
+    h('div', { style: { flex: '1 1 180px' } }, ui.progress(ctx.state.index / ctx.state.deck.length)),
+    h('span', { class: 'small muted' }, `card ${ctx.state.index + 1} / ${ctx.state.deck.length}`),
+    h('a', { class: 'back', href: '#/home', 'aria-label': 'Close' }, '×')
+  );
+
+  let flashContent;
+  if (!ctx.state.revealed) {
+    const frontText = isEnFirst
+      ? h('div', { class: 'flash-front' }, card.english)
+      : h('div', { class: 'flash-front' }, ui.pl(card.polish));
+    flashContent = [
+      frontText,
+      h('div', { class: 'flash-hint' }, 'Odwróć kartę · tap to flip'),
+    ];
+  } else {
+    const plNode = tappable(card.polish, { tag: 'div' });
+    plNode.className = 'pl flash-front';
+
+    const userNote = L.notePreview(noteFor(card.polish), 160);
+
+    flashContent = [
+      plNode,
+      card.phonetic ? h('div', { class: 'phonetic' }, card.phonetic) : null,
+      h('div', { class: 'flash-back' }, card.english),
+      card.examplePolish
+        ? h('div', { class: 'stack', style: { gap: '2px', marginTop: '6px' } },
+            tappable(card.examplePolish, { tag: 'div' }),
+            card.exampleEnglish ? h('div', { class: 'small muted' }, card.exampleEnglish) : null
+          )
+        : null,
+      card.notes ? h('div', { class: 'small muted' }, card.notes) : null,
+      userNote
+        ? h('div', { class: 'small', style: { marginTop: '4px' } },
+            h('span', { class: 'muted' }, 'Your note: '),
+            userNote
+          )
+        : null,
+    ];
+  }
+
+  const flashCard = ui.card({
+    class: 'flash',
+    onclick: reveal,
+  }, ...flashContent);
+
+  const toolsRow = h('div', { class: 'hstack', style: { justifyContent: 'center' } },
+    phraseTools(card),
+    ui.button('Read PL', { small: true, onclick: () => speak(card.polish) }),
+    ui.button('More', { small: true, onclick: () => openWord(card) })
+  );
+
+  const onGrade = (got) => {
+    if (card.id) grade(card, got);
+    if (got) ctx.state.known++;
+    if (ctx.state.index + 1 >= ctx.state.deck.length) {
+      ctx.state.done = true;
+    } else {
+      ctx.state.index++;
+      ctx.state.revealed = false;
+    }
+    ctx.refresh();
+  };
+
+  const buttonArea = !ctx.state.revealed
+    ? ui.button('Pokaż odpowiedź · show answer', {
+        kind: 'primary',
+        block: true,
+        onclick: reveal,
+      })
+    : h('div', { class: 'grid grid-2' },
+        ui.button('Jeszcze nie · not yet', {
+          kind: 'ghost',
+          block: true,
+          onclick: () => onGrade(false),
+        }),
+        ui.button('Umiem! · got it', {
+          kind: 'lime',
+          block: true,
+          onclick: () => onGrade(true),
+        })
+      );
+
+  return h('div', { class: 'stack', style: { maxWidth: '640px', margin: '0 auto', width: '100%' } },
+    topRow,
+    flashCard,
+    toolsRow,
+    buttonArea
+  );
+}
+

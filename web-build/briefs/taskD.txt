@@ -1,0 +1,37 @@
+
+==== YOUR TASK: write js/views/words.js, js/views/more.js and js/views/settings.js ====
+
+Favourites: favourites() returns deck cards ({id, polish, english, phonetic, level, ...}) and free phrases ({polish, english}), newest first. Word lists: lists() = [{name, items: [{polish, english}]}], stored under 'lists'. Notes: store.get('notes', {}) maps a normalised Polish headword to the learner's note text.
+
+--- words.js (#/words and #/words/<listName>) ---
+#/words:
+- ui.header('My words', {kicker: 'Favourites, lists and notes'}).
+- Section '★ Favourites': when empty, ui.empty('No favourites yet. Tap ☆ on any card or conversation line.'). Otherwise a .hstack of buttons: 'Study' -> #/session/fav, 'Listen' (store.set('listen', {...store.get('listen', {}), source: 'fav'}) then go('#/listen')), 'Export .md'; then the items in a .grid.grid-2 of ui.card({onclick: () => openWord(item)}) with ui.pl(polish), english, and phraseTools(item, {onchange: ctx.refresh}).
+- Section 'Word lists': ui.row(list.name, `${items.length} words`) -> #/words/<encoded name>; a small form (input + 'Create list' button) to add an empty list; 'Import CSV' (a hidden <input type="file" accept=".csv,.tsv,.txt,text/csv"> triggered by a button) and 'Download template'.
+  - CSV import: columns polish, english; the separator may be comma, semicolon or tab (detect from the first line); fields may be double-quoted with "" escapes; skip a header row whose first cell is 'polish' (case-insensitive) and skip empty rows. The list name is the file name without extension; if a list with that name exists, append the new words (no duplicate Polish). Toast `${n} words imported`.
+  - Template: downloadText('polish4beginners-list-template.csv', 'polish,english\ndzień dobry,good morning\n', 'text/csv').
+- Section 'Notes' (only when there are notes): each as ui.row(headword, '→', () => openWord({polish: headword}), L.notePreview(text, 110)).
+- Markdown export (favourites and lists share it): a file with '# Title', a blank line, then a table '| Polish | English | Note |' with one row per item, each cell through L.markdownCell(), note = noteFor(polish). File name 'polish4beginners-<slug>.md'.
+#/words/<listName>:
+- ui.header(list name, {back: '#/words', kicker: `${n} words`}); buttons: 'Study' -> #/session/list/<name>, 'Listen' (source 'list:<name>'), 'Export .md', 'Export CSV', 'Rename' (window.prompt), 'Delete list' (window.confirm; kind danger) -> back to #/words.
+- An add form: two inputs (Polish, English) and 'Add'.
+- Items in a .grid.grid-2: ui.card with ui.pl(polish), english, phraseTools(item), and a small 'Remove' button. Clicking the card opens openWord(item).
+- Unknown list: ui.empty('List not found.', back button).
+All list edits write the whole array back with store.set('lists', next) and then ctx.refresh().
+
+--- more.js (#/more) ---
+The phone menu. ui.header('More'), then ui.row entries with a one-line sub text: 'Grammar course' ('52 lessons with quizzes') -> #/course, 'Grammar & vocabulary guide' ('The full reference') -> #/guide, 'Grammar basics' ('23 quick lessons') -> #/grammar, 'Alphabet' ('39 letters and sounds') -> #/alphabet, 'My words' ('Favourites, lists and notes') -> #/words, 'Settings' ('Theme, voice, account') -> #/settings. Then a link styled as a button to the Android app: https://play.google.com/store/apps/details?id=com.mustardseed.polish4beginners ('Get the Android app').
+
+--- settings.js (#/settings) ---
+ui.header('Settings'). Use a .grid.grid-2 of ui.card panels, each with an h2:
+1. 'Account' (import { account, onAccount, signIn, signOut, deleteAccount } from '../sync.js'). Subscribe once with onAccount(() => ctx.refresh()) (guard with a flag in ctx.state; unsubscribe in ctx.onLeave).
+   - status 'off': 'Your progress is saved in this browser. Sign-in is not switched on for this site yet.'
+   - status 'out': 'Sign in to keep your progress on every device.' with ui.button('Continue with Google', {kind: 'primary'}) and ui.button('Continue with GitHub'); wrap signIn in try/catch and ui.toast(e.message) on failure. A small muted note: 'We store your study progress and the name on your account, nothing else.' with a link to ../privacy.html.
+   - status 'in': the avatar (img.avatar, referrerpolicy no-referrer) when there is a photo, the name, 'Progress synced' plus the time of account.lastSync (toLocaleTimeString) when set, account.error in class 'verdict no' when set, ui.button('Sign out'), and ui.button('Delete my account and synced data', {kind: 'danger', small: true}) behind window.confirm.
+   - status 'error': account.error.
+2. 'Theme': a swatch + name per theme (colours '#6c4dff' Komiks, '#8a2c1f' Książka, '#000000' Atrament) as chips; setSetting('theme', name); ctx.refresh().
+3. 'Level': chips A1..C1 (setSetting('level', l)).
+4. 'Reading voice': speed chips for the five SPEEDS keys labelled Slowest, Slow, Normal, Fast, Fastest; a <select class="input"> of Polish voices (voicesFor('pl'), option value = voiceURI, text = `${name} (${lang})`, first option 'Automatic' = '') saved to setting 'voicePl'; the same for English ('voiceEn', voicesFor('en')); a 'Test' button that speaks 'Dzień dobry! Jak się masz?'. If voicesFor('pl') is empty show: 'This device has no Polish voice installed. On Android and iPhone add one in the system text-to-speech settings; on desktop Chrome and Edge include one.' If !canSpeak(), say the browser cannot read aloud. Voices load late: listen once for window.speechSynthesis 'voiceschanged' to refresh (remove the listener in ctx.onLeave).
+   Also a chip toggle 'Show English by default' (setting 'showEnglish').
+5. 'Backup': ui.button('Export my progress') -> downloadText(`polish4beginners-backup-${date}.json`, JSON.stringify({app: 'polish4beginners', format: 1, exportedAt: Date.now(), keys: store.dump()}), 'application/json'); 'Import a backup' (file input) -> parse, check app === 'polish4beginners', call store.merge(keys), toast `${changed.length} items restored` (or 'Nothing newer in that file'); note text: 'Newer entries win, nothing is deleted.'
+6. 'About': `Polish4Beginners web ${APP_VERSION}`; fetch('build.json') once (cache the result in ctx.state, then ctx.refresh()) and show `Matches Android app ${build.androidVersion} · word deck v${build.dataVersion} · build ${build.build}` when available; `${data.phrases.length} flashcards, ${data.dialogs.length} conversations`; links: the Android app (URL above), privacy (../privacy.html); ui.button('Check for updates', {small: true}) -> location.reload().
